@@ -1,8 +1,5 @@
 #include "cfgtree.h"
 
-#include <rapidjson/rapidjson.h>
-#include <rapidjson/document.h>
-
 using namespace std;
 
 namespace pgn
