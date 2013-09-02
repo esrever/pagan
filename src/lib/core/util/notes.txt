@@ -1,0 +1,15 @@
+================
+CfgTree: Json-based options manager
+Usage:
+    Cfg(): default cfg tree
+    Cfg("name") : named cfg tree. Create if non-existent
+    Cfg().Get("Gfx.Camera.View", vec<float>): read the given in the format asked. assert
+    Cfg().Set("Gfx.Camera.View", vec<float>): write the given in the format asked. assert if existing but different
+    Cfg().Export(fname) : export to json
+    Cfg().Import(fname) : import-add from json
+    
+    if -jopt has 2 elements, the 2nd is the name of the cfg tree. That way we can have multiple conf files.
+        e.g. jopt=cfg1.json,basics jopt=cfg2.json,gfx
+        all non jopt options go to the default CfgTree
+================
+ProtoCL: OpenCL for prototyping, encapsulate basics
