@@ -1,5 +1,7 @@
 #include "cfgtree.h"
 
+#include <pystring.h>
+
 using namespace std;
 
 namespace pgn
@@ -25,7 +27,9 @@ namespace pgn
 		if (document.Parse<0>(&jsontext.front()).HasParseError())
 			return ;
 		assert(document.IsObject());
-        process_level( document, 0);
+        //process_level( document, 0);
+		std::vector<std::string> rn;
+		BuildTreeLevel(document,rn);
 	}
 
 	//--------------------------------------------------------------
@@ -34,44 +38,49 @@ namespace pgn
 		mCfgData = zCfgData;
 	}
 
-	void cCfgTree::BuildTreeLevel(const rapidjson::Value& val, int depth, std::string& zRunningName)
+	void cCfgTree::BuildTreeLevel(const rapidjson::Value& val, std::vector<std::string> zRunningName)
 	{
-		string outp;
-		ostringstream prefix;
-		for(int i=0;i<depth;++i)
-			prefix << "\t";
+		std::string runningKey = pystring::join(".",zRunningName);
+		std::vector<std::string> tmpName;
 		switch( val.GetType())
 		{
 			case rapidjson::Type::kObjectType:
 				for (auto itr = val.MemberBegin(); itr != val.MemberEnd(); ++itr) 
 				{
-					cout<< prefix.str() << itr->name.GetString() << endl ;
-					process_level( itr->value, depth+1);
+					tmpName = zRunningName;
+                    tmpName.push_back(itr->name.GetString());
+					BuildTreeLevel(itr->value, tmpName);
 				};
 			break;
 			case rapidjson::Type::kArrayType:
-				for (auto itr = val.Begin(); itr != val.End(); ++itr) 
 				{
-					static const char* kTypeNames[] = { "Null", "False", "True", "Object", "Array", "String", "Number" };
-					cout<< prefix.str() << kTypeNames[itr->GetType()] << endl ;
-					process_level( *itr, depth+1);
-				};
+					int c=0;
+					for (auto itr = val.Begin(); itr != val.End(); ++itr) 
+					{
+						tmpName = zRunningName;
+						tmpName.back() += "[" + to_string(c++) +"]";
+						BuildTreeLevel(*itr, tmpName);
+					};
+				}
 				break;
 			case rapidjson::Type::kStringType:
-				cout<<prefix.str() <<val.GetString()<<endl;
+                mCfgData.Set(runningKey, std::string(val.GetString()));
 				break;
 			case rapidjson::Type::kTrueType:
 			case rapidjson::Type::kFalseType:
-				outp = "bool";
+                mCfgData.Set(runningKey, val.GetBool());
 				break;
 			case rapidjson::Type::kNumberType:
-				outp = val.IsInt() ? "int" : "real";
+                if(val.IsInt()) mCfgData.Set(runningKey, val.GetInt());
+				if(val.IsUint()) mCfgData.Set(runningKey, val.GetUint());
+				if(val.IsInt64()) mCfgData.Set(runningKey, val.GetInt64());
+				if(val.IsUint64()) mCfgData.Set(runningKey, val.GetUint64());
+				if(val.IsDouble()) mCfgData.Set(runningKey, val.GetDouble());
 				break;
 			case rapidjson::Type::kNullType:
-				outp = "null";
 				break;
 			default :
-				outp = "BEEEEEP";
+				assert(false);
 				break;
 		}
 	}

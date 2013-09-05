@@ -15,7 +15,9 @@ namespace pgn
 	struct cCfgData
 	{
 	public:
-		typedef std::map< std::string, std::vector<std::string> > map_type;
+        typedef std::string map_key_type;
+        typedef std::vector<std::string> map_value_type;
+		typedef std::map< map_key_type, map_value_type > map_type;
 	
 	public:
 		void Merge(const cCfgData& zOtherData);

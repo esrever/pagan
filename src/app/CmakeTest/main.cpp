@@ -65,5 +65,6 @@ int main(int argc, char ** argv)
 		pgn::cCfgTree cfgjson(fname);
 		cfgtree.mCfgData.Merge(cfgjson.mCfgData);
     }
+	cout<<to_string(cfgtree);
 	return 0;
 }
