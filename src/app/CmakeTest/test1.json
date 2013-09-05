@@ -1,6 +1,6 @@
 {"menu": {
   "id": "file",
-  "value": 32,
+  "value": 320,
   "neg" : false,
   "pos" : true,
   "popup": {
