@@ -10,7 +10,7 @@
 namespace pgn
 {
 	/* 
-		DESCRIPTION: Configuration tree
+		DESCRIPTION: Configuration tree creator
 
 		From nothing (empty)
 		From json file
@@ -25,7 +25,7 @@ namespace pgn
 			cCfgTree(const cCfgData& zCfgData);
 		
 		private:
-			void BuildTreeLevel(const rapidjson::Value& val, std::vector<std::string> zRunningName);
+			void BuildTree(const rapidjson::Value& val, std::vector<std::string> zRunningName);
 
 		public:
 			cCfgData mCfgData;
@@ -36,7 +36,7 @@ namespace pgn
 	inline std::string to_string<cCfgTree>(const cCfgTree& s)
 	{
 		std::string tot = "";
-		for(auto v : s.mCfgData.mData)
+		for(auto v : s.mCfgData.Data())
 		{
 			tot += v.first + " : " + pystring::join(", ", v.second) + "\n";
 		}

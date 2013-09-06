@@ -21,28 +21,15 @@ namespace pgn
 	//----------------------------------------------------------------------------
 	void cApplication::InitCmdLine(int argc, char ** argv)
 	{
-		// Use cmdopt to gather options
-		cCmdOpt cmdopt;
-		cmdopt.Init(argc, argv);
-
-
-		std::vector<std::string> chunks;
-		// Create the json tree
-		for(auto itr : cmdopt.CfgData().mData)
+		pgn::cCmdOpt cmdopts;
+		cmdopts.Init(argc,argv);
+		pgn::cCfgTree& cfgtree = mConfigMap[""];
+		cfgtree = cmdopts.CfgData();
+		std::string jsonfname;
+		if( cmdopts.CfgData().Get("jopt",jsonfname))
 		{
-			std::string confname = "";
-			if(pystring::startswith( itr.first, "jopt"))
-			{
-				pystring::split(itr.first,chunks,":",1);
-				if(chunks.size() == 2)
-					confname = chunks[1];
-				const std::string jsonfname = itr.second[0];
-				mConfigMap[confname] = cCfgTree(jsonfname);
-			}
-			else
-			{
-				mConfigMap[confname].mCfgData.Set(itr.first, itr.second);
-			}
+			pgn::cCfgTree cfgjson(jsonfname);
+			cfgtree.mCfgData.Merge(cfgjson.mCfgData);
 		}
 	}
 

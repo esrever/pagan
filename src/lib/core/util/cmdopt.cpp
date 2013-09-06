@@ -28,7 +28,7 @@ namespace pgn
 			// Now extract the vector of values
             pystring::split( val, strings, ",");
             
-            // a=b0,b1,b2,...,bn format is invalid
+            // check if a=b0,b1,b2,...,bn format is invalid
             bool invalid = false;
             for(auto s:strings ) if (s.empty()) invalid = true;
             if(invalid) continue;

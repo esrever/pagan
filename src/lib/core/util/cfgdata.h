@@ -6,12 +6,11 @@
 
 #include <core/util/conversions.h>
 
-/*
-	TODO: description, get/set single uses get/set vectors
-*/
-
 namespace pgn
 {
+	/*
+		Configuration data accessor : map< string, vector<string> >
+	*/
 	struct cCfgData
 	{
 	public:
@@ -21,6 +20,8 @@ namespace pgn
 	
 	public:
 		void Merge(const cCfgData& zOtherData);
+		const map_type& Data() const	{return mData;}
+		
 		template<class T>
 		bool Get(const std::string& zKey, std::vector<T>& zValues) const;
 		template<class T>
@@ -30,7 +31,7 @@ namespace pgn
 		template<class T>
 		bool Set(const std::string& zKey, const T& zValue);
 
-	public:
+	private:
 		map_type mData;
 	};
 

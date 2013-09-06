@@ -1,6 +1,8 @@
 {"menu": {
   "id": "file",
   "value": 320,
+  "value2": 3.21,
+  "value3": [4.21, "loop-de=loo,p", null],
   "neg" : false,
   "pos" : true,
   "popup": {
