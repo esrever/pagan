@@ -15,6 +15,8 @@ namespace pgn
 		From nothing (empty)
 		From json file
 		from opts (be aware of jopt and unpack/merge that)
+
+		TODO: need to be able to fetch a subtree, without the prefix data!
 	*/
 
 	class cCfgTree
