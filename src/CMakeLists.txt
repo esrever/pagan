@@ -151,6 +151,14 @@ add_definitions(${OSD_COMPILER_FLAGS})
 
 set(CMAKE_SUPPRESS_REGENERATION TRUE)
 
+##############################################
+
+macro(copy_dll TGT DLLPATH)
+    add_custom_command(TARGET ${TGT} POST_BUILD        # Adds a post-build event to MyTest
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
+        "${DLLPATH}"      # <--this is in-file
+        $<TARGET_FILE_DIR:${TGT}>)                 # <--this is out-file path
+endmacro(copy_dll)
 
 #################################################################
 # Packages
