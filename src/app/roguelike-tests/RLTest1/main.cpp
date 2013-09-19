@@ -8,9 +8,36 @@ enum class eTile : char
 	WALL = 35
 };
 
+struct cWin
+{
+	WINDOW * mWin;
+
+	cWin():mWin(nullptr){}
+	~cWin() {Destroy();}
+
+	void Destroy()
+	{
+		if(mWin)
+		{
+			wborder(mWin, ' ', ' ', ' ',' ',' ',' ',' ',' ');
+			wrefresh(mWin);
+			delwin(mWin);
+			mWin = nullptr;
+		}
+	}
+	void Init(int x, int y, int w, int h)
+	{
+		Destroy();	
+		mWin = newwin(h, w, y, x);
+		box(mWin, 0 , 0);		/* 0, 0 gives default characters 
+					 * for the vertical and horizontal
+					 * lines			*/
+		wrefresh(mWin);		/* Show that box 		*/
+	}
+};
+	
 int main()
 {	int ch;
-
 	initscr();			/* Start curses mode 		*/
 	raw();				/* Line buffering disabled	*/
 	keypad(stdscr, TRUE);		/* We get F1, F2 etc..		*/
@@ -25,6 +52,10 @@ int main()
 
 	mvaddch(posy,posx,chtype(eTile::CHAR));
 	move(posy,posx);
+
+	cWin win_map;
+	win_map.Init(3,4,5,6);
+
 	ch = getch();
 	int prevposx=posx,prevposy=posy;
 	while( ch != 27 )
