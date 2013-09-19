@@ -37,6 +37,7 @@ copy_dll(RLTest1 ${Curses_DLL})
 #set_target_properties(CMakeTest PROPERTIES OUTPUT_NAME pagan_core CLEAN_DIRECT_OUTPUT 1)
 target_link_libraries(RLTest1
     pagan_core
+    pagan_rl
     ${Boost_LIBRARIES}
     ${Curses_LIBRARY}
 )

@@ -1,0 +1,48 @@
+// How can I have classes & subclasses, with inherited traits? E.g. wooden floor, iron wall, etc. Diff descs, traits, colours, etc
+{
+    [ 
+        {
+            name : "floor",
+            desc : "a dusty floor, made of stone",
+            ascii : {
+                symb : "."
+            },
+            map_feature : {
+                pass : true
+            }
+        },
+        
+        {
+            name : "wall",
+            desc : "a worn, stone wall",
+            ascii : {
+                symb : "#"
+            },
+            map_feature : {
+                pass : false
+            }
+        },
+        
+        {
+            name : "stairs_up",
+            desc : "stairs, leading up",
+            ascii : {
+                symb : "<"
+            },
+            map_feature : {
+                pass : true
+            }
+        },
+        
+        {
+            name : "stairs_down",
+            desc : "stairs, leading down",
+            ascii : {
+                symb : ">"
+            },
+            map_feature : {
+                pass : true
+            }
+        }
+    ]
+}

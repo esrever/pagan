@@ -1,11 +1,42 @@
 #include <curses.h>
 #include <algorithm>
+#include <vector>
 
 enum class eTile : char 
 {
 	EMPTY = 46,
 	CHAR = 64,
 	WALL = 35
+};
+
+
+struct cMap
+{
+	std::vector<char> mMap;
+	int mRows;
+	int mCols;
+
+	cMap(int rows=0, int cols=0):mRows(rows),mCols(cols)
+	{ 
+		int total = rows * cols;
+		if(total)
+		{
+			mMap.resize(total+1);
+			mMap.back() = '\0';
+		}
+
+		memset(&mMap.front(),46,total);
+		for(int i=0;i<(total>>2);++i)
+		{
+			mMap.at(rand() % total) = 35;
+		}
+	}
+
+	eTile Get(int xpos, int ypos) const
+	{
+		int tot = xpos 	+ypos*mCols;
+		return eTile(mMap.at(tot));
+	}
 };
 
 struct cWin
@@ -46,10 +77,9 @@ int main()
 	int maxx,maxy;
 	getmaxyx(stdscr,maxy,maxx);
 	int posx=maxx/2,posy=maxy/2;
-	for(int i=0;i<maxy;++i)
-		for(int j=0;j<maxx;++j)
-			mvaddch(i,j,chtype(eTile::EMPTY));
+	cMap mymap(maxy,maxx);
 
+	addstr(&mymap.mMap.front());
 	mvaddch(posy,posx,chtype(eTile::CHAR));
 	move(posy,posx);
 
@@ -62,22 +92,29 @@ int main()
 	{
 		switch(ch)
 		{
-			case '1': posx = std::max(posx-1,0); posy=std::min(posy+1,maxy-1); break;
-			case '2': posy=std::min(posy+1,maxy-1); break;
-			case '3': posx = std::min(posx+1,maxx-1); posy=std::min(posy+1,maxy-1); break;
-			case '7': posx = std::max(posx-1,0); posy=std::max(posy-1,0); break;
-			case '8': posy=std::max(posy-1,0); break;
-			case '9': posx = std::min(posx+1,maxx); posy=std::max(posy-1,0); break;
-			case '4': posx = std::max(posx-1,0); break;
-			case '5': break;
-			case '6': posx = std::min(posx+1,maxx-1); break;
+			case '1': posx--;posy++; break;
+			case '2': posx  ;posy++; break;
+			case '3': posx++;posy++; break;
+			case '7': posx--;posy--; break;
+			case '8': posx  ;posy--; break;
+			case '9': posx++;posy--; break;
+			case '4': posx--;posy  ; break;
+			case '5': posx  ;posy  ; break;
+			case '6': posx++;posy  ; break;
 		}
-		mvaddch(prevposy,prevposx,chtype(eTile::EMPTY));
-		mvaddch(posy,posx,chtype(eTile::CHAR));
-		
-		move(posy,posx);
-		prevposx=posx;
-		prevposy=posy;
+		if( (posx>=0) && (posy>=0) && (posx<maxx) && (posy<maxy) && (mymap.Get(posx,posy) == eTile::EMPTY))
+		{
+			mvaddch(prevposy,prevposx,chtype(mymap.Get(prevposx,prevposy)));
+			mvaddch(posy,posx,chtype(eTile::CHAR));
+			move(posy,posx);
+			prevposx=posx;
+			prevposy=posy;
+		}
+		else
+		{
+			posx = prevposx;
+			posy = prevposy;
+		}
 		refresh();
 		ch = getch();
 	}

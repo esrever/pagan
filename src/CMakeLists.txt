@@ -167,6 +167,7 @@ SET(ENV{BOOST_ROOT} ${PROJECT_SOURCE_DIR}/contrib/boost_1_54_0)
 find_package(BOOST 1.54.0 REQUIRED COMPONENTS program_options)
 #find_package(JSONSPIRIT)
 find_package(Rapidjson)
+find_package(Curses)
 
 # Sub-projects
 add_subdirectory(lib)
