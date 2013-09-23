@@ -104,6 +104,7 @@ class SystemBase
 	virtual void Init() {};
 	virtual void Process( entity ) {};
 	virtual bitset EntityMask() const =0;
+    virtual string SystemName() const=0;
 }
 
 class System1 : public SystemBase
@@ -114,8 +115,8 @@ class System1 : public SystemBase
 
 class EventBase
 {
-	System *		// system that emitted the event
-	vector<Entity>	// entities that are coupled to the event
+	System *		// system that emitted the event. For debug purposes
+	map<string, entity>	// entities that are coupled to the event. String is used for easier linking, but we could also pass a vector and the derived class could provide the enums-indices
 }
 
 class EventDer : public EventBase
@@ -130,8 +131,6 @@ class EventDer : public EventBase
 	types (immediate)
 		AI actions. All these use a list of entities as an argument
 		Debug checks make sure that the passed entities are of the correct type (IsPC, IsItem, etc.)
-			OnCreate<E>
-			OnDestroy<E>
 			OnUseItem event <E, Eitem>
 			OnApplySkill event <E, Es>
 			OnSacrifice event <E0, E1>
@@ -157,9 +156,15 @@ class EventDer : public EventBase
 		
 		// General ones
 		EntityCreated <E>
-		DestroyEntity <E>
+		RemoveEntity <E>
 		ComponentAdded <E,C>
-		ComponentModified <E,C>
+        RemoveComponent <E,C>
+        SystemAdded<S>
+        RemoveSystem<S>
+        ComponentModified <E,C>
+        EntityModified <E>
+        SystemModified <S>
+        
 	
 	Definite difference of immediate and timed events?
 		immediate like QT
