@@ -1,13 +1,9 @@
 set(SOURCE_FILES
-    asciirep.cpp
-    GameEntity.cpp
-    GameEntityLib.cpp
+    
 )
 
 set(HEADER_FILES
-    asciirep.h
-    GameEntity.h
-    GameEntityLib.h
+    
 )
 
 add_definitions(
@@ -22,15 +18,14 @@ include_directories(
     ${PYSTRING_INCLUDE_DIR}
     ${Boost_INCLUDE_DIRS}
     ${Rapidjson_INCLUDE_DIR}
-    ${Curses_INCLUDE_DIR}
 )
 
-add_library(pagan_rl STATIC
+add_library(pagan_ecs STATIC
             ${SOURCE_FILES}
             ${HEADER_FILES}
         )
-set_target_properties(pagan_rl PROPERTIES OUTPUT_NAME pagan_rl CLEAN_DIRECT_OUTPUT 1)
-target_link_libraries(pagan_rl
+set_target_properties(pagan_ecs PROPERTIES OUTPUT_NAME pagan_ecs CLEAN_DIRECT_OUTPUT 1)
+target_link_libraries(pagan_ecs
     ${PLATFORM_LIBRARIES}
     ${Boost_LIBRARIES}
 )

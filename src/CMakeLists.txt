@@ -168,6 +168,7 @@ find_package(BOOST 1.54.0 REQUIRED COMPONENTS program_options)
 #find_package(JSONSPIRIT)
 find_package(Rapidjson)
 find_package(Curses)
+find_package(Artemis)
 
 # Sub-projects
 add_subdirectory(lib)

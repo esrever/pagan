@@ -1,6 +1,7 @@
 #include <curses.h>
 #include <algorithm>
 #include <vector>
+#include <typeinfo>
 
 enum class eTile : char 
 {
