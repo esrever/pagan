@@ -6,10 +6,6 @@ namespace pgn
     {
         public:
         
-            template<class T>
-                T::view_data_type GetView() const;
-            
-        
         private:
     
     };
