@@ -105,6 +105,9 @@ class SystemBase
 	virtual void Process( entity ) {};
 	virtual bitset EntityMask() const =0;
     virtual string SystemName() const=0;
+    
+    virtual void ClearDeleted() const=0;
+    // TODO: deletes marked E/C for deletion. Runs after process. what about created? E.g. fireball
 }
 
 class System1 : public SystemBase
@@ -170,6 +173,11 @@ class EventDer : public EventBase
 		immediate like QT
 		timed are for running in the end of a loop/frame.
 		similar iface to both!
+        or make the delayListener a system, running at the end of each system?
+        
+    mMarkedDeleted for components/entities? 
+        set as not to be further processed
+        
 */
 
 int main()
