@@ -18,7 +18,7 @@ include_directories(
     ${PYSTRING_INCLUDE_DIR}
     ${Boost_INCLUDE_DIRS}
     ${Rapidjson_INCLUDE_DIR}
-    ${Curses_INCLUDE_DIR}
+    ${Signal_INCLUDE_DIR}
 )
 
 

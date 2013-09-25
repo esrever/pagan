@@ -4,6 +4,10 @@
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 
+#include <iostream>
+
+#include "myevent.h"
+
 using boost::uuids::uuid;
 using namespace std;
 
@@ -21,6 +25,7 @@ how do you tag an entity with an easily referencable name?
 	map< refname, entity> 
 */
 
+/*
 // Components
 struct Compo1{static const int cid = 0; int a;};
 struct Compo2{static const int cid = 1; int b;};
@@ -126,7 +131,7 @@ class EventDer : public EventBase
 {
 	// event-specific data ... 
 }
-
+*/
 /*
 	EventSys:
 
@@ -180,10 +185,57 @@ class EventDer : public EventBase
         
 */
 
+using namespace pgn;
+
+struct EvtData1 { int boom; float blam;};
+
+struct Printer1 : public cEventReceiver<int>, public cEventReceiver<float>
+{
+public:
+	void Receive( const int& zData) { std::cout<<"IntPrinter1 "<<zData<<std::endl; }
+	void Receive( const float& zData) { std::cout<<"FloatPrinter1 "<<zData<<std::endl; }
+};
+
+struct Printer2 : public cEventReceiver<int>, public cEventReceiver<EvtData1>
+{
+public:
+	void Receive( const int& zData) { std::cout<<"IntPrinter2 "<<zData<<std::endl; }
+	void Receive( const EvtData1& zData) { std::cout<<"EvtPrinter2 "<<zData.blam<<" "<<zData.boom<<std::endl; }
+};
+
+
+
 int main()
 {
+	EvtData1 evtdata;
+	evtdata.blam=5.0f;
+	evtdata.boom=7;
+
+	Printer1 p1; p1.cEventReceiver<int>::Subscribe(); p1.cEventReceiver<float>::Subscribe();
+	{
+		Printer2 p2; p2.cEventReceiver<int>::Subscribe(); p2.cEventReceiver<EvtData1>::Subscribe();
+
+		cEvent<int>::emit( 10);
+		cEvent<float>::emit( 20.0f);
+		cEvent<EvtData1>::emit( evtdata);
+	}
+
+	std::cout<<"-----"<<std::endl;
+	cEvent<int>::emit( 10);
+	cEvent<float>::emit( 20.0f);
+	cEvent<EvtData1>::emit( evtdata);
+
+	cEvent<int>::emit.Clear();
+
+	std::cout<<"-----"<<std::endl;
+	cEvent<int>::emit( 10);
+	cEvent<float>::emit( 20.0f);
+	cEvent<EvtData1>::emit( evtdata);
+
+	/*
 	size_t c1 = sizeof(Compo1);
 	size_t cb = sizeof(BaseCompo);
 	size_t cd1 = sizeof(CompoDer1);
+	*/
 	return 0;
 }
