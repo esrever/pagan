@@ -1,9 +1,17 @@
 set(SOURCE_FILES
-    
+    SystemBase.cpp
+    Entity.cpp
+    EntityMgr.cpp
 )
 
 set(HEADER_FILES
-    
+    SystemBase.h
+    Entity.h
+    Event.h
+    EntityMgr.h
+    ecs_config.h
+    Component.h
+    ComponentMgr.h
 )
 
 add_definitions(
@@ -18,6 +26,7 @@ include_directories(
     ${PYSTRING_INCLUDE_DIR}
     ${Boost_INCLUDE_DIRS}
     ${Rapidjson_INCLUDE_DIR}
+    ${Signal_INCLUDE_DIR}
 )
 
 add_library(pagan_ecs STATIC

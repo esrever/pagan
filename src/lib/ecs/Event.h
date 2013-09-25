@@ -17,6 +17,9 @@
 		cEvent<T>::emit( Tinst )
 */
 
+#define DECL_EVENT(N, T) struct c##N##EventData{ T data; c##N##EventData(){} c##N##EventData(const T &v):data(v){} };
+#define EMIT_EVENT(N, V) pgn::cEvent<c##N##EventData>::emit(c##N##EventData( V ));
+
 namespace pgn
 {
 	//!Event class

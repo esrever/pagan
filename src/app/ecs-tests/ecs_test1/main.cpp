@@ -59,15 +59,11 @@ class EntityManager
 	Entity Create( conf = 0, e = null);  // augment
 	Entity Create( bin = 0, e = null);   // augment
 
-	void Tag(entity, name)
-	void Untag(entity, name)
-
 	// Go through the list of the subsystems and add/remove entity refs if conditions are met
 	template<class T>
 	void AddComponent(entity, T component = T()) 
 	template<class T>
 	void RemoveComponent(entity)
-
 	template<class T>
 	bool GetComponent(entity, T& component)
 
