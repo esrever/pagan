@@ -23,9 +23,9 @@ namespace pgn
 			// Entity creation functions
 
 			//! From an existing entity
-			cEntityPtr Create( cEntityPtr = nullptr );
+			cEntityPtr Create( cEntityPtr = cEntity::wptr_type() );
 			cEntityPtr Create( const component_mask_type& zMask, 
-							cEntityPtr = nullptr);
+							cEntityPtr = cEntity::wptr_type());
 			//cEntity Create( conf = 0, e = null);  // augment
 			//cEntity Create( bin = 0, e = null);   // augment
 
@@ -44,6 +44,7 @@ namespace pgn
 			void Receive( const cComponentMaskModifiedEventData& zData);
 
 		private:
+			std::set<cEntitySptr> mEntities;
 			std::map<std::string, std::set<cEntityPtr>> mTaggedEntities;
 			std::map<cEntityPtr, std::bitset<MAX_COMPONENTS>> mComponentMasks;
 	};

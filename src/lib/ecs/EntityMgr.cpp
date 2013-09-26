@@ -5,10 +5,9 @@ namespace pgn
 	//----------------------------------------------------------------
 	cEntityPtr cEntityMgr::Create( cEntityPtr zEntity)
 	{
-		// TODO: new globally unique entity
-		cEntityPtr e = zEntity == nullptr ? cEntity().sptr() : zEntity;
-
-		// TODO: copy mask & associated data from existing entity
+		auto e = std::shared_ptr<cEntity>(new cEntity());
+		mEntities.insert(e);
+		EMIT_EVENT(EntityCreated,e);
 		return e;
 	}
 
@@ -16,10 +15,17 @@ namespace pgn
 	cEntityPtr cEntityMgr::Create( const component_mask_type& zMask, 
 								cEntityPtr zEntity)
 	{
-		cEntityPtr e = Create(zEntity);
-		
-		// TODO: xor the mask and create/init the rest data
+		auto e = Create(zEntity);
+		auto xored = zMask ^ mComponentMasks[zEntity];
+		// TODO: create the components from the set bits
 		return e;
+	}
+
+	void cEntityMgr::Destroy(cEntityPtr zEntity)
+	{
+		EMIT_EVENT(DestroyEntity, zEntity);
+		// and finally erase it
+		mEntities.erase(zEntity.lock());
 	}
 
 	//----------------------------------------------------------------
@@ -33,6 +39,7 @@ namespace pgn
 	{
 		// untag from all groups
 		Untag(zData.data);
+		// unset bits
 		mComponentMasks.erase(zData.data);
 	}
 
@@ -42,7 +49,7 @@ namespace pgn
 		auto i = mComponentMasks.find(zData.data);
 		assert(i != mComponentMasks.end()); // We just got the message! 
 		if(i->second.none())
-			EMIT_EVENT(DestroyEntity, zData.data);
+			Destroy(zData.data);
 	}
 
 	//----------------------------------------------------------------
