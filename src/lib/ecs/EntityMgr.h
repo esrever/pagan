@@ -9,15 +9,15 @@
 
 namespace pgn
 {
+	typedef std::bitset<MAX_COMPONENTS> component_mask_type;
+
 	DECL_EVENT(EntityCreated, cEntity);
 	DECL_EVENT(DestroyEntity, cEntity);
-
-	typedef std::bitset<MAX_COMPONENTS> component_mask_type;
+	DECL_EVENT(ComponentMaskModified, cEntity);
 
 	class cEntityMgr : public cEventReceiver<cEntityCreatedEventData>,
 					   public cEventReceiver<cDestroyEntityEventData>,
-					   public cEventReceiver<cComponentAddedEventData>,
-					   public cEventReceiver<cRemoveComponentEventData>
+					   public cEventReceiver<cComponentMaskModifiedEventData>
 	{
 		public:
 			// Entity creation functions
@@ -29,6 +29,9 @@ namespace pgn
 			//cEntity Create( conf = 0, e = null);  // augment
 			//cEntity Create( bin = 0, e = null);   // augment
 
+			void Destroy(const cEntity& zEntity);
+
+
 			// Entity marking/unmarking functions
 			void Tag(const cEntity& zEntity, const std::string& zTag);
 			void Untag(const cEntity& zEntity, const std::string& zTag);
@@ -38,6 +41,7 @@ namespace pgn
 			// Receiving functions
 			void Receive( const cEntityCreatedEventData& zData);
 			void Receive( const cDestroyEntityEventData& zData);
+			void Receive( const cComponentMaskModifiedEventData& zData);
 
 		private:
 			std::map<std::string, std::set<cEntity>> mTaggedEntities;

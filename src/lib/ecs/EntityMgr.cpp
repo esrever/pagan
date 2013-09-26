@@ -34,6 +34,16 @@ namespace pgn
 	{
 		// untag from all groups
 		Untag(zData.data);
+		mComponentMasks.erase(zData.data);
+	}
+
+	//----------------------------------------------------------------
+	void cEntityMgr::Receive( const cComponentMaskModifiedEventData& zData)
+	{
+		auto i = mComponentMasks.find(zData.data);
+		assert(i != mComponentMasks.end()); // We just got the message! 
+		if(i->second.none())
+			EMIT_EVENT(DestroyEntity, zEntity);
 	}
 
 	//----------------------------------------------------------------
