@@ -2,5 +2,5 @@
 
 namespace pgn
 {
-	unsigned long cEntity::msIdCounter=1;
+	cEntity::cEntity():mId(boost::uuids::random_generator()()){}
 }

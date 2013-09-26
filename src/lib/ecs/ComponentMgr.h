@@ -1,10 +1,15 @@
 #pragma once
 
+#include <set>
+
+#include "ecs_config.h"
+#include "Event.h"
+#include "Entity.h"
+
 namespace pgn
 {
 	class cEntity;
 
-	template<class T>
 	class cComponentMgr : public cEventReceiver<cEntityCreatedEventData>,
 						  public cEventReceiver<cDestroyEntityEventData>
 	{
@@ -16,7 +21,9 @@ namespace pgn
 		void RemoveComponent(const cEntity& zEntity, const T& zComponent);
 	private:
 
-		std::set<T> mEntitiesPerComponent;
+		std::set<cEntity> mEntitiesPerComponent[MAX_COMPONENTS];
+		// TODO: what's a fast data structure for intersections of vectors?
+		// TODO: still need to store the actual components.
 	};
 
 
