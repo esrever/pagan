@@ -21,8 +21,8 @@ namespace pgn
 		sptr_type sptr() const {return sptr_type(this);}
 	private:
 		friend class cEntityMgr;
+		friend class sptr_type;
 		cEntity();
-		~cEntity(){}
 
 	private:
 		boost::uuids::uuid mId;

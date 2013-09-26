@@ -6,18 +6,17 @@ namespace pgn
 	cEntityPtr cEntityMgr::Create( cEntityPtr zEntity)
 	{
 		// TODO: new globally unique entity
-		cEntity e;
+		cEntityPtr e = zEntity == nullptr ? cEntity().sptr() : zEntity;
 
 		// TODO: copy mask & associated data from existing entity
-		
-		return e.sptr();
+		return e;
 	}
 
 	//----------------------------------------------------------------
 	cEntityPtr cEntityMgr::Create( const component_mask_type& zMask, 
 								cEntityPtr zEntity)
 	{
-		cEntity e = Create(zEntity);
+		cEntityPtr e = Create(zEntity);
 		
 		// TODO: xor the mask and create/init the rest data
 		return e;
@@ -43,7 +42,7 @@ namespace pgn
 		auto i = mComponentMasks.find(zData.data);
 		assert(i != mComponentMasks.end()); // We just got the message! 
 		if(i->second.none())
-			EMIT_EVENT(DestroyEntity, zEntity);
+			EMIT_EVENT(DestroyEntity, zData.data);
 	}
 
 	//----------------------------------------------------------------

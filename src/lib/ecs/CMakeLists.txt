@@ -16,6 +16,7 @@ set(HEADER_FILES
 
 add_definitions(
     ${PLATFORM_COMPILE_FLAGS}
+    -D_SCL_SECURE_NO_WARNINGS
 )
 
 source_group("Sources" FILES ${SOURCE_FILES})
