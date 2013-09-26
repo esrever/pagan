@@ -21,7 +21,7 @@ namespace pgn
 	template<class T>
 	void cComponentStorage<T>::AddComponent(cEntityPtr zEntity, const T& zComponent)
 	{
-		// TODO: looks dodgy. where are the events?
+		// TODO: looks dodgy. where are the events? also, set bits.
 		if( mComponents.find(zEntity) != mComponents.end())
 			RemoveComponent(zEntity);
 		mComponents[zEntity] = zComponent;

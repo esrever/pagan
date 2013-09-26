@@ -32,20 +32,23 @@ namespace pgn
 			void Destroy(cEntityPtr zEntity);
 
 
-			// Entity marking/unmarking functions
+			//! Entity marking/unmarking functions
 			void Tag(cEntityPtr zEntity, const std::string& zTag);
 			void Untag(cEntityPtr zEntity, const std::string& zTag);
 			void Untag(const std::string& zTag);
 			void Untag(cEntityPtr zEntity);
 
-			// Receiving functions
+			//! Receiving functions
 			void Receive( const cEntityCreatedEventData& zData);
 			void Receive( const cDestroyEntityEventData& zData);
 			void Receive( const cComponentMaskModifiedEventData& zData);
 
 		private:
+			//! All entities
 			std::set<cEntitySptr> mEntities;
+			//! tags to entities
 			std::map<std::string, std::set<cEntityPtr>> mTaggedEntities;
+			//! entities to component masks
 			std::map<cEntityPtr, std::bitset<MAX_COMPONENTS>> mComponentMasks;
 	};
 
