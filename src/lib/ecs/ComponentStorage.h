@@ -6,15 +6,31 @@ namespace pgn
 	class cComponentStorage
 	{
 		public:
-			 // TODO: copy is bad?
-			void AddComponent(const cEntity& zEntity, const T& zComponent = T());
-			void RemoveComponent(const cEntity& zEntity);
-			const T& Component(const cEntity& zEntity) const;
-			T& Component(const cEntity& zEntity);
+			void AddComponent(cEntityPtr zEntity, const T& zComponent = T());
+			void RemoveComponent(cEntityPtr);
+			//const T& Component(cEntityPtr zEntity) const;
+			//T& Component(cEntityPtr zEntity);
 
-			const std::map<cEntity, T>& Components(const cEntity& zEntity) const { return mComponents; }
+			const std::map<cEntityPtr, T>& Components(cEntityPtr zEntity) const { return mComponents; }
 
 	private:
 		std::map<cEntity, T> mComponents;
 	};
+
+	//------------------------------------------------------------------------------
+	template<class T>
+	void cComponentStorage<T>::AddComponent(cEntityPtr zEntity, const T& zComponent)
+	{
+		// TODO: looks dodgy. where are the events?
+		if( mComponents.find(zEntity) != mComponents.end())
+			RemoveComponent(zEntity);
+		mComponents[zEntity] = zComponent;
+	}
+
+	//------------------------------------------------------------------------------
+	template<class T>
+	void cComponentStorage<T>::RemoveComponent(cEntityPtr zEntity)
+	{
+		mComponents.erase(zEntity);
+	}
 }
