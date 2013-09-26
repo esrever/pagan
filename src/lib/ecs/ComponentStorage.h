@@ -12,6 +12,8 @@ namespace pgn
 			const T& Component(const cEntity& zEntity) const;
 			T& Component(const cEntity& zEntity);
 
+			const std::map<cEntity, T>& Components(const cEntity& zEntity) const { return mComponents; }
+
 	private:
 		std::map<cEntity, T> mComponents;
 	};

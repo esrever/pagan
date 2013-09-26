@@ -27,4 +27,6 @@ namespace pgn
 	private:
 		boost::uuids::uuid mId;
     };
+
+	typedef cEntity::sptr_type cEntityPtr;
 }

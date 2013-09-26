@@ -11,9 +11,9 @@ namespace pgn
 {
 	typedef std::bitset<MAX_COMPONENTS> component_mask_type;
 
-	DECL_EVENT(EntityCreated, cEntity);
-	DECL_EVENT(DestroyEntity, cEntity);
-	DECL_EVENT(ComponentMaskModified, cEntity);
+	DECL_EVENT(EntityCreated, cEntityPtr);
+	DECL_EVENT(DestroyEntity, cEntityPtr);
+	DECL_EVENT(ComponentMaskModified, cEntityPtr);
 
 	class cEntityMgr : public cEventReceiver<cEntityCreatedEventData>,
 					   public cEventReceiver<cDestroyEntityEventData>,
@@ -23,20 +23,20 @@ namespace pgn
 			// Entity creation functions
 
 			//! From an existing entity
-			cEntity Create( const cEntity& zEntity = cEntity());
-			cEntity Create( const component_mask_type& zMask, 
-							const cEntity& zEntity = cEntity()); // augment
+			cEntityPtr Create( cEntityPtr = nullptr );
+			cEntityPtr Create( const component_mask_type& zMask, 
+							cEntityPtr = nullptr);
 			//cEntity Create( conf = 0, e = null);  // augment
 			//cEntity Create( bin = 0, e = null);   // augment
 
-			void Destroy(const cEntity& zEntity);
+			void Destroy(cEntityPtr zEntity);
 
 
 			// Entity marking/unmarking functions
-			void Tag(const cEntity& zEntity, const std::string& zTag);
-			void Untag(const cEntity& zEntity, const std::string& zTag);
+			void Tag(cEntityPtr zEntity, const std::string& zTag);
+			void Untag(cEntityPtr zEntity, const std::string& zTag);
 			void Untag(const std::string& zTag);
-			void Untag(const cEntity& zEntity);
+			void Untag(cEntityPtr zEntity);
 
 			// Receiving functions
 			void Receive( const cEntityCreatedEventData& zData);
@@ -44,8 +44,8 @@ namespace pgn
 			void Receive( const cComponentMaskModifiedEventData& zData);
 
 		private:
-			std::map<std::string, std::set<cEntity>> mTaggedEntities;
-			std::map<cEntity, std::bitset<MAX_COMPONENTS>> mComponentMasks;
+			std::map<std::string, std::set<cEntityPtr>> mTaggedEntities;
+			std::map<cEntityPtr, std::bitset<MAX_COMPONENTS>> mComponentMasks;
 	};
 
 	

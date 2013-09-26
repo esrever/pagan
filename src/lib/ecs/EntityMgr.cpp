@@ -3,19 +3,19 @@
 namespace pgn
 {
 	//----------------------------------------------------------------
-	cEntity cEntityMgr::Create( const cEntity& zEntity)
+	cEntityPtr cEntityMgr::Create( cEntityPtr zEntity)
 	{
 		// TODO: new globally unique entity
 		cEntity e;
 
 		// TODO: copy mask & associated data from existing entity
 		
-		return e;
+		return e.sptr();
 	}
 
 	//----------------------------------------------------------------
-	cEntity cEntityMgr::Create( const cEntity::component_mask_type& zMask, 
-								const cEntity& zEntity)
+	cEntityPtr cEntityMgr::Create( const component_mask_type& zMask, 
+								cEntityPtr zEntity)
 	{
 		cEntity e = Create(zEntity);
 		
@@ -47,13 +47,13 @@ namespace pgn
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Tag(const cEntity& zEntity, const std::string& zTag)
+	void cEntityMgr::Tag(cEntityPtr zEntity, const std::string& zTag)
 	{
 		mTaggedEntities[zTag].insert(zEntity);
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Untag(const cEntity& zEntity, const std::string& zTag)
+	void cEntityMgr::Untag(cEntityPtr zEntity, const std::string& zTag)
 	{
 		// Look for the tag
 		auto i1 = mTaggedEntities.find(zTag);
@@ -71,7 +71,7 @@ namespace pgn
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Untag(const cEntity& zEntity)
+	void cEntityMgr::Untag(cEntityPtr zEntity)
 	{
 		for(auto i : mTaggedEntities)
 			i.second.erase(zEntity);
