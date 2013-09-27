@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <bitset>
 #include <boost/uuid/uuid.hpp>        
 #include <boost/uuid/uuid_generators.hpp>
 
@@ -32,6 +33,12 @@ namespace pgn
 
 	typedef cEntity::wptr_type cEntityPtr;
 	typedef cEntity::sptr_type cEntitySptr;
+
+	DECL_EVENT(EntityCreated, cEntityPtr);
+	DECL_EVENT(DestroyEntity, cEntityPtr);
+	DECL_EVENT(ComponentMaskModified, cEntityPtr);
+
+	typedef std::bitset<MAX_COMPONENTS> component_mask_type;
 }
 
 bool std::less<pgn::cEntityPtr>::operator ()(const pgn::cEntityPtr &lhs ,const pgn::cEntityPtr &rhs) const

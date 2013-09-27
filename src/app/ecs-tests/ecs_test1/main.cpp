@@ -199,10 +199,33 @@ public:
 	void Receive( const EvtData1& zData) { std::cout<<"EvtPrinter2 "<<zData.blam<<" "<<zData.boom<<std::endl; }
 };
 
+class cBase
+{
+public:
+	virtual ~cBase(){}
+	virtual int v1(){return 1;}
+	virtual int v2(){return 2;}
+	virtual int v3(){return 3;}
+};
 
+class cDer : public cBase
+{
+public:
+	virtual int v1(){return 4;}
+	virtual int v2(){return 5;}
+	virtual int v3(){return 6;}
+
+	int s;
+};
 
 int main()
 {
+	cBase b0;
+	cDer d0;
+	auto s0 = sizeof(b0);
+	auto s1 = sizeof(d0);
+	auto s2 = sizeof(cBase);
+	auto s3 = sizeof(cDer);
 	EvtData1 evtdata;
 	evtdata.blam=5.0f;
 	evtdata.boom=7;

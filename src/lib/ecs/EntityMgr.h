@@ -1,6 +1,5 @@
 #pragma once
 
-#include <bitset>
 #include <map>
 #include <string>
 #include <set>
@@ -9,12 +8,6 @@
 
 namespace pgn
 {
-	typedef std::bitset<MAX_COMPONENTS> component_mask_type;
-
-	DECL_EVENT(EntityCreated, cEntityPtr);
-	DECL_EVENT(DestroyEntity, cEntityPtr);
-	DECL_EVENT(ComponentMaskModified, cEntityPtr);
-
 	class cEntityMgr : public cEventReceiver<cEntityCreatedEventData>,
 					   public cEventReceiver<cDestroyEntityEventData>,
 					   public cEventReceiver<cComponentMaskModifiedEventData>
