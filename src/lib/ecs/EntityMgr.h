@@ -8,6 +8,8 @@
 
 namespace pgn
 {
+	class cComponentBase;
+
 	class cEntityMgr : public cEventReceiver<cEntityCreatedEventData>,
 					   public cEventReceiver<cDestroyEntityEventData>,
 					   public cEventReceiver<cComponentMaskModifiedEventData>
@@ -23,6 +25,16 @@ namespace pgn
 			//cEntity Create( bin = 0, e = null);   // augment
 
 			void Destroy(cEntityPtr zEntity);
+
+
+			// Component-related functions
+			template<class T>
+			void AddComponent(cEntityPtr zEntity, const T& zComponent = T());
+			void AddComponent(cEntityPtr zEntity, const cComponentBase& zComponent);
+			void AddComponent(cEntityPtr zEntity, int zBit);
+			
+			void RemoveComponent(cEntityPtr zEntity, const cComponentBase& zComponent);
+			void RemoveComponent(cEntityPtr zEntity, int zBit);
 
 
 			//! Entity marking/unmarking functions
