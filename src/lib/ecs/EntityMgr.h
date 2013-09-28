@@ -27,6 +27,7 @@ namespace pgn
 			void Destroy(cEntityPtr zEntity);
 
 
+			// TODO: templated storage listeners? CompoStorage<T>:: Listen <ComponentAdded> {E, Cbase/mask}
 			// Component-related functions
 			template<class T>
 			void AddComponent(cEntityPtr zEntity, const T& zComponent = T());
