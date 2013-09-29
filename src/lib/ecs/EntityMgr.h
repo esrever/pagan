@@ -28,14 +28,15 @@ namespace pgn
 
 
 			// TODO: templated storage listeners? CompoStorage<T>:: Listen <ComponentAdded> {E, Cbase/mask}
+			// No, just query
 			// Component-related functions
 			template<class T>
-			void AddComponent(cEntityPtr zEntity, const T& zComponent = T());
-			void AddComponent(cEntityPtr zEntity, const cComponentBase& zComponent);
-			void AddComponent(cEntityPtr zEntity, int zBit);
+			void AddComponent(cEntityPtr zEntity, const T& zComponent = T()); // cast to base and call below
+			void AddComponent(cEntityPtr zEntity, const cComponentBase& zComponent); // store & emit message
+			void AddComponent(cEntityPtr zEntity, int zBit); // find function and call top
 			
-			void RemoveComponent(cEntityPtr zEntity, const cComponentBase& zComponent);
-			void RemoveComponent(cEntityPtr zEntity, int zBit);
+			void RemoveComponent(cEntityPtr zEntity, const cComponentBase& zComponent); // find bit and call below
+			void RemoveComponent(cEntityPtr zEntity, int zBit); // emit message and remove(?)
 
 
 			//! Entity marking/unmarking functions
