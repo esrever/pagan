@@ -1,6 +1,8 @@
 #include <algorithm>
 #include <vector>
+#include <memory>
 #include <map>
+#include <unordered_set>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 
@@ -218,8 +220,41 @@ public:
 	int s;
 };
 
+class cB
+{
+public:
+	virtual ~cB(){}
+	virtual void doit()=0;
+	int a;
+
+	bool operator < (const cB& b) const {return a < b.a;}
+};
+
+class cD : public cB{
+public:
+	virtual void doit() {};
+	int b;
+};
+
 int main()
 {
+	{
+		set< std::shared_ptr<cB> > bset;
+		bset.insert( std::make_shared<cD>() );
+		bset.insert( std::make_shared<cD>() );
+
+		auto cB_sptr = *bset.begin();
+		std::weak_ptr<cB> cB_wptr = cB_sptr;
+		reinterpret_cast<cD *>(cB_wptr.lock().get());
+	}
+
+	int a=2,b=2,c=3;
+	auto sptr_2 = std::shared_ptr<int>(new int(2));
+	auto sptr_22 = std::shared_ptr<int>(new int(2));
+	auto sptr_3 = std::shared_ptr<int>(new int(3));
+	auto res1 = sptr_2 == sptr_22;
+	auto res2 = sptr_2 == sptr_3;
+	//auto wptr_2 = std::weak_ptr<int>(new int(2));
 	cBase b0;
 	cDer d0;
 	auto s0 = sizeof(b0);

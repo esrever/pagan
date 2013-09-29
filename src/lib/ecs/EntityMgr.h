@@ -11,6 +11,17 @@
 
 #include "Entity.h"
 
+/*
+	Entity is stored by value
+	Components are stored as shared_pointers (cComponentBase)
+		add comparison operators: *(sptr.get())
+
+		figure out how to give weak_ptrs. or emit shared ptrs directly?
+		Use the lock-check of weak pointers to handle markDeleted, etc. cases
+		So the componentQueries, instead of lists, they can use other containers of weak ptrs?
+			No, as they would still need to do extra processing in the end to weed out null weak_ptrs
+*/
+
 namespace pgn
 {
 	class cComponentBase;
