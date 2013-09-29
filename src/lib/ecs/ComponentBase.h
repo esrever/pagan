@@ -1,6 +1,9 @@
 #pragma once
 
 #include <iostream>
+#include <memory>
+#include <typeinfo>
+#include <typeindex>
 
 namespace pgn
 {
@@ -23,4 +26,26 @@ namespace pgn
 	protected:
 		cComponentBase(){}
 	};
+
+	typedef std::weak_ptr<cComponentBase> cComponentPtr;
+	typedef std::shared_ptr<cComponentBase> cComponentSptr;
+
+	template<class T>
+	class cComponent : public cComponentBase
+	{
+		public:
+			// virtual void read_json() { read_json<T>(mData); } etc
+
+			virtual unsigned short BitId() const {return msBitId;}
+		public:
+			T mData;
+
+		private:
+			static unsigned short msBitId;
+	};
+
+	//------------------------------------------------------------------------
+	template<class T>
+	unsigned short cComponent<T>::msBitId( cEntityMgr::AddComponentType(std::typeid(T)));
+
 }

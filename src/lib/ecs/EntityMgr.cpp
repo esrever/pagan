@@ -82,4 +82,33 @@ namespace pgn
 		for(auto i : mTaggedEntities)
 			i.second.erase(zEntity);
 	}
+
+	//----------------------------------------------------------------
+	void cEntityMgr::AddComponent(cEntityPtr zEntity, std::shared_ptr<cComponentBase> zComponent)
+	{
+		mComponents[zEntity.lock()].insert(zComponent);
+		// TODO: EMIT_EVENT(ComponentAdded, )
+	}
+
+	//----------------------------------------------------------------
+	void cEntityMgr::RemoveComponent(cEntityPtr zEntity, std::weak_ptr<cComponentBase> zComponent)
+	{
+		// TODO: EMIT_EVENT(RemoveComponent, )
+		auto i = mComponents.find(zEntity.lock());
+		assert(i !=mComponents.end());
+		i->second.erase(zComponent.lock());
+	}
+
+	//----------------------------------------------------------------
+	unsigned short cEntityMgr::AddComponentType( const std::type_index& zTi)
+	{
+		for(size_t i=0;i<mComponentTypeIds.size();++i)
+		{
+			if(zTi == mComponentTypeIds[i])
+				return i;
+		}
+		mComponentTypeIds.push_back(zTi);
+		return mComponentTypeIds.size() - 1;
+	}
+
 }

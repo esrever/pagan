@@ -1,8 +1,13 @@
 #pragma once
 
 #include <map>
+#include <memory>
 #include <string>
 #include <set>
+#include <unordered_set>
+#include <typeinfo>
+#include <typeindex>
+#include <vector>
 
 #include "Entity.h"
 
@@ -27,17 +32,10 @@ namespace pgn
 			void Destroy(cEntityPtr zEntity);
 
 
-			// TODO: templated storage listeners? CompoStorage<T>:: Listen <ComponentAdded> {E, Cbase/mask}
-			// No, just query
+			// TODO: add ctros from templated component and bitid
 			// Component-related functions
-			template<class T>
-			void AddComponent(cEntityPtr zEntity, const T& zComponent = T()); // cast to base and call below
-			void AddComponent(cEntityPtr zEntity, const cComponentBase& zComponent); // store & emit message
-			void AddComponent(cEntityPtr zEntity, int zBit); // find function and call top
-			
-			void RemoveComponent(cEntityPtr zEntity, const cComponentBase& zComponent); // find bit and call below
-			void RemoveComponent(cEntityPtr zEntity, int zBit); // emit message and remove(?)
-
+			void AddComponent(cEntityPtr zEntity, std::shared_ptr<cComponentBase> zComponent); 
+			void RemoveComponent(cEntityPtr zEntity, std::weak_ptr<cComponentBase> zComponent); 
 
 			//! Entity marking/unmarking functions
 			void Tag(cEntityPtr zEntity, const std::string& zTag);
@@ -50,6 +48,8 @@ namespace pgn
 			void Receive( const cDestroyEntityEventData& zData);
 			void Receive( const cComponentMaskModifiedEventData& zData);
 
+			unsigned short AddComponentType( const std::type_index& zTi);
+
 		private:
 			//! All entities
 			std::set<cEntitySptr> mEntities;
@@ -57,7 +57,12 @@ namespace pgn
 			std::map<std::string, std::set<cEntityPtr>> mTaggedEntities;
 			//! entities to component masks
 			std::map<cEntityPtr, std::bitset<MAX_COMPONENTS>> mComponentMasks;
-	};
+			//! All component types
+			std::vector< std::type_index> mComponentTypeIds;
+			//! All components
 
-	
+			typedef std::shared_ptr<cComponentBase> ComponentSptr;
+			typedef std::unordered_set<ComponentSptr> ComponentSet;
+			std::map<cEntitySptr, ComponentSet> mComponents;
+	};
 }
