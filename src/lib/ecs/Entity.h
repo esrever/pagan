@@ -19,6 +19,11 @@ namespace pgn
 
 
 		bool operator < (const cEntity& e) const {return mId < e.Id();}
+		std::ostream& operator<<(std::ostream& os) const
+		{
+			os<<Id().data;
+		  return os;
+		}
 	private:
 		friend class cEntityMgr;
 		//sfriend class sptr_type;

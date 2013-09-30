@@ -8,19 +8,23 @@
 #include <core/util/singleton.h>
 #include <core/util/conversions.h>
 
-/*
+/*	
 	Usage: 
 
 	Receivers of T events:
 		inherit from pgn::cEventListener<T> 
 		implement Receive<T>(cEvent<T>::signal_data_type data)
-		
-		call foo.cEventListener<T>::Subscribe()
-		...listen...
-		let be destroyed, or call foo.cEventListener<T>::Unsubscribe()
 
 	Events T:
 		cEvent<T>::emit( Tinst )
+	Notes:
+		Events are instantiated at first emission - don't generate events at compile time.
+		do a less clunky emit with bind
+			emit(eEvent, arg0, arg1, ...)
+				auto handle = std::bind( event_handle2, _1, arg0, arg1 ); // Bind the arguments
+				for_each recv in receivers[eEvent], handle(recv)
+			Subscribe( vector<eEvent> ) : 
+				
 */
 
 #define DECL_EVENT(N, T) struct c##N##EventData{ typedef T data_type; T data; c##N##EventData(){} c##N##EventData(const T &v):data(v){} };

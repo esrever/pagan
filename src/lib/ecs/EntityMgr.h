@@ -19,10 +19,9 @@
 #define ECS pgn::cSingleton<pgn::cEntityMgr>::Instance()
 
 /*
-	Entity is stored by value
-	Components are stored as shared_pointers (cComponentBase)
-		add comparison operators: *(sptr.get())
-		how do I do erase() with finding actually the correct data?
+
+	How to have a general to_string() function for all objects.
+	How do I do erase() with finding actually the correct data?
 	Would I have multiple components of the same type per entity?
 		No. Items are stored as "ItemList"
 	Components can be referenced by other components
