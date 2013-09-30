@@ -52,9 +52,13 @@ namespace pgn
 
 			void Destroy(cEntityWptr zEntity);
 
-			// Component-related functions
-			void AddComponent(cEntityWptr zEntity, cComponentBaseSptr zComponent); 
-			void RemoveComponent(cEntityWptr zEntity, cComponentBaseWptr zComponent); 
+			// Component-related functions 
+			void AddComponentPtr(cEntityWptr zEntity, cComponentBaseSptr zComponent); 
+			void RemoveComponentPtr(cEntityWptr zEntity, cComponentBaseWptr zComponent); 
+			template<class T>
+			void AddComponent(cEntityWptr zEntity, const T& zComponent); 
+			template<class T>
+			void RemoveComponent(cEntityWptr zEntity, const T& zComponent); 
 
 			//! Entity marking/unmarking functions
 			void Tag(cEntityWptr zEntity, const std::string& zTag);
@@ -80,4 +84,18 @@ namespace pgn
 			//! All component types
 			std::vector< std::type_index> mComponentTypeIds;
 	};
+
+	//------------------------------------------------------------------------
+	template<class T>
+	void cEntityMgr::AddComponent(cEntityWptr zEntity, const T& zComponent)
+	{
+		AddComponentPtr(zEntity, std::make_shared<T>(zComponent) );
+	}
+
+	//------------------------------------------------------------------------
+	template<class T>
+	void cEntityMgr::RemoveComponent(cEntityWptr zEntity, const T& zComponent)
+	{
+		RemoveComponentPtr(zEntity, std::make_shared<T>(zComponent) );
+	}
 }

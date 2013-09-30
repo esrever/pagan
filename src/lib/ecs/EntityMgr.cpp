@@ -81,7 +81,7 @@ namespace pgn
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::AddComponent(cEntityWptr zEntity, cComponentBaseSptr zComponent)
+	void cEntityMgr::AddComponentPtr(cEntityWptr zEntity, cComponentBaseSptr zComponent)
 	{
 		auto i = mEntityComponents.find(*zEntity.lock().get());
 		assert(i !=mEntityComponents.end());
@@ -91,7 +91,7 @@ namespace pgn
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::RemoveComponent(cEntityWptr zEntity, cComponentBaseWptr zComponent)
+	void cEntityMgr::RemoveComponentPtr(cEntityWptr zEntity, cComponentBaseWptr zComponent)
 	{
 		auto evtd = std::pair<cEntityWptr,cComponentBaseWptr>(zEntity,zComponent);
 		EMIT_EVENT(RemoveComponent, evtd);
