@@ -6,7 +6,9 @@ namespace pgn
 	{ 
 		auto e = cEntity();
 		auto it = mEntityComponents.insert(std::pair<cEntity,cEntityComponents>(e,cEntityComponents()));
-		return std::make_shared<cEntity>( it.first->first);
+		auto eptr = std::make_shared<cEntity>( it.first->first);
+		EMIT_EVENT(EntityCreated,eptr);
+		return eptr;
 	}
 	/*
 	//----------------------------------------------------------------

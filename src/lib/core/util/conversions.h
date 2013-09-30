@@ -22,4 +22,12 @@ namespace pgn
 	{
 		return s;
 	}
+
+	template<class T, class U>
+	inline std::string to_string( const std::pair< T , U >& data)
+	{
+		std::ostringstream str;
+		str << "<"<< std::to_string(data.first) << ", " << std::to_string(data.second)<<">";
+		return str.str();
+	}
 }
