@@ -3,6 +3,7 @@ set(SOURCE_FILES
     Entity.cpp
     EntityMgr.cpp
     ComponentQuery.cpp
+    EntityComponents.cpp
 )
 
 set(HEADER_FILES
@@ -14,6 +15,7 @@ set(HEADER_FILES
     ComponentBase.h
     #ComponentMgr.h
     ComponentQuery.h
+    EntityComponents.h
 )
 
 add_definitions(

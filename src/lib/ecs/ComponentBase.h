@@ -1,18 +1,20 @@
 #pragma once
 
 #include <iostream>
-#include <memory>
 #include <typeinfo>
 #include <typeindex>
 
+#include "ecs_config.h"
+
 namespace pgn
 {
+	//! Class used for common storage.
 	class cComponentBase
 	{
 	public:
 		virtual ~cComponentBase(){}
-
-		virtual unsigned short BitId() const {return 0xFFFF;}
+		//! Get the component type index 
+		virtual unsigned short TypeIndex() const {return 0xFFFF;}
 
 		/* stream-style
 
@@ -27,25 +29,25 @@ namespace pgn
 		cComponentBase(){}
 	};
 
-	typedef std::weak_ptr<cComponentBase> cComponentPtr;
-	typedef std::shared_ptr<cComponentBase> cComponentSptr;
+	DECL_PTRTYPE(cComponentBase)
 
+	//! Templated class on the actual data type
 	template<class T>
 	class cComponent : public cComponentBase
 	{
 		public:
 			// virtual void read_json() { read_json<T>(mData); } etc
 
-			virtual unsigned short BitId() const {return msBitId;}
+			virtual unsigned short TypeIndex() const {return msTypeIndex;}
 		public:
 			T mData;
 
 		private:
-			static unsigned short msBitId;
+			static unsigned short msTypeIndex;
 	};
 
 	//------------------------------------------------------------------------
 	template<class T>
-	unsigned short cComponent<T>::msBitId( cEntityMgr::AddComponentType(std::typeid(T)));
+	unsigned short cComponent<T>::msTypeIndex( cEntityMgr::AddComponentType(std::typeid(T)));
 
 }

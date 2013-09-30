@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <bitset>
 #include <boost/uuid/uuid.hpp>        
 #include <boost/uuid/uuid_generators.hpp>
@@ -15,13 +14,6 @@ namespace pgn
     //! 
     class cEntity
     {
-	public:
-		typedef std::shared_ptr<const cEntity> sptr_type;
-		typedef std::weak_ptr<const cEntity> wptr_type;
-
-		//! get shared pointer
-		sptr_type sptr() const {return sptr_type(this);}
-		wptr_type wptr() const {return std::make_shared<cEntity>(*this);}
 	private:
 		friend class cEntityMgr;
 		//sfriend class sptr_type;
@@ -31,8 +23,7 @@ namespace pgn
 		boost::uuids::uuid mId;
     };
 
-	typedef cEntity::wptr_type cEntityPtr;
-	typedef cEntity::sptr_type cEntitySptr;
+	DECL_PTRTYPE(cEntity)
 
 	DECL_EVENT(EntityCreated, cEntityPtr);
 	DECL_EVENT(DestroyEntity, cEntityPtr);
