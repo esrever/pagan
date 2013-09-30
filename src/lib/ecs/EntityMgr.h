@@ -24,7 +24,13 @@
 		Entities provide: 
 			void json_write(doc&)
 			void json_read(const doc&)
+		Components provide:
+			void json_write(doc&)
+			void json_read(const doc&)
+		utils provide:
+			void json_to_text()
 	Naming:
+		blueprints are randomisable, instanced entities
 		blueprints have names
 		default blueprint is "default"
 		entities from blue prints get a successive number: orc_shaman_32
