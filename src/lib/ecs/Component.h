@@ -16,6 +16,7 @@ namespace pgn
 			// virtual void read_json() { read_json<T>(mData); } etc
 
 			virtual unsigned short TypeIndex() const {return msTypeIndex;}
+			virtual std::string to_string() const;
 		public:
 			T mData;
 
@@ -26,4 +27,10 @@ namespace pgn
 	//------------------------------------------------------------------------
 	template<class T>
 	unsigned short cComponent<T>::msTypeIndex( ECS.AddComponentType(typeid(T)));
+
+	template<class T>
+	std::string cComponent<T>::to_string() const
+	{
+		return pgn::to_string( mData );
+	}
 }

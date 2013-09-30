@@ -8,6 +8,10 @@
 #include <core/util/singleton.h>
 #include <core/util/conversions.h>
 
+#include "ecs_config.h"
+#include "Entity.h"
+#include "ComponentBase.h"
+
 /*	
 	Usage: 
 
@@ -26,10 +30,6 @@
 			Subscribe( vector<eEvent> ) : 
 				
 */
-
-#define DECL_EVENT(N, T) struct c##N##EventData{ typedef T data_type; T data; c##N##EventData(){} c##N##EventData(const T &v):data(v){} };
-#define EMIT_EVENT_DBG(N, V) { OutputDebugStringA( pgn::evt_string< c##N##EventData::data_type >( #N , V ).c_str());OutputDebugStringA( "\n" ); EMIT_EVENT_REL( N , V )}
-#define EMIT_EVENT(N,V) emit_event< c##N##EventData >(V);
 
 namespace pgn
 {

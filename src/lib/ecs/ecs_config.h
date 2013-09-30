@@ -8,3 +8,7 @@ typedef std::bitset<MAX_COMPONENTS> component_mask_type;
 						typedef std::weak_ptr< T >   T##Wptr;\
 						typedef const T &    T##Cref;\
 						typedef T &    T##Ref;
+
+#define DECL_EVENT(N, T) struct c##N##EventData{ typedef T data_type; T data; c##N##EventData(){} c##N##EventData(const T &v):data(v){} };
+//#define EMIT_EVENT_DBG(N, V) { OutputDebugStringA( pgn::evt_string< c##N##EventData::data_type >( #N , V ).c_str());OutputDebugStringA( "\n" ); EMIT_EVENT_REL( N , V )}
+#define EMIT_EVENT(N,V) pgn::emit_event< pgn::c##N##EventData >(V);

@@ -1,11 +1,10 @@
 #pragma once
 
+#include "ecs_config.h"
 #include "Event.h"
 
 namespace pgn
 {
-	struct cEntity;
-
 	DECL_EVENT(SystemActivity, bool);
 
 	class cSystemBase

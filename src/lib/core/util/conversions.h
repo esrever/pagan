@@ -28,23 +28,24 @@ namespace pgn
 	inline std::string to_string( const std::pair< T , U >& data)
 	{
 		std::ostringstream str;
-		str << "<"<< std::to_string(data.first) << ", " << std::to_string(data.second)<<">";
+		str << "<"<< to_string(data.first) << ", " << to_string(data.second)<<">";
 		return str.str();
 	}
 
 	template<class T>
 	inline std::string to_string( std::weak_ptr< T > data)
 	{
-		std::ostringstream str;
-		str << "weak_ptr("<< std::to_string(*data.lock().get()) << ")";
-		return str.str();
+		if(auto sptr = data.lock())
+			return to_string(sptr);
+		else
+			return "expired";
 	}
 
 	template<class T>
 	inline std::string to_string( std::shared_ptr< T > data)
 	{
 		std::ostringstream str;
-		str << "shared_ptr("<< std::to_string(*data.get()) << ")";
+		str << "shared_ptr("<< to_string(*data.get()) << ")";
 		return str.str();
 	}
 }

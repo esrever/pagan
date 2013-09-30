@@ -11,6 +11,7 @@
 
 #include "ecs_config.h"
 #include "Entity.h"
+#include "Event.h"
 #include "ComponentBase.h"
 #include "EntityComponents.h"
 #include "ComponentQuery.h"
@@ -19,6 +20,14 @@
 #define ECS pgn::cSingleton<pgn::cEntityMgr>::Instance()
 
 /*
+	Printing:
+		Entities provide: 
+			void json_write(doc&)
+			void json_read(const doc&)
+	Naming:
+		blueprints have names
+		default blueprint is "default"
+		entities from blue prints get a successive number: orc_shaman_32
 
 	How to have a general to_string() function for all objects.
 	How do I do erase() with finding actually the correct data?
@@ -78,6 +87,9 @@ namespace pgn
 			std::map<cEntity, cEntityComponents> mEntityComponents;
 			//! Component queries: maps tags to entities that have prespecified components
 			std::map<std::string, cComponentQuery> mComponentQueries;
+			
+			//! Counters for blueprints
+			std::map<std::string, unsigned> mBlueprintCounters;
 
 		private:
 			//! All component types

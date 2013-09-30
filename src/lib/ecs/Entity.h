@@ -1,10 +1,12 @@
 #pragma once
 
 #include <bitset>
+#include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/uuid/uuid.hpp>        
 #include <boost/uuid/uuid_generators.hpp>
+#include <boost/uuid/uuid_io.hpp>
 
-#include "Event.h"
 #include "ecs_config.h"
 
 namespace pgn 
@@ -19,11 +21,7 @@ namespace pgn
 
 
 		bool operator < (const cEntity& e) const {return mId < e.Id();}
-		std::ostream& operator<<(std::ostream& os) const
-		{
-			os<<Id().data;
-		  return os;
-		}
+
 	private:
 		friend class cEntityMgr;
 		//sfriend class sptr_type;
@@ -43,3 +41,16 @@ bool std::less<pgn::cEntityWptr>::operator ()(const pgn::cEntityWptr &lhs ,const
 {
 	return *lhs.lock() < *rhs.lock(); 
 }
+
+inline std::ostream& operator<<(std::ostream& os,const pgn::cEntity& zEntity)
+{
+	os<<boost::lexical_cast<std::string>(zEntity.Id());
+	return os;
+}
+namespace pgn{
+inline std::string to_string( const cEntity& zCompo)
+{
+	std::ostringstream str;
+	str << zCompo;
+	return str.str();
+}}

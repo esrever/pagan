@@ -3,6 +3,7 @@
 #include <set>
 
 #include "ecs_config.h"
+#include "event.h"
 #include "EntityComponents.h"
 
 namespace pgn
