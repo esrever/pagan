@@ -14,6 +14,11 @@ namespace pgn
     //! 
     class cEntity
     {
+	public:
+		const boost::uuids::uuid& Id() const {return mId;} 
+
+
+		bool operator < (const cEntity& e) const {return mId < e.Id();}
 	private:
 		friend class cEntityMgr;
 		//sfriend class sptr_type;
@@ -25,14 +30,11 @@ namespace pgn
 
 	DECL_PTRTYPE(cEntity)
 
-	DECL_EVENT(EntityCreated, cEntityPtr);
-	DECL_EVENT(DestroyEntity, cEntityPtr);
-	DECL_EVENT(ComponentMaskModified, cEntityPtr);
-
-	typedef std::bitset<MAX_COMPONENTS> component_mask_type;
+	DECL_EVENT(EntityCreated, cEntityWptr);
+	DECL_EVENT(DestroyEntity, cEntityWptr);
 }
 
-bool std::less<pgn::cEntityPtr>::operator ()(const pgn::cEntityPtr &lhs ,const pgn::cEntityPtr &rhs) const
+bool std::less<pgn::cEntityWptr>::operator ()(const pgn::cEntityWptr &lhs ,const pgn::cEntityWptr &rhs) const
 {
-	return lhs.lock() < rhs.lock(); 
+	return *lhs.lock() < *rhs.lock(); 
 }

@@ -2,8 +2,15 @@
 
 namespace pgn
 {
+	cEntitySptr cEntityMgr::Create() 
+	{ 
+		auto e = cEntity();
+		auto it = mEntityComponents.insert(std::pair<cEntity,cEntityComponents>(e,cEntityComponents()));
+		return std::make_shared<cEntity>( it.first->first);
+	}
+	/*
 	//----------------------------------------------------------------
-	cEntityPtr cEntityMgr::Create( cEntityPtr zEntity)
+	cEntityWptr cEntityMgr::Create( cEntityWptr zEntity)
 	{
 		auto e = std::shared_ptr<cEntity>(new cEntity());
 		mEntities.insert(e);
@@ -12,20 +19,21 @@ namespace pgn
 	}
 
 	//----------------------------------------------------------------
-	cEntityPtr cEntityMgr::Create( const component_mask_type& zMask, 
-								cEntityPtr zEntity)
+	cEntityWptr cEntityMgr::Create( const component_mask_type& zMask, 
+								cEntityWptr zEntity)
 	{
 		auto e = Create(zEntity);
 		auto xored = zMask ^ mComponentMasks[zEntity];
 		// TODO: create the components from the set bits
 		return e;
 	}
+	*/
 
-	void cEntityMgr::Destroy(cEntityPtr zEntity)
+	void cEntityMgr::Destroy(cEntityWptr zEntity)
 	{
 		EMIT_EVENT(DestroyEntity, zEntity);
 		// and finally erase it
-		mEntities.erase(zEntity.lock());
+		mEntityComponents.erase(*zEntity.lock().get());
 	}
 
 	//----------------------------------------------------------------
@@ -39,27 +47,16 @@ namespace pgn
 	{
 		// untag from all groups
 		Untag(zData.data);
-		// unset bits
-		mComponentMasks.erase(zData.data);
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Receive( const cComponentMaskModifiedEventData& zData)
-	{
-		auto i = mComponentMasks.find(zData.data);
-		assert(i != mComponentMasks.end()); // We just got the message! 
-		if(i->second.none())
-			Destroy(zData.data);
-	}
-
-	//----------------------------------------------------------------
-	void cEntityMgr::Tag(cEntityPtr zEntity, const std::string& zTag)
+	void cEntityMgr::Tag(cEntityWptr zEntity, const std::string& zTag)
 	{
 		mTaggedEntities[zTag].insert(zEntity);
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Untag(cEntityPtr zEntity, const std::string& zTag)
+	void cEntityMgr::Untag(cEntityWptr zEntity, const std::string& zTag)
 	{
 		// Look for the tag
 		auto i1 = mTaggedEntities.find(zTag);
@@ -77,26 +74,32 @@ namespace pgn
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Untag(cEntityPtr zEntity)
+	void cEntityMgr::Untag(cEntityWptr zEntity)
 	{
 		for(auto i : mTaggedEntities)
 			i.second.erase(zEntity);
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::AddComponent(cEntityPtr zEntity, std::shared_ptr<cComponentBase> zComponent)
+	void cEntityMgr::AddComponent(cEntityWptr zEntity, cComponentBaseSptr zComponent)
 	{
-		mComponents[zEntity.lock()].insert(zComponent);
-		// TODO: EMIT_EVENT(ComponentAdded, )
+		auto i = mEntityComponents.find(*zEntity.lock().get());
+		assert(i !=mEntityComponents.end());
+		i->second.AddComponent(zComponent);
+		auto evtd = std::pair<cEntityWptr,cComponentBaseWptr>(zEntity,zComponent);
+		EMIT_EVENT(ComponentAdded, evtd);
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::RemoveComponent(cEntityPtr zEntity, std::weak_ptr<cComponentBase> zComponent)
+	void cEntityMgr::RemoveComponent(cEntityWptr zEntity, cComponentBaseWptr zComponent)
 	{
-		// TODO: EMIT_EVENT(RemoveComponent, )
-		auto i = mComponents.find(zEntity.lock());
-		assert(i !=mComponents.end());
-		i->second.erase(zComponent.lock());
+		auto evtd = std::pair<cEntityWptr,cComponentBaseWptr>(zEntity,zComponent);
+		EMIT_EVENT(RemoveComponent, evtd);
+		auto i = mEntityComponents.find(*zEntity.lock().get());
+		assert(i !=mEntityComponents.end());
+		i->second.RemoveComponent(zComponent);
+		if(i->second.Mask().none())
+			Destroy(zEntity);
 	}
 
 	//----------------------------------------------------------------

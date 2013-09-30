@@ -2,17 +2,21 @@
 
 #include <set>
 
-#include "Entity.h"
+#include "ecs_config.h"
+#include "EntityComponents.h"
 
 namespace pgn
 {
-	class cComponentQuery : public cEventReceiver<cComponentMaskModifiedEventData>
+	class cComponentQuery : public cEventReceiver<cComponentAddedEventData>,
+							public cEventReceiver<cRemoveComponentEventData>
 	{
 	public:
 
 		cComponentQuery(const component_mask_type& zMask);
-		void Receive(const cComponentMaskModifiedEventData& zData);
+		void Receive(const cComponentAddedEventData& zData);
+		void Receive(const cRemoveComponentEventData& zData);
+		const std::set<cEntityWptr>& Get() const {return mEntitiesWithComponents;}
 	private:
-		std::set<cEntityPtr> mEntitiesWithComponents;
+		std::set<cEntityWptr> mEntitiesWithComponents;
 	};
 }

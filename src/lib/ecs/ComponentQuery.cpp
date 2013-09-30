@@ -10,7 +10,12 @@ namespace pgn
 	}
 
 	//------------------------------------------------------------------------------
-	void cComponentQuery::Receive(const cComponentMaskModifiedEventData& zData)
+	void cComponentQuery::Receive(const cComponentAddedEventData& zData)
+	{
+		//TODO: if mask | thismask, tryAddEntity, else, tryRemoveEntity
+	}
+	//------------------------------------------------------------------------------
+	void cComponentQuery::Receive(const cRemoveComponentEventData& zData)
 	{
 		//TODO: if mask | thismask, tryAddEntity, else, tryRemoveEntity
 	}

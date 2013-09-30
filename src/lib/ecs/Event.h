@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ssignal.h>
+#include <core/util/singleton.h>
 
 /*
 	Usage: 
@@ -18,7 +19,7 @@
 */
 
 #define DECL_EVENT(N, T) struct c##N##EventData{ T data; c##N##EventData(){} c##N##EventData(const T &v):data(v){} };
-#define EMIT_EVENT(N, V) pgn::cEvent<c##N##EventData>::emit(c##N##EventData( V ));
+#define EMIT_EVENT(N, V) pgn::cSingleton<pgn::cEvent<c##N##EventData>>::Instance().emit(c##N##EventData( V ));
 
 namespace pgn
 {
@@ -30,18 +31,18 @@ namespace pgn
 			typedef const evt_data_type& signal_data_type;
 			typedef Gallant::Signal1<signal_data_type> signal_type;
 		public:
-			static signal_type emit;
+			signal_type emit;
 	};
 
 	//! Instantiate the signal
-	template<class evt_data_type> typename cEvent<evt_data_type>::signal_type cEvent<evt_data_type>::emit;
+	//template<class evt_data_type> typename cEvent<evt_data_type>::signal_type cEvent<evt_data_type>::emit;
 
 	//!Event receiver base class
 	template<class evt_data_type>
 	class cEventReceiver
 	{
 		public:
-			cEventReceiver() {}
+			cEventReceiver() {Subscribe();}
 			virtual ~cEventReceiver(){ Unsubscribe();}
 
 			void Subscribe();
@@ -54,12 +55,12 @@ namespace pgn
 	template<class evt_data_type> 
 	void cEventReceiver<evt_data_type> ::Subscribe()
 	{
-		cEvent<evt_data_type>::emit.Connect(this, &cEventReceiver<evt_data_type>::Receive);
+		pgn::cSingleton<cEvent<evt_data_type>>::Instance().emit.Connect(this, &cEventReceiver<evt_data_type>::Receive);
 	}
 
 	template<class evt_data_type> 
 	void cEventReceiver<evt_data_type>::Unsubscribe()
 	{
-		cEvent<evt_data_type>::emit.Disconnect(this, &cEventReceiver<evt_data_type>::Receive);
+		pgn::cSingleton<cEvent<evt_data_type>>::Instance().emit.Disconnect(this, &cEventReceiver<evt_data_type>::Receive);
 	}
 }

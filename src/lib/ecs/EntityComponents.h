@@ -9,6 +9,10 @@
 
 namespace pgn
 {
+	typedef std::pair<cEntityWptr, cComponentBaseWptr> EntityComponent;
+	DECL_EVENT(ComponentAdded, EntityComponent);
+	DECL_EVENT(RemoveComponent, EntityComponent);
+
 	class cEntityComponents
 	{
 		typedef std::set<cComponentBaseSptr> ComponentSet;
@@ -17,15 +21,18 @@ namespace pgn
 		void AddComponent(cComponentBaseSptr zCompo);
 		void RemoveComponent(cComponentBaseWptr zCompo);
 
+		const component_mask_type& Mask() const {return mMask;}
+		const ComponentSet& Components() const {return mComponents;}
+
 	private:
 		//! All components
 		ComponentSet mComponents;
-		std::bitset<MAX_COMPONENTS> mMask;
+		component_mask_type mMask;
 	};
+}
 
-	//! Comparison criterion
-	bool operator < (const cComponentBaseSptr& lhs, const cComponentBaseSptr& rhs)
-	{
-		return lhs.get()->TypeIndex() < rhs.get()->TypeIndex();
-	}
+//! Comparison criterion
+bool std::less<pgn::cComponentBaseSptr>::operator ()(const pgn::cComponentBaseSptr& lhs, const pgn::cComponentBaseSptr& rhs) const
+{
+	return lhs.get()->TypeIndex() < rhs.get()->TypeIndex();
 }
