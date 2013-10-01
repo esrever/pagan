@@ -1,6 +1,36 @@
 #include <ecs/EntityMgr.h>
 #include <ecs/Component.h>
 
+#include <core/util/json_conversions.h>
+
+/*
+	Provide json conversions for all components
+*/
+
+namespace pgn
+{
+	template <>
+	void to_json<pgn::cComponent<int>>(const pgn::cComponent<int>& zObj, rapidjson::Value& zRoot)
+	{
+		zRoot.SetObject();
+		zRoot.AddMember("an_int",zObj.mData, ECS.JsonAllocator() );
+	}
+
+	template <>
+	void to_json<pgn::cComponent<double>>(const pgn::cComponent<double>& zObj, rapidjson::Value& zRoot)
+	{
+		zRoot.SetObject();
+		zRoot.AddMember("a_double",zObj.mData, ECS.JsonAllocator());
+	}
+
+	template <>
+	void to_json<pgn::cComponent<float>>(const pgn::cComponent<float>& zObj, rapidjson::Value& zRoot)
+	{
+		zRoot.SetObject();
+		zRoot.AddMember("a_float",zObj.mData, ECS.JsonAllocator());
+	}
+}
+
 int main()
 {
 	auto ecs = ECS;

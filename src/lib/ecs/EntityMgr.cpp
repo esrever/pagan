@@ -2,6 +2,7 @@
 
 namespace pgn
 {
+	//----------------------------------------------------------------
 	cEntitySptr cEntityMgr::Create() 
 	{ 
 		auto e = cEntity();
@@ -11,27 +12,8 @@ namespace pgn
 		EMIT_EVENT(EntityCreated,ewptr);
 		return eptr;
 	}
-	/*
-	//----------------------------------------------------------------
-	cEntityWptr cEntityMgr::Create( cEntityWptr zEntity)
-	{
-		auto e = std::shared_ptr<cEntity>(new cEntity());
-		mEntities.insert(e);
-		EMIT_EVENT(EntityCreated,e);
-		return e;
-	}
 
 	//----------------------------------------------------------------
-	cEntityWptr cEntityMgr::Create( const component_mask_type& zMask, 
-								cEntityWptr zEntity)
-	{
-		auto e = Create(zEntity);
-		auto xored = zMask ^ mComponentMasks[zEntity];
-		// TODO: create the components from the set bits
-		return e;
-	}
-	*/
-
 	void cEntityMgr::Destroy(cEntityWptr zEntity)
 	{
 		EMIT_EVENT(DestroyEntity, zEntity);
@@ -73,7 +55,10 @@ namespace pgn
 		// Look for the tag
 		auto i1 = mTaggedEntities.find(zTag);
 		if(i1 != mTaggedEntities.end())
+		{
 			i1->second.clear();
+			mTaggedEntities.erase(i1);
+		}
 	}
 
 	//----------------------------------------------------------------

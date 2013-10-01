@@ -47,13 +47,6 @@ namespace pgn
 			// Entity creation functions
 			//! From an existing entity
 			cEntitySptr Create();
-			/*
-			cEntityPtr Create( const component_mask_type& zMask, 
-							cEntityPtr = cEntity::wptr_type());
-							*/
-			//cEntity Create( conf = 0, e = null);  // augment
-			//cEntity Create( bin = 0, e = null);   // augment
-
 			void Destroy(cEntityWptr zEntity);
 
 			// Component-related functions 
@@ -75,6 +68,8 @@ namespace pgn
 			void Receive( const cDestroyEntityEventData& zData);
 
 			unsigned short AddComponentType( const std::type_index& zTi);
+
+			rapidjson::MemoryPoolAllocator<>& JsonAllocator() { static rapidjson::MemoryPoolAllocator<> alloc(0); return alloc;}
 
 		private:
 			//! tags to entities
