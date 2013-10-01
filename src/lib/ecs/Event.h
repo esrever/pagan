@@ -31,6 +31,9 @@
 
 namespace pgn
 {
+	//! for debugging the event calls
+	void log_event_call(const std::string& s);
+
 	//!Event class
 	template<class evt_data_type>
 	class cEvent
@@ -41,9 +44,6 @@ namespace pgn
 		public:
 			signal_type emit;
 	};
-
-	//! Instantiate the signal
-	//template<class evt_data_type> typename cEvent<evt_data_type>::signal_type cEvent<evt_data_type>::emit;
 
 	//!Event receiver base class
 	template<class evt_data_type>
@@ -63,25 +63,28 @@ namespace pgn
 	template<class evt_data_type> 
 	void cEventReceiver<evt_data_type> ::Subscribe()
 	{
-		pgn::cSingleton<cEvent<evt_data_type>>::Instance().emit.Connect(this, &cEventReceiver<evt_data_type>::Receive);
+		log_event_call(boost::str(boost::format("%x subscribes to %s")% this %typeid(evt_data_type).name() ));
+		pgn::cSingleton<cEvent<evt_data_type>>::Instance().emit.Connect(this, &cEventReceiver<evt_data_type>::Receive);		
 	}
 
 	//-------------------------------------------
 	template<class evt_data_type> 
 	void cEventReceiver<evt_data_type>::Unsubscribe()
 	{
+		log_event_call(boost::str(boost::format("%x unsubscribes from %s")% this %typeid(evt_data_type).name() ));
 		pgn::cSingleton<cEvent<evt_data_type>>::Instance().emit.Disconnect(this, &cEventReceiver<evt_data_type>::Receive);
 	}
 
 	//-------------------------------------------
+	//! create a string out of an emitted event
 	template <class evt_data_type>
 	inline std::string evt_string(const std::string& evtName, const evt_data_type& evtData)
 	{
 		return boost::str(boost::format("Emitting event %s with data: %s")%evtName.c_str()%pgn::to_string(evtData));
 	}
 
-	void log_event_call(const std::string& s);
-
+	//-------------------------------------------
+	//! emit event 
 	template<class T>
 	void emit_event(const typename T::data_type & zVal)
 	{

@@ -6,6 +6,7 @@ namespace pgn
 {
 	cEntityMgr::cEntityMgr()
 	{
+		std::ios_base::Init();
 		mLog.SetName("ECS");
 		mLog.SetChannel(&std::cout);
 	}
