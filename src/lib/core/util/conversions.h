@@ -7,23 +7,29 @@
 
 namespace pgn
 {
+	//! string to type
 	template <class T>
 	inline bool from_string(const std::string& s, T& t)
 	{
 		std::istringstream iss(s);
 		return !(iss >> t).fail();
 	}
+
+	//! type to string
 	template <class T>
 	inline std::string to_string(const T& s)
 	{
 		return std::to_string(s);
 	}
+
+	//! type(string) to string
 	template <>
 	inline std::string to_string<std::string>(const std::string& s)
 	{
 		return s;
 	}
 
+	//! type(pair) to string
 	template<class T, class U>
 	inline std::string to_string( const std::pair< T , U >& data)
 	{
@@ -32,6 +38,7 @@ namespace pgn
 		return str.str();
 	}
 
+	//! type(weak_ptr) to string
 	template<class T>
 	inline std::string to_string( std::weak_ptr< T > data)
 	{
@@ -41,6 +48,7 @@ namespace pgn
 			return "expired";
 	}
 
+	//! type(shared_ptr) to string
 	template<class T>
 	inline std::string to_string( std::shared_ptr< T > data)
 	{

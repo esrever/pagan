@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <core/util/conversions.h>
+#include <core/util/json_conversions.h>
 #include "ecs_config.h"
 
 namespace pgn
@@ -16,6 +17,8 @@ namespace pgn
 		virtual unsigned short TypeIndex() const {return 0xFFFF;}
 
 		virtual std::string to_string() const {return "BaseClass";}
+		virtual void to_json(rapidjson::Value& zRoot) const{}
+		virtual void from_json(const rapidjson::Value& zRoot){}
 
 		/* stream-style
 

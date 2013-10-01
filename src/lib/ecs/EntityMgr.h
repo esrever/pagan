@@ -22,16 +22,26 @@
 /*
 	Printing:
 		Entities provide: 
-			void json_write(doc&)
-			void json_read(const doc&)
+			void to_json(doc&) const
+			void from_json(const doc&)
+			global to_string(): to_json -> to_string()
+		Systems provide: 
+			void to_json(doc&) const
+			void from_json(const doc&)
+			global to_string(): to_json -> to_string()
 		Components provide:
-			void json_write(doc&)
-			void json_read(const doc&)
+			virtual void to_json(doc&) const	{ pgn::to_json<T>(*this, doc)}
+			virtual void from_json(const doc&)	{ pgn::from_json<T>(*this, doc)}
+			global to_string(): to_json -> to_string()
 		utils provide:
-			void json_to_text()
+			void to_json<>(const T& doc&)
+			void from_json<>(T&, const doc&)
+			from_string<doc>(doc&)
+			to_string<doc>(const doc&)
 	Naming:
 		blueprints are randomisable, instanced entities
 		blueprints have names
+		blueprints can be merged/inher
 		default blueprint is "default"
 		entities from blue prints get a successive number: orc_shaman_32
 

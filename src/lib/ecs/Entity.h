@@ -7,6 +7,9 @@
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
 
+#include <core/util/conversions.h>
+#include <core/util/json_conversions.h>
+
 #include "ecs_config.h"
 
 namespace pgn 
@@ -17,14 +20,12 @@ namespace pgn
     class cEntity
     {
 	public:
+		//! get uuid
 		const boost::uuids::uuid& Id() const {return mId;} 
-
-
-		bool operator < (const cEntity& e) const {return mId < e.Id();}
-
+		//! compare uuids
+		bool operator < (const pgn::cEntity &rhs) const {return Id() < rhs.Id();}
 	private:
 		friend class cEntityMgr;
-		//sfriend class sptr_type;
 		cEntity();
 
 	private:
@@ -35,22 +36,17 @@ namespace pgn
 
 	DECL_EVENT(EntityCreated, cEntityWptr);
 	DECL_EVENT(DestroyEntity, cEntityWptr);
+
+	//! entity to json
+	template<>
+	void to_json<cEntity>(const cEntity& zEntity, rapidjson::Value& zRoot);
+	//! entity from json
+	template<>
+	void from_json<cEntity>(cEntity& zEntity, const rapidjson::Value& zRoot);
+	//! entity to string
+	template<>
+	std::string to_string<cEntity>(const cEntity& zEntity);
 }
 
-bool std::less<pgn::cEntityWptr>::operator ()(const pgn::cEntityWptr &lhs ,const pgn::cEntityWptr &rhs) const
-{
-	return *lhs.lock() < *rhs.lock(); 
-}
-
-inline std::ostream& operator<<(std::ostream& os,const pgn::cEntity& zEntity)
-{
-	os<<boost::lexical_cast<std::string>(zEntity.Id());
-	return os;
-}
-namespace pgn{
-inline std::string to_string( const cEntity& zCompo)
-{
-	std::ostringstream str;
-	str << zCompo;
-	return str.str();
-}}
+//! Global wptr comparison operator 
+inline bool std::less<pgn::cEntityWptr>::operator ()(const pgn::cEntityWptr &lhs ,const pgn::cEntityWptr &rhs) const {return *lhs.lock() < *rhs.lock();}
