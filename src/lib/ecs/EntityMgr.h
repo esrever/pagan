@@ -20,14 +20,16 @@
 #define ECS pgn::cSingleton<pgn::cEntityMgr>::Instance()
 
 /*
-	Naming:
+	Blueprints:
 		blueprints are randomisable, instanced entities
 		blueprints have names
 		blueprints can be merged/inher
 		default blueprint is "default"
 		entities from blue prints get a successive number: orc_shaman_32
+	Pointers and structs in containers issues:
+		tags currently duplicate entity
+		componentquery is probably problematic
 
-	How do I do erase() with finding actually the correct data?
 	Would I have multiple components of the same type per entity?
 		No. Items are stored as "ItemList"
 	Components can be referenced by other components
@@ -77,13 +79,13 @@ namespace pgn
 
 		private:
 			//! tags to entities
-			std::map<std::string, std::set<cEntityWptr>> mTaggedEntities;
+			std::map<std::string, std::set<cEntity>> mTaggedEntities;
 			//! entities and components
 			std::map<cEntity, cEntityComponents> mEntityComponents;
 			//! Component queries: maps tags to entities that have prespecified components
 			std::map<std::string, cComponentQuery> mComponentQueries;
 			
-			//! Counters for blueprints
+			//! Counters for blueprints - TODO: move at blueprint/archetype class
 			std::map<std::string, unsigned> mBlueprintCounters;
 
 		private:

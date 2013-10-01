@@ -55,7 +55,7 @@ namespace pgn
 	//----------------------------------------------------------------
 	void cEntityMgr::Tag(cEntityWptr zEntity, const std::string& zTag)
 	{
-		mTaggedEntities[zTag].insert(zEntity);
+		mTaggedEntities[zTag].insert(*zEntity.lock());
 	}
 
 	//----------------------------------------------------------------
@@ -64,7 +64,7 @@ namespace pgn
 		// Look for the tag
 		auto i1 = mTaggedEntities.find(zTag);
 		if(i1 != mTaggedEntities.end())
-			i1->second.erase(zEntity);
+			i1->second.erase(*zEntity.lock());
 	}
 
 	//----------------------------------------------------------------
@@ -80,7 +80,7 @@ namespace pgn
 	void cEntityMgr::Untag(cEntityWptr zEntity)
 	{
 		for(auto i : mTaggedEntities)
-			i.second.erase(zEntity);
+			i.second.erase(*zEntity.lock());
 	}
 
 	//----------------------------------------------------------------
@@ -98,9 +98,9 @@ namespace pgn
 	{
 		auto evtd = std::pair<cEntityWptr,cComponentBaseWptr>(zEntity,zComponent);
 		EMIT_EVENT(RemoveComponent, evtd);
-		auto i = mEntityComponents.find(*zEntity.lock().get());
+		auto i = mEntityComponents.find(*zEntity.lock());
 		assert(i !=mEntityComponents.end());
-		i->second.RemoveComponent(zComponent);
+		i->second.RemoveComponent(zComponent.lock()->TypeIndex());
 		if(i->second.Mask().none())
 			Destroy(zEntity);
 	}

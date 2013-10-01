@@ -10,16 +10,14 @@ namespace pgn
 		auto idx = zCompo.get()->TypeIndex();
 		assert(!mMask.at(idx));
 		mMask.at(idx) = 1;
-		mComponents.insert(zCompo);
+		mComponents.insert(std::pair<unsigned short, cComponentBaseSptr>(idx, zCompo));
 	}
 
 	//-----------------------------------------------------------------
-	void cEntityComponents::RemoveComponent(cComponentBaseWptr zCompo)
+	void cEntityComponents::RemoveComponent(unsigned short zTypeId)
 	{
-		auto sptr =zCompo.lock(); 
-		auto idx = sptr.get()->TypeIndex();
-		assert(mMask.at(idx));
-		mMask.at(idx) = 0;
-		mComponents.erase(sptr);
+		assert(mMask.at(zTypeId));
+		mMask.at(zTypeId) = 0;
+		mComponents.erase(zTypeId);
 	}
 }
