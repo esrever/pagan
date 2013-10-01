@@ -16,6 +16,7 @@
 #include "EntityComponents.h"
 #include "ComponentQuery.h"
 
+#include <core/util/logstream.h>
 #include <core/util/Singleton.h>
 #define ECS pgn::cSingleton<pgn::cEntityMgr>::Instance()
 
@@ -44,6 +45,12 @@ namespace pgn
 					   public cEventReceiver<cDestroyEntityEventData>
 	{
 		public:
+			cLogStream mLog;
+
+		public:
+			//! ctor
+			cEntityMgr();
+
 			// Entity creation functions
 			//! From an existing entity
 			cEntitySptr Create();

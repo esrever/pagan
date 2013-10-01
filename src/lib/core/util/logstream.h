@@ -22,7 +22,7 @@ namespace pgn
 			void SetName(const std::string& zName) { mName = zName;}
 			void SetDisplayLevel(const eLogLevel zDispLevel) { mDisplayLevel = zDispLevel;}
 			void SetChannel(std::ostream * zChannel) { mChannel = zChannel;}
-			void SetFormat(const std::string (&zLevelNames)[eLogLevel::num], const boost::format& zFmt);
+			void SetFormat(const boost::format& zFmt);
 			
 			void Log(const eLogLevel zLevel, const std::string& zMsg);
 			void Dbg(const std::string& zMsg) {Log(eLogLevel::DBG, zMsg);}

@@ -8,7 +8,7 @@ namespace pgn
     cLogStream::cLogStream()
         :mName("default")
         ,mDisplayLevel( eLogLevel::DBG )
-        ,mFormat( boost::format("%s: %s\n") )
+        ,mFormat( boost::format("%s(%s): %s\n") )
         ,mChannel( nullptr )
     {
         mLevelNames[0] = "ERR";
@@ -18,10 +18,8 @@ namespace pgn
     }
 
 	//----------------------------------------------------------------------------
-    void cLogStream::SetFormat(const std::string (&zLevelNames)[eLogLevel::num], const boost::format& zFmt)
+    void cLogStream::SetFormat(const boost::format& zFmt)
     {
-        for(int i=0;i< int(eLogLevel::num);++i)
-            mLevelNames[i] = zLevelNames[i];
         mFormat = zFmt;
     }
 
@@ -29,7 +27,7 @@ namespace pgn
     void cLogStream::Log(const eLogLevel zLevel, const std::string& zMsg)
     {
         if(mChannel && (int(zLevel) <= int(mDisplayLevel)))
-            (*mChannel) << ( mFormat % mLevelNames[int(zLevel)] % zMsg);
+            (*mChannel) << ( mFormat % mName % mLevelNames[int(zLevel)] % zMsg);
     }
 
 	//----------------------------------------------------------------------------

@@ -1,7 +1,15 @@
 #include "EntityMgr.h"
 
+#include <iostream>
+
 namespace pgn
 {
+	cEntityMgr::cEntityMgr()
+	{
+		mLog.SetName("ECS");
+		mLog.SetChannel(&std::cout);
+	}
+
 	//----------------------------------------------------------------
 	cEntitySptr cEntityMgr::Create() 
 	{ 

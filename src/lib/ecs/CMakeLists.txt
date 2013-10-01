@@ -2,6 +2,7 @@ set(SOURCE_FILES
     ComponentBase.cpp
     SystemBase.cpp
     Entity.cpp
+    Event.cpp
     EntityMgr.cpp
     ComponentQuery.cpp
     ComponentBase.cpp

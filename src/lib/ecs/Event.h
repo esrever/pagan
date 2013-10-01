@@ -1,7 +1,5 @@
 #pragma once
 
-#include <Windows.h>
-
 #include <boost/format.hpp>
 
 #include <ssignal.h>
@@ -82,12 +80,14 @@ namespace pgn
 		return boost::str(boost::format("Emitting event %s with data: %s")%evtName.c_str()%pgn::to_string(evtData));
 	}
 
+	void log_event_call(const std::string& s);
+
 	template<class T>
 	void emit_event(const typename T::data_type & zVal)
 	{
 		const std::type_info& ti = typeid(T);
-		std::string s = evt_string<typename T::data_type>( ti.name(), zVal ) + "\n";
-		OutputDebugStringA( s.c_str() );
+		std::string s = evt_string<typename T::data_type>( ti.name(), zVal );
+		log_event_call(s);
 
 		T evd;
 		evd.data = zVal;
