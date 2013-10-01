@@ -3,6 +3,11 @@
 
 #include <core/util/json_conversions.h>
 
+#include <rapidjson/reader.h>
+#include <rapidjson/prettywriter.h>
+#include <rapidjson/filestream.h>
+#include <rapidjson/stringbuffer.h>
+
 /*
 	Provide json conversions for all components
 */

@@ -3,6 +3,8 @@ set(SOURCE_FILES
     util/logstream.cpp
     util/cfgtree.cpp
     util/cfgdata.cpp
+    util/conversions.cpp
+    util/json_conversions.cpp
     app/application.cpp
 )
 
@@ -11,6 +13,7 @@ set(HEADER_FILES
     util/logstream.h
     util/cfgtree.h
     util/conversions.h
+    util/json_conversions.h
     app/application.h
 )
 

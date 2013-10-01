@@ -7,6 +7,12 @@
 
 namespace pgn
 {
+	//! repeats a string by a number of times
+	std::string repeat_string(const std::string& s, int count) ;
+
+	//! pad a string by the given text
+	std::string pad_string(const std::string& zText, const std::string& zPad);
+
 	//! string to type
 	template <class T>
 	inline bool from_string(const std::string& s, T& t)

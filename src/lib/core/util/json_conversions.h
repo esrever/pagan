@@ -4,6 +4,8 @@
 
 #include <rapidjson/rapidjson.h>
 #include <rapidjson/document.h>
+#include <rapidjson/prettywriter.h>
+#include <rapidjson/stringbuffer.h>
 #include <pystring.h>
 
 #include "conversions.h"
@@ -30,12 +32,17 @@
 
 namespace pgn
 {
+	//! converts a single json level to text
+	void json_level_to_text(const rapidjson::Value& val, std::string& text, int depth);
+
 	//! type(json_doc) to string
 	template<>
 	inline std::string to_string<rapidjson::Value>( const rapidjson::Value& zRoot)
 	{
-		assert(false);
-		return std::string();
+		rapidjson::StringBuffer strbuf;
+		rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(strbuf);
+		zRoot.Accept(writer);
+		return pystring::strip(strbuf.GetString()," \n");
 	}
 
 	//! string to type(json)
