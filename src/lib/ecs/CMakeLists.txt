@@ -4,6 +4,7 @@ set(SOURCE_FILES
     Entity.cpp
     EntityMgr.cpp
     ComponentQuery.cpp
+    ComponentBase.cpp
     EntityComponents.cpp
 )
 
