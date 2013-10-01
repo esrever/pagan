@@ -27,8 +27,7 @@
 		default blueprint is "default"
 		entities from blue prints get a successive number: orc_shaman_32
 	Pointers and structs in containers issues:
-		tags currently duplicate entity
-		componentquery is probably problematic
+		tags & componentquery currently duplicate entities
 
 	Would I have multiple components of the same type per entity?
 		No. Items are stored as "ItemList"
