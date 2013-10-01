@@ -8,6 +8,7 @@ namespace pgn
 	{
 		// TODO: fetch all components that match the mask, from cEntityMgr
 		assert(false);
+		//use std::vector<int>::iterator it = std::find_if (myvector.begin(), myvector.end(), IsOdd); bool IsOdd (int i) {return ((i%2)==1);}
 	}
 
 	//------------------------------------------------------------------------------
