@@ -26,16 +26,3 @@ namespace pgn
 		return boost::lexical_cast<std::string>(zEntity.Id());
 	}
 }
-
-//bool std::less<pgn::cEntityWptr>::operator ()(const pgn::cEntityWptr &lhs ,const pgn::cEntityWptr &rhs) const
-/*
-bool operator < (const pgn::cEntity &lhs ,const pgn::cEntity &rhs)
-{
-	return lhs.Id() < rhs.Id(); 
-}
-
-bool operator < (const pgn::cEntityWptr &lhs ,const pgn::cEntityWptr &rhs)
-{
-	return *lhs.lock() < *rhs.lock(); 
-}
-*/

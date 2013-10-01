@@ -16,36 +16,22 @@ namespace pgn
 		//! Get the component type index 
 		virtual unsigned short TypeIndex() const {return 0xFFFF;}
 
-		virtual std::string to_string() const {return "BaseClass";}
+		virtual std::string to_string() const {return "cComponentBase";}
 		virtual void to_json(rapidjson::Value& zRoot) const{}
 		virtual void from_json(const rapidjson::Value& zRoot){}
-
-		/* stream-style
-
-			virtual std::ostream& operator << (std::ostream& o) const;
-			virtual std::istream& operator >> (std::istream& i) const;
-
-			config-style
-
-			ReadJson, WriteJson( document& doc)
-		*/
 	protected:
 		cComponentBase(){}
 	};
 
 	DECL_PTRTYPE(cComponentBase)	
-}
 
-
-inline std::ostream& operator<<(std::ostream& os,const pgn::cComponentBase& zComp)
-{
-	os<<zComp.to_string();
-	return os;
+	//! sys to json
+	template<>
+	void to_json<cComponentBase>(const cComponentBase& zCompo, rapidjson::Value& zRoot);
+	//! sys from json
+	template<>
+	void from_json<cComponentBase>(cComponentBase& zCompo, const rapidjson::Value& zRoot);
+	//! sys to string
+	template<>
+	std::string to_string<cComponentBase>(const cComponentBase& zCompo);
 }
-namespace pgn{
-inline std::string to_string( const cComponentBase& zCompo)
-{
-	std::ostringstream str;
-	str << zCompo;
-	return str.str();
-}}

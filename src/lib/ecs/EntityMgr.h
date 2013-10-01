@@ -20,24 +20,6 @@
 #define ECS pgn::cSingleton<pgn::cEntityMgr>::Instance()
 
 /*
-	Printing:
-		Entities provide: 
-			void to_json(doc&) const
-			void from_json(const doc&)
-			global to_string(): to_json -> to_string()
-		Systems provide: 
-			void to_json(doc&) const
-			void from_json(const doc&)
-			global to_string(): to_json -> to_string()
-		Components provide:
-			virtual void to_json(doc&) const	{ pgn::to_json<T>(*this, doc)}
-			virtual void from_json(const doc&)	{ pgn::from_json<T>(*this, doc)}
-			global to_string(): to_json -> to_string()
-		utils provide:
-			void to_json<>(const T& doc&)
-			void from_json<>(T&, const doc&)
-			from_string<doc>(doc&)
-			to_string<doc>(const doc&)
 	Naming:
 		blueprints are randomisable, instanced entities
 		blueprints have names
@@ -45,14 +27,11 @@
 		default blueprint is "default"
 		entities from blue prints get a successive number: orc_shaman_32
 
-	How to have a general to_string() function for all objects.
 	How do I do erase() with finding actually the correct data?
 	Would I have multiple components of the same type per entity?
 		No. Items are stored as "ItemList"
 	Components can be referenced by other components
 		Sword component by inventory and equipment components
-
-	figure out how to give weak_ptrs. or emit shared ptrs directly?
 	Use the lock-check of weak pointers to handle markDeleted, etc. cases
 	So the componentQueries, instead of lists, they can use other containers of weak ptrs?
 		No, as they would still need to do extra processing in the end to weed out null weak_ptrs

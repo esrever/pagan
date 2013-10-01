@@ -1,4 +1,5 @@
 set(SOURCE_FILES
+    ComponentBase.cpp
     SystemBase.cpp
     Entity.cpp
     EntityMgr.cpp
