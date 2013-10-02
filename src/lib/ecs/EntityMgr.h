@@ -76,7 +76,7 @@ namespace pgn
 
 			unsigned short AddComponentType( const std::type_index& zTi);
 
-			rapidjson::MemoryPoolAllocator<>& JsonAllocator() { static rapidjson::MemoryPoolAllocator<> alloc(0); return alloc;}
+			//rapidjson::MemoryPoolAllocator<>& JsonAllocator() { static rapidjson::MemoryPoolAllocator<> alloc(0); return alloc;}
 
 		private:
 			//! tags to entities

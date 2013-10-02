@@ -18,21 +18,21 @@ namespace pgn
 	void to_json<pgn::cComponent<int>>(const pgn::cComponent<int>& zObj, rapidjson::Value& zRoot)
 	{
 		zRoot.SetObject();
-		zRoot.AddMember("an_int",zObj.mData, ECS.JsonAllocator() );
+		zRoot.AddMember("an_int",zObj.mData );
 	}
 
 	template <>
 	void to_json<pgn::cComponent<double>>(const pgn::cComponent<double>& zObj, rapidjson::Value& zRoot)
 	{
 		zRoot.SetObject();
-		zRoot.AddMember("a_double",zObj.mData, ECS.JsonAllocator());
+		zRoot.AddMember("a_double",zObj.mData);
 	}
 
 	template <>
 	void to_json<pgn::cComponent<float>>(const pgn::cComponent<float>& zObj, rapidjson::Value& zRoot)
 	{
 		zRoot.SetObject();
-		zRoot.AddMember("a_float",zObj.mData, ECS.JsonAllocator());
+		zRoot.AddMember("a_float",zObj.mData);
 	}
 }
 
