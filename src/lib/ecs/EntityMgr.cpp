@@ -112,5 +112,13 @@ namespace pgn
 		mComponentTypeIds.push_back(zTi);
 		return mComponentTypeIds.size() - 1;
 	}
+	
+	//----------------------------------------------------------------
+	const cEntityMgr::cEntityComponents& GetComponents(const cEntity& zEntity) const
+	{
+		auto f = mEntityComponents.find(zEntity);
+		assert(f != mEntityComponents.end());
+		return *f;
+	}
 
 }

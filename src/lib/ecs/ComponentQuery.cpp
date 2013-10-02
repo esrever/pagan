@@ -1,10 +1,14 @@
 #include "ComponentQuery.h"
+
+#include <algorithm>
+
 #include "EntityMgr.h"
 
 namespace pgn
 {
 	//------------------------------------------------------------------------------
 	cComponentQuery::cComponentQuery(const component_mask_type& zMask)
+	:mMask(zMask)
 	{
 		// TODO: fetch all components that match the mask, from cEntityMgr
 		assert(false);
@@ -27,13 +31,15 @@ namespace pgn
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cEntityCreatedEventData& zData)
 	{
-		//TODO: search through the components of the entity and add it if it contains the mask
-		assert(false);
+		auto e = *zData.data.lock();
+		auto ored = ECS.GetComponents(e).Mask() & mMask;
+		if( ored.count() == mMask.count())
+			mEntitiesWithComponents.insert(e);
+
 	}
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cDestroyEntityEventData& zData)
 	{
-		//TODO: if entity exists here, remove it.
-		assert(false);
+		mEntitiesWithComponents.erase(*zData.data.lock());
 	}
 }

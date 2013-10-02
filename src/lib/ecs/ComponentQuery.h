@@ -22,6 +22,7 @@ namespace pgn
 		void Receive( const cDestroyEntityEventData& zData);
 		const std::set<cEntity>& Get() const {return mEntitiesWithComponents;}
 	private:
+		component_mask_type mMask;
 		std::set<cEntity> mEntitiesWithComponents;
 	};
 }

@@ -74,9 +74,10 @@ namespace pgn
 			void Receive( const cEntityCreatedEventData& zData);
 			void Receive( const cDestroyEntityEventData& zData);
 
-			unsigned short AddComponentType( const std::type_index& zTi);
+			//! Accessors
+			const cEntityComponents& GetComponents(const cEntity& zEntity) const;
 
-			//rapidjson::MemoryPoolAllocator<>& JsonAllocator() { static rapidjson::MemoryPoolAllocator<> alloc(0); return alloc;}
+			unsigned short AddComponentType( const std::type_index& zTi);
 
 		private:
 			//! tags to entities
