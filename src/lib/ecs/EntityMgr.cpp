@@ -121,4 +121,10 @@ namespace pgn
 		return f->second;
 	}
 
+	//----------------------------------------------------------------
+	const std::map<cEntity, cEntityComponents>& cEntityMgr::GetComponents() const
+	{
+		return mEntityComponents;
+	}
+
 }

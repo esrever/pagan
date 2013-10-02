@@ -10,30 +10,34 @@ namespace pgn
 	cComponentQuery::cComponentQuery(const component_mask_type& zMask)
 	:mMask(zMask)
 	{
-		// TODO: fetch all components that match the mask, from cEntityMgr
-		assert(false);
-		//use std::vector<int>::iterator it = std::find_if (myvector.begin(), myvector.end(), IsOdd); bool IsOdd (int i) {return ((i%2)==1);}
+		// Fetch all components that match the mask, from cEntityMgr
+		for(auto x : ECS.GetComponents() )
+		{
+			if ( is_subset( x.second.Mask(), mMask))
+				mEntitiesWithComponents.insert(x.first);
+		}
 	}
 
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cComponentAddedEventData& zData)
 	{
-		//TODO: if mask | thismask, tryAddEntity, else, tryRemoveEntity
-		assert(false);
+		auto e = *zData.data.first.lock();
+		if( is_subset(ECS.GetComponents(e).Mask(), mMask))
+			mEntitiesWithComponents.insert(e);
 	}
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cRemoveComponentEventData& zData)
 	{
-		//TODO: if mask | thismask, tryAddEntity, else, tryRemoveEntity
-		assert(false);
+		auto e = *zData.data.first.lock();
+		if( mMask[zData.data.second.lock()->TypeIndex()])
+			mEntitiesWithComponents.erase(e);	
 	}
 
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cEntityCreatedEventData& zData)
 	{
 		auto e = *zData.data.lock();
-		auto ored = ECS.GetComponents(e).Mask() & mMask;
-		if( ored.count() == mMask.count())
+		if( is_subset(ECS.GetComponents(e).Mask(), mMask) )
 			mEntitiesWithComponents.insert(e);
 
 	}
@@ -41,5 +45,11 @@ namespace pgn
 	void cComponentQuery::Receive(const cDestroyEntityEventData& zData)
 	{
 		mEntitiesWithComponents.erase(*zData.data.lock());
+	}
+
+	//------------------------------------------------------------------------------
+	bool is_subset(const component_mask_type& zAll, const component_mask_type& zSub)
+	{
+		return (zAll & zSub) == zSub;
 	}
 }

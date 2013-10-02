@@ -76,6 +76,7 @@ namespace pgn
 
 			//! Accessors
 			const cEntityComponents& GetComponents(const cEntity& zEntity) const;
+			const std::map<cEntity, cEntityComponents>& GetComponents() const;
 
 			unsigned short AddComponentType( const std::type_index& zTi);
 

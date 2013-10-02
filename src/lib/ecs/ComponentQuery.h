@@ -25,4 +25,7 @@ namespace pgn
 		component_mask_type mMask;
 		std::set<cEntity> mEntitiesWithComponents;
 	};
+
+	//-------------------------------------------------------------------------------
+	bool is_subset(const component_mask_type& zAll, const component_mask_type& zSub);
 }
