@@ -17,7 +17,7 @@ namespace pgn
 	//---------------------------------------------------------------
 	void cSystemBase::SetActive(bool zActive)
 	{
-		EMIT_EVENT(SystemActivity, zActive);
+		cSystemActivityEventData::emit(zActive);
 	}
 
 	//---------------------------------------------------------------

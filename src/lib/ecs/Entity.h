@@ -11,6 +11,7 @@
 #include <core/util/json_conversions.h>
 
 #include "ecs_config.h"
+#include "Event.h"
 
 namespace pgn 
 {

@@ -18,14 +18,14 @@ namespace pgn
 		auto it = mEntityComponents.insert(std::pair<cEntity,cEntityComponents>(e,cEntityComponents()));
 		auto eptr = std::make_shared<cEntity>( it.first->first);
 		cEntityWptr ewptr = eptr;
-		EMIT_EVENT(EntityCreated,ewptr);
+		cEntityCreatedEventData::emit(ewptr);
 		return eptr;
 	}
 
 	//----------------------------------------------------------------
 	void cEntityMgr::Destroy(cEntityWptr zEntity)
 	{
-		EMIT_EVENT(DestroyEntity, zEntity);
+		cDestroyEntityEventData::emit(zEntity);
 		// and finally erase it
 		mEntityComponents.erase(*zEntity.lock().get());
 	}
@@ -84,14 +84,16 @@ namespace pgn
 		assert(i !=mEntityComponents.end());
 		i->second.AddComponent(zComponent);
 		auto evtd = std::pair<cEntityWptr,cComponentBaseWptr>(zEntity,zComponent);
-		EMIT_EVENT(ComponentAdded, evtd);
+		//EMIT_EVENT(ComponentAdded, evtd);
+		//EMIT_EVENT(ComponentAdded, evtd);
+		cComponentAddedEventData::emit(evtd);
 	}
 
 	//----------------------------------------------------------------
 	void cEntityMgr::RemoveComponentPtr(cEntityWptr zEntity, cComponentBaseWptr zComponent)
 	{
 		auto evtd = std::pair<cEntityWptr,cComponentBaseWptr>(zEntity,zComponent);
-		EMIT_EVENT(RemoveComponent, evtd);
+		cRemoveComponentEventData::emit(evtd);
 		auto i = mEntityComponents.find(*zEntity.lock());
 		assert(i !=mEntityComponents.end());
 		i->second.RemoveComponent(zComponent.lock()->TypeIndex());

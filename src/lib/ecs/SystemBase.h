@@ -9,6 +9,8 @@ namespace pgn
 {
 	DECL_EVENT(SystemActivity, bool);
 
+	class cEntity;
+
 	class cSystemBase
 	{
 		public:
@@ -23,7 +25,7 @@ namespace pgn
 			void SetActive(bool zActive);
 			bool Active() const {return mActive;}
 		protected:
-			virtual void ProcessOne(cEntity zE)=0;
+			virtual void ProcessOne(const cEntity& zE)=0;
 
 		private:
 			bool mActive;

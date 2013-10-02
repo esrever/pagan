@@ -7,7 +7,7 @@
 #include <core/util/conversions.h>
 
 #include "ecs_config.h"
-#include "Entity.h"
+//#include "Entity.h"
 #include "ComponentBase.h"
 
 /*	
