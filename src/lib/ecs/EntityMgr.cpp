@@ -114,11 +114,11 @@ namespace pgn
 	}
 	
 	//----------------------------------------------------------------
-	const cEntityMgr::cEntityComponents& GetComponents(const cEntity& zEntity) const
+	const cEntityComponents& cEntityMgr::GetComponents(const cEntity& zEntity) const
 	{
 		auto f = mEntityComponents.find(zEntity);
 		assert(f != mEntityComponents.end());
-		return *f;
+		return f->second;
 	}
 
 }
