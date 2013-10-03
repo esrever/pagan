@@ -1,16 +1,24 @@
 #pragma once
 
+#include <core/util/Singleton.h>
+#include <core/util/logstream.h>
+
+#include "EntityMgr.h"
+#include "SystemMgr.h"
+
+#define ECS pgn::cSingleton<pgn::cECS>::Instance()
+
 namespace pgn
 {
 	class cECS
 	{
+		public: 
+			void Init();
+			void from_json(const rapidjson::Value& zRoot);
 		public:
-
-		private:
 			// sub-managers
 			cEntityMgr mEntityMgr;
 			cSystemMgr mSystemMgr;
-			
-			std::map<string, cComponentQuery> mComponentQueries;
-	}
+			cLogStream mLog;
+	};
 }

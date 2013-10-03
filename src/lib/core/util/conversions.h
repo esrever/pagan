@@ -7,7 +7,7 @@
 
 namespace pgn
 {
-	//! text file to text
+	//! text file to string
 	std::string file_to_text(const std::string& fname);
 
 	//! repeats a string by a number of times

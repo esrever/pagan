@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-#include "EntityMgr.h"
+#include "ecs.h"
 
 namespace pgn
 {
@@ -11,7 +11,7 @@ namespace pgn
 	:mMask(zMask)
 	{
 		// Fetch all components that match the mask, from cEntityMgr
-		for(auto x : ECS.GetComponents() )
+		for(auto x : ECS.mEntityMgr.GetComponents() )
 		{
 			if ( is_subset( x.second.Mask(), mMask))
 				mEntitiesWithComponents.insert(x.first);
@@ -22,7 +22,7 @@ namespace pgn
 	void cComponentQuery::Receive(const cComponentAddedEventData& zData)
 	{
 		const auto& e = *zData.data.first.lock();
-		if( is_subset(ECS.GetComponents(e).Mask(), mMask))
+		if( is_subset(ECS.mEntityMgr.GetComponents(e).Mask(), mMask))
 			mEntitiesWithComponents.insert(e);
 	}
 	//------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ namespace pgn
 	{
 		const auto& e = *zData.data.lock();
 		auto& ecs = ECS;
-		if( is_subset(ecs.GetComponents(e).Mask(), mMask) )
+		if( is_subset(ecs.mEntityMgr.GetComponents(e).Mask(), mMask) )
 			mEntitiesWithComponents.insert(e);
 
 	}

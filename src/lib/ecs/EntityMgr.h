@@ -16,23 +16,15 @@
 #include "EntityComponents.h"
 #include "ComponentQuery.h"
 
-#include <core/util/logstream.h>
-#include <core/util/Singleton.h>
-#define ECS pgn::cSingleton<pgn::cEntityMgr>::Instance()
-
 /*
-	Queries:
-		Read from json file: LoadQueries( doc )
-		For reading either from a doc or from a file, have a "JsonDoc"
-	Blueprints:
-		blueprints are randomisable, instanced entities
-		blueprints have names
-		blueprints can be merged/inher
-		default blueprint is "default"
-		entities from blue prints get a successive number: orc_shaman_32
+	Init() function
+		initializes all components
+		Loads json file for queries, systems, etc
+	Component data types
+		declare a static var in cpp file to populate ECS (at least for now)
+		type idx from name 
 	Pointers and structs in containers issues:
 		tags & componentquery currently duplicate entities
-
 	Would I have multiple components of the same type per entity?
 		No. Items are stored as "ItemList"
 	Components can be referenced by other components
@@ -48,11 +40,6 @@ namespace pgn
 					   public cEventReceiver<cDestroyEntityEventData>
 	{
 		public:
-			cLogStream mLog;
-
-		public:
-			//! ctor
-			cEntityMgr();
 
 			// Entity creation functions
 			//! From an existing entity
@@ -84,22 +71,23 @@ namespace pgn
 			const cEntityComponents& GetComponents(const cEntity& zEntity) const;
 			const std::map<cEntity, cEntityComponents>& GetComponents() const;
 
+			//! Json
+			void from_json(const rapidjson::Value& zRoot){}
+
+			//! Component type
 			unsigned short AddComponentType( const std::type_index& zTi);
+			size_t GetComponentTypeIndex( const std::string& zName) const;
 
 		private:
 			//! tags to entities
 			std::map<std::string, std::set<cEntity>> mTaggedEntities;
 			//! entities and components
 			std::map<cEntity, cEntityComponents> mEntityComponents;
-			//! Component queries: maps tags to entities that have prespecified components
-			std::map<std::string, cComponentQuery> mComponentQueries;
-			
-			//! Counters for blueprints - TODO: move at blueprint/archetype class
-			std::map<std::string, unsigned> mBlueprintCounters;
 
 		private:
 			//! All component types
 			std::vector< std::type_index> mComponentTypeIds;
+			std::map< std::string, size_t > mComponentTypeNamesToIds;
 	};
 
 	//------------------------------------------------------------------------

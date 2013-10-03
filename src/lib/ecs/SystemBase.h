@@ -11,6 +11,7 @@ namespace pgn
 
 	class cEntity;
 
+	//! Base class for a system. 
 	class cSystemBase
 	{
 		public:

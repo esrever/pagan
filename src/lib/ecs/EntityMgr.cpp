@@ -4,13 +4,6 @@
 
 namespace pgn
 {
-	cEntityMgr::cEntityMgr()
-	{
-		std::ios_base::Init();
-		mLog.SetName("ECS");
-		mLog.SetChannel(&std::cout);
-	}
-
 	//----------------------------------------------------------------
 	cEntitySptr cEntityMgr::Create() 
 	{ 
@@ -112,6 +105,7 @@ namespace pgn
 				return i;
 		}
 		mComponentTypeIds.push_back(zTi);
+		mComponentTypeNamesToIds[ zTi.name()] = mComponentTypeIds.size() - 1;
 		return mComponentTypeIds.size() - 1;
 	}
 	
@@ -129,4 +123,10 @@ namespace pgn
 		return mEntityComponents;
 	}
 
+	//----------------------------------------------------------------
+	size_t cEntityMgr::GetComponentTypeIndex( const std::string& zName) const
+	{
+		auto f = mComponentTypeNamesToIds.find(zName);
+		return f != mComponentTypeNamesToIds.end() ? f->second : 0xFFFFFFFF;
+	}
 }

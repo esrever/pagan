@@ -7,6 +7,10 @@ set(SOURCE_FILES
     ComponentQuery.cpp
     ComponentBase.cpp
     EntityComponents.cpp
+    ecs.cpp
+    ExampleComponent.cpp
+    ExampleSystem.cpp
+    SystemMgr.cpp
 )
 
 set(HEADER_FILES
@@ -16,9 +20,12 @@ set(HEADER_FILES
     EntityMgr.h
     ecs_config.h
     ComponentBase.h
-    #ComponentMgr.h
     ComponentQuery.h
     EntityComponents.h
+    ecs.h
+    ExampleComponent.h
+    ExampleSystem.h
+    SystemMgr.h
 )
 
 add_definitions(

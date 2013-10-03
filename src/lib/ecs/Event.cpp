@@ -1,5 +1,5 @@
 #include "Event.h"
-#include "EntityMgr.h"
+#include "ecs.h"
 
 namespace pgn
 {

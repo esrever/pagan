@@ -1,0 +1,22 @@
+{
+    "EntityMgr" : {}, 
+    "SystemMgr" : {
+        "Queries" : [
+            "Query1" : [
+                "Type1",
+                "Type2"
+            ]
+        ],
+        
+        "Systems" : [
+            "System1" : {
+                "Name" : "SystemName",
+                "Desc" : "SystemDesc",
+                "QueriesUsed" : [
+                    "Query1",
+                    "Query2"
+                ]
+            }
+        ]
+    }
+}

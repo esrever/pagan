@@ -31,7 +31,7 @@ namespace pgn
 
 	//------------------------------------------------------------------------
 	template<class T>
-	unsigned short cComponent<T>::msTypeIndex( ECS.AddComponentType(typeid(T)));
+	unsigned short cComponent<T>::msTypeIndex( ECS.mEntityMgr.AddComponentType(typeid(T)));
 
 	//------------------------------------------------------------------------
 	template<class T>
