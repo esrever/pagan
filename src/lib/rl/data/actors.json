@@ -1,21 +1,17 @@
-// How can I have classes & subclasses, with inherited traits? E.g. wooden floor, iron wall, etc. Diff descs, traits, colours, etc
-{
-    [ 
-        {
-            name : "PC",
-            desc : "you!",
-            ascii : {
-                symb : "@"
-            }
-        },
-        
-        {
-            name : "rat",
-            desc : "a fat, vicious-looking rat",
-            ascii : {
-                symb : "r"
-            }
-        },
-        
-    ]
-}
+[ 
+    {
+        "name" : "PC",
+        "desc" : "you!",
+        "ascii" : {
+            "symb" : "@"
+        }
+    },
+    
+    {
+        "name" : "rat",
+        "desc" : "a fat, vicious-looking rat",
+        "ascii" : {
+            "symb" : "r"
+        }
+    }
+]

@@ -1,7 +1,21 @@
 #include "json_conversions.h"
 
+#include <boost/format.hpp>
+#include <cassert>
+
 namespace pgn
 {
+	std::shared_ptr<rapidjson::Document> file_to_json(const std::string& zFname)
+	{
+		auto doc = std::shared_ptr<rapidjson::Document>( new rapidjson::Document());
+		if(doc->Parse<0>(file_to_text(zFname).c_str()).HasParseError())
+		{
+			auto errs = boost::str(boost::format( "Error(%u): %s") % (unsigned)doc->GetErrorOffset() % doc->GetParseError());
+			std::cerr<< errs<< std::endl;
+		}
+		return doc;
+	}
+
 	/*
 	void json_level_to_text(const rapidjson::Value& val, std::string& text, int depth)
 	{

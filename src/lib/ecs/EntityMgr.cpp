@@ -14,7 +14,7 @@ namespace pgn
 	//----------------------------------------------------------------
 	cEntitySptr cEntityMgr::Create() 
 	{ 
-		auto e = cEntity();
+		const auto& e = cEntity();
 		auto it = mEntityComponents.insert(std::pair<cEntity,cEntityComponents>(e,cEntityComponents()));
 		auto eptr = std::make_shared<cEntity>( it.first->first);
 		cEntityWptr ewptr = eptr;

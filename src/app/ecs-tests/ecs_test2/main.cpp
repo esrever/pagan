@@ -38,10 +38,18 @@ namespace pgn
 
 int main()
 {
-	auto ecs = ECS;
+	auto& ecs = ECS;
 	pgn::cComponent<int> iComp;  iComp.mData = 2;
 	pgn::cComponent<double> dComp; dComp.mData = 3.0;
 	pgn::cComponent<float> fComp; fComp.mData= 4.0f;
+
+	std::cout<< pgn::to_string<rapidjson::Value>(*pgn::file_to_json("C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\lib\\rl\\data\\actors.json"));
+
+	pgn::component_mask_type mask_df, mask_id;
+	mask_df.set(1).set(2); // query for doubles and floats
+	mask_id.set(0).set(1); // query for doubles and floats
+	pgn::cComponentQuery q_df(mask_df);
+	pgn::cComponentQuery q_id(mask_id);
 
 	{
 		auto entity = ecs.Create();

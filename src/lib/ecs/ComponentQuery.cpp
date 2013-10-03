@@ -21,14 +21,14 @@ namespace pgn
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cComponentAddedEventData& zData)
 	{
-		auto e = *zData.data.first.lock();
+		const auto& e = *zData.data.first.lock();
 		if( is_subset(ECS.GetComponents(e).Mask(), mMask))
 			mEntitiesWithComponents.insert(e);
 	}
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cRemoveComponentEventData& zData)
 	{
-		auto e = *zData.data.first.lock();
+		const auto& e = *zData.data.first.lock();
 		if( mMask[zData.data.second.lock()->TypeIndex()])
 			mEntitiesWithComponents.erase(e);	
 	}
@@ -36,8 +36,9 @@ namespace pgn
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cEntityCreatedEventData& zData)
 	{
-		auto e = *zData.data.lock();
-		if( is_subset(ECS.GetComponents(e).Mask(), mMask) )
+		const auto& e = *zData.data.lock();
+		auto& ecs = ECS;
+		if( is_subset(ecs.GetComponents(e).Mask(), mMask) )
 			mEntitiesWithComponents.insert(e);
 
 	}

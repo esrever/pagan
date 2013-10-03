@@ -21,6 +21,9 @@
 #define ECS pgn::cSingleton<pgn::cEntityMgr>::Instance()
 
 /*
+	Queries:
+		Read from json file: LoadQueries( doc )
+		For reading either from a doc or from a file, have a "JsonDoc"
 	Blueprints:
 		blueprints are randomisable, instanced entities
 		blueprints have names

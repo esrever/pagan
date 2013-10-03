@@ -8,6 +8,7 @@
 
 namespace pgn
 {
+	//! Stores entities with at least the specified components. 
 	class cComponentQuery : public cEventReceiver<cComponentAddedEventData>,
 							public cEventReceiver<cRemoveComponentEventData>,
 							public cEventReceiver<cEntityCreatedEventData>,

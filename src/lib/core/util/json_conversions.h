@@ -33,7 +33,10 @@
 namespace pgn
 {
 	//! converts a single json level to text
-	void json_level_to_text(const rapidjson::Value& val, std::string& text, int depth);
+	//void json_level_to_text(const rapidjson::Value& val, std::string& text, int depth);
+	
+	
+	std::shared_ptr<rapidjson::Document> file_to_json(const std::string& zFname);
 
 	//! type(json_doc) to string
 	template<>

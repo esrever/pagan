@@ -2,6 +2,9 @@
 #include <memory>
 #include <bitset>
 
+namespace pgn
+{
+
 #define MAX_COMPONENTS 64
 typedef std::bitset<MAX_COMPONENTS> component_mask_type;
 #define DECL_PTRTYPE(T) typedef std::shared_ptr< T > T##Sptr;\
@@ -17,3 +20,5 @@ typedef std::bitset<MAX_COMPONENTS> component_mask_type;
 	static void emit(const T& val ) { pgn::emit_event< pgn::c##N##EventData >(val); }\
 };
 //#define EMIT_EVENT(N,V) pgn::emit_event< pgn::c##N##EventData >(V);
+
+}

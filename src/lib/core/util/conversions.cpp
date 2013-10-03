@@ -1,5 +1,7 @@
 #include "conversions.h"
 
+#include <fstream>
+
 #include <pystring.h>
 
 namespace pgn
@@ -18,5 +20,22 @@ namespace pgn
 		for(auto i=0; i<count; ++i)
 			ret += s;
 		return ret;
+	}
+
+	//----------------------------------------------------------------------------------------
+	std::string file_to_text(const std::string& fname)
+	{
+		std::ifstream in(fname, std::ios::in | std::ios::binary);
+		if (in)
+		{
+			std::string contents;
+			in.seekg(0, std::ios::end);
+			contents.resize( size_t(in.tellg()));
+			in.seekg(0, std::ios::beg);
+			in.read(&contents[0], contents.size());
+			in.close();
+			return(contents);
+		}
+		throw(errno);
 	}
 }

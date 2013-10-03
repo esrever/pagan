@@ -14,11 +14,11 @@ namespace pgn
 	public:
 		virtual ~cComponentBase(){}
 		//! Get the component type index 
-		virtual unsigned short TypeIndex() const {return 0xFFFF;}
+		virtual unsigned short TypeIndex() const =0;//{return 0xFFFF;}
 
-		virtual std::string to_string() const {return "cComponentBase";}
-		virtual void to_json(rapidjson::Value& zRoot) const{}
-		virtual void from_json(const rapidjson::Value& zRoot){}
+		virtual std::string to_string() const =0; //{return "cComponentBase::to_string";}
+		virtual void to_json(rapidjson::Value& zRoot) const =0;//{}
+		virtual void from_json(const rapidjson::Value& zRoot)=0;//{}
 	protected:
 		cComponentBase(){}
 	};
