@@ -59,7 +59,7 @@ namespace pgn
 			cEntitySptr Create();
 			void Destroy(cEntityWptr zEntity);
 
-			// Component-related functions 
+			// Component-related functions - if an entity has no components, it gets destroyed
 			void AddComponentPtr(cEntityWptr zEntity, cComponentBaseSptr zComponent); 
 			void RemoveComponentPtr(cEntityWptr zEntity, cComponentBaseWptr zComponent); 
 			template<class T>
@@ -74,7 +74,10 @@ namespace pgn
 			void Untag(cEntityWptr zEntity);
 
 			//! Receiving functions
+
+			//! Do nothing
 			void Receive( const cEntityCreatedEventData& zData);
+			//! Untag
 			void Receive( const cDestroyEntityEventData& zData);
 
 			//! Accessors

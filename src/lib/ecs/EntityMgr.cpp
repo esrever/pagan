@@ -80,7 +80,8 @@ namespace pgn
 	//----------------------------------------------------------------
 	void cEntityMgr::AddComponentPtr(cEntityWptr zEntity, cComponentBaseSptr zComponent)
 	{
-		auto i = mEntityComponents.find(*zEntity.lock().get());
+		const auto& e = *zEntity.lock();
+		auto i = mEntityComponents.find(e);
 		assert(i !=mEntityComponents.end());
 		i->second.AddComponent(zComponent);
 		auto evtd = std::pair<cEntityWptr,cComponentBaseWptr>(zEntity,zComponent);
@@ -97,6 +98,7 @@ namespace pgn
 		auto i = mEntityComponents.find(*zEntity.lock());
 		assert(i !=mEntityComponents.end());
 		i->second.RemoveComponent(zComponent.lock()->TypeIndex());
+		//! No components -> destroy entity
 		if(i->second.Mask().none())
 			Destroy(zEntity);
 	}

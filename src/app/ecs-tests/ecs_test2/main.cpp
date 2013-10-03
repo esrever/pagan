@@ -54,11 +54,37 @@ int main()
 	{
 		auto entity = ecs.Create();
 		ecs.AddComponent(entity, iComp);
+		assert(q_df.Get().size() == 0);
+		assert(q_id.Get().size() == 0);
 		ecs.AddComponent(entity, dComp);
+		assert(q_df.Get().size() == 0);
+		assert(q_id.Get().size() == 1);
 		ecs.AddComponent(entity, fComp);
+		assert(q_df.Get().size() == 1);
+		assert(q_id.Get().size() == 1);
 		ecs.RemoveComponent(entity, iComp);
+		assert(q_df.Get().size() == 1);
+		assert(q_id.Get().size() == 0);
 		ecs.RemoveComponent(entity, fComp);
+		assert(q_df.Get().size() == 0);
+		assert(q_id.Get().size() == 0);
 		ecs.RemoveComponent(entity, dComp);
+		assert(q_df.Get().size() == 0);
+		assert(q_id.Get().size() == 0);
+
+		// TODO: keep entity alive without components, or kill it? keep it alive and have a query AND system for destroying empty entities?
+		// How to say: I want entities with xyz components SET and abc compoenents NOT set? useful, or make special query?
+		/*
+		ecs.AddComponent(entity, iComp)
+		ecs.AddComponent(entity, dComp);
+		assert(q_id.Get().size() == 1);
+		ecs.Destroy(entity);
+		assert(q_id.Get().size() == 0);
+		*/
+	}
+	
+	{
+
 	}
 	return 0;
 }
