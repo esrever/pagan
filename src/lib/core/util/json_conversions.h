@@ -37,13 +37,13 @@ namespace pgn
 	template <class T>
 	inline void to_json(const T& zObj, rapidjson::Value& zRoot)
 	{
-		assert(false);
+		zObj.to_json(zRoot);
 	}
 
 	//! type from json
 	template <class T>
 	inline void from_json(T& zObj, const rapidjson::Value& zRoot)
 	{
-		assert(false);
+		zObj.from_json(zRoot);
 	}
 }

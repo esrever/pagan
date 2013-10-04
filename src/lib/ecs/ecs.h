@@ -7,8 +7,8 @@
 #include "SystemMgr.h"
 
 #define ECS pgn::cSingleton<pgn::cECS>::Instance()
-#define EMGR ECS.mEntityMgr;
-#define SMGR ECS.SystemMgr;
+#define EMGR ECS.mEntityMgr
+#define SMGR ECS.SystemMgr
 
 namespace pgn
 {

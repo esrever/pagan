@@ -4,13 +4,13 @@ namespace pgn
 {
 	//------------------------------------------------------------------------
 	template<>
-	void to_json<cExample>(const cExample& zObj, rapidjson::Value& zRoot)
+	void to_json<cExampleSystem>(const cExampleSystem& zObj, rapidjson::Value& zRoot)
 	{
 	}
 
 	//------------------------------------------------------------------------
 	template<>
-	void from_json<cExample>(cExample& zObj, const rapidjson::Value& zRoot)
+	void from_json<cExampleSystem>(cExampleSystem& zObj, const rapidjson::Value& zRoot)
 	{
 	}
 }
