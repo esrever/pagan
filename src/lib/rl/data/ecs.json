@@ -1,26 +1,26 @@
 {
     "EntityMgr" : {
         "Tags" : [
-            "a" : "b"
+            {"a" : "b"}
         ]
     }, 
     "SystemMgr" : {
-        "Queries" : [
-            {"Query1" : [
+        "Queries" : {
+            "Query1" : [
                 "Type1",
                 "Type2"
-            ]}
-        ],
+            ]
+        },
         
         "Systems" : [
-            "System1" : {
+            {"System1" : {
                 "Name" : "SystemName",
                 "Desc" : "SystemDesc",
                 "QueriesUsed" : [
                     "Query1",
                     "Query2"
                 ]
-            }
+            }}
         ]
     }
 }
