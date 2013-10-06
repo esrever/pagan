@@ -1,11 +1,15 @@
 {
-    "EntityMgr" : {}, 
+    "EntityMgr" : {
+        "Tags" : [
+            "a" : "b"
+        ]
+    }, 
     "SystemMgr" : {
         "Queries" : [
-            "Query1" : [
+            {"Query1" : [
                 "Type1",
                 "Type2"
-            ]
+            ]}
         ],
         
         "Systems" : [

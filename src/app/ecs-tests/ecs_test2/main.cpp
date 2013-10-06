@@ -80,7 +80,8 @@ int main()
 	*/
 
 	auto& ecs = ECS;
-
+	ecs.Init();
+	ecs.from_json( *pgn::file_to_json("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\rl\\data\\ecs.json"));
 
 	{
 		pgn::cComponent<pgn::cExample> exc;

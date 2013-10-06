@@ -1,6 +1,6 @@
 #pragma once
 
-#include <map>
+#include <set>
 #include <core/util/json_conversions.h>
 
 namespace pgn
@@ -19,6 +19,6 @@ namespace pgn
 			
 		private:
 			//! Component queries: maps tags to entities that have prespecified components
-			std::map<std::string, cComponentQuery> mComponentQueries;
+			std::set<cComponentQuery> mComponentQueries;
 	};
 }

@@ -7,7 +7,7 @@ namespace pgn
 		std::ios_base::Init();
 		mLog.SetName("ECS");
 		mLog.SetChannel(&std::cout);
-		// TODO: from_json
+		// TODO: from_json. Add project source to path or config file
 	}
 
 	void cECS::from_json(const rapidjson::Value& zRoot)

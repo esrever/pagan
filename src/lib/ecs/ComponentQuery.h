@@ -22,6 +22,10 @@ namespace pgn
 		void Receive( const cEntityCreatedEventData& zData);
 		void Receive( const cDestroyEntityEventData& zData);
 		const std::set<cEntity>& Get() const {return mEntitiesWithComponents;}
+		const component_mask_type& Mask() const {return mMask;}
+
+		//! compare masks
+		bool operator < (const cComponentQuery &rhs) const {return Mask().hash() < rhs.Mask().hash();}
 	private:
 		component_mask_type mMask;
 		std::set<cEntity> mEntitiesWithComponents;
@@ -30,3 +34,6 @@ namespace pgn
 	//-------------------------------------------------------------------------------
 	bool is_subset(const component_mask_type& zAll, const component_mask_type& zSub);
 }
+
+	//! Global comparison operator 
+	//inline bool std::less<pgn::cComponentQuery>::operator ()(const pgn::cComponentQuery &lhs ,const pgn::cComponentQuery &rhs) const {return lhs.Mask() < rhs.Mask();}
