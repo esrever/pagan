@@ -27,6 +27,7 @@ namespace pgn
 		//! compare masks
 		bool operator < (const cComponentQuery &rhs) const {return Mask().hash() < rhs.Mask().hash();}
 	private:
+		std::string mName;
 		component_mask_type mMask;
 		std::set<cEntity> mEntitiesWithComponents;
 	};

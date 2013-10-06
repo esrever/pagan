@@ -9,18 +9,38 @@
             "Query1" : [
                 "Type1",
                 "Type2"
+            ],
+            "Query2" : [
+                "Type1",
+                "Type2"
             ]
         },
         
-        "Systems" : [
-            {"System1" : {
-                "Name" : "SystemName",
+        "Systems" : {
+            "System1" : {
+                "Type" : "SystemType",
+                "Priority" : 0,
                 "Desc" : "SystemDesc",
                 "QueriesUsed" : [
                     "Query1",
                     "Query2"
-                ]
-            }}
-        ]
+                ],
+                "Init" : {
+                    "class-specific data" : "blahblah"
+                }
+            },
+            "System2" : {
+                "Type" : "SystemType",
+                "Priority" : 0,
+                "Desc" : "SystemDesc",
+                "QueriesUsed" : [
+                    "Query1",
+                    "Query2"
+                ],
+                "Init" : {
+                    "class-specific data" : "blahblah"
+                }
+            }
+        }
     }
 }
