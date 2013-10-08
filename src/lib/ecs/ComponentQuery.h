@@ -15,7 +15,7 @@ namespace pgn
 							public cEventReceiver<cDestroyEntityEventData>
 	{
 	public:
-
+		virtual const std::string ReceiverName() const {return "asd";}
 		cComponentQuery(const component_mask_type& zMask);
 		void Receive(const cComponentAddedEventData& zData);
 		void Receive(const cRemoveComponentEventData& zData);

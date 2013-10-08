@@ -22,7 +22,7 @@ namespace pgn
 				for (auto itr2 = types.Begin(); itr2 != types.End(); ++itr2) 
 				{
 					const auto& s = itr2->GetString();
-					auto idx = EMGR.GetComponentTypeIndex(s);
+					auto idx = EMGR->GetComponentTypeIndex(s);
 					if(idx != 0xFFFFFFFF)
 						mask.set(idx);
 					else

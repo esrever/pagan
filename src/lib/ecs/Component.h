@@ -27,12 +27,13 @@ namespace pgn
 			T mData;
 
 		private:
+			friend class cEntityMgr;
 			static unsigned short msTypeIndex;
 	};
 
 	//------------------------------------------------------------------------
 	template<class T>
-	unsigned short cComponent<T>::msTypeIndex( ECS.mEntityMgr.AddComponentType(typeid(T)));
+	unsigned short cComponent<T>::msTypeIndex( 0xFFFF );
 
 	//------------------------------------------------------------------------
 	template<class T>

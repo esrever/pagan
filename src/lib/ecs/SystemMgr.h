@@ -11,6 +11,7 @@ namespace pgn
 	class cSystemMgr
 	{
 		public:
+			virtual const std::string ReceiverName() const {return "SystemMgr";}
 			virtual ~cSystemMgr(){}
 			void AddSystem(const cSystemBase& zSystem, int zPriority);
 			void RemoveSystem(const cSystemBase& zSystem);

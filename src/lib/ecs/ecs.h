@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <core/util/Singleton.h>
 #include <core/util/logstream.h>
 
@@ -16,11 +17,12 @@ namespace pgn
 	{
 		public: 
 			void Init();
+			void Destroy();
 			void from_json(const rapidjson::Value& zRoot);
 		public:
 			// sub-managers
-			cEntityMgr mEntityMgr;
-			cSystemMgr mSystemMgr;
+			std::shared_ptr<cEntityMgr> mEntityMgr;
+			std::shared_ptr<cSystemMgr> mSystemMgr;
 			cLogStream mLog;
 	};
 }

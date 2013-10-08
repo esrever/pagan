@@ -105,7 +105,10 @@ namespace pgn
 				return i;
 		}
 		mComponentTypeIds.push_back(zTi);
-		mComponentTypeNamesToIds[ zTi.name()] = mComponentTypeIds.size() - 1;
+
+		std::vector<std::string> result;
+		pystring::split(zTi.name(), result, " ");
+		mComponentTypeNamesToIds[ result[1] ] = mComponentTypeIds.size() - 1;
 		return mComponentTypeIds.size() - 1;
 	}
 	

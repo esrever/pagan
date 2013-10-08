@@ -1,2 +1,3 @@
 add_subdirectory(ecs_test1)
 add_subdirectory(ecs_test2)
+add_subdirectory(ecs_test3)

@@ -55,6 +55,7 @@ namespace pgn
 
 			void Subscribe();
 			void Unsubscribe();
+			virtual const std::string ReceiverName() const =0;//{return boost::str(boost::format("%x")% this );}
 			virtual void Receive(typename cEvent<evt_data_type>::signal_data_type zData) {}
 	};
 
@@ -63,7 +64,7 @@ namespace pgn
 	template<class evt_data_type> 
 	void cEventReceiver<evt_data_type> ::Subscribe()
 	{
-		log_event_call(boost::str(boost::format("%x subscribes to %s")% this %typeid(evt_data_type).name() ));
+		log_event_call(boost::str(boost::format("%s subscribes to %s")% ReceiverName().c_str() %typeid(evt_data_type).name() ));
 		pgn::cSingleton<cEvent<evt_data_type>>::Instance().emit.Connect(this, &cEventReceiver<evt_data_type>::Receive);		
 	}
 
@@ -71,7 +72,7 @@ namespace pgn
 	template<class evt_data_type> 
 	void cEventReceiver<evt_data_type>::Unsubscribe()
 	{
-		log_event_call(boost::str(boost::format("%x unsubscribes from %s")% this %typeid(evt_data_type).name() ));
+		log_event_call(boost::str(boost::format("%s unsubscribes from %s")% ReceiverName().c_str() %typeid(evt_data_type).name() ));
 		pgn::cSingleton<cEvent<evt_data_type>>::Instance().emit.Disconnect(this, &cEventReceiver<evt_data_type>::Receive);
 	}
 

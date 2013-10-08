@@ -40,7 +40,8 @@ namespace pgn
 					   public cEventReceiver<cDestroyEntityEventData>
 	{
 		public:
-
+			virtual const std::string ReceiverName() const {return "EntityMgr";}
+			virtual ~cEntityMgr(){}
 			// Entity creation functions
 			//! From an existing entity
 			cEntitySptr Create();
@@ -75,16 +76,20 @@ namespace pgn
 			void from_json(const rapidjson::Value& zRoot){}
 
 			//! Component type
-			unsigned short AddComponentType( const std::type_index& zTi);
+			template<class T>
+			void AddComponentType();
 			size_t GetComponentTypeIndex( const std::string& zName) const;
+		
+		private:	
+			unsigned short AddComponentType( const std::type_index& zTi);
 
-		private:
+		protected:
 			//! tags to entities
 			std::map<std::string, std::set<cEntity>> mTaggedEntities;
 			//! entities and components
 			std::map<cEntity, cEntityComponents> mEntityComponents;
 
-		private:
+		protected:
 			//! All component types
 			std::vector< std::type_index> mComponentTypeIds;
 			std::map< std::string, size_t > mComponentTypeNamesToIds;
@@ -102,5 +107,12 @@ namespace pgn
 	void cEntityMgr::RemoveComponent(cEntityWptr zEntity, const T& zComponent)
 	{
 		RemoveComponentPtr(zEntity, std::make_shared<T>(zComponent) );
+	}
+
+	//------------------------------------------------------------------------
+	template<class T>
+	void cEntityMgr::AddComponentType()
+	{
+		cComponent<T>::msTypeIndex = AddComponentType(typeid(T));
 	}
 }

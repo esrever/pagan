@@ -11,8 +11,7 @@
                 "Type2"
             ],
             "Query2" : [
-                "Type1",
-                "Type2"
+                "pgn::cExample"
             ]
         },
         

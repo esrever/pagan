@@ -106,8 +106,8 @@ int main()
 		pgn::cComponent<float> fComp; fComp.mData= 4.0f;
 
 		pgn::component_mask_type mask_df, mask_id;
-		mask_df.set( EMGR.GetComponentTypeIndex("double")).set(EMGR.GetComponentTypeIndex("float")); // query for doubles and floats
-		mask_id.set(EMGR.GetComponentTypeIndex("int")).set(EMGR.GetComponentTypeIndex("double")); // query for doubles and floats
+		mask_df.set( EMGR->GetComponentTypeIndex("double")).set(EMGR->GetComponentTypeIndex("float")); // query for doubles and floats
+		mask_id.set(EMGR->GetComponentTypeIndex("int")).set(EMGR->GetComponentTypeIndex("double")); // query for doubles and floats
 		pgn::cComponentQuery q_df(mask_df);
 		pgn::cComponentQuery q_id(mask_id);
 
@@ -134,7 +134,7 @@ int main()
 	
 	{
 		pgn::component_mask_type mask_d;
-		mask_d.set(EMGR.GetComponentTypeIndex("double"));
+		mask_d.set(EMGR->GetComponentTypeIndex("double"));
 		pgn::cComponentQuery q_d(mask_d);
 		assert(q_d.Get().size() == 0);
 		pgn::cComponent<double> dComp; dComp.mData = 3.0;
@@ -148,7 +148,7 @@ int main()
 
 	{
 		pgn::component_mask_type mask_d;
-		mask_d.set(EMGR.GetComponentTypeIndex("double"));
+		mask_d.set(EMGR->GetComponentTypeIndex("double"));
 		pgn::cComponentQuery q_d(mask_d);
 		assert(q_d.Get().size() == 0);
 		{
