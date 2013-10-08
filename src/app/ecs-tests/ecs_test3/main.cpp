@@ -18,22 +18,22 @@
 class cSystemMgrEx : public pgn::cSystemMgr
 {
 public:
-	virtual const std::string ReceiverName() const {return "SystemMgrEx";}
-	virtual std::shared_ptr<pgn::cSystemBase> Create(const std::string& zName,
-												const std::string& zType,
-												const std::string& zDesc,
-												const std::vector<std::string>& zQueriesUsed,
-												const rapidjson::Value& zInitData)
+	virtual void RegisterSystemTypes()
 	{
-		std::cout<<"Custom system creation func"<<std::endl;
-		return nullptr;
+		AddSystemType<pgn::cExampleSystem>();
 	}
+	virtual const std::string ReceiverName() const {return "SystemMgrEx";}
+
 };
 
 class cEntityMgrEx : public pgn::cEntityMgr 
 {
 public:
 	virtual const std::string ReceiverName() const {return "EntityMgrEx";}
+	virtual void RegisterComponentTypes()
+	{
+		AddComponentType<pgn::cExample>();
+	}
 };
 
 namespace pgn
@@ -58,8 +58,11 @@ int main()
 	ecs.mSystemMgr = std::shared_ptr<pgn::cSystemMgr>(new cSystemMgrEx());
 	ecs.mEntityMgr = std::shared_ptr<pgn::cEntityMgr>(new cEntityMgrEx());
 
-	//! Init custom types
-	ecs.mEntityMgr->AddComponentType<pgn::cExample>();
+	//! register custom types
+	ecs.mEntityMgr->RegisterComponentTypes();
+
+	//! register system types
+	ecs.mSystemMgr->RegisterSystemTypes();
 
 	//! Read ecs configuration
 	ecs.from_json( *pgn::file_to_json("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\rl\\data\\ecs.json"));

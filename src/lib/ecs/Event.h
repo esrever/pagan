@@ -55,7 +55,7 @@ namespace pgn
 
 			void Subscribe();
 			void Unsubscribe();
-			virtual const std::string ReceiverName() const =0;//{return boost::str(boost::format("%x")% this );}
+			virtual const std::string ReceiverName() const {return boost::str(boost::format("%x")% this );}
 			virtual void Receive(typename cEvent<evt_data_type>::signal_data_type zData) {}
 	};
 

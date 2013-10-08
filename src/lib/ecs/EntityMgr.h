@@ -40,6 +40,7 @@ namespace pgn
 					   public cEventReceiver<cDestroyEntityEventData>
 	{
 		public:
+			virtual void RegisterComponentTypes(){}
 			virtual const std::string ReceiverName() const {return "EntityMgr";}
 			virtual ~cEntityMgr(){}
 			// Entity creation functions
