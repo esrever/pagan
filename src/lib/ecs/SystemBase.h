@@ -48,7 +48,7 @@ namespace pgn
 	template<class T>
 	std::shared_ptr<cSystemBase> cSystemBase::Create()
 	{
-		return new T();
+		return std::shared_ptr<cSystemBase>(new T());
 	}
 	
 }

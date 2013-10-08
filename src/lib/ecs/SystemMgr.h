@@ -16,20 +16,22 @@ namespace pgn
 		public:
 			virtual const std::string ReceiverName() const {return "SystemMgr";}
 			virtual ~cSystemMgr(){}
-			void AddSystem(const cSystemBase& zSystem, int zPriority);
-			void RemoveSystem(const cSystemBase& zSystem);
+			void AddSystem(std::shared_ptr<cSystemBase> zSystem, int zPriority);
+			void RemoveSystem(std::shared_ptr<cSystemBase> zSystem);
 
 			//! Json
 			void from_json(const rapidjson::Value& zRoot);
 
+			std::shared_ptr<cSystemBase> Create(const std::string& zName) const;
 			virtual void RegisterSystemTypes(){}
 			template<class T>
 			void AddSystemType();
 			
+			
 		protected:
 			//! Component queries: maps tags to entities that have prespecified components
 			std::map<std::string, cComponentQuery> mComponentQueries;
-			std::map<size_t, std::shared_ptr<cSystemBase> > mSystems;
+			std::multimap<size_t, std::shared_ptr<cSystemBase> > mSystems;
 
 			//! All system types
 			std::map< std::string, system_creator_fun> mSystemCreators;

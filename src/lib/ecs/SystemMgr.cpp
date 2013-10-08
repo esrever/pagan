@@ -6,6 +6,19 @@
 
 namespace pgn
 {
+	//--------------------------------------------------------------------------------------
+	void cSystemMgr::AddSystem(std::shared_ptr<cSystemBase> zSystem, int zPriority)
+	{
+		//mSystems.insert( std::pair<>)
+	}
+
+	//--------------------------------------------------------------------------------------
+	void cSystemMgr::RemoveSystem(std::shared_ptr<cSystemBase> zSystem)
+	{
+
+	}
+
+	//--------------------------------------------------------------------------------------
 	void cSystemMgr::from_json(const rapidjson::Value& zRoot)
 	{
 		const auto&  qobj = zRoot["Queries"];
@@ -27,7 +40,7 @@ namespace pgn
 						mask.set(idx);
 					else
 					{
-						ECS.mLog.Err(boost::str(boost::format("cSystemMgr::from_json: type \"%s\" does not exist")%s));
+						ECS.mLog.Err(boost::str(boost::format("cSystemMgr::from_json: Component type \"%s\" does not exist")%s));
 						err = true;
 						break;
 					}; 
@@ -64,21 +77,24 @@ namespace pgn
 				assert(sdata.HasMember("Init"));
 				const auto& initdata = sdata["Init"];
 				// Create the system
-				auto sptr = Create(sname, stype, desc, str_qused, initdata);
+				// TODO: use/rearrange sname, desc, str_qused, initdata
+				auto sptr = Create(stype);
 				if(sptr)
-					mSystems.insert( std::pair<size_t, std::shared_ptr<cSystemBase>>(priority, sptr));
+					AddSystem(sptr, priority);
+				else
+					ECS.mLog.Err(boost::str(boost::format("cSystemMgr::from_json: Failed to create system of type \"%s\"")%stype));
 			}
 		else
 			ECS.mLog.Wrn("cSystemMgr::from_json: \"Systems\" not found");
 	}
 
 	//-------------------------------------------------------------------------------------------------
-	std::shared_ptr<cSystemBase>  cSystemMgr::Create(const std::string& zName,
-													const std::string& zType,
-													const std::string& zDesc,
-													const std::vector<std::string>& zQueriesUsed,
-													const rapidjson::Value& zInitData)
+	std::shared_ptr<cSystemBase> cSystemMgr::Create(const std::string& zName) const
 	{
-		return nullptr;
+		auto it = mSystemCreators.find(zName);
+		if(it == mSystemCreators.end())
+			return nullptr;
+		else
+			return it->second();
 	}
 }
