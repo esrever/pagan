@@ -15,31 +15,28 @@
             ]
         },
         
-        "Systems" : {
-            "System1" : {
-                "Type" : "SystemType",
+        "Systems" : [
+            {
+                "Type" : "pgn::cExampleSystem",
                 "Priority" : 0,
-                "Desc" : "SystemDesc",
-                "QueriesUsed" : [
-                    "Query1",
-                    "Query2"
-                ],
-                "Init" : {
-                    "class-specific data" : "blahblah"
+                "Data" : {
+                    "Desc" : "The example system",
+                    "QueriesUsed" : [
+                        "pgn::cExample"
+                    ],
                 }
             },
-            "System2" : {
+            {
                 "Type" : "SystemType",
                 "Priority" : 0,
-                "Desc" : "SystemDesc",
-                "QueriesUsed" : [
-                    "Query1",
-                    "Query2"
-                ],
-                "Init" : {
-                    "class-specific data" : "blahblah"
+                "Data" : {
+                    "Desc" : "SystemDesc",
+                    "QueriesUsed" : [
+                        "Query1",
+                        "Query2"
+                    ],
                 }
             }
-        }
+        ]
     }
 }

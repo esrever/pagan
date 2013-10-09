@@ -38,21 +38,28 @@ namespace pgn
 		else
 			ECS.mLog.Wrn("cSystemMgr::from_json: \"Queries\" not found");
 		const auto&  sobj = zRoot["Systems"];
-		if(sobj.IsObject())
-			for (auto itr = sobj.MemberBegin(); itr != sobj.MemberEnd(); ++itr) 
+		if(sobj.IsArray())
+			for (auto itr = sobj.Begin(); itr != sobj.End(); ++itr) 
 			{
 				// get a system object
 				const auto& scur = *itr;
-				const auto& sname = scur.name.GetString();
+				assert(scur.IsObject());
+
+				// Get type
+				assert(scur.HasMember("Type"));
+				const auto& stype = scur["Type"].GetString();
+
+				// Get priority
+				const size_t priority = scur.HasMember("Priority") ? scur["Priority"].GetUint() : 0xFFFFFFFF;
 				const auto& sdata = scur.value;
-				assert(sdata.IsObject());
+				
 				// Read Type
 				assert(sdata.HasMember("Type"));
 				const auto& stype = sdata["Type"].GetString();
 				// Read Desc
 				const auto desc = sdata.HasMember("Desc") ? sdata["Desc"].GetString() : "";
 				// Read Priority
-				const size_t priority = sdata.HasMember("Priority") ? sdata["Priority"].GetUint() : 0xFFFFFFFF;
+				
 				// Read Used queries
 				assert(sdata.HasMember("QueriesUsed"));
 				const auto& qused = sdata["QueriesUsed"];
@@ -69,7 +76,7 @@ namespace pgn
 					mSystems.insert( std::pair<size_t, std::shared_ptr<cSystemBase>>(priority, sptr));
 			}
 		else
-			ECS.mLog.Wrn("cSystemMgr::from_json: \"Systems\" not found");
+			ECS.mLog.Wrn("cSystemMgr::from_json: \"Systems\" array not found");
 	}
 
 	//-------------------------------------------------------------------------------------------------
