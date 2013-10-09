@@ -64,30 +64,15 @@ namespace pgn
 
 				// Get priority
 				const size_t priority = scur.HasMember("Priority") ? scur["Priority"].GetUint() : 0xFFFFFFFF;
-				const auto& sdata = scur.value;
-				
-				// Read Type
-				assert(sdata.HasMember("Type"));
-				const auto& stype = sdata["Type"].GetString();
-				// Read Desc
-				const auto desc = sdata.HasMember("Desc") ? sdata["Desc"].GetString() : "";
-				// Read Priority
-				
-				// Read Used queries
-				assert(sdata.HasMember("QueriesUsed"));
-				const auto& qused = sdata["QueriesUsed"];
-				assert(qused.IsArray());
-				std::vector<std::string> str_qused;
-				for (auto itr2 = qused.Begin(); itr2 != qused.End(); ++itr2) 
-					str_qused.push_back(itr2->GetString());
-				// Read init data
-				assert(sdata.HasMember("Init"));
-				const auto& initdata = sdata["Init"];
-				// Create the system
-				// TODO: use/rearrange sname, desc, str_qused, initdata
+		
 				auto sptr = Create(stype);
 				if(sptr)
+				{
+					assert(scur.HasMember("Data"));
+					const auto& sdata = scur["Data"];
+					sptr->from_json(sdata);
 					AddSystem(sptr, priority);
+				}
 				else
 					ECS.mLog.Err(boost::str(boost::format("cSystemMgr::from_json: Failed to create system of type \"%s\"")%stype));
 			}

@@ -14,10 +14,15 @@ namespace pgn
 	class cSystemMgr
 	{
 		public:
+			typedef std::map<std::string, cComponentQuery> QueryMap;
+			typedef std::multimap<size_t, std::shared_ptr<cSystemBase> > SystemMap;
+		public:
 			virtual const std::string ReceiverName() const {return "SystemMgr";}
 			virtual ~cSystemMgr(){}
 			void AddSystem(std::shared_ptr<cSystemBase> zSystem, int zPriority);
 			void RemoveSystem(std::shared_ptr<cSystemBase> zSystem);
+
+			const QueryMap& GetQueries() const {return mComponentQueries;}
 
 			//! Json
 			void from_json(const rapidjson::Value& zRoot);
@@ -30,8 +35,8 @@ namespace pgn
 			
 		protected:
 			//! Component queries: maps tags to entities that have prespecified components
-			std::map<std::string, cComponentQuery> mComponentQueries;
-			std::multimap<size_t, std::shared_ptr<cSystemBase> > mSystems;
+			QueryMap	mComponentQueries;
+			SystemMap	mSystems;
 
 			//! All system types
 			std::map< std::string, system_creator_fun> mSystemCreators;
@@ -43,6 +48,8 @@ namespace pgn
 	{
 		const std::type_info& ti = typeid(T);
 		system_creator_fun func = &cSystemBase::Create<T>;
-		mSystemCreators[ti.name()] = func;
+		std::vector<std::string> res;
+		pystring::split(ti.name(),res," ");
+		mSystemCreators[res[1]] = func;
 	}
 }

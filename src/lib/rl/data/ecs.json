@@ -20,21 +20,11 @@
                 "Type" : "pgn::cExampleSystem",
                 "Priority" : 0,
                 "Data" : {
+                    "Name" : "SysEx",
                     "Desc" : "The example system",
                     "QueriesUsed" : [
                         "pgn::cExample"
-                    ],
-                }
-            },
-            {
-                "Type" : "SystemType",
-                "Priority" : 0,
-                "Data" : {
-                    "Desc" : "SystemDesc",
-                    "QueriesUsed" : [
-                        "Query1",
-                        "Query2"
-                    ],
+                    ]
                 }
             }
         ]

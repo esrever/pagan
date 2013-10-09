@@ -1,5 +1,8 @@
 #pragma once
 
+#include <vector>
+#include <map>
+#include <string>
 #include <memory>
 #include <core/util/json_conversions.h>
 
@@ -11,6 +14,7 @@ namespace pgn
 	DECL_EVENT(SystemActivity, bool);
 
 	class cEntity;
+	class cComponentQuery;
 
 	//! Base class for a system. 
 	class cSystemBase
@@ -20,8 +24,8 @@ namespace pgn
 			virtual ~cSystemBase();
 			virtual void Process(){};
 
-			virtual void to_json(rapidjson::Value& zRoot) const =0;
-			virtual void from_json(const rapidjson::Value& zRoot)=0;
+			virtual void to_json(rapidjson::Value& zRoot) const{};
+			virtual void from_json(const rapidjson::Value& zRoot);
 
 			void SetActive(bool zActive);
 			bool Active() const {return mActive;}
@@ -31,8 +35,11 @@ namespace pgn
 		protected:
 			virtual void ProcessSingle(const cEntity& zE){};
 
-		private:
+		protected:
 			bool mActive;
+			std::string mName;
+			std::string mDesc;
+			std::vector<std::map<std::string, cComponentQuery>::const_iterator> mReferencedQueries;
 	};
 
 	//! sys to json
