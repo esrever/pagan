@@ -3,15 +3,20 @@
 namespace pgn
 {
 	//------------------------------------------------------------------------
-	template<>
-	void to_json<cExampleSystem>(const cExampleSystem& zObj, rapidjson::Value& zRoot)
+	void cExampleSystem::to_json(rapidjson::Value& zRoot) const
 	{
+		zRoot.SetObject();
+		//zRoot.AddMember("an_int",zObj.a );
+		//zRoot.AddMember("a_double",zObj.b );
+		//zRoot.AddMember("a_float",zObj.c );		
 	}
 
 	//------------------------------------------------------------------------
-	template<>
-	void from_json<cExampleSystem>(cExampleSystem& zObj, const rapidjson::Value& zRoot)
+	void cExampleSystem::from_json(const rapidjson::Value& zRoot)
 	{
+		//zObj.a = zRoot["an_int"].GetInt();
+		//zObj.b = zRoot["a_double"].GetDouble();
+		//zObj.c = float(zRoot["a_float"].GetDouble());
 	}
 
 	//------------------------------------------------------------------------
