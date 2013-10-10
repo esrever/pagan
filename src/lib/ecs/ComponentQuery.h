@@ -15,7 +15,7 @@ namespace pgn
 							public cEventReceiver<cDestroyEntityEventData>
 	{
 	public:
-		virtual const std::string ReceiverName() const {return "asd";}
+		virtual const std::string ReceiverName() const {return "ComponentQuery";}
 		cComponentQuery(const component_mask_type& zMask);
 		void Receive(const cComponentAddedEventData& zData);
 		void Receive(const cRemoveComponentEventData& zData);
@@ -26,8 +26,8 @@ namespace pgn
 
 		//! compare masks
 		bool operator < (const cComponentQuery &rhs) const {return Mask().hash() < rhs.Mask().hash();}
+		bool operator == (const cComponentQuery &rhs) const {return Mask().hash() == rhs.Mask().hash();}
 	private:
-		std::string mName;
 		component_mask_type mMask;
 		std::set<cEntity> mEntitiesWithComponents;
 	};

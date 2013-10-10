@@ -2,6 +2,8 @@
 
 namespace pgn
 {
+	const std::string cECS::mErrorString("ECS_Error");
+
 	void cECS::Init()
 	{
 		std::ios_base::Init();

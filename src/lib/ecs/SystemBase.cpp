@@ -1,4 +1,7 @@
 #include "SystemBase.h"
+
+#include <boost/format.hpp>
+
 #include "ecs.h"
 #include "Event.h"
 
@@ -36,9 +39,9 @@ namespace pgn
 			const auto& s = itr2->GetString();
 			auto it = allQueries.find(s);
 			if( it != allQueries.end())
-				mReferencedQueries.push_back(it);
+				mReferencedQueries.push_back( std::make_shared<cComponentQuery>(it->second));
 			else
-				;
+				ECS.mLog.Err(boost::str(boost::format("cSystemBase::from_json: Failed to find query \"%s\"")%s));;
 		}
 	}
 

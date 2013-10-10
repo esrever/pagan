@@ -39,7 +39,7 @@ namespace pgn
 			bool mActive;
 			std::string mName;
 			std::string mDesc;
-			std::vector<std::map<std::string, cComponentQuery>::const_iterator> mReferencedQueries;
+			std::vector< std::shared_ptr< cComponentQuery> > mReferencedQueries;
 	};
 
 	//! sys to json

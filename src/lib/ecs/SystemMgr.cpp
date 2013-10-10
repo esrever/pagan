@@ -1,4 +1,7 @@
 #include "SystemMgr.h"
+
+#include <core/util/predicates.h>
+
 #include "ecs.h"
 #include "EntityMgr.h"
 #include "SystemBase.h"
@@ -88,5 +91,15 @@ namespace pgn
 			return nullptr;
 		else
 			return it->second();
+	}
+
+	//--------------------------------------------------------------------------------------------------
+	const std::string& cSystemMgr::GetQueryName(const cComponentQuery& zQuery) const
+	{
+		const auto& it = std::find_if(mComponentQueries.begin(), mComponentQueries.end(), cMapValueFinder<std::string,cComponentQuery>(zQuery));
+		if(it == mComponentQueries.end())
+			return ECS.mErrorString;
+		else
+			return it->first;
 	}
 }

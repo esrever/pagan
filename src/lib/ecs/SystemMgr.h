@@ -23,6 +23,7 @@ namespace pgn
 			void RemoveSystem(std::shared_ptr<cSystemBase> zSystem);
 
 			const QueryMap& GetQueries() const {return mComponentQueries;}
+			const std::string& GetQueryName(const cComponentQuery& zQuery) const;
 
 			//! Json
 			void from_json(const rapidjson::Value& zRoot);
