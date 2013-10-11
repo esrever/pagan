@@ -1,10 +1,13 @@
 #pragma once
 
+#include <glm/glm.hpp>
+
 namespace pgn
 {
 	//! Stores mouse input information
-	struct cInputKeyboard
+	struct cInputMouse
 	{
-		
+		glm::ivec2 mCoords;
+		// TODO: button state
 	};
 }
