@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <iostream>
 #include <cstdint>
@@ -29,8 +31,12 @@ namespace pgn
 			void Inf(const std::string& zMsg) {Log(eLogLevel::INF, zMsg);}
 			void Wrn(const std::string& zMsg) {Log(eLogLevel::WRN, zMsg);}
 			void Err(const std::string& zMsg) {Log(eLogLevel::ERR, zMsg);}
+
+			static cLogStream& Default() {return mDefault;}
 		
 		private:
+			static cLogStream mDefault;
+
 			std::string 	mName;
 			eLogLevel 		mDisplayLevel;
 			std::string 	mLevelNames[eLogLevel::num];

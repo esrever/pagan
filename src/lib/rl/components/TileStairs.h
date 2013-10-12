@@ -4,10 +4,10 @@
 
 namespace pgn
 {
-	struct cEntity;
+	class cEntity;
 
 	//! Connection to a stairs entity of a different level
-	struct cStairs
+	struct cTileStairs
 	{
 		bool					mDirectionDown;
 		std::weak_ptr<cEntity>	mConnectedTo;

@@ -1,25 +1,39 @@
 {
     "EntityMgr" : {
         "Tags" : [
-            {"a" : "b"}
+            {"PC" : "b"}
         ]
     }, 
     "SystemMgr" : {
         "Queries" : {
-            "ExampleQuery" : [
-                "pgn::cExample"
-            ]
+            "AsciiRenderable" : [
+                "pgn::cAsciiRep",
+                "pgn::cAsciiLevelRep"
+            ],
+            "InputListener" : [
+                "pgn::cInputKeyboard",
+                "pgn::cInputMouse"
+            ],
         },
         
         "Systems" : [
             {
-                "Type" : "pgn::cExampleSystem",
-                "Priority" : 0,
+                "Type" : "pgn::cAsciiRenderSystem",
                 "Data" : {
-                    "Name" : "SysEx",
-                    "Desc" : "The example system",
+                    "Name" : "AsciiRenderer",
+                    "Desc" : "A very basic RL renderer. Renders level, followed by chars",
                     "QueriesUsed" : [
-                        "ExampleQuery"
+                        "AsciiRenderable"
+                    ]
+                }
+            },
+            {
+                "Type" : "pgn::cMapInputProcessSystem",
+                "Data" : {
+                    "Name" : "MapInputProcessor",
+                    "Desc" : "Maps input to desired actions via bindings in the context of a level map -- the main game view",
+                    "QueriesUsed" : [
+                        "InputListener"
                     ]
                 }
             }

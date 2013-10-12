@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace pgn
 {
 	//! 2-tier descriptions for components

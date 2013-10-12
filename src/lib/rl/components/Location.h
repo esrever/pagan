@@ -5,9 +5,9 @@
 namespace pgn
 {
 	//! World position coordinates
-	struct cPosition
+	struct cLocation
 	{
-		uint	   mLevelId;
+		unsigned   mLevelId;
 		glm::ivec2 mCoords;
 	};
 }

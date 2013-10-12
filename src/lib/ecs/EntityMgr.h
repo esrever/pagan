@@ -12,7 +12,7 @@
 #include "ecs_config.h"
 #include "Entity.h"
 #include "Event.h"
-#include "ComponentBase.h"
+#include "Component.h"
 #include "EntityComponents.h"
 #include "ComponentQuery.h"
 
@@ -114,6 +114,6 @@ namespace pgn
 	template<class T>
 	void cEntityMgr::AddComponentType()
 	{
-		cComponent<T>::msTypeIndex = AddComponentType(typeid(T));
+		cComponent<typename T>::msTypeIndex = AddComponentType(typeid(T));
 	}
 }

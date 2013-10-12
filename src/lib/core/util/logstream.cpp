@@ -18,6 +18,9 @@ namespace pgn
     }
 
 	//----------------------------------------------------------------------------
+	cLogStream cLogStream::mDefault;
+
+	//----------------------------------------------------------------------------
     void cLogStream::SetFormat(const boost::format& zFmt)
     {
         mFormat = zFmt;

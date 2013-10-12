@@ -6,7 +6,6 @@
 #include <core/util/json_conversions.h>
 
 #include "Component.h"
-#include "EntityMgr.h"
 
 namespace pgn
 {

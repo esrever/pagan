@@ -81,8 +81,14 @@ int main()
 
 	auto& ecs = ECS;
 	ecs.Init();
+	//! Init managers
+	ecs.mSystemMgr = std::shared_ptr<pgn::cSystemMgr>(new pgn::cSystemMgr());
+	ecs.mEntityMgr = std::shared_ptr<pgn::cEntityMgr>(new pgn::cEntityMgr());
+	//! register custom types
+	ecs.mEntityMgr->RegisterComponentTypes();
 	ecs.from_json( *pgn::file_to_json("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\rl\\data\\ecs.json"));
 
+	if(false)
 	{
 		pgn::cComponent<pgn::cExample> exc;
 		exc.mData.a = 1;
@@ -105,29 +111,33 @@ int main()
 		pgn::cComponent<double> dComp; dComp.mData = 3.0;
 		pgn::cComponent<float> fComp; fComp.mData= 4.0f;
 
+		ecs.mEntityMgr->AddComponentType<int>();
+		ecs.mEntityMgr->AddComponentType<double>();
+		ecs.mEntityMgr->AddComponentType<float>();
+
 		pgn::component_mask_type mask_df, mask_id;
 		mask_df.set( EMGR->GetComponentTypeIndex("double")).set(EMGR->GetComponentTypeIndex("float")); // query for doubles and floats
 		mask_id.set(EMGR->GetComponentTypeIndex("int")).set(EMGR->GetComponentTypeIndex("double")); // query for doubles and floats
 		pgn::cComponentQuery q_df(mask_df);
 		pgn::cComponentQuery q_id(mask_id);
 
-		auto entity = ecs.mEntityMgr.Create();
-		ecs.mEntityMgr.AddComponent(entity, iComp);
+		auto entity = ecs.mEntityMgr->Create();
+		ecs.mEntityMgr->AddComponent(entity, iComp);
 		assert(q_df.Get().size() == 0);
 		assert(q_id.Get().size() == 0);
-		ecs.mEntityMgr.AddComponent(entity, dComp);
+		ecs.mEntityMgr->AddComponent(entity, dComp);
 		assert(q_df.Get().size() == 0);
 		assert(q_id.Get().size() == 1);
-		ecs.mEntityMgr.AddComponent(entity, fComp);
+		ecs.mEntityMgr->AddComponent(entity, fComp);
 		assert(q_df.Get().size() == 1);
 		assert(q_id.Get().size() == 1);
-		ecs.mEntityMgr.RemoveComponent(entity, iComp);
+		ecs.mEntityMgr->RemoveComponent(entity, iComp);
 		assert(q_df.Get().size() == 1);
 		assert(q_id.Get().size() == 0);
-		ecs.mEntityMgr.RemoveComponent(entity, fComp);
+		ecs.mEntityMgr->RemoveComponent(entity, fComp);
 		assert(q_df.Get().size() == 0);
 		assert(q_id.Get().size() == 0);
-		ecs.mEntityMgr.RemoveComponent(entity, dComp);
+		ecs.mEntityMgr->RemoveComponent(entity, dComp);
 		assert(q_df.Get().size() == 0);
 		assert(q_id.Get().size() == 0);
 	}
@@ -138,11 +148,11 @@ int main()
 		pgn::cComponentQuery q_d(mask_d);
 		assert(q_d.Get().size() == 0);
 		pgn::cComponent<double> dComp; dComp.mData = 3.0;
-		auto entity = ecs.mEntityMgr.Create();
-		ecs.mEntityMgr.AddComponent(entity, dComp);
+		auto entity = ecs.mEntityMgr->Create();
+		ecs.mEntityMgr->AddComponent(entity, dComp);
 		assert(q_d.Get().size() == 1);
 		// ecs.AddComponent(entity, dComp); // would assert!
-		ecs.mEntityMgr.Destroy(entity);
+		ecs.mEntityMgr->Destroy(entity);
 		assert(q_d.Get().size() == 0);
 	}
 
@@ -154,8 +164,8 @@ int main()
 		{
 			pgn::cComponent<double> dComp; dComp.mData = 3.0;
 			{
-				auto entity = ecs.mEntityMgr.Create();
-				ecs.mEntityMgr.AddComponent(entity, dComp);
+				auto entity = ecs.mEntityMgr->Create();
+				ecs.mEntityMgr->AddComponent(entity, dComp);
 			}
 			//assert(q_d.Get().size() == 0); // entity out of scope -> it's a copy
 		}
@@ -163,9 +173,10 @@ int main()
 	}
 
 	{
-		assert(ecs.mEntityMgr.GetComponentTypeIndex("int") == 1);
-		assert(ecs.mEntityMgr.GetComponentTypeIndex("float") == 3);
-		assert(ecs.mEntityMgr.GetComponentTypeIndex("double") == 2);
+		assert(ecs.mEntityMgr->GetComponentTypeIndex("int") == 0);
+		assert(ecs.mEntityMgr->GetComponentTypeIndex("float") == 2);
+		assert(ecs.mEntityMgr->GetComponentTypeIndex("double") == 1);
 	}
+	ecs.Destroy();
 	return 0;
 }

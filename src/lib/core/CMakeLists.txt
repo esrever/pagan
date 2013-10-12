@@ -9,6 +9,7 @@ set(SOURCE_FILES
 )
 
 set(HEADER_FILES
+    container/Array2D.h
     util/cmdopt.h
     util/logstream.h
     util/cfgtree.h

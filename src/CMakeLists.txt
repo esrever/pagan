@@ -102,6 +102,7 @@ elseif(MSVC)
                     # empty trailing comment to avoid this.
                     /Dxor=^/**/
                     /Dxor_eq=^=
+                    /D_SCL_SECURE_NO_WARNINGS
     )
     
 
@@ -190,6 +191,7 @@ find_package(Rapidjson)
 find_package(Curses)
 #find_package(Artemis)
 find_package(Signal)
+find_package(GLM)
 
 # Sub-projects
 add_subdirectory(lib)

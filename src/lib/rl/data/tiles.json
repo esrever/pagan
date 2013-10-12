@@ -2,47 +2,42 @@
 {
     [ 
         {
-            name : "floor",
-            desc : "a dusty floor, made of stone",
-            ascii : {
-                symb : "."
+            "name" : "floor",
+            "desc" : "a dusty floor, made of stone",
+            "ascii" : {
+                "symbol" : "."
             },
-            map_feature : {
-                pass : true
-            }
+            "movecost": 1,
+            "obstacle": false
         },
         
         {
-            name : "wall",
-            desc : "a worn, stone wall",
-            ascii : {
-                symb : "#"
+            "name" : "wall",
+            "desc" : "a worn, stone wall",
+            "ascii" : {
+                "symbol" : "#"
             },
-            map_feature : {
-                pass : false
-            }
+            "obstacle": true
         },
         
         {
             name : "stairs_up",
             desc : "stairs, leading up",
             ascii : {
-                symb : "<"
+                "symbol" : "<"
             },
-            map_feature : {
-                pass : true
-            }
+            "movecost": 1,
+            "obstacle": false
         },
         
         {
             name : "stairs_down",
             desc : "stairs, leading down",
             ascii : {
-                symb : ">"
+                "symbol" : ">"
             },
-            map_feature : {
-                pass : true
-            }
+            "movecost": 1,
+            "obstacle": false
         }
     ]
 }

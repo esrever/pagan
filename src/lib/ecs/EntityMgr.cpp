@@ -108,7 +108,7 @@ namespace pgn
 
 		std::vector<std::string> result;
 		pystring::split(zTi.name(), result, " ");
-		mComponentTypeNamesToIds[ result[1] ] = mComponentTypeIds.size() - 1;
+		mComponentTypeNamesToIds[ result.back() ] = mComponentTypeIds.size() - 1;
 		return mComponentTypeIds.size() - 1;
 	}
 	

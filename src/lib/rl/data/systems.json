@@ -1,0 +1,13 @@
+{
+    [         
+        {
+            name : "stairs_down",
+            desc : "stairs, leading down",
+            ascii : {
+                "symbol" : ">"
+            },
+            "movecost": 1,
+            "obstacle": false
+        }
+    ]
+}

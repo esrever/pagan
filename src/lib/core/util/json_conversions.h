@@ -8,6 +8,7 @@
 #include <rapidjson/stringbuffer.h>
 #include <pystring.h>
 
+#include "logstream.h"
 #include "conversions.h"
 
 namespace pgn
@@ -37,13 +38,15 @@ namespace pgn
 	template <class T>
 	inline void to_json(const T& zObj, rapidjson::Value& zRoot)
 	{
-		zObj.to_json(zRoot);
+		cLogStream::Default().Wrn( boost::str(boost::format("Type %s does not implement to_json()")% typeid(T).name()));
+		//zObj.to_json(zRoot);
 	}
 
 	//! type from json
 	template <class T>
 	inline void from_json(T& zObj, const rapidjson::Value& zRoot)
 	{
-		zObj.from_json(zRoot);
+		cLogStream::Default().Wrn( boost::str(boost::format("Type %s does not implement from_json()")% typeid(T).name()));
+		//zObj.from_json(zRoot);
 	}
 }

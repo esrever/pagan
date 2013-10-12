@@ -1,13 +1,17 @@
+FILE(GLOB components_CPP "components/*.cpp")
+FILE(GLOB components_H "components/*.h")
+
 set(SOURCE_FILES
-    asciirep.cpp
-    GameEntity.cpp
-    GameEntityLib.cpp
+    EntityMgrRL.cpp
+    ${components_CPP}
 )
 
+
+
+
 set(HEADER_FILES
-    asciirep.h
-    GameEntity.h
-    GameEntityLib.h
+    EntityMgrRL.h
+    ${components_H}
 )
 
 add_definitions(
@@ -23,6 +27,8 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
     ${Rapidjson_INCLUDE_DIR}
     ${Curses_INCLUDE_DIR}
+    ${Signal_INCLUDE_DIR}
+    ${glm_INCLUDE_DIR}
 )
 
 add_library(pagan_rl STATIC
