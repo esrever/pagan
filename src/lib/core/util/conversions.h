@@ -47,6 +47,33 @@ namespace pgn
 		return str.str();
 	}
 
+	//! type(tuple) to string
+	template<class A>
+	inline std::string to_string( const std::tuple< A >& data)
+	{
+		std::ostringstream str;
+		str << "<"<< to_string(std::get<0>(data))<<">";
+		return str.str();
+	}
+
+	//! type(tuple) to string
+	template<class A, class B>
+	inline std::string to_string( const std::tuple< A , B >& data)
+	{
+		std::ostringstream str;
+		str << "<"<< to_string(std::get<0>(data)) << ", " << to_string(std::get<1>(data))<<">";
+		return str.str();
+	}
+
+	//! type(tuple) to string
+	template<class A, class B, class C>
+	inline std::string to_string( const std::tuple< A , B, C >& data)
+	{
+		std::ostringstream str;
+		str << "<"<< to_string(std::get<0>(data)) << ", " << to_string(std::get<1>(data))<<", " << to_string(std::get<2>(data))<<">";
+		return str.str();
+	}
+
 	//! type(weak_ptr) to string
 	template<class T>
 	inline std::string to_string( std::weak_ptr< T > data)

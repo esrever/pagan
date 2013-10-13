@@ -1,10 +1,14 @@
 #pragma once
 
+#include <rl/events/events.h>
+
 namespace pgn
 {
 	//! Type-specific views of a map, e.g. visibility, obstacle, movecost, asciirep, atmo, etc.
 	template<class T>
-	class cLevelView : public cEventReceiver< TileModified >,
+	class cLevelView : public cEventReceiver< cTileInLevelChangedEventData >,
+					   public cEventReceiver< cLevelCreatedEventData >,
+					   public cEventReceiver< cLevelDestroyEventData >
 	{
 		public:
 			//! Access data at a location

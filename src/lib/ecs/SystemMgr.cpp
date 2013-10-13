@@ -5,7 +5,6 @@
 #include "ecs.h"
 #include "EntityMgr.h"
 #include "SystemBase.h"
-#include "ComponentQuery.h"
 
 namespace pgn
 {

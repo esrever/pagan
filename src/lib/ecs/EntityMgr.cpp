@@ -11,14 +11,14 @@ namespace pgn
 		auto it = mEntityComponents.insert(std::pair<cEntity,cEntityComponents>(e,cEntityComponents()));
 		auto eptr = std::make_shared<cEntity>( it.first->first);
 		cEntityWptr ewptr = eptr;
-		cEntityCreatedEventData::emit(ewptr);
+		cEntityCreatedEventData::emit(std::make_tuple(ewptr));
 		return eptr;
 	}
 
 	//----------------------------------------------------------------
 	void cEntityMgr::Destroy(cEntityWptr zEntity)
 	{
-		cDestroyEntityEventData::emit(zEntity);
+		cDestroyEntityEventData::emit(std::make_tuple(zEntity));
 		// and finally erase it
 		mEntityComponents.erase(*zEntity.lock().get());
 	}
@@ -33,7 +33,7 @@ namespace pgn
 	void cEntityMgr::Receive( const cDestroyEntityEventData& zData)
 	{
 		// untag from all groups
-		Untag(zData.data);
+		Untag(std::get<0>(zData.data));
 	}
 
 	//----------------------------------------------------------------

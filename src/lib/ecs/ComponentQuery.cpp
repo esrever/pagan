@@ -21,22 +21,22 @@ namespace pgn
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cComponentAddedEventData& zData)
 	{
-		const auto& e = *zData.data.first.lock();
+		const auto& e = *std::get<0>(zData.data).lock();
 		if( is_subset(ECS.mEntityMgr->GetComponents(e).Mask(), mMask))
 			mEntitiesWithComponents.insert(e);
 	}
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cRemoveComponentEventData& zData)
 	{
-		const auto& e = *zData.data.first.lock();
-		if( mMask[zData.data.second.lock()->TypeIndex()])
+		const auto& e = *std::get<0>(zData.data).lock();
+		if( mMask[std::get<1>(zData.data).lock()->TypeIndex()])
 			mEntitiesWithComponents.erase(e);	
 	}
 
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cEntityCreatedEventData& zData)
 	{
-		const auto& e = *zData.data.lock();
+		const auto& e = *std::get<0>(zData.data).lock();
 		auto& ecs = ECS;
 		if( is_subset(ecs.mEntityMgr->GetComponents(e).Mask(), mMask) )
 			mEntitiesWithComponents.insert(e);
@@ -45,7 +45,7 @@ namespace pgn
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cDestroyEntityEventData& zData)
 	{
-		mEntitiesWithComponents.erase(*zData.data.lock());
+		mEntitiesWithComponents.erase(*std::get<0>(zData.data).lock());
 	}
 
 	//------------------------------------------------------------------------------

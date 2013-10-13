@@ -9,9 +9,8 @@
 
 namespace pgn
 {
-	typedef std::pair<cEntityWptr, cComponentBaseWptr> EntityComponent;
-	DECL_EVENT(ComponentAdded, EntityComponent);
-	DECL_EVENT(RemoveComponent, EntityComponent);
+	DECL_EVENT2(ComponentAdded, cEntityWptr, cComponentBaseWptr);
+	DECL_EVENT2(RemoveComponent, cEntityWptr, cComponentBaseWptr);
 
 	class cEntityComponents
 	{

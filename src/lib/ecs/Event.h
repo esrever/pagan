@@ -95,6 +95,6 @@ namespace pgn
 
 		T evd;
 		evd.data = zVal;
-		pgn::cSingleton<pgn::cEvent<T>>::Instance().emit(evd);
+		pgn::cSingleton<pgn::cEvent<T>>::Instance().emit(zVal);
 	}
 }

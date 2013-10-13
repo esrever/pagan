@@ -7,10 +7,7 @@ namespace pgn
 	class cSystemMgrRL : public cSystemMgr
 	{
 	public:
-		virtual void RegisterSystemTypes()
-		{
-			
-		}
+		virtual void RegisterSystemTypes();
 		virtual const std::string ReceiverName() const {return "SystemMgrRL";}
 
 	};

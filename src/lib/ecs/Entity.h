@@ -35,8 +35,8 @@ namespace pgn
 
 	DECL_PTRTYPE(cEntity)
 
-	DECL_EVENT(EntityCreated, cEntityWptr);
-	DECL_EVENT(DestroyEntity, cEntityWptr);
+	DECL_EVENT1(EntityCreated, cEntityWptr);
+	DECL_EVENT1(DestroyEntity, cEntityWptr);
 
 	//! entity to json
 	template<>

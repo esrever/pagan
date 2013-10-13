@@ -11,7 +11,7 @@
 
 namespace pgn
 {
-	DECL_EVENT(SystemActivity, bool);
+	DECL_EVENT1(SystemActivity, bool);
 
 	class cEntity;
 	class cComponentQuery;

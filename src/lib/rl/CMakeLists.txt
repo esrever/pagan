@@ -1,9 +1,13 @@
 FILE(GLOB components_CPP "components/*.cpp")
 FILE(GLOB components_H "components/*.h")
+FILE(GLOB systems_CPP "systems/*.cpp")
+FILE(GLOB systems_H "systems/*.h")
 
 set(SOURCE_FILES
     EntityMgrRL.cpp
+    SystemMgrRL.cpp
     ${components_CPP}
+    ${systems_CPP}
 )
 
 
@@ -11,7 +15,10 @@ set(SOURCE_FILES
 
 set(HEADER_FILES
     EntityMgrRL.h
+    SystemMgrRL.h
+    events/events.h
     ${components_H}
+    ${systems_H}
 )
 
 add_definitions(

@@ -13,7 +13,7 @@
             "InputListener" : [
                 "pgn::cInputKeyboard",
                 "pgn::cInputMouse"
-            ],
+            ]
         },
         
         "Systems" : [

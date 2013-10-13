@@ -3,7 +3,6 @@
 #include <memory>
 #include <core/container/Array2D.h>
 #include <ecs/Event.h>
-#include <rl/events/events.h>
 
 namespace pgn
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ecs/SystemBase>
+#include <ecs/SystemBase.h>
 
 namespace pgn
 {
@@ -11,5 +11,5 @@ namespace pgn
 		virtual void from_json(const rapidjson::Value& zRoot);
 	private:
 		
-	}
+	};
 }

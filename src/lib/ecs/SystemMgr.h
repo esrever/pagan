@@ -5,9 +5,10 @@
 #include <Delegate.h>
 #include <core/util/json_conversions.h>
 
+#include "ComponentQuery.h"
+
 namespace pgn
 {
-	class cComponentQuery;
 	class cSystemBase;
 	typedef Gallant::Delegate0< std::shared_ptr<cSystemBase> > system_creator_fun;
 
