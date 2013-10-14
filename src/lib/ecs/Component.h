@@ -14,6 +14,7 @@ namespace pgn
 	class cComponent : public cComponentBase
 	{
 		public:
+			typedef T datatype;
 			// virtual void read_json() { read_json<T>(mData); } etc
 
 			virtual unsigned short TypeIndex() const {return msTypeIndex;}

@@ -9,7 +9,7 @@ namespace pgn
 	struct cArray2D
 	{
 	public:
-
+		virtual ~cArray2D(){}
 		void Resize(size_t zRows, size_t zCols)								{mRows=zRows;mCols=zCols;mData.resize(mRows*mCols);}
 		size_t Rows() const													{return mRows;}
 		size_t Cols() const													{return mCols;}
@@ -18,9 +18,9 @@ namespace pgn
 		const T * Raw() const												{return &mData.first();}
 		void SetRaw(T * ptr, size_t zRows, size_t zCols)					{Resize(zRows,zCols);memcpy(&mData.front(),ptr,mData.size()*sizeof(T));}
 		
-	private:
+	protected:
 		size_t LinearIdx(const size_t zRow, const size_t zCol) const		{return zRow*mCols + zCol;}
-	private:
+	protected:
 		size_t		   mRows;
 		size_t		   mcols;
 		std::vector<T> mData;
