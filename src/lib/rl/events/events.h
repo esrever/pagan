@@ -5,10 +5,10 @@
 
 namespace pgn
 {
-	//! A specific tile in the world has been modified
+	//! A specific tile in the world has been modified -- <NewTileInstance, Location>
 	DECL_EVENT2(TileInLevelChanged, cEntityWptr, cLocation);
-	//! A level has been created
+	//! A level has been created -- <Level>
 	DECL_EVENT1(LevelCreated, cEntityWptr);
-	//! A level is about to be destroyed
+	//! A level is about to be destroyed -- <Level>
 	DECL_EVENT1(LevelDestroy, cEntityWptr);
 }

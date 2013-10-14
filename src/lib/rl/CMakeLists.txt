@@ -46,6 +46,7 @@ set_target_properties(pagan_rl PROPERTIES OUTPUT_NAME pagan_rl CLEAN_DIRECT_OUTP
 target_link_libraries(pagan_rl
     ${PLATFORM_LIBRARIES}
     ${Boost_LIBRARIES}
+    ${Curses_LIBRARY}
 )
 
 

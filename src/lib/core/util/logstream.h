@@ -10,7 +10,7 @@ namespace pgn
 {
 	enum class eLogLevel : std::int8_t 
 	{
-		ERR=0,
+		MERR=0,
 		WRN,
 		INF,
 		DBG,
@@ -30,7 +30,7 @@ namespace pgn
 			void Dbg(const std::string& zMsg) {Log(eLogLevel::DBG, zMsg);}
 			void Inf(const std::string& zMsg) {Log(eLogLevel::INF, zMsg);}
 			void Wrn(const std::string& zMsg) {Log(eLogLevel::WRN, zMsg);}
-			void Err(const std::string& zMsg) {Log(eLogLevel::ERR, zMsg);}
+			void Err(const std::string& zMsg) {Log(eLogLevel::MERR, zMsg);}
 
 			static cLogStream& Default() {return mDefault;}
 		

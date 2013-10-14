@@ -11,6 +11,7 @@ set(SOURCE_FILES
     ExampleComponent.cpp
     ExampleSystem.cpp
     SystemMgr.cpp
+    ComponentHelpers.cpp
 )
 
 set(HEADER_FILES
@@ -27,6 +28,7 @@ set(HEADER_FILES
     ExampleComponent.h
     ExampleSystem.h
     SystemMgr.h
+    ComponentHelpers.h
 )
 
 add_definitions(
