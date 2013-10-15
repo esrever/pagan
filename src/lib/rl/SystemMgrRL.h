@@ -9,6 +9,7 @@ namespace pgn
 	public:
 		virtual void RegisterSystemTypes();
 		virtual const std::string ReceiverName() const {return "SystemMgrRL";}
+		virtual bool UpdateFrame();
 
 	};
 }

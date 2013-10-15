@@ -26,6 +26,8 @@ namespace pgn
 			const QueryMap& GetQueries() const {return mComponentQueries;}
 			const std::string& GetQueryName(const cComponentQuery& zQuery) const;
 
+			virtual bool UpdateFrame(){return true;}
+
 			//! Json
 			void from_json(const rapidjson::Value& zRoot);
 

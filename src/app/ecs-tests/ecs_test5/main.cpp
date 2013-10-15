@@ -3,7 +3,6 @@
 #include <ecs/ecs.h>
 #include <rl/EntityMgrRL.h>
 #include <rl/SystemMgrRL.h>
-#include <rl/EntityMgrRL.h>
 
 /*
 	Provide json conversions for all components
@@ -44,18 +43,8 @@ int main()
 	//# Loop
 
 	
-	int prevposx=posx,prevposy=posy;
-	while( true )
-	{
-		//! Convert actions into moves 
-		//cActionMappingSystem.Process();
-		// chtype ch = getch();
-		//if(ch == 27) break;
-
-		cGameTurnSystem.Process();
-		cAsciiRenderSystem.Process();
-		//refresh();
-	}
+	//int prevposx=posx,prevposy=posy;
+	while( ecs.mSystemMgr->UpdateFrame() );
 
 	//##############################
 	//# Curses init
