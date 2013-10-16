@@ -23,6 +23,7 @@ include_directories(
 )
 
 
+
 # TODO: what's the lib dir? depends on the configuration that I want! how can i specify that flexibly? from find_package? if I detect the generator for x86/64 then in the script?
 
 add_executable (ecs-test5 
@@ -30,7 +31,7 @@ add_executable (ecs-test5
             ${HEADER_FILES}
         ) 
 
-#copy_dll(RLTest1 ${Curses_DLL})
+copy_dll(RLTest1 ${Curses_DLL})
 
 #set_target_properties(CMakeTest PROPERTIES OUTPUT_NAME pagan_core CLEAN_DIRECT_OUTPUT 1)
 target_link_libraries(ecs-test5
