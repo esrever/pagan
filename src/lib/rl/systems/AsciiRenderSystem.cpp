@@ -13,6 +13,6 @@ namespace pgn
 
 	void cAsciiRenderSystem::from_json(const rapidjson::Value& zRoot)
 	{
-		assert(false);
+		cSystemBase::from_json(zRoot);
 	}
 }

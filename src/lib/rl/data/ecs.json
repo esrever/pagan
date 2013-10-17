@@ -13,6 +13,9 @@
             "InputListener" : [
                 "pgn::cInputKeyboard",
                 "pgn::cInputMouse"
+            ],
+            "Actor" : [
+                "pgn::cActor"
             ]
         },
         
@@ -34,6 +37,16 @@
                     "Desc" : "Maps input to desired actions via bindings in the context of a level map -- the main game view",
                     "QueriesUsed" : [
                         "InputListener"
+                    ]
+                }
+            },
+            {
+                "Type" : "pgn::cGameTurnSystem",
+                "Data" : {
+                    "Name" : "GameTurnSystem",
+                    "Desc" : "Controls the game turns",
+                    "QueriesUsed" : [
+                        "Actor"
                     ]
                 }
             }
