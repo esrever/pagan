@@ -2,14 +2,15 @@
 
 #include "ActionMappingSystem.h"
 
+#include <curses.h>
+
 namespace pgn
 {
 	//------------------------------------------------------
 	void cActionMappingSystem::Process()
 	{
-		// TODO:
-		// chtype ch = getch();
-		//if(ch == 27) break;
+		chtype ch = getch();
+		if(ch == 27) exit(0);
 	}
 
 	//------------------------------------------------------

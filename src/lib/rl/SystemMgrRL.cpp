@@ -20,6 +20,8 @@ namespace pgn
 			GameTurnSystem
 			AsciiRenderSystem
 		*/
+		for(auto it : mSystems)
+			it.second->Process();
 		return true;
 	}
 }

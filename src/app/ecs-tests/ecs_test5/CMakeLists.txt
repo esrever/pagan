@@ -31,7 +31,7 @@ add_executable (ecs-test5
             ${HEADER_FILES}
         ) 
 
-copy_dll(RLTest1 ${Curses_DLL})
+copy_dll(ecs-test5 ${Curses_DLL})
 
 #set_target_properties(CMakeTest PROPERTIES OUTPUT_NAME pagan_core CLEAN_DIRECT_OUTPUT 1)
 target_link_libraries(ecs-test5

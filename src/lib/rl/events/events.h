@@ -11,4 +11,6 @@ namespace pgn
 	DECL_EVENT1(LevelCreated, cEntityWptr);
 	//! A level is about to be destroyed -- <Level>
 	DECL_EVENT1(LevelDestroy, cEntityWptr);
+
+	DECL_EVENT0(ExitApplication);
 }

@@ -11,7 +11,7 @@ namespace pgn
 	//--------------------------------------------------------------------------------------
 	void cSystemMgr::AddSystem(std::shared_ptr<cSystemBase> zSystem, int zPriority)
 	{
-		//mSystems.insert( std::pair<>)
+		mSystems.insert( std::pair<size_t, std::shared_ptr<cSystemBase>>(zPriority,zSystem));
 	}
 
 	//--------------------------------------------------------------------------------------

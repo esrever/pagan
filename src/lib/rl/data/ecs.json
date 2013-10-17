@@ -28,7 +28,7 @@
                 }
             },
             {
-                "Type" : "pgn::cMapInputProcessSystem",
+                "Type" : "pgn::cActionMappingSystem",
                 "Data" : {
                     "Name" : "MapInputProcessor",
                     "Desc" : "Maps input to desired actions via bindings in the context of a level map -- the main game view",
