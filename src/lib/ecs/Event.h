@@ -83,6 +83,11 @@ namespace pgn
 	{
 		return boost::str(boost::format("Emitting event %s with data: %s")%evtName.c_str()%pgn::to_string(evtData));
 	}
+	template <class evt_data_type>
+	inline std::string evt_string(const std::string& evtName)
+	{
+		return boost::str(boost::format("Emitting non-data event %s")%evtName.c_str());
+	}
 
 	//-------------------------------------------
 	//! emit event 
@@ -96,5 +101,13 @@ namespace pgn
 		T evd;
 		evd.data = zVal;
 		pgn::cSingleton<pgn::cEvent<T>>::Instance().emit(zVal);
+	}
+	template<class T>
+	void emit_event()
+	{
+		const std::type_info& ti = typeid(T);
+		std::string s = evt_string<typename T::data_type>( ti.name() );
+		log_event_call(s);
+		pgn::cSingleton<pgn::cEvent<T>>::Instance().emit(T());
 	}
 }

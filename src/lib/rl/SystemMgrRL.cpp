@@ -20,8 +20,15 @@ namespace pgn
 			GameTurnSystem
 			AsciiRenderSystem
 		*/
+		mLoop = true;
 		for(auto it : mSystems)
 			it.second->Process();
-		return true;
+		return mLoop;
+	}
+
+
+	void cSystemMgrRL::Receive(const cExitApplicationEventData&)
+	{
+		mLoop=false;
 	}
 }

@@ -20,6 +20,7 @@ include_directories(
     ${Rapidjson_INCLUDE_DIR}
     ${Signal_INCLUDE_DIR}
     ${Curses_INCLUDE_DIR}
+    ${glm_INCLUDE_DIR}
 )
 
 

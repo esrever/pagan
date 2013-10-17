@@ -13,7 +13,7 @@ typedef std::bitset<MAX_COMPONENTS> component_mask_type;
 						typedef const T &    T##Cref;\
 						typedef T &    T##Ref;
 
-#define DECL_EVENT0(N) typedef std::tuple< A > N##_datatype; struct c##N##EventData{\
+#define DECL_EVENT0(N) typedef void N##_datatype; struct c##N##EventData{\
 	typedef void data_type; \
 	static void emit() { pgn::emit_event< pgn::c##N##EventData >( ); }};
 

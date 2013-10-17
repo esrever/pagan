@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ecs/ecs_config.h>
+#include <ecs/Entity.h>
 #include <rl/components/components.h>
 
 namespace pgn

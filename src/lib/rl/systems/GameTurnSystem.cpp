@@ -13,6 +13,6 @@ namespace pgn
 	//------------------------------------------------------
 	void cGameTurnSystem::from_json(const rapidjson::Value& zRoot)
 	{
-
+		assert(false);
 	}
 }
