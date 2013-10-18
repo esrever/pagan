@@ -62,6 +62,8 @@ namespace pgn
 			void Untag(const std::string& zTag);
 			void Untag(cEntityWptr zEntity);
 
+			const std::set<cEntity>& GetTagged(const std::string& zTag) const;
+
 			//! Receiving functions
 
 			//! Do nothing

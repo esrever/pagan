@@ -13,5 +13,8 @@ namespace pgn
 	//! A level is about to be destroyed -- <Level>
 	DECL_EVENT1(LevelDestroy, cEntityWptr);
 
+	//! Apply an action to an adjacent tile
+	DECL_EVENT2(MoveToAdjacent, cEntityWptr, cLocation);
+
 	DECL_EVENT0(ExitApplication);
 }

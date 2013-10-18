@@ -58,9 +58,15 @@ namespace pgn
 				gotoDir.x++;gotoDir.y  ; break;
 			default: break;
 		};
+		auto & ecs = ECS;
+		//TODO: get entity tagged 'player'
+		//		get/copy location component
+		//		update location with the got dir
+		//		Send MoveToAdjacent event, which does the rest of the logic
 		ECS.mLog.Dbg(boost::str(boost::format("Pressed key '%d'")%ch));
 		if(ch == 27) cExitApplicationEventData::emit();
 	}
+
 
 	//------------------------------------------------------
 	void cActionMappingSystem::from_json(const rapidjson::Value& zRoot)
