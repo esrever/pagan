@@ -40,6 +40,8 @@ namespace pgn
 					   public cEventReceiver<cDestroyEntityEventData>
 	{
 		public:
+			typedef std::map<std::string, std::set<cEntity>> tagged_entity_map;
+		public:
 			virtual void RegisterComponentTypes(){}
 			virtual const std::string ReceiverName() const {return "EntityMgr";}
 			virtual ~cEntityMgr(){}
@@ -62,7 +64,7 @@ namespace pgn
 			void Untag(const std::string& zTag);
 			void Untag(cEntityWptr zEntity);
 
-			const std::set<cEntity>& GetTagged(const std::string& zTag) const;
+			const tagged_entity_map& TaggedEntities() const {return mTaggedEntities;}
 
 			//! Receiving functions
 

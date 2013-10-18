@@ -17,7 +17,8 @@ namespace pgn
 			typedef T datatype;
 			// virtual void read_json() { read_json<T>(mData); } etc
 
-			virtual unsigned short TypeIndex() const {return msTypeIndex;}
+			static unsigned short StaticTypeIndex() {return msTypeIndex;}
+			virtual unsigned short TypeIndex() const {StaticTypeIndex();}
 
 			virtual void to_json(rapidjson::Value& zRoot) const;
 			virtual void from_json(const rapidjson::Value& zRoot);

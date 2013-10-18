@@ -132,10 +132,4 @@ namespace pgn
 		auto f = mComponentTypeNamesToIds.find(zName);
 		return f != mComponentTypeNamesToIds.end() ? f->second : 0xFFFFFFFF;
 	}
-
-	//-----------------------------------------------------------------
-	const std::set<cEntity>::const_iterator& cEntityMgr::GetTagged(const std::string& zTag) const
-	{
-		auto it = mTaggedEntities.find(zTag);
-	}
 }

@@ -58,13 +58,31 @@ namespace pgn
 				gotoDir.x++;gotoDir.y  ; break;
 			default: break;
 		};
-		auto & ecs = ECS;
-		//TODO: get entity tagged 'player'
-		//		get/copy location component
-		//		update location with the got dir
-		//		Send MoveToAdjacent event, which does the rest of the logic
-		ECS.mLog.Dbg(boost::str(boost::format("Pressed key '%d'")%ch));
+		auto & ecs = ECS;		
+		ecs.mLog.Dbg(boost::str(boost::format("Pressed key '%d'")%ch));
 		if(ch == 27) cExitApplicationEventData::emit();
+
+		auto it = ecs.mEntityMgr->TaggedEntities().find("player");
+		if( it != ecs.mEntityMgr->TaggedEntities().end() )
+		{
+			// get entity set
+			const auto& it2 = it->second;
+			assert(it2.size() == 1); // Only 1 player!
+			// get entity
+			const auto& e = *it2.begin();
+			// get entity components
+			const auto& compos = ecs.mEntityMgr->GetComponents(e);
+			// get location component
+			const auto& itcompo = compos.Components().find( cComponent<cLocation>::StaticTypeIndex());
+
+			// pointer to location - TODO: have a better interface to be getting the typed components directly. Impl in EntityComponents
+			auto pLoc = static_cast<cComponent<cLocation> *>(itcompo->second.get());
+
+			//TODO: update location with the got dir
+			//		Send MoveToAdjacent event, which does the rest of the logic
+
+			//TODO: helper functions to get player character, specific components etc. observe usage patterns
+		}
 	}
 
 
