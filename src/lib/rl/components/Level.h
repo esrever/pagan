@@ -6,7 +6,6 @@
 
 namespace pgn
 {
-	class cEntity;
 	//! Level component: default tiles, AI, sim.
 	// TODO: listens to events that modify floor tiles. Initializes from sources such as bitmap, string, random, etc
 	struct cLevel

@@ -5,6 +5,7 @@
 #include <curses.h>
 
 #include <ecs/ecs.h>
+#include <ecs/ComponentHelpers.h>
 #include <rl/events/events.h>
 
 namespace pgn
@@ -73,10 +74,13 @@ namespace pgn
 			// get entity components
 			const auto& compos = ecs.mEntityMgr->GetComponents(e);
 			// get location component
-			const auto& itcompo = compos.Components().find( cComponent<cLocation>::StaticTypeIndex());
+			const auto& itcompo = compos.Components().at( cComponent<cLocation>::StaticTypeIndex());
 
 			// pointer to location - TODO: have a better interface to be getting the typed components directly. Impl in EntityComponents
-			auto pLoc = static_cast<cComponent<cLocation> *>(itcompo->second.get());
+			auto pLoc = static_cast<cComponent<cLocation> *>(itcompo.get());
+
+			std::shared_ptr<cComponent<cLocation>> ptr;
+			GetComponent<cLocation>(e, ptr);
 
 			//TODO: update location with the got dir
 			//		Send MoveToAdjacent event, which does the rest of the logic

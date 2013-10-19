@@ -9,6 +9,8 @@
 #include <typeindex>
 #include <vector>
 
+#include <core/util/idgen.h>
+
 #include "ecs_config.h"
 #include "Entity.h"
 #include "Event.h"
@@ -47,22 +49,22 @@ namespace pgn
 			virtual ~cEntityMgr(){}
 			// Entity creation functions
 			//! From an existing entity
-			cEntitySptr Create();
-			void Destroy(cEntityWptr zEntity);
+			cEntity Create();
+			void Destroy(cEntity zEntity);
 
 			// Component-related functions - if an entity has no components, it gets destroyed
-			void AddComponentPtr(cEntityWptr zEntity, cComponentBaseSptr zComponent); 
-			void RemoveComponentPtr(cEntityWptr zEntity, cComponentBaseWptr zComponent); 
+			void AddComponentPtr(cEntity zEntity, cComponentBaseSptr zComponent); 
+			void RemoveComponentPtr(cEntity zEntity, cComponentBaseWptr zComponent); 
 			template<class T>
-			void AddComponent(cEntityWptr zEntity, const T& zComponent); 
+			void AddComponent(cEntity zEntity, const T& zComponent); 
 			template<class T>
-			void RemoveComponent(cEntityWptr zEntity, const T& zComponent); 
+			void RemoveComponent(cEntity zEntity, const T& zComponent); 
 
 			//! Entity marking/unmarking functions
-			void Tag(cEntityWptr zEntity, const std::string& zTag);
-			void Untag(cEntityWptr zEntity, const std::string& zTag);
+			void Tag(cEntity zEntity, const std::string& zTag);
+			void Untag(cEntity zEntity, const std::string& zTag);
 			void Untag(const std::string& zTag);
-			void Untag(cEntityWptr zEntity);
+			void Untag(cEntity zEntity);
 
 			const tagged_entity_map& TaggedEntities() const {return mTaggedEntities;}
 
@@ -84,6 +86,7 @@ namespace pgn
 			template<class T>
 			void AddComponentType();
 			size_t GetComponentTypeIndex( const std::string& zName) const;
+			const std::vector< std::type_index>& GetComponentTypeIndexAll( ) const {return mComponentTypeIds;}
 		
 		private:	
 			unsigned short AddComponentType( const std::type_index& zTi);
@@ -98,18 +101,21 @@ namespace pgn
 			//! All component types
 			std::vector< std::type_index> mComponentTypeIds;
 			std::map< std::string, size_t > mComponentTypeNamesToIds;
+
+		private:
+			cIdGen<cEntity> mEntityIdGen;
 	};
 
 	//------------------------------------------------------------------------
 	template<class T>
-	void cEntityMgr::AddComponent(cEntityWptr zEntity, const T& zComponent)
+	void cEntityMgr::AddComponent(cEntity zEntity, const T& zComponent)
 	{
 		AddComponentPtr(zEntity, std::make_shared<T>(zComponent) );
 	}
 
 	//------------------------------------------------------------------------
 	template<class T>
-	void cEntityMgr::RemoveComponent(cEntityWptr zEntity, const T& zComponent)
+	void cEntityMgr::RemoveComponent(cEntity zEntity, const T& zComponent)
 	{
 		RemoveComponentPtr(zEntity, std::make_shared<T>(zComponent) );
 	}

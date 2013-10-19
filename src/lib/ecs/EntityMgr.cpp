@@ -5,22 +5,21 @@
 namespace pgn
 {
 	//----------------------------------------------------------------
-	cEntitySptr cEntityMgr::Create() 
+	cEntity cEntityMgr::Create() 
 	{ 
-		const auto& e = cEntity();
+		const auto& e = mEntityIdGen.New();
 		auto it = mEntityComponents.insert(std::pair<cEntity,cEntityComponents>(e,cEntityComponents()));
-		auto eptr = std::make_shared<cEntity>( it.first->first);
-		cEntityWptr ewptr = eptr;
-		cEntityCreatedEventData::emit(std::make_tuple(ewptr));
-		return eptr;
+		cEntityCreatedEventData::emit(std::make_tuple(e));
+		return e;
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Destroy(cEntityWptr zEntity)
+	void cEntityMgr::Destroy(cEntity zEntity)
 	{
 		cDestroyEntityEventData::emit(std::make_tuple(zEntity));
 		// and finally erase it
-		mEntityComponents.erase(*zEntity.lock().get());
+		mEntityComponents.erase(zEntity);
+		mEntityIdGen.Destroy(zEntity);
 	}
 
 	//----------------------------------------------------------------
@@ -37,18 +36,18 @@ namespace pgn
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Tag(cEntityWptr zEntity, const std::string& zTag)
+	void cEntityMgr::Tag(cEntity zEntity, const std::string& zTag)
 	{
-		mTaggedEntities[zTag].insert(*zEntity.lock());
+		mTaggedEntities[zTag].insert(zEntity);
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Untag(cEntityWptr zEntity, const std::string& zTag)
+	void cEntityMgr::Untag(cEntity zEntity, const std::string& zTag)
 	{
 		// Look for the tag
 		auto i1 = mTaggedEntities.find(zTag);
 		if(i1 != mTaggedEntities.end())
-			i1->second.erase(*zEntity.lock());
+			i1->second.erase(zEntity);
 	}
 
 	//----------------------------------------------------------------
@@ -64,32 +63,28 @@ namespace pgn
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Untag(cEntityWptr zEntity)
+	void cEntityMgr::Untag(cEntity zEntity)
 	{
 		for(auto i : mTaggedEntities)
-			i.second.erase(*zEntity.lock());
+			i.second.erase(zEntity);
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::AddComponentPtr(cEntityWptr zEntity, cComponentBaseSptr zComponent)
+	void cEntityMgr::AddComponentPtr(cEntity zEntity, cComponentBaseSptr zComponent)
 	{
-		const auto& e = *zEntity.lock();
+		const auto& e = zEntity;
 		auto i = mEntityComponents.find(e);
 		assert(i !=mEntityComponents.end());
 		i->second.AddComponent(zComponent);
-		auto evtd = std::pair<cEntityWptr,cComponentBaseWptr>(zEntity,zComponent);
-		//EMIT_EVENT(ComponentAdded, evtd);
-		//EMIT_EVENT(ComponentAdded, evtd);
-		cComponentAddedEventData::emit(evtd);
+		cComponentAddedEventData::emit(std::make_tuple(i,zComponent->TypeIndex()));
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::RemoveComponentPtr(cEntityWptr zEntity, cComponentBaseWptr zComponent)
+	void cEntityMgr::RemoveComponentPtr(cEntity zEntity, cComponentBaseWptr zComponent)
 	{
-		auto evtd = std::pair<cEntityWptr,cComponentBaseWptr>(zEntity,zComponent);
-		cRemoveComponentEventData::emit(evtd);
-		auto i = mEntityComponents.find(*zEntity.lock());
+		auto i = mEntityComponents.find(zEntity);
 		assert(i !=mEntityComponents.end());
+		cRemoveComponentEventData::emit(std::make_tuple(i,zComponent.lock()->TypeIndex()));
 		i->second.RemoveComponent(zComponent.lock()->TypeIndex());
 		//! No components -> destroy entity
 		if(i->second.Mask().none())

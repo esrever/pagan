@@ -5,7 +5,7 @@
 
 #include <core/util/json_conversions.h>
 
-#include "Component.h"
+#include "ComponentBase.h"
 
 namespace pgn
 {

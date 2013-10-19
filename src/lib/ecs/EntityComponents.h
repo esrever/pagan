@@ -9,14 +9,12 @@
 
 namespace pgn
 {
-	DECL_EVENT2(ComponentAdded, cEntityWptr, cComponentBaseWptr);
-	DECL_EVENT2(RemoveComponent, cEntityWptr, cComponentBaseWptr);
-
 	class cEntityComponents
 	{
-		typedef std::map<unsigned short, cComponentBaseSptr> ComponentSet;
+		typedef std::vector<cComponentBaseSptr> ComponentSet;
 
 	public:
+		cEntityComponents();
 		void AddComponent(cComponentBaseSptr zCompo);
 		void RemoveComponent(unsigned short zTypeId);
 
@@ -28,4 +26,8 @@ namespace pgn
 		ComponentSet mComponents;
 		component_mask_type mMask;
 	};
+
+	typedef std::map<cEntity, cEntityComponents>::const_iterator cEntityWithComponents;
+	DECL_EVENT2(ComponentAdded, cEntityWithComponents, unsigned short );
+	DECL_EVENT2(RemoveComponent, cEntityWithComponents, unsigned short );
 }

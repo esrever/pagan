@@ -5,6 +5,7 @@
 
 namespace pgn
 {
+	typedef unsigned cEntity;
 
 #define MAX_COMPONENTS 64
 typedef std::bitset<MAX_COMPONENTS> component_mask_type;

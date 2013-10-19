@@ -1,16 +1,21 @@
 #include "EntityComponents.h"
 
+#include "ecs.h"
 #include <cassert>
 
 namespace pgn
 {
+	cEntityComponents::cEntityComponents()
+	{
+		mComponents.resize(  ECS.mEntityMgr->GetComponentTypeIndexAll().size());
+	}
 	//-----------------------------------------------------------------
 	void cEntityComponents::AddComponent(cComponentBaseSptr zCompo)
 	{
 		auto idx = zCompo.get()->TypeIndex();
 		assert(!mMask.at(idx));
 		mMask.at(idx) = 1;
-		mComponents.insert(std::pair<unsigned short, cComponentBaseSptr>(idx, zCompo));
+		mComponents.at(idx) = zCompo;
 	}
 
 	//-----------------------------------------------------------------
@@ -18,6 +23,6 @@ namespace pgn
 	{
 		assert(mMask.at(zTypeId));
 		mMask.at(zTypeId) = 0;
-		mComponents.erase(zTypeId);
+		mComponents.at(zTypeId).reset();
 	}
 }

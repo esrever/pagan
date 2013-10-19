@@ -11,7 +11,7 @@ namespace pgn
 		assert(false);
 		const auto& ecs = ECS;
 		const auto& compos = ecs.mEntityMgr->GetComponents(zEntity);
-		const auto& cit = compos.Components().find( zComponent.TypeIndex());
+		const auto& cit = compos.Components().at( zComponent.TypeIndex());
 		//return (cit!=compos.Components().end()) && (*cit->second.get() == zComponent);
 		return false;
 	}
@@ -21,7 +21,6 @@ namespace pgn
 	{
 		const auto& ecs = ECS;
 		const auto& compos = ecs.mEntityMgr->GetComponents(zEntity);
-		const auto& cit = compos.Components().find( zTypeIndex);
-		return (cit == compos.Components().end()) ? nullptr : cit->second;
+		return compos.Components().at( zTypeIndex);
 	}
 }

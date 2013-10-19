@@ -28,8 +28,17 @@ namespace pgn
 	template <class T>
 	inline std::string to_string(const T& s)
 	{
-		return std::to_string(s);
+		return "<unknown>";
 	}
+
+	#define DEFINE_TOSTRING_POD(T) template <>	inline std::string to_string< T >(const T & s) 	{ return std::to_string(s);}
+	DEFINE_TOSTRING_POD(int);
+	DEFINE_TOSTRING_POD(unsigned int);
+	DEFINE_TOSTRING_POD(long);
+	DEFINE_TOSTRING_POD(unsigned long);
+	DEFINE_TOSTRING_POD(long double);
+	DEFINE_TOSTRING_POD(double);
+	DEFINE_TOSTRING_POD(float);
 
 	//! type(string) to string
 	template <>
