@@ -1,0 +1,43 @@
+[
+    {
+        "name" : "common",
+        "components" : ["pgn::cDescription"],
+        "inherits" : []
+    },
+    {
+        "name" : "creature",
+        "components" : ["pgn::cMovement", "pgn::cDescription","pgn::cAsciiRep"],
+        "inherits" : ["common"]
+    },
+    {
+        "name" : "pc",
+        "components" : [],
+        "inherits" : ["creature"],
+        "tags" : ["pc"]
+    },
+    {
+        "name" : "npc",
+        "components" : ["pgn::cAI"],
+        "inherits" : ["creature"]
+    },
+    {
+        "name" : "tile",
+        "components" : ["pgn::cAsciiRep", "pgn::cTileMoveCost", "pgn::cTileObstacle", "pgn::cTileAtmospheric","pgn::cTileVisibility"],
+        "inherits" : ["common"]
+    },
+    {
+        "name" : "level",
+        "components" : ["pgn::cAsciiLevelRep"],
+        "inherits" : ["common"]
+    },
+    {
+        "name" : "stairs",
+        "components" : ["pgn::cTileStairs"],
+        "inherits" : ["tile"]
+    },
+    {
+        "name" : "door",
+        "components" : ["pgn::cOpenClose"],
+        "inherits" : ["tile"]
+    }
+]

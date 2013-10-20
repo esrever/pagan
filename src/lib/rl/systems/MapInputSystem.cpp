@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ActionMappingSystem.h"
+#include "MapInputSystem.h"
 
 #include <curses.h>
 
@@ -11,7 +11,7 @@
 namespace pgn
 {
 	//------------------------------------------------------
-	void cActionMappingSystem::Process()
+	void cMapInputSystem::Process()
 	{
 		// TODO: the listener will check 1) if it's active 2) against a map of keys to:
 		//		 void function(), or a signal
@@ -73,6 +73,11 @@ namespace pgn
 			const auto& e = *it2.begin();
 			// get entity components
 			const auto& compos = ecs.mEntityMgr->GetComponents(e);
+
+			std::shared_ptr<cComponent<cLocation>> ploc;
+			compos.GetComponent(ploc);
+
+			/*
 			// get location component
 			const auto& itcompo = compos.Components().at( cComponent<cLocation>::StaticTypeIndex());
 
@@ -81,6 +86,7 @@ namespace pgn
 
 			std::shared_ptr<cComponent<cLocation>> ptr;
 			GetComponent<cLocation>(e, ptr);
+			*/
 
 			//TODO: update location with the got dir
 			//		Send MoveToAdjacent event, which does the rest of the logic
@@ -91,7 +97,7 @@ namespace pgn
 
 
 	//------------------------------------------------------
-	void cActionMappingSystem::from_json(const rapidjson::Value& zRoot)
+	void cMapInputSystem::from_json(const rapidjson::Value& zRoot)
 	{
 		cSystemBase::from_json(zRoot);
 	}

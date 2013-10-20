@@ -4,7 +4,7 @@
 
 namespace pgn
 {
-	class cActionMappingSystem : public cSystemBase
+	class cMapInputSystem : public cSystemBase
 	{
 	public:
 		virtual void Process();

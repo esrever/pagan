@@ -1,7 +1,7 @@
 #pragma once
-#include "ActionMappingSystem.h"
 #include "AsciiRenderSystem.h"
 #include "GameTurnSystem.h"
+#include "MapInputSystem.h"
 
 namespace pgn
 {

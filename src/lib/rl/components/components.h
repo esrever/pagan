@@ -8,6 +8,7 @@
 #include "Level.h"
 #include "Location.h"
 #include "Lockable.h"
+#include "Movement.h"
 #include "OpenClose.h"
 #include "PixelRep.h"
 #include "TileAtmospheric.h"

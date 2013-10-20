@@ -15,6 +15,7 @@ set(HEADER_FILES
     util/cfgtree.h
     util/conversions.h
     util/json_conversions.h
+    util/idgen.h
     app/application.h
 )
 

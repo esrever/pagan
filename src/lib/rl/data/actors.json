@@ -1,17 +1,32 @@
-[ 
+[
     {
-        "name" : "PC",
-        "desc" : "you!",
-        "ascii" : {
-            "symb" : "@"
-        }
+        "Name" : "player_character",
+        "Tags" : ["player"],
+        "Components" : [
+            "pgn::cLocation",
+            "pgn::cAsciiRep",
+            "pgn::cDescription",
+            "pgn::cMovement"
+            ]
     },
-    
     {
-        "name" : "rat",
-        "desc" : "a fat, vicious-looking rat",
-        "ascii" : {
-            "symb" : "r"
-        }
+        "Name" : "rat",
+        "Components" : [
+            "pgn::cLocation",
+            "pgn::cAsciiRep",
+            "pgn::cDescription",
+            "pgn::cMovement",
+            "pgn::cAI"
+            ]
+    },
+    {
+        "Name" : "rat",
+        "Components" : [
+            "pgn::cLocation",
+            "pgn::cAsciiRep",
+            "pgn::cDescription",
+            "pgn::cMovement",
+            "pgn::cAI"
+            ]
     }
 ]

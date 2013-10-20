@@ -14,6 +14,7 @@ namespace pgn
 		zMgr.AddComponentType<pgn::cLevel>();
 		zMgr.AddComponentType<pgn::cLocation>();
 		zMgr.AddComponentType<pgn::cLockable>();
+		zMgr.AddComponentType<pgn::cMovement>();
 		zMgr.AddComponentType<pgn::cOpenClose>();
 		zMgr.AddComponentType<pgn::cPixelRep>();
 		zMgr.AddComponentType<pgn::cTileAtmospheric>();
