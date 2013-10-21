@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include <core/util/json_conversions.h>
+
 namespace pgn
 {
 	//! 2-tier descriptions for components
@@ -10,4 +12,8 @@ namespace pgn
 		std::string mShort;
 		std::string mVerbose;
 	};
+
+	//-----------------------------------------------------------------------
+	template<>
+	void from_json< cDescription>( cDescription& zData, const rapidjson::Value& zRoot);
 }

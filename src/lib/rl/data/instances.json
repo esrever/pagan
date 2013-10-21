@@ -34,7 +34,7 @@
             "short" : "wall",
             "verbose" : "dusty wall"
             },
-        "pgn::cTileObstacle" : {"IsObstacle" : true},
+        "pgn::cTileObstacle" : {"is_obstacle" : true},
         "pgn::cAsciiRep" : {
             "char" : "#",
             "color" : "EEEEEE",
@@ -48,7 +48,7 @@
             "short" : "floor",
             "verbose" : "dusty floor"
             },
-        "pgn::cTileMoveCost" : {"MoveCost" : 1},
+        "pgn::cTilemove_cost" : {"move_cost" : 1},
         "pgn::cAsciiRep" : {
             "char" : ".",
             "color" : "EEEEEE",
@@ -62,7 +62,7 @@
             "short" : "flight of stairs leading down",
             "verbose" : "what? flight of stairs leading down"
             },
-        "pgn::cTileMoveCost" : {"MoveCost" : 1},
+        "pgn::cTilemove_cost" : {"move_cost" : 1},
         "pgn::cAsciiRep" : {
             "char" : ">",
             "color" : "EEEEEE",
@@ -76,7 +76,7 @@
             "short" : "flight of stairs leading up",
             "verbose" : "what? flight of stairs leading up"
             },
-        "pgn::cTileMoveCost" : {"MoveCost" : 1},
+        "pgn::cTilemove_cost" : {"move_cost" : 1},
         "pgn::cAsciiRep" : {
             "char" : "<",
             "color" : "EEEEEE",
@@ -84,15 +84,15 @@
             }
     },
     {
-        "_comments" : "All main entities should also have a [World/Menu/...]Context component, not existing in partial entities! From the below instances, I need to remove the cPartOfWorld component. Do that at reading time"
+        "_comments" : "All main entities should also have a [World/Menu/...]Context component, not existing in partial entities! From the below instances, I need to remove the cPartOfWorld component. Do that at reading time",
         "archetype" : "door",
         "name" : "door_open_common",
         "pgn::cDescription" : {
             "short" : "open door",
             "verbose" : "open, wooden door"
             },
-        "pgn::cTileMoveCost" : {"MoveCost" : 1},
-        "pgn::cTileObstacle" : {"IsObstacle" : false},
+        "pgn::cTilemove_cost" : {"move_cost" : 1},
+        "pgn::cTileObstacle" : {"is_obstacle" : false},
         "pgn::cAsciiRep" : {
             "char" : "/",
             "color" : "CD6600",
@@ -106,7 +106,7 @@
             "short" : "closed door",
             "verbose" : "closed, wooden door"
             },
-        "pgn::cTileObstacle" : {"IsObstacle" : true},
+        "pgn::cTileObstacle" : {"is_obstacle" : true},
         "pgn::cAsciiRep" : {
             "char" : "+",
             "color" : "CD6600",
@@ -114,10 +114,10 @@
             }
     },
     {
-        "_comment" : "what component do the states correspond to? cOpenClose probably"
+        "_comment" : "what component do the states correspond to? cOpenClose probably",
         "archetype" : "door",
         "name" : "door_common",
-        "pgn::cOpenClose" : {"door_open_common","door_closed_common"]
+        "pgn::cOpenClose" : ["door_open_common","door_closed_common"]
     }
 ]
     

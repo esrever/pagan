@@ -57,4 +57,25 @@ namespace pgn
 		assert(zRoot.IsString());
 		zObj = zRoot.GetString();
 	}
+
+	template <>
+	inline void from_json<float>(float& zObj, const rapidjson::Value& zRoot)
+	{
+		assert(zRoot.IsNumber());
+		zObj = float(zRoot.GetDouble());
+	}
+
+	template <>
+	inline void from_json<double>(double& zObj, const rapidjson::Value& zRoot)
+	{
+		assert(zRoot.IsNumber());
+		zObj = zRoot.GetDouble();
+	}
+
+	template <>
+	inline void from_json<bool>(bool& zObj, const rapidjson::Value& zRoot)
+	{
+		assert(zRoot.IsBool());
+		zObj = zRoot.GetBool();
+	}
 }

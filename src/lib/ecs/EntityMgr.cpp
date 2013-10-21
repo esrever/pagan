@@ -186,12 +186,16 @@ namespace pgn
 				{
 					if( strcmp( mitr->name.GetString(),"archetype") == 0)
 						archname = mitr->value.GetString();
-					//else if ( mitr->name == "name")
 					else if ( strcmp( mitr->name.GetString(),"name") == 0)
 						instname = mitr->value.GetString();
 					else
 					{
-						const std::string componentName = mitr->name.GetString();
+						const std::string componentType = mitr->name.GetString();
+						auto sptr = CreateComponent(componentType);
+						if(sptr)
+						{
+							sptr->from_json(mitr->value);
+						}
 					}
 				}
 			}

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <core/util/json_conversions.h>
+
 namespace pgn
 {
 	//! 
@@ -7,4 +9,8 @@ namespace pgn
 	{
 		float mSpeed;
 	};
+
+	//-----------------------------------------------------------------------
+	template<>
+	void from_json< cMovement>( cMovement& zData, const rapidjson::Value& zRoot);
 }
