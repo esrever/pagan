@@ -48,7 +48,7 @@
             "short" : "floor",
             "verbose" : "dusty floor"
             },
-        "pgn::cTilemove_cost" : {"move_cost" : 1},
+        "pgn::cTileMoveCost" : {"move_cost" : 1},
         "pgn::cAsciiRep" : {
             "char" : ".",
             "color" : "EEEEEE",
@@ -62,7 +62,7 @@
             "short" : "flight of stairs leading down",
             "verbose" : "what? flight of stairs leading down"
             },
-        "pgn::cTilemove_cost" : {"move_cost" : 1},
+        "pgn::cTileMoveCost" : {"move_cost" : 1},
         "pgn::cAsciiRep" : {
             "char" : ">",
             "color" : "EEEEEE",
@@ -76,7 +76,7 @@
             "short" : "flight of stairs leading up",
             "verbose" : "what? flight of stairs leading up"
             },
-        "pgn::cTilemove_cost" : {"move_cost" : 1},
+        "pgn::cTileMoveCost" : {"move_cost" : 1},
         "pgn::cAsciiRep" : {
             "char" : "<",
             "color" : "EEEEEE",
@@ -91,7 +91,7 @@
             "short" : "open door",
             "verbose" : "open, wooden door"
             },
-        "pgn::cTilemove_cost" : {"move_cost" : 1},
+        "pgn::cTileMoveCost" : {"move_cost" : 1},
         "pgn::cTileObstacle" : {"is_obstacle" : false},
         "pgn::cAsciiRep" : {
             "char" : "/",
