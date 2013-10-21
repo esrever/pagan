@@ -11,7 +11,7 @@
     },
     {
         "name" : "creature",
-        "components" : ["pgn::cMovement", "pgn::cDescription","pgn::cAsciiRep"],
+        "components" : ["pgn::cMovement","pgn::cAsciiRep"],
         "inherits" : ["common_world"]
     },
     {

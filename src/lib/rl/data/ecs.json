@@ -1,10 +1,10 @@
 {
     "EntityMgr" : {
         "ArchetypesFile" : ["archetypes.json"],
-        "InstancesFile" : ["instances.json"],
+        "InstancesFile" : ["instances.json"]
     }, 
     "SystemMgr" : {
-        "QueriesFile" : ["queries.json"]
+        "QueriesFile" : ["queries.json"],
         "SystemsFile" : ["systems.json"]
     }
 }

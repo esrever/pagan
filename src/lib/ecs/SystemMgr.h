@@ -23,6 +23,9 @@ namespace pgn
 			void AddSystem(std::shared_ptr<cSystemBase> zSystem, int zPriority);
 			void RemoveSystem(std::shared_ptr<cSystemBase> zSystem);
 
+			void ImportSystems(const rapidjson::Document * zDoc);
+			void ImportQueries(const rapidjson::Document * zDoc);
+
 			const QueryMap& GetQueries() const {return mComponentQueries;}
 			const std::string& GetQueryName(const cComponentQuery& zQuery) const;
 

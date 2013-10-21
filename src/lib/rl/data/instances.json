@@ -84,7 +84,7 @@
             }
     },
     {
-        "_comments" : "All main entities should also have a [World/Menu/...]Context component, not existing in partial entities! From the below instances, I need to remove the cPartOfWorld component"
+        "_comments" : "All main entities should also have a [World/Menu/...]Context component, not existing in partial entities! From the below instances, I need to remove the cPartOfWorld component. Do that at reading time"
         "archetype" : "door",
         "name" : "door_open_common",
         "pgn::cDescription" : {

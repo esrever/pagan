@@ -10,6 +10,7 @@
 #include <vector>
 
 #include <core/util/idgen.h>
+#include <core/util/json_conversions.h>
 
 #include "ecs_config.h"
 #include "Entity.h"
@@ -17,6 +18,7 @@
 #include "Component.h"
 #include "EntityComponents.h"
 #include "ComponentQuery.h"
+#include "Archetype.h"
 
 /*
 	Init() function
@@ -43,6 +45,7 @@ namespace pgn
 	{
 		public:
 			typedef std::map<std::string, std::set<cEntity>> tagged_entity_map;
+			typedef Gallant::Delegate0< std::shared_ptr<cComponentBase> > component_creator_fun;
 		public:
 			virtual void RegisterComponentTypes(){}
 			virtual const std::string ReceiverName() const {return "EntityMgr";}
@@ -51,6 +54,9 @@ namespace pgn
 			//! From an existing entity
 			cEntity Create();
 			void Destroy(cEntity zEntity);
+
+			void ImportArchetypes(const rapidjson::Document * zDoc);
+			void ImportInstances(const rapidjson::Document * zDoc);
 
 			// Component-related functions - if an entity has no components, it gets destroyed
 			void AddComponentPtr(cEntity zEntity, cComponentBaseSptr zComponent); 
@@ -80,18 +86,23 @@ namespace pgn
 			const std::map<cEntity, cEntityComponents>& GetComponents() const;
 
 			//! Json
-			void from_json(const rapidjson::Value& zRoot){}
+			void from_json(const rapidjson::Value& zRoot);
 
 			//! Component type
 			template<class T>
 			void AddComponentType();
 			size_t GetComponentTypeIndex( const std::string& zName) const;
 			const std::vector< std::type_index>& GetComponentTypeIndexAll( ) const {return mComponentTypeIds;}
+
+			std::shared_ptr<cComponentBase> CreateComponent(const std::string& zName) const;
 		
 		private:	
 			unsigned short AddComponentType( const std::type_index& zTi);
 
 		protected:
+			//! Archetypes
+			std::map<std::string, cArchetype> mArchetypes;
+
 			//! tags to entities
 			std::map<std::string, std::set<cEntity>> mTaggedEntities;
 			//! entities and components
@@ -101,6 +112,7 @@ namespace pgn
 			//! All component types
 			std::vector< std::type_index> mComponentTypeIds;
 			std::map< std::string, size_t > mComponentTypeNamesToIds;
+			std::map< std::string, component_creator_fun> mComponentCreators;
 
 		private:
 			cIdGen<cEntity> mEntityIdGen;
@@ -124,6 +136,11 @@ namespace pgn
 	template<class T>
 	void cEntityMgr::AddComponentType()
 	{
-		cComponent<typename T>::msTypeIndex = AddComponentType(typeid(T));
+		const auto& ti = typeid(T);
+		cComponent<typename T>::msTypeIndex = AddComponentType(ti);
+		component_creator_fun func = &cComponent<typename T>::Create;
+		std::vector<std::string> res;
+		pystring::split(ti.name(),res," ");
+		mComponentCreators[res[1]] = func;
 	}
 }

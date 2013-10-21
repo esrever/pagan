@@ -49,4 +49,12 @@ namespace pgn
 		cLogStream::Default().Wrn( boost::str(boost::format("Type %s does not implement from_json()")% typeid(T).name()));
 		//zObj.from_json(zRoot);
 	}
+
+	//! PODs
+	template <>
+	inline void from_json<std::string>(std::string& zObj, const rapidjson::Value& zRoot)
+	{
+		assert(zRoot.IsString());
+		zObj = zRoot.GetString();
+	}
 }

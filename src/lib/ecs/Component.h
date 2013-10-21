@@ -18,11 +18,13 @@ namespace pgn
 			// virtual void read_json() { read_json<T>(mData); } etc
 
 			static unsigned short StaticTypeIndex() {return msTypeIndex;}
-			virtual unsigned short TypeIndex() const {StaticTypeIndex();}
+			virtual unsigned short TypeIndex() const {return StaticTypeIndex();}
 
 			virtual void to_json(rapidjson::Value& zRoot) const;
 			virtual void from_json(const rapidjson::Value& zRoot);
 			//virtual std::string to_string() const;
+
+			static std::shared_ptr<cComponentBase> Create() { return std::shared_ptr<cComponentBase>(new cComponent<T>());}
 			
 		public:
 			T mData;
@@ -49,5 +51,4 @@ namespace pgn
 	{
 		pgn::from_json< T >(mData, zRoot);
 	}
-
 }

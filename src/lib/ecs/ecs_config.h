@@ -3,6 +3,8 @@
 #include <tuple>
 #include <bitset>
 
+#define JSON_DATA_PATH 
+
 namespace pgn
 {
 	typedef unsigned cEntity;
