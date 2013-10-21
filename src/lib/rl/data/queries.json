@@ -1,0 +1,13 @@
+{
+    "AsciiRenderable" : [
+        "pgn::cAsciiRep",
+        "pgn::cAsciiLevelRep"
+    ],
+    "InputListener" : [
+        "pgn::cInputKeyboard",
+        "pgn::cInputMouse"
+    ],
+    "Actor" : [
+        "pgn::cAI"
+    ]
+}

@@ -5,9 +5,14 @@
         "inherits" : []
     },
     {
+        "name" : "common_world",
+        "components" : ["pgn::cPartOfWorld"],
+        "inherits" : ["common"]
+    },
+    {
         "name" : "creature",
         "components" : ["pgn::cMovement", "pgn::cDescription","pgn::cAsciiRep"],
-        "inherits" : ["common"]
+        "inherits" : ["common_world"]
     },
     {
         "name" : "pc",
@@ -23,12 +28,12 @@
     {
         "name" : "tile",
         "components" : ["pgn::cAsciiRep", "pgn::cTileMoveCost", "pgn::cTileObstacle", "pgn::cTileAtmospheric","pgn::cTileVisibility"],
-        "inherits" : ["common"]
+        "inherits" : ["common_world"]
     },
     {
         "name" : "level",
         "components" : ["pgn::cAsciiLevelRep"],
-        "inherits" : ["common"]
+        "inherits" : ["common_world"]
     },
     {
         "name" : "stairs",

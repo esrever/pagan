@@ -84,7 +84,7 @@
             }
     },
     {
-        "_comments" : "how do I represent both states, open and closed? diff rendering and movecost  representations. Or perhaps state-rendering repre? Perhaps I can have 2 referenced sub-entities with components that update the door's components. E.g. the door refs 2 sub-entities, door_open and door_closed, and depending on the state-change it updates its own comonents accordingly. Note that the sub-entities are not visible by systems! (do not emit specific events?)"
+        "_comments" : "All main entities should also have a [World/Menu/...]Context component, not existing in partial entities! From the below instances, I need to remove the cPartOfWorld component"
         "archetype" : "door",
         "name" : "door_open_common",
         "pgn::cDescription" : {
@@ -112,6 +112,12 @@
             "color" : "CD6600",
             "attribs" : []
             }
+    },
+    {
+        "_comment" : "what component do the states correspond to? cOpenClose probably"
+        "archetype" : "door",
+        "name" : "door_common",
+        "pgn::cOpenClose" : {"door_open_common","door_closed_common"]
     }
 ]
     

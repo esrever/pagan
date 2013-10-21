@@ -4,51 +4,7 @@
         "InstancesFile" : ["instances.json"],
     }, 
     "SystemMgr" : {
-        "Queries" : {
-            "AsciiRenderable" : [
-                "pgn::cAsciiRep",
-                "pgn::cAsciiLevelRep"
-            ],
-            "InputListener" : [
-                "pgn::cInputKeyboard",
-                "pgn::cInputMouse"
-            ],
-            "Actor" : [
-                "pgn::cAI"
-            ]
-        },
-        
-        "Systems" : [
-            {
-                "Type" : "pgn::cAsciiRenderSystem",
-                "Data" : {
-                    "Name" : "AsciiRenderer",
-                    "Desc" : "A very basic RL renderer. Renders level, followed by chars",
-                    "QueriesUsed" : [
-                        "AsciiRenderable"
-                    ]
-                }
-            },
-            {
-                "Type" : "pgn::cMapInputSystem",
-                "Data" : {
-                    "Name" : "MapInputProcessor",
-                    "Desc" : "Maps input to desired actions via bindings in the context of a level map -- the main game view",
-                    "QueriesUsed" : [
-                        "InputListener"
-                    ]
-                }
-            },
-            {
-                "Type" : "pgn::cGameTurnSystem",
-                "Data" : {
-                    "Name" : "GameTurnSystem",
-                    "Desc" : "Controls the game turns",
-                    "QueriesUsed" : [
-                        "Actor"
-                    ]
-                }
-            }
-        ]
+        "QueriesFile" : ["queries.json"]
+        "SystemsFile" : ["systems.json"]
     }
 }

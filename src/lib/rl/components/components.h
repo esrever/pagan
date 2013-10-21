@@ -10,6 +10,7 @@
 #include "Lockable.h"
 #include "Movement.h"
 #include "OpenClose.h"
+#include "PartOfWorld.h"
 #include "PixelRep.h"
 #include "TileAtmospheric.h"
 #include "TileMoveCost.h"
