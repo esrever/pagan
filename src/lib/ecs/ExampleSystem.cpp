@@ -24,9 +24,4 @@ namespace pgn
 	void cExampleSystem::Process()
 	{
 	}
-
-	//------------------------------------------------------------------------
-	void cExampleSystem::ProcessSingle(const cEntity& zE)
-	{
-	}
 }
