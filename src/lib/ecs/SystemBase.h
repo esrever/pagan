@@ -19,20 +19,24 @@ namespace pgn
 	class cSystemBase
 	{
 		public:
+			//! ctors
 			cSystemBase();
 			virtual ~cSystemBase();
+
+			//! Process entities
 			virtual void Process(){};
 
+			//! Json related
 			virtual void to_json(rapidjson::Value& zRoot) const{};
 			virtual void from_json(const rapidjson::Value& zRoot);
 
+			//! System activity
 			void SetActive(bool zActive);
 			bool Active() const {return mActive;}
 
+			//! Pointer generator
 			template<class T>
 			static std::shared_ptr<cSystemBase> Create();
-		protected:
-			virtual void ProcessSingle(const cEntity& zE){};
 
 		protected:
 			bool mActive;

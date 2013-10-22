@@ -20,21 +20,27 @@ namespace pgn
 		public:
 			virtual const std::string ReceiverName() const {return "SystemMgr";}
 			virtual ~cSystemMgr(){}
+
+			//! System add/remove
 			void AddSystem(std::shared_ptr<cSystemBase> zSystem, int zPriority);
 			void RemoveSystem(std::shared_ptr<cSystemBase> zSystem);
 
-			void ImportSystems(const rapidjson::Document * zDoc);
-			void ImportQueries(const rapidjson::Document * zDoc);
-
+			//! Queries
 			const QueryMap& GetQueries() const {return mComponentQueries;}
 			const std::string& GetQueryName(const cComponentQuery& zQuery) const;
 
+			//! the main frame updater
 			virtual bool UpdateFrame(){return true;}
 
-			//! Json
+			//! Json-related 
 			void from_json(const rapidjson::Value& zRoot);
+			void ImportSystems(const rapidjson::Document * zDoc);
+			void ImportQueries(const rapidjson::Document * zDoc);
 
+			//! pointer generator
 			std::shared_ptr<cSystemBase> Create(const std::string& zName) const;
+
+			//! System type related
 			virtual void RegisterSystemTypes(){}
 			template<class T>
 			void AddSystemType();

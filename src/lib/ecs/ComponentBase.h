@@ -13,9 +13,10 @@ namespace pgn
 	{
 	public:
 		virtual ~cComponentBase(){}
-		//! Get the component type index 
-		virtual unsigned short TypeIndex() const =0;//{return 0xFFFF;}
+		//! Get type index(for masks), virtually
+		virtual unsigned short TypeIndex() const =0;
 
+		//! Json conversions
 		virtual void to_json(rapidjson::Value& zRoot) const =0;//{}
 		virtual void from_json(const rapidjson::Value& zRoot)=0;//{}
 	protected:
@@ -24,13 +25,13 @@ namespace pgn
 
 	DECL_PTRTYPE(cComponentBase)	
 
-	//! sys to json
+	//------------------------------------------------------------------------
 	template<>
 	void to_json<cComponentBase>(const cComponentBase& zCompo, rapidjson::Value& zRoot);
-	//! sys from json
+	//------------------------------------------------------------------------
 	template<>
 	void from_json<cComponentBase>(cComponentBase& zCompo, const rapidjson::Value& zRoot);
-	//! sys to string
+	//------------------------------------------------------------------------
 	template<>
 	std::string to_string<cComponentBase>(const cComponentBase& zCompo);
 }

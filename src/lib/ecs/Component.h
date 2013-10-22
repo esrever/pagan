@@ -15,15 +15,17 @@ namespace pgn
 	{
 		public:
 			typedef T datatype;
-			// virtual void read_json() { read_json<T>(mData); } etc
-
+		public:			
+			//! Get type index(for masks), statically
 			static unsigned short StaticTypeIndex() {return msTypeIndex;}
+			//! Get type index(for masks), virtually
 			virtual unsigned short TypeIndex() const {return StaticTypeIndex();}
 
+			//! Json conversions
 			virtual void to_json(rapidjson::Value& zRoot) const;
 			virtual void from_json(const rapidjson::Value& zRoot);
-			//virtual std::string to_string() const;
 
+			//! Object creator function
 			static std::shared_ptr<cComponentBase> Create() { return std::shared_ptr<cComponentBase>(new cComponent<T>());}
 			
 		public:

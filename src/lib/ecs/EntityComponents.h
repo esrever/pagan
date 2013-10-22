@@ -12,13 +12,17 @@ namespace pgn
 {
 	class cEntityComponents
 	{
-		typedef std::vector<cComponentBaseSptr> ComponentSet;
-
 	public:
+		typedef std::vector<cComponentBaseSptr> ComponentSet;
+	public:
+		//! ctors
 		cEntityComponents();
+		
+		//! Component management
 		void AddComponent(cComponentBaseSptr zCompo);
 		void RemoveComponent(unsigned short zTypeId);
 
+		//! Accessors
 		const component_mask_type& Mask() const {return mMask;}
 		const ComponentSet& Components() const {return mComponents;}
 
@@ -26,7 +30,6 @@ namespace pgn
 		void GetComponent(std::shared_ptr<T >& zPtr) const;
 
 	private:
-		//! All components
 		ComponentSet mComponents;
 		component_mask_type mMask;
 	};

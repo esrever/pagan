@@ -10,7 +10,5 @@ namespace pgn
 		virtual void Process();
 		virtual void to_json(rapidjson::Value& zRoot) const;
 		virtual void from_json(const rapidjson::Value& zRoot);
-	protected:
-		virtual void ProcessSingle(const cEntity& zE);
 	};
 }

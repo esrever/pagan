@@ -26,7 +26,7 @@ namespace pgn
 			const std::string& GetErrorString() const {return mErrorString;}
 
 		public:
-			// sub-managers
+			//! sub-managers
 			std::shared_ptr<cEntityMgr> mEntityMgr;
 			std::shared_ptr<cSystemMgr> mSystemMgr;
 			cLogStream mLog;
