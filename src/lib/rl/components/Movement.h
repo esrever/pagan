@@ -13,4 +13,8 @@ namespace pgn
 	//-----------------------------------------------------------------------
 	template<>
 	void from_json< cMovement>( cMovement& zData, const rapidjson::Value& zRoot);
+
+	//-----------------------------------------------------------------------
+	template<>
+	void to_json< cMovement>( const cMovement& zData, rapidjson::Value& zRoot);
 }

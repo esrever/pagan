@@ -15,4 +15,8 @@ namespace pgn
 	//-----------------------------------------------------------------------
 	template<>
 	void from_json< cAsciiRep>( cAsciiRep& zData, const rapidjson::Value& zRoot);
+
+	//-----------------------------------------------------------------------
+	template<>
+	void to_json< cAsciiRep>( const cAsciiRep& zData, rapidjson::Value& zRoot);
 }

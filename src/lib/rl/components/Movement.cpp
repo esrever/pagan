@@ -8,4 +8,11 @@ namespace pgn
 	{
 		from_json( zData.mSpeed, zRoot["speed"]);
 	}
+
+	//----------------------------------------------------------------------------------
+	template<>
+	void to_json<cMovement>( const cMovement& zData, rapidjson::Value& zRoot)
+	{
+		to_json( zData.mSpeed, zRoot["speed"]);
+	}
 }

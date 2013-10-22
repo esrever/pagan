@@ -12,6 +12,7 @@ namespace pgn
 		glm::ivec2 mCoords;
 	};
 
+	//-----------------------------------------------------------------------
 	template<>
 	inline std::string to_string<cLocation>(const cLocation& s)
 	{

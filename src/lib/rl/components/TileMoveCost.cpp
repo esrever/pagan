@@ -8,4 +8,11 @@ namespace pgn
 	{
 		from_json( zData.mMoveCost, zRoot["move_cost"]);
 	}
+
+	//----------------------------------------------------------------------------------
+	template<>
+	void to_json<cTileMoveCost>( const cTileMoveCost& zData, rapidjson::Value& zRoot)
+	{
+		to_json( zData.mMoveCost, zRoot["move_cost"]);
+	}
 }

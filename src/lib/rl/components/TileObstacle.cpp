@@ -8,4 +8,11 @@ namespace pgn
 	{
 		from_json( zData.mIsObstacle, zRoot["is_obstacle"]);
 	}
+
+	//----------------------------------------------------------------------------------
+	template<>
+	void to_json<cTileObstacle>( const cTileObstacle& zData, rapidjson::Value& zRoot)
+	{
+		to_json( zData.mIsObstacle, zRoot["is_obstacle"]);
+	}
 }

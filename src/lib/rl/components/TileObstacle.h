@@ -13,4 +13,8 @@ namespace pgn
 	//-----------------------------------------------------------------------
 	template<>
 	void from_json< cTileObstacle>( cTileObstacle& zData, const rapidjson::Value& zRoot);
+
+	//-----------------------------------------------------------------------
+	template<>
+	void to_json< cTileObstacle>( const cTileObstacle& zData, rapidjson::Value& zRoot);
 }

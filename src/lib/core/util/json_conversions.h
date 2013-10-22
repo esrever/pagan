@@ -59,10 +59,35 @@ namespace pgn
 	}
 
 	template <>
+	inline void to_json<std::string>(const std::string& zObj, rapidjson::Value& zRoot)
+	{
+		zRoot.SetString( zObj.c_str());
+	}
+
+	template <>
+	inline void from_json<char>(char& zObj, const rapidjson::Value& zRoot)
+	{
+		assert(zRoot.IsString());
+		zObj = zRoot.GetString()[0];
+	}
+
+	template <>
+	inline void to_json<char>(const char& zObj, rapidjson::Value& zRoot)
+	{
+		char tmp[2] = {zObj,'\n'};
+		zRoot.SetString( tmp);
+	}
+
+	template <>
 	inline void from_json<float>(float& zObj, const rapidjson::Value& zRoot)
 	{
 		assert(zRoot.IsNumber());
 		zObj = float(zRoot.GetDouble());
+	}
+	template <>
+	inline void to_json<float>(const float& zObj, rapidjson::Value& zRoot)
+	{
+		zRoot.SetDouble( zObj);
 	}
 
 	template <>
@@ -71,11 +96,22 @@ namespace pgn
 		assert(zRoot.IsNumber());
 		zObj = zRoot.GetDouble();
 	}
+	template <>
+	inline void to_json<double>(const double& zObj, rapidjson::Value& zRoot)
+	{
+		zRoot.SetDouble( zObj);
+	}
 
 	template <>
 	inline void from_json<bool>(bool& zObj, const rapidjson::Value& zRoot)
 	{
 		assert(zRoot.IsBool());
 		zObj = zRoot.GetBool();
+	}
+
+	template <>
+	inline void to_json<bool>(const bool& zObj, rapidjson::Value& zRoot)
+	{
+		zRoot.SetBool(zObj);
 	}
 }
