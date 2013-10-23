@@ -183,6 +183,8 @@ endmacro(copy_dll)
 
 #################################################################
 # Packages
+SET(CMAKE_PREFIX_PATH $ENV{QTDIR})
+#SET(ENV{PATH} $ENV{QTDIR}bin $ENV{PATH}) # Still, from VS2012 I can't run it
 find_package(Pystring)
 SET(ENV{BOOST_ROOT} ${PROJECT_SOURCE_DIR}/contrib/boost_1_54_0)
 find_package(BOOST 1.54.0 REQUIRED COMPONENTS program_options)
