@@ -184,6 +184,9 @@ endmacro(copy_dll)
 #################################################################
 # Packages
 SET(CMAKE_PREFIX_PATH $ENV{QTDIR})
+if ("${CMAKE_VERSION}" VERSION_GREATER 2.8.11)
+    cmake_policy(SET CMP0020 OLD)
+endif()
 #SET(ENV{PATH} $ENV{QTDIR}bin $ENV{PATH}) # Still, from VS2012 I can't run it
 find_package(Pystring)
 SET(ENV{BOOST_ROOT} ${PROJECT_SOURCE_DIR}/contrib/boost_1_54_0)
