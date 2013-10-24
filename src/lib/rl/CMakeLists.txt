@@ -16,12 +16,14 @@ file(GLOB_RECURSE SYSTEM_SRCS
 set(SOURCE_FILES
     EntityMgrRL.cpp
     SystemMgrRL.cpp
+    window/curseswindow.cpp
 )
 
 set(HEADER_FILES
     EntityMgrRL.h
     SystemMgrRL.h
     events/events.h
+    window/curseswindow.h
     ${COMPONENT_SRCS}
     ${SYSTEM_SRCS}
     
