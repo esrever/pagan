@@ -18,6 +18,9 @@ int main()
 	keypad(stdscr, TRUE);		/* We get F1, F2 etc..		*/
 	noecho();			/* Don't echo() while we do getch */
 
+	auto v = LINES;
+	auto v2 = COLS;
+
 	//##############################
 	//# ECS Init
 

@@ -1,0 +1,30 @@
+[
+    {
+        "name" : "game_window",
+        "pos" : [0, 0],
+        "size" : [160, 50],
+        "subwindows" : [
+            {
+                "name" : "map_window",
+                "pos" : [0, 0],
+                "size" : [140, 30]
+            },
+            {
+                "name" : "log_window",
+                "pos" : [0, 30],
+                "size" : [140, 20]
+            },
+            {
+                "name" : "status_window",
+                "pos" : [140, 0],
+                "size" : [20, 50]
+            }
+        ]
+    },
+    {
+        "name" : "log_window",
+        "pos" : [0, 0],
+        "size" : [160, 50],
+        "subwindows" : []
+    }
+]

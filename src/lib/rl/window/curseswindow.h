@@ -1,7 +1,12 @@
 #pragma once
 
+#include <string>
+#include <vector>
+
 #include <curses.h>
 #include <glm/glm.hpp>
+
+#include <core/util/json_conversions.h>
 
 namespace pgn
 {
@@ -12,11 +17,23 @@ namespace pgn
 		~cCursesWindow() {Destroy();}
 
 		void Destroy();
-		void Init(const glm::ivec2& zStart, const glm::uvec2& zSize);
+		void Init(const glm::ivec2& zStart, const glm::uvec2& zSize, WINDOW * parent = nullptr);
+		void Init(WINDOW * parent = nullptr);
+
+		WINDOW * Ptr() const {return mWindow;}
 
 	private:
-		WINDOW * mWindow;
-		glm::ivec2 mStart;
-		glm::uvec2 mSize;
+		template<class T>
+		friend bool from_json(T& zObj, const rapidjson::Value& zRoot);
+	private:
+		WINDOW *				   mWindow;
+		glm::ivec2				   mStart;
+		glm::uvec2				   mSize;
+		std::string				   mName;
+		std::vector<cCursesWindow> mSubWindows;
 	};
+
+	//-------------------------------------------------------------------
+	template<>
+	bool from_json<cCursesWindow>(cCursesWindow& zObj, const rapidjson::Value& zRoot);
 }
