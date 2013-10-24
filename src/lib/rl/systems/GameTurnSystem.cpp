@@ -11,8 +11,8 @@ namespace pgn
 	}
 
 	//------------------------------------------------------
-	void cGameTurnSystem::from_json(const rapidjson::Value& zRoot)
+	bool cGameTurnSystem::from_json(const rapidjson::Value& zRoot)
 	{
-		cSystemBase::from_json(zRoot);
+		return cSystemBase::from_json(zRoot);
 	}
 }

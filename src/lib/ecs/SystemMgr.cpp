@@ -22,7 +22,7 @@ namespace pgn
 	}
 
 	//--------------------------------------------------------------------------------------
-	void cSystemMgr::from_json(const rapidjson::Value& zRoot)
+	bool cSystemMgr::from_json(const rapidjson::Value& zRoot)
 	{
 		std::vector<std::string> fnames;
 		read_json_vector(fnames, zRoot["QueriesFile"]);
@@ -37,6 +37,7 @@ namespace pgn
 			auto pdoc = file_to_json(ECS.GetDataPath() + s);
 			ImportSystems(pdoc.get());
 		}
+		return true;
 	}
 
 	//-------------------------------------------------------------------------------------------------

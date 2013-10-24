@@ -14,10 +14,11 @@ namespace pgn
 
 	//------------------------------------------------------------------------
 	template<>
-	void from_json<cExample>(cExample& zObj, const rapidjson::Value& zRoot)
+	bool from_json<cExample>(cExample& zObj, const rapidjson::Value& zRoot)
 	{
 		zObj.a = zRoot["an_int"].GetInt();
 		zObj.b = zRoot["a_double"].GetDouble();
 		zObj.c = float(zRoot["a_float"].GetDouble());
+		return true;
 	}
 }

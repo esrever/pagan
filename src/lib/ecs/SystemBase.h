@@ -28,7 +28,7 @@ namespace pgn
 
 			//! Json related
 			virtual void to_json(rapidjson::Value& zRoot) const{};
-			virtual void from_json(const rapidjson::Value& zRoot);
+			virtual bool from_json(const rapidjson::Value& zRoot);
 
 			//! System activity
 			void SetActive(bool zActive);
@@ -50,7 +50,7 @@ namespace pgn
 	void to_json<cSystemBase>(const cSystemBase& zSys, rapidjson::Value& zRoot);
 	//! sys from json
 	template<>
-	void from_json<cSystemBase>(cSystemBase& zSys, const rapidjson::Value& zRoot);
+	bool from_json<cSystemBase>(cSystemBase& zSys, const rapidjson::Value& zRoot);
 	//! sys to string
 	template<>
 	std::string to_string<cSystemBase>(const cSystemBase& zSys);

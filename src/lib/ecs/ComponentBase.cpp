@@ -11,9 +11,9 @@ namespace pgn
 
 	//---------------------------------------------------------------
 	template<>
-	void from_json<cComponentBase>(cComponentBase& zCompo, const rapidjson::Value& zRoot) 
+	bool from_json<cComponentBase>(cComponentBase& zCompo, const rapidjson::Value& zRoot) 
 	{
-		zCompo.from_json(zRoot);
+		return zCompo.from_json(zRoot);
 	}
 
 	//---------------------------------------------------------------

@@ -18,7 +18,7 @@ namespace pgn
 
 		//! Json conversions
 		virtual void to_json(rapidjson::Value& zRoot) const =0;//{}
-		virtual void from_json(const rapidjson::Value& zRoot)=0;//{}
+		virtual bool from_json(const rapidjson::Value& zRoot)=0;//{}
 	protected:
 		cComponentBase(){}
 	};
@@ -30,7 +30,7 @@ namespace pgn
 	void to_json<cComponentBase>(const cComponentBase& zCompo, rapidjson::Value& zRoot);
 	//------------------------------------------------------------------------
 	template<>
-	void from_json<cComponentBase>(cComponentBase& zCompo, const rapidjson::Value& zRoot);
+	bool from_json<cComponentBase>(cComponentBase& zCompo, const rapidjson::Value& zRoot);
 	//------------------------------------------------------------------------
 	template<>
 	std::string to_string<cComponentBase>(const cComponentBase& zCompo);

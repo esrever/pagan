@@ -68,7 +68,7 @@ namespace pgn
 			const tagged_entity_map& TaggedEntities() const {return mTaggedEntities;}
 
 			//! Json
-			void from_json(const rapidjson::Value& zRoot);
+			bool from_json(const rapidjson::Value& zRoot);
 			void ImportArchetypes(const rapidjson::Document * zDoc);
 			void ImportInstances(const rapidjson::Document * zDoc);
 

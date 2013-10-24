@@ -8,7 +8,7 @@ namespace pgn
 	{
 	public:
 		virtual void Process();
-		virtual void from_json(const rapidjson::Value& zRoot);
+		virtual bool from_json(const rapidjson::Value& zRoot);
 	private:
 		
 	};

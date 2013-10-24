@@ -13,7 +13,7 @@ namespace pgn
 	}
 
 	template<class T>
-	void read_json_vector( std::vector<T>& vec, const rapidjson::Value& doc)
+	bool read_json_vector( std::vector<T>& vec, const rapidjson::Value& doc)
 	{
 		vec.clear();
 		T obj;
@@ -24,9 +24,13 @@ namespace pgn
 			{
 				// get an archetype object
 				const auto& robj = *itr;
-				from_json(obj, robj);
+				if(! from_json(obj, robj))
+                    return false;
 				vec.push_back(obj);
 			}
+            return true;
 		}
+        else
+            return false;
 	}
 }

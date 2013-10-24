@@ -19,7 +19,7 @@ namespace pgn
 		public: 
 			void Init();
 			void Destroy();
-			void from_json(const rapidjson::Value& zRoot);
+			bool from_json(const rapidjson::Value& zRoot);
 
 			void SetDataPath(const std::string& zPath) {mDataPath = zPath;}
 			const std::string& GetDataPath() const {return mDataPath;}

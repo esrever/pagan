@@ -17,5 +17,5 @@ namespace pgn
 
 	//------------------------------------------------------------------------
 	template<>
-	void from_json<cExample>(cExample& zObj, const rapidjson::Value& zRoot);
+	bool from_json<cExample>(cExample& zObj, const rapidjson::Value& zRoot);
 }

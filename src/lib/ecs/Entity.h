@@ -19,6 +19,6 @@ namespace pgn
 	void to_json<cEntity>(const cEntity& zEntity, rapidjson::Value& zRoot);
 
 	template<>
-	void from_json<cEntity>(cEntity& zEntity, const rapidjson::Value& zRoot);
+	bool from_json<cEntity>(cEntity& zEntity, const rapidjson::Value& zRoot);
 }
 

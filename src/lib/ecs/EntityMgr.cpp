@@ -143,7 +143,7 @@ namespace pgn
 				assert(arch.IsObject());
 
 				std::string name; 
-				pgn::from_json( name, arch["name"]);
+				if( !pgn::from_json( name, arch["name"])) break;
 				// Look for the inherited values from mArchetypes
 				std::vector<std::string> inherited,components,tags;
 				read_json_vector(inherited, arch["inherits"]);
@@ -203,7 +203,7 @@ namespace pgn
 	}
 
 	//--------------------------------------------------------------------------------------
-	void cEntityMgr::from_json(const rapidjson::Value& zRoot)
+	bool cEntityMgr::from_json(const rapidjson::Value& zRoot)
 	{
 		const auto&  qobj = zRoot["ArchetypesFile"];
 		std::vector<std::string> fnames;
@@ -219,6 +219,7 @@ namespace pgn
 			auto pdoc = file_to_json(ECS.GetDataPath() + s);
 			ImportInstances(pdoc.get());
 		}		
+        return true;
 	}
 
 	//-------------------------------------------------------------------------------------------------

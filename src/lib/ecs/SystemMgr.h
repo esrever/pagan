@@ -33,7 +33,7 @@ namespace pgn
 			virtual bool UpdateFrame(){return true;}
 
 			//! Json-related 
-			void from_json(const rapidjson::Value& zRoot);
+			bool from_json(const rapidjson::Value& zRoot);
 			void ImportSystems(const rapidjson::Document * zDoc);
 			void ImportQueries(const rapidjson::Document * zDoc);
 

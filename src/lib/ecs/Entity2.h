@@ -43,7 +43,7 @@ namespace pgn
 	void to_json<cEntity>(const cEntity& zEntity, rapidjson::Value& zRoot);
 	//! entity from json
 	template<>
-	void from_json<cEntity>(cEntity& zEntity, const rapidjson::Value& zRoot);
+	bool from_json<cEntity>(cEntity& zEntity, const rapidjson::Value& zRoot);
 	//! entity to string
 	template<>
 	std::string to_string<cEntity>(const cEntity& zEntity);

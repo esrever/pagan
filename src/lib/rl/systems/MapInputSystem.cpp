@@ -97,8 +97,8 @@ namespace pgn
 
 
 	//------------------------------------------------------
-	void cMapInputSystem::from_json(const rapidjson::Value& zRoot)
+	bool cMapInputSystem::from_json(const rapidjson::Value& zRoot)
 	{
-		cSystemBase::from_json(zRoot);
+		return cSystemBase::from_json(zRoot);
 	}
 }

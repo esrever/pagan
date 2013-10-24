@@ -44,18 +44,19 @@ namespace pgn
 
 	//! type from json
 	template <class T>
-	inline void from_json(T& zObj, const rapidjson::Value& zRoot)
+	inline bool from_json(T& zObj, const rapidjson::Value& zRoot)
 	{
 		cLogStream::Default().Wrn( boost::str(boost::format("Type %s does not implement from_json()")% typeid(T).name()));
-		//zObj.from_json(zRoot);
+		return false;
 	}
 
 	//! PODs
 	template <>
-	inline void from_json<std::string>(std::string& zObj, const rapidjson::Value& zRoot)
+	inline bool from_json<std::string>(std::string& zObj, const rapidjson::Value& zRoot)
 	{
-		assert(zRoot.IsString());
-		zObj = zRoot.GetString();
+		if(zRoot.IsString())
+			zObj = zRoot.GetString();
+        return zRoot.IsString();
 	}
 
 	template <>
@@ -65,10 +66,11 @@ namespace pgn
 	}
 
 	template <>
-	inline void from_json<char>(char& zObj, const rapidjson::Value& zRoot)
+	inline bool from_json<char>(char& zObj, const rapidjson::Value& zRoot)
 	{
-		assert(zRoot.IsString());
-		zObj = zRoot.GetString()[0];
+		if(zRoot.IsString())
+			zObj = zRoot.GetString()[0];
+        return zRoot.IsString();
 	}
 
 	template <>
@@ -79,10 +81,11 @@ namespace pgn
 	}
 
 	template <>
-	inline void from_json<float>(float& zObj, const rapidjson::Value& zRoot)
+	inline bool from_json<float>(float& zObj, const rapidjson::Value& zRoot)
 	{
-		assert(zRoot.IsNumber());
-		zObj = float(zRoot.GetDouble());
+		if(zRoot.IsNumber())
+			zObj = float(zRoot.GetDouble());
+        return zRoot.IsNumber();
 	}
 	template <>
 	inline void to_json<float>(const float& zObj, rapidjson::Value& zRoot)
@@ -91,10 +94,11 @@ namespace pgn
 	}
 
 	template <>
-	inline void from_json<double>(double& zObj, const rapidjson::Value& zRoot)
+	inline bool from_json<double>(double& zObj, const rapidjson::Value& zRoot)
 	{
-		assert(zRoot.IsNumber());
-		zObj = zRoot.GetDouble();
+		if(zRoot.IsNumber())
+			zObj = zRoot.GetDouble();
+        return zRoot.IsNumber();
 	}
 	template <>
 	inline void to_json<double>(const double& zObj, rapidjson::Value& zRoot)
@@ -103,10 +107,11 @@ namespace pgn
 	}
 
 	template <>
-	inline void from_json<bool>(bool& zObj, const rapidjson::Value& zRoot)
+	inline bool from_json<bool>(bool& zObj, const rapidjson::Value& zRoot)
 	{
-		assert(zRoot.IsBool());
-		zObj = zRoot.GetBool();
+		if(zRoot.IsBool())
+			zObj = zRoot.GetBool();
+        return zRoot.IsBool();
 	}
 
 	template <>

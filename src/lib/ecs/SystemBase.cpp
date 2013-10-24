@@ -25,7 +25,7 @@ namespace pgn
 	}
 
 	//---------------------------------------------------------------
-	void cSystemBase::from_json(const rapidjson::Value& zRoot)
+	bool cSystemBase::from_json(const rapidjson::Value& zRoot)
 	{
 		// Read Desc
 		const auto desc = zRoot.HasMember("Desc") ? zRoot["Desc"].GetString() : "";
@@ -43,6 +43,7 @@ namespace pgn
 			else
 				ECS.mLog.Err(boost::str(boost::format("cSystemBase::from_json: Failed to find query \"%s\"")%s));;
 		}
+		return true;
 	}
 
 	//---------------------------------------------------------------
@@ -54,9 +55,9 @@ namespace pgn
 
 	//---------------------------------------------------------------
 	template<>
-	void from_json<cSystemBase>(cSystemBase& zSys, const rapidjson::Value& zRoot) 
+	bool from_json<cSystemBase>(cSystemBase& zSys, const rapidjson::Value& zRoot) 
 	{
-		zSys.from_json(zRoot);
+		return zSys.from_json(zRoot);
 	}
 
 	//---------------------------------------------------------------

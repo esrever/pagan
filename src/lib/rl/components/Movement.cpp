@@ -4,9 +4,9 @@ namespace pgn
 {
 	//----------------------------------------------------------------------------------
 	template<>
-	void from_json<cMovement>( cMovement& zData, const rapidjson::Value& zRoot)
+	bool from_json<cMovement>( cMovement& zData, const rapidjson::Value& zRoot)
 	{
-		from_json( zData.mSpeed, zRoot["speed"]);
+		return from_json( zData.mSpeed, zRoot["speed"]);
 	}
 
 	//----------------------------------------------------------------------------------

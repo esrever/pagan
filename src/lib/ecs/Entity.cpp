@@ -11,8 +11,9 @@ namespace pgn
 	
 	//---------------------------------------------------------------------------
 	template<>
-	void from_json<cEntity>(cEntity& zEntity, const rapidjson::Value& zRoot)
+	bool from_json<cEntity>(cEntity& zEntity, const rapidjson::Value& zRoot)
 	{
 		assert(false);
+        return false;
 	}
 }

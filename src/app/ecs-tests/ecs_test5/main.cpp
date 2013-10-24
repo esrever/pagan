@@ -12,6 +12,13 @@
 int main()
 {
 	//##############################
+	//# Curses init
+	initscr();			/* Start curses mode 		*/
+	raw();				/* Line buffering disabled	*/
+	keypad(stdscr, TRUE);		/* We get F1, F2 etc..		*/
+	noecho();			/* Don't echo() while we do getch */
+
+	//##############################
 	//# ECS Init
 
 	auto& ecs = ECS;
@@ -31,15 +38,6 @@ int main()
 	//! Read ecs configuration
 	//ecs.SetDataPath("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\rl\\data\\");
 	ecs.from_json( *pgn::file_to_json(ecs.GetDataPath() + "ecs.json"));
-
-	//##############################
-	//# Curses init
-
-	initscr();			/* Start curses mode 		*/
-	start_color();
-	raw();				/* Line buffering disabled	*/
-	keypad(stdscr, TRUE);		/* We get F1, F2 etc..		*/
-	noecho();			/* Don't echo() while we do getch */
 
 	//##############################
 	//# Loop

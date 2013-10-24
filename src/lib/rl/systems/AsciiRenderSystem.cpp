@@ -11,8 +11,8 @@ namespace pgn
 		refresh();
 	}
 
-	void cAsciiRenderSystem::from_json(const rapidjson::Value& zRoot)
+	bool cAsciiRenderSystem::from_json(const rapidjson::Value& zRoot)
 	{
-		cSystemBase::from_json(zRoot);
+		return cSystemBase::from_json(zRoot);
 	}
 }

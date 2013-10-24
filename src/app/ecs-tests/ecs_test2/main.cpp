@@ -38,9 +38,9 @@ namespace pgn
 		zRoot.AddMember("a_float",zObj);
 	}
 
-	template <> void from_json<int>(int& obj, const rapidjson::Value& root){ obj = root["an_int"].GetInt();}
-	template <> void from_json<double>(double& obj, const rapidjson::Value& root){  obj = root["a_double"].GetDouble();}
-	template <> void from_json<float>(float& obj, const rapidjson::Value& root){  obj = float(root["a_float"].GetDouble());}
+	template <> bool from_json<int>(int& obj, const rapidjson::Value& root){ obj = root["an_int"].GetInt();return true;}
+	template <> bool from_json<double>(double& obj, const rapidjson::Value& root){  obj = root["a_double"].GetDouble();return true;}
+	template <> bool from_json<float>(float& obj, const rapidjson::Value& root){  obj = float(root["a_float"].GetDouble());return true;}
 }
 
 class cBase{};

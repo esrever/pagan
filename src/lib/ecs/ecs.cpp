@@ -20,11 +20,12 @@ namespace pgn
 		mEntityMgr.reset();
 	}
 
-	void cECS::from_json(const rapidjson::Value& zRoot)
+	bool cECS::from_json(const rapidjson::Value& zRoot)
 	{
 		const auto& ment = zRoot["EntityMgr"];
-		mEntityMgr->from_json(ment);
+		bool r1 = mEntityMgr->from_json(ment);
 		const auto& msys = zRoot["SystemMgr"];
-		mSystemMgr->from_json(msys);
+		bool r2 = mSystemMgr->from_json(msys);
+        return r1 && r2;
 	}
 }

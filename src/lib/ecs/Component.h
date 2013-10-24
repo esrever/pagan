@@ -23,7 +23,7 @@ namespace pgn
 
 			//! Json conversions
 			virtual void to_json(rapidjson::Value& zRoot) const;
-			virtual void from_json(const rapidjson::Value& zRoot);
+			virtual bool from_json(const rapidjson::Value& zRoot);
 
 			//! Object creator function
 			static std::shared_ptr<cComponentBase> Create() { return std::shared_ptr<cComponentBase>(new cComponent<T>());}
@@ -49,8 +49,8 @@ namespace pgn
 
 	//------------------------------------------------------------------------
 	template<class T>
-	void cComponent<T>::from_json(const rapidjson::Value& zRoot)
+	bool cComponent<T>::from_json(const rapidjson::Value& zRoot)
 	{
-		pgn::from_json< T >(mData, zRoot);
+		return pgn::from_json< T >(mData, zRoot);
 	}
 }
