@@ -1,5 +1,6 @@
 #pragma once
 
+#include <curses.h>
 #include <glm/glm.hpp>
 
 namespace pgn
@@ -17,5 +18,5 @@ namespace pgn
 		WINDOW * mWindow;
 		glm::ivec2 mStart;
 		glm::uvec2 mSize;
-	}
+	};
 }

@@ -6,10 +6,17 @@ namespace pgn
 	template<>
 	void from_json<cAsciiRep>( cAsciiRep& zData, const rapidjson::Value& zRoot)
 	{
-		from_json( zData.mChar, zRoot["char"]);
-		// TODO: read the rest, sanity checks too
-		//from_json( zData.mVerbose, zRoot["color"]);
-		//from_json( zData.mVerbose, zRoot["attribs"]);
+		char c;
+		from_json( c, zRoot["char"]);
+		
+		/*
+			Parse:
+				char
+				attr
+				col_fg
+				col_bg
+			Create a color object (static), and fetch the color index, and set it
+		*/
 	}
 
 	//----------------------------------------------------------------------------------

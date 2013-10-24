@@ -1,5 +1,6 @@
 #pragma once
 
+#include <curses.h>
 #include <core/util/json_conversions.h>
 
 namespace pgn
@@ -7,9 +8,7 @@ namespace pgn
 	//! ASCII render properties
 	struct cAsciiRep
 	{
-		char mChar;
-		unsigned mColor;
-		unsigned mAttribs;
+		chtype mChar;
 	};
 
 	//-----------------------------------------------------------------------

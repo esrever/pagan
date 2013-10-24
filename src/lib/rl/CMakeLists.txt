@@ -17,6 +17,7 @@ set(SOURCE_FILES
     EntityMgrRL.cpp
     SystemMgrRL.cpp
     window/curseswindow.cpp
+    window/cursescolor.cpp
 )
 
 set(HEADER_FILES
@@ -24,6 +25,7 @@ set(HEADER_FILES
     SystemMgrRL.h
     events/events.h
     window/curseswindow.h
+    window/cursescolor.h
     ${COMPONENT_SRCS}
     ${SYSTEM_SRCS}
     

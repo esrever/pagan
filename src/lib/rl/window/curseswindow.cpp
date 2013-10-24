@@ -6,21 +6,21 @@ namespace pgn
 {
 	void cCursesWindow::Destroy()
 	{
-		if(mWin)
+		if(mWindow)
 		{
-			wborder(mWin, ' ', ' ', ' ',' ',' ',' ',' ',' ');
-			wrefresh(mWin);
-			delwin(mWin);
-			mWin = nullptr;
+			wborder(mWindow, ' ', ' ', ' ',' ',' ',' ',' ',' ');
+			wrefresh(mWindow);
+			delwin(mWindow);
+			mWindow = nullptr;
 		}
 	}
 	void cCursesWindow::Init(const glm::ivec2& zStart, const glm::uvec2& zSize)
 	{
 		Destroy();	
-		mWin = newwin(h, w, y, x);
-		box(mWin, 0 , 0);		/* 0, 0 gives default characters 
+		mWindow = newwin(zSize.y, zSize.x, zStart.y, zStart.x);
+		box(mWindow, 0 , 0);		/* 0, 0 gives default characters 
 					 * for the vertical and horizontal
 					 * lines			*/
-		wrefresh(mWin);		/* Show that box 		*/
+		wrefresh(mWindow);		/* Show that box 		*/
 	}
 }
