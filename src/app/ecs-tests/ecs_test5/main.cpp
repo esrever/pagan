@@ -29,7 +29,7 @@ int main()
 	ecs.mSystemMgr->RegisterSystemTypes();
 
 	//! Read ecs configuration
-	ecs.SetDataPath("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\rl\\data\\");
+	//ecs.SetDataPath("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\rl\\data\\");
 	ecs.from_json( *pgn::file_to_json(ecs.GetDataPath() + "ecs.json"));
 
 	//##############################
