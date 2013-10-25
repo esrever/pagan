@@ -1,13 +1,29 @@
 {
-    "AsciiRenderable" : [
-        "pgn::cAsciiRep",
-        "pgn::cAsciiLevelRep"
-    ],
-    "InputListener" : [
-        "pgn::cInputKeyboard",
-        "pgn::cInputMouse"
-    ],
-    "Actor" : [
-        "pgn::cAI"
-    ]
+    "Component" : {
+        "AsciiRenderable" : [
+            "pgn::cAsciiRep",
+            "pgn::cAsciiLevelRep"
+        ],
+        "InputListener" : [
+            "pgn::cInputKeyboard",
+            "pgn::cInputMouse"
+        ],
+        "Actor" : [
+            "pgn::cAI"
+        ]
+    }
+    "Tag" : {
+        "Player" : [
+            "Player"
+        ],
+        "Status" : [
+            "Status"
+        ],
+        "CurrentLevel" : [
+            "CurrentLevel"
+        ],
+        "GameLog" : [
+            "GameLog"
+        ]
+    }
 }

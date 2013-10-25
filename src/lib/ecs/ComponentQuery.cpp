@@ -14,7 +14,7 @@ namespace pgn
 		for(auto x : ECS.mEntityMgr->GetComponents() )
 		{
 			if ( is_subset( x.second.Mask(), mMask))
-				mEntitiesWithComponents.insert(x.first);
+				mEntities.insert(x.first);
 		}
 	}
 
@@ -23,14 +23,14 @@ namespace pgn
 	{
 		const auto& e = std::get<0>(zData.data)->first;
 		if( is_subset(ECS.mEntityMgr->GetComponents(e).Mask(), mMask))
-			mEntitiesWithComponents.insert(e);
+			mEntities.insert(e);
 	}
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cRemoveComponentEventData& zData)
 	{
 		const auto& e = std::get<0>(zData.data)->first;
 		if( mMask[std::get<1>(zData.data)])
-			mEntitiesWithComponents.erase(e);	
+			mEntities.erase(e);	
 	}
 
 	//------------------------------------------------------------------------------
@@ -39,13 +39,13 @@ namespace pgn
 		const auto& e = std::get<0>(zData.data);
 		auto& ecs = ECS;
 		if( is_subset(ecs.mEntityMgr->GetComponents(e).Mask(), mMask) )
-			mEntitiesWithComponents.insert(e);
+			mEntities.insert(e);
 
 	}
 	//------------------------------------------------------------------------------
 	void cComponentQuery::Receive(const cDestroyEntityEventData& zData)
 	{
-		mEntitiesWithComponents.erase(std::get<0>(zData.data));
+		mEntities.erase(std::get<0>(zData.data));
 	}
 
 	//------------------------------------------------------------------------------

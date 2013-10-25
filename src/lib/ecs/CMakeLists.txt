@@ -12,6 +12,7 @@ set(SOURCE_FILES
     ExampleSystem.cpp
     SystemMgr.cpp
     ComponentHelpers.cpp
+    TagQuery.cpp
 )
 
 set(HEADER_FILES
@@ -29,6 +30,7 @@ set(HEADER_FILES
     ExampleSystem.h
     SystemMgr.h
     ComponentHelpers.h
+    TagQuery.h
 )
 
 add_definitions(

@@ -9,6 +9,7 @@ namespace pgn
 		zMgr.AddComponentType<pgn::cAsciiLevelRep>();
 		zMgr.AddComponentType<pgn::cAsciiRep>();
 		zMgr.AddComponentType<pgn::cDescription>();
+		zMgr.AddComponentType<pgn::cGameLog>();
 		zMgr.AddComponentType<pgn::cInputKeyboard>();
 		zMgr.AddComponentType<pgn::cInputMouse>();
 		zMgr.AddComponentType<pgn::cLevel>();

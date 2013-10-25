@@ -13,6 +13,9 @@ namespace pgn
 
 	DECL_EVENT1(EntityCreated, cEntity);
 	DECL_EVENT1(DestroyEntity, cEntity);
+	DECL_EVENT2(EntityTagged,cEntity,std::string);
+	DECL_EVENT2(EntityUntag,cEntity,std::string);
+	DECL_EVENT1(Untag,std::string);
 
 	//! Json conversions
 	template<>

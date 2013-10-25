@@ -3,6 +3,7 @@
 #include "AsciiLevelRep.h"
 #include "AsciiRep.h"
 #include "Description.h"
+#include "GameLog.h"
 #include "InputKeyboard.h"
 #include "InputMouse.h"
 #include "Level.h"

@@ -42,6 +42,7 @@ namespace pgn
 	void cEntityMgr::Tag(cEntity zEntity, const std::string& zTag)
 	{
 		mTaggedEntities[zTag].insert(zEntity);
+		cEntityTaggedEventData::emit(std::make_tuple(zEntity,zTag));
 	}
 
 	//----------------------------------------------------------------
@@ -50,7 +51,10 @@ namespace pgn
 		// Look for the tag
 		auto i1 = mTaggedEntities.find(zTag);
 		if(i1 != mTaggedEntities.end())
+		{
+			cEntityUntagEventData::emit(std::make_tuple(zEntity,zTag));
 			i1->second.erase(zEntity);
+		}
 	}
 
 	//----------------------------------------------------------------
@@ -60,6 +64,7 @@ namespace pgn
 		auto i1 = mTaggedEntities.find(zTag);
 		if(i1 != mTaggedEntities.end())
 		{
+			cUntagEventData::emit(std::make_tuple(zTag));
 			i1->second.clear();
 			mTaggedEntities.erase(i1);
 		}

@@ -7,6 +7,9 @@
 #include "EntityMgr.h"
 #include "SystemBase.h"
 
+#include "ComponentQuery.h"
+#include "TagQuery.h"
+
 namespace pgn
 {
 	//--------------------------------------------------------------------------------------
@@ -51,10 +54,10 @@ namespace pgn
 	}
 
 	//--------------------------------------------------------------------------------------------------
-	const std::string& cSystemMgr::GetQueryName(const cComponentQuery& zQuery) const
+	const std::string& cSystemMgr::GetQueryName(const cQueryBase& zQuery) const
 	{
-		const auto& it = std::find_if(mComponentQueries.begin(), mComponentQueries.end(), cMapValueFinder<std::string,cComponentQuery>(zQuery));
-		if(it == mComponentQueries.end())
+		const auto& it = std::find_if(mQueries.begin(), mQueries.end(), cMapValueFinder<std::string,cQueryBase>(zQuery));
+		if(it == mQueries.end())
 			return ECS.GetErrorString();
 		else
 			return it->first;
@@ -98,31 +101,53 @@ namespace pgn
 	{
 		if (!zDoc) return;
 		if(zDoc->IsObject())
-			for (auto itr = zDoc->MemberBegin(); itr != zDoc->MemberEnd(); ++itr) 
-			{
-				// get a query object
-				const auto& qcur = *itr;
-				const auto& qname = qcur.name;
-				const auto& types = qcur.value;
-				component_mask_type mask;
-				bool err = false;
-				assert(types.IsArray());
-				for (auto itr2 = types.Begin(); itr2 != types.End(); ++itr2) 
+		{
+			const auto& zDocRef = *zDoc;
+			const auto& zDocCompo = zDocRef["Component"];
+			if(zDocCompo.IsObject())
+				for (auto itr = zDocCompo.MemberBegin(); itr != zDocCompo.MemberEnd(); ++itr) 
 				{
-					const auto& s = itr2->GetString();
-					auto idx = EMGR->GetComponentTypeIndex(s);
-					if(idx != 0xFFFFFFFF)
-						mask.set(idx);
-					else
+					// get a query object
+					const auto& qcur = *itr;
+					const auto& qname = qcur.name;
+					const auto& types = qcur.value;
+					component_mask_type mask;
+					bool err = false;
+					assert(types.IsArray());
+					for (auto itr2 = types.Begin(); itr2 != types.End(); ++itr2) 
 					{
-						ECS.mLog.Err(boost::str(boost::format("cSystemMgr::from_json: Component type \"%s\" does not exist")%s));
-						err = true;
-						break;
-					}; 
+						const auto& s = itr2->GetString();
+						auto idx = EMGR->GetComponentTypeIndex(s);
+						if(idx != 0xFFFFFFFF)
+							mask.set(idx);
+						else
+						{
+							ECS.mLog.Err(boost::str(boost::format("cSystemMgr::from_json: Component type \"%s\" does not exist")%s));
+							err = true;
+							break;
+						}; 
+					}
+					if(!err)
+						mQueries.insert( std::pair<std::string, cQueryBase>( qname.GetString(),cComponentQuery(mask)));
 				}
-				if(!err)
-					mComponentQueries.insert( std::pair<std::string, cComponentQuery>( qname.GetString(),cComponentQuery(mask)));
-			}
+			const auto& zDocTag = zDocRef["Tag"];
+				for (auto itr = zDocTag.MemberBegin(); itr != zDocTag.MemberEnd(); ++itr) 
+				{
+					// get a query object
+					const auto& qcur = *itr;
+					const auto& qname = qcur.name;
+					const auto& tags = qcur.value;
+					bool err = false;
+					assert(tags.IsArray());
+					std::vector<std::string> tagstr;
+					for (auto itr2 = tags.Begin(); itr2 != tags.End(); ++itr2) 
+					{
+						tagstr.push_back(itr2->GetString());
+					}
+					if(!err)
+						mQueries.insert( std::pair<std::string, cQueryBase>( qname.GetString(),cTagQuery(tagstr)));
+				}
+		}
 		else
 			ECS.mLog.Wrn("cSystemMgr::from_json: \"Queries\" not found");
 	}

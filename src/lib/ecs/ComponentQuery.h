@@ -1,15 +1,14 @@
 #pragma once
 
-#include <set>
-
-#include "ecs_config.h"
-#include "event.h"
+#include "QueryBase.h"
 #include "EntityComponents.h"
+
 
 namespace pgn
 {
 	//! Stores entities with at least the specified components. 
-	class cComponentQuery : public cEventReceiver<cComponentAddedEventData>,
+	class cComponentQuery : public cQueryBase,
+							public cEventReceiver<cComponentAddedEventData>,
 							public cEventReceiver<cRemoveComponentEventData>,
 							public cEventReceiver<cEntityCreatedEventData>,
 							public cEventReceiver<cDestroyEntityEventData>
@@ -28,20 +27,12 @@ namespace pgn
 		virtual const std::string ReceiverName() const {return "ComponentQuery";}
 
 		//! Access data
-		const std::set<cEntity>& Get() const {return mEntitiesWithComponents;}
 		const component_mask_type& Mask() const {return mMask;}
 
-		//! compare masks
-		bool operator < (const cComponentQuery &rhs) const {return Mask().hash() < rhs.Mask().hash();}
-		bool operator == (const cComponentQuery &rhs) const {return Mask().hash() == rhs.Mask().hash();}
 	private:
 		component_mask_type mMask;
-		std::set<cEntity> mEntitiesWithComponents;
 	};
 
 	//-------------------------------------------------------------------------------
 	bool is_subset(const component_mask_type& zAll, const component_mask_type& zSub);
 }
-
-	//! Global comparison operator 
-	//inline bool std::less<pgn::cComponentQuery>::operator ()(const pgn::cComponentQuery &lhs ,const pgn::cComponentQuery &rhs) const {return lhs.Mask() < rhs.Mask();}

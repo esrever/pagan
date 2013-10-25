@@ -13,7 +13,7 @@ namespace pgn
 {
 	DECL_EVENT1(SystemActivity, bool);
 
-	class cComponentQuery;
+	class cQueryBase;
 
 	//! Base class for a system. 
 	class cSystemBase
@@ -42,7 +42,7 @@ namespace pgn
 			bool mActive;
 			std::string mName;
 			std::string mDesc;
-			std::vector< std::shared_ptr< cComponentQuery> > mReferencedQueries;
+			std::vector< std::shared_ptr< cQueryBase> > mReferencedQueries;
 	};
 
 	//! sys to json

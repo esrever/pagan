@@ -5,7 +5,7 @@
 #include <Delegate.h>
 #include <core/util/json_conversions.h>
 
-#include "ComponentQuery.h"
+#include "QueryBase.h"
 
 namespace pgn
 {
@@ -15,7 +15,7 @@ namespace pgn
 	class cSystemMgr
 	{
 		public:
-			typedef std::map<std::string, cComponentQuery> QueryMap;
+			typedef std::map<std::string, cQueryBase> QueryMap;
 			typedef std::multimap<size_t, std::shared_ptr<cSystemBase> > SystemMap;
 		public:
 			virtual const std::string ReceiverName() const {return "SystemMgr";}
@@ -26,8 +26,8 @@ namespace pgn
 			void RemoveSystem(std::shared_ptr<cSystemBase> zSystem);
 
 			//! Queries
-			const QueryMap& GetQueries() const {return mComponentQueries;}
-			const std::string& GetQueryName(const cComponentQuery& zQuery) const;
+			const QueryMap& GetQueries() const {return mQueries;}
+			const std::string& GetQueryName(const cQueryBase& zQuery) const;
 
 			//! the main frame updater
 			virtual bool UpdateFrame(){return true;}
@@ -48,7 +48,7 @@ namespace pgn
 			
 		protected:
 			//! Component queries: maps tags to entities that have prespecified components
-			QueryMap	mComponentQueries;
+			QueryMap	mQueries;
 			SystemMap	mSystems;
 
 			//! All system types

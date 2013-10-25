@@ -1,0 +1,12 @@
+{
+    "TextModifier" : [
+        "Damage" : {
+            "color" : [255,0,0],
+            "attribs" : []
+        }
+    ],
+    
+    "GameLogMessages": [
+        "movement" : ["%s move$s$ towards %s ","actor","direction"],
+    ]
+}
