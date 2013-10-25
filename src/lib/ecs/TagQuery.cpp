@@ -35,23 +35,16 @@ namespace pgn
 	//------------------------------------------------------------------------------
 	void cTagQuery::Receive(const cEntityTaggedEventData& zData)
 	{
-		assert(false);
+		const auto& e = std::get<0>(zData.data);
+		if (std::find(mTags.begin(), mTags.end(), std::get<1>(zData.data)) != mTags.end())
+			mEntities.insert(e);
 	}
 	//------------------------------------------------------------------------------
 	void cTagQuery::Receive(const cEntityUntagEventData& zData)
 	{
-		assert(false);
-	}
-
-	//------------------------------------------------------------------------------
-	void cTagQuery::Receive(const cEntityCreatedEventData& zData)
-	{
-		assert(false);
-	}
-	//------------------------------------------------------------------------------
-	void cTagQuery::Receive(const cDestroyEntityEventData& zData)
-	{
-		assert(false);
+		const auto& e = std::get<0>(zData.data);
+		if (std::find(mTags.begin(), mTags.end(), std::get<1>(zData.data)) != mTags.end())
+			mEntities.erase(e);
 	}
 
 }

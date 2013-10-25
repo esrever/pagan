@@ -9,8 +9,6 @@ namespace pgn
 {
 	//! Stores entities with at least the specified components. 
 	class cTagQuery : public cQueryBase,
-					  public cEventReceiver<cEntityCreatedEventData>,
-					  public cEventReceiver<cDestroyEntityEventData>,
 					  public cEventReceiver<cEntityTaggedEventData>,
 					  public cEventReceiver<cEntityUntagEventData>
 	{
@@ -20,8 +18,6 @@ namespace pgn
 		cTagQuery(const std::vector<std::string>& zTags);
 
 		//! Receive functions
-		void Receive( const cEntityCreatedEventData& zData);
-		void Receive( const cDestroyEntityEventData& zData);
 		void Receive( const cEntityTaggedEventData& zData);
 		void Receive( const cEntityUntagEventData& zData);
 
