@@ -12,6 +12,7 @@ namespace pgn
 	{
 		//std::vector<std::vector<chtype>> mLogData;
 		std::vector<std::string> mLogData;
+		size_t mMaxLines;
 	};
 
 	//-----------------------------------------------------------------------

@@ -13,7 +13,6 @@ namespace pgn
 	void cEntityComponents::AddComponent(cComponentBaseSptr zCompo)
 	{
 		auto idx = zCompo.get()->TypeIndex();
-		assert(!mMask.at(idx));
 		mMask.at(idx) = 1;
 		mComponents.at(idx) = zCompo;
 	}

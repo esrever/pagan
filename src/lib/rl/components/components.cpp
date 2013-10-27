@@ -8,6 +8,7 @@ namespace pgn
 		zMgr.AddComponentType<pgn::cAI>();
 		zMgr.AddComponentType<pgn::cAsciiLevelRep>();
 		zMgr.AddComponentType<pgn::cAsciiRep>();
+		zMgr.AddComponentType<pgn::cAsciiWindow>();
 		zMgr.AddComponentType<pgn::cDescription>();
 		zMgr.AddComponentType<pgn::cGameLog>();
 		zMgr.AddComponentType<pgn::cInputKeyboard>();
@@ -17,7 +18,6 @@ namespace pgn
 		zMgr.AddComponentType<pgn::cLockable>();
 		zMgr.AddComponentType<pgn::cMovement>();
 		zMgr.AddComponentType<pgn::cOpenClose>();
-		zMgr.AddComponentType<pgn::cPartOfWorld>();
 		zMgr.AddComponentType<pgn::cPixelRep>();
 		zMgr.AddComponentType<pgn::cTileAtmospheric>();
 		zMgr.AddComponentType<pgn::cTileMoveCost>();

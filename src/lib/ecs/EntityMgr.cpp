@@ -108,6 +108,7 @@ namespace pgn
 				return i;
 		}
 		mComponentTypeIds.push_back(zTi);
+		mComponentCreators.push_back(component_creator_fun());
 
 		std::vector<std::string> result;
 		pystring::split(zTi.name(), result, " ");
@@ -187,12 +188,18 @@ namespace pgn
 				const auto& inst = *itr;
 				assert(inst.IsObject());
 				std::string archname, instname;
+				std::vector<std::string> tags;
+				std::vector<std::shared_ptr<cComponentBase>> componentPtrs;
 				for (auto mitr = inst.MemberBegin(); mitr != inst.MemberEnd(); ++mitr) 
 				{
 					if( strcmp( mitr->name.GetString(),"archetype") == 0)
 						archname = mitr->value.GetString();
 					else if ( strcmp( mitr->name.GetString(),"name") == 0)
 						instname = mitr->value.GetString();
+					else if ( strcmp( mitr->name.GetString(),"tags") == 0)
+					{
+						read_json_vector(tags,mitr->value);
+					}
 					else
 					{
 						const std::string componentType = mitr->name.GetString();
@@ -200,8 +207,39 @@ namespace pgn
 						if(sptr)
 						{
 							sptr->from_json(mitr->value);
+							componentPtrs.push_back(sptr);
 						}
 					}
+				}
+
+				// Create the entity
+				if( (archname != "") && (instname != "") && (!componentPtrs.empty()))
+				{
+					auto e = Create();
+					auto itArch = mArchetypes.find(archname);
+					if(itArch != mArchetypes.end())
+					{
+						const auto& arch = itArch->second;
+						// Add tags
+						for( auto t : arch.mTags)
+							Tag(e,t);
+						// Add components
+						for (size_t i = 0;i < arch.mMask.size();++i)
+							if(arch.mMask.test(i))
+							{
+								auto compo = CreateComponent( i);
+								AddComponentPtr(e,compo);
+							} 
+						mExemplars[instname] = e;
+					}
+					else
+					{
+						ECS.mLog.Wrn(boost::str(boost::format("cEntityMgr::ImportInstances: archetype \"%s\" does not exist")%archname));
+					}
+					for( auto c : componentPtrs)
+						AddComponentPtr(e,c);
+					for( auto t : tags)
+						Tag(e,t);
 				}
 			}
 		}
@@ -230,10 +268,36 @@ namespace pgn
 	//-------------------------------------------------------------------------------------------------
 	std::shared_ptr<cComponentBase> cEntityMgr::CreateComponent(const std::string& zName) const
 	{
-		auto it = mComponentCreators.find(zName);
-		if(it == mComponentCreators.end())
+		auto it = mComponentTypeNamesToIds.find(zName);
+		if(it == mComponentTypeNamesToIds.end())
 			return nullptr;
 		else
-			return it->second();
+			return CreateComponent(it->second);
+	}
+
+	//-------------------------------------------------------------------------------------------------
+	std::shared_ptr<cComponentBase> cEntityMgr::CreateComponent(size_t zIdx) const
+	{
+		return mComponentCreators.at(zIdx)();
+	}
+
+	//-------------------------------------------------------------------------------------------------
+	cEntity cEntityMgr::CloneExemplar(const std::string& zName)
+	{
+		auto it = mExemplars.find(zName);
+		assert(it != mExemplars.end());
+		auto e = Create();
+		const auto& ec = GetComponents(it->second);
+		const auto& cset = ec.Components();
+		for (const auto& x : cset)
+		{
+			if(x)
+			{
+				auto sptr = CreateComponent( x->TypeIndex());
+				*sptr = *x;
+				AddComponentPtr(e, sptr);
+			}
+		}
+		return e;
 	}
 }

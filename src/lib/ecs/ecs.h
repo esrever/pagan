@@ -7,6 +7,7 @@
 
 #include "EntityMgr.h"
 #include "SystemMgr.h"
+#include "ActionMgr.h"
 
 #define ECS pgn::cSingleton<pgn::cECS>::Instance()
 #define EMGR ECS.mEntityMgr
@@ -29,6 +30,7 @@ namespace pgn
 			//! sub-managers
 			std::shared_ptr<cEntityMgr> mEntityMgr;
 			std::shared_ptr<cSystemMgr> mSystemMgr;
+			std::shared_ptr<cActionMgr> mActionMgr;
 			cLogStream mLog;
 		private:
 			std::string mDataPath;

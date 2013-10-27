@@ -11,7 +11,7 @@
         "Actor" : [
             "pgn::cAI"
         ]
-    }
+    },
     "Tag" : {
         "Player" : [
             "Player"
@@ -22,8 +22,8 @@
         "CurrentLevel" : [
             "CurrentLevel"
         ],
-        "GameLog" : [
-            "GameLog"
+        "ActiveWindow" : [
+            "ActiveWindow"
         ]
     }
 }

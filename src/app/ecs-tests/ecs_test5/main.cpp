@@ -45,6 +45,8 @@ int main()
 	//##############################
 	//# Loop
 
+	ecs.mEntityMgr->CloneExemplar("rat_common");
+	ecs.mEntityMgr->CloneExemplar("human_common");
 	
 	//int prevposx=posx,prevposy=posy;
 	while( ecs.mSystemMgr->UpdateFrame() );

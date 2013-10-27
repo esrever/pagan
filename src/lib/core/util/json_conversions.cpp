@@ -10,7 +10,7 @@ namespace pgn
 		auto doc = std::shared_ptr<rapidjson::Document>( new rapidjson::Document());
 		if(doc->Parse<0>(file_to_text(zFname).c_str()).HasParseError())
 		{
-			auto errs = boost::str(boost::format( "Error(%u): %s") % (unsigned)doc->GetErrorOffset() % doc->GetParseError());
+			auto errs = boost::str(boost::format( "Json Error(%s - %u): %s") % zFname.c_str() % (unsigned)doc->GetErrorOffset() % doc->GetParseError());
 			std::cerr<< errs<< std::endl;
 		}
 		return doc;

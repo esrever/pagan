@@ -56,6 +56,8 @@ namespace pgn
 
 		auto cpair = cCursesColor::CreateColorPairIndex( vcol, vcolbg);
 
+		zData.mChar = c + (0<<PDC_ATTR_SHIFT) + (cpair<<PDC_COLOR_SHIFT);
+
 		return true;
 	}
 

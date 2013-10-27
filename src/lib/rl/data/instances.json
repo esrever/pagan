@@ -85,7 +85,7 @@
     },
     {
         "_comments" : "All main entities should also have a [World/Menu/...]Context component, not existing in partial entities! From the below instances, I need to remove the cPartOfWorld component. Do that at reading time",
-        "archetype" : "door",
+        "archetype" : "tile_state",
         "name" : "door_open_common",
         "pgn::cDescription" : {
             "short" : "open door",
@@ -100,7 +100,7 @@
             }
     },
     {
-        "archetype" : "door",
+        "archetype" : "tile_state",
         "name" : "door_closed_common",
         "pgn::cDescription" : {
             "short" : "closed door",
@@ -118,6 +118,43 @@
         "archetype" : "door",
         "name" : "door_common",
         "pgn::cOpenClose" : ["door_open_common","door_closed_common"]
+    },
+    {
+        "archetype" : "system_window_log",
+        "name" : "system_window_log_fullscreen",
+        "pgn::cGameLog" : {"MaxLines" : 1000},
+        "pgn::cAsciiWindow" : {
+            "Start" : [0,0],
+            "Size" : [160,50]
+            }
+    },
+    {
+        "archetype" : "system_window_log",
+        "name" : "system_window_log_small",
+        "pgn::cGameLog" : {"MaxLines" : 20},
+        "pgn::cAsciiWindow" : {
+            "Start" : [0,30],
+            "Size" : [140,20]
+            },
+        "tags" : ["ActiveWindow"]
+    },
+    {
+        "archetype" : "system_window_status",
+        "name" : "system_window_status",
+        "pgn::cAsciiWindow" : {
+            "Start" : [140,0],
+            "Size" : [20,50]
+            },
+        "tags" : ["ActiveWindow"]
+    },
+    {
+        "archetype" : "system_window_map",
+        "name" : "system_window_map",
+        "pgn::cAsciiWindow" : {
+            "Start" : [0,0],
+            "Size" : [140,30]
+            },
+        "tags" : ["ActiveWindow"]
     }
 ]
     

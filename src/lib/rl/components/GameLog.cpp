@@ -6,7 +6,11 @@ namespace pgn
 {
 	//-----------------------------------------------------------------------
 	template<>
-	bool from_json< cGameLog>( cGameLog& zData, const rapidjson::Value& zRoot){return true;}
+	bool from_json< cGameLog>( cGameLog& zData, const rapidjson::Value& zRoot)
+	{
+		from_json(zData.mMaxLines,"MaxLines");
+		return true;
+	}
 
 	//-----------------------------------------------------------------------
 	template<>

@@ -14,6 +14,8 @@ namespace pgn
 	{
 	public:
 		//! ctors
+		cQueryBase(){}
+		cQueryBase(const std::set<cEntity>& zEnts):mEntities(zEnts){}
 		virtual ~cQueryBase(){}
 
 		//! Name
@@ -24,6 +26,9 @@ namespace pgn
 
 		virtual bool operator < (const cQueryBase &rhs) const {return container_hash<std::set<cEntity>>()(Get()) < container_hash<std::set<cEntity>>()(rhs.Get());}
 		virtual bool operator == (const cQueryBase &rhs) const {return container_hash<std::set<cEntity>>()(Get()) == container_hash<std::set<cEntity>>()(rhs.Get());}
+
+		virtual cQueryBase operator && (const cQueryBase &rhs) const;
+		virtual cQueryBase operator || (const cQueryBase &rhs) const;
 
 	protected:
 		std::set<cEntity> mEntities;

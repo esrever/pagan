@@ -43,6 +43,7 @@ namespace pgn
 			//! Entity create/destroy
 			cEntity Create();
 			void Destroy(cEntity zEntity);
+			cEntity CloneExemplar(const std::string& zName);
 
 			//! Component add/remove
 			void AddComponentPtr(cEntity zEntity, cComponentBaseSptr zComponent); 
@@ -78,6 +79,7 @@ namespace pgn
 			size_t GetComponentTypeIndex( const std::string& zName) const;
 			const std::vector< std::type_index>& GetComponentTypeIndexAll( ) const {return mComponentTypeIds;}
 			std::shared_ptr<cComponentBase> CreateComponent(const std::string& zName) const;
+			std::shared_ptr<cComponentBase> CreateComponent(size_t zIdx) const;
 		
 		private:	
 			unsigned short AddComponentType( const std::type_index& zTi);
@@ -85,6 +87,9 @@ namespace pgn
 		protected:
 			//! Archetypes
 			std::map<std::string, cArchetype> mArchetypes;
+
+			//! Exemplars
+			std::map<std::string, cEntity> mExemplars;
 
 			//! tags to entities
 			std::map<std::string, std::set<cEntity>> mTaggedEntities;
@@ -95,7 +100,7 @@ namespace pgn
 			//! component-related
 			std::vector< std::type_index> mComponentTypeIds;
 			std::map< std::string, size_t > mComponentTypeNamesToIds;
-			std::map< std::string, component_creator_fun> mComponentCreators;
+			std::vector<component_creator_fun> mComponentCreators;
 
 		private:
 			//! entity id generator
@@ -123,8 +128,6 @@ namespace pgn
 		const auto& ti = typeid(T);
 		cComponent<typename T>::msTypeIndex = AddComponentType(ti);
 		component_creator_fun func = &cComponent<typename T>::Create;
-		std::vector<std::string> res;
-		pystring::split(ti.name(),res," ");
-		mComponentCreators[res[1]] = func;
+		mComponentCreators[cComponent<typename T>::msTypeIndex] = func;
 	}
 }
