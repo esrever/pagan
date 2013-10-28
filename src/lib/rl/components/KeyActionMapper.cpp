@@ -13,13 +13,13 @@ namespace pgn
 		for(auto itr = zRoot.MemberBegin(); itr != zRoot.MemberEnd(); ++itr)
 		{
 			const auto& entry = *itr;
-			std::string funcname = entry.name;
+			std::string funcname = entry.name.GetString();
 			
-			auto keys = entry.value;
+			const auto& keys = entry.value;
 			std::vector<unsigned short> key_vals;
 			if( keys.IsArray())
 			{
-				from_json_vector<unsigned short>(key_vals, keys);
+				read_json_vector(key_vals, keys);
 			}
 			else if(keys.IsObject())
 			{
