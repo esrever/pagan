@@ -1,0 +1,15 @@
+[
+    "MoveW" : [a,b,c,d],
+    "MoveE" : ,
+    "MoveN" : ,
+    "MoveS" : ,
+    "MoveNW" : ,
+    "MoveNE" : ,
+    "MoveSW" : ,
+    "MoveSE" : ,
+    "Idle" : ,
+    "QuitProgram" : ,
+    "SwitchToWindowMain" : ,
+    "SwitchToWindowLog" : ,
+    "SwitchToWindowBack" : 
+]
