@@ -1,4 +1,4 @@
-[
+{
     "MoveW" : [52],
     "MoveE" : [54],
     "MoveN" : [56],
@@ -9,7 +9,7 @@
     "MoveSE" : [51],
     "Idle" : [53],
     "QuitProgram" : [27],
-    "SwitchToWindowMain" : ,
-    "SwitchToWindowLog" : ,
-    "SwitchToWindowBack" : 
-]
+    "SwitchToWindowMain" : [],
+    "SwitchToWindowLog" : [],
+    "SwitchToWindowBack" : [] 
+}

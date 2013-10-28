@@ -5,7 +5,7 @@
 namespace pgn
 {
 	//! Stores mouse input information
-	struct cInputMouse
+	struct cMouseActionMapper
 	{
 		glm::ivec2 mCoords;
 		// TODO: button state

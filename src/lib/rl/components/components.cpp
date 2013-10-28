@@ -11,11 +11,11 @@ namespace pgn
 		zMgr.AddComponentType<pgn::cAsciiWindow>();
 		zMgr.AddComponentType<pgn::cDescription>();
 		zMgr.AddComponentType<pgn::cGameLog>();
-		zMgr.AddComponentType<pgn::cInputKeyboard>();
-		zMgr.AddComponentType<pgn::cInputMouse>();
+		zMgr.AddComponentType<pgn::cKeyActionMapper>();
 		zMgr.AddComponentType<pgn::cLevel>();
 		zMgr.AddComponentType<pgn::cLocation>();
 		zMgr.AddComponentType<pgn::cLockable>();
+		zMgr.AddComponentType<pgn::cMouseActionMapper>();
 		zMgr.AddComponentType<pgn::cMovement>();
 		zMgr.AddComponentType<pgn::cOpenClose>();
 		zMgr.AddComponentType<pgn::cPixelRep>();
