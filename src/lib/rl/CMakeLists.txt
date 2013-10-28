@@ -12,6 +12,11 @@ file(GLOB_RECURSE SYSTEM_SRCS
          RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
          ${CMAKE_CURRENT_SOURCE_DIR}/systems/*.cpp
          ${CMAKE_CURRENT_SOURCE_DIR}/systems/*.h)
+         
+file(GLOB_RECURSE ACTION_SRCS
+         RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+         ${CMAKE_CURRENT_SOURCE_DIR}/actions/*.cpp
+         ${CMAKE_CURRENT_SOURCE_DIR}/actions/*.h)
 
 set(SOURCE_FILES
     EntityMgrRL.cpp
@@ -28,6 +33,7 @@ set(HEADER_FILES
     window/cursescolor.h
     ${COMPONENT_SRCS}
     ${SYSTEM_SRCS}
+    ${ACTION_SRCS}
     
 )
 
@@ -39,6 +45,7 @@ source_group("Sources" FILES ${SOURCE_FILES})
 source_group("Headers" FILES ${HEADER_FILES})
 source_group("_Components"   FILES ${COMPONENT_SRCS})
 source_group("_Systems"      FILES ${SYSTEM_SRCS})
+source_group("_Actions"      FILES ${ACTION_SRCS})
 
 include_directories(
     ${PROJECT_SOURCE_DIR}/lib

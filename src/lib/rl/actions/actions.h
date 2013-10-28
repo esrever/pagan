@@ -4,5 +4,5 @@
 namespace pgn
 {
     class cActionMgr;
-    void RegisterAllActions(cActions& zMgr);
+    void RegisterAllActions(cActionMgr& zMgr);
 }

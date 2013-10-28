@@ -1,5 +1,5 @@
 #include "actions.h"
-#include "ecs/ActionMgr.h
+#include "ecs/ActionMgr.h"
 
 #include "MoveEAction.h"
 #include "MoveNAction.h"
@@ -12,7 +12,7 @@
 
 namespace pgn
 {
-    void RegisterAllActions(cActionsMgr& zMgr) 
+    void RegisterAllActions(cActionMgr& zMgr) 
 	{
 		zMgr.AddAction("MoveEAction",&pgn::action::MoveE);
 		zMgr.AddAction("MoveNAction",&pgn::action::MoveN);

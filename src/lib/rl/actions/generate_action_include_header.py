@@ -13,19 +13,19 @@ hdata = """
 namespace pgn
 {
     class cActionMgr;
-    void RegisterAllActions(cActions& zMgr);
+    void RegisterAllActions(cActionMgr& zMgr);
 }
 """
 fp.write(hdata)
 fp.close()
 
 cppdata = """#include "actions.h"
-#include "ecs/ActionMgr.h\n
+#include "ecs/ActionMgr.h"\n
 """  + incdata + """
 
 namespace pgn
 {
-    void RegisterAllActions(cActionsMgr& zMgr) \n\t{\n%s\n\t}
+    void RegisterAllActions(cActionMgr& zMgr) \n\t{\n%s\n\t}
 }
 """%regdata
 

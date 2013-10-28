@@ -1,11 +1,12 @@
 #pragma once
 
-#include "MoveAction.h"
+#include "MoveWAction.h"
+#include "common/MoveAdjacent.h"
 
 namespace pgn
 {
 	namespace action
 	{
-		void MoveW(cEntity e);
+		void MoveW(cEntity e) {MoveAdjacent(e,-1,0);}
 	}
 }

@@ -14,6 +14,7 @@ set(SOURCE_FILES
     ComponentHelpers.cpp
     TagQuery.cpp
     QueryBase.cpp
+    ActionMgr.cpp
 )
 
 set(HEADER_FILES
@@ -30,6 +31,7 @@ set(HEADER_FILES
     ExampleComponent.h
     ExampleSystem.h
     SystemMgr.h
+    ActionMgr.h
     ComponentHelpers.h
     TagQuery.h
     QueryBase.h
