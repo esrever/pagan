@@ -8,6 +8,8 @@
 #include <ecs/ComponentHelpers.h>
 #include <rl/events/events.h>
 
+#include <boost/format.hpp>
+
 namespace pgn
 {
 	//------------------------------------------------------
@@ -16,6 +18,7 @@ namespace pgn
 		// TODO: the listener will check 1) if it's active 2) against a map of keys to:
 		//		 void function(), or a signal
 		chtype ch = getch();
+		// TODO: InputKeyboard component: 
 		glm::ivec2 gotoDir(0,0);
 		switch(ch)
 		{
