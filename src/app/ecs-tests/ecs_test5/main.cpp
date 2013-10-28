@@ -42,11 +42,14 @@ int main()
 	//ecs.SetDataPath("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\rl\\data\\");
 	ecs.from_json( *pgn::file_to_json(ecs.GetDataPath() + "ecs.json"));
 
-	//##############################
-	//# Loop
-
+	//###############################
+	//# Demo
+	// Create 2 entities, a rat and a human
 	ecs.mEntityMgr->CloneExemplar("rat_common");
 	ecs.mEntityMgr->CloneExemplar("human_common");
+
+	//##############################
+	//# Loop
 	
 	//int prevposx=posx,prevposy=posy;
 	while( ecs.mSystemMgr->UpdateFrame() );

@@ -7,7 +7,8 @@ namespace pgn
 	//------------------------------------------------------
 	void cGameTurnSystem::Process()
 	{
-
+		// TODO: simple turn taking at the moment.
+		// Move both entities to a random position
 	}
 
 	//------------------------------------------------------
