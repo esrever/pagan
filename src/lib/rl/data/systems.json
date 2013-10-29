@@ -10,10 +10,10 @@
         }
     },
     {
-        "Type" : "pgn::cMapInputSystem",
+        "Type" : "pgn::cAsciiActionInputSystem",
         "Data" : {
-            "Name" : "MapInputProcessor",
-            "Desc" : "Maps input to desired actions via bindings in the context of a level map -- the main game view",
+            "Name" : "AsciiInput",
+            "Desc" : "read ascii char and propagate to keyactionmap components",
             "QueriesUsed" : [
                 "InputListener"
             ]
