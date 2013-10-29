@@ -154,6 +154,21 @@
             "Start" : [0,0],
             "Size" : [140,30]
             },
+        "pgn::cKeyActionMapper" : {
+            "MoveW" : [52],
+            "MoveE" : [54],
+            "MoveN" : [56],
+            "MoveS" : [50],
+            "MoveNW" : [55],
+            "MoveNE" : [57],
+            "MoveSW" : [49],
+            "MoveSE" : [51],
+            "Idle" : [53],
+            "QuitProgram" : [27],
+            "SwitchToWindowMain" : [],
+            "SwitchToWindowLog" : [],
+            "SwitchToWindowBack" : [] 
+        },
         "tags" : ["ActiveWindow"]
     }
 ]
