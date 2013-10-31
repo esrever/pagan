@@ -6,6 +6,8 @@
 
 #include <ecs/ecs.h>
 #include <ecs/SystemMgr.h>
+#include <ecs/Component.h>
+#include <ecs/EntityComponents.h>
 
 #include <rl/components/KeyActionMapper.h>
 
@@ -14,30 +16,34 @@ namespace pgn
 	//------------------------------------------------------
 	void cAsciiActionInputSystem::Process()
 	{
-		auto ch = static_cast<wchar_t>(getch());
-		// Get the query. This should be easily retrievable
-		auto qit = ECS.mSystemMgr->GetQueries().find("InputListener");
-		if( qit != ECS.mSystemMgr->GetQueries().end())
-		{
-			// Get entities found by the query
-			auto ents = qit->second.Get();
-			for(auto e : ents)
-			{
-				// Get the entities' components
-				const auto& ec = ECS.mEntityMgr->GetComponents(e);
+		mCurChar = static_cast<wchar_t>(getch());
+		/*
+			Summary of below process:
+			get query
+			get query's entities
+			for each entity
+				get components
+				get keyactionmapper component
+				search for function
+				execut function
 
-				// Get keyactionmapper component
-				std::shared_ptr< cComponent<cKeyActionMapper>> ptr;
-				ec.GetComponent( ptr);
+		*/
+		
+		ProcessQuery("KeyInputListener");
+	}
+
+	void cAsciiActionInputSystem::ProcessSingle(const std::map< cEntity, cEntityComponents>::const_iterator& zEc)
+	{
+		// Get keyactionmapper component
+		std::shared_ptr< cComponent<cKeyActionMapper>> ptr;
+		zEc->second.GetComponent( ptr);
 				
-				// find function
-				auto itFunc = ptr->mData.mActions.find(ch);
-				if(itFunc != ptr->mData.mActions.end() )
-				{
-					// if found, execute
-					itFunc->second(e);
-				}
-			}
+		// find function
+		auto itFunc = ptr->mData.mActions.find(mCurChar);
+		if(itFunc != ptr->mData.mActions.end() )
+		{
+			// if found, execute
+			itFunc->second(zEc->first);
 		}
 	}
 

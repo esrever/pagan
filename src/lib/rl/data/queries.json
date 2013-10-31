@@ -4,8 +4,10 @@
             "pgn::cAsciiRep",
             "pgn::cAsciiLevelRep"
         ],
-        "InputListener" : [
-            "pgn::cKeyActionMapper",
+        "KeyInputListener" : [
+            "pgn::cKeyActionMapper"
+        ],
+        "MouseInputListener" : [
             "pgn::cMouseActionMapper"
         ],
         "Actor" : [

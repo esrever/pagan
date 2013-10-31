@@ -26,6 +26,24 @@ namespace pgn
 	}
 
 	//---------------------------------------------------------------
+	void cSystemBase::ProcessQuery(const std::string& zQueryName)
+	{
+		// Get the query. This should be easily retrievable
+		auto qit = ECS.mSystemMgr->GetQueries().find(zQueryName);
+		if( qit != ECS.mSystemMgr->GetQueries().end())
+		{
+			// Get entities found by the query
+			auto ents = qit->second.Get();
+			for(auto e : ents)
+			{
+				// Get the entities' components
+				auto ec = ECS.mEntityMgr->GetComponents().find(e);
+				ProcessSingle(ec);
+			}
+		}
+	}
+
+	//---------------------------------------------------------------
 	bool cSystemBase::from_json(const rapidjson::Value& zRoot)
 	{
 		// Read Desc

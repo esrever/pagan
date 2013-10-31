@@ -14,7 +14,7 @@
             }
     },
     {
-        "archetype" : "creature",
+        "archetype" : "pc",
         "name" : "human_common",
         "pgn::cDescription" : {
             "short" : "human",
@@ -25,7 +25,18 @@
             "char" : "h",
             "color" : "EEE9E9",
             "attribs" : []
-            }
+            },
+        "pgn::cKeyActionMapper" : {
+            "MoveW" : [52],
+            "MoveE" : [54],
+            "MoveN" : [56],
+            "MoveS" : [50],
+            "MoveNW" : [55],
+            "MoveNE" : [57],
+            "MoveSW" : [49],
+            "MoveSE" : [51],
+            "Idle" : [53]
+        }
     },
     {
         "archetype" : "tile",
@@ -126,7 +137,11 @@
         "pgn::cAsciiWindow" : {
             "Start" : [0,0],
             "Size" : [160,50]
-            }
+            },
+        "pgn::cKeyActionMapper" : {
+            "QuitProgram" : [27],
+            "SwitchToWindowMain" : []
+        }
     },
     {
         "archetype" : "system_window_log",
@@ -155,19 +170,8 @@
             "Size" : [140,30]
             },
         "pgn::cKeyActionMapper" : {
-            "MoveW" : [52],
-            "MoveE" : [54],
-            "MoveN" : [56],
-            "MoveS" : [50],
-            "MoveNW" : [55],
-            "MoveNE" : [57],
-            "MoveSW" : [49],
-            "MoveSE" : [51],
-            "Idle" : [53],
             "QuitProgram" : [27],
-            "SwitchToWindowMain" : [],
-            "SwitchToWindowLog" : [],
-            "SwitchToWindowBack" : [] 
+            "SwitchToWindowLog" : []
         },
         "tags" : ["ActiveWindow"]
     }

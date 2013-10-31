@@ -94,9 +94,9 @@ namespace pgn
 	template<class T>
 	void emit_event(const typename T::data_type & zVal)
 	{
-		const std::type_info& ti = typeid(T);
-		std::string s = evt_string<typename T::data_type>( ti.name(), zVal );
-		log_event_call(s);
+		//const std::type_info& ti = typeid(T);
+		//std::string s = evt_string<typename T::data_type>( ti.name(), zVal );
+		//log_event_call(s);
 
 		T evd;
 		evd.data = zVal;
@@ -105,9 +105,9 @@ namespace pgn
 	template<class T>
 	void emit_event()
 	{
-		const std::type_info& ti = typeid(T);
-		std::string s = evt_string<typename T::data_type>( ti.name() );
-		log_event_call(s);
+		//const std::type_info& ti = typeid(T);
+		//std::string s = evt_string<typename T::data_type>( ti.name() );
+		//log_event_call(s);
 		pgn::cSingleton<pgn::cEvent<T>>::Instance().emit(T());
 	}
 }

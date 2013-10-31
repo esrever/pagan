@@ -21,6 +21,7 @@ file(GLOB_RECURSE ACTION_SRCS
 set(SOURCE_FILES
     EntityMgrRL.cpp
     SystemMgrRL.cpp
+    ActionMgrRL.cpp
     #window/curseswindow.cpp
     window/cursescolor.cpp
 )
@@ -28,6 +29,7 @@ set(SOURCE_FILES
 set(HEADER_FILES
     EntityMgrRL.h
     SystemMgrRL.h
+    ActionMgrRL.cpp
     events/events.h
     #window/curseswindow.h
     window/cursescolor.h

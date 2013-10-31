@@ -119,4 +119,17 @@ namespace pgn
 	{
 		zRoot.SetBool(zObj);
 	}
+
+	template <>
+	inline bool from_json<unsigned short>(unsigned short& zObj, const rapidjson::Value& zRoot)
+	{
+		if(zRoot.IsNumber())
+			zObj = unsigned short(zRoot.GetUint());
+        return zRoot.IsNumber();
+	}
+	template <>
+	inline void to_json<unsigned short>(const unsigned short& zObj, rapidjson::Value& zRoot)
+	{
+		zRoot.SetUint( zObj);
+	}
 }

@@ -16,7 +16,7 @@ namespace pgn
 		public:
 			virtual ~cActionMgr(){}
 
-			virtual void RegisterAllActions(){}
+			virtual void RegisterActionTypes(){}
 			void AddAction(const std::string& zName, action_fun zFun);
 
 			action_fun GetAction(size_t zIdx) {return mActions.at(zIdx);}

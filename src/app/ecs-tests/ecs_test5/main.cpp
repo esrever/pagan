@@ -3,6 +3,7 @@
 #include <ecs/ecs.h>
 #include <rl/EntityMgrRL.h>
 #include <rl/SystemMgrRL.h>
+#include <rl/ActionMgrRL.h>
 
 /*
 	Provide json conversions for all components
@@ -31,12 +32,16 @@ int main()
 	//! Init managers
 	ecs.mSystemMgr = std::shared_ptr<pgn::cSystemMgr>(new pgn::cSystemMgrRL());
 	ecs.mEntityMgr = std::shared_ptr<pgn::cEntityMgr>(new pgn::cEntityMgrRL());
+	ecs.mActionMgr = std::shared_ptr<pgn::cActionMgr>(new pgn::cActionMgrRL());
 
 	//! register custom types
 	ecs.mEntityMgr->RegisterComponentTypes();
 
 	//! register system types
 	ecs.mSystemMgr->RegisterSystemTypes();
+
+	//! register action types
+	ecs.mActionMgr->RegisterActionTypes();
 
 	//! Read ecs configuration
 	//ecs.SetDataPath("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\rl\\data\\");

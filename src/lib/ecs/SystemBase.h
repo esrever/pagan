@@ -14,6 +14,7 @@ namespace pgn
 	DECL_EVENT1(SystemActivity, bool);
 
 	class cQueryBase;
+	class cEntityComponents;
 
 	//! Base class for a system. 
 	class cSystemBase
@@ -25,6 +26,11 @@ namespace pgn
 
 			//! Process entities
 			virtual void Process(){};
+
+			//! Processes a single entity-component
+			virtual void ProcessSingle(const std::map< cEntity, cEntityComponents>::const_iterator& zEc){};
+
+			void ProcessQuery(const std::string& zQueryName);
 
 			//! Json related
 			virtual void to_json(rapidjson::Value& zRoot) const{};

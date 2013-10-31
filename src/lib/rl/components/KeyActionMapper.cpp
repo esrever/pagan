@@ -5,6 +5,9 @@
 #include <core/util/json_conversions_glm.h>
 #include <core/util/jsonutils.h>
 
+#include <ecs/ecs.h>
+#include <ecs/ActionMgr.h>
+
 namespace pgn
 {
 	template<>
@@ -30,6 +33,14 @@ namespace pgn
 			else
 			{
 				assert(false);
+			}
+
+			if(!key_vals.empty())
+			{
+				auto fun = ECS.mActionMgr->GetAction(funcname);
+				if(fun)
+					for(auto key_val : key_vals)
+						zObj.mActions[key_val] = fun;
 			}
 		}
 		return true;

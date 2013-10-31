@@ -16,9 +16,9 @@
     },
     {
         "name" : "pc",
-        "components" : [],
+        "components" : ["pgn::cKeyActionMapper"],
         "inherits" : ["creature"],
-        "tags" : ["pc"]
+        "tags" : ["Player"]
     },
     {
         "name" : "npc",

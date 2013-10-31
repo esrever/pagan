@@ -8,6 +8,5 @@ namespace pgn
 		zMgr.AddSystemType<pgn::cAsciiActionInputSystem>();
 		zMgr.AddSystemType<pgn::cAsciiRenderSystem>();
 		zMgr.AddSystemType<pgn::cGameTurnSystem>();
-		zMgr.AddSystemType<pgn::cMapInputSystem>();
 	}
 }
