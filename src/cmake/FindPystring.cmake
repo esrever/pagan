@@ -21,7 +21,7 @@ if (WIN32)
             pystring
         PATHS
             #${PROJECT_SOURCE_DIR}/contrib/pystring/lib/${ARCH}/debug
-            ${PROJECT_SOURCE_DIR}/contrib/pystring/lib/x86/release
+            ${PROJECT_SOURCE_DIR}/contrib/pystring/lib/${ARCH}/release
 
             DOC "The pystring library")
             
@@ -30,7 +30,7 @@ if (WIN32)
             pystring
         PATHS
             #${PROJECT_SOURCE_DIR}/contrib/pystring/lib/${ARCH}/debug
-            ${PROJECT_SOURCE_DIR}/contrib/pystring/lib/x86/debug
+            ${PROJECT_SOURCE_DIR}/contrib/pystring/lib/${ARCH}/debug
 
             DOC "The pystring library")
 endif ()

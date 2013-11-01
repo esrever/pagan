@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 2.8.6)
 message(STATUS "Compiling ${CMAKE_PROJECT_NAME}")
 message(STATUS "Using cmake version ${CMAKE_VERSION}")
 
-if( ${CMAKE_GENERATOR} STREQUAL "Visual Studio 11" )
+if( ${CMAKE_GENERATOR} STREQUAL "Visual Studio 12" )
     set( ARCH "x86")
 else()
     set( ARCH "x64")
