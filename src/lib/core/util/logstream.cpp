@@ -5,11 +5,10 @@
 namespace pgn
 {
 	//----------------------------------------------------------------------------
-    cLogStream::cLogStream()
+    cLogBase::cLogBase()
         :mName("default")
         ,mDisplayLevel( eLogLevel::DBG )
         ,mFormat( boost::format("%s(%s): %s\n") )
-        ,mChannel( nullptr )
     {
         mLevelNames[0] = "ERR";
         mLevelNames[1] = "WRN";
@@ -18,10 +17,16 @@ namespace pgn
     }
 
 	//----------------------------------------------------------------------------
+    cLogStream::cLogStream()
+        :mChannel( nullptr )
+    {
+    }
+
+	//----------------------------------------------------------------------------
 	cLogStream cLogStream::mDefault;
 
 	//----------------------------------------------------------------------------
-    void cLogStream::SetFormat(const boost::format& zFmt)
+    void cLogBase::SetFormat(const boost::format& zFmt)
     {
         mFormat = zFmt;
     }

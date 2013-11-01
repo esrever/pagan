@@ -90,10 +90,10 @@ namespace pgn
 					AddSystem(sptr, priority);
 				}
 				else
-					ECS.mLog.Err(boost::str(boost::format("cSystemMgr::from_json: Failed to create system of type \"%s\"")%stype));
+					ECS.mLog->Err(boost::str(boost::format("cSystemMgr::from_json: Failed to create system of type \"%s\"")%stype));
 			}
 		else
-			ECS.mLog.Wrn("cSystemMgr::from_json: \"Systems\" array not found");
+			ECS.mLog->Wrn("cSystemMgr::from_json: \"Systems\" array not found");
 	}
 
 	//----------------------------------------------------------------
@@ -122,7 +122,7 @@ namespace pgn
 							mask.set(idx);
 						else
 						{
-							ECS.mLog.Err(boost::str(boost::format("cSystemMgr::from_json: Component type \"%s\" does not exist")%s));
+							ECS.mLog->Err(boost::str(boost::format("cSystemMgr::from_json: Component type \"%s\" does not exist")%s));
 							err = true;
 							break;
 						}; 
@@ -149,6 +149,6 @@ namespace pgn
 				}
 		}
 		else
-			ECS.mLog.Wrn("cSystemMgr::from_json: \"Queries\" not found");
+			ECS.mLog->Wrn("cSystemMgr::from_json: \"Queries\" not found");
 	}
 }

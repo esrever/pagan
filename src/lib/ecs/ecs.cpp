@@ -6,9 +6,12 @@ namespace pgn
 
 	void cECS::Init()
 	{
+		/*
 		std::ios_base::Init();
-		mLog.SetName("ECS");
 		mLog.SetChannel(&std::cout);
+		*/
+		mLog->SetName("ECS");
+
 		mDataPath = __FILE__;
 		mDataPath.erase( mDataPath.end()-7, mDataPath.end());
 		mDataPath.append( "../rl/data/");

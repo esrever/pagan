@@ -15,7 +15,7 @@
             "Name" : "AsciiInput",
             "Desc" : "read ascii char and propagate to keyactionmap components",
             "QueriesUsed" : [
-                "InputListener"
+                "KeyInputListener"
             ]
         }
     },

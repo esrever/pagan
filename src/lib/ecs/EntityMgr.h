@@ -43,7 +43,9 @@ namespace pgn
 			//! Entity create/destroy
 			cEntity Create();
 			void Destroy(cEntity zEntity);
-			cEntity CloneExemplar(const std::string& zName);
+			cEntity InstantiateEntity(const std::string& zArchName,const std::string& zExemplarName);
+			cEntity InstantiateArchetype(const std::string& zArchName);
+			cEntity InstantiateExemplar(const std::string& zExemplarName);
 
 			//! Component add/remove
 			void AddComponentPtr(cEntity zEntity, cComponentBaseSptr zComponent); 
@@ -71,7 +73,7 @@ namespace pgn
 			//! Json
 			bool from_json(const rapidjson::Value& zRoot);
 			void ImportArchetypes(const rapidjson::Document * zDoc);
-			void ImportInstances(const rapidjson::Document * zDoc);
+			void ImportInstances(const rapidjson::Document * zDoc, bool isExemplar);
 
 			//! Component type related
 			virtual void RegisterComponentTypes(){}

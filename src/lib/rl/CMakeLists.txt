@@ -23,14 +23,17 @@ set(SOURCE_FILES
     SystemMgrRL.cpp
     ActionMgrRL.cpp
     #window/curseswindow.cpp
+    util/LogCurses.cpp
     window/cursescolor.cpp
+    
 )
 
 set(HEADER_FILES
     EntityMgrRL.h
     SystemMgrRL.h
-    ActionMgrRL.cpp
+    ActionMgrRL.h
     events/events.h
+    util/LogCurses.h
     #window/curseswindow.h
     window/cursescolor.h
     ${COMPONENT_SRCS}

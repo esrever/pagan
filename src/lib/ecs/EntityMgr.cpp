@@ -177,7 +177,7 @@ namespace pgn
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::ImportInstances(const rapidjson::Document * zDoc)
+	void cEntityMgr::ImportInstances(const rapidjson::Document * zDoc, bool zIsExemplar)
 	{
 		if (!zDoc) return;
 		if(zDoc->IsArray())
@@ -215,31 +215,17 @@ namespace pgn
 				// Create the entity
 				if( (archname != "") && (instname != "") && (!componentPtrs.empty()))
 				{
-					auto e = Create();
-					auto itArch = mArchetypes.find(archname);
-					if(itArch != mArchetypes.end())
-					{
-						const auto& arch = itArch->second;
-						// Add tags
-						for( auto t : arch.mTags)
-							Tag(e,t);
-						// Add components
-						for (size_t i = 0;i < arch.mMask.size();++i)
-							if(arch.mMask.test(i))
-							{
-								auto compo = CreateComponent( i);
-								AddComponentPtr(e,compo);
-							} 
-						mExemplars[instname] = e;
-					}
-					else
-					{
-						ECS.mLog.Wrn(boost::str(boost::format("cEntityMgr::ImportInstances: archetype \"%s\" does not exist")%archname));
-					}
+					auto e = InstantiateArchetype(archname);
+
 					for( auto c : componentPtrs)
 						AddComponentPtr(e,c);
 					for( auto t : tags)
 						Tag(e,t);
+					if (zIsExemplar)
+					{
+						mExemplars[instname] = e;
+						Tag(e,"Exemplar");
+					}
 				}
 			}
 		}
@@ -256,11 +242,17 @@ namespace pgn
 			auto pdoc = file_to_json(ECS.GetDataPath() + s);
 			ImportArchetypes(pdoc.get());
 		}
+		read_json_vector(fnames, zRoot["ExemplarsFile"]);
+		for(auto s : fnames)
+		{
+			auto pdoc = file_to_json(ECS.GetDataPath() + s);
+			ImportInstances(pdoc.get(),true);
+		}
 		read_json_vector(fnames, zRoot["InstancesFile"]);
 		for(auto s : fnames)
 		{
 			auto pdoc = file_to_json(ECS.GetDataPath() + s);
-			ImportInstances(pdoc.get());
+			ImportInstances(pdoc.get(),false);
 		}		
         return true;
 	}
@@ -282,12 +274,34 @@ namespace pgn
 	}
 
 	//-------------------------------------------------------------------------------------------------
-	cEntity cEntityMgr::CloneExemplar(const std::string& zName)
+	cEntity cEntityMgr::InstantiateArchetype(const std::string& zArchName)
 	{
-		auto it = mExemplars.find(zName);
-		assert(it != mExemplars.end());
 		auto e = Create();
-		const auto& ec = GetComponents(it->second);
+		auto itArch = mArchetypes.find(zArchName);
+		if(itArch != mArchetypes.end())
+		{
+			const auto& arch = itArch->second;
+			// Add tags
+			for( auto t : arch.mTags)
+				Tag(e,t);
+			// Add components
+			for (size_t i = 0;i < arch.mMask.size();++i)
+				if(arch.mMask.test(i))
+				{
+					auto compo = CreateComponent( i);
+					AddComponentPtr(e,compo);
+				} 
+		}
+		return e;
+	}
+
+	//-------------------------------------------------------------------------------------------------
+	cEntity cEntityMgr::InstantiateExemplar(const std::string& zExemplarName)
+	{
+		auto e = Create();
+		auto itEx = mExemplars.find(zExemplarName);
+		// Copy components
+		const auto& ec = GetComponents(itEx->second);
 		const auto& cset = ec.Components();
 		for (const auto& x : cset)
 		{
@@ -298,6 +312,16 @@ namespace pgn
 				AddComponentPtr(e, sptr);
 			}
 		}
+
+		// Copy tags
+		for (const auto& it : TaggedEntities())
+		{
+			if(it.second.find(itEx->second) != it.second.end())
+				Tag(e,it.first);
+		}
+
+		// Remove exemplar tag
+		Untag(e,"Exemplar");
 		return e;
 	}
 }

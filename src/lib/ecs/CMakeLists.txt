@@ -1,7 +1,7 @@
 set(SOURCE_FILES
     ComponentBase.cpp
     SystemBase.cpp
-    Entity.cpp
+    #Entity.cpp
     Event.cpp
     EntityMgr.cpp
     ComponentQuery.cpp
@@ -51,6 +51,7 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
     ${Rapidjson_INCLUDE_DIR}
     ${Signal_INCLUDE_DIR}
+    ${glm_INCLUDE_DIR}
 )
 
 add_library(pagan_ecs STATIC

@@ -31,7 +31,7 @@ namespace pgn
 			std::shared_ptr<cEntityMgr> mEntityMgr;
 			std::shared_ptr<cSystemMgr> mSystemMgr;
 			std::shared_ptr<cActionMgr> mActionMgr;
-			cLogStream mLog;
+			std::shared_ptr<cLogBase>	mLog;
 		private:
 			std::string mDataPath;
 			static const std::string mErrorString;

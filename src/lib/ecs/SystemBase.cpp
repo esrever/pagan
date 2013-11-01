@@ -60,7 +60,7 @@ namespace pgn
 			if( it != allQueries.end())
 				mReferencedQueries.push_back( std::make_shared<cQueryBase>(it->second));
 			else
-				ECS.mLog.Err(boost::str(boost::format("cSystemBase::from_json: Failed to find query \"%s\"")%s));;
+				ECS.mLog->Err(boost::str(boost::format("cSystemBase::from_json: Failed to find query \"%s\"")%s));;
 		}
 		return true;
 	}

@@ -7,6 +7,7 @@
 #include <rapidjson/prettywriter.h>
 #include <rapidjson/stringbuffer.h>
 #include <pystring.h>
+#include <glm/glm.hpp>
 
 #include "logstream.h"
 #include "conversions.h"
@@ -131,5 +132,50 @@ namespace pgn
 	inline void to_json<unsigned short>(const unsigned short& zObj, rapidjson::Value& zRoot)
 	{
 		zRoot.SetUint( zObj);
+	}
+	
+	template <>
+	inline bool from_json<unsigned int>(unsigned int& zObj, const rapidjson::Value& zRoot)
+	{
+		if(zRoot.IsNumber())
+			zObj = unsigned(zRoot.GetUint());
+        return zRoot.IsNumber();
+	}
+	template <>
+	inline void to_json<unsigned int>(const unsigned int& zObj, rapidjson::Value& zRoot)
+	{
+		zRoot.SetUint( zObj);
+	}
+
+	//-------------------------------------------------------------------------------------
+	template<class T, size_t N>
+	bool from_json(T& zObj, const rapidjson::Value& zRoot)
+	{
+		if(zRoot.IsArray())
+		{
+			if(zRoot.Size() != N) 
+				return false;
+			size_t i=0;
+			for (auto itr = zRoot.Begin(); itr != zRoot.End(); ++itr) 
+			{
+				if(!from_json(zObj[i],*itr))
+					return false;
+				++i;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	template <>
+	inline bool from_json<glm::uvec2>(glm::uvec2& zObj, const rapidjson::Value& zRoot)
+	{
+		return from_json<glm::uvec2,2>(zObj,zRoot);
+	}
+
+	template <>
+	inline bool from_json<glm::ivec2>(glm::ivec2& zObj, const rapidjson::Value& zRoot)
+	{
+		return from_json<glm::ivec2,2>(zObj,zRoot);
 	}
 }

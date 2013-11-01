@@ -31,6 +31,7 @@ include_directories(
     ${PYSTRING_INCLUDE_DIR}
     ${Boost_INCLUDE_DIRS}
     ${Rapidjson_INCLUDE_DIR}
+    ${glm_INCLUDE_DIR}
 )
 
 add_library(pagan_core STATIC
