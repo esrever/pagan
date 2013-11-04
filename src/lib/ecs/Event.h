@@ -14,100 +14,51 @@
 	Usage: 
 
 	Receivers of T events:
-		inherit from pgn::cEventListener<T> 
-		implement Receive<T>(cEvent<T>::signal_data_type data)
+		Add member  : cEventHandler<cXXXEvent> mEventHandlerXXX;
+		Add function: void cFoo::HandleEvent(Args...)
+		initialize  : :mEventHandlerXXX(Simple::slot(this, &Foo::HandleEvent))
 
-	Events T:
-		cEvent<T>::emit( Tinst )
+	Events:
+		enum class eEvent : size_t {
+			LOCATION_CHANGED = 0,
+			ENTITY_CREATED = 1
+		};
+	
+	Emitting:
+		cXXXEvent::mSig.emit(args...)
+
 	Notes:
 		Events are instantiated at first emission - don't generate events at compile time.
-		do a less clunky emit with bind
-			emit(eEvent, arg0, arg1, ...)
-				auto handle = std::bind( event_handle2, _1, arg0, arg1 ); // Bind the arguments
-				for_each recv in receivers[eEvent], handle(recv)
-			Subscribe( vector<eEvent> ) : 
-				
 */
 
 namespace pgn
 {
-	//! for debugging the event calls
-	void log_event_call(const std::string& s);
-
-	//!Event class
-	template<class evt_data_type>
-	class cEvent
+	template< size_t E, class... Args >
+	struct cEvent
 	{
-		public:
-			typedef const evt_data_type& signal_data_type;
-			typedef Gallant::Signal1<signal_data_type> signal_type;
-		public:
-			signal_type emit;
+		typedef Simple::Signal<void(Args...)> sigtype;
+		typedef std::function<void(Args...)> functype;
+		static sigtype mSig;
 	};
+	template< size_t E, class... Args >
+	typename cEvent<E, Args...>::sigtype cEvent<E, Args...>::mSig;
 
-	//!Event receiver base class
-	template<class evt_data_type>
-	class cEventReceiver
+
+	template<class E>
+	class cEventHandler
 	{
-		public:
-			cEventReceiver() {Subscribe();}
-			virtual ~cEventReceiver(){ Unsubscribe();}
+	public:
+		cEventHandler(typename E::functype zCallback)
+		{
+			mId = E::mSig += zCallback;
+		}
 
-			void Subscribe();
-			void Unsubscribe();
-			virtual const std::string ReceiverName() const {return boost::str(boost::format("%x")% this );}
-			virtual void Receive(typename cEvent<evt_data_type>::signal_data_type zData) {}
+		~cEventHandler()
+		{
+			E::mSig -= mId;
+		}
+
+	private:
+		unsigned mId;
 	};
-
-
-	//-------------------------------------------
-	template<class evt_data_type> 
-	void cEventReceiver<evt_data_type> ::Subscribe()
-	{
-		log_event_call(boost::str(boost::format("%s subscribes to %s")% ReceiverName().c_str() %typeid(evt_data_type).name() ));
-		pgn::cSingleton<cEvent<evt_data_type>>::Instance().emit.Connect(this, &cEventReceiver<evt_data_type>::Receive);		
-	}
-
-	//-------------------------------------------
-	template<class evt_data_type> 
-	void cEventReceiver<evt_data_type>::Unsubscribe()
-	{
-		log_event_call(boost::str(boost::format("%s unsubscribes from %s")% ReceiverName().c_str() %typeid(evt_data_type).name() ));
-		pgn::cSingleton<cEvent<evt_data_type>>::Instance().emit.Disconnect(this, &cEventReceiver<evt_data_type>::Receive);
-	}
-
-	//-------------------------------------------
-	//! create a string out of an emitted event
-	template <class evt_data_type>
-	inline std::string evt_string(const std::string& evtName, const evt_data_type& evtData)
-	{
-		return boost::str(boost::format("Emitting event %s with data: %s")%evtName.c_str()%pgn::to_string(evtData));
-	}
-	template <class evt_data_type>
-	inline std::string evt_string(const std::string& evtName)
-	{
-		return boost::str(boost::format("Emitting non-data event %s")%evtName.c_str());
-	}
-
-	//-------------------------------------------
-	//! emit event 
-	template<class T>
-	void emit_event(const typename T::data_type & zVal)
-	{
-		//const std::type_info& ti = typeid(T);
-		//std::string s = evt_string<typename T::data_type>( ti.name(), zVal );
-		//log_event_call(s);
-
-		T evd;
-		evd.data = zVal;
-		pgn::cSingleton<pgn::cEvent<T>>::Instance().emit(zVal);
-	}
-	template<class T>
-	void emit_event()
-	{
-		//const std::type_info& ti = typeid(T);
-		//std::string s = evt_string<typename T::data_type>( ti.name() );
-		//log_event_call(s);
-		pgn::cSingleton<pgn::cEvent<T>>::Instance().emit(T());
-	}
 }

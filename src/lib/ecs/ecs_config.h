@@ -1,4 +1,4 @@
-#pragma once
+				pragma once
 #include <memory>
 #include <tuple>
 #include <bitset>
@@ -18,19 +18,18 @@ typedef unsigned cEntity;
 						typedef const T &    T##Cref;\
 						typedef T &    T##Ref;
 
-//! Declare events
-#define DECL_EVENT0(N) typedef void N##_datatype; struct c##N##EventData{\
-	typedef void data_type; \
-	static void emit() { pgn::emit_event< pgn::c##N##EventData >( ); }};
-#define DECL_EVENT1(N, A) typedef std::tuple< A > N##_datatype; DECL_EVENT( N , N##_datatype )
-#define DECL_EVENT2(N, A, B) typedef std::tuple< A , B > N##_datatype; DECL_EVENT( N , N##_datatype )
-#define DECL_EVENT3(N, A, B, C) typedef std::tuple< A , B , C> N##_datatype; DECL_EVENT( N , N##_datatype )
-#define DECL_EVENT(N, T) struct c##N##EventData{ \
-	typedef T data_type; \
-	T data; \
-	c##N##EventData(){} \
-	c##N##EventData(const T &v):data(v){} \
-	static void emit(const T & val ) { pgn::emit_event< pgn::c##N##EventData >(val); }\
+//! Allow 256 values for the eBasicECSEvent
+enum class eBasicECSEvent : size_t {
+	ENTITY_CREATED = 0,
+	ENTITY_DESTROY,
+	ENTITY_TAGGED,
+	ENTITY_UNTAG,
+	TAG_REMOVE,
+	COMPONENT_ADDED,
+	COMPONENT_REMOVE,
+	SYSTEM_ACTIVE,
+	num = 256
 };
+
 
 }
