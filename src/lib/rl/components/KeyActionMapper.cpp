@@ -35,7 +35,8 @@ namespace pgn
 
 			if(!key_vals.empty())
 			{
-				auto fun = ECS.mActionMgr->GetAction(funcname);
+				auto& amgr = ECS.mActionMgr;
+				auto fun = amgr->GetAction(funcname);
 				if(fun)
 					for(auto key_val : key_vals)
 						zObj.mActions[key_val] = fun;

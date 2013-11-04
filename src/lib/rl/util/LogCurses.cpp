@@ -7,6 +7,6 @@ namespace pgn
 	//--------------------------------------------------------------------------
 	void cLogCurses::Log(const eLogLevel zLevel, const std::string& zMsg)
 	{
-		wprintw(mWindow->mWindow,"%s\n",zMsg.c_str());
+		wprintw(*(mWindow->mWindow.get()),"%s\n",zMsg.c_str());
 	}
 }

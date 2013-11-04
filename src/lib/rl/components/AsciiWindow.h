@@ -13,13 +13,13 @@ namespace pgn
 	struct cAsciiWindow
 	{
 	public:
-		cAsciiWindow():mWindow(nullptr){}
+		cAsciiWindow();
 		~cAsciiWindow() {Destroy();}
 
 		void Destroy();
 		void Init();
 
-		WINDOW *				   mWindow;
+		std::shared_ptr<WINDOW *>	   mWindow;
 		glm::ivec2				   mStart;
 		glm::uvec2				   mSize;
 	};

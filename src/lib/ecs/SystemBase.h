@@ -11,8 +11,6 @@
 
 namespace pgn
 {
-	DECL_EVENT1(SystemActivity, bool);
-
 	class cQueryBase;
 	class cEntityComponents;
 
@@ -50,6 +48,8 @@ namespace pgn
 			std::string mDesc;
 			std::vector< std::shared_ptr< cQueryBase> > mReferencedQueries;
 	};
+
+	typedef cEvent<size_t(eBasicECSEvent::SYSTEM_ACTIVE),  cSystemBase * , bool> cSystemActiveEvent;
 
 	//! sys to json
 	template<>

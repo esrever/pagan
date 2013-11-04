@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <map>
 #include <string>
 #include <vector>
@@ -9,7 +10,7 @@
 
 namespace pgn
 {
-	typedef Gallant::Delegate1<cEntity> action_fun;
+	typedef std::function<void (cEntity)> action_fun;
 
 	class cActionMgr
 	{		

@@ -9,7 +9,7 @@ namespace pgn
 	{
 		void QuitProgram(cEntity e) 
 		{
-			cExitApplicationEventData::emit(); 
+			cExitApplicationEvent::mSig.emit(); 
 		}
 	}
 }

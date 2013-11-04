@@ -7,42 +7,45 @@
 
 namespace pgn
 {
+	cEntityMgr::cEntityMgr()
+	:mOnEntityCreated(Simple::slot(this, &cEntityMgr::OnEntityCreated))
+	,mOnEntityDestroy(Simple::slot(this, &cEntityMgr::OnEntityDestroy))
+	{}
 	//----------------------------------------------------------------
 	cEntity cEntityMgr::Create() 
 	{ 
 		const auto& e = mEntityIdGen.New();
 		auto it = mEntityComponents.insert(std::pair<cEntity,cEntityComponents>(e,cEntityComponents()));
-		cEntityCreatedEventData::emit(std::make_tuple(e));
+		cEntityCreatedEvent::mSig.emit(e);
 		return e;
 	}
 
 	//----------------------------------------------------------------
 	void cEntityMgr::Destroy(cEntity zEntity)
 	{
-		cDestroyEntityEventData::emit(std::make_tuple(zEntity));
+		cEntityDestroyEvent::mSig.emit(zEntity);
 		// and finally erase it
 		mEntityComponents.erase(zEntity);
 		mEntityIdGen.Destroy(zEntity);
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Receive( const cEntityCreatedEventData& zData)
+	void cEntityMgr::OnEntityCreated(cEntity e)
 	{
-		
 	}
 	
 	//----------------------------------------------------------------
-	void cEntityMgr::Receive( const cDestroyEntityEventData& zData)
+	void cEntityMgr::OnEntityDestroy( cEntity e)
 	{
 		// untag from all groups
-		Untag(std::get<0>(zData.data));
+		Untag(e);
 	}
 
 	//----------------------------------------------------------------
 	void cEntityMgr::Tag(cEntity zEntity, const std::string& zTag)
 	{
 		mTaggedEntities[zTag].insert(zEntity);
-		cEntityTaggedEventData::emit(std::make_tuple(zEntity,zTag));
+		cEntityTaggedEvent::mSig.emit(zEntity, zTag);
 	}
 
 	//----------------------------------------------------------------
@@ -52,7 +55,7 @@ namespace pgn
 		auto i1 = mTaggedEntities.find(zTag);
 		if(i1 != mTaggedEntities.end())
 		{
-			cEntityUntagEventData::emit(std::make_tuple(zEntity,zTag));
+			cEntityUntagEvent::mSig.emit(zEntity, zTag);
 			i1->second.erase(zEntity);
 		}
 	}
@@ -64,7 +67,7 @@ namespace pgn
 		auto i1 = mTaggedEntities.find(zTag);
 		if(i1 != mTaggedEntities.end())
 		{
-			cUntagEventData::emit(std::make_tuple(zTag));
+			cTagRemoveEvent::mSig.emit( zTag);
 			i1->second.clear();
 			mTaggedEntities.erase(i1);
 		}
@@ -84,7 +87,7 @@ namespace pgn
 		auto i = mEntityComponents.find(e);
 		assert(i !=mEntityComponents.end());
 		i->second.AddComponent(zComponent);
-		cComponentAddedEventData::emit(std::make_tuple(i,zComponent->TypeIndex()));
+		cComponentAddedEvent::mSig.emit(i,zComponent->TypeIndex());
 	}
 
 	//----------------------------------------------------------------
@@ -92,7 +95,7 @@ namespace pgn
 	{
 		auto i = mEntityComponents.find(zEntity);
 		assert(i !=mEntityComponents.end());
-		cRemoveComponentEventData::emit(std::make_tuple(i,zComponent.lock()->TypeIndex()));
+		cComponentRemoveEvent::mSig.emit(i, zComponent.lock()->TypeIndex());
 		i->second.RemoveComponent(zComponent.lock()->TypeIndex());
 		//! No components -> destroy entity
 		if(i->second.Mask().none())

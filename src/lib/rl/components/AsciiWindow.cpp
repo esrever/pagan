@@ -6,25 +6,32 @@
 
 namespace pgn
 {
+	cAsciiWindow::cAsciiWindow()
+	:mStart(0,0)
+	,mSize(0, 0)
+	{}
+
 	void cAsciiWindow::Destroy()
 	{
-		if(mWindow)
+		if(mWindow.use_count() == 1)
 		{
-			wborder(mWindow, ' ', ' ', ' ',' ',' ',' ',' ',' ');
-			wrefresh(mWindow);
-			delwin(mWindow);
-			mWindow = nullptr;
+			wborder(*mWindow.get(), ' ', ' ', ' ',' ',' ',' ',' ',' ');
+			wrefresh(*mWindow.get());
+			delwin(*mWindow.get());
 		}
 	}
 	
 	void cAsciiWindow::Init()
 	{
-		Destroy();	
-		mWindow = newwin(mSize.y, mSize.x, mStart.y, mStart.x);
-		box(mWindow, 0 , 0);		/* 0, 0 gives default characters 
-					 * for the vertical and horizontal
-					 * lines			*/
-		wrefresh(mWindow);		/* Show that box 		*/
+		Destroy();
+		if (mSize.x && mSize.y)
+		{
+			mWindow = std::make_shared<WINDOW *>(newwin(mSize.y, mSize.x, mStart.y, mStart.x));
+			box(*mWindow.get(), 0, 0);		/* 0, 0 gives default characters
+						 * for the vertical and horizontal
+						 * lines			*/
+			//wrefresh(mWindow.get());		/* Show that box 		*/
+		}
 	}
 
 	template<>

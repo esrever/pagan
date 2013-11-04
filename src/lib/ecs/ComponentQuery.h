@@ -7,21 +7,17 @@
 namespace pgn
 {
 	//! Stores entities with at least the specified components. 
-	class cComponentQuery : public cQueryBase,
-							public cEventReceiver<cComponentAddedEventData>,
-							public cEventReceiver<cRemoveComponentEventData>,
-							public cEventReceiver<cEntityCreatedEventData>,
-							public cEventReceiver<cDestroyEntityEventData>
+	class cComponentQuery : public cQueryBase
 	{
 	public:
 		//! ctors
 		cComponentQuery(const component_mask_type& zMask);
 
 		//! Receive functions
-		void Receive(const cComponentAddedEventData& zData);
-		void Receive(const cRemoveComponentEventData& zData);
-		void Receive( const cEntityCreatedEventData& zData);
-		void Receive( const cDestroyEntityEventData& zData);
+		void OnComponentAdded(cEntityWithComponents ec, unsigned short cid);
+		void OnComponentRemove(cEntityWithComponents ec, unsigned short cid);
+		void OnEntityCreated(cEntity e);
+		void OnEntityDestroy(cEntity e);
 
 		//! Name
 		virtual const std::string ReceiverName() const {return "ComponentQuery";}
@@ -29,6 +25,11 @@ namespace pgn
 		//! Access data
 		const component_mask_type& Mask() const {return mMask;}
 
+	private:
+		cEventHandler<cEntityCreatedEvent> mOnEntityCreated;
+		cEventHandler<cEntityDestroyEvent> mOnEntityDestroy;
+		cEventHandler<cComponentAddedEvent> mOnComponentAdded;
+		cEventHandler<cComponentRemoveEvent> mOnComponentRemove;
 	private:
 		component_mask_type mMask;
 	};

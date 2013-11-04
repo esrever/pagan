@@ -30,13 +30,13 @@ TODO:
 
 namespace pgn
 {
-	class cEntityMgr : public cEventReceiver<cEntityCreatedEventData>,
-					   public cEventReceiver<cDestroyEntityEventData>
+	class cEntityMgr
 	{
 		public:
 			typedef std::map<std::string, std::set<cEntity>> tagged_entity_map;
-			typedef Gallant::Delegate0< std::shared_ptr<cComponentBase> > component_creator_fun;
+			typedef std::function< std::shared_ptr<cComponentBase>() > component_creator_fun;
 		public:
+			cEntityMgr();
 			virtual const std::string ReceiverName() const {return "EntityMgr";}
 			virtual ~cEntityMgr(){}
 
@@ -62,8 +62,8 @@ namespace pgn
 			void Untag(cEntity zEntity);
 
 			//! Receiving functions
-			void Receive( const cEntityCreatedEventData& zData);
-			void Receive( const cDestroyEntityEventData& zData);
+			void OnEntityCreated(cEntity e);
+			void OnEntityDestroy(cEntity e);
 
 			//! Accessors
 			const cEntityComponents& GetComponents(const cEntity& zEntity) const;
@@ -82,6 +82,10 @@ namespace pgn
 			const std::vector< std::type_index>& GetComponentTypeIndexAll( ) const {return mComponentTypeIds;}
 			std::shared_ptr<cComponentBase> CreateComponent(const std::string& zName) const;
 			std::shared_ptr<cComponentBase> CreateComponent(size_t zIdx) const;
+
+		private:
+			cEventHandler<cEntityCreatedEvent> mOnEntityCreated;
+			cEventHandler<cEntityDestroyEvent> mOnEntityDestroy;
 		
 		private:	
 			unsigned short AddComponentType( const std::type_index& zTi);

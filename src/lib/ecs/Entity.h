@@ -10,12 +10,11 @@
 
 namespace pgn 
 {
-
-	DECL_EVENT1(EntityCreated, cEntity);
-	DECL_EVENT1(DestroyEntity, cEntity);
-	DECL_EVENT2(EntityTagged,cEntity,std::string);
-	DECL_EVENT2(EntityUntag,cEntity,std::string);
-	DECL_EVENT1(Untag,std::string);
+	typedef cEvent<size_t(eBasicECSEvent::ENTITY_CREATED), cEntity> cEntityCreatedEvent;
+	typedef cEvent<size_t(eBasicECSEvent::ENTITY_DESTROY), cEntity> cEntityDestroyEvent;
+	typedef cEvent<size_t(eBasicECSEvent::ENTITY_TAGGED), cEntity, const std::string&> cEntityTaggedEvent;
+	typedef cEvent<size_t(eBasicECSEvent::ENTITY_UNTAG), cEntity, const std::string&> cEntityUntagEvent;
+	typedef cEvent<size_t(eBasicECSEvent::TAG_REMOVE), const std::string&> cTagRemoveEvent;
 
 	//! Json conversions
 	template<>

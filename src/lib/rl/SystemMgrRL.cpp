@@ -5,6 +5,9 @@
 
 namespace pgn
 {
+	cSystemMgrRL::cSystemMgrRL()
+	:mOnExitApplication(Simple::slot(this, &cSystemMgrRL::OnExitApplication))
+	{}
 	//-------------------------------------------------
 	void cSystemMgrRL::RegisterSystemTypes()
 	{
@@ -27,7 +30,7 @@ namespace pgn
 	}
 
 
-	void cSystemMgrRL::Receive(const cExitApplicationEventData&)
+	void cSystemMgrRL::OnExitApplication()
 	{
 		mLoop=false;
 	}

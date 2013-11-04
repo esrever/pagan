@@ -35,8 +35,9 @@ namespace pgn
 	};
 
 	typedef std::map<cEntity, cEntityComponents>::const_iterator cEntityWithComponents;
-	DECL_EVENT2(ComponentAdded, cEntityWithComponents, unsigned short );
-	DECL_EVENT2(RemoveComponent, cEntityWithComponents, unsigned short );
+	
+	typedef cEvent<size_t(eBasicECSEvent::COMPONENT_ADDED), cEntityWithComponents, unsigned short> cComponentAddedEvent;
+	typedef cEvent<size_t(eBasicECSEvent::COMPONENT_REMOVE), cEntityWithComponents, unsigned short> cComponentRemoveEvent;
 
 	//---------------------------------------------------------------------------
 	template<class T>

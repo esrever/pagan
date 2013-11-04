@@ -22,7 +22,8 @@ namespace pgn
 	//---------------------------------------------------------------
 	void cSystemBase::SetActive(bool zActive)
 	{
-		cSystemActivityEventData::emit(std::make_tuple(zActive));
+		const cSystemBase * const ptr = this;
+		cSystemActiveEvent::mSig.emit( this, zActive);
 	}
 
 	//---------------------------------------------------------------

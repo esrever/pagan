@@ -16,15 +16,15 @@ namespace pgn
 {
     void RegisterAllActions(cActionMgr& zMgr) 
 	{
-		zMgr.AddAction("IdleAction",&pgn::action::Idle);
-		zMgr.AddAction("MoveEAction",&pgn::action::MoveE);
-		zMgr.AddAction("MoveNAction",&pgn::action::MoveN);
-		zMgr.AddAction("MoveNEAction",&pgn::action::MoveNE);
-		zMgr.AddAction("MoveNWAction",&pgn::action::MoveNW);
-		zMgr.AddAction("MoveSAction",&pgn::action::MoveS);
-		zMgr.AddAction("MoveSEAction",&pgn::action::MoveSE);
-		zMgr.AddAction("MoveSWAction",&pgn::action::MoveSW);
-		zMgr.AddAction("MoveWAction",&pgn::action::MoveW);
-		zMgr.AddAction("QuitProgramAction",&pgn::action::QuitProgram);
+		zMgr.AddAction("Idle",&pgn::action::Idle);
+		zMgr.AddAction("MoveE",&pgn::action::MoveE);
+		zMgr.AddAction("MoveN",&pgn::action::MoveN);
+		zMgr.AddAction("MoveNE",&pgn::action::MoveNE);
+		zMgr.AddAction("MoveNW",&pgn::action::MoveNW);
+		zMgr.AddAction("MoveS",&pgn::action::MoveS);
+		zMgr.AddAction("MoveSE",&pgn::action::MoveSE);
+		zMgr.AddAction("MoveSW",&pgn::action::MoveSW);
+		zMgr.AddAction("MoveW",&pgn::action::MoveW);
+		zMgr.AddAction("QuitProgram",&pgn::action::QuitProgram);
 	}
 }

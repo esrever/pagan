@@ -7,15 +7,18 @@
 
 namespace pgn
 {
-	//! A specific tile in the world has been modified -- <NewTileInstance, Location>
-	DECL_EVENT2(TileInLevelChanged, cEntityWithComponents, cLocation);
-	//! A level has been created -- <Level>
-	DECL_EVENT1(LevelCreated, cEntityWithComponents);
-	//! A level is about to be destroyed -- <Level>
-	DECL_EVENT1(LevelDestroy, cEntityWithComponents);
+	enum eRLEvents
+	{
+		TILE_IN_LEVEL_CHANGED= eBasicECSEvent::num,
+		LEVEL_CREATED,
+		LEVEL_DESTROY,
+		MOVE_TO_ADJACENT,
+		EXIT_APPLICATION
+	};
 
-	//! Apply an action to an adjacent tile
-	DECL_EVENT2(MoveToAdjacent, cEntityWithComponents, cLocation);
-
-	DECL_EVENT0(ExitApplication);
+	typedef cEvent<size_t(eRLEvents::TILE_IN_LEVEL_CHANGED), cEntityWithComponents> cTileInLevelChangedEvent;
+	typedef cEvent<size_t(eRLEvents::LEVEL_CREATED), cEntityWithComponents> cLevelCreatedEvent;
+	typedef cEvent<size_t(eRLEvents::LEVEL_DESTROY), cEntityWithComponents> cLevelDestroyEvent;
+	typedef cEvent<size_t(eRLEvents::MOVE_TO_ADJACENT), cEntityWithComponents, const cLocation&> cMoveToAdjacentEvent;
+	typedef cEvent<size_t(eRLEvents::EXIT_APPLICATION)> cExitApplicationEvent;
 }

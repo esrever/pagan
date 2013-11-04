@@ -9,6 +9,10 @@ namespace pgn
 	//------------------------------------------------------------------------------
 	cComponentQuery::cComponentQuery(const component_mask_type& zMask)
 	:mMask(zMask)
+	, mOnEntityCreated(Simple::slot(this, &cComponentQuery::OnEntityCreated))
+	, mOnEntityDestroy(Simple::slot(this, &cComponentQuery::OnEntityDestroy))
+	, mOnComponentAdded(Simple::slot(this, &cComponentQuery::OnComponentAdded))
+	, mOnComponentRemove(Simple::slot(this, &cComponentQuery::OnComponentRemove))
 	{
 		// Fetch all components that match the mask, from cEntityMgr
 		for(auto x : ECS.mEntityMgr->GetComponents() )
@@ -19,33 +23,32 @@ namespace pgn
 	}
 
 	//------------------------------------------------------------------------------
-	void cComponentQuery::Receive(const cComponentAddedEventData& zData)
+	void cComponentQuery::OnComponentAdded(cEntityWithComponents ec, unsigned short )
 	{
-		const auto& e = std::get<0>(zData.data)->first;
+		const auto& e = ec->first;
 		if( is_subset(ECS.mEntityMgr->GetComponents(e).Mask(), mMask))
 			mEntities.insert(e);
 	}
 	//------------------------------------------------------------------------------
-	void cComponentQuery::Receive(const cRemoveComponentEventData& zData)
+	void cComponentQuery::OnComponentRemove(cEntityWithComponents ec, unsigned short cid)
 	{
-		const auto& e = std::get<0>(zData.data)->first;
-		if( mMask[std::get<1>(zData.data)])
+		const auto& e = ec->first;
+		if( mMask[cid])
 			mEntities.erase(e);	
 	}
 
 	//------------------------------------------------------------------------------
-	void cComponentQuery::Receive(const cEntityCreatedEventData& zData)
+	void cComponentQuery::OnEntityCreated(cEntity e)
 	{
-		const auto& e = std::get<0>(zData.data);
 		auto& ecs = ECS;
 		if( is_subset(ecs.mEntityMgr->GetComponents(e).Mask(), mMask) )
 			mEntities.insert(e);
 
 	}
 	//------------------------------------------------------------------------------
-	void cComponentQuery::Receive(const cDestroyEntityEventData& zData)
+	void cComponentQuery::OnEntityDestroy(cEntity e)
 	{
-		mEntities.erase(std::get<0>(zData.data));
+		mEntities.erase(e);
 	}
 
 	//------------------------------------------------------------------------------

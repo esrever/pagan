@@ -1,8 +1,8 @@
 #pragma once
 
+#include <functional>
 #include <map>
 #include <memory>
-#include <Delegate.h>
 #include <core/util/json_conversions.h>
 
 #include "QueryBase.h"
@@ -10,7 +10,7 @@
 namespace pgn
 {
 	class cSystemBase;
-	typedef Gallant::Delegate0< std::shared_ptr<cSystemBase> > system_creator_fun;
+	typedef std::function< std::shared_ptr<cSystemBase> (void) > system_creator_fun;
 
 	class cSystemMgr
 	{
