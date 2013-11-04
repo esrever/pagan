@@ -14,6 +14,7 @@ set(SOURCE_FILES
     ComponentHelpers.cpp
     TagQuery.cpp
     QueryBase.cpp
+    QueryExpression.cpp
     ActionMgr.cpp
 )
 
@@ -35,6 +36,7 @@ set(HEADER_FILES
     ComponentHelpers.h
     TagQuery.h
     QueryBase.h
+    QueryExpression.h
 )
 
 add_definitions(

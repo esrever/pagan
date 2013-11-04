@@ -13,8 +13,6 @@ namespace pgn
 	void cAsciiRenderSystem::Process()
 	{
 		ProcessQuery("component_AsciiRep");
-		// TODO: process subsystems one-by-one, set the order in the file. subsystems are the level render & entity render
-		refresh();
 	}
 
 	void cAsciiRenderSystem::ProcessSingle(const std::map< cEntity, cEntityComponents>::const_iterator& zEc)
