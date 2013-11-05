@@ -6,7 +6,6 @@
 
 #include <core/util/json_conversions.h>
 
-#include "QueryBase.h"
 #include "EntityComponents.h"
 
 namespace pgn

@@ -13,7 +13,7 @@ set(SOURCE_FILES
     SystemMgr.cpp
     ComponentHelpers.cpp
     #TagQuery.cpp
-    QueryBase.cpp
+    #QueryBase.cpp
     QueryExpression.cpp
     ActionMgr.cpp
 )
@@ -35,7 +35,7 @@ set(HEADER_FILES
     ActionMgr.h
     ComponentHelpers.h
     #TagQuery.h
-    QueryBase.h
+    #QueryBase.h
     QueryExpression.h
 )
 

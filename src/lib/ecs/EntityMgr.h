@@ -17,7 +17,6 @@
 #include "Event.h"
 #include "Component.h"
 #include "EntityComponents.h"
-#include "ComponentQuery.h"
 #include "Archetype.h"
 
 /*

@@ -11,7 +11,6 @@
 
 namespace pgn
 {
-	class cQueryBase;
 	class cEntityComponents;
 
 	//! Base class for a system. 
@@ -46,7 +45,7 @@ namespace pgn
 			bool mActive;
 			std::string mName;
 			std::string mDesc;
-			std::vector< std::shared_ptr< cQueryBase> > mReferencedQueries;
+			//std::vector< std::shared_ptr< cQueryBase> > mReferencedQueries;
 	};
 
 	typedef cEvent<size_t(eBasicECSEvent::SYSTEM_ACTIVE),  cSystemBase * , bool> cSystemActiveEvent;

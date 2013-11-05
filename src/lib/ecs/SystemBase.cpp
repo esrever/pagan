@@ -4,7 +4,6 @@
 
 #include "ecs.h"
 #include "Event.h"
-#include "QueryBase.h"
 
 namespace pgn
 {

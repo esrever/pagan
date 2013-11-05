@@ -7,9 +7,6 @@
 #include "EntityMgr.h"
 #include "SystemBase.h"
 
-#include "ComponentQuery.h"
-#include "TagQuery.h"
-
 namespace pgn
 {
 	//--------------------------------------------------------------------------------------
@@ -54,9 +51,9 @@ namespace pgn
 	}
 
 	//--------------------------------------------------------------------------------------------------
-	const std::string& cSystemMgr::GetQueryName(const cQueryBase& zQuery) const
+	const std::string& cSystemMgr::GetQueryName(const cQueryExpression& zQuery) const
 	{
-		const auto& it = std::find_if(mQueries.begin(), mQueries.end(), cMapValueFinder<std::string,cQueryBase>(zQuery));
+		const auto& it = std::find_if(mQueries.begin(), mQueries.end(), cMapValueFinder<std::string,cQueryExpression>(zQuery));
 		if(it == mQueries.end())
 			return ECS.GetErrorString();
 		else
@@ -100,11 +97,22 @@ namespace pgn
 	void cSystemMgr::ImportQueries(const rapidjson::Document * zDoc)
 	{
 		if (!zDoc) return;
-		if(zDoc->IsObject())
+		if (zDoc->IsObject())
 		{
 			for (auto itr = zDoc->MemberBegin(); itr != zDoc->MemberEnd(); ++itr)
+			{
+				const auto& qcur = *itr;
+				const auto& qname = qcur.name;
+				const auto& qdata = qcur.value;
 
+				cQueryExpression qexp;
+				if (pgn::from_json(qexp, qdata))
+					mQueries.insert(std::pair<std::string, cQueryExpression>(qname.GetString(), qexp));
+			}
+		}
+	}
 
+		/*
 			const auto& zDocRef = *zDoc;
 			const auto& zDocCompo = zDocRef["Component"];
 			if(zDocCompo.IsObject())
@@ -154,4 +162,5 @@ namespace pgn
 		else
 			ECS.mLog->Wrn("cSystemMgr::from_json: \"Queries\" not found");
 	}
+	*/
 }
