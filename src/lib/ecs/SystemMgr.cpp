@@ -102,6 +102,9 @@ namespace pgn
 		if (!zDoc) return;
 		if(zDoc->IsObject())
 		{
+			for (auto itr = zDoc->MemberBegin(); itr != zDoc->MemberEnd(); ++itr)
+
+
 			const auto& zDocRef = *zDoc;
 			const auto& zDocCompo = zDocRef["Component"];
 			if(zDocCompo.IsObject())

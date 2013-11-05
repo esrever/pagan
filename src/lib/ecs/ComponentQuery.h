@@ -19,9 +19,6 @@ namespace pgn
 		void OnEntityCreated(cEntity e);
 		void OnEntityDestroy(cEntity e);
 
-		//! Name
-		virtual const std::string ReceiverName() const {return "ComponentQuery";}
-
 		//! Access data
 		const component_mask_type& Mask() const {return mMask;}
 

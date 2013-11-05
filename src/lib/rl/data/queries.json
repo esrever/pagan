@@ -1,31 +1,19 @@
 {
-    "Component" : {
-        "AsciiRenderable" : [
-            "pgn::cAsciiRep",
-            "pgn::cAsciiLevelRep"
-        ],
-        "KeyInputListener" : [
-            "pgn::cKeyActionMapper"
-        ],
-        "MouseInputListener" : [
-            "pgn::cMouseActionMapper"
-        ],
-        "Actor" : [
-            "pgn::cAI"
-        ]
+    "alias" : {
+        "HasTags" : [],
+        "HasNotTags" : [],
+        "HasComponents" : [],
+        "HasNotComponents" : []
     },
-    "Tag" : {
-        "Player" : [
-            "Player"
-        ],
-        "Status" : [
-            "Status"
-        ],
-        "CurrentLevel" : [
-            "CurrentLevel"
-        ],
-        "ActiveWindow" : [
-            "ActiveWindow"
-        ]
+    "ActiveLevelWindow" : {
+        "HasTags" : ["CurrentLevel", "ActiveWindow"]
+    },
+    "ActiveLogWindow" : {
+        "HasTags" : ["ActiveWindow"]
+        "HasComponents" : ["pgn::cGameLog"]
+    },
+    "ActiveStatusWindow" : {
+        "HasTags" : ["ActiveWindow"],
+        "HasComponents" : ["pgn::cGameStatus"]
     }
 }

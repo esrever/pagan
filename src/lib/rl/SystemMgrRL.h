@@ -10,7 +10,6 @@ namespace pgn
 	public:
 		cSystemMgrRL();
 		virtual void RegisterSystemTypes();
-		virtual const std::string ReceiverName() const {return "SystemMgrRL";}
 		virtual bool UpdateFrame();
 
 		void OnExitApplication();

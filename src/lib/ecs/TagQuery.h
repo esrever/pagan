@@ -2,8 +2,8 @@
 
 #include <set>
 
-#include "Entity.h"
 #include "QueryBase.h"
+#include "EntityComponents.h"
 
 namespace pgn
 {
@@ -20,15 +20,16 @@ namespace pgn
 		void OnEntityUntag(cEntity e, const std::string& zTag);
 		// TODO: add tagremove
 
-		//! Name
-		virtual const std::string ReceiverName() const {return "TagQuery";}
-
 		//! Access data
 		const std::vector<std::string>& Tags() const {return mTags;}
 
 	private:
 		cEventHandler<cEntityTaggedEvent> mOnEntityTagged;
 		cEventHandler<cEntityUntagEvent> mOnEntityUntag;
+		cEventHandler<cEntityCreatedEvent> mOnEntityCreated;
+		cEventHandler<cEntityDestroyEvent> mOnEntityDestroy;
+		cEventHandler<cComponentAddedEvent> mOnComponentAdded;
+		cEventHandler<cComponentRemoveEvent> mOnComponentRemove;
 	private:
 		void Init();
 	private:

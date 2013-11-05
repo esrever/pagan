@@ -4,7 +4,7 @@ set(SOURCE_FILES
     #Entity.cpp
     Event.cpp
     EntityMgr.cpp
-    ComponentQuery.cpp
+    #ComponentQuery.cpp
     ComponentBase.cpp
     EntityComponents.cpp
     ecs.cpp
@@ -12,7 +12,7 @@ set(SOURCE_FILES
     ExampleSystem.cpp
     SystemMgr.cpp
     ComponentHelpers.cpp
-    TagQuery.cpp
+    #TagQuery.cpp
     QueryBase.cpp
     QueryExpression.cpp
     ActionMgr.cpp
@@ -26,7 +26,7 @@ set(HEADER_FILES
     EntityMgr.h
     ecs_config.h
     ComponentBase.h
-    ComponentQuery.h
+    #ComponentQuery.h
     EntityComponents.h
     ecs.h
     ExampleComponent.h
@@ -34,7 +34,7 @@ set(HEADER_FILES
     SystemMgr.h
     ActionMgr.h
     ComponentHelpers.h
-    TagQuery.h
+    #TagQuery.h
     QueryBase.h
     QueryExpression.h
 )
