@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 
+#include <core/util/predicates.h>
 #include <core/util/json_conversions.h>
 
 #include "EntityComponents.h"
@@ -25,15 +26,30 @@ namespace pgn
 		void OnEntityTagged(cEntity e, const std::string& zTag);
 		void OnEntityUntag(cEntity e, const std::string& zTag);
 		void OnTagRemove(const std::string& zTag);
-		// TODO: add tagremove
+
+		void Reset();
+		bool Qualify(cEntity e) const;
 
 		//! Access data
+		size_t Hash() const { return mHash; }
 		const std::set<cEntity>& Entities() const { return mEntities; }
-		//const std::vector<std::string>& Tags() const { return mTags; }
-		//const component_mask_type& Mask() const { return mMask; }
 
-		virtual bool operator < (const cQueryExpression &rhs) const { return container_hash < std::set < cEntity >> ()(Entities()) < container_hash < std::set < cEntity >> ()(rhs.Entities()); }
-		virtual bool operator == (const cQueryExpression &rhs) const { return container_hash<std::set<cEntity>>()(Entities()) == container_hash<std::set<cEntity>>()(rhs.Entities()); }
+		bool operator < (const cQueryExpression &rhs) const;
+		bool operator == (const cQueryExpression &rhs) const;
+
+	private:
+		bool ArrayFormatMergeSingle(const rapidjson::Value& zRoot);
+
+		void Merge(const cQueryExpression& zQ, bool zNot);
+
+		//! Scans all entities that fulfill query criteria
+		void ScanEntities();
+
+		//! Generate hash from all tags/masks
+		void GenerateHash();
+
+		//! Scan entities and generate hash
+		void Finalize() { ScanEntities(); GenerateHash(); }
 
 	private:
 		cEventHandler<cEntityTaggedEvent> mOnEntityTagged;
@@ -51,10 +67,14 @@ namespace pgn
 		std::set<cEntity> mEntities;
 		
 		std::vector<std::string> mTags;
-		std::vector<std::string> mNotTags;
+		std::vector<std::string> mTagsNot;
 		component_mask_type mMask;
-		component_mask_type mNotMask;
+		component_mask_type mMaskNot;
+
+		size_t mHash;
 	};
+
+	DECL_PTRTYPE(cQueryExpression);
 
 	//------------------------------------------------------------------------
 	inline bool is_subset(const component_mask_type& zAll, const component_mask_type& zSub) { return (zAll & zSub) == zSub; }

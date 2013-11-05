@@ -6,7 +6,6 @@ regdata = "\n".join(["\t\tzMgr.AddComponentType<pgn::c" + f[:-2] + ">();" for f 
 
 fp = open("components.h", "w")
 fp.write("#pragma once\n")
-fp.write(incdata)
 
 hdata = """
 
@@ -21,12 +20,13 @@ fp.close()
 
 cppdata = """#include "components.h"
 #include "ecs/EntityMgr.h"
+%s
 
 namespace pgn
 {
     void RegisterAllComponents(cEntityMgr& zMgr) \n\t{\n%s\n\t}
 }
-"""%regdata
+"""%(incdata,regdata)
 
 fp = open("components.cpp", "w")
 fp.write(cppdata)

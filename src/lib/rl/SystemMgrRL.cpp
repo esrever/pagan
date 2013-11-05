@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SystemMgrRL.h"
+#include <ecs/SystemBase.h>
 #include "systems/systems.h"
 
 namespace pgn

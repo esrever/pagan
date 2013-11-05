@@ -29,27 +29,35 @@ namespace pgn
 
 		*/
 		
-		ProcessQuery("KeyInputListener");
-	}
-
-	void cAsciiActionInputSystem::ProcessSingle(const std::map< cEntity, cEntityComponents>::const_iterator& zEc)
-	{
-		// Get keyactionmapper component
-		std::shared_ptr< cComponent<cKeyActionMapper>> ptr;
-		zEc->second.GetComponent( ptr);
-				
-		// find function
-		auto itFunc = ptr->mData.mActions.find(mCurChar);
-		if(itFunc != ptr->mData.mActions.end() )
+		for (auto e : mQuery->Entities())
 		{
-			// if found, execute
-			itFunc->second(zEc->first);
+			auto ec = ECS.mEntityMgr->GetComponents().find(e);
+			assert(ec != ECS.mEntityMgr->GetComponents().end());
+
+			// Get keyactionmapper component
+			std::shared_ptr< cComponent<cKeyActionMapper>> ptr;
+			ec->second.GetComponent(ptr);
+
+			// find function
+			auto itFunc = ptr->mData.mActions.find(mCurChar);
+			if (itFunc != ptr->mData.mActions.end())
+			{
+				// if found, execute
+				itFunc->second(ec->first);
+			}
 		}
+
 	}
 
 	//------------------------------------------------------
 	bool cAsciiActionInputSystem::from_json(const rapidjson::Value& zRoot)
 	{
-		return cSystemBase::from_json(zRoot);
+		cSystemBase::from_json(zRoot);
+
+		mQuery = std::shared_ptr< cQueryExpression>( new cQueryExpression());
+		if (pgn::from_json(*mQuery, zRoot["Query"]))
+			ECS.mSystemMgr->AddQuery(to_string(mQuery->Hash()), mQuery);
+		
+		return mQuery != nullptr;
 	}
 }

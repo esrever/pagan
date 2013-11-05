@@ -1,18 +1,10 @@
-[
-    {
-        "Type" : "pgn::cAsciiRenderSystem",
-        "Data" : {
-            "Name" : "AsciiRenderer",
-            "Desc" : "A very basic RL renderer. Renders level, followed by chars",
-            "QueriesUsed" : "AsciiRenderable"
-        }
-    },
+[    
     {
         "Type" : "pgn::cAsciiActionInputSystem",
         "Data" : {
             "Name" : "AsciiInput",
             "Desc" : "read ascii char and propagate to keyactionmap components",
-            "QueriesUsed" : "KeyInputListener"
+            "Query" : ["cmp_pgn::cKeyActionMapper"]
         }
     },
     {
@@ -20,7 +12,7 @@
         "Data" : {
             "Name" : "GameTurnSystem",
             "Desc" : "Controls the game turns",
-            "QueriesUsed" : "Actor"
+            "QueryPre" : "Actor"
         }
     },
     {
@@ -28,7 +20,7 @@
         "Data" : {
             "Name" : "AsciiStatusRenderSystem",
             "Desc" : "Render status on screen",
-            "QueriesUsed" : "ActiveWindow & pgn::cGameStatus & pgn::cAsciiWindow"
+            "Query" : "ActiveStatusWindow"
         }
     },
     {
@@ -36,7 +28,10 @@
         "Data" : {
             "Name" : "AsciiMapRenderSystem",
             "Desc" : "Render map on screen",
-            "QueriesUsed" : "ActiveWindow & pgn::cAsciiWindow & pgn::cLevel & CurrentLevel"
+            "Systems" : ["AsciiLevelRenderer", "AsciiCharRenderer"],
+            "QueryLvl" : "tag_CurrentLevel",
+            "QueryChar" : "cmp_pgn::cAsciiRep",
+            "QueryWin" : "ActiveLevelWindow"
         }
     },
     {
@@ -44,7 +39,7 @@
         "Data" : {
             "Name" : "AsciiLogRenderSystem",
             "Desc" : "Render log on screen",
-            "QueriesUsed" : "ActiveWindow & pgn::cAsciiWindow & pgn::cGameLog"
+            "Query" : "ActiveLogWindow"
         }
     }
 ]

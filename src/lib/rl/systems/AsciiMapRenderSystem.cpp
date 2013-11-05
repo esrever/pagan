@@ -11,17 +11,25 @@ namespace pgn
 {
 	void cAsciiMapRenderSystem::Process()
 	{
-		ProcessQuery("component_GameLog");
-	}
-
-	void cAsciiMapRenderSystem::ProcessSingle(const std::map< cEntity, cEntityComponents>::const_iterator& zEc)
-	{
-		std::shared_ptr< cComponent<cAsciiWindow>> asciiwin_ptr;
-		zEc->second.GetComponent(asciiwin_ptr);
+		
 	}
 
 	bool cAsciiMapRenderSystem::from_json(const rapidjson::Value& zRoot)
 	{
-		return cSystemBase::from_json(zRoot);
+		cSystemBase::from_json(zRoot);
+
+		mQueryWin = std::shared_ptr< cQueryExpression>(new cQueryExpression());
+		if (pgn::from_json(*mQueryWin, zRoot["QueryWin"]))
+			ECS.mSystemMgr->AddQuery(to_string(mQueryWin->Hash()), mQueryWin);
+
+		mQueryLvl = std::shared_ptr< cQueryExpression>(new cQueryExpression());
+		if (pgn::from_json(*mQueryLvl, zRoot["QueryLvl"]))
+			ECS.mSystemMgr->AddQuery(to_string(mQueryLvl->Hash()), mQueryLvl);
+
+		mQueryChar = std::shared_ptr< cQueryExpression>(new cQueryExpression());
+		if (pgn::from_json(*mQueryChar, zRoot["QueryChar"]))
+			ECS.mSystemMgr->AddQuery(to_string(mQueryChar->Hash()), mQueryChar);
+
+		return mQueryChar && mQueryLvl && mQueryWin;
 	}
 }

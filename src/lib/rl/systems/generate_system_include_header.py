@@ -6,7 +6,6 @@ regdata = "\n".join(["\t\tzMgr.AddSystemType<pgn::c" + f[:-2] + ">();" for f in 
 
 fp = open("systems.h", "w")
 fp.write("#pragma once\n")
-fp.write(incdata)
 
 hdata = """
 
@@ -21,12 +20,13 @@ fp.close()
 
 cppdata = """#include "systems.h"
 #include "ecs/SystemMgr.h"
+%s
 
 namespace pgn
 {
     void RegisterAllSystems(cSystemMgr& zMgr) \n\t{\n%s\n\t}
 }
-"""%regdata
+"""%(incdata,regdata)
 
 fp = open("systems.cpp", "w")
 fp.write(cppdata)

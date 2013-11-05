@@ -3,7 +3,7 @@
 #include <ecs/ecs_config.h>
 #include <ecs/Entity.h>
 #include <ecs/EntityMgr.h>
-#include <rl/components/components.h>
+#include <rl/components/Location.h>
 
 namespace pgn
 {

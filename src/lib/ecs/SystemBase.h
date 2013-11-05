@@ -6,6 +6,7 @@
 #include <memory>
 #include <core/util/json_conversions.h>
 
+#include "ecs.h"
 #include "ecs_config.h"
 #include "Event.h"
 
@@ -22,12 +23,7 @@ namespace pgn
 			virtual ~cSystemBase();
 
 			//! Process entities
-			virtual void Process(){};
-
-			//! Processes a single entity-component
-			virtual void ProcessSingle(const std::map< cEntity, cEntityComponents>::const_iterator& zEc){};
-
-			void ProcessQuery(const std::string& zQueryName);
+			virtual void Process() = 0;
 
 			//! Json related
 			virtual void to_json(rapidjson::Value& zRoot) const{};
@@ -45,11 +41,12 @@ namespace pgn
 			bool mActive;
 			std::string mName;
 			std::string mDesc;
-			//std::vector< std::shared_ptr< cQueryBase> > mReferencedQueries;
 	};
 
 	typedef cEvent<size_t(eBasicECSEvent::SYSTEM_ACTIVE),  cSystemBase * , bool> cSystemActiveEvent;
 
+
+	//--------------------------------------------------
 	//! sys to json
 	template<>
 	void to_json<cSystemBase>(const cSystemBase& zSys, rapidjson::Value& zRoot);
@@ -65,5 +62,26 @@ namespace pgn
 	{
 		return std::shared_ptr<cSystemBase>(new T());
 	}
+
+	/*
+	template<class T>
+	void ProcessQuery(const std::string& zQueryName, T * const zPtr, std::function<void(T * const, const std::map< cEntity, cEntityComponents>::const_iterator&)> func)
+	{
+		// Get the query. This should be easily retrievable
+		auto qit = ECS.mSystemMgr->GetQueries().find(zQueryName);
+		if (qit != ECS.mSystemMgr->GetQueries().end())
+		{
+			// Get entities found by the query
+			auto ents = qit->second.Entities();
+			for (auto e : ents)
+			{
+				// Get the entities' components
+				auto ec = ECS.mEntityMgr->GetComponents().find(e);
+				func(zPtr, ec);
+			}
+		}
+	}
+	*/
+	
 	
 }

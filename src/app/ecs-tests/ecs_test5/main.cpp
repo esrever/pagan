@@ -6,6 +6,8 @@
 #include <rl/ActionMgrRL.h>
 #include <rl/util/LogCurses.h>
 
+#include <rl/components/AsciiWindow.h>
+
 /*
 	Provide json conversions for all components
 */

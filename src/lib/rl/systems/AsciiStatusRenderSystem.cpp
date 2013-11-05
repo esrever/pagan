@@ -11,17 +11,24 @@ namespace pgn
 {
 	void cAsciiStatusRenderSystem::Process()
 	{
-		ProcessQuery("component_GameLog");
-	}
-
-	void cAsciiStatusRenderSystem::ProcessSingle(const std::map< cEntity, cEntityComponents>::const_iterator& zEc)
-	{
 		std::shared_ptr< cComponent<cAsciiWindow>> asciiwin_ptr;
-		zEc->second.GetComponent(asciiwin_ptr);
+		for (auto e : mQuery->Entities())
+		{
+			auto ec = ECS.mEntityMgr->GetComponents().find(e);
+			assert(ec != ECS.mEntityMgr->GetComponents().end());
+
+			ec->second.GetComponent(asciiwin_ptr);
+		}
 	}
 
 	bool cAsciiStatusRenderSystem::from_json(const rapidjson::Value& zRoot)
 	{
-		return cSystemBase::from_json(zRoot);
+		cSystemBase::from_json(zRoot);
+		
+		mQuery = std::shared_ptr< cQueryExpression>(new cQueryExpression());
+		if (pgn::from_json(*mQuery, zRoot["Query"]))
+			ECS.mSystemMgr->AddQuery(to_string(mQuery->Hash()), mQuery);
+
+		return mQuery != nullptr;
 	}
 }

@@ -8,9 +8,9 @@ namespace pgn
 	{
 	public:
 		virtual void Process();
-		virtual void ProcessSingle(const std::map< cEntity, cEntityComponents>::const_iterator& zEc);
 		virtual bool from_json(const rapidjson::Value& zRoot);
 	private:
 		
+		cQueryExpressionSptr mQuery;
 	};
 }

@@ -50,16 +50,6 @@ namespace pgn
 			return it->second();
 	}
 
-	//--------------------------------------------------------------------------------------------------
-	const std::string& cSystemMgr::GetQueryName(const cQueryExpression& zQuery) const
-	{
-		const auto& it = std::find_if(mQueries.begin(), mQueries.end(), cMapValueFinder<std::string,cQueryExpression>(zQuery));
-		if(it == mQueries.end())
-			return ECS.GetErrorString();
-		else
-			return it->first;
-	}
-
 	//----------------------------------------------------------------
 	void cSystemMgr::ImportSystems(const rapidjson::Document * zDoc)
 	{
@@ -104,63 +94,16 @@ namespace pgn
 				const auto& qcur = *itr;
 				const auto& qname = qcur.name;
 				const auto& qdata = qcur.value;
-
-				cQueryExpression qexp;
-				if (pgn::from_json(qexp, qdata))
-					mQueries.insert(std::pair<std::string, cQueryExpression>(qname.GetString(), qexp));
+				auto qexp = std::shared_ptr<cQueryExpression>(new cQueryExpression());
+				if ( pgn::from_json(*qexp, qdata))
+					mQueries.insert(std::pair<std::string, cQueryExpressionSptr>(qname.GetString(), qexp));
 			}
 		}
 	}
 
-		/*
-			const auto& zDocRef = *zDoc;
-			const auto& zDocCompo = zDocRef["Component"];
-			if(zDocCompo.IsObject())
-				for (auto itr = zDocCompo.MemberBegin(); itr != zDocCompo.MemberEnd(); ++itr) 
-				{
-					// get a query object
-					const auto& qcur = *itr;
-					const auto& qname = qcur.name;
-					const auto& types = qcur.value;
-					component_mask_type mask;
-					bool err = false;
-					assert(types.IsArray());
-					for (auto itr2 = types.Begin(); itr2 != types.End(); ++itr2) 
-					{
-						const auto& s = itr2->GetString();
-						auto idx = EMGR->GetComponentTypeIndex(s);
-						if(idx != 0xFFFFFFFF)
-							mask.set(idx);
-						else
-						{
-							ECS.mLog->Err(boost::str(boost::format("cSystemMgr::from_json: Component type \"%s\" does not exist")%s));
-							err = true;
-							break;
-						}; 
-					}
-					if(!err)
-						mQueries.insert( std::pair<std::string, cQueryBase>( qname.GetString(),cComponentQuery(mask)));
-				}
-			const auto& zDocTag = zDocRef["Tag"];
-				for (auto itr = zDocTag.MemberBegin(); itr != zDocTag.MemberEnd(); ++itr) 
-				{
-					// get a query object
-					const auto& qcur = *itr;
-					const auto& qname = qcur.name;
-					const auto& tags = qcur.value;
-					bool err = false;
-					assert(tags.IsArray());
-					std::vector<std::string> tagstr;
-					for (auto itr2 = tags.Begin(); itr2 != tags.End(); ++itr2) 
-					{
-						tagstr.push_back(itr2->GetString());
-					}
-					if(!err)
-						mQueries.insert( std::pair<std::string, cQueryBase>( qname.GetString(),cTagQuery(tagstr)));
-				}
-		}
-		else
-			ECS.mLog->Wrn("cSystemMgr::from_json: \"Queries\" not found");
+	//----------------------------------------------------------------
+	void cSystemMgr::AddQuery(const std::string& zName, const cQueryExpressionSptr& zPtr)
+	{
+		mQueries[zName] = zPtr;
 	}
-	*/
 }

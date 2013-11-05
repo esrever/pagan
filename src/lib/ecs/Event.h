@@ -48,6 +48,14 @@ namespace pgn
 	class cEventHandler
 	{
 	public:
+
+		cEventHandler&  operator=   (const cEventHandler& eh)
+		{
+			E::mSig -= mId;
+			mId = eh.mId;
+			return *this;
+		}
+
 		cEventHandler(typename E::functype zCallback)
 		{
 			mId = E::mSig += zCallback;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ecs/SystemBase.h>
+#include <ecs/QueryExpression.h>
 
 namespace pgn
 {
@@ -9,8 +10,9 @@ namespace pgn
 	public:
 		virtual void Process();
 		virtual bool from_json(const rapidjson::Value& zRoot);
-		virtual void ProcessSingle(const std::map< cEntity, cEntityComponents>::const_iterator& zEc);
 	private:
+
+		cQueryExpressionSptr mQuery;
 
 		wchar_t mCurChar;
 		

@@ -15,7 +15,7 @@ namespace pgn
 	class cSystemMgr
 	{
 		public:
-			typedef std::map<std::string, cQueryExpression> QueryMap;
+			typedef std::map<std::string, cQueryExpressionSptr> QueryMap;
 			typedef std::multimap<size_t, std::shared_ptr<cSystemBase> > SystemMap;
 		public:
 			virtual const std::string ReceiverName() const {return "SystemMgr";}
@@ -27,7 +27,7 @@ namespace pgn
 
 			//! Queries
 			const QueryMap& GetQueries() const {return mQueries;}
-			const std::string& GetQueryName(const cQueryExpression& zQuery) const;
+			void AddQuery(const std::string& zName, const cQueryExpressionSptr& zPtr);
 
 			//! the main frame updater
 			virtual bool UpdateFrame(){return true;}

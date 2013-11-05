@@ -3,13 +3,14 @@
         "HasTags" : [],
         "HasNotTags" : [],
         "HasComponents" : [],
-        "HasNotComponents" : []
+        "HasNotComponents" : [],
+        "HasComposite" : []
     },
     "ActiveLevelWindow" : {
         "HasTags" : ["CurrentLevel", "ActiveWindow"]
     },
     "ActiveLogWindow" : {
-        "HasTags" : ["ActiveWindow"]
+        "HasTags" : ["ActiveWindow"],
         "HasComponents" : ["pgn::cGameLog"]
     },
     "ActiveStatusWindow" : {
