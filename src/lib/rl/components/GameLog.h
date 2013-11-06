@@ -21,5 +21,5 @@ namespace pgn
 
 	//-----------------------------------------------------------------------
 	template<>
-	void to_json< cGameLog>( const cGameLog& zData, rapidjson::Value& zRoot);
+	void to_json< cGameLog>( const cGameLog& zData, JsonWriter& zRoot);
 }

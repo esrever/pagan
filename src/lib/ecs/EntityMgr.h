@@ -82,6 +82,12 @@ namespace pgn
 			std::shared_ptr<cComponentBase> CreateComponent(const std::string& zName) const;
 			std::shared_ptr<cComponentBase> CreateComponent(size_t zIdx) const;
 
+			template<class Writer>
+			void Serialize(Writer& writer) const;
+	private:
+		template<class T>
+		friend void to_json(const T& zObj, JsonWriter& zRoot);
+
 		private:
 			cEventHandler<cEntityCreatedEvent> mOnEntityCreated;
 			cEventHandler<cEntityDestroyEvent> mOnEntityDestroy;
@@ -135,4 +141,9 @@ namespace pgn
 		component_creator_fun func = &cComponent<typename T>::Create;
 		mComponentCreators[cComponent<typename T>::msTypeIndex] = func;
 	}
+
+	//------------------------------------------------------------------------
+	template<>
+	void to_json<cEntityMgr>(const cEntityMgr& zObj, JsonWriter& zRoot);
+	
 }

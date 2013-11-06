@@ -11,8 +11,10 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------
 	template<>
-	void to_json<cTileObstacle>( const cTileObstacle& zData, rapidjson::Value& zRoot)
+	void to_json<cTileObstacle>( const cTileObstacle& zData, JsonWriter& zRoot)
 	{
-		to_json( zData.mIsObstacle, zRoot["is_obstacle"]);
+		zRoot.StartObject();
+		JsonWriter_AddMember("is_obstacle", zData.mIsObstacle, zRoot);
+		zRoot.EndObject();
 	}
 }

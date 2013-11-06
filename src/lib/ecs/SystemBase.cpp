@@ -36,7 +36,7 @@ namespace pgn
 
 	//---------------------------------------------------------------
 	template<>
-	void to_json<cSystemBase>(const cSystemBase& zSys, rapidjson::Value& zRoot) 
+	void to_json<cSystemBase>(const cSystemBase& zSys, JsonWriter& zRoot) 
 	{
 		zSys.to_json(zRoot);
 	}
@@ -46,14 +46,5 @@ namespace pgn
 	bool from_json<cSystemBase>(cSystemBase& zSys, const rapidjson::Value& zRoot) 
 	{
 		return zSys.from_json(zRoot);
-	}
-
-	//---------------------------------------------------------------
-	template<>
-	std::string to_string<cSystemBase>(const cSystemBase& zSys) 
-	{
-		rapidjson::Value root;
-		zSys.to_json(root);
-		return to_string(root);
 	}
 }

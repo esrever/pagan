@@ -19,6 +19,7 @@ set(SOURCE_FILES
 )
 
 set(HEADER_FILES
+    Archetype.h
     Component.h
     SystemBase.h
     Entity.h

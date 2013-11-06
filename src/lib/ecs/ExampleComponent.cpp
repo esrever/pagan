@@ -4,12 +4,16 @@ namespace pgn
 {
 	//------------------------------------------------------------------------
 	template<>
-	void to_json<cExample>(const cExample& zObj, rapidjson::Value& zRoot)
+	void to_json<cExample>(const cExample& zObj, JsonWriter& zRoot)
 	{
-		zRoot.SetObject();
-		zRoot.AddMember("an_int",zObj.a );
-		zRoot.AddMember("a_double",zObj.b );
-		zRoot.AddMember("a_float",zObj.c );
+		zRoot.StartObject();
+		zRoot.String("an_int");
+		zRoot.Uint(zObj.a);
+		zRoot.String("a_double");
+		zRoot.Double(zObj.b);
+		zRoot.String("a_float");
+		zRoot.Double(zObj.c);
+		zRoot.EndObject();
 	}
 
 	//------------------------------------------------------------------------

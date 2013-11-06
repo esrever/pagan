@@ -16,5 +16,5 @@ namespace pgn
 
 	//-----------------------------------------------------------------------
 	template<>
-	void to_json< cTileMoveCost>( const cTileMoveCost& zData, rapidjson::Value& zRoot);
+	void to_json< cTileMoveCost>( const cTileMoveCost& zData, JsonWriter& zRoot);
 }

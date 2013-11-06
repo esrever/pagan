@@ -24,4 +24,14 @@ namespace pgn
 		mMask.at(zTypeId) = 0;
 		mComponents.at(zTypeId).reset();
 	}
+
+	//---------------------------------------------------------------------------
+	template<>
+	void to_json<cEntityComponents>(const cEntityComponents& zObj, JsonWriter& writer)
+	{
+		writer.StartObject();
+		JsonWriter_AddMember("Mask", zObj.Mask().to_string(), writer);
+		JsonWriter_AddMember("Components", zObj.Components(), writer);
+		writer.EndObject();
+	}
 }

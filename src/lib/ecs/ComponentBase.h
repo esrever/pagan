@@ -17,8 +17,10 @@ namespace pgn
 		virtual unsigned short TypeIndex() const =0;
 
 		//! Json conversions
-		virtual void to_json(rapidjson::Value& zRoot) const =0;//{}
+		virtual std::string to_string() const = 0;
+		virtual void to_json(JsonWriter& zRoot) const = 0;//{}
 		virtual bool from_json(const rapidjson::Value& zRoot)=0;//{}
+
 	protected:
 		cComponentBase(){}
 	};
@@ -27,11 +29,12 @@ namespace pgn
 
 	//------------------------------------------------------------------------
 	template<>
-	void to_json<cComponentBase>(const cComponentBase& zCompo, rapidjson::Value& zRoot);
+	void to_json<cComponentBase>(const cComponentBase& zCompo, JsonWriter& zRoot);
 	//------------------------------------------------------------------------
 	template<>
 	bool from_json<cComponentBase>(cComponentBase& zCompo, const rapidjson::Value& zRoot);
 	//------------------------------------------------------------------------
 	template<>
 	std::string to_string<cComponentBase>(const cComponentBase& zCompo);
+
 }

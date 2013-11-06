@@ -22,7 +22,8 @@ namespace pgn
 			virtual unsigned short TypeIndex() const {return StaticTypeIndex();}
 
 			//! Json conversions
-			virtual void to_json(rapidjson::Value& zRoot) const;
+			virtual std::string to_string() const;
+			virtual void to_json(JsonWriter& zRoot) const;
 			virtual bool from_json(const rapidjson::Value& zRoot);
 
 			//! Object creator function
@@ -42,7 +43,7 @@ namespace pgn
 
 	//------------------------------------------------------------------------
 	template<class T>
-	void cComponent<T>::to_json(rapidjson::Value& zRoot) const
+	void cComponent<T>::to_json(JsonWriter& zRoot) const
 	{
 		pgn::to_json< T >(mData, zRoot);
 	}
@@ -52,5 +53,12 @@ namespace pgn
 	bool cComponent<T>::from_json(const rapidjson::Value& zRoot)
 	{
 		return pgn::from_json< T >(mData, zRoot);
+	}
+
+	//---------------------------------------------------------------------
+	template<class T>
+	std::string cComponent<T>::to_string() const 
+	{
+		return pgn::to_string<T>(mData); 
 	}
 }

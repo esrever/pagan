@@ -327,4 +327,28 @@ namespace pgn
 		Untag(e,"Exemplar");
 		return e;
 	}
+
+	//-------------------------------------------------------------------------------------------------
+	template<>
+	void to_json<cEntityMgr>(const cEntityMgr& zMgr, JsonWriter& writer)
+	{
+		writer.StartObject();
+
+		// Archetypes
+		JsonWriter_AddMember("Archetypes", zMgr.mArchetypes, writer);
+
+		// Exemplars
+		JsonWriter_AddMember("Exemplars", zMgr.mExemplars, writer);
+
+		// Tagged entities
+		JsonWriter_AddMember("Tagged Entities", zMgr.mTaggedEntities, writer);
+
+		// Entity Components
+		JsonWriter_AddMember("Entity components", zMgr.mEntityComponents, writer);
+
+		// Component types:
+		JsonWriter_AddMember("ComponentTypeIds", zMgr.mComponentTypeIds, writer);
+
+		writer.EndObject();
+	}
 }

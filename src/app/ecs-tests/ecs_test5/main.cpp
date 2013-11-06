@@ -1,5 +1,8 @@
 #include <curses.h>
 
+#include <rapidjson/prettywriter.h>	// for stringify JSON
+#include <rapidjson/filestream.h>	// wrapper of C stream for prettywriter as output
+
 #include <ecs/ecs.h>
 #include <rl/EntityMgrRL.h>
 #include <rl/SystemMgrRL.h>
@@ -62,6 +65,14 @@ int main()
 		// Create 2 entities, a rat and a human
 		ecs.mEntityMgr->InstantiateExemplar("rat_common");
 		ecs.mEntityMgr->InstantiateExemplar("human_common");
+
+		FILE * fp = fopen("ecs_export.txt","wt");
+		rapidjson::StringBuffer strbuf;
+		JsonWriter writer(strbuf);
+		to_json(ecs.mEntityMgr, writer);
+		const char * jsontext = strbuf.GetString();
+		fwrite(jsontext, 1, strlen(jsontext), fp);
+		fclose(fp);
 
 		//##############################
 		//# Loop

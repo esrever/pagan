@@ -12,9 +12,11 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------
 	template<>
-	void to_json<cDescription>( const cDescription& zData, rapidjson::Value& zRoot)
+	void to_json<cDescription>( const cDescription& zData, JsonWriter& zRoot)
 	{
-		to_json( zData.mShort, zRoot["short"]);
-		to_json( zData.mVerbose, zRoot["verbose"]);
+		zRoot.StartObject();
+		JsonWriter_AddMember("short", zData.mShort,zRoot);
+		JsonWriter_AddMember("verbose", zData.mVerbose, zRoot);
+		zRoot.EndObject();
 	}
 }

@@ -11,8 +11,10 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------
 	template<>
-	void to_json<cMovement>( const cMovement& zData, rapidjson::Value& zRoot)
+	void to_json<cMovement>( const cMovement& zData, JsonWriter& zRoot)
 	{
-		to_json( zData.mSpeed, zRoot["speed"]);
+		zRoot.StartObject();
+		JsonWriter_AddMember("speed", zData.mSpeed, zRoot);
+		zRoot.EndObject();
 	}
 }

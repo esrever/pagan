@@ -46,4 +46,7 @@ namespace pgn
 		zPtr = std::dynamic_pointer_cast< T >( mComponents.at(T::StaticTypeIndex()));
 	}
 
+	//---------------------------------------------------------------------------
+	template<>
+	void to_json<cEntityComponents>(const cEntityComponents& zObj, JsonWriter& writer);
 }

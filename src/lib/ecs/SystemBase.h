@@ -26,7 +26,7 @@ namespace pgn
 			virtual void Process() = 0;
 
 			//! Json related
-			virtual void to_json(rapidjson::Value& zRoot) const{};
+			virtual void to_json(JsonWriter& zRoot) const{};
 			virtual bool from_json(const rapidjson::Value& zRoot);
 
 			//! System activity
@@ -49,7 +49,7 @@ namespace pgn
 	//--------------------------------------------------
 	//! sys to json
 	template<>
-	void to_json<cSystemBase>(const cSystemBase& zSys, rapidjson::Value& zRoot);
+	void to_json<cSystemBase>(const cSystemBase& zSys, JsonWriter& zRoot);
 	//! sys from json
 	template<>
 	bool from_json<cSystemBase>(cSystemBase& zSys, const rapidjson::Value& zRoot);

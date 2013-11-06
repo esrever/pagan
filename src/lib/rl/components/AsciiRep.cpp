@@ -63,8 +63,8 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------
 	template<>
-	void to_json<cAsciiRep>( const cAsciiRep& zData, rapidjson::Value& zRoot)
+	void to_json<cAsciiRep>( const cAsciiRep& zData, JsonWriter& zRoot)
 	{
-		to_json( zData.mChar, zRoot["char"]);
+		
 	}
 }

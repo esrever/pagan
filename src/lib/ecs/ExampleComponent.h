@@ -13,7 +13,7 @@ namespace pgn
 
 	//------------------------------------------------------------------------
 	template<>
-	void to_json<cExample>(const cExample& zObj, rapidjson::Value& zRoot);
+	void to_json<cExample>(const cExample& zObj, JsonWriter& zRoot);
 
 	//------------------------------------------------------------------------
 	template<>
