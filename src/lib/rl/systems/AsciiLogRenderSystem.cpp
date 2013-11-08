@@ -12,6 +12,8 @@ namespace pgn
 {
 	void cAsciiLogRenderSystem::Process()
 	{
+		assert(mQuery->Entities().size() == 1);
+
 		std::shared_ptr< cComponent<cAsciiWindow>> asciiwin_ptr;
 		std::shared_ptr< cComponent<cGameLog>> log_ptr;
 		for (auto e : mQuery->Entities())
@@ -21,6 +23,8 @@ namespace pgn
 			
 			ec->second.GetComponent(asciiwin_ptr);
 			ec->second.GetComponent(log_ptr);
+
+			wrefresh(*asciiwin_ptr->mData.mWindow.get());
 		}
 	}
 
@@ -33,5 +37,14 @@ namespace pgn
 			ECS.mSystemMgr->AddQuery(to_string(mQuery->Hash()), mQuery);
 		
 		return mQuery != nullptr;
+	}
+
+	void cAsciiLogRenderSystem::to_json(JsonWriter& zRoot) const
+	{
+		zRoot.StartObject();
+		zRoot.String("Base");
+		cSystemBase::to_json(zRoot);
+		JsonWriter_AddMember("Query", mQuery, zRoot);
+		zRoot.EndObject();
 	}
 }

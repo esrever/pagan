@@ -189,6 +189,19 @@ namespace pgn
 		zRoot.EndObject();
 	}
 
+	template <class T, class U>
+	inline void to_json(const std::multimap<T, U>& zObj, JsonWriter& zRoot)
+	{
+		zRoot.StartArray();
+		for (const auto& x : zObj)
+		{
+			zRoot.StartObject();
+			JsonWriter_AddMember(to_string(x.first), x.second, zRoot);
+			zRoot.EndObject();
+		}
+		zRoot.EndArray();
+	}
+
 	template <class T>
 	inline void to_json(const std::shared_ptr<T>& zObj, JsonWriter& zRoot)
 	{

@@ -45,6 +45,9 @@ namespace pgn
 			template<class T>
 			void AddSystemType();
 			
+		private:
+			template<class T>
+			friend void to_json(const T& zObj, JsonWriter& zRoot);
 			
 		protected:
 			QueryMap	mQueries;
@@ -64,4 +67,8 @@ namespace pgn
 		pystring::split(ti.name(),res," ");
 		mSystemCreators[res[1]] = func;
 	}
+
+	//---------------------------------------------------------------
+	template<>
+	void to_json<cSystemMgr>(const cSystemMgr& zMgr, JsonWriter& writer);
 }

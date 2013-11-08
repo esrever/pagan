@@ -16,4 +16,8 @@ namespace pgn
 	{
 		return cSystemBase::from_json(zRoot);
 	}
+
+	//------------------------------------------------------
+	void cGameTurnSystem::to_json(JsonWriter& zRoot) const
+	{}
 }

@@ -220,8 +220,13 @@ namespace pgn
 				{
 					auto e = InstantiateArchetype(archname);
 
-					for( auto c : componentPtrs)
-						AddComponentPtr(e,c);
+					for (auto c : componentPtrs)
+					{
+						// Make sure the exemplar instantiates only componenents existing in the archetype
+						if (zIsExemplar)
+							assert(GetComponents(e).Mask().test(c->TypeIndex()));
+						AddComponentPtr(e, c);
+					}
 					for( auto t : tags)
 						Tag(e,t);
 					if (zIsExemplar)

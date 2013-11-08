@@ -3,6 +3,7 @@ set(SOURCE_FILES
     SystemBase.cpp
     #Entity.cpp
     Event.cpp
+    ecs_config.cpp
     EntityMgr.cpp
     #ComponentQuery.cpp
     ComponentBase.cpp

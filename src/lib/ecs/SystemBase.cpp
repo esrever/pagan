@@ -47,4 +47,12 @@ namespace pgn
 	{
 		return zSys.from_json(zRoot);
 	}
+
+	void cSystemBase::to_json(JsonWriter& zRoot) const
+	{
+		zRoot.StartObject();
+		JsonWriter_AddMember("Name", mName,zRoot);
+		JsonWriter_AddMember("Desc", mDesc, zRoot);
+		zRoot.EndObject();
+	}
 }

@@ -63,6 +63,8 @@ namespace pgn
 	private:
 		template<class T>
 		friend bool from_json(T& zObj, const rapidjson::Value& zRoot);
+		template<class T>
+		friend void to_json(const T& zObj, JsonWriter& zRoot);
 
 		std::set<cEntity> mEntities;
 		
@@ -82,4 +84,8 @@ namespace pgn
 	//------------------------------------------------------------------------
 	template<>
 	bool from_json<cQueryExpression>(cQueryExpression& zObj, const rapidjson::Value& zRoot);
+
+	//------------------------------------------------------------------------
+	template<>
+	void to_json<cQueryExpression>(const cQueryExpression& zMgr, JsonWriter& writer);
 }

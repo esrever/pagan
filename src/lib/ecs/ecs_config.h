@@ -1,7 +1,10 @@
 #pragma once
+
 #include <memory>
 #include <tuple>
 #include <bitset>
+
+#include <core/util/json_conversions.h>
 
 namespace pgn
 {
@@ -10,6 +13,9 @@ namespace pgn
 
 //! Declare types
 typedef std::bitset<MAX_COMPONENTS> component_mask_type;
+template<>
+void to_json<component_mask_type>(const component_mask_type& zObj, JsonWriter& zRoot);
+
 typedef unsigned cEntity;
 
 //! Declare pointer types

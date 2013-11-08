@@ -26,7 +26,7 @@ namespace pgn
 			virtual void Process() = 0;
 
 			//! Json related
-			virtual void to_json(JsonWriter& zRoot) const{};
+			virtual void to_json(JsonWriter& zRoot) const;
 			virtual bool from_json(const rapidjson::Value& zRoot);
 
 			//! System activity

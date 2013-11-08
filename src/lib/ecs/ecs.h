@@ -36,4 +36,7 @@ namespace pgn
 			std::string mDataPath;
 			static const std::string mErrorString;
 	};
+
+	template<>
+	void to_json(const cECS& zObj, JsonWriter& zRoot);
 }

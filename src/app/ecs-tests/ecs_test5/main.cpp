@@ -69,7 +69,7 @@ int main()
 		FILE * fp = fopen("ecs_export.txt","wt");
 		rapidjson::StringBuffer strbuf;
 		JsonWriter writer(strbuf);
-		to_json(ecs.mEntityMgr, writer);
+		to_json(ecs, writer);
 		const char * jsontext = strbuf.GetString();
 		fwrite(jsontext, 1, strlen(jsontext), fp);
 		fclose(fp);

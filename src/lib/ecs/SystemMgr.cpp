@@ -106,4 +106,16 @@ namespace pgn
 	{
 		mQueries[zName] = zPtr;
 	}
+
+	template<>
+	void to_json<cSystemMgr>(const cSystemMgr& zMgr, JsonWriter& writer)
+	{
+		writer.StartObject();
+
+		// Archetypes
+		JsonWriter_AddMember("Queries", zMgr.mQueries, writer);
+		JsonWriter_AddMember("Systems", zMgr.mSystems, writer);
+
+		writer.EndObject();
+	}
 }

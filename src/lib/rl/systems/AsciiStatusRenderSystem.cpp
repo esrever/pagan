@@ -11,6 +11,7 @@ namespace pgn
 {
 	void cAsciiStatusRenderSystem::Process()
 	{
+		assert(mQuery->Entities().size() == 1);
 		std::shared_ptr< cComponent<cAsciiWindow>> asciiwin_ptr;
 		for (auto e : mQuery->Entities())
 		{
@@ -19,6 +20,8 @@ namespace pgn
 
 			ec->second.GetComponent(asciiwin_ptr);
 		}
+
+		wrefresh(*asciiwin_ptr->mData.mWindow.get());
 	}
 
 	bool cAsciiStatusRenderSystem::from_json(const rapidjson::Value& zRoot)
@@ -30,5 +33,14 @@ namespace pgn
 			ECS.mSystemMgr->AddQuery(to_string(mQuery->Hash()), mQuery);
 
 		return mQuery != nullptr;
+	}
+
+	void cAsciiStatusRenderSystem::to_json(JsonWriter& zRoot) const
+	{
+		zRoot.StartObject();
+		zRoot.String("Base");
+		cSystemBase::to_json(zRoot);
+		JsonWriter_AddMember("Query", mQuery, zRoot);
+		zRoot.EndObject();
 	}
 }

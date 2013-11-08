@@ -60,4 +60,13 @@ namespace pgn
 		
 		return mQuery != nullptr;
 	}
+
+	void cAsciiActionInputSystem::to_json(JsonWriter& zRoot) const
+	{
+		zRoot.StartObject();
+		zRoot.String("Base");
+		cSystemBase::to_json(zRoot);
+		JsonWriter_AddMember("Query", mQuery,zRoot);
+		zRoot.EndObject();
+	}
 }

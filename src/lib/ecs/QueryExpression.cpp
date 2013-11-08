@@ -320,4 +320,16 @@ namespace pgn
 			return ok;
 		}
 	}
+
+	//------------------------------------------------------------------------
+	template<>
+	void to_json<cQueryExpression>(const cQueryExpression& zMgr, JsonWriter& writer)
+	{
+		writer.StartObject();
+		JsonWriter_AddMember("Tags", zMgr.mTags,writer);
+		JsonWriter_AddMember("Tags-not", zMgr.mTagsNot, writer);
+		JsonWriter_AddMember("Mask", zMgr.mMask, writer);
+		JsonWriter_AddMember("Mask-not", zMgr.mMaskNot, writer);
+		writer.EndObject();
+	}
 }

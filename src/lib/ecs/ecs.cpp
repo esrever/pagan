@@ -31,4 +31,13 @@ namespace pgn
 		bool r2 = mSystemMgr->from_json(msys);
         return r1 && r2;
 	}
+
+	template<>
+	void to_json(const cECS& zObj, JsonWriter& zRoot)
+	{
+		zRoot.StartObject();
+		JsonWriter_AddMember("EntityMgr", zObj.mEntityMgr, zRoot);
+		JsonWriter_AddMember("SystemMgr", zObj.mSystemMgr, zRoot);
+		zRoot.EndObject();
+	}
 }

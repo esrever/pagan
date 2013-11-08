@@ -22,7 +22,7 @@ namespace pgn
 	{
 		writer.StartObject();
 		JsonWriter_AddMember("Name", zObj.mName, writer);
-		JsonWriter_AddMember("Mask", zObj.mMask.to_string(), writer);
+		JsonWriter_AddMember("Mask", zObj.mMask, writer);
 		JsonWriter_AddMember("Tags", zObj.mTags, writer);
 		writer.EndObject();
 	}
