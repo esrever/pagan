@@ -171,7 +171,7 @@ namespace pgn
 		}
 
 		// TAGS_NOT
-		for (const auto& x : mTags)
+		for (const auto& x : mTagsNot)
 		{
 			auto itset = tagged_ents.find(x);
 			if (itset != tagged_ents.end())

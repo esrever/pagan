@@ -65,6 +65,8 @@ namespace pgn
 	template<>
 	void to_json<cAsciiRep>( const cAsciiRep& zData, JsonWriter& zRoot)
 	{
-		
+		zRoot.StartObject();
+		//JsonWriter_AddMember("char", zData.mChar, zRoot);
+		zRoot.EndObject();
 	}
 }

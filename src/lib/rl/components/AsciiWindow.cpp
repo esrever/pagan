@@ -37,8 +37,8 @@ namespace pgn
 	template<>
 	bool from_json<cAsciiWindow>(cAsciiWindow& zObj, const rapidjson::Value& zRoot)
 	{
-		from_json(zObj.mStart,"Start");
-		from_json(zObj.mSize,"Size");
+		from_json(zObj.mStart,zRoot["Start"]);
+		from_json(zObj.mSize, zRoot["Size"]);
 		zObj.Init();
 		return true;
 	}

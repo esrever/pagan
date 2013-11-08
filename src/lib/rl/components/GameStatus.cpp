@@ -13,5 +13,9 @@ namespace pgn
 
 	//-----------------------------------------------------------------------
 	template<>
-	void to_json< cGameStatus>( const cGameStatus& zData, JsonWriter& zRoot){}
+	void to_json< cGameStatus>( const cGameStatus& zData, JsonWriter& zRoot)
+	{
+		zRoot.StartObject();
+		zRoot.EndObject();
+	}
 }
