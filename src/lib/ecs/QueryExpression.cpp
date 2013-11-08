@@ -168,6 +168,8 @@ namespace pgn
 				if (itent == itset->second.end())
 					return false;
 			}
+			else
+				return false;
 		}
 
 		// TAGS_NOT
