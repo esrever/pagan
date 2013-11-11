@@ -1,12 +1,12 @@
 #pragma once
 
-#include "GameLog.h"
+#include "Logger.h"
 
 namespace pgn
 {
 	//-----------------------------------------------------------------------
 	template<>
-	bool from_json< cGameLog>( cGameLog& zData, const rapidjson::Value& zRoot)
+	bool from_json< cLogger>( cLogger& zData, const rapidjson::Value& zRoot)
 	{
 		from_json(zData.mMaxLines,"MaxLines");
 		return true;
@@ -14,7 +14,7 @@ namespace pgn
 
 	//-----------------------------------------------------------------------
 	template<>
-	void to_json< cGameLog>( const cGameLog& zData, JsonWriter& zRoot){}
+	void to_json< cLogger>( const cLogger& zData, JsonWriter& zRoot){}
 
 	/*
 		I need functions with text modification:
@@ -24,6 +24,11 @@ namespace pgn
 		cTextModifier::Apply(boost::str(boost::format("%d damage")%dmg), line2)
 		cTextModifier::Apply("\n",line3);
 		cTextModifier::Join(lineOut, line1, line2, line3);
-		void WriteToLog(cGameLog& zLog, lineOut )
+		void WriteToLog(cLogger& zLog, lineOut )
 	*/
+
+	void Log(cLogger& zLog, const std::string zMsg)
+	{
+
+	}
 }

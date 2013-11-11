@@ -6,7 +6,7 @@
 #include <ecs/EntityComponents.h>
 
 #include <rl/components/AsciiWindow.h>
-#include <rl/components/GameLog.h>
+#include <rl/components/Logger.h>
 
 namespace pgn
 {

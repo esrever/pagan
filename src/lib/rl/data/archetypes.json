@@ -54,19 +54,5 @@
         "name" : "system_window",
         "components" : ["pgn::cAsciiWindow"],
         "inherits" : ["common"]
-    },
-    {
-        "name" : "system_window_log",
-        "components" : ["pgn::cGameLog"],
-        "inherits" : ["system_window"]
-    },
-    {
-        "name" : "system_window_status",
-        "components" : ["pgn::cGameStatus"],
-        "inherits" : ["system_window"]
-    },
-    {
-        "name" : "system_window_map",
-        "inherits" : ["system_window"]
     }
 ]

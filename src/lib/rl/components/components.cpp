@@ -5,12 +5,12 @@
 #include "AsciiRep.h"
 #include "AsciiWindow.h"
 #include "Description.h"
-#include "GameLog.h"
 #include "GameStatus.h"
 #include "KeyActionMapper.h"
 #include "Level.h"
 #include "Location.h"
 #include "Lockable.h"
+#include "Logger.h"
 #include "MouseActionMapper.h"
 #include "Movement.h"
 #include "OpenClose.h"
@@ -30,12 +30,12 @@ namespace pgn
 		zMgr.AddComponentType<pgn::cAsciiRep>();
 		zMgr.AddComponentType<pgn::cAsciiWindow>();
 		zMgr.AddComponentType<pgn::cDescription>();
-		zMgr.AddComponentType<pgn::cGameLog>();
 		zMgr.AddComponentType<pgn::cGameStatus>();
 		zMgr.AddComponentType<pgn::cKeyActionMapper>();
 		zMgr.AddComponentType<pgn::cLevel>();
 		zMgr.AddComponentType<pgn::cLocation>();
 		zMgr.AddComponentType<pgn::cLockable>();
+		zMgr.AddComponentType<pgn::cLogger>();
 		zMgr.AddComponentType<pgn::cMouseActionMapper>();
 		zMgr.AddComponentType<pgn::cMovement>();
 		zMgr.AddComponentType<pgn::cOpenClose>();

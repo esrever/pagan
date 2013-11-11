@@ -38,6 +38,17 @@ namespace pgn
             (*mChannel) << ( mFormat % mName % mLevelNames[int(zLevel)] % zMsg);
     }
 
+
+	//----------------------------------------------------------------------------
+	cLogString cLogString::mDefault;
+
+	//----------------------------------------------------------------------------
+	void cLogString::Log(const eLogLevel zLevel, const std::string& zMsg)
+	{
+		if (int(zLevel) <= int(mDisplayLevel))
+			mLogLines.push_back(  boost::str(mFormat % mName % mLevelNames[int(zLevel)] % zMsg) );
+	}
+
 	//----------------------------------------------------------------------------
 	void InitFromConfig(cLogStream& zLog, const cCfgTree& cfg, const std::string& zBase)
 	{

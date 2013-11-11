@@ -14,9 +14,16 @@
         }
     },
     {
-        "archetype" : "system_window_log",
+        "archetype" : "common",
+        "name" : "game_log",
+        "pgn::cLogger" : {
+            "MaxLines" : 100000
+            },
+        "tags" : ["GameLog"]
+    },
+    {
+        "archetype" : "system_window",
         "name" : "system_window_log_fullscreen",
-        "pgn::cGameLog" : {"MaxLines" : 1000},
         "pgn::cAsciiWindow" : {
             "Start" : [0,0],
             "Size" : [160,50]
@@ -27,7 +34,7 @@
         }
     },
     {
-        "archetype" : "system_window_log",
+        "archetype" : "system_window",
         "name" : "system_window_log_small",
         "pgn::cGameLog" : {"MaxLines" : 20},
         "pgn::cAsciiWindow" : {
@@ -37,7 +44,7 @@
         "tags" : ["ActiveWindow"]
     },
     {
-        "archetype" : "system_window_status",
+        "archetype" : "system_window",
         "name" : "system_window_status",
         "pgn::cAsciiWindow" : {
             "Start" : [140,0],
@@ -46,7 +53,7 @@
         "tags" : ["ActiveWindow"]
     },
     {
-        "archetype" : "system_window_map",
+        "archetype" : "system_window",
         "name" : "system_window_map",
         "pgn::cAsciiWindow" : {
             "Start" : [0,0],

@@ -33,6 +33,7 @@ int main()
 
 	{
 		//! Init log stuff. TODO: Do I need a proper entity? SysLogWindow e.g.
+		/*
 		pgn::cAsciiWindow awin;
 		awin.mStart = glm::ivec2(0, 0);
 		awin.mSize = glm::uvec2(COLS, LINES);
@@ -40,6 +41,8 @@ int main()
 		pgn::cLogCurses log;
 		log.SetWindow(std::make_shared<pgn::cAsciiWindow>(awin));
 		ecs.mLog = std::dynamic_pointer_cast<pgn::cLogBase>(std::make_shared<pgn::cLogCurses>(log));
+		*/
+		ecs.mLog = std::dynamic_pointer_cast<pgn::cLogBase>(std::make_shared<pgn::cLogString>(pgn::cLogString()));
 
 		//! Init ecs
 		ecs.Init();

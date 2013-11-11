@@ -54,6 +54,17 @@ namespace pgn
 			std::ostream * 	mChannel;
 	};
 
+	class cLogString : public cLogBase
+	{
+	public:
+		void Log(const eLogLevel zLevel, const std::string& zMsg);
+		static cLogString& Default() { return mDefault; }
+
+	private:
+		static cLogString mDefault;
+		std::vector<std::string> mLogLines;
+	};
+
 	class cCfgTree;
 	void InitFromConfig(cLogStream& zLog, const cCfgTree& cfg, const std::string& zBase);
 }

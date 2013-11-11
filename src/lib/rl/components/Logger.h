@@ -8,7 +8,7 @@
 namespace pgn
 {
 	//! Game log
-	struct cGameLog
+	struct cLogger
 	{
 		//std::vector<std::vector<chtype>> mLogData;
 		std::vector<std::string> mLogData;
@@ -17,9 +17,12 @@ namespace pgn
 
 	//-----------------------------------------------------------------------
 	template<>
-	bool from_json< cGameLog>( cGameLog& zData, const rapidjson::Value& zRoot);
+	bool from_json< cLogger>( cLogger& zData, const rapidjson::Value& zRoot);
 
 	//-----------------------------------------------------------------------
 	template<>
-	void to_json< cGameLog>( const cGameLog& zData, JsonWriter& zRoot);
+	void to_json< cLogger>( const cLogger& zData, JsonWriter& zRoot);
+
+	//-----------------------------------------------------------------------
+	void Log(cLogger& zLog, const std::string zMsg);
 }

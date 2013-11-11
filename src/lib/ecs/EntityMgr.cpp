@@ -223,8 +223,10 @@ namespace pgn
 					for (auto c : componentPtrs)
 					{
 						// Make sure the exemplar instantiates only componenents existing in the archetype
+						/*
 						if (zIsExemplar)
 							assert(GetComponents(e).Mask().test(c->TypeIndex()));
+						*/
 						AddComponentPtr(e, c);
 					}
 					for( auto t : tags)
