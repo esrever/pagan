@@ -24,8 +24,8 @@ set(SOURCE_FILES
     ActionMgrRL.cpp
     #window/curseswindow.cpp
     util/LogCurses.cpp
-    window/cursescolor.cpp
-    
+    curses/color.cpp
+    curses/fontpreset.cpp
 )
 
 set(HEADER_FILES
@@ -35,7 +35,9 @@ set(HEADER_FILES
     events/events.h
     util/LogCurses.h
     #window/curseswindow.h
-    window/cursescolor.h
+    curses/color.h
+    curses/textmod.h
+    curses/fontpreset.h
     ${COMPONENT_SRCS}
     ${SYSTEM_SRCS}
     ${ACTION_SRCS}

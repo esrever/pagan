@@ -7,9 +7,10 @@
 
 namespace pgn
 {
-
-	class cCursesColor
+	namespace curses
 	{
+		class cColor
+		{
 		public:
 			static uint16_t CreateColorPairIndex(const glm::vec3& zFront, const glm::vec3& zBack);
 			static uint16_t CreateColorIndex(const glm::vec3& zCol);
@@ -18,5 +19,6 @@ namespace pgn
 			// set  
 			static std::map<uint64_t, unsigned short> mColorToIndex;
 			static std::map<uint32_t, unsigned short> mColorPairToIndex;
-	};	
+		};
+	}
 }

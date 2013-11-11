@@ -12,6 +12,7 @@ namespace pgn
 {
 	void cAsciiLogRenderSystem::Process()
 	{
+		/*
 		assert(mQuery->Entities().size() == 1);
 
 		std::shared_ptr< cComponent<cAsciiWindow>> asciiwin_ptr;
@@ -26,6 +27,7 @@ namespace pgn
 
 			wrefresh(*asciiwin_ptr->mData.mWindow.get());
 		}
+		*/
 	}
 
 	bool cAsciiLogRenderSystem::from_json(const rapidjson::Value& zRoot)

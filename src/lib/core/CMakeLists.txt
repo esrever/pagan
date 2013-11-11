@@ -17,6 +17,7 @@ set(HEADER_FILES
     util/json_conversions.h
     util/idgen.h
     app/application.h
+    util/textmod.h
 )
 
 add_definitions(

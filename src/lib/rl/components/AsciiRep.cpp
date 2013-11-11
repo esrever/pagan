@@ -4,7 +4,7 @@
 
 #include <core/util/jsonutils.h>
 
-#include <rl/window/cursescolor.h>
+#include <rl/curses/color.h>
 
 namespace pgn
 {
@@ -54,7 +54,7 @@ namespace pgn
 		glm::vec3 vcol = read_color(zRoot["color"]);
 		glm::vec3 vcolbg = read_color(zRoot["color_bg"]);
 
-		auto cpair = cCursesColor::CreateColorPairIndex( vcol, vcolbg);
+		auto cpair = curses::cColor::CreateColorPairIndex( vcol, vcolbg);
 
 		zData.mChar = c + (0<<PDC_ATTR_SHIFT) + (cpair<<PDC_COLOR_SHIFT);
 
