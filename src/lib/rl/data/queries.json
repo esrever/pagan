@@ -11,7 +11,7 @@
     },
     "ActiveLogWindow" : {
         "HasTags" : ["ActiveWindow"],
-        "HasComponents" : ["pgn::cGameLog"]
+        "HasComponents" : ["pgn::cLogger"]
     },
     "ActiveStatusWindow" : {
         "HasTags" : ["ActiveWindow"],
