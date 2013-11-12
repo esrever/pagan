@@ -2,9 +2,15 @@
 
 #include <string>
 
+#include <boost/format.hpp>
+
 namespace pgn
 {
-	// Normal text handler
+	/*
+		Text modifiers for wstring, as we'll use that for all sorts of messages
+	*/
+
+	//! Modifies a string in-place, evaluating tags, given a modifier class from:
 	template<class C>
 	void TextMod(std::wstring& zOut)
 	{
@@ -28,6 +34,14 @@ namespace pgn
 	}
 
 	//--------------------------------------------------------
+	//! Modifies a string in-place, adding a given tag
+	inline const std::wstring TextModAdd(const std::wstring& zStr, const std::wstring& zMod)
+	{
+		return boost::str(boost::wformat(L"<%s>%s</%s>")%zMod%zStr%zMod);
+	}
+
+	//--------------------------------------------------------
+	//! Passthrough
 	class cTextModConverterPassthrough
 	{
 		public:
@@ -39,6 +53,7 @@ namespace pgn
 	};
 
 	//--------------------------------------------------------
+	//! Removes tags
 	class cTextModConverterIgnore
 	{
 	public:

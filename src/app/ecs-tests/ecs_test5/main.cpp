@@ -30,33 +30,6 @@ int main()
 	noecho();			/* Don't echo() while we do getch */
 	start_color();
 
-	std::wstring s = L"The quick <meh>brown fox</meh> jumps <meh>over</meh> <doo>the lazy</doo> dog";
-	std::wstring s0 = s;
-	std::wstring s1 = s;
-
-	std::vector<chtype> scurse;
-
-	pgn::curses::cFontPreset::Add(L"meh", false, glm::vec3(1, 0.2, 0.9), glm::vec3(0.2, 0, 1));
-	pgn::curses::cFontPreset::Add(L"doo", true, glm::vec3(0, 0.1, 1), glm::vec3(1, 0.0001, 0));
-
-	for (short ci = 0; ci < 10; ++ci)
-	{
-		short r, g, b;
-		color_content(ci, &r, &g, &b);
-		std::cout << r << " " << g << " " << b << " " << std::endl;
-	}
-	
-
-	pgn::TextMod<pgn::cTextModConverterCurses>(scurse, s);
-	addchstr(&scurse.front());
-	refresh();
-	getch();
-	pgn::TextMod<pgn::cTextModConverterPassthrough>(s0);
-	std::wcout << s0 << std::endl;
-	pgn::TextMod<pgn::cTextModConverterIgnore>(s1);
-	std::wcout << s1 << std::endl;
-	exit(0);
-
 	//##############################
 	//# ECS Init
 

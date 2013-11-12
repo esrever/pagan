@@ -6,6 +6,7 @@
 
 namespace pgn
 {
+	//! Curses version of TextMod, outputs a vector of chtype
 	template<class C>
 	void TextMod(std::vector<chtype>& zOut, const std::wstring& zIn)
 	{
@@ -39,6 +40,7 @@ namespace pgn
 	}
 
 	//--------------------------------------------------------
+	//! Evaluates tags as curses fontpresets
 	class cTextModConverterCurses
 	{
 	public:
@@ -51,12 +53,7 @@ namespace pgn
 			const size_t len1 = textSize;
 
 			const auto fmt = zOutText.substr(i0 + 1, fmtSize);
-			/*
-				TODO: 
-					- grab fmt. TODO: from where??
-					- look up fmt presets (ushort elem)
 
-			*/
 			wchar_t elem = curses::cFontPreset::Get(fmt);
 			std::fill(zOutAttr.begin() + i1, zOutAttr.begin() + i1 + len1, elem);
 			cTextModConverterIgnore::Apply(zOutText, textOffset, textSize, fmtSize);
