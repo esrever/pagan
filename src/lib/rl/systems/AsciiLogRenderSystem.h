@@ -12,6 +12,7 @@ namespace pgn
 		virtual void to_json(JsonWriter& zRoot) const;
 	private:
 		
-		cQueryExpressionSptr mQuery;
+		cQueryExpressionSptr mQueryWin;
+		cQueryExpressionSptr mQueryLog;
 	};
 }

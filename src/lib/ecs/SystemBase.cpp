@@ -55,4 +55,16 @@ namespace pgn
 		JsonWriter_AddMember("Desc", mDesc, zRoot);
 		zRoot.EndObject();
 	}
+
+	bool cSystemBase::LoadQuery(pgn::cQueryExpressionSptr& zQuery, const rapidjson::Value& zRoot, const char * zName) const
+	{
+		zQuery = std::shared_ptr< cQueryExpression>(new cQueryExpression());
+		if (pgn::from_json(*zQuery, zRoot[zName]))
+		{
+			ECS.mSystemMgr->AddQuery(to_string(zQuery->Hash()), zQuery);
+			return true;
+		}
+		else
+			return false;
+	}
 }

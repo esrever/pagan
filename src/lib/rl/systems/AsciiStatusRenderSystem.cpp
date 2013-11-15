@@ -11,9 +11,8 @@ namespace pgn
 {
 	void cAsciiStatusRenderSystem::Process()
 	{
-		assert(mQuery->Entities().size() == 1);
 		std::shared_ptr< cComponent<cAsciiWindow>> asciiwin_ptr;
-		for (auto e : mQuery->Entities())
+		for (auto e : mQueryWin->Entities())
 		{
 			auto ec = ECS.mEntityMgr->GetComponents().find(e);
 			assert(ec != ECS.mEntityMgr->GetComponents().end());
@@ -21,18 +20,18 @@ namespace pgn
 			ec->second.GetComponent(asciiwin_ptr);
 		}
 
-		wrefresh(*asciiwin_ptr->mData.mWindow.get());
+		auto win = *asciiwin_ptr->mData.mWindow.get();
+		wprintw(win, "Status render");
+		wrefresh(win);
 	}
 
 	bool cAsciiStatusRenderSystem::from_json(const rapidjson::Value& zRoot)
 	{
 		cSystemBase::from_json(zRoot);
 		
-		mQuery = std::shared_ptr< cQueryExpression>(new cQueryExpression());
-		if (pgn::from_json(*mQuery, zRoot["Query"]))
-			ECS.mSystemMgr->AddQuery(to_string(mQuery->Hash()), mQuery);
-
-		return mQuery != nullptr;
+		auto b0 = LoadQuery(mQueryWin, zRoot,"QueryWin");
+		auto b1 = LoadQuery(mQueryStatus, zRoot, "QueryStatus");
+		return b0 && b1;
 	}
 
 	void cAsciiStatusRenderSystem::to_json(JsonWriter& zRoot) const
@@ -40,7 +39,8 @@ namespace pgn
 		zRoot.StartObject();
 		zRoot.String("Base");
 		cSystemBase::to_json(zRoot);
-		JsonWriter_AddMember("Query", mQuery, zRoot);
+		JsonWriter_AddMember("QueryWin", mQueryWin, zRoot);
+		JsonWriter_AddMember("QueryStatus", mQueryStatus, zRoot);
 		zRoot.EndObject();
 	}
 }

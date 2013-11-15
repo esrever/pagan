@@ -22,6 +22,14 @@
         "tags" : ["GameLog"]
     },
     {
+        "archetype" : "common",
+        "name" : "system_log",
+        "pgn::cLogger" : {
+            "MaxLines" : 100000
+            },
+        "tags" : ["SystemLog"]
+    },
+    {
         "archetype" : "system_window",
         "name" : "system_window_log_fullscreen",
         "pgn::cAsciiWindow" : {
@@ -31,17 +39,23 @@
         "pgn::cKeyActionMapper" : {
             "QuitProgram" : [27],
             "SwitchToWindowMain" : []
-        }
+        },
+        "pgn::cLoggerListener" : {
+            "logtags" : ["GameLog","SystemLog"]
+        },
+        "tags" : ["LogWindow"]
     },
     {
         "archetype" : "system_window",
         "name" : "system_window_log_small",
-        "pgn::cGameLog" : {"MaxLines" : 20},
         "pgn::cAsciiWindow" : {
             "Start" : [0,30],
             "Size" : [140,20]
             },
-        "tags" : ["ActiveWindow"]
+        "pgn::cLoggerListener" : {
+            "logtags" : ["GameLog"]
+        },
+        "tags" : ["ActiveWindow","LogWindow"]
     },
     {
         "archetype" : "system_window",
@@ -50,7 +64,7 @@
             "Start" : [140,0],
             "Size" : [20,50]
             },
-        "tags" : ["ActiveWindow"]
+        "tags" : ["ActiveWindow","StatusWindow"]
     },
     {
         "archetype" : "system_window",
@@ -63,7 +77,7 @@
             "QuitProgram" : [27],
             "SwitchToWindowLog" : []
         },
-        "tags" : ["ActiveWindow"]
+        "tags" : ["ActiveWindow","MapWindow"]
     }
 ]
     

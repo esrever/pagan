@@ -12,7 +12,7 @@
         "Data" : {
             "Name" : "GameTurnSystem",
             "Desc" : "Controls the game turns",
-            "QueryPre" : "Actor"
+            "Query" : "Actor"
         }
     },
     {
@@ -20,7 +20,8 @@
         "Data" : {
             "Name" : "AsciiStatusRenderSystem",
             "Desc" : "Render status on screen",
-            "Query" : "ActiveStatusWindow"
+            "QueryWin" : "tag_StatusWindow",
+            "QueryStatus" : ["cmp_pgn::cGameStatus", "tag_ActiveWindow"]
         }
     },
     {
@@ -31,7 +32,7 @@
             "Systems" : ["AsciiLevelRenderer", "AsciiCharRenderer"],
             "QueryLvl" : "tag_CurrentLevel",
             "QueryChar" : "cmp_pgn::cAsciiRep",
-            "QueryWin" : "ActiveLevelWindow"
+            "QueryWin" : ["tag_MapWindow", "tag_ActiveWindow"]
         }
     },
     {
@@ -39,7 +40,8 @@
         "Data" : {
             "Name" : "AsciiLogRenderSystem",
             "Desc" : "Render log on screen",
-            "Query" : "ActiveLogWindow"
+            "QueryWin" : ["tag_LogWindow", "tag_ActiveWindow"],
+            "QueryLog" : "cmp_pgn::cLogger"
         }
     }
 ]

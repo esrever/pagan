@@ -158,6 +158,19 @@ namespace pgn
 		zRoot.Uint( zObj);
 	}
 
+	template <>
+	inline bool from_json<int>(int& zObj, const rapidjson::Value& zRoot)
+	{
+		if (zRoot.IsNumber())
+			zObj = unsigned(zRoot.GetInt());
+		return zRoot.IsNumber();
+	}
+	template <>
+	inline void to_json<int>(const int& zObj, JsonWriter& zRoot)
+	{
+		zRoot.Int(zObj);
+	}
+
 	//-------------------------------------------------------------------------
 	template <class T>
 	inline void to_json(const std::vector<T>& zObj, JsonWriter& zRoot)

@@ -15,7 +15,7 @@ namespace pgn
 	{
 	
 		assert(mQueryWin->Entities().size() == 1);
-		assert(mQueryLvl->Entities().size() == 1);
+		//assert(mQueryLvl->Entities().size() == 1);
 
 		std::shared_ptr< cComponent<cAsciiWindow>> asciiwin_ptr;
 		auto ec = ECS.mEntityMgr->GetComponents().find( *mQueryWin->Entities().begin());
@@ -38,7 +38,9 @@ namespace pgn
 			ec->second.GetComponent(char_ptr);
 		}
 
-		wrefresh(*asciiwin_ptr->mData.mWindow.get());
+		auto win = *asciiwin_ptr->mData.mWindow.get();
+		wprintw(win, "Map render");
+		wrefresh(win);
 	}
 
 	bool cAsciiMapRenderSystem::from_json(const rapidjson::Value& zRoot)

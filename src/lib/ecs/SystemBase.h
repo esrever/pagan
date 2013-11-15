@@ -38,6 +38,9 @@ namespace pgn
 			static std::shared_ptr<cSystemBase> Create();
 
 		protected:
+			bool LoadQuery(pgn::cQueryExpressionSptr& zQuery, const rapidjson::Value& zRoot, const char * zName) const;
+
+		protected:
 			bool mActive;
 			std::string mName;
 			std::string mDesc;

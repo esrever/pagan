@@ -27,10 +27,7 @@ namespace pgn
 		if (mSize.x && mSize.y)
 		{
 			mWindow = std::make_shared<WINDOW *>(newwin(mSize.y, mSize.x, mStart.y, mStart.x));
-			box(*mWindow.get(), 0, 0);		/* 0, 0 gives default characters
-						 * for the vertical and horizontal
-						 * lines			*/
-			//wrefresh(mWindow.get());		/* Show that box 		*/
+			box(*mWindow.get(), 0, 0);
 		}
 	}
 

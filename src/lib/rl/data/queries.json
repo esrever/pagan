@@ -5,16 +5,5 @@
         "HasComponents" : [],
         "HasNotComponents" : [],
         "HasComposite" : []
-    },
-    "ActiveLevelWindow" : {
-        "HasTags" : ["CurrentLevel", "ActiveWindow"]
-    },
-    "ActiveLogWindow" : {
-        "HasTags" : ["ActiveWindow"],
-        "HasComponents" : ["pgn::cLogger"]
-    },
-    "ActiveStatusWindow" : {
-        "HasTags" : ["ActiveWindow"],
-        "HasComponents" : ["pgn::cGameStatus"]
     }
 }
