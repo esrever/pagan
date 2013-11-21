@@ -79,3 +79,11 @@ namespace pgn
 print src_h
 print src_cpp
 
+
+fph = open('{class}.h'.format(**srcdict),'w')
+fph.write(src_h)
+fph.close()
+
+fph = open('{class}.cpp'.format(**srcdict),'w')
+fph.write(src_cpp)
+fph.close()
