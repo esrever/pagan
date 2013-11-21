@@ -3,8 +3,9 @@ import sys
 
 srcdict = dict();
 
-if len(sys.argv) <= 6:
+if len(sys.argv) < 6:
     print "Need 6 arguments: cmd name doxy [inch] [inccpp] [type,name,var]]"
+    print sys.argv
     sys.exit(0);
 else:
     srcdict['name'] = sys.argv[1];

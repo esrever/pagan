@@ -1,5 +1,3 @@
-#include <curses.h>
-
 #include <rapidjson/prettywriter.h>	// for stringify JSON
 #include <rapidjson/filestream.h>	// wrapper of C stream for prettywriter as output
 
@@ -7,13 +5,6 @@
 #include <rl/EntityMgrRL.h>
 #include <rl/SystemMgrRL.h>
 #include <rl/ActionMgrRL.h>
-#include <rl/util/LogCurses.h>
-
-#include <rl/components/AsciiWindow.h>
-
-#include <core/util/textmod.h>
-#include <rl/curses/textmod.h>
-#include <rl/curses/fontpreset.h>
 
 /*
 	Provide json conversions for all components
@@ -22,14 +13,6 @@
 
 int main()
 {
-	//##############################
-	//# Curses init
-	initscr();			/* Start curses mode 		*/
-	raw();				/* Line buffering disabled	*/
-	keypad(stdscr, TRUE);		/* We get F1, F2 etc..		*/
-	noecho();			/* Don't echo() while we do getch */
-	start_color();
-
 	//##############################
 	//# ECS Init
 
@@ -84,8 +67,5 @@ int main()
 	//# ECS End
 	ecs.Destroy();
 
-	//##############################
-	//# Curses end
-	endwin();			/* End curses mode		  */
 	return 0;
 }
