@@ -1,0 +1,58 @@
+[
+    {
+        "name" : "common",
+        "components" : ["pgn::cDescription"],
+        "inherits" : []
+    },
+    {
+        "name" : "common_world",
+        "inherits" : ["common"],
+        "tags" : ["PartOfWorld"]
+    },
+    {
+        "name" : "creature",
+        "components" : ["pgn::cMovement","pgn::cAsciiRep"],
+        "inherits" : ["common"]
+    },
+    {
+        "name" : "pc",
+        "components" : ["pgn::cKeyActionMapper"],
+        "inherits" : ["creature"],
+        "tags" : ["Player"]
+    },
+    {
+        "name" : "npc",
+        "components" : ["pgn::cAI"],
+        "inherits" : ["creature"]
+    },
+    {
+        "name" : "tile",
+        "components" : ["pgn::cAsciiRep", "pgn::cTileMoveCost", "pgn::cTileObstacle", "pgn::cTileAtmospheric","pgn::cTileVisibility"],
+        "inherits" : ["common"]
+    },
+    {
+        "name" : "tile_state",
+        "components" : ["pgn::cAsciiRep", "pgn::cTileMoveCost", "pgn::cTileObstacle", "pgn::cTileAtmospheric","pgn::cTileVisibility"],
+        "inherits" : ["common"]
+    },
+    {
+        "name" : "level",
+        "components" : ["pgn::cAsciiLevelRep"],
+        "inherits" : ["common"]
+    },
+    {
+        "name" : "stairs",
+        "components" : ["pgn::cTileStairs"],
+        "inherits" : ["tile"]
+    },
+    {
+        "name" : "door",
+        "components" : ["pgn::cOpenClose"],
+        "inherits" : ["common"]
+    },
+    {
+        "name" : "system_window",
+        "components" : ["pgn::cAsciiWindow"],
+        "inherits" : ["common"]
+    }
+]

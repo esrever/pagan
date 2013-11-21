@@ -34,11 +34,6 @@ namespace pgn
 		component_mask_type mMask;
 	};
 
-	typedef std::map<cEntity, cEntityComponents>::const_iterator cEntityWithComponents;
-	
-	typedef cEvent<size_t(eBasicECSEvent::COMPONENT_ADDED), cEntityWithComponents, unsigned short> cComponentAddedEvent;
-	typedef cEvent<size_t(eBasicECSEvent::COMPONENT_REMOVE), cEntityWithComponents, unsigned short> cComponentRemoveEvent;
-
 	//---------------------------------------------------------------------------
 	template<class T>
 	void cEntityComponents::GetComponent(std::shared_ptr<T>& zPtr) const

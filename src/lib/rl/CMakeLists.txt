@@ -13,34 +13,24 @@ file(GLOB_RECURSE SYSTEM_SRCS
          ${CMAKE_CURRENT_SOURCE_DIR}/systems/*.cpp
          ${CMAKE_CURRENT_SOURCE_DIR}/systems/*.h)
          
-file(GLOB_RECURSE ACTION_SRCS
+file(GLOB_RECURSE EVENT_SRCS
          RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
-         ${CMAKE_CURRENT_SOURCE_DIR}/actions/*.cpp
-         ${CMAKE_CURRENT_SOURCE_DIR}/actions/*.h)
+         ${CMAKE_CURRENT_SOURCE_DIR}/events/*.cpp
+         ${CMAKE_CURRENT_SOURCE_DIR}/events/*.h)
 
 set(SOURCE_FILES
     EntityMgrRL.cpp
     SystemMgrRL.cpp
     ActionMgrRL.cpp
-    #window/curseswindow.cpp
-    util/LogCurses.cpp
-    curses/color.cpp
-    curses/fontpreset.cpp
 )
 
 set(HEADER_FILES
     EntityMgrRL.h
     SystemMgrRL.h
     ActionMgrRL.h
-    events/events.h
-    util/LogCurses.h
-    #window/curseswindow.h
-    curses/color.h
-    curses/textmod.h
-    curses/fontpreset.h
     ${COMPONENT_SRCS}
     ${SYSTEM_SRCS}
-    ${ACTION_SRCS}
+    ${EVENT_SRCS}
     
 )
 
@@ -52,7 +42,7 @@ source_group("Sources" FILES ${SOURCE_FILES})
 source_group("Headers" FILES ${HEADER_FILES})
 source_group("_Components"   FILES ${COMPONENT_SRCS})
 source_group("_Systems"      FILES ${SYSTEM_SRCS})
-source_group("_Actions"      FILES ${ACTION_SRCS})
+source_group("_Events"      FILES ${EVENT_SRCS})
 
 include_directories(
     ${PROJECT_SOURCE_DIR}/lib

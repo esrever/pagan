@@ -16,7 +16,7 @@
 #include "Entity.h"
 #include "Event.h"
 #include "Component.h"
-#include "EntityComponents.h"
+#include "EntityData.h"
 #include "Archetype.h"
 
 /*
@@ -65,8 +65,8 @@ namespace pgn
 			void OnEntityDestroy(cEntity e);
 
 			//! Accessors
-			const cEntityComponents& GetComponents(const cEntity& zEntity) const;
-			const std::map<cEntity, cEntityComponents>& GetComponents() const;
+			const cEntityData& GetEntityData(const cEntity& zEntity) const;
+			const std::map<cEntity, cEntityData>& GetEntityData() const;
 			const tagged_entity_map& TaggedEntities() const {return mTaggedEntities;}
 
 			//! Json
@@ -89,8 +89,8 @@ namespace pgn
 		friend void to_json(const T& zObj, JsonWriter& zRoot);
 
 		private:
-			cEventHandler<cEntityCreatedEvent> mOnEntityCreated;
-			cEventHandler<cEntityDestroyEvent> mOnEntityDestroy;
+			cEventHandler<evt::cEntityCreated> mOnEntityCreated;
+			cEventHandler<evt::cEntityDestroy> mOnEntityDestroy;
 		
 		private:	
 			unsigned short AddComponentType( const std::type_index& zTi);
@@ -105,7 +105,7 @@ namespace pgn
 			//! tags to entities
 			std::map<std::string, std::set<cEntity>> mTaggedEntities;
 			//! entities and components
-			std::map<cEntity, cEntityComponents> mEntityComponents;
+			std::map<cEntity, cEntityData> mEntityData;
 
 		protected:
 			//! component-related

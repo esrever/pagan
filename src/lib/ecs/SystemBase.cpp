@@ -22,7 +22,7 @@ namespace pgn
 	void cSystemBase::SetActive(bool zActive)
 	{
 		const cSystemBase * const ptr = this;
-		cSystemActiveEvent::mSig.emit( this, zActive);
+		evt::cSystemActive::mSig.emit( this, zActive);
 	}
 
 	//---------------------------------------------------------------

@@ -14,7 +14,7 @@ namespace pgn
 
 		void OnExitApplication();
 	private:
-		cEventHandler<cExitApplicationEvent> mOnExitApplication;
+		cEventHandler<evt::cExitApplication> mOnExitApplication;
 	private:
 		bool mLoop;
 

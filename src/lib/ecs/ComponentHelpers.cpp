@@ -10,7 +10,7 @@ namespace pgn
 		// Is this a bad paradigm?
 		assert(false);
 		const auto& ecs = ECS;
-		const auto& compos = ecs.mEntityMgr->GetComponents(zEntity);
+		const auto& compos = ecs.mEntityMgr->GetEntityData(zEntity).mComponents;
 		const auto& cit = compos.Components().at( zComponent.TypeIndex());
 		//return (cit!=compos.Components().end()) && (*cit->second.get() == zComponent);
 		return false;
@@ -20,7 +20,7 @@ namespace pgn
 	cComponentBaseSptr GetComponent( const cEntity& zEntity, const unsigned short zTypeIndex)
 	{
 		const auto& ecs = ECS;
-		const auto& compos = ecs.mEntityMgr->GetComponents(zEntity);
+		const auto& compos = ecs.mEntityMgr->GetEntityData(zEntity).mComponents;
 		return compos.Components().at( zTypeIndex);
 	}
 }

@@ -1,0 +1,47 @@
+[    
+    {
+        "Type" : "pgn::cAsciiActionInputSystem",
+        "Data" : {
+            "Name" : "AsciiInput",
+            "Desc" : "read ascii char and propagate to keyactionmap components",
+            "Query" : ["cmp_pgn::cKeyActionMapper"]
+        }
+    },
+    {
+        "Type" : "pgn::cGameTurnSystem",
+        "Data" : {
+            "Name" : "GameTurnSystem",
+            "Desc" : "Controls the game turns",
+            "Query" : "Actor"
+        }
+    },
+    {
+        "Type" : "pgn::cAsciiStatusRenderSystem",
+        "Data" : {
+            "Name" : "AsciiStatusRenderSystem",
+            "Desc" : "Render status on screen",
+            "QueryWin" : "tag_StatusWindow",
+            "QueryStatus" : ["cmp_pgn::cGameStatus", "tag_ActiveWindow"]
+        }
+    },
+    {
+        "Type" : "pgn::cAsciiMapRenderSystem",
+        "Data" : {
+            "Name" : "AsciiMapRenderSystem",
+            "Desc" : "Render map on screen",
+            "Systems" : ["AsciiLevelRenderer", "AsciiCharRenderer"],
+            "QueryLvl" : "tag_CurrentLevel",
+            "QueryChar" : "cmp_pgn::cAsciiRep",
+            "QueryWin" : ["tag_MapWindow", "tag_ActiveWindow"]
+        }
+    },
+    {
+        "Type" : "pgn::cAsciiLogRenderSystem",
+        "Data" : {
+            "Name" : "AsciiLogRenderSystem",
+            "Desc" : "Render log on screen",
+            "QueryWin" : ["tag_LogWindow", "tag_ActiveWindow"],
+            "QueryLog" : "cmp_pgn::cLogger"
+        }
+    }
+]

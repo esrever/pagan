@@ -86,7 +86,7 @@ namespace pgn
 	void cQueryExpression::ScanEntities()
 	{
 		// Fetch all components that match the mask, from cEntityMgr
-		for (auto x : ECS.mEntityMgr->GetComponents())
+		for (auto x : ECS.mEntityMgr->GetEntityData())
 		{
 			if (Qualify(x.first))
 				mEntities.insert(x.first);
@@ -94,16 +94,16 @@ namespace pgn
 	}
 
 	//------------------------------------------------------------------------------
-	void cQueryExpression::OnComponentAdded(cEntityWithComponents ec, unsigned short)
+	void cQueryExpression::OnComponentAdded(cEntityWithData ec, unsigned short)
 	{
 		const auto& e = ec->first;
-		if (Qualify(e)) 
+		if (Qualify(e))
 			mEntities.insert(e); 
 		else 
 			mEntities.erase(e);
 	}
 	//------------------------------------------------------------------------------
-	void cQueryExpression::OnComponentRemove(cEntityWithComponents ec, unsigned short cid)
+	void cQueryExpression::OnComponentRemove(cEntityWithData ec, unsigned short cid)
 	{
 		const auto& e = ec->first;
 		if (Qualify(e))
@@ -184,13 +184,13 @@ namespace pgn
 			}
 		}
 		
-		const auto& entity_components = ECS.mEntityMgr->GetComponents();
+		const auto& entity_components = ECS.mEntityMgr->GetEntityData();
 		const auto& it = entity_components.find(e);
 		if (it == entity_components.end())
 			return false;
 		
 		// MASK
-		const component_mask_type& allmask = it->second.Mask();
+		const component_mask_type& allmask = it->second.mComponents.Mask();
 		if (!is_subset(allmask,mMask))
 			return false;
 		// MASK_NOT

@@ -1,47 +1,35 @@
 [    
     {
-        "Type" : "pgn::cAsciiActionInputSystem",
+        "Type" : "pgn::sys::cKeyboardInput",
         "Data" : {
-            "Name" : "AsciiInput",
-            "Desc" : "read ascii char and propagate to keyactionmap components",
-            "Query" : ["cmp_pgn::cKeyActionMapper"]
+            "Name" : "KeyboardInput",
+            "Desc" : "read keys and propagate to keyactionmap components",
+            "Query" : ["pgn::cmp::cKeyActionMapper"]
         }
     },
     {
-        "Type" : "pgn::cGameTurnSystem",
+        "Type" : "pgn::sys::cLogger",
         "Data" : {
-            "Name" : "GameTurnSystem",
-            "Desc" : "Controls the game turns",
-            "Query" : "Actor"
+            "Name" : "Logger",
+            "Desc" : "log events, from the game or the system",
+            "Query" : ["pgn::cmp::cLog"]
         }
     },
     {
-        "Type" : "pgn::cAsciiStatusRenderSystem",
+        "Type" : "pgn::sys::cMapRender",
         "Data" : {
-            "Name" : "AsciiStatusRenderSystem",
-            "Desc" : "Render status on screen",
-            "QueryWin" : "tag_StatusWindow",
-            "QueryStatus" : ["cmp_pgn::cGameStatus", "tag_ActiveWindow"]
+            "Name" : "LevelRender",
+            "Desc" : "renders the current level",
+            "Query" : ["tag::CurrentLevel"]
         }
     },
     {
-        "Type" : "pgn::cAsciiMapRenderSystem",
+        "Type" : "pgn::sys::cLogRender",
         "Data" : {
-            "Name" : "AsciiMapRenderSystem",
-            "Desc" : "Render map on screen",
-            "Systems" : ["AsciiLevelRenderer", "AsciiCharRenderer"],
-            "QueryLvl" : "tag_CurrentLevel",
-            "QueryChar" : "cmp_pgn::cAsciiRep",
-            "QueryWin" : ["tag_MapWindow", "tag_ActiveWindow"]
-        }
-    },
-    {
-        "Type" : "pgn::cAsciiLogRenderSystem",
-        "Data" : {
-            "Name" : "AsciiLogRenderSystem",
-            "Desc" : "Render log on screen",
-            "QueryWin" : ["tag_LogWindow", "tag_ActiveWindow"],
-            "QueryLog" : "cmp_pgn::cLogger"
+            "Name" : "LogRender",
+            "Desc" : "displays the log somewhere. cerr maybe?. Later I'd want LogRenderColor, etc",
+            "Query" : ["pgn::cmp::cLog"]
         }
     }
+    
 ]

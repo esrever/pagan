@@ -46,8 +46,10 @@ namespace pgn
 			std::string mDesc;
 	};
 
-	typedef cEvent<size_t(eBasicECSEvent::SYSTEM_ACTIVE),  cSystemBase * , bool> cSystemActiveEvent;
-
+	namespace evt
+	{
+		typedef cEvent<size_t(eBasicECS::SYSTEM_ACTIVE), cSystemBase *, bool> cSystemActive;
+	}
 
 	//--------------------------------------------------
 	//! sys to json

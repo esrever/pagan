@@ -1,0 +1,123 @@
+[
+    {
+        "archetype" : "creature",
+        "name" : "rat_common",
+        "pgn::cDescription" : {
+            "short" : "rat",
+            "verbose" : "hairy, brown, fat, vicious-looking rat"
+            },
+        "pgn::cMovement" : {"speed" : 2},
+        "pgn::cAsciiRep" : {
+            "char" : "r",
+            "color" : "CD6600",
+            "attribs" : []
+            }
+    },
+    {
+        "archetype" : "creature",
+        "name" : "human_common",
+        "pgn::cDescription" : {
+            "short" : "human",
+            "verbose" : "tall, dark-haired man"
+            },
+        "pgn::cMovement" : {"speed" : 1},
+        "pgn::cAsciiRep" : {
+            "char" : "h",
+            "color" : "EEE9E9",
+            "attribs" : []
+            }
+    },
+    {
+        "archetype" : "tile",
+        "name" : "wall_common",
+        "pgn::cDescription" : {
+            "short" : "wall",
+            "verbose" : "dusty wall"
+            },
+        "pgn::cTileObstacle" : {"is_obstacle" : true},
+        "pgn::cAsciiRep" : {
+            "char" : "#",
+            "color" : "EEEEEE",
+            "attribs" : []
+            }
+    },
+    {
+        "archetype" : "tile",
+        "name" : "floor_common",
+        "pgn::cDescription" : {
+            "short" : "floor",
+            "verbose" : "dusty floor"
+            },
+        "pgn::cTileMoveCost" : {"move_cost" : 1},
+        "pgn::cAsciiRep" : {
+            "char" : ".",
+            "color" : "EEEEEE",
+            "attribs" : []
+            }
+    },
+    {
+        "archetype" : "stairs",
+        "name" : "stairs_down_common",
+        "pgn::cDescription" : {
+            "short" : "flight of stairs leading down",
+            "verbose" : "what? flight of stairs leading down"
+            },
+        "pgn::cTileMoveCost" : {"move_cost" : 1},
+        "pgn::cAsciiRep" : {
+            "char" : ">",
+            "color" : "EEEEEE",
+            "attribs" : []
+            }
+    },
+    {
+        "archetype" : "stairs",
+        "name" : "stairs_up_common",
+        "pgn::cDescription" : {
+            "short" : "flight of stairs leading up",
+            "verbose" : "what? flight of stairs leading up"
+            },
+        "pgn::cTileMoveCost" : {"move_cost" : 1},
+        "pgn::cAsciiRep" : {
+            "char" : "<",
+            "color" : "EEEEEE",
+            "attribs" : []
+            }
+    },
+    {
+        "_comments" : "All main entities should also have a [World/Menu/...]Context component, not existing in partial entities! From the below instances, I need to remove the cPartOfWorld component. Do that at reading time",
+        "archetype" : "tile_state",
+        "name" : "door_open_common",
+        "pgn::cDescription" : {
+            "short" : "open door",
+            "verbose" : "open, wooden door"
+            },
+        "pgn::cTileMoveCost" : {"move_cost" : 1},
+        "pgn::cTileObstacle" : {"is_obstacle" : false},
+        "pgn::cAsciiRep" : {
+            "char" : "/",
+            "color" : "CD6600",
+            "attribs" : []
+            }
+    },
+    {
+        "archetype" : "tile_state",
+        "name" : "door_closed_common",
+        "pgn::cDescription" : {
+            "short" : "closed door",
+            "verbose" : "closed, wooden door"
+            },
+        "pgn::cTileObstacle" : {"is_obstacle" : true},
+        "pgn::cAsciiRep" : {
+            "char" : "+",
+            "color" : "CD6600",
+            "attribs" : []
+            }
+    },
+    {
+        "_comment" : "what component do the states correspond to? cOpenClose probably",
+        "archetype" : "door",
+        "name" : "door_common",
+        "pgn::cOpenClose" : ["door_open_common","door_closed_common"]
+    }
+]
+    

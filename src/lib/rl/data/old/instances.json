@@ -1,7 +1,7 @@
 [
     {
         "archetype" : "pc",
-        "pgn::cmp::cKeyActionMapper" : {
+        "pgn::cKeyActionMapper" : {
             "MoveW" : [52],
             "MoveE" : [54],
             "MoveN" : [56],
@@ -15,23 +15,32 @@
     },
     {
         "archetype" : "common",
-        "name" : "the_log",
-        "pgn::cmp::cLog" : {
+        "name" : "game_log",
+        "pgn::cLogger" : {
             "MaxLines" : 100000
-            }
+            },
+        "tags" : ["GameLog"]
+    },
+    {
+        "archetype" : "common",
+        "name" : "system_log",
+        "pgn::cLogger" : {
+            "MaxLines" : 100000
+            },
+        "tags" : ["SystemLog"]
     },
     {
         "archetype" : "system_window",
         "name" : "system_window_log_fullscreen",
-        "pgn::cmp::cAsciiWindow" : {
+        "pgn::cAsciiWindow" : {
             "Start" : [0,0],
             "Size" : [160,50]
             },
-        "pgn::cmp::cKeyActionMapper" : {
+        "pgn::cKeyActionMapper" : {
             "QuitProgram" : [27],
             "SwitchToWindowMain" : []
         },
-        "pgn::cmp::cLoggerListener" : {
+        "pgn::cLoggerListener" : {
             "logtags" : ["GameLog","SystemLog"]
         },
         "tags" : ["LogWindow"]
@@ -39,11 +48,11 @@
     {
         "archetype" : "system_window",
         "name" : "system_window_log_small",
-        "pgn::cmp::cAsciiWindow" : {
+        "pgn::cAsciiWindow" : {
             "Start" : [0,30],
             "Size" : [140,20]
             },
-        "pgn::cmp::cLoggerListener" : {
+        "pgn::cLoggerListener" : {
             "logtags" : ["GameLog"]
         },
         "tags" : ["ActiveWindow","LogWindow"]
@@ -51,7 +60,7 @@
     {
         "archetype" : "system_window",
         "name" : "system_window_status",
-        "pgn::cmp::cAsciiWindow" : {
+        "pgn::cAsciiWindow" : {
             "Start" : [140,0],
             "Size" : [20,50]
             },
@@ -60,11 +69,11 @@
     {
         "archetype" : "system_window",
         "name" : "system_window_map",
-        "pgn::cmp::cAsciiWindow" : {
+        "pgn::cAsciiWindow" : {
             "Start" : [0,0],
             "Size" : [140,30]
             },
-        "pgn::cmp::cKeyActionMapper" : {
+        "pgn::cKeyActionMapper" : {
             "QuitProgram" : [27],
             "SwitchToWindowLog" : []
         },

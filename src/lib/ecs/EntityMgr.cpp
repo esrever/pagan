@@ -15,17 +15,17 @@ namespace pgn
 	cEntity cEntityMgr::Create() 
 	{ 
 		const auto& e = mEntityIdGen.New();
-		auto it = mEntityComponents.insert(std::pair<cEntity,cEntityComponents>(e,cEntityComponents()));
-		cEntityCreatedEvent::mSig.emit(e);
+		auto it = mEntityData.insert(std::pair<cEntity,cEntityData>(e,cEntityData()));
+		evt::cEntityCreated::mSig.emit(e);
 		return e;
 	}
 
 	//----------------------------------------------------------------
 	void cEntityMgr::Destroy(cEntity zEntity)
 	{
-		cEntityDestroyEvent::mSig.emit(zEntity);
+		evt::cEntityDestroy::mSig.emit(zEntity);
 		// and finally erase it
-		mEntityComponents.erase(zEntity);
+		mEntityData.erase(zEntity);
 		mEntityIdGen.Destroy(zEntity);
 	}
 
@@ -45,7 +45,7 @@ namespace pgn
 	void cEntityMgr::Tag(cEntity zEntity, const std::string& zTag)
 	{
 		mTaggedEntities[zTag].insert(zEntity);
-		cEntityTaggedEvent::mSig.emit(zEntity, zTag);
+		evt::cEntityTagged::mSig.emit(zEntity, zTag);
 	}
 
 	//----------------------------------------------------------------
@@ -55,7 +55,7 @@ namespace pgn
 		auto i1 = mTaggedEntities.find(zTag);
 		if(i1 != mTaggedEntities.end())
 		{
-			cEntityUntagEvent::mSig.emit(zEntity, zTag);
+			evt::cEntityUntag::mSig.emit(zEntity, zTag);
 			i1->second.erase(zEntity);
 		}
 	}
@@ -67,7 +67,7 @@ namespace pgn
 		auto i1 = mTaggedEntities.find(zTag);
 		if(i1 != mTaggedEntities.end())
 		{
-			cTagRemoveEvent::mSig.emit( zTag);
+			evt::cTagRemove::mSig.emit(zTag);
 			i1->second.clear();
 			mTaggedEntities.erase(i1);
 		}
@@ -84,21 +84,21 @@ namespace pgn
 	void cEntityMgr::AddComponentPtr(cEntity zEntity, cComponentBaseSptr zComponent)
 	{
 		const auto& e = zEntity;
-		auto i = mEntityComponents.find(e);
-		assert(i !=mEntityComponents.end());
-		i->second.AddComponent(zComponent);
-		cComponentAddedEvent::mSig.emit(i,zComponent->TypeIndex());
+		auto i = mEntityData.find(e);
+		assert(i !=mEntityData.end());
+		i->second.mComponents.AddComponent(zComponent);
+		evt::cComponentAdded::mSig.emit(i, zComponent->TypeIndex());
 	}
 
 	//----------------------------------------------------------------
 	void cEntityMgr::RemoveComponentPtr(cEntity zEntity, cComponentBaseWptr zComponent)
 	{
-		auto i = mEntityComponents.find(zEntity);
-		assert(i !=mEntityComponents.end());
-		cComponentRemoveEvent::mSig.emit(i, zComponent.lock()->TypeIndex());
-		i->second.RemoveComponent(zComponent.lock()->TypeIndex());
+		auto i = mEntityData.find(zEntity);
+		assert(i !=mEntityData.end());
+		evt::cComponentRemove::mSig.emit(i, zComponent.lock()->TypeIndex());
+		i->second.mComponents.RemoveComponent(zComponent.lock()->TypeIndex());
 		//! No components -> destroy entity
-		if(i->second.Mask().none())
+		if (i->second.mComponents.Mask().none())
 			Destroy(zEntity);
 	}
 
@@ -120,17 +120,17 @@ namespace pgn
 	}
 	
 	//----------------------------------------------------------------
-	const cEntityComponents& cEntityMgr::GetComponents(const cEntity& zEntity) const
+	const cEntityData& cEntityMgr::GetEntityData(const cEntity& zEntity) const
 	{
-		auto f = mEntityComponents.find(zEntity);
-		assert(f != mEntityComponents.end());
+		auto f = mEntityData.find(zEntity);
+		assert(f != mEntityData.end());
 		return f->second;
 	}
 
 	//----------------------------------------------------------------
-	const std::map<cEntity, cEntityComponents>& cEntityMgr::GetComponents() const
+	const std::map<cEntity, cEntityData>& cEntityMgr::GetEntityData() const
 	{
-		return mEntityComponents;
+		return mEntityData;
 	}
 
 	//----------------------------------------------------------------
@@ -311,8 +311,8 @@ namespace pgn
 		auto e = Create();
 		auto itEx = mExemplars.find(zExemplarName);
 		// Copy components
-		const auto& ec = GetComponents(itEx->second);
-		const auto& cset = ec.Components();
+		const auto& ec = GetEntityData(itEx->second);
+		const auto& cset = ec.mComponents.Components();
 		for (const auto& x : cset)
 		{
 			if(x)
@@ -351,7 +351,7 @@ namespace pgn
 		JsonWriter_AddMember("Tagged Entities", zMgr.mTaggedEntities, writer);
 
 		// Entity Components
-		JsonWriter_AddMember("Entity components", zMgr.mEntityComponents, writer);
+		JsonWriter_AddMember("Entity data", zMgr.mEntityData, writer);
 
 		// Component types:
 		JsonWriter_AddMember("ComponentTypeIds", zMgr.mComponentTypeIds, writer);

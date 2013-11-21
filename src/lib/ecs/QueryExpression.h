@@ -7,7 +7,7 @@
 #include <core/util/predicates.h>
 #include <core/util/json_conversions.h>
 
-#include "EntityComponents.h"
+#include "EntityData.h"
 
 namespace pgn
 {
@@ -19,8 +19,8 @@ namespace pgn
 		~cQueryExpression(){}
 
 		//! Receive functions
-		void OnComponentAdded(cEntityWithComponents ec, unsigned short cid);
-		void OnComponentRemove(cEntityWithComponents ec, unsigned short cid);
+		void OnComponentAdded(cEntityWithData ec, unsigned short cid);
+		void OnComponentRemove(cEntityWithData ec, unsigned short cid);
 		void OnEntityCreated(cEntity e);
 		void OnEntityDestroy(cEntity e);
 		void OnEntityTagged(cEntity e, const std::string& zTag);
@@ -52,13 +52,13 @@ namespace pgn
 		void Finalize() { ScanEntities(); GenerateHash(); }
 
 	private:
-		cEventHandler<cEntityTaggedEvent> mOnEntityTagged;
-		cEventHandler<cEntityUntagEvent> mOnEntityUntag;
-		cEventHandler<cEntityCreatedEvent> mOnEntityCreated;
-		cEventHandler<cEntityDestroyEvent> mOnEntityDestroy;
-		cEventHandler<cComponentAddedEvent> mOnComponentAdded;
-		cEventHandler<cComponentRemoveEvent> mOnComponentRemove;
-		cEventHandler<cTagRemoveEvent> mOnTagRemove;
+		cEventHandler<evt::cEntityTagged> mOnEntityTagged;
+		cEventHandler<evt::cEntityUntag> mOnEntityUntag;
+		cEventHandler<evt::cEntityCreated> mOnEntityCreated;
+		cEventHandler<evt::cEntityDestroy> mOnEntityDestroy;
+		cEventHandler<evt::cComponentAdded> mOnComponentAdded;
+		cEventHandler<evt::cComponentRemove> mOnComponentRemove;
+		cEventHandler<evt::cTagRemove> mOnTagRemove;
 
 	private:
 		template<class T>

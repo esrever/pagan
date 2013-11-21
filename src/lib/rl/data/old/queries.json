@@ -1,0 +1,9 @@
+{
+    "alias" : {
+        "HasTags" : [],
+        "HasNotTags" : [],
+        "HasComponents" : [],
+        "HasNotComponents" : [],
+        "HasComposite" : []
+    }
+}
