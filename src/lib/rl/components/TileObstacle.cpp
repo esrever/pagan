@@ -5,7 +5,7 @@ namespace pgn
 {
 	//----------------------------------------------------------------------------------
 	template<>
-	bool from_json<cTileObstacle>( cTileObstacle& zData, const rapidjson::Value& zRoot)
+	bool from_json<cmp::cTileObstacle>( cmp::cTileObstacle& zData, const rapidjson::Value& zRoot)
 	{
         from_json( zData.mIsObstacle, zRoot["IsObstacle"]);
         return true;
@@ -13,7 +13,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------
 	template<>
-	void to_json<cTileObstacle>( const cTileObstacle& zData, JsonWriter& zRoot)
+	void to_json<cmp::cTileObstacle>( const cmp::cTileObstacle& zData, JsonWriter& zRoot)
 	{
 		zRoot.StartObject();
         JsonWriter_AddMember("IsObstacle", zData.mIsObstacle, zRoot);

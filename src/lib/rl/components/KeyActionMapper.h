@@ -4,12 +4,15 @@
 
 namespace pgn
 {
-	struct cKeyActionMapper
+	namespace cmp
 	{
-		std::map<wchar_t, action_fun> mActions;
-	};
+		struct cKeyActionMapper
+		{
+			std::map<wchar_t, action_fun> mActions;
+		};
+	}
 
 	//-------------------------------------------------------------------
 	template<>
-	bool from_json<cKeyActionMapper>(cKeyActionMapper& zObj, const rapidjson::Value& zRoot);
+	bool from_json<cmp::cKeyActionMapper>(cmp::cKeyActionMapper& zObj, const rapidjson::Value& zRoot);
 }

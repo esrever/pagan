@@ -1,25 +1,26 @@
 #pragma once
 
 #include <core/util/json_conversions.h>
-
+#include <string>
 
 namespace pgn
 {
     namespace cmp
     {
     
-        //! Can we move through this or not?
-        struct cTileObstacle
+        //! Info about the entity
+        struct cDescription
         {
-            bool mIsObstacle;
+            std::string mVerbose;
+		std::string mShort;
         };
         
     }
 
     //-----------------------------------------------------------------------
     template<>
-    bool from_json< cmp::cTileObstacle>( cmp::cTileObstacle& zData, const rapidjson::Value& zRoot);
+    bool from_json< cmp::cDescription>( cmp::cDescription& zData, const rapidjson::Value& zRoot);
     //-----------------------------------------------------------------------
     template<>
-    void to_json< cmp::cTileObstacle>( const cmp::cTileObstacle& zData, JsonWriter& zRoot);
+    void to_json< cmp::cDescription>( const cmp::cDescription& zData, JsonWriter& zRoot);
 }

@@ -8,18 +8,18 @@ namespace pgn
     namespace cmp
     {
     
-        //! Can we move through this or not?
-        struct cTileObstacle
+        //! 
+        struct cTileLayout
         {
-            bool mIsObstacle;
+            
         };
         
     }
 
     //-----------------------------------------------------------------------
     template<>
-    bool from_json< cmp::cTileObstacle>( cmp::cTileObstacle& zData, const rapidjson::Value& zRoot);
+    bool from_json< cmp::cTileLayout>( cmp::cTileLayout& zData, const rapidjson::Value& zRoot);
     //-----------------------------------------------------------------------
     template<>
-    void to_json< cmp::cTileObstacle>( const cmp::cTileObstacle& zData, JsonWriter& zRoot);
+    void to_json< cmp::cTileLayout>( const cmp::cTileLayout& zData, JsonWriter& zRoot);
 }

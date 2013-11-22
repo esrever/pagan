@@ -1,25 +1,25 @@
 #pragma once
 
 #include <core/util/json_conversions.h>
-
+#include <glm/glm.hpp>
 
 namespace pgn
 {
     namespace cmp
     {
     
-        //! Can we move through this or not?
-        struct cTileObstacle
+        //! 
+        struct cLevelPosition
         {
-            bool mIsObstacle;
+            glm::ivec2 mPos;
         };
         
     }
 
     //-----------------------------------------------------------------------
     template<>
-    bool from_json< cmp::cTileObstacle>( cmp::cTileObstacle& zData, const rapidjson::Value& zRoot);
+    bool from_json< cmp::cLevelPosition>( cmp::cLevelPosition& zData, const rapidjson::Value& zRoot);
     //-----------------------------------------------------------------------
     template<>
-    void to_json< cmp::cTileObstacle>( const cmp::cTileObstacle& zData, JsonWriter& zRoot);
+    void to_json< cmp::cLevelPosition>( const cmp::cLevelPosition& zData, JsonWriter& zRoot);
 }

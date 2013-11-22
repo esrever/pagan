@@ -1,5 +1,8 @@
 import sys
 
+"""
+gen_component.py class=TileObstacle doxy="Can we move through this or not?" var=bool,mIsObstacle,IsObstacle
+"""
 
 srcdict = dict();
 
@@ -38,19 +41,23 @@ src_h = """#pragma once
 
 namespace pgn
 {{
-	//! {doxy}
-	struct c{class}
-	{{
-		{vars_decl}
-	}};
+    namespace cmp
+    {{
+    
+        //! {doxy}
+        struct c{class}
+        {{
+            {vars_decl}
+        }};
+        
+    }}
 
-	//-----------------------------------------------------------------------
-	template<>
-	bool from_json< c{class}>( c{class}& zData, const rapidjson::Value& zRoot);
-
-	//-----------------------------------------------------------------------
-	template<>
-	void to_json< c{class}>( const c{class}& zData, JsonWriter& zRoot);
+    //-----------------------------------------------------------------------
+    template<>
+    bool from_json< cmp::c{class}>( cmp::c{class}& zData, const rapidjson::Value& zRoot);
+    //-----------------------------------------------------------------------
+    template<>
+    void to_json< cmp::c{class}>( const cmp::c{class}& zData, JsonWriter& zRoot);
 }}""".format(**srcdict)
 
 src_cpp = """#include "{class}.h"
@@ -60,7 +67,7 @@ namespace pgn
 {{
 	//----------------------------------------------------------------------------------
 	template<>
-	bool from_json<c{class}>( c{class}& zData, const rapidjson::Value& zRoot)
+	bool from_json<cmp::c{class}>( cmp::c{class}& zData, const rapidjson::Value& zRoot)
 	{{
         {from_json}
         return true;
@@ -68,7 +75,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------
 	template<>
-	void to_json<c{class}>( const c{class}& zData, JsonWriter& zRoot)
+	void to_json<cmp::c{class}>( const cmp::c{class}& zData, JsonWriter& zRoot)
 	{{
 		zRoot.StartObject();
         {to_json}

@@ -9,7 +9,7 @@
 namespace pgn
 {
 	template<>
-	bool from_json<cKeyActionMapper>(cKeyActionMapper& zObj, const rapidjson::Value& zRoot)
+	bool from_json<cmp::cKeyActionMapper>(cmp::cKeyActionMapper& zObj, const rapidjson::Value& zRoot)
 	{
 		for(auto itr = zRoot.MemberBegin(); itr != zRoot.MemberEnd(); ++itr)
 		{
