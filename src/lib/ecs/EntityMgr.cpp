@@ -44,6 +44,10 @@ namespace pgn
 	//----------------------------------------------------------------
 	void cEntityMgr::Tag(cEntity zEntity, const std::string& zTag)
 	{
+		if (zTag == "Player")
+			mGlobals.mPC = zEntity;
+		else if (zTag == "World")
+			mGlobals.mWorld = zEntity;
 		mTaggedEntities[zTag].insert(zEntity);
 		evt::cEntityTagged::mSig.emit(zEntity, zTag);
 	}
@@ -200,9 +204,7 @@ namespace pgn
 					else if ( strcmp( mitr->name.GetString(),"name") == 0)
 						instname = mitr->value.GetString();
 					else if ( strcmp( mitr->name.GetString(),"tags") == 0)
-					{
 						read_json_vector(tags,mitr->value);
-					}
 					else
 					{
 						const std::string componentType = mitr->name.GetString();
@@ -218,24 +220,16 @@ namespace pgn
 				// Create the entity
 				if( (archname != "") && (instname != "") && (!componentPtrs.empty()))
 				{
-					auto e = InstantiateArchetype(archname);
-
+					// Archetype to exemplar
+					cExemplar exemplar = ArchetypeToExemplar(archname);
+					exemplar.mName = instname;
+					exemplar.mTags.insert(exemplar.mTags.end(), tags.begin(), tags.end());
 					for (auto c : componentPtrs)
-					{
-						// Make sure the exemplar instantiates only componenents existing in the archetype
-						/*
-						if (zIsExemplar)
-							assert(GetComponents(e).Mask().test(c->TypeIndex()));
-						*/
-						AddComponentPtr(e, c);
-					}
-					for( auto t : tags)
-						Tag(e,t);
-					if (zIsExemplar)
-					{
-						mExemplars[instname] = e;
-						Tag(e,"Exemplar");
-					}
+						exemplar.mComponents.AddComponent(c);
+
+					mExemplars[exemplar.mName] = exemplar;
+					if (!zIsExemplar)
+						InstantiateExemplar(exemplar.mName);
 				}
 			}
 		}
@@ -284,54 +278,43 @@ namespace pgn
 	}
 
 	//-------------------------------------------------------------------------------------------------
-	cEntity cEntityMgr::InstantiateArchetype(const std::string& zArchName)
+	cExemplar cEntityMgr::ArchetypeToExemplar(const std::string& zArchName)
 	{
-		auto e = Create();
+		cExemplar out;
 		auto itArch = mArchetypes.find(zArchName);
 		if(itArch != mArchetypes.end())
 		{
 			const auto& arch = itArch->second;
 			// Add tags
-			for( auto t : arch.mTags)
-				Tag(e,t);
+			out.mTags = arch.mTags;
 			// Add components
 			for (size_t i = 0;i < arch.mMask.size();++i)
 				if(arch.mMask.test(i))
 				{
 					auto compo = CreateComponent( i);
-					AddComponentPtr(e,compo);
+					out.mComponents.AddComponent(compo);
 				} 
 		}
-		return e;
+		return out;
 	}
 
 	//-------------------------------------------------------------------------------------------------
 	cEntity cEntityMgr::InstantiateExemplar(const std::string& zExemplarName)
 	{
+		cEntityData ed;
 		auto e = Create();
 		auto itEx = mExemplars.find(zExemplarName);
-		// Copy components
-		const auto& ec = GetEntityData(itEx->second);
-		const auto& cset = ec.mComponents.Components();
-		for (const auto& x : cset)
-		{
-			if(x)
-			{
-				auto sptr = CreateComponent( x->TypeIndex());
-				*sptr = *x;
-				AddComponentPtr(e, sptr);
-			}
-		}
+		ed.mName = zExemplarName + "_instance";
+		ed.mComponents = itEx->second.mComponents;
 
-		// Copy tags
-		for (const auto& it : TaggedEntities())
-		{
-			if(it.second.find(itEx->second) != it.second.end())
-				Tag(e,it.first);
-		}
+		auto it = mEntityData.find(e);
+		it->second = ed;
+		evt::cComponentsAdded::mSig.emit(it);
 
-		// Remove exemplar tag
-		Untag(e,"Exemplar");
+		// Add tags
+		for (const auto& t : itEx->second.mTags)
+			Tag(e,t);
+
 		return e;
 	}
 

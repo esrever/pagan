@@ -21,6 +21,7 @@ namespace pgn
 		, mOnEntityCreated(Simple::slot(this, &cQueryExpression::OnEntityCreated))
 		, mOnEntityDestroy(Simple::slot(this, &cQueryExpression::OnEntityDestroy))
 		, mOnComponentAdded(Simple::slot(this, &cQueryExpression::OnComponentAdded))
+		, mOnComponentsAdded(Simple::slot(this, &cQueryExpression::OnComponentsAdded))
 		, mOnComponentRemove(Simple::slot(this, &cQueryExpression::OnComponentRemove))
 		, mOnEntityTagged(Simple::slot(this, &cQueryExpression::OnEntityTagged))
 		, mOnEntityUntag(Simple::slot(this, &cQueryExpression::OnEntityUntag))
@@ -96,10 +97,15 @@ namespace pgn
 	//------------------------------------------------------------------------------
 	void cQueryExpression::OnComponentAdded(cEntityWithData ec, unsigned short)
 	{
+		OnComponentsAdded(ec);
+	}
+	//------------------------------------------------------------------------------
+	void cQueryExpression::OnComponentsAdded(cEntityWithData ec)
+	{
 		const auto& e = ec->first;
 		if (Qualify(e))
-			mEntities.insert(e); 
-		else 
+			mEntities.insert(e);
+		else
 			mEntities.erase(e);
 	}
 	//------------------------------------------------------------------------------

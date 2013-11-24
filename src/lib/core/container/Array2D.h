@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include <glm/glm.hpp>
+
 namespace pgn
 {
 	//! 2D array data. TODO: Sub-array if needed

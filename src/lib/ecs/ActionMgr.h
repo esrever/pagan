@@ -10,7 +10,8 @@
 
 namespace pgn
 {
-	typedef std::function<void (cEntity)> action_fun;
+	//typedef std::function<void (cEntity)> action_fun;
+	typedef std::function<void(void)> action_fun;
 
 	class cActionMgr
 	{		

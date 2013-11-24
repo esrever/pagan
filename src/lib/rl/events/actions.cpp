@@ -1,25 +1,76 @@
 #include "actions.h"
+#include "events.h"
+#include "ecs/ecs.h"
 #include "ecs/ActionMgr.h"
 
 namespace pgn
 {
 	namespace evt
 	{
-		// Player-specific actions
-		void PlayerIdle();
-		void PlayerMoveN();
-		void PlayerMoveS();
-		void PlayerMoveE();
-		void PlayerMoveW();
-		void PlayerMoveNE();
-		void PlayerMoveSE();
-		void PlayerMoveNW();
-		void PlayerMoveSW();
+		//-----------------------------------------------------------------
+		void PlayerIdle()
+		{
+			cActionIdle::mSig.emit(ECS.mEntityMgr->Globals().mPC);
+		}
 
-		// Tile-specific actions?
+		//-----------------------------------------------------------------
+		void PlayerMoveN()
+		{
+			cActionMoveAdj::mSig.emit(ECS.mEntityMgr->Globals().mPC, glm::ivec2(0, 1));
+		}
 
-		// App specific actions
-		void AppQuit();
-		void AppHelp();
+		//-----------------------------------------------------------------
+		void PlayerMoveS()
+		{
+			cActionMoveAdj::mSig.emit(ECS.mEntityMgr->Globals().mPC, glm::ivec2(0, -1));
+		}
+
+		//-----------------------------------------------------------------
+		void PlayerMoveE()
+		{
+			cActionMoveAdj::mSig.emit(ECS.mEntityMgr->Globals().mPC, glm::ivec2(1, 0));
+		}
+
+		//-----------------------------------------------------------------
+		void PlayerMoveW()
+		{
+			cActionMoveAdj::mSig.emit(ECS.mEntityMgr->Globals().mPC, glm::ivec2(-1, 0));
+		}
+
+		//-----------------------------------------------------------------
+		void PlayerMoveNE()
+		{
+			cActionMoveAdj::mSig.emit(ECS.mEntityMgr->Globals().mPC, glm::ivec2(1, 1));
+		}
+
+		//-----------------------------------------------------------------
+		void PlayerMoveSE()
+		{
+			cActionMoveAdj::mSig.emit(ECS.mEntityMgr->Globals().mPC, glm::ivec2(1, -1));
+		}
+
+		//-----------------------------------------------------------------
+		void PlayerMoveNW()
+		{
+			cActionMoveAdj::mSig.emit(ECS.mEntityMgr->Globals().mPC, glm::ivec2(-1, 1));
+		}
+
+		//-----------------------------------------------------------------
+		void PlayerMoveSW()
+		{
+			cActionMoveAdj::mSig.emit(ECS.mEntityMgr->Globals().mPC, glm::ivec2(-1, -1));
+		}
+
+		//-----------------------------------------------------------------
+		void AppQuit()
+		{
+			cExitApplication::mSig.emit();
+		}
+
+		//-----------------------------------------------------------------
+		void AppHelp()
+		{
+			assert(false);
+		}
 	}
 }

@@ -1,27 +1,27 @@
 #pragma once
 
-#include <core/container/Array2D.h>
 #include <core/util/json_conversions.h>
-
-#include <ecs/Entity.h>
+#include <vector>
+#include <string>
 
 namespace pgn
 {
     namespace cmp
     {
     
-        //! 
-        struct cTileLayout
+        //! Stores logs
+        struct cLog
         {
-			cArray2D<cEntity> mData;
+            std::vector<std::string> mLines;
+			unsigned				 mMaxLineNum;
         };
         
     }
 
     //-----------------------------------------------------------------------
     template<>
-    bool from_json< cmp::cTileLayout>( cmp::cTileLayout& zData, const rapidjson::Value& zRoot);
+    bool from_json< cmp::cLog>( cmp::cLog& zData, const rapidjson::Value& zRoot);
     //-----------------------------------------------------------------------
     template<>
-    void to_json< cmp::cTileLayout>( const cmp::cTileLayout& zData, JsonWriter& zRoot);
+    void to_json< cmp::cLog>( const cmp::cLog& zData, JsonWriter& zRoot);
 }

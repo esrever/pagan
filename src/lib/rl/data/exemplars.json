@@ -3,8 +3,8 @@
         "archetype" : "creature",
         "name" : "rat_common",
         "pgn::cmp::cDescription" : {
-            "short" : "rat",
-            "verbose" : "fat, brown, hairy, vicious-looking rat"
+            "Short" : "rat",
+            "Verbose" : "fat, brown, hairy, vicious-looking rat"
             },
         "pgn::cmp::cMovement" : {"Speed" : 1},
         "pgn::cmp::cAsciiRep" : {
@@ -16,8 +16,8 @@
         "archetype" : "creature",
         "name" : "human_common",
         "pgn::cmp::cDescription" : {
-            "short" : "human",
-            "verbose" : "tall, dark-haired man"
+            "Short" : "human",
+            "Verbose" : "tall, dark-haired man"
             },
         "pgn::cmp::cMovement" : {"Speed" : 1},
         "pgn::cmp::cAsciiRep" : {
@@ -29,8 +29,8 @@
         "archetype" : "tile",
         "name" : "wall_common",
         "pgn::cmp::cDescription" : {
-            "short" : "wall",
-            "verbose" : "dusty wall"
+            "Short" : "wall",
+            "Verbose" : "dusty wall"
             },
         "pgn::cmp::cTileObstacle" : {"IsObstacle" : true},
         "pgn::cmp::cAsciiRep" : {
@@ -42,8 +42,8 @@
         "archetype" : "tile",
         "name" : "floor_common",
         "pgn::cmp::cDescription" : {
-            "short" : "floor",
-            "verbose" : "dusty floor"
+            "Short" : "floor",
+            "Verbose" : "dusty floor"
             },
         "pgn::cmp::cTileObstacle" : {"IsObstacle" : false},
         "pgn::cmp::cAsciiRep" : {

@@ -17,7 +17,7 @@
         "archetype" : "common",
         "name" : "the_log",
         "pgn::cmp::cLog" : {
-            "MaxLines" : 100000
+            "MaxLineNum" : 100000
             }
     },
     {

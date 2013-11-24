@@ -21,6 +21,7 @@ set(SOURCE_FILES
 
 set(HEADER_FILES
     Archetype.h
+    Exemplar.h
     Component.h
     SystemBase.h
     Entity.h

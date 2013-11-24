@@ -17,7 +17,9 @@
 #include "Event.h"
 #include "Component.h"
 #include "EntityData.h"
+#include "EntityGlobals.h"
 #include "Archetype.h"
+#include "Exemplar.h"
 
 /*
 TODO:
@@ -42,8 +44,10 @@ namespace pgn
 			//! Entity create/destroy
 			cEntity Create();
 			void Destroy(cEntity zEntity);
+
+			//! Instantiations
 			cEntity InstantiateEntity(const std::string& zArchName,const std::string& zExemplarName);
-			cEntity InstantiateArchetype(const std::string& zArchName);
+			cExemplar ArchetypeToExemplar(const std::string& zArchName);
 			cEntity InstantiateExemplar(const std::string& zExemplarName);
 
 			//! Component add/remove
@@ -65,6 +69,7 @@ namespace pgn
 			void OnEntityDestroy(cEntity e);
 
 			//! Accessors
+			const cEntityGlobals& Globals() const { return mGlobals; }
 			const cEntityData& GetEntityData(const cEntity& zEntity) const;
 			const std::map<cEntity, cEntityData>& GetEntityData() const;
 			const tagged_entity_map& TaggedEntities() const {return mTaggedEntities;}
@@ -72,7 +77,7 @@ namespace pgn
 			//! Json
 			bool from_json(const rapidjson::Value& zRoot);
 			void ImportArchetypes(const rapidjson::Document * zDoc);
-			void ImportInstances(const rapidjson::Document * zDoc, bool isExemplar);
+			void ImportInstances(const rapidjson::Document * zDoc, bool zIsExemplar);
 
 			//! Component type related
 			virtual void RegisterComponentTypes(){}
@@ -100,7 +105,7 @@ namespace pgn
 			std::map<std::string, cArchetype> mArchetypes;
 
 			//! Exemplars
-			std::map<std::string, cEntity> mExemplars;
+			std::map<std::string, cExemplar> mExemplars;
 
 			//! tags to entities
 			std::map<std::string, std::set<cEntity>> mTaggedEntities;
@@ -114,6 +119,7 @@ namespace pgn
 			std::vector<component_creator_fun> mComponentCreators;
 
 		private:
+			cEntityGlobals mGlobals;
 			//! entity id generator
 			cIdGen<cEntity> mEntityIdGen;
 	};

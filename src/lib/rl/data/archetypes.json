@@ -11,7 +11,7 @@
     },
     {
         "name" : "creature",
-        "components" : ["pgn::cmp::cMovement","pgn::cmp::cAsciiRep"],
+        "components" : ["pgn::cmp::cMovement","pgn::cmp::cLevelPosition","pgn::cmp::cAsciiRep"],
         "inherits" : ["common"]
     },
     {

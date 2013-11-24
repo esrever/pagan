@@ -20,6 +20,7 @@ namespace pgn
 
 		//! Receive functions
 		void OnComponentAdded(cEntityWithData ec, unsigned short cid);
+		void OnComponentsAdded(cEntityWithData ec);
 		void OnComponentRemove(cEntityWithData ec, unsigned short cid);
 		void OnEntityCreated(cEntity e);
 		void OnEntityDestroy(cEntity e);
@@ -57,6 +58,7 @@ namespace pgn
 		cEventHandler<evt::cEntityCreated> mOnEntityCreated;
 		cEventHandler<evt::cEntityDestroy> mOnEntityDestroy;
 		cEventHandler<evt::cComponentAdded> mOnComponentAdded;
+		cEventHandler<evt::cComponentsAdded> mOnComponentsAdded;
 		cEventHandler<evt::cComponentRemove> mOnComponentRemove;
 		cEventHandler<evt::cTagRemove> mOnTagRemove;
 
