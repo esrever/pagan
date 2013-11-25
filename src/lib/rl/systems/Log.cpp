@@ -1,4 +1,4 @@
-#include "LogSystem.h"
+#include "Log.h"
 
 #include <ecs/Event.h>
 #include <ecs/Component.h>
