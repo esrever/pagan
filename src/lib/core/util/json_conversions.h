@@ -273,4 +273,22 @@ namespace pgn
 	{
 		to_json<unsigned, 2>(&zObj.x, zRoot);
 	}
+
+	#define JSON_GLM( T, N, P) \
+	template <>\
+	inline void to_json<glm::##T##N >(const glm::##T##N& zObj, JsonWriter& zRoot){\
+		to_json< P , N >(&zObj.x, zRoot);}\
+	template <>\
+	inline bool from_json<glm::##T##N >(glm::##T##N& zObj, const rapidjson::Value& zRoot){\
+		return from_json<glm::##T##N ,  N >(zObj, zRoot);\
+	}
+
+	#define JSON_GLM_ALL( T, P) \
+		JSON_GLM(T,2,P)\
+		JSON_GLM(T, 3, P)\
+		JSON_GLM(T, 4, P)
+
+	JSON_GLM_ALL(ivec, int)
+	JSON_GLM_ALL(uvec, unsigned)
+	JSON_GLM_ALL(vec, float)
 }
