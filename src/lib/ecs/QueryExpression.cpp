@@ -237,19 +237,18 @@ namespace pgn
 		}
 		
 		std::vector<std::string> results;
-		if (pystring::startswith(name, "tag_"))
+		if (pystring::startswith(name, "tag:"))
 		{
-			pystring::split(name, results, "_", 1);
+			pystring::split(name, results, ":", 1);
 			if (zNot)
 				mTagsNot.push_back(results[1]);
 			else
 				mTags.push_back(results[1]);
 		}
-		else if (pystring::startswith(name, "cmp_"))
+		else if (pystring::startswith(name, "pgn::cmp::"))
 		{
-			pystring::split(name, results, "_", 1);
 			std::vector<std::string> components;
-			components.push_back(results[1]);
+			components.push_back(name);
 			read_component_mask(zNot ? mMaskNot : mMask, components);
 		}
 		else

@@ -250,30 +250,6 @@ namespace pgn
 		return false;
 	}
 
-	template <>
-	inline bool from_json<glm::uvec2>(glm::uvec2& zObj, const rapidjson::Value& zRoot)
-	{
-		return from_json<glm::uvec2,2>(zObj,zRoot);
-	}
-
-	template <>
-	inline bool from_json<glm::ivec2>(glm::ivec2& zObj, const rapidjson::Value& zRoot)
-	{
-		return from_json<glm::ivec2,2>(zObj,zRoot);
-	}
-
-	template <>
-	inline void to_json<glm::ivec2>(const glm::ivec2& zObj, JsonWriter& zRoot)
-	{
-		to_json<int,2>(&zObj.x, zRoot);
-	}
-
-	template <>
-	inline void to_json<glm::uvec2>(const glm::uvec2& zObj, JsonWriter& zRoot)
-	{
-		to_json<unsigned, 2>(&zObj.x, zRoot);
-	}
-
 	#define JSON_GLM( T, N, P) \
 	template <>\
 	inline void to_json<glm::##T##N >(const glm::##T##N& zObj, JsonWriter& zRoot){\

@@ -20,7 +20,7 @@
         "Data" : {
             "Name" : "LevelRender",
             "Desc" : "renders the current level",
-            "Query" : ["tag::CurrentLevel"]
+            "Query" : ["tag:CurrentLevel"]
         }
     },
     {
