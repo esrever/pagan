@@ -198,6 +198,11 @@ find_package(Curses)
 find_package(Signal)
 find_package(GLM)
 
+add_subdirectory(${CMAKE_SOURCE_DIR}/contrib/oxygine-framework ${CMAKE_CURRENT_BINARY_DIR}/contrib/oxygine-framework)
+add_definitions(${OXYGINE_DEFINITIONS})
+include_directories(${OXYGINE_INCLUDE_DIRS})
+link_directories(${OXYGINE_LIBRARY_DIRS})
+
 # Sub-projects
 add_subdirectory(lib)
 add_subdirectory(app)

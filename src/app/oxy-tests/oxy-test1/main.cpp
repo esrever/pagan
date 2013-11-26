@@ -6,9 +6,6 @@
 #include <rl/SystemMgrRL.h>
 #include <rl/ActionMgrRL.h>
 
-#include <Actor.h>
-#include <SDL.h>
-
 /*
 	Provide json conversions for all components
 */
