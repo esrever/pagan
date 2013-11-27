@@ -12,32 +12,11 @@ using namespace oxygine;
 Renderer renderer;
 Rect viewport;
 
-
-class ExampleRootActor: public RootActor
-{
-public:
-	ExampleRootActor()
-	{
-		//each mobile application should handle focus lost
-		//and free/restore GPU resources
-		addEventListener(RootActor::DEACTIVATE, CLOSURE(this, &ExampleRootActor::onDeactivate));
-		addEventListener(RootActor::ACTIVATE, CLOSURE(this, &ExampleRootActor::onActivate));
-	}
-
-	void onDeactivate(Event *)
-	{
-		core::reset();
-	}
-
-	void onActivate(Event *)
-	{
-		core::restore();
-	}
-};
+cApplication app;
 
 int mainloop()
 {
-	example_update();
+	app.Update();
 	//update our rootActor
 	//Actor::update would be called also for children
 	getRoot()->update();
@@ -71,15 +50,15 @@ void run()
 
 #if OXYGINE_SDL
 	//we could setup initial window size on SDL builds
-	desc.w = 1440;
-	desc.h = 900;
+	desc.w = cApplication::mWinWidth;
+	desc.h = cApplication::mWinHeight;
 	//marmalade settings could be changed from emulator's menu
 #endif
 
 	core::init(&desc);	
 	
 	//create RootActor. RootActor is a root node
-	RootActor::instance = new ExampleRootActor();	
+	RootActor::instance = new cRootActor();	
 	Point size = core::getDisplaySize();
 	getRoot()->init(size, size);
 	
@@ -108,7 +87,7 @@ void run()
 	renderer.setViewProjTransform(view, proj);
 
 	//initialize this example stuff. see example.cpp
-	example_init();
+	app.Init();
 
 	bool done = false;	
 
@@ -131,7 +110,7 @@ void run()
 	//but now we want delete it by hands
 
 	//check example.cpp
-	example_destroy();	
+	app.Destroy();	
 	
 
 	renderer.cleanup();
