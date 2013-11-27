@@ -1,8 +1,10 @@
 set(SOURCE_FILES
-    main.cpp
+    src/entry_point.cpp
+    src/example.cpp
 )
 
 set(HEADER_FILES
+    src/example.h
 )
 
 add_definitions(
@@ -25,6 +27,7 @@ include_directories(
 )
 
 #link_directories(${OXYGINE_LIBRARY_DIRS})
+#target_link_libraries(HelloWorld ${OXYGINE_CORE_LIBS})
 
 add_executable (oxy-test1 
             ${SOURCE_FILES}
@@ -44,4 +47,5 @@ target_link_libraries(oxy-test1
     ${PYSTRING_LIBRARY_DBG}
     optimized
     ${PYSTRING_LIBRARY}
+    ${OXYGINE_CORE_LIBS}
 )
