@@ -234,7 +234,11 @@ void cApplication::Init()
 			sprite->addTween(TweenAnim(animation), duration, loops);
 
 			//set sprite initial position
-			sprite->setPosition(srcPos);
+			Vector2 sprite_pos(j*mTileSize, i*mTileSize);
+			sprite->setPosition(sprite_pos);
+			Vector2 frame_size = sprite->getAnimFrame().getFrameSize();
+			sprite->setScaleX(mTileSize / frame_size.x);
+			sprite->setScaleY(mTileSize / frame_size.y);
 		}
 		
 
