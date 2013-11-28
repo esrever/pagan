@@ -88,14 +88,13 @@ public:
 		//it would be centered and colored
 		TextStyle style;
 		style.font = gameResources.getResFont("main")->getFont();
+		// TODO: color doesn't work? aha might be related to html? better do html colouring
 		style.color = Color(72, 61, 139, 255);
 		style.vAlign = TextStyle::VALIGN_MIDDLE;
 		style.hAlign = TextStyle::HALIGN_CENTER;
 
 		text->setStyle(style);
-		text->setText("click\nme!");
-
-		//we will change text later
+		text->setHtmlText("click\nme!");
 	}
 
 	void displayClicked(Event *event)
@@ -227,7 +226,7 @@ void cApplication::Init()
 			ResAnim *animation = gameResources.getResAnim("anim");
 
 			int duration = 500;//500 ms 
-			int loops = -1;//infinity loops
+			int loops = 4;//infinity loops
 
 			//add animation tween to sprite
 			//TweenAnim would change animation frames
