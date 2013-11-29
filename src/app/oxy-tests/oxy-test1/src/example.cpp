@@ -23,9 +23,9 @@ void cTextWindow::Init(Vector2 start, Vector2 size)
 
 	// Create the text style
 	TextStyle st;
-	st.font = gameResources.getResFont("main")->getFont();
+	st.font = gameResources.getResFont("system")->getFont();
 	st.vAlign = TextStyle::VALIGN_TOP;
-	st.color = Color(0xffffffff);
+	st.color = Color(0xff00ffff);
 	st.multiline = true;
 
 	// Create the bg sprite -- Attach to window
@@ -40,7 +40,7 @@ void cTextWindow::Init(Vector2 start, Vector2 size)
 	text->attachTo(bg);
 	text->setStyle(st);
 	text->setSize(size);
-	text->setText("Hello this is a first message -- Hello this is a first message -- Hello this is a first message -- Hello this is a first message -- Hello this is a first message -- \nLine new\nMore line");
+	text->setHtmlText("This is <div color='ff0000'/> colored text <div/>supports  <div color='00ff00AA'/>nested tags</div><br/> with broken line. -- Hello this is a first message -- Hello this is a first message -- Hello this is a first message -- Hello this is a first message -- \nLine new\nMore line");
 }
 
 /*

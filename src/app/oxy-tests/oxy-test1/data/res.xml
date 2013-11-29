@@ -4,8 +4,10 @@
 	<atlas>
 		<image id="anim" file="anim1.png" cols = "7" /> <!-- 'id' is optional -->
 		<image file="button.png" cols = "3" />		
+		<image id="font_atlas" file="font_atlas_georgia.png" cols = "16" rows = "6" />	
 	</atlas>
 	
 	<set path = "fonts" />
 	<font file="main.fnt" />	
+	<font file="system.fnt" />
 </resources>

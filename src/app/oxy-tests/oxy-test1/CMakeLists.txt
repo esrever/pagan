@@ -1,10 +1,12 @@
 set(SOURCE_FILES
     src/entry_point.cpp
     src/example.cpp
+    src/FontAtlas.cpp
 )
 
 set(HEADER_FILES
     src/example.h
+    src/FontAtlas.h
 )
 
 add_definitions(
