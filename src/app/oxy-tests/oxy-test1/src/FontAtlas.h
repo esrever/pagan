@@ -1,6 +1,15 @@
 #pragma once
 
-class cFontAtlas
+#include <vector>
+
+#include "oxygine-framework.h"
+
+class cFontAtlas : public oxygine::Actor
 {
-	void Init()
+public:
+	void Init(oxygine::ResAnim * res);
+
+private:
+
+	std::vector<oxygine::spSprite>	mFontSprites;
 };

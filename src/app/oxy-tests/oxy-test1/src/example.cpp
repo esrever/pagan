@@ -40,7 +40,7 @@ void cTextWindow::Init(Vector2 start, Vector2 size)
 	text->attachTo(bg);
 	text->setStyle(st);
 	text->setSize(size);
-	text->setHtmlText("This is <div c='ff0000'/> colored text <div/>supports  <div c='00ff00AA'/>nested tags</div><br/> with broken line. -- Hello this is a first message -- Hello this is a first message -- Hello this is a first message -- Hello this is a first message -- \nLine new\nMore line");
+	text->setHtmlText("This is <div color='ff0000'/> colored text <div/>supports  <div color='00ff00AA'/>nested tags</div><br/> with broken line. -- Hello this is a first message -- Hello this is a first message -- Hello this is a first message -- Hello this is a first message -- \nLine new\nMore line");
 }
 
 /*
