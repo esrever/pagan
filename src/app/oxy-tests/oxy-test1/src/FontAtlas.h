@@ -4,10 +4,13 @@
 
 #include "oxygine-framework.h"
 
+DECLARE_SMART(cFontAtlas, spFontAtlas);
+
 class cFontAtlas : public oxygine::Actor
 {
 public:
 	void Init(oxygine::ResAnim * res);
+	oxygine::spSprite Get(const char c) const;
 
 private:
 

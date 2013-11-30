@@ -1,5 +1,6 @@
 #include "oxygine-framework.h"
 #include "example.h"
+#include "FontAtlas.h"
 
 #include <rapidjson/prettywriter.h>	// for stringify JSON
 #include <rapidjson/filestream.h>	// wrapper of C stream for prettywriter as output
@@ -40,7 +41,7 @@ void cTextWindow::Init(Vector2 start, Vector2 size)
 	text->attachTo(bg);
 	text->setStyle(st);
 	text->setSize(size);
-	text->setHtmlText("This is <div color='ab0000'> colored text </div>supports with broken line. -- Hello this is a first message -- Hello this is a first message -- Hello this is a first message -- Hello this is a first message -- \nLine new\nMore line");
+	text->setHtmlText("This is <div color='ab0000'> colored text </div>supports with broken \nline. -- Hello this is a first message -- Hello this is a first message -- Hello this is a first message -- Hello this is a first message -- \nLine new\nMore line");
 }
 
 /*
@@ -215,10 +216,15 @@ void cApplication::Init()
 
 	//##########################
 	// MAP
-
+	spFontAtlas fontmap = new cFontAtlas();
+	//win->addChild(fontmap);
+	fontmap->Init(gameResources.getResAnim("font_atlas"));
 	for (int i = 0; i < mTileRows;++i)
 		for (int j = 0; j < mTileCols; ++j)
 		{
+			spSprite sprite = fontmap->Get(32 + ((i * mTileCols + j) % 96));
+			win->addChild(sprite);
+			/*
 			spSprite sprite = new Sprite();
 			win->addChild(sprite);
 
@@ -231,6 +237,7 @@ void cApplication::Init()
 			//add animation tween to sprite
 			//TweenAnim would change animation frames
 			sprite->addTween(TweenAnim(animation), duration, loops);
+			*/
 
 			//set sprite initial position
 			Vector2 sprite_pos(j*mTileSize, i*mTileSize);
