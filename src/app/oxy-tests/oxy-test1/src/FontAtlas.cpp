@@ -2,7 +2,7 @@
 
 using namespace oxygine;
 
-void cFontAtlas::Init(ResAnim * anim)
+void cFontAtlas::Init(ResAnim * anim, size_t tileSize)
 {
 	mFontSprites.resize( anim->getTotalFrames());
 	for (int i = 0; i < 6;++i)
@@ -13,6 +13,9 @@ void cFontAtlas::Init(ResAnim * anim)
 			sprite = new Sprite();
 			addChild(sprite);
 			sprite->setAnimFrame(anim->getFrame(j, i));
+			Vector2 frame_size = sprite->getAnimFrame().getFrameSize();
+			sprite->setScaleX(tileSize / frame_size.x);
+			sprite->setScaleY(tileSize / frame_size.y);
 		}
 }
 

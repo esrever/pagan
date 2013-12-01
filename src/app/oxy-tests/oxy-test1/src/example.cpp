@@ -217,34 +217,17 @@ void cApplication::Init()
 	//##########################
 	// MAP
 	spFontAtlas fontmap = new cFontAtlas();
-	//win->addChild(fontmap);
-	fontmap->Init(gameResources.getResAnim("font_atlas"));
+	//win->addChild(fontmap); // TODO: do I need to attach it to the scene graph?
+	fontmap->Init(gameResources.getResAnim("font_atlas"),mTileSize);
 	for (int i = 0; i < mTileRows;++i)
 		for (int j = 0; j < mTileCols; ++j)
 		{
 			spSprite sprite = fontmap->Get(32 + ((i * mTileCols + j) % 96));
 			win->addChild(sprite);
-			/*
-			spSprite sprite = new Sprite();
-			win->addChild(sprite);
-
-			//animation has 7 columns, check res.xml
-			ResAnim *animation = gameResources.getResAnim("anim");
-
-			int duration = 500;//500 ms 
-			int loops = 4;//infinity loops
-
-			//add animation tween to sprite
-			//TweenAnim would change animation frames
-			sprite->addTween(TweenAnim(animation), duration, loops);
-			*/
 
 			//set sprite initial position
 			Vector2 sprite_pos(j*mTileSize, i*mTileSize);
 			sprite->setPosition(sprite_pos);
-			Vector2 frame_size = sprite->getAnimFrame().getFrameSize();
-			sprite->setScaleX(mTileSize / frame_size.x);
-			sprite->setScaleY(mTileSize / frame_size.y);
 		}
 		
 
