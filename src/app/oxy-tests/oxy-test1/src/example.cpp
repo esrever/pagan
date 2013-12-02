@@ -1,6 +1,7 @@
 #include "oxygine-framework.h"
 #include "example.h"
 #include "FontAtlas.h"
+#include "TileLib.h"
 
 #include <rapidjson/prettywriter.h>	// for stringify JSON
 #include <rapidjson/filestream.h>	// wrapper of C stream for prettywriter as output
@@ -216,11 +217,16 @@ void cApplication::Init()
 
 	//##########################
 	// MAP
+	static cTileLib tilelib;
+	tilelib.Init(gameResources);
+
 	spFontAtlas fontmap = new cFontAtlas();
 	//win->addChild(fontmap); // TODO: do I need to attach it to the scene graph?
 	fontmap->Init(gameResources.getResAnim("font_atlas"),mTileSize);
 	ResAnim * all_tiles = gameResources.getResAnim("tilemap");
 	//ResAnim * all_tiles = gameResources.getResAnim("tilemap_people");
+
+	auto it = tilelib.GetMap().begin();
 	for (int i = 0; i < mTileRows;++i)
 		for (int j = 0; j < mTileCols; ++j)
 		{
@@ -229,7 +235,20 @@ void cApplication::Init()
 			//spSprite sprite = fontmap->Get(rand()&1 ? '#' : '.');
 			win->addChild(sprite);
 			*/
-			
+			while (it != tilelib.GetMap().end())
+			{
+				if (pystring::find(it->first, "item") != -1)
+				{
+					spSprite sprite = it->second->clone();
+					win->addChild(sprite);
+					//set sprite initial position
+					Vector2 sprite_pos(j*mTileSize, i*mTileSize);
+					sprite->setPosition(sprite_pos);
+					break;
+				}
+				++it;
+			}
+			/*
 			spSprite sprite = new Sprite();
 			win->addChild(sprite);
 			auto rows = all_tiles->getRows();
@@ -240,10 +259,13 @@ void cApplication::Init()
 			Vector2 frame_size = sprite->getAnimFrame().getFrameSize();
 			sprite->setScaleX(mTileSize / frame_size.x);
 			sprite->setScaleY(mTileSize / frame_size.y);
+			*/
 			
 			//set sprite initial position
+			/*
 			Vector2 sprite_pos(j*mTileSize, i*mTileSize);
 			sprite->setPosition(sprite_pos);
+			*/
 		}
 		
 

@@ -2,11 +2,13 @@ set(SOURCE_FILES
     src/entry_point.cpp
     src/example.cpp
     src/FontAtlas.cpp
+    src/TileLib.cpp
 )
 
 set(HEADER_FILES
     src/example.h
     src/FontAtlas.h
+    src/TileLib.h
 )
 
 add_definitions(

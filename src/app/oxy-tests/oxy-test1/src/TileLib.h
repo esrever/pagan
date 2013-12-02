@@ -1,8 +1,9 @@
 #pragma once
 
-#include <cstdint.h>
+#include <map>
+#include <oxygine-framework.h>
 
-enum class eTileCategory : std::uint8_t
+enum class eTileCategory : char
 {
 	// Main categories
 	ITEM=1,
@@ -15,8 +16,12 @@ enum class eTileCategory : std::uint8_t
 class cTileLib
 {
 public:
+	typedef std::map<std::string, oxygine::spSprite> SpriteMap;
+
 	// Load xml file with all tiles and descriptors
-	void Init(const char * zFileName);
+	void Init(oxygine::Resources& res);
+
+	SpriteMap& GetMap() { return mSprites; }
 private:
-	std::vector<oxygine::spResAnim> mTileMaps;
+	SpriteMap mSprites;
 };
