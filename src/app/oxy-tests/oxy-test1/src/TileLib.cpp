@@ -15,8 +15,8 @@ void cTileLib::Init(Resources& res)
 		for (auto it : doc)
 		{
 			auto name = it.attribute("name").as_string();
-			auto row = it.attribute("name").as_uint();
-			auto col = it.attribute("name").as_uint();
+			auto row = it.attribute("row").as_uint();
+			auto col = it.attribute("col").as_uint();
 
 			spSprite sprite = new Sprite();
 			sprite->setAnimFrame(tilemap->getFrame(col, row));

@@ -237,13 +237,14 @@ void cApplication::Init()
 			*/
 			while (it != tilelib.GetMap().end())
 			{
-				if (pystring::find(it->first, "item") != -1)
+				if (pystring::find(it->first, "stairs") != -1)
 				{
-					spSprite sprite = it->second->clone();
+					spSprite sprite = it->second;
 					win->addChild(sprite);
 					//set sprite initial position
 					Vector2 sprite_pos(j*mTileSize, i*mTileSize);
 					sprite->setPosition(sprite_pos);
+					++it;
 					break;
 				}
 				++it;
