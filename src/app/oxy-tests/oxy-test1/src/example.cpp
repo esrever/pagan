@@ -237,7 +237,7 @@ void cApplication::Init()
 			*/
 			while (it != tilelib.GetMap().end())
 			{
-				if (pystring::find(it->first, "stairs") != -1)
+				if (pystring::find(it->first, "floor") != -1)
 				{
 					spSprite sprite = it->second;
 					win->addChild(sprite);

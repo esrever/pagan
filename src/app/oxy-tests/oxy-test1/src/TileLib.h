@@ -1,6 +1,8 @@
 #pragma once
 
 #include <map>
+#include <string>
+
 #include <oxygine-framework.h>
 
 enum class eTileCategory : char
@@ -21,7 +23,8 @@ public:
 	// Load xml file with all tiles and descriptors
 	void Init(oxygine::Resources& res);
 
-	SpriteMap& GetMap() { return mSprites; }
+	const SpriteMap& GetMap() { return mSprites; }
+	oxygine::spSprite GetSprite(const std::string& name);
 private:
 	SpriteMap mSprites;
 };

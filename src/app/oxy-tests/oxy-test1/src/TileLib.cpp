@@ -24,3 +24,9 @@ void cTileLib::Init(Resources& res)
 		}
 	}
 }
+
+spSprite cTileLib::GetSprite(const std::string& name)
+{
+	auto it = mSprites.find(name);
+	return it != mSprites.end() ? it->second : nullptr;
+}
