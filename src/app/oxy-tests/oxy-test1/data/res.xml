@@ -5,6 +5,7 @@
 		<image id="anim" file="anim1.png" cols = "7" /> <!-- 'id' is optional -->
 		<image file="button.png" cols = "3" />		
 		<image id="font_atlas" file="font_atlas_georgia.png" cols = "16" rows = "6" />	
+        <image file="tilemap.png" frame_width ="32" frame_height="32" />	
 	</atlas>
 	
 	<set path = "fonts" />

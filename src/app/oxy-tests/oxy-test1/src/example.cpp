@@ -219,12 +219,28 @@ void cApplication::Init()
 	spFontAtlas fontmap = new cFontAtlas();
 	//win->addChild(fontmap); // TODO: do I need to attach it to the scene graph?
 	fontmap->Init(gameResources.getResAnim("font_atlas"),mTileSize);
+	ResAnim * all_tiles = gameResources.getResAnim("tilemap");
+	//ResAnim * all_tiles = gameResources.getResAnim("tilemap_people");
 	for (int i = 0; i < mTileRows;++i)
 		for (int j = 0; j < mTileCols; ++j)
 		{
+			/*
 			spSprite sprite = fontmap->Get(32 + ((i * mTileCols + j) % 96));
+			//spSprite sprite = fontmap->Get(rand()&1 ? '#' : '.');
 			win->addChild(sprite);
-
+			*/
+			
+			spSprite sprite = new Sprite();
+			win->addChild(sprite);
+			auto rows = all_tiles->getRows();
+			auto cols = all_tiles->getColumns();
+			auto o = j + mTileCols*i;
+			sprite->setAnimFrame(all_tiles->getFrame(o%cols, (o/cols)%rows));
+			//sprite->setAnimFrame(all_tiles->getFrame(rand()&1 ? 6 : 9, 0));
+			Vector2 frame_size = sprite->getAnimFrame().getFrameSize();
+			sprite->setScaleX(mTileSize / frame_size.x);
+			sprite->setScaleY(mTileSize / frame_size.y);
+			
 			//set sprite initial position
 			Vector2 sprite_pos(j*mTileSize, i*mTileSize);
 			sprite->setPosition(sprite_pos);

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<tilemaps>
+    <comment val="set up default variations with a separate file! Also script-scan all subcat names and variation names/vals"/>
+    <set path = "images/AngbandTk" />
+    <tilemap category="map_feature">
+        <image file="dg_dungeon32.png" frame_width ="32" frame_height="32" />
+        <set subcategory="map_feature:wall"/>
+        <tile name="wall" row="0" col="0"/>
+        <tile name="wall" row="0" col="1">
+            <variation shade="dark"/>
+        </tile>
+        <tile name="wall" row="0" col="2">
+            <variation shade="darker"/>
+        </tile>
+        <set subcategory="map_feature:door_closed"/>
+        <tile name="door_closed" row="0" col="3"/>
+        <tile name="door_open" row="0" col="4"/>
+        <tile name="door_open" row="0" col="5">
+            <variation state="ruined"/>
+        </tile>
+        <tile name="door_open" row="0" col="6">
+            <variation door_win="bars"/>
+            <variation ornament="skull"/>
+        </tile>
+        <tile name="door_closed" row="0" col="7">
+            <variation door_win="bars"/>
+            <variation ornament="skull"/>
+        </tile>
+        <tile name="door_closed" row="0" col="8">
+            <variation door_win="bars"/>
+            <variation ornament="skull"/>
+            <variation state="ruined"/>
+        </tile>
+        <tile name="door_closed" row="1" col="0">
+            <variation door_win="2x2"/>
+            <variation door_frame_material="wood"/>
+            <variation door_material="wood"/>
+            <variation door_wall_material="stone"/>
+        </tile>
+        <tile name="door_open" row="1" col="1">
+            <variation door_frame_material="wood"/>
+            <variation door_material="wood"/>
+            <variation door_wall_material="stone"/>
+        </tile>
+        <tile name="door_open" row="1" col="2">
+            <variation door_frame_material="wood"/>
+            <variation door_material="wood"/>
+            <variation door_wall_material="stone"/>
+            <variation state="ruined"/>
+        </tile>
+        <tile name="door_closed" row="1" col="3">
+            <variation door_win="2x2"/>
+            <variation door_frame_material="stone"/>
+            <variation door_material="stone"/>
+            <variation door_wall_material="stone"/>
+        </tile>
+        <tile name="door_open" row="1" col="4">
+            <variation door_frame_material="stone"/>
+            <variation door_material="stone"/>
+            <variation door_wall_material="stone"/>
+        </tile>
+        <tile name="door_open" row="1" col="5">
+            <variation door_frame_material="stone"/>
+            <variation door_material="stone"/>
+            <variation door_wall_material="stone"/>
+            <variation state="ruined"/>
+        </tile>
+        
+        cosmetic_variation: 
+            shade = ?normal, dark, darker, 
+            state = ?normal, ruined
+            material = wood,stone, etc.
+            cover = ?none, blood, ivy
+            pattern = ?none, skull
+    </tilemap>
+</tilemaps>
