@@ -6,6 +6,7 @@
 
 DECLARE_SMART(cFontAtlas, spFontAtlas);
 
+//Bitmap Font builder: Georgia, Lucida Sans, Verdana, Tahoma or Trebuchet MS
 class cFontAtlas : public oxygine::Actor
 {
 public:
