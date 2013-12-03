@@ -27,6 +27,7 @@ include_directories(
     ${Signal_INCLUDE_DIR}
     ${Curses_INCLUDE_DIR}
     ${glm_INCLUDE_DIR}
+    ${pugixml_INCLUDE_DIR}
     ${OXYGINE_INCLUDE_DIRS}
 )
 
@@ -44,12 +45,15 @@ target_link_libraries(oxy-test1
     pagan_ecs
     pagan_rl
     ${Boost_LIBRARIES}
+    ${OXYGINE_CORE_LIBS}
 )
 
 target_link_libraries(oxy-test1
     debug
     ${PYSTRING_LIBRARY_DBG}
+    ${pugixml_LIBRARY_DBG}
     optimized
     ${PYSTRING_LIBRARY}
-    ${OXYGINE_CORE_LIBS}
+    ${pugixml_LIBRARY}
+    
 )

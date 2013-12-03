@@ -3,6 +3,8 @@
 #include "FontAtlas.h"
 #include "TileLib.h"
 
+#include <core/util/xml_conversions.h>
+
 #include <rapidjson/prettywriter.h>	// for stringify JSON
 #include <rapidjson/filestream.h>	// wrapper of C stream for prettywriter as output
 

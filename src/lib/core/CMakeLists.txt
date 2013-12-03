@@ -5,6 +5,7 @@ set(SOURCE_FILES
     util/cfgdata.cpp
     util/conversions.cpp
     util/json_conversions.cpp
+    util/xml_conversions.cpp
     app/application.cpp
 )
 
@@ -15,6 +16,7 @@ set(HEADER_FILES
     util/cfgtree.h
     util/conversions.h
     util/json_conversions.h
+    util/xml_conversions.h
     util/idgen.h
     app/application.h
     util/textmod.h
@@ -33,6 +35,7 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
     ${Rapidjson_INCLUDE_DIR}
     ${glm_INCLUDE_DIR}
+    ${pugixml_INCLUDE_DIR}
 )
 
 add_library(pagan_core STATIC
