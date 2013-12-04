@@ -7,7 +7,6 @@
 
 #include "Event.h"
 
-
 namespace pgn
 {
 	//typedef std::function<void (cEntity)> action_fun;

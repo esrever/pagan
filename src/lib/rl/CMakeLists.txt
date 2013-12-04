@@ -22,12 +22,14 @@ set(SOURCE_FILES
     EntityMgrRL.cpp
     SystemMgrRL.cpp
     ActionMgrRL.cpp
+    oxygine/KeyboardMgr.cpp
 )
 
 set(HEADER_FILES
     EntityMgrRL.h
     SystemMgrRL.h
     ActionMgrRL.h
+    oxygine/KeyboardMgr.h
     ${COMPONENT_SRCS}
     ${SYSTEM_SRCS}
     ${EVENT_SRCS}
