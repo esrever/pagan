@@ -1,6 +1,9 @@
 #pragma once
 
+#include <core/util/singleton.h>
 #include <ecs/Event.h>
+
+#define KeyboardInstance pgn::cSingleton<pgn::cKeyboardMgr>::Instance()
 
 namespace oxygine
 {

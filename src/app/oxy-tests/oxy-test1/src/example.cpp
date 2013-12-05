@@ -12,6 +12,7 @@
 #include <rl/EntityMgrRL.h>
 #include <rl/SystemMgrRL.h>
 #include <rl/ActionMgrRL.h>
+#include <rl/oxygine/KeyboardMgr.h>
 
 using namespace oxygine;
 
@@ -58,6 +59,8 @@ void cApplication::Init()
 	auto& ecs = ECS;
 	ecs.mLog = std::dynamic_pointer_cast<pgn::cLogBase>(std::make_shared<pgn::cLogString>(pgn::cLogString()));
 	ecs.Init();
+
+	KeyboardInstance;
 
 	//! Init log stuff. TODO: Do I need a proper entity? SysLogWindow e.g.
 	ecs.mLog = std::dynamic_pointer_cast<pgn::cLogBase>(std::make_shared<pgn::cLogString>(pgn::cLogString()));
