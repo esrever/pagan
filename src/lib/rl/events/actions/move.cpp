@@ -20,7 +20,7 @@ namespace pgn
 			auto ec = ECS.mEntityMgr->GetEntityData(e);
 
 			auto msg = boost::str(boost::format("%ss moved %s")%ec.mName.c_str()%locnames[loc1]);
-			evt::cLog::mSig.emit(msg);
+			evt::cLog::mSig.emit("game",msg);
 		}
 	}
 }

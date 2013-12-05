@@ -5,9 +5,8 @@
 using namespace oxygine;
 
 	// Load xml file with all tiles and descriptors
-void cTileLib::Init(Resources& res)
+void cTileLib::Init(ResAnim * tilemap)
 {
-	auto tilemap = res.getResAnim("tilemap");
 	pugi::xml_document doc;
 	if (doc.load_file("tilemap.xml", pugi::parse_default | pugi::parse_comments))
 	{

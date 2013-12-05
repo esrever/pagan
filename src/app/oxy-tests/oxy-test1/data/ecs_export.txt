@@ -82,6 +82,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -116,6 +117,7 @@
                         },
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -147,6 +149,7 @@
                         },
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -161,6 +164,7 @@
                         "struct pgn::cmp::cKeyActionMapper"
                     ],
                     "Components": [
+                        null,
                         null,
                         null,
                         null,
@@ -182,6 +186,7 @@
                         "struct pgn::cmp::cKeyActionMapper"
                     ],
                     "Components": [
+                        null,
                         null,
                         null,
                         null,
@@ -213,6 +218,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -230,6 +236,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -275,6 +282,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -292,6 +300,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -303,6 +312,7 @@
                         "struct pgn::cmp::cKeyActionMapper"
                     ],
                     "Components": [
+                        null,
                         null,
                         null,
                         null,
@@ -339,6 +349,7 @@
                         },
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -369,6 +380,7 @@
                         },
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -378,6 +390,23 @@
     },
     "SystemMgr": {
         "Queries": {
+            "1695609238": {
+                "Tags": [
+                    "log:game",
+                    "log:sys"
+                ],
+                "Tags-not": [],
+                "Mask": [],
+                "Mask-not": []
+            },
+            "2426457603": {
+                "Tags": [],
+                "Tags-not": [],
+                "Mask": [
+                    "struct pgn::cmp::cLog"
+                ],
+                "Mask-not": []
+            },
             "alias": {
                 "Tags": [],
                 "Tags-not": [],
@@ -385,6 +414,32 @@
                 "Mask-not": []
             }
         },
-        "Systems": []
+        "Systems": [
+            {
+                "4294967295": {
+                    "Base": {
+                        "Name": "AlmightyLogger",
+                        "Desc": "log events from the game or the system"
+                    },
+                    "QueryLog": {
+                        "Tags": [],
+                        "Tags-not": [],
+                        "Mask": [
+                            "struct pgn::cmp::cLog"
+                        ],
+                        "Mask-not": []
+                    },
+                    "QueryLogListener": {
+                        "Tags": [
+                            "log:game",
+                            "log:sys"
+                        ],
+                        "Tags-not": [],
+                        "Mask": [],
+                        "Mask-not": []
+                    }
+                }
+            }
+        ]
     }
 }

@@ -32,7 +32,7 @@ namespace pgn
 		typedef cEvent<size_t(eRL::LEVEL_CREATED), cEntityWithData> cLevelCreated;
 		typedef cEvent<size_t(eRL::LEVEL_DESTROY), cEntityWithData> cLevelDestroy;
 		typedef cEvent<size_t(eRL::EXIT_APPLICATION)> cExitApplication;
-		typedef cEvent<size_t(eRL::LOG), std::string> cLog;
+		typedef cEvent<size_t(eRL::LOG), const std::string&, const std::string&> cLog;
 		
 		typedef cEvent<size_t(eRL::ACTION_IDLE), cEntity> cActionIdle;
 		typedef cEvent<size_t(eRL::ACTION_MOVE_ADJ), cEntity, const glm::ivec2&> cActionMoveAdj;

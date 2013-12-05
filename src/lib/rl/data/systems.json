@@ -3,16 +3,17 @@
         "Type" : "pgn::sys::cKeyboardInput",
         "Data" : {
             "Name" : "KeyboardInput",
-            "Desc" : "read keys and propagate to keyactionmap components",
+            "Desc" : "read keys and propagate to keyactionmap components. listens to keystate changes",
             "Query" : ["pgn::cmp::cKeyActionMapper"]
         }
     },
     {
-        "Type" : "pgn::sys::cLogger",
+        "Type" : "pgn::sys::cLog",
         "Data" : {
-            "Name" : "Logger",
-            "Desc" : "log events, from the game or the system",
-            "Query" : ["pgn::cmp::cLog"]
+            "Name" : "AlmightyLogger",
+            "Desc" : "log events from the game or the system",
+            "QueryLog" : ["pgn::cmp::cLog"],
+            "QueryLogListener" : ["tag:log:game","tag:log:sys"]
         }
     },
     {
@@ -24,11 +25,11 @@
         }
     },
     {
-        "Type" : "pgn::sys::cLogRender",
+        "Type" : "pgn::sys::cTextWindowRender",
         "Data" : {
-            "Name" : "LogRender",
-            "Desc" : "displays the log somewhere. cerr maybe?. Later I'd want LogRenderColor, etc",
-            "Query" : ["pgn::cmp::cLog"]
+            "Name" : "TextWindowRender",
+            "Desc" : "renders the text win",
+            "Query" : ["pgn::cmp::cTextWindow"]
         }
     }
     

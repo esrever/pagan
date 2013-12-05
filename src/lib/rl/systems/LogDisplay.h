@@ -21,8 +21,11 @@ namespace pgn
 		private:
 			//! Receiving functions
 		private:
-
+			//! Gets all entities that have a log
 			cQueryExpressionSptr mQueryLog;
+			
+			//! Gets all entities that have a text window AND are tagged with "log:${logname}"
+			cQueryExpressionSptr mQueryTextWin;
 		};
 	}
 }

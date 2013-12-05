@@ -23,6 +23,7 @@ set(SOURCE_FILES
     SystemMgrRL.cpp
     ActionMgrRL.cpp
     oxygine/KeyboardMgr.cpp
+    util/FormatString.cpp
 )
 
 set(HEADER_FILES
@@ -30,6 +31,7 @@ set(HEADER_FILES
     SystemMgrRL.h
     ActionMgrRL.h
     oxygine/KeyboardMgr.h
+    util/FormatString.h
     ${COMPONENT_SRCS}
     ${SYSTEM_SRCS}
     ${EVENT_SRCS}

@@ -1,5 +1,5 @@
 #pragma once
-
+#include "oxygine-framework.h"
 #include <Actor.h>
 
 using namespace oxygine;

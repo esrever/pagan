@@ -5,6 +5,7 @@
 #include <ecs/EntityData.h>
 
 #include <rl/components/Log.h>
+#include <rl/components/TextWindow.h>
 
 namespace pgn
 {
@@ -28,8 +29,15 @@ namespace pgn
 				++i;
 			}
 
-			// For each log output
-			// TODO:
+			// For each text window that is a log 
+			std::vector < std::shared_ptr < cComponent<cmp::cTextWindow >> > textwin_ptrs(mQueryLog->Entities().size());
+			for (auto e : mQueryTextWin->Entities())
+			{
+				auto ec = ECS.mEntityMgr->GetEntityData().find(e);
+				assert(ec != ECS.mEntityMgr->GetEntityData().end());
+				ec->second.mComponents.GetComponent(textwin_ptrs.at(i));
+				++i;
+			}
 		}
 
 		bool cLogDisplay::from_json(const rapidjson::Value& zRoot)
@@ -37,7 +45,8 @@ namespace pgn
 			cSystemBase::from_json(zRoot);
 
 			auto b0 = LoadQuery(mQueryLog, zRoot, "QueryLog");
-			return b0;
+			auto b1 = LoadQuery(mQueryTextWin, zRoot, "QueryTextWin");
+			return b0 && b1;
 		}
 
 		void cLogDisplay::to_json(JsonWriter& zRoot) const
@@ -46,6 +55,7 @@ namespace pgn
 			zRoot.String("Base");
 			cSystemBase::to_json(zRoot);
 			JsonWriter_AddMember("QueryLog", mQueryLog, zRoot);
+			JsonWriter_AddMember("QueryTextWin", mQueryTextWin, zRoot);
 			zRoot.EndObject();
 		}
 	}

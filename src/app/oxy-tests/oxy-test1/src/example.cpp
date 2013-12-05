@@ -1,5 +1,6 @@
-#include "oxygine-framework.h"
 #include "example.h"
+
+#include <iostream>
 #include "FontAtlas.h"
 #include "TileLib.h"
 
@@ -63,7 +64,10 @@ void cApplication::Init()
 	KeyboardInstance;
 
 	//! Init log stuff. TODO: Do I need a proper entity? SysLogWindow e.g.
-	ecs.mLog = std::dynamic_pointer_cast<pgn::cLogBase>(std::make_shared<pgn::cLogString>(pgn::cLogString()));
+	//ecs.mLog = std::dynamic_pointer_cast<pgn::cLogBase>(std::make_shared<pgn::cLogString>(pgn::cLogString()));
+	auto log_ptr = std::make_shared<pgn::cLogStream>(pgn::cLogStream());
+	log_ptr->SetChannel(&std::cout);
+	ecs.mLog = std::dynamic_pointer_cast<pgn::cLogBase>(log_ptr);
 
 	//! Init ecs
 	ecs.Init();
@@ -132,23 +136,15 @@ void cApplication::Init()
 	//##########################
 	// MAP
 	static cTileLib tilelib;
-	tilelib.Init(gameResources);
+	tilelib.Init(gameResources.getResAnim("tilemap"));
 
 	spFontAtlas fontmap = new cFontAtlas();
-	//win->addChild(fontmap); // TODO: do I need to attach it to the scene graph?
 	fontmap->Init(gameResources.getResAnim("font_atlas"),mTileSize);
-	ResAnim * all_tiles = gameResources.getResAnim("tilemap");
-	//ResAnim * all_tiles = gameResources.getResAnim("tilemap_people");
 
 	auto it = tilelib.GetMap().begin();
 	for (int i = 0; i < mTileRows;++i)
 		for (int j = 0; j < mTileCols; ++j)
 		{
-			/*
-			spSprite sprite = fontmap->Get(32 + ((i * mTileCols + j) % 96));
-			//spSprite sprite = fontmap->Get(rand()&1 ? '#' : '.');
-			win->addChild(sprite);
-			*/
 			while (it != tilelib.GetMap().end())
 			{
 				if (pystring::find(it->first, "floor") != -1)
@@ -163,24 +159,6 @@ void cApplication::Init()
 				}
 				++it;
 			}
-			/*
-			spSprite sprite = new Sprite();
-			win->addChild(sprite);
-			auto rows = all_tiles->getRows();
-			auto cols = all_tiles->getColumns();
-			auto o = j + mTileCols*i;
-			sprite->setAnimFrame(all_tiles->getFrame(o%cols, (o/cols)%rows));
-			//sprite->setAnimFrame(all_tiles->getFrame(rand()&1 ? 6 : 9, 0));
-			Vector2 frame_size = sprite->getAnimFrame().getFrameSize();
-			sprite->setScaleX(mTileSize / frame_size.x);
-			sprite->setScaleY(mTileSize / frame_size.y);
-			*/
-			
-			//set sprite initial position
-			/*
-			Vector2 sprite_pos(j*mTileSize, i*mTileSize);
-			sprite->setPosition(sprite_pos);
-			*/
 		}
 }
 
