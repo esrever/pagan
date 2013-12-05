@@ -10,28 +10,39 @@ static key_evt_sig sig;
 
 namespace pgn
 {
-	// TODO: The below is crap and wont work. I need to hook sendKeyEvt to a local function. 
-	void cKeyboardMgr()
-		:mOnKey(Simple::slot(this, &cKeyboardMgr::OnKey))
+	struct cKeyCallback
+	{
+		public:
+			static cKeyboardMgr * msKeyMgr;
+			static void OnKey(const int key, const oxygine::cKeyState& state)
+			{
+				if (msKeyMgr)
+					msKeyMgr->OnKey(key, state);
+			}
+	};
+	cKeyboardMgr * cKeyCallback::msKeyMgr(nullptr);
+
+
+	cKeyboardMgr::cKeyboardMgr()
 	{
 		// hook to oxygine key events
-		auto func = std::bind(&oxygine::Input::sendKeyEvent, &oxygine::Input::instance, std::placeholders::_1);
+		cKeyCallback::msKeyMgr = this;
+		oxygine::Input::instance.setKeyCallback(&cKeyCallback::OnKey);
 		
 		// Initialize keys
 		mKeyStates.resize(SDL_NUM_SCANCODES);
 	}
 
-	void cKeyboardMgr::Destroy()
+	cKeyboardMgr::~cKeyboardMgr()
 	{
-		sig -= mCbId;
+		cKeyCallback::msKeyMgr = nullptr;
 		mKeyStates.clear();
 	}
 
-	void cKeyboardMgr::OnKeyStateChange(const SDL_KeyboardEvent& evt)
+	void cKeyboardMgr::OnKey(const int key, const oxygine::cKeyState& state)
 	{
-		auto& state = mKeyStates[int(evt.keysym.scancode)];
-		state.mMod = evt.keysym.mod;
-		state.mRepeat = evt.repeat != 0;
-		state.mPressed = evt.state == SDL_PRESSED;
+		mKeyStates.at(key) = state;
+		// emit signal
+		evt::cKey::mSig.emit(key, state);
 	}
 }

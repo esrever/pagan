@@ -1,34 +1,28 @@
 #pragma once
 
-#include "Event.h"
+#include <ecs/Event.h>
 
-struct SDL_KeyboardEvent;
+namespace oxygine
+{
+	struct cKeyState;
+}
 
 namespace pgn
 {
-	typedef std::function<void(const SDL_KeyboardEvent& evt)> key_evt_fun;
-
-	struct cKeyState
+	namespace evt
 	{
-		unsigned short mMod;
-		bool		   mPressed;
-		bool		   mRepeat;
-		
-		cKeyState() :mMod(0), mPressed(false), mRepeat(false){}
-	};
+		typedef cEvent<size_t(eBasicECS::KEY_EVT), const int, const oxygine::cKeyState&> cKey;
+	}
 
 	class cKeyboardMgr
 	{
 		public:
-			void Init();
-			void Destroy();
-			const cKeyState& KeyState(const int key) const { return mKeyStates.at(key); }
-		private:
-			cEventHandler<evt::cKeyEvt> mOnKey;
-			void OnKey(const SDL_KeyboardEvent& evt);
+			cKeyboardMgr();
+			~cKeyboardMgr();
+			const oxygine::cKeyState& KeyState(const int key) const { return mKeyStates.at(key); }
+			void OnKey(const int key,  const oxygine::cKeyState& evt);
 
 		private:
-			unsigned			   mCbId;
-			std::vector<cKeyState> mKeyStates;
+			std::vector<oxygine::cKeyState> mKeyStates;
 	};
 }

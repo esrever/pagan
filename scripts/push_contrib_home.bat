@@ -1,1 +1,1 @@
-update_contrib.py ..\src\contrib %1 E:\Dropbox\TODOs\roguelike-design\contrib %2
+push_contrib.py ..\src\contrib %1 E:\Dropbox\TODOs\roguelike-design\contrib %2
