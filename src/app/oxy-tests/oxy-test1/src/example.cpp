@@ -14,7 +14,7 @@
 #include <rl/SystemMgrRL.h>
 #include <rl/ActionMgrRL.h>
 #include <rl/oxygine/KeyboardMgr.h>
-#include <rl/resources/ResourceMgrRL.h>
+#include <rl/oxygine/resources/ResourceMgrRL.h>
 
 using namespace oxygine;
 

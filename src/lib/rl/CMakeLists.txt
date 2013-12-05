@@ -25,8 +25,8 @@ set(SOURCE_FILES
     oxygine/KeyboardMgr.cpp
     oxygine/Window.cpp
     util/FormatString.cpp
-    resources/FontLib.cpp
-    resources/TileLib.cpp
+    oxygine/resources/FontLib.cpp
+    oxygine/resources/TileLib.cpp
 )
 
 set(HEADER_FILES
@@ -36,8 +36,8 @@ set(HEADER_FILES
     oxygine/KeyboardMgr.h
     oxygine/Window.h
     util/FormatString.h
-    resources/FontLib.h
-    resources/TileLib.h
+    oxygine/resources/FontLib.h
+    oxygine/resources/TileLib.h
     ${COMPONENT_SRCS}
     ${SYSTEM_SRCS}
     ${EVENT_SRCS}
