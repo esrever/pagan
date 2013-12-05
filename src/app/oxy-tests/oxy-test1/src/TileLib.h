@@ -5,16 +5,6 @@
 
 #include <oxygine-framework.h>
 
-enum class eTileCategory : char
-{
-	// Main categories
-	ITEM=1,
-	CREATURE,
-	MAP_FEATURE,
-	EFFECT,
-	ICON
-};
-
 class cTileLib
 {
 public:
