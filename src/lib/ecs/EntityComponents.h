@@ -29,6 +29,9 @@ namespace pgn
 		template<class T>
 		void GetComponent(std::shared_ptr<T >& zPtr) const;
 
+		template<class T>
+		bool HasComponent() const;
+
 	private:
 		ComponentSet mComponents;
 		component_mask_type mMask;
@@ -36,9 +39,15 @@ namespace pgn
 
 	//---------------------------------------------------------------------------
 	template<class T>
-	void cEntityComponents::GetComponent(std::shared_ptr<T>& zPtr) const
+	inline void cEntityComponents::GetComponent(std::shared_ptr<T>& zPtr) const
 	{
 		zPtr = std::dynamic_pointer_cast< T >( mComponents.at(T::StaticTypeIndex()));
+	}
+
+	template<class T>
+	inline bool cEntityComponents::HasComponent() const
+	{
+		return Mask().at(T::StaticTypeIndex());
 	}
 
 	//---------------------------------------------------------------------------

@@ -22,7 +22,7 @@ namespace pgn
 		public:
 			cKeyboardMgr();
 			~cKeyboardMgr();
-			const oxygine::cKeyState& KeyState(const int key) const { return mKeyStates.at(key); }
+			const oxygine::cKeyState& KeyState(const int key) const;
 			void OnKey(const int key,  const oxygine::cKeyState& evt);
 
 		private:

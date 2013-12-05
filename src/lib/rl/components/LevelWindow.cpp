@@ -1,11 +1,11 @@
-#include "Window.h"
+#include "LevelWindow.h"
 
 
 namespace pgn
 {
 	//----------------------------------------------------------------------------------
 	template<>
-	bool from_json<cmp::cWindow>( cmp::cWindow& zData, const rapidjson::Value& zRoot)
+	bool from_json<cmp::cLevelWindow>( cmp::cLevelWindow& zData, const rapidjson::Value& zRoot)
 	{
         
         return true;
@@ -13,7 +13,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------
 	template<>
-	void to_json<cmp::cWindow>( const cmp::cWindow& zData, JsonWriter& zRoot)
+	void to_json<cmp::cLevelWindow>( const cmp::cLevelWindow& zData, JsonWriter& zRoot)
 	{
 		zRoot.StartObject();
         

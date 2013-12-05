@@ -9,7 +9,7 @@ namespace pgn
 	namespace cmp
 	{
 		struct cLog;
-		struct cTextWin;
+		struct cTextWindow;
 		struct cOutStream;
 	}
 
@@ -31,11 +31,11 @@ namespace pgn
 
 			//! Default: blow if I don't know how to handle the log listener
 			template<class T>
-			void ApplyLog(T& zLogListener, const cmp::cLog& zLog) { assert(false); }
+			void ApplyLog(T& zLogListener, const std::string& zLog) { assert(false); }
 
 		private:
-			void ApplyLogTextWin(cmp::cTextWin& zLogListener, const cmp::cLog& zLog);
-			void ApplyLogOutStream(cmp::cOutStream& zLogListener, const cmp::cLog& zLog);
+			void ApplyLogTextWin(cmp::cTextWindow& zLogListener, const std::string& zLog);
+			void ApplyLogOutStream(cmp::cOutStream& zLogListener, const std::string& zLog);
 
 		private:
 
@@ -49,14 +49,14 @@ namespace pgn
 
 	//---------------------------------------------------------------------------------------
 	template<>
-	inline void sys::cLog::ApplyLog<cmp::cTextWin>(cmp::cTextWin& zLogListener, const cmp::cLog& zLog)
+	inline void sys::cLog::ApplyLog<cmp::cTextWindow>(cmp::cTextWindow& zLogListener, const std::string& zLog)
 	{
 		ApplyLogTextWin(zLogListener, zLog);
 	}
 
 	//---------------------------------------------------------------------------------------
 	template<>
-	inline void sys::cLog::ApplyLog<cmp::cOutStream>(cmp::cOutStream& zLogListener, const cmp::cLog& zLog)
+	inline void sys::cLog::ApplyLog<cmp::cOutStream>(cmp::cOutStream& zLogListener, const std::string& zLog)
 	{
 		ApplyLogOutStream(zLogListener, zLog);
 	}

@@ -23,7 +23,10 @@ set(SOURCE_FILES
     SystemMgrRL.cpp
     ActionMgrRL.cpp
     oxygine/KeyboardMgr.cpp
+    oxygine/Window.cpp
     util/FormatString.cpp
+    resources/FontLib.cpp
+    resources/TileLib.cpp
 )
 
 set(HEADER_FILES
@@ -31,7 +34,10 @@ set(HEADER_FILES
     SystemMgrRL.h
     ActionMgrRL.h
     oxygine/KeyboardMgr.h
+    oxygine/Window.h
     util/FormatString.h
+    resources/FontLib.h
+    resources/TileLib.h
     ${COMPONENT_SRCS}
     ${SYSTEM_SRCS}
     ${EVENT_SRCS}

@@ -2,24 +2,26 @@
 
 #include <core/util/json_conversions.h>
 
+#include <rl/oxygine/window.h>
+
 
 namespace pgn
 {
     namespace cmp
     {
     
-        //! 
-        struct cWindow
-        {
-            
-        };
+		//! 
+		struct cLevelWindow
+		{
+			cWindow mWindow;
+		};
         
     }
 
     //-----------------------------------------------------------------------
     template<>
-    bool from_json< cmp::cWindow>( cmp::cWindow& zData, const rapidjson::Value& zRoot);
+    bool from_json< cmp::cLevelWindow>( cmp::cLevelWindow& zData, const rapidjson::Value& zRoot);
     //-----------------------------------------------------------------------
     template<>
-    void to_json< cmp::cWindow>( const cmp::cWindow& zData, JsonWriter& zRoot);
+    void to_json< cmp::cLevelWindow>( const cmp::cLevelWindow& zData, JsonWriter& zRoot);
 }

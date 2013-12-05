@@ -1,8 +1,8 @@
 [    
     {
-        "Type" : "pgn::sys::cKeyboardInput",
+        "Type" : "pgn::sys::cKeyboardHandle",
         "Data" : {
-            "Name" : "KeyboardInput",
+            "Name" : "KeyboardHandle",
             "Desc" : "read keys and propagate to keyactionmap components. listens to keystate changes",
             "Query" : ["pgn::cmp::cKeyActionMapper"]
         }

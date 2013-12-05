@@ -2,6 +2,7 @@
 
 #include <string>
 
+#include <oxygine-framework.h>
 #include <core/util/json_conversions.h>
 
 
@@ -11,10 +12,25 @@ namespace pgn
     {
     
         //! 
-        struct cTextWindow
+        struct cTextWindow : public oxygine::Actor
         {
-			std::string mText;
-			//oxygine Window // init with json config, provide nice defaults
+		public:
+			void Init();
+			void SetText(const std::string& zText);
+
+		private:
+			template<class T>
+			friend bool from_json(cmp::cTextWindow& zData, const rapidjson::Value& zRoot);
+			template<class T>
+			friend void to_json< cmp::cTextWindow>(const cmp::cTextWindow& zData, JsonWriter& zRoot);
+		private:
+
+			oxygine::spColorRectSprite mBg;
+			oxygine::spTextActor mText;
+			oxygine::TextStyle mStyle;
+			oxygine::Vector2 mStart;
+			oxygine::Vector2 mSize;
+			
         };
         
     }

@@ -6,6 +6,7 @@
 
 #include <rl/components/Log.h>
 #include <rl/components/TextWindow.h>
+#include <rl/components/OutStream.h>
 
 namespace pgn
 {
@@ -59,7 +60,21 @@ namespace pgn
 					if (ec->second.mName != zLoggerName)
 						continue;
 
-					// TODO: is it a TextWin? is it an OutStream? if .. if .. . Run typed log: tem
+					// Does it have a TextWin?
+					std::shared_ptr< cComponent<cmp::cTextWindow>> twin_ptr;
+					ec->second.mComponents.GetComponent(twin_ptr);
+					if (twin_ptr)
+					{
+
+					}
+
+					// Does it have an OutStream?
+					std::shared_ptr< cComponent<cmp::cOutStream>> os_ptr;
+					ec->second.mComponents.GetComponent(os_ptr);
+					if (os_ptr)
+					{
+
+					}
 				}
 			}
 		}
@@ -88,14 +103,15 @@ namespace pgn
 			zRoot.EndObject();
 		}
 
-		void cLog::ApplyLogTextWin(cmp::cTextWin& zLogListener, const cmp::cLog& zLog)
+		void cLog::ApplyLogTextWin(cmp::cTextWindow& zLogListener, const std::string& zLog)
 		{
-			assert(false);
+			zLogListener.SetText(zLog);
 		}
 
-		void cLog::ApplyLogOutStream(cmp::cOutStream& zLogListener, const cmp::cLog& zLog)
+		void cLog::ApplyLogOutStream(cmp::cOutStream& zLogListener, const std::string& zLog)
 		{
-			assert(false);
+			//TODO: fix this
+			std::cout << zLog;
 		}
 	}
 }

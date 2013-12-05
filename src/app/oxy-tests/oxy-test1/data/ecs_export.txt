@@ -418,6 +418,26 @@
             {
                 "4294967295": {
                     "Base": {
+                        "Name": "KeyboardHandle",
+                        "Desc": "read keys and propagate to keyactionmap components. listens to keystate changes"
+                    },
+                    "QueryKeyActionMapper": {
+                        "Tags": [],
+                        "Tags-not": [],
+                        "Mask": [],
+                        "Mask-not": []
+                    },
+                    "QueryDevConsole": {
+                        "Tags": [],
+                        "Tags-not": [],
+                        "Mask": [],
+                        "Mask-not": []
+                    }
+                }
+            },
+            {
+                "4294967295": {
+                    "Base": {
                         "Name": "AlmightyLogger",
                         "Desc": "log events from the game or the system"
                     },

@@ -3,12 +3,13 @@
 #include "Description.h"
 #include "KeyActionMapper.h"
 #include "LevelPosition.h"
+#include "LevelWindow.h"
 #include "Log.h"
 #include "Movement.h"
+#include "OutStream.h"
 #include "TextWindow.h"
 #include "TileLayout.h"
 #include "TileObstacle.h"
-#include "Window.h"
 
 namespace pgn
 {
@@ -17,11 +18,12 @@ namespace pgn
 		zMgr.AddComponentType<pgn::cmp::cDescription>();
 		zMgr.AddComponentType<pgn::cmp::cKeyActionMapper>();
 		zMgr.AddComponentType<pgn::cmp::cLevelPosition>();
+		zMgr.AddComponentType<pgn::cmp::cLevelWindow>();
 		zMgr.AddComponentType<pgn::cmp::cLog>();
 		zMgr.AddComponentType<pgn::cmp::cMovement>();
+		zMgr.AddComponentType<pgn::cmp::cOutStream>();
 		zMgr.AddComponentType<pgn::cmp::cTextWindow>();
 		zMgr.AddComponentType<pgn::cmp::cTileLayout>();
 		zMgr.AddComponentType<pgn::cmp::cTileObstacle>();
-		zMgr.AddComponentType<pgn::cmp::cWindow>();
 	}
 }

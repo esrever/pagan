@@ -39,6 +39,11 @@ namespace pgn
 		mKeyStates.clear();
 	}
 
+	const oxygine::cKeyState& cKeyboardMgr::KeyState(const int key) const
+	{ 
+		return mKeyStates.at(key); 
+	}
+
 	void cKeyboardMgr::OnKey(const int key, const oxygine::cKeyState& state)
 	{
 		mKeyStates.at(key) = state;

@@ -105,7 +105,6 @@ void cApplication::Init()
 
 	//load xml file with resources definition
 	gameResources.loadXML("res.xml");
-
 	
 	//##########################
 	// General
