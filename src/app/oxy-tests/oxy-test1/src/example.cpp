@@ -1,10 +1,6 @@
 #include "example.h"
 
 #include <iostream>
-#include "FontAtlas.h"
-#include "TileLib.h"
-
-#include <core/util/xml_conversions.h>
 
 #include <rapidjson/prettywriter.h>	// for stringify JSON
 #include <rapidjson/filestream.h>	// wrapper of C stream for prettywriter as output
@@ -13,8 +9,7 @@
 #include <rl/EntityMgrRL.h>
 #include <rl/SystemMgrRL.h>
 #include <rl/ActionMgrRL.h>
-#include <rl/oxygine/KeyboardMgr.h>
-#include <rl/oxygine/resources/ResourceMgrRL.h>
+#include <rl/GameApp.h>
 
 using namespace oxygine;
 
@@ -22,6 +17,45 @@ using namespace oxygine;
 //in real project you would have more than one Resources declarations. 
 //It is important on mobile devices with limited memory and you would load/unload them
 Resources gameResources;
+static pgn::cGameApp * game;
+
+/*
+static void test_xml()
+{
+	// Init
+	int intv = 1;
+	float f = 2.2f;
+	double d = 3.3;
+	short s = 4;
+	unsigned u = 5;
+	std::vector<double> vd;
+	for (size_t i = 0; i < 4; ++i) vd.push_back(i + 14);
+
+	std::set<int> sd;
+	for (size_t i = 0; i < 4; ++i) sd.insert(i *10);
+
+
+	const char * keys[] = { "zero", "one", "two", "three" };
+	std::map<std::string, int> md;
+	for (size_t i = 0; i < 4; ++i) md[std::string(keys[i])] = i * 3;
+
+	pugi::xml_document doc;
+	pgn::xml_add_child("int", intv,doc);
+	pgn::xml_add_child("float", f, doc);
+	pgn::xml_add_child("double", d, doc);
+	pgn::xml_add_child("short", s, doc);
+	pgn::xml_add_child("unsigned", u, doc);
+	pgn::xml_add_child("vec", vd, doc);
+	pgn::xml_add_child("set", sd, doc);
+	pgn::xml_add_child("map", md, doc);
+
+
+	std::ostringstream os;
+	doc.save(os);
+	std::cout << os.str();
+
+}
+*/
 
 void cTextWindow::Init(Vector2 start, Vector2 size)
 {
@@ -58,12 +92,16 @@ void cTextWindow::Init(Vector2 start, Vector2 size)
 
 void cApplication::Init()
 {
+	//test_xml();
+
+	game = new pgn::cGameApp();
+	game->Init();
+
+	auto& inst = oxygine::Input::instance;
+
 	auto& ecs = ECS;
 	ecs.mLog = std::dynamic_pointer_cast<pgn::cLogBase>(std::make_shared<pgn::cLogString>(pgn::cLogString()));
 	ecs.Init();
-
-	KeyboardInstance;
-	ResourceInstance;
 
 	//! Init log stuff. TODO: Do I need a proper entity? SysLogWindow e.g.
 	//ecs.mLog = std::dynamic_pointer_cast<pgn::cLogBase>(std::make_shared<pgn::cLogString>(pgn::cLogString()));
@@ -104,7 +142,6 @@ void cApplication::Init()
 	fwrite(jsontext, 1, strlen(jsontext), fp);
 	fclose(fp);
 
-
 	//load xml file with resources definition
 	gameResources.loadXML("res.xml");
 	
@@ -136,11 +173,11 @@ void cApplication::Init()
 
 	//##########################
 	// MAP
-	static cTileLib tilelib;
-	tilelib.Init(gameResources.getResAnim("tilemap"));
+	const auto& tilelib  = game->GetResources().mTileLib;
+	//tilelib.Init(gameResources.getResAnim("tilemap"));
 
-	spFontAtlas fontmap = new cFontAtlas();
-	fontmap->Init(gameResources.getResAnim("font_atlas"),mTileSize);
+	//spFontAtlas fontmap = new cFontAtlas();
+	//fontmap->Init(gameResources.getResAnim("font_atlas"),mTileSize);
 
 	auto it = tilelib.GetMap().begin();
 	for (int i = 0; i < mTileRows;++i)
@@ -176,4 +213,5 @@ void cApplication::Destroy()
 	gameResources.free();
 
 	ecs.Destroy();
+	game->Destroy();
 }

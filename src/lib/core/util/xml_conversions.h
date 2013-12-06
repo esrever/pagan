@@ -17,8 +17,11 @@ namespace pgn
 	template<class T>
 	inline void xml_add_child(const std::string& zName, const T& zValue, pugi::xml_node& node)
 	{
-		auto cnode = node.append_child(zName.c_str());
-		to_xml(zValue, cnode);
+		auto& cnode = node.append_child("object");
+		auto& attr_name = cnode.append_attribute("name");
+		to_xml(zName, attr_name);
+		auto& cnode2 = cnode.append_child("value");
+		to_xml(zValue, cnode2);
 	}
 
 	//! type to xml

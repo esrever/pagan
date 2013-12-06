@@ -83,10 +83,11 @@
                         null,
                         null,
                         null,
+                        null,
+                        null,
                         {
                             "IsObstacle": false
-                        },
-                        null
+                        }
                     ]
                 }
             },
@@ -111,6 +112,7 @@
                                 0
                             ]
                         },
+                        null,
                         null,
                         {
                             "Speed": 1
@@ -144,6 +146,7 @@
                             ]
                         },
                         null,
+                        null,
                         {
                             "Speed": 1
                         },
@@ -164,6 +167,7 @@
                         "struct pgn::cmp::cKeyActionMapper"
                     ],
                     "Components": [
+                        null,
                         null,
                         null,
                         null,
@@ -193,6 +197,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -210,6 +215,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         {
@@ -242,10 +248,11 @@
                         null,
                         null,
                         null,
+                        null,
+                        null,
                         {
                             "IsObstacle": true
-                        },
-                        null
+                        }
                     ]
                 }
             }
@@ -276,6 +283,7 @@
                         },
                         null,
                         null,
+                        null,
                         {
                             "MaxLineNum": 100000
                         },
@@ -301,6 +309,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -312,6 +321,7 @@
                         "struct pgn::cmp::cKeyActionMapper"
                     ],
                     "Components": [
+                        null,
                         null,
                         null,
                         null,
@@ -344,6 +354,7 @@
                             ]
                         },
                         null,
+                        null,
                         {
                             "Speed": 1
                         },
@@ -375,6 +386,7 @@
                             ]
                         },
                         null,
+                        null,
                         {
                             "Speed": 1
                         },
@@ -399,7 +411,7 @@
                 "Mask": [],
                 "Mask-not": []
             },
-            "2426457603": {
+            "3526230300": {
                 "Tags": [],
                 "Tags-not": [],
                 "Mask": [

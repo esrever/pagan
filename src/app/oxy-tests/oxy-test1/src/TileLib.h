@@ -1,5 +1,5 @@
 #pragma once
-
+/*
 #include <map>
 #include <string>
 
@@ -13,8 +13,9 @@ public:
 	// Load xml file with all tiles and descriptors
 	void Init(oxygine::ResAnim * tilemap);
 
-	const SpriteMap& GetMap() { return mSprites; }
-	oxygine::spSprite GetSprite(const std::string& name);
+	const SpriteMap& GetMap() const { return mSprites; }
+	oxygine::spSprite GetSprite(const std::string& name) const;
 private:
 	SpriteMap mSprites;
 };
+*/

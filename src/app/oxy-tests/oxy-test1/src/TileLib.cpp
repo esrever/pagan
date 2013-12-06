@@ -1,6 +1,7 @@
 #pragma once
 
 #include "TileLib.h"
+/*
 
 using namespace oxygine;
 
@@ -29,3 +30,4 @@ spSprite cTileLib::GetSprite(const std::string& name)
 	auto it = mSprites.find(name);
 	return it != mSprites.end() ? it->second : nullptr;
 }
+*/

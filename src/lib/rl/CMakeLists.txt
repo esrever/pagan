@@ -22,22 +22,27 @@ set(SOURCE_FILES
     EntityMgrRL.cpp
     SystemMgrRL.cpp
     ActionMgrRL.cpp
-    oxygine/KeyboardMgr.cpp
-    oxygine/Window.cpp
+    GameApp.cpp
     util/FormatString.cpp
-    oxygine/resources/FontLib.cpp
-    oxygine/resources/TileLib.cpp
+    io/GameIO.cpp
+    io/Keyboard.cpp
+    resources/GameResources.cpp
+    resources/FontLib.cpp
+    resources/TileLib.cpp
 )
 
 set(HEADER_FILES
     EntityMgrRL.h
     SystemMgrRL.h
     ActionMgrRL.h
-    oxygine/KeyboardMgr.h
-    oxygine/Window.h
+    GameApp.h
     util/FormatString.h
-    oxygine/resources/FontLib.h
-    oxygine/resources/TileLib.h
+    util/json_conversions.h
+    io/GameIO.h
+    io/Keyboard.h
+    resources/GameResources.h
+    resources/FontLib.h
+    resources/TileLib.h
     ${COMPONENT_SRCS}
     ${SYSTEM_SRCS}
     ${EVENT_SRCS}
