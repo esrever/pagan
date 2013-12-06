@@ -7,6 +7,7 @@
 #include <memory>
 
 #include <pugixml.hpp>
+#include <glm/glm.hpp>
 
 namespace pgn
 {
@@ -24,14 +25,28 @@ namespace pgn
 	template <class T>
 	inline void to_xml(const T& zObj, pugi::xml_attribute& node)
 	{
-		cLogStream::Default().Wrn(boost::str(boost::format("Type %s does not implement to_xml()")% typeid(T).name()));
+		cLogStream::Default().Wrn(boost::str(boost::format("Type %s does not implement to_xml(attr)")% typeid(T).name()));
 	}
 
 	//! type from xml
 	template <class T>
 	inline void from_xml(T& zObj, const pugi::xml_attribute& zRoot)
 	{
-		cLogStream::Default().Wrn(boost::str(boost::format("Type %s does not implement from_xml()")% typeid(T).name()));
+		cLogStream::Default().Wrn(boost::str(boost::format("Type %s does not implement from_xml(attr)")% typeid(T).name()));
+	}
+
+	//! type to xml
+	template <class T>
+	inline void to_xml(const T& zObj, pugi::xml_node& node)
+	{
+		cLogStream::Default().Wrn(boost::str(boost::format("Type %s does not implement to_xml(node)") % typeid(T).name()));
+	}
+
+	//! type from xml
+	template <class T>
+	inline void from_xml(T& zObj, const pugi::xml_node& zRoot)
+	{
+		cLogStream::Default().Wrn(boost::str(boost::format("Type %s does not implement from_xml(node)") % typeid(T).name()));
 	}
 
 	//! PODs
@@ -176,7 +191,7 @@ namespace pgn
 	{
 		for (const auto& x : zObj)
 		{
-			auto node& = zRoot.append_child("elem");
+			auto& node = zRoot.append_child("elem");
 			auto& attrib = node.append_attribute("value");
 			to_xml(x, attrib);
 		}
@@ -200,7 +215,7 @@ namespace pgn
 	{
 		for (const auto& x : zObj)
 		{
-			auto node& = zRoot.append_child("elem");
+			auto& node = zRoot.append_child("elem");
 			auto& attrib = node.append_attribute("value");
 			to_xml(x, attrib);
 		}
@@ -225,7 +240,7 @@ namespace pgn
 	{
 		for (const auto& x : zObj)
 		{
-			auto node& = zRoot.append_child("elem");
+			auto& node = zRoot.append_child("elem");
 			auto& kattrib = node.append_attribute("key");
 			auto& vattrib = node.append_attribute("value");
 			to_xml(x.first, kattrib);
@@ -252,7 +267,7 @@ namespace pgn
 	{
 		for (const auto& x : zObj)
 		{
-			auto node& = zRoot.append_child("elem");
+			auto& node = zRoot.append_child("elem");
 			auto& kattrib = node.append_attribute("key");
 			auto& vattrib = node.append_attribute("value");
 			to_xml(x.first, kattrib);
@@ -282,8 +297,48 @@ namespace pgn
 		to_xml(zObj.lock(), zRoot);
 	}
 
+	// arbitrary vector types:
+	template<class T, size_t N>
+	inline void from_xml(T * zObj, const pugi::xml_node& zRoot)
+	{
+		T val;
+		size_t i=0;
+		for (auto c : zRoot)
+		{
+			from_xml(val, c.attribute("value"));
+			zObj[i++] = val;
+		}
+	}
+
+	template <class T, size_t N>
+	inline void to_xml(const T * zObj, pugi::xml_node& zRoot)
+	{
+		for (size_t i = 0; i < N;++i)
+		{
+			auto& node = zRoot.append_child("elem");
+			auto& attrib = node.append_attribute("value");
+			to_xml(zObj[i], attrib);
+		}
+	}
+
+#define XML_GLM( T, N, P) \
+	template <>\
+	inline void to_xml<glm::##T##N >(const glm::##T##N& zObj, pugi::xml_node& zRoot){\
+		to_xml< P, N >(&zObj.x, zRoot);}\
+	template <>\
+	inline void from_xml<glm::##T##N >(glm::##T##N& zObj, const pugi::xml_node& zRoot){\
+		from_xml<P, N >(&zObj.x, zRoot); }
+
+#define XML_GLM_ALL( T, P) \
+	XML_GLM(T, 2, P)\
+	XML_GLM(T, 3, P)\
+	XML_GLM(T, 4, P)
+
+	XML_GLM_ALL(ivec, int)
+	XML_GLM_ALL(uvec, unsigned)
+	XML_GLM_ALL(vec, float)
+
 	/*
-		glm 
 		oxygine-related (sep. file)
 	*/
 }
