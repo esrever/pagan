@@ -18,6 +18,33 @@ namespace pgn
 		auto cnode = node.append_child(zName.c_str());
 		to_xml(zValue, cnode);
 	}
+
+	//! type to xml
+	template <class T>
+	inline void to_xml(const T& zObj, pugi::xml_attribute& node)
+	{
+		cLogStream::Default().Wrn(boost::str(boost::format("Type %s does not implement to_xml()")% typeid(T).name()));
+	}
+
+	//! type from xml
+	template <class T>
+	inline void from_xml(T& zObj, const pugi::xml_attribute& zRoot)
+	{
+		cLogStream::Default().Wrn(boost::str(boost::format("Type %s does not implement from_xml()")% typeid(T).name()));
+	}
+
+	//! PODs
+	template <>
+	inline void from_xml<char>(char& zObj, const pugi::xml_attribute& zRoot)
+	{
+		zObj = zRoot.as_string("")[0];
+	}
+
+	template <>
+	inline void to_xml<char>(const char& zObj, pugi::xml_attribute& zRoot)
+	{
+		//zRoot.set_value()
+	}
 }
 
 /*
@@ -39,22 +66,6 @@ namespace pgn
 	inline bool from_string<rapidjson::Value>(const std::string& s, rapidjson::Value& t)
 	{
 		assert(false);
-		return false;
-	}
-
-	//! type to json
-	template <class T>
-	inline void to_json(const T& zObj, JsonWriter& zRoot)
-	{
-		cLogStream::Default().Wrn( boost::str(boost::format("Type %s does not implement to_json()")% typeid(T).name()));
-		//zObj.to_json(zRoot);
-	}
-
-	//! type from json
-	template <class T>
-	inline bool from_json(T& zObj, const rapidjson::Value& zRoot)
-	{
-		cLogStream::Default().Wrn( boost::str(boost::format("Type %s does not implement from_json()")% typeid(T).name()));
 		return false;
 	}
 
