@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <vector>
 #include <set>
 #include <map>
 #include <memory>
@@ -34,6 +35,7 @@ namespace pgn
 	}
 
 	//! PODs
+	// char
 	template <>
 	inline void from_xml<char>(char& zObj, const pugi::xml_attribute& zRoot)
 	{
@@ -43,8 +45,247 @@ namespace pgn
 	template <>
 	inline void to_xml<char>(const char& zObj, pugi::xml_attribute& zRoot)
 	{
-		//zRoot.set_value()
+		std::string s(1, zObj);
+		zRoot.set_value(s.c_str());
 	}
+
+	// int
+	template <>
+	inline void from_xml<int>(int& zObj, const pugi::xml_attribute& zRoot)
+	{
+		zObj = zRoot.as_int(-1);
+	}
+
+	template <>
+	inline void to_xml<int>(const int& zObj, pugi::xml_attribute& zRoot)
+	{
+		zRoot.set_value(zObj);
+	}
+
+	// uint
+	template <>
+	inline void from_xml<unsigned int>(unsigned int& zObj, const pugi::xml_attribute& zRoot)
+	{
+		zObj = zRoot.as_uint(0xFFFFFFFF);
+	}
+
+	template <>
+	inline void to_xml<unsigned int>(const unsigned & zObj, pugi::xml_attribute& zRoot)
+	{
+		zRoot.set_value(zObj);
+	}
+
+	// short
+	template <>
+	inline void from_xml<short>(short& zObj, const pugi::xml_attribute& zRoot)
+	{
+		int v;
+		from_xml(v, zRoot);
+		zObj = static_cast<short>(v);
+	}
+
+	template <>
+	inline void to_xml<short>(const short& zObj, pugi::xml_attribute& zRoot)
+	{
+		zRoot.set_value(int(zObj));
+	}
+
+	// ushort
+	template <>
+	inline void from_xml<unsigned short>(unsigned short& zObj, const pugi::xml_attribute& zRoot)
+	{
+		unsigned v;
+		from_xml(v, zRoot);
+		zObj = static_cast<unsigned short>(v);
+	}
+
+	template <>
+	inline void to_xml<unsigned short>(const unsigned short & zObj, pugi::xml_attribute& zRoot)
+	{
+		zRoot.set_value(unsigned(zObj));
+	}
+
+	// float
+	template <>
+	inline void from_xml<float>(float& zObj, const pugi::xml_attribute& zRoot)
+	{
+		zObj = zRoot.as_float(-1.0f);
+	}
+
+	template <>
+	inline void to_xml<float>(const float & zObj, pugi::xml_attribute& zRoot)
+	{
+		zRoot.set_value(zObj);
+	}
+
+	// double
+	template <>
+	inline void from_xml<double>(double& zObj, const pugi::xml_attribute& zRoot)
+	{
+		zObj = zRoot.as_double(-1);
+	}
+
+	template <>
+	inline void to_xml<double>(const double & zObj, pugi::xml_attribute& zRoot)
+	{
+		zRoot.set_value(zObj);
+	}
+
+	// std::string
+	template <>
+	inline void from_xml<std::string>(std::string& zObj, const pugi::xml_attribute& zRoot)
+	{
+		zObj = zRoot.as_string("");
+	}
+
+	template <>
+	inline void to_xml<std::string>(const std::string & zObj, pugi::xml_attribute& zRoot)
+	{
+		zRoot.set_value(zObj.c_str());
+	}
+
+	// bool
+	template <>
+	inline void from_xml<bool>(bool& zObj, const pugi::xml_attribute& zRoot)
+	{
+		zObj = zRoot.as_bool();
+	}
+
+	template <>
+	inline void to_xml<bool>(const bool & zObj, pugi::xml_attribute& zRoot)
+	{
+		zRoot.set_value(zObj);
+	}
+	//! Containers
+
+	// vector
+	template <class T>
+	inline void from_xml(std::vector<T>& zObj, const pugi::xml_node& zRoot)
+	{
+		zObj.clear();
+		T val;
+		for (auto c : zRoot)
+		{
+			from_xml(val, c.attribute("value"));
+			zObj.push_back(val);
+		}
+	}
+
+	template <class T>
+	inline void to_xml(const std::vector<T> & zObj, pugi::xml_node& zRoot)
+	{
+		for (const auto& x : zObj)
+		{
+			auto node& = zRoot.append_child("elem");
+			auto& attrib = node.append_attribute("value");
+			to_xml(x, attrib);
+		}
+	}
+
+	// set
+	template <class T>
+	inline void from_xml(std::set<T>& zObj, const pugi::xml_node& zRoot)
+	{
+		zObj.clear();
+		T val;
+		for (auto c : zRoot)
+		{
+			from_xml(val, c.attribute("value"));
+			zObj.push_back(val);
+		}
+	}
+
+	template <class T>
+	inline void to_xml(const std::set<T> & zObj, pugi::xml_node& zRoot)
+	{
+		for (const auto& x : zObj)
+		{
+			auto node& = zRoot.append_child("elem");
+			auto& attrib = node.append_attribute("value");
+			to_xml(x, attrib);
+		}
+	}
+
+	// map
+	template <class T,class U>
+	inline void from_xml(std::map<T,U>& zObj, const pugi::xml_node& zRoot)
+	{
+		zObj.clear();
+		T val; U key;
+		for (auto c : zRoot)
+		{
+			from_xml(key, c.attribute("key"));
+			from_xml(val, c.attribute("value"));
+			zObj.push_back(val);
+		}
+	}
+
+	template <class T,class U>
+	inline void to_xml(const std::map<T, U> & zObj, pugi::xml_node& zRoot)
+	{
+		for (const auto& x : zObj)
+		{
+			auto node& = zRoot.append_child("elem");
+			auto& kattrib = node.append_attribute("key");
+			auto& vattrib = node.append_attribute("value");
+			to_xml(x.first, kattrib);
+			to_xml(x.second, vattrib);
+		}
+	}
+
+	// multimap
+	template <class T, class U>
+	inline void from_xml(std::multimap<T, U>& zObj, const pugi::xml_node& zRoot)
+	{
+		zObj.clear();
+		T val; U key;
+		for (auto c : zRoot)
+		{
+			from_xml(key, c.attribute("key"));
+			from_xml(val, c.attribute("value"));
+			zObj.push_back(val);
+		}
+	}
+
+	template <class T, class U>
+	inline void to_xml(const std::multimap<T, U> & zObj, pugi::xml_node& zRoot)
+	{
+		for (const auto& x : zObj)
+		{
+			auto node& = zRoot.append_child("elem");
+			auto& kattrib = node.append_attribute("key");
+			auto& vattrib = node.append_attribute("value");
+			to_xml(x.first, kattrib);
+			to_xml(x.second, vattrib);
+		}
+	}
+
+	// shared_ptr
+	template <class T>
+	inline void from_xml(std::shared_ptr<T>& zObj, const pugi::xml_attribute& zRoot)
+	{
+		T val;
+		from_xml(val, zRoot);
+		zObj = std::make_shared<T>(val);
+	}
+
+	template <class T>
+	inline void to_xml(const std::shared_ptr<T>& zObj, pugi::xml_attribute& zRoot)
+	{
+		zObj ? to_xml(*zObj, zRoot) : zRoot.set_value("nullptr");
+	}
+
+	// weak_ptr
+	template <class T>
+	inline void to_xml(const std::weak_ptr<T>& zObj, pugi::xml_attribute& zRoot)
+	{
+		to_xml(zObj.lock(), zRoot);
+	}
+
+	/*
+		glm 
+		oxygine-related (sep. file)
+	*/
 }
 
 /*
@@ -67,115 +308,6 @@ namespace pgn
 	{
 		assert(false);
 		return false;
-	}
-
-	//! PODs
-	template <>
-	inline bool from_json<std::string>(std::string& zObj, const rapidjson::Value& zRoot)
-	{
-		if(zRoot.IsString())
-			zObj = zRoot.GetString();
-        return zRoot.IsString();
-	}
-
-	template <>
-	inline void to_json<std::string>(const std::string& zObj, JsonWriter& zRoot)
-	{
-		zRoot.String( zObj.c_str());
-	}
-
-	template <>
-	inline bool from_json<char>(char& zObj, const rapidjson::Value& zRoot)
-	{
-		if(zRoot.IsString())
-			zObj = zRoot.GetString()[0];
-        return zRoot.IsString();
-	}
-
-	template <>
-	inline void to_json<char>(const char& zObj, JsonWriter& zRoot)
-	{
-		char tmp[2] = {zObj,'\n'};
-		zRoot.String( tmp);
-	}
-
-	template <>
-	inline bool from_json<float>(float& zObj, const rapidjson::Value& zRoot)
-	{
-		if(zRoot.IsNumber())
-			zObj = float(zRoot.GetDouble());
-        return zRoot.IsNumber();
-	}
-	template <>
-	inline void to_json<float>(const float& zObj, JsonWriter& zRoot)
-	{
-		zRoot.Double( zObj);
-	}
-
-	template <>
-	inline bool from_json<double>(double& zObj, const rapidjson::Value& zRoot)
-	{
-		if(zRoot.IsNumber())
-			zObj = zRoot.GetDouble();
-        return zRoot.IsNumber();
-	}
-	template <>
-	inline void to_json<double>(const double& zObj, JsonWriter& zRoot)
-	{
-		zRoot.Double( zObj);
-	}
-
-	template <>
-	inline bool from_json<bool>(bool& zObj, const rapidjson::Value& zRoot)
-	{
-		if(zRoot.IsBool())
-			zObj = zRoot.GetBool();
-        return zRoot.IsBool();
-	}
-
-	template <>
-	inline void to_json<bool>(const bool& zObj, JsonWriter& zRoot)
-	{
-		zRoot.Bool(zObj);
-	}
-
-	template <>
-	inline bool from_json<unsigned short>(unsigned short& zObj, const rapidjson::Value& zRoot)
-	{
-		if(zRoot.IsNumber())
-			zObj = unsigned short(zRoot.GetUint());
-        return zRoot.IsNumber();
-	}
-	template <>
-	inline void to_json<unsigned short>(const unsigned short& zObj, JsonWriter& zRoot)
-	{
-		zRoot.Uint( zObj);
-	}
-	
-	template <>
-	inline bool from_json<unsigned int>(unsigned int& zObj, const rapidjson::Value& zRoot)
-	{
-		if(zRoot.IsNumber())
-			zObj = unsigned(zRoot.GetUint());
-        return zRoot.IsNumber();
-	}
-	template <>
-	inline void to_json<unsigned int>(const unsigned int& zObj, JsonWriter& zRoot)
-	{
-		zRoot.Uint( zObj);
-	}
-
-	template <>
-	inline bool from_json<int>(int& zObj, const rapidjson::Value& zRoot)
-	{
-		if (zRoot.IsNumber())
-			zObj = unsigned(zRoot.GetInt());
-		return zRoot.IsNumber();
-	}
-	template <>
-	inline void to_json<int>(const int& zObj, JsonWriter& zRoot)
-	{
-		zRoot.Int(zObj);
 	}
 
 	//-------------------------------------------------------------------------
