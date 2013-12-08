@@ -24,6 +24,7 @@ set(SOURCE_FILES
     ActionMgrRL.cpp
     GameApp.cpp
     util/FormatString.cpp
+    util/json_conversions.cpp
     io/GameIO.cpp
     io/Keyboard.cpp
     resources/GameResources.cpp

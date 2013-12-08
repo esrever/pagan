@@ -9,7 +9,7 @@ namespace pgn
 	class cFontLib
 	{
 	public:
-		oxygine::Font * Get(const std::string& zFontName); 
+		oxygine::Font * Get(const std::string& zFontName) const; 
 		void Init(const std::string& zResFile);
 	private:
 		DECL_JSON_PGN_FRIEND

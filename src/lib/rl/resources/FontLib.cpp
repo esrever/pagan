@@ -4,9 +4,10 @@
 
 namespace pgn
 {
-	oxygine::Font * cFontLib::Get(const std::string& zFontName)
+	oxygine::Font * cFontLib::Get(const std::string& zFontName) const
 	{
-		return mFontResources.getResFont(zFontName)->getFont();
+		auto& res = const_cast<oxygine::Resources &>(mFontResources);
+		return res.getResFont(zFontName)->getFont();
 	}
 
 	void cFontLib::Init(const std::string& zResFile)

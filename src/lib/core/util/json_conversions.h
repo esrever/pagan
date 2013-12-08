@@ -22,9 +22,9 @@ void to_json< T >(const T & zData, JsonWriter& zRoot);
 
 #define DECL_JSON_PGN_FRIEND \
 template<class T>\
-friend bool from_json(T & zData, const rapidjson::Value& zRoot); \
+friend bool ::pgn::from_json(T & zData, const rapidjson::Value& zRoot); \
 template<class T>\
-friend void to_json(const T & zData, JsonWriter& zRoot);
+	friend void ::pgn::to_json(const T & zData, JsonWriter& zRoot);
 
 typedef rapidjson::PrettyWriter<rapidjson::StringBuffer> JsonWriter;
 
@@ -74,6 +74,22 @@ namespace pgn
 		return false;
 	}
 
+	//! type to json
+	template <class T>
+	inline void to_json(const T *& zObj, JsonWriter& zRoot)
+	{
+		cLogStream::Default().Wrn(boost::str(boost::format("Type %s does not implement to_json(ptr)")% typeid(T).name()));
+		//zObj.to_json(zRoot);
+	}
+
+	//! type from json
+	template <class T>
+	inline bool from_json(T *& zObj, const rapidjson::Value& zRoot)
+	{
+		cLogStream::Default().Wrn(boost::str(boost::format("Type %s does not implement from_json(ptr)")% typeid(T).name()));
+		return false;
+	}
+
 	//! PODs
 	template <>
 	inline bool from_json<std::string>(std::string& zObj, const rapidjson::Value& zRoot)
@@ -92,16 +108,22 @@ namespace pgn
 	template <>
 	inline bool from_json<char>(char& zObj, const rapidjson::Value& zRoot)
 	{
-		if(zRoot.IsString())
+		if (zRoot.IsString())
 			zObj = zRoot.GetString()[0];
-        return zRoot.IsString();
+		return zRoot.IsString();
 	}
 
 	template <>
 	inline void to_json<char>(const char& zObj, JsonWriter& zRoot)
 	{
-		char tmp[2] = {zObj,'\n'};
+		char tmp[2] = {zObj,'\0'};
 		zRoot.String( tmp);
+	}
+
+	template <>
+	inline void to_json<char>(const char *& zObj, JsonWriter& zRoot)
+	{
+		zRoot.String(zObj);
 	}
 
 	template <>
@@ -185,6 +207,25 @@ namespace pgn
 
 	//-------------------------------------------------------------------------
 	template <class T, size_t N>
+	inline bool from_json(T * zObj, const rapidjson::Value& zRoot)
+	{
+		if (zRoot.IsArray())
+		{
+			if (zRoot.Size() != N)
+				return false;
+			size_t i = 0;
+			for (auto itr = zRoot.Begin(); itr != zRoot.End(); ++itr)
+			{
+				if (!from_json(zObj[i], *itr))
+					return false;
+				++i;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	template <class T, size_t N>
 	inline void to_json(const T * zObj, JsonWriter& zRoot)
 	{
 		zRoot.StartArray();
@@ -237,30 +278,17 @@ namespace pgn
 	}
 
 	template <class T>
+	inline bool from_json(std::shared_ptr<T>& zObj, const rapidjson::Value& zRoot)
+	{
+		return zObj ? from_json(*zObj, zRoot) : false;
+	}
+
+	template <class T>
 	inline void to_json(const std::shared_ptr<T>& zObj, JsonWriter& zRoot)
 	{
 		zObj ? to_json(*zObj, zRoot) : zRoot.Null();
 	}
 
-	//-------------------------------------------------------------------------------------
-	template<class T, size_t N>
-	bool from_json(T& zObj, const rapidjson::Value& zRoot)
-	{
-		if(zRoot.IsArray())
-		{
-			if(zRoot.Size() != N) 
-				return false;
-			size_t i=0;
-			for (auto itr = zRoot.Begin(); itr != zRoot.End(); ++itr) 
-			{
-				if(!from_json(zObj[i],*itr))
-					return false;
-				++i;
-			}
-			return true;
-		}
-		return false;
-	}
 
 	#define JSON_GLM( T, N, P) \
 	template <>\
@@ -268,7 +296,7 @@ namespace pgn
 		to_json< P , N >(&zObj.x, zRoot);}\
 	template <>\
 	inline bool from_json<glm::##T##N >(glm::##T##N& zObj, const rapidjson::Value& zRoot){\
-		return from_json<glm::##T##N ,  N >(zObj, zRoot);\
+		return from_json< P ,  N >(&zObj.x, zRoot);\
 	}
 
 	#define JSON_GLM_ALL( T, P) \

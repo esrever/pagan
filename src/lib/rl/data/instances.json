@@ -21,54 +21,28 @@
             }
     },
     {
-        "archetype" : "system_window",
-        "name" : "system_window_log_fullscreen",
-        "pgn::cmp::cAsciiWindow" : {
-            "Start" : [0,0],
-            "Size" : [160,50]
+        "archetype" : "common",
+        "name" : "status_win",
+        "pgn::cmp::cTextWindow" : {
+            "style":{
+                "font" : "system",
+                "color" : "0xffffffff",
+                "valign" : "top",
+                "halign" : "left",
+                "fontSize2Scale" : 0,
+                "linesOffset" : 0,
+                "kerning" : 0,
+                "multiline" : true
             },
-        "pgn::cmp::cKeyActionMapper" : {
-            "QuitProgram" : [27],
-            "SwitchToWindowMain" : []
-        },
-        "pgn::cmp::cLoggerListener" : {
-            "logtags" : ["GameLog","SystemLog"]
-        },
-        "tags" : ["LogWindow"]
-    },
-    {
-        "archetype" : "system_window",
-        "name" : "system_window_log_small",
-        "pgn::cmp::cAsciiWindow" : {
-            "Start" : [0,30],
-            "Size" : [140,20]
+            "bg":{
+                "color" : "0x444444ff"
             },
-        "pgn::cmp::cLoggerListener" : {
-            "logtags" : ["GameLog"]
-        },
-        "tags" : ["ActiveWindow","LogWindow"]
-    },
-    {
-        "archetype" : "system_window",
-        "name" : "system_window_status",
-        "pgn::cmp::cAsciiWindow" : {
-            "Start" : [140,0],
-            "Size" : [20,50]
+            "text":{
+                "text" : "Hello\nworld"
             },
-        "tags" : ["ActiveWindow","StatusWindow"]
-    },
-    {
-        "archetype" : "system_window",
-        "name" : "system_window_map",
-        "pgn::cmp::cAsciiWindow" : {
-            "Start" : [0,0],
-            "Size" : [140,30]
-            },
-        "pgn::cmp::cKeyActionMapper" : {
-            "QuitProgram" : [27],
-            "SwitchToWindowLog" : []
-        },
-        "tags" : ["ActiveWindow","MapWindow"]
+            "pos":[1,2],
+            "size": [30,40]
+        }
     }
 ]
     
