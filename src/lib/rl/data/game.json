@@ -1,0 +1,23 @@
+{
+    "IO" : {}, 
+    "Resources" : {
+        "Tile" : {
+            "res" : "resources/tilemap.xml",
+            "desc" : "resources/tiledesc.xml"
+        },
+        "Font" : {
+            "res" : "resources/fonts.xml"
+        }
+    },
+    "ecs" : {
+        "EntityMgr" : {
+            "ArchetypesFile" : ["archetypes.json"],
+            "ExemplarsFile" : ["exemplars.json"],
+            "InstancesFile" : ["instances.json"]
+        }, 
+        "SystemMgr" : {
+            "QueriesFile" : ["queries.json"],
+            "SystemsFile" : ["systems.json"]
+        }
+    }
+}

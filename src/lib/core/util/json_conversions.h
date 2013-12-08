@@ -14,6 +14,18 @@
 #include "logstream.h"
 #include "conversions.h"
 
+#define DECL_JSON_PGN(T)\
+template<>\
+bool from_json< T >( T & zData, const rapidjson::Value& zRoot);\
+template<>\
+void to_json< T >(const T & zData, JsonWriter& zRoot);
+
+#define DECL_JSON_PGN_FRIEND \
+template<class T>\
+friend bool from_json(T & zData, const rapidjson::Value& zRoot); \
+template<class T>\
+friend void to_json(const T & zData, JsonWriter& zRoot);
+
 typedef rapidjson::PrettyWriter<rapidjson::StringBuffer> JsonWriter;
 
 namespace pgn

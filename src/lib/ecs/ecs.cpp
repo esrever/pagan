@@ -6,15 +6,11 @@ namespace pgn
 
 	void cECS::Init()
 	{
-		/*
 		std::ios_base::Init();
-		mLog.SetChannel(&std::cout);
-		*/
+		auto log_ptr = std::make_shared<pgn::cLogStream>(pgn::cLogStream());
+		log_ptr->SetChannel(&std::cout);
+		mLog = std::dynamic_pointer_cast<pgn::cLogBase>(log_ptr);
 		mLog->SetName("ECS");
-
-		mDataPath = __FILE__;
-		mDataPath.erase( mDataPath.end()-7, mDataPath.end());
-		mDataPath.append( "../rl/data/");
 	}
 
 	void cECS::Destroy()

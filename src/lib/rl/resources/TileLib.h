@@ -5,6 +5,8 @@
 
 #include <oxygine-framework.h>
 
+#include <core/util/json_conversions.h>
+
 enum class eTileCategory : char
 {
 	// Main categories
@@ -28,7 +30,11 @@ namespace pgn
 		const SpriteMap& GetMap() const { return mSprites; }
 		oxygine::spSprite GetSprite(const std::string& name) const;
 	private:
+		DECL_JSON_PGN_FRIEND
+
 		SpriteMap mSprites;
 		oxygine::Resources mTileRes;
 	};
+
+	DECL_JSON_PGN(cTileLib)
 }

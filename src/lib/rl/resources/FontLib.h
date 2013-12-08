@@ -2,6 +2,8 @@
 
 #include <oxygine-framework.h>
 
+#include <core/util/json_conversions.h>
+
 namespace pgn
 {
 	class cFontLib
@@ -10,6 +12,10 @@ namespace pgn
 		oxygine::Font * Get(const std::string& zFontName); 
 		void Init(const std::string& zResFile);
 	private:
+		DECL_JSON_PGN_FRIEND
+
 		oxygine::Resources mFontResources;
 	};
+
+	DECL_JSON_PGN(cFontLib)
 }

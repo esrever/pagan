@@ -1,5 +1,7 @@
 #include "TileLib.h"
 
+#include <rl/GameApp.h>
+
 using namespace oxygine;
 
 namespace pgn
@@ -31,5 +33,21 @@ namespace pgn
 	{
 		auto it = mSprites.find(name);
 		return it != mSprites.end() ? it->second : nullptr;
+	}
+
+	template<>
+	bool from_json< cTileLib >(cTileLib & zData, const rapidjson::Value& zRoot)
+	{
+		std::string res, desc;
+		from_json(res, zRoot["res"]);
+		from_json(desc, zRoot["desc"]);
+		zData.Init(GAME.GetDataPath() + res, GAME.GetDataPath() + desc);
+		return true;
+	}
+
+	template<>
+	void to_json< cTileLib >(const cTileLib & zData, JsonWriter& zRoot)
+	{
+
 	}
 }
