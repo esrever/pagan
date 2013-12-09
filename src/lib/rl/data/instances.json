@@ -39,10 +39,34 @@
             },
             "text":{
                 "text" : "Hello\nworld"
-            },
-            "pos":[1,2],
-            "size": [30,40]
+            }
         }
+    },
+    {
+        "archetype" : "common",
+        "name" : "log_win",
+        "pgn::cmp::cTextWindow" : {
+            "style":{
+                "font" : "system",
+                "color" : "0xffffffff",
+                "valign" : "top",
+                "halign" : "left",
+                "fontSize2Scale" : 0,
+                "linesOffset" : 0,
+                "kerning" : 0,
+                "multiline" : true
+            },
+            "bg":{
+                "color" : "0x444444ff"
+            },
+            "text":{
+                "text" : "Hello\n log world"
+            }
+        }
+    },
+    {
+        "archetype" : "common",
+        "name" : "game_map_win"
     }
 ]
     
