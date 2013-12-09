@@ -53,10 +53,10 @@ void cApplication::Init()
 	//##########################
 	// General
 
-	auto win = new Actor;
-	win->setPosition(Vector2(0, 0));
-	win->setSize(mWinWidth, mWinHeight);
-	getRoot()->addChild(win);
+	//auto win = new Actor;
+	//win->setPosition(Vector2(0, 0));
+	//win->setSize(mWinWidth, mWinHeight);
+	//getRoot()->addChild(win);
 
 	//##########################
 	// STATUS & LOG
@@ -68,10 +68,10 @@ void cApplication::Init()
 	auto logBoxSize = Vector2(mWinWidth, mWinHeight-mTileSize*mTileRows);
 
 	spTextWindow status = new cTextWindow();
-	win->addChild(status);
+	getRoot()->addChild(status);
 		
 	spTextWindow log = new cTextWindow();
-	win->addChild(log);
+	getRoot()->addChild(log);
 
 	status->Init(statusBoxPosition, statusBoxSize);
 	status->Init(logBoxPosition, logBoxSize);
@@ -93,7 +93,7 @@ void cApplication::Init()
 				if (pystring::find(it->first, "floor") != -1)
 				{
 					spSprite sprite = it->second;
-					win->addChild(sprite);
+					getRoot()->addChild(sprite);
 					//set sprite initial position
 					Vector2 sprite_pos(j*mTileSize, i*mTileSize);
 					sprite->setPosition(sprite_pos);

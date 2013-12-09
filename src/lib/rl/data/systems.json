@@ -17,18 +17,18 @@
         }
     },
     {
-        "Type" : "pgn::sys::cMapRender",
+        "Type" : "pgn::sys::cMapWindow",
         "Data" : {
-            "Name" : "MapRender",
-            "Desc" : "renders the current level",
+            "Name" : "MapWindow",
+            "Desc" : "updates / handles events",
             "Query" : ["pgn::cmp::cMapWindow"]
         }
     },
     {
-        "Type" : "pgn::sys::cTextWindowRender",
+        "Type" : "pgn::sys::cTextWindow",
         "Data" : {
-            "Name" : "TextWindowRender",
-            "Desc" : "renders the text win",
+            "Name" : "TextWindow",
+            "Desc" : "updates / handles events",
             "Query" : ["pgn::cmp::cTextWindow"]
         }
     }

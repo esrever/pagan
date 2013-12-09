@@ -74,10 +74,7 @@
         "name" : "game_map_win",
         "pgn::cmp::cMapWindow" : {
             "cell_dims" : [24,16],
-            "tile_dims" : [32,32],
-            "bg":{
-                "color" : "0x00000000"
-            }
+            "tile_dims" : [32,32]
         }
     }
 ]

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 #include <glm/glm.hpp>
 #include <oxygine-framework.h>
@@ -17,10 +18,12 @@ namespace pgn
         {
 		public:
 
+			oxygine::spSprite& Tile(size_t col, size_t row) { return mTiles.at(col + row*mCellDims.x); }
+
 		private:
 			DECL_JSON_PGN_FRIEND
 
-			oxygine::spColorRectSprite mBg;
+			std::vector<oxygine::spSprite> mTiles;
 			glm::uvec2 mCellDims;
 			glm::uvec2 mTileDims;
 			
