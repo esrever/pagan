@@ -14,7 +14,7 @@
             "Name" : "AlmightyLogger",
             "Desc" : "log events from the game or the system",
             "QueryLog" : ["pgn::cmp::cLog"],
-            "QueryLogListener" : ["tag:log:game","tag:log:sys"]
+            "QueryLogListener" : ["tag:log:game_log"]
         }
     },
     {

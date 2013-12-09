@@ -21,8 +21,11 @@ namespace pgn
 
 		}
 
-		void cMove::OnActionMoveAdj(cEntity e, const glm::ivec2& v)
+		void cMove::OnActionMoveAdj(cEntity e, const glm::ivec2& vin)
 		{ 
+			glm::ivec2 v = vin;
+
+			// Get entity data
 			auto ed = ECS.mEntityMgr->GetEntityData(e);
 			std::shared_ptr< cComponent<cmp::cMovement>> move_ptr;
 			std::shared_ptr< cComponent<cmp::cMapSprite>> sprite_ptr;
@@ -31,15 +34,23 @@ namespace pgn
 			ed.mComponents.GetComponent(sprite_ptr);
 			ed.mComponents.GetComponent(pos_ptr);
 
+			// TODO: apply logic to check if we can move, apply movepoint reduction etc.
+
 			// TODO: temp!
 			pos_ptr->mData.mPos += v;
 			auto curspritepos = sprite_ptr->mData.mSprite->getPosition();
 			sprite_ptr->mData.mSprite->setPosition(curspritepos + oxygine::Vector2(32 * v.x, -32 * v.y));
+
+			// Log
+			int udir = v.x + 1 + (v.y + 1) * 3;
+			evt::cLog::mSig.emit("game_log", boost::str(boost::format("%s moved %s") % ed.mName.c_str()%dir2text_full[udir]));
+
 		}
 
 		void cMove::OnActionIdle(cEntity e)
 		{
-
+			auto ed = ECS.mEntityMgr->GetEntityData(e);
+			evt::cLog::mSig.emit("game_log", boost::str(boost::format("%s moved %s") % ed.mName.c_str() % dir2text_full[4]));
 		}
 
 		void cMove::Process()

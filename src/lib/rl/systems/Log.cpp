@@ -56,16 +56,17 @@ namespace pgn
 				{
 					auto ec = ECS.mEntityMgr->GetEntityData().find(e);
 					assert(ec != ECS.mEntityMgr->GetEntityData().end());
+					// TODO: below is disabled because the one we're looking for is defined in the tag, so if it's tagged we got the right one
 					// Move to the next log listener if it's not the one we're looking for
-					if (ec->second.mName != zLoggerName)
-						continue;
+					//if (ec->second.mName != zLoggerName)
+					//	continue;
 
 					// Does it have a TextWin?
 					std::shared_ptr< cComponent<cmp::cTextWindow>> twin_ptr;
 					ec->second.mComponents.GetComponent(twin_ptr);
 					if (twin_ptr)
 					{
-
+						twin_ptr->mData.SetText(log_string);
 					}
 
 					// Does it have an OutStream?

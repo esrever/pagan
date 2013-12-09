@@ -308,7 +308,7 @@ namespace pgn
 		cEntityData ed;
 		auto e = Create();
 		auto itEx = mExemplars.find(zExemplarName);
-		ed.mName = zExemplarName + "_instance";
+		ed.mName = zExemplarName;// +"_instance";
 		ed.mComponents = itEx->second.mComponents;
 
 		auto it = mEntityData.find(e);

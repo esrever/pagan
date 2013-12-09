@@ -133,6 +133,34 @@
                     ]
                 }
             },
+            "game_log": {
+                "Name": "game_log",
+                "Tags": [],
+                "Data": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cLog"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        {
+                            "MaxLineNum": 100000
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                }
+            },
             "game_map_win": {
                 "Name": "game_map_win",
                 "Tags": [],
@@ -205,7 +233,9 @@
             },
             "log_win": {
                 "Name": "log_win",
-                "Tags": [],
+                "Tags": [
+                    "log:game_log"
+                ],
                 "Data": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
@@ -364,34 +394,6 @@
                     ]
                 }
             },
-            "the_log": {
-                "Name": "the_log",
-                "Tags": [],
-                "Data": {
-                    "Mask": [
-                        "struct pgn::cmp::cDescription",
-                        "struct pgn::cmp::cLog"
-                    ],
-                    "Components": [
-                        {
-                            "Verbose": "",
-                            "Short": ""
-                        },
-                        null,
-                        null,
-                        {
-                            "MaxLineNum": 100000
-                        },
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null
-                    ]
-                }
-            },
             "wall_common": {
                 "Name": "wall_common",
                 "Tags": [],
@@ -425,11 +427,14 @@
         "Tagged Entities": {
             "Player": [
                 0
+            ],
+            "log:game_log": [
+                3
             ]
         },
         "Entity data": {
             "0": {
-                "Name": "Hero_instance",
+                "Name": "Hero",
                 "Components": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
@@ -463,7 +468,7 @@
                 }
             },
             "1": {
-                "Name": "the_log_instance",
+                "Name": "game_log",
                 "Components": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
@@ -490,7 +495,7 @@
                 }
             },
             "2": {
-                "Name": "status_win_instance",
+                "Name": "status_win",
                 "Components": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
@@ -552,7 +557,7 @@
                 }
             },
             "3": {
-                "Name": "log_win_instance",
+                "Name": "log_win",
                 "Components": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
@@ -614,7 +619,7 @@
                 }
             },
             "4": {
-                "Name": "game_map_win_instance",
+                "Name": "game_map_win",
                 "Components": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
@@ -648,7 +653,7 @@
                 }
             },
             "5": {
-                "Name": "rat_common_instance",
+                "Name": "rat_common",
                 "Components": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
@@ -682,7 +687,7 @@
                 }
             },
             "6": {
-                "Name": "human_common_instance",
+                "Name": "human_common",
                 "Components": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
@@ -732,15 +737,6 @@
     },
     "SystemMgr": {
         "Queries": {
-            "1695609238": {
-                "Tags": [
-                    "log:game",
-                    "log:sys"
-                ],
-                "Tags-not": [],
-                "Mask": [],
-                "Mask-not": []
-            },
             "2426457603": {
                 "Tags": [],
                 "Tags-not": [],
@@ -755,6 +751,14 @@
                 "Mask": [
                     "struct pgn::cmp::cKeyActionMapper"
                 ],
+                "Mask-not": []
+            },
+            "519867310": {
+                "Tags": [
+                    "log:game_log"
+                ],
+                "Tags-not": [],
+                "Mask": [],
                 "Mask-not": []
             },
             "alias": {
@@ -805,8 +809,7 @@
                     },
                     "QueryLogListener": {
                         "Tags": [
-                            "log:game",
-                            "log:sys"
+                            "log:game_log"
                         ],
                         "Tags-not": [],
                         "Mask": [],

@@ -17,7 +17,7 @@
     },
     {
         "archetype" : "common",
-        "name" : "the_log",
+        "name" : "game_log",
         "pgn::cmp::cLog" : {
             "MaxLineNum" : 100000
             }
@@ -68,7 +68,8 @@
             },
             "pos" : [0, 512],
             "size" : [768, 128]
-        }
+        },
+        "tags" : ["log:game_log"]
     },
     {
         "archetype" : "common",
