@@ -10,10 +10,17 @@ using namespace oxygine;
 //It is important on mobile devices with limited memory and you would load/unload them
 Resources gameResources;
 
+void cTextWindow::onMotion(Event * evt)
+{
+	TouchEvent * evt2 = reinterpret_cast<TouchEvent *>(evt);
+	auto pos = evt2->getPointer()->getPosition();
+	auto s = boost::str(boost::format("%f %f") % pos.x%pos.y);
+	text->setText(s.c_str());
+}
+
 void cTextWindow::Init(Vector2 start, Vector2 size)
 {
 	spColorRectSprite bg;
-	spTextActor text;
 
 	// Create the text style
 	TextStyle st;
@@ -70,11 +77,11 @@ void cApplication::Init()
 	spTextWindow status = new cTextWindow();
 	getRoot()->addChild(status);
 		
-	spTextWindow log = new cTextWindow();
-	getRoot()->addChild(log);
+	mTextWin = new cTextWindow();
+	getRoot()->addChild(mTextWin);
 
 	status->Init(statusBoxPosition, statusBoxSize);
-	status->Init(logBoxPosition, logBoxSize);
+	mTextWin->Init(logBoxPosition, logBoxSize);
 
 	//##########################
 	// MAP
@@ -90,9 +97,10 @@ void cApplication::Init()
 		{
 			while (it != tilelib.GetMap().end())
 			{
-				if (pystring::find(it->first, "floor") != -1)
+				//if (pystring::find(it->first, "floor") != -1)
 				{
 					spSprite sprite = it->second;
+					mSprites.push_back(sprite);
 					getRoot()->addChild(sprite);
 					//set sprite initial position
 					Vector2 sprite_pos(j*mTileSize, i*mTileSize);
@@ -110,6 +118,13 @@ void cApplication::Update()
 	//auto& ecs = ECS;
 	//ecs.mSystemMgr->UpdateFrame();
 	GAME.UpdateFrame();
+
+	for (auto x : mSprites)
+	{
+		auto iso = x->getOvered();
+		if (iso)
+			mTextWin->text->setText(x->getName());
+	}
 }
 
 void cApplication::Destroy()

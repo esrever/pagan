@@ -90,6 +90,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Speed": -4.31602e+008
                         },
@@ -122,6 +123,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         }
@@ -141,6 +143,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -187,6 +190,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Speed": 1
                         },
@@ -210,6 +214,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -284,6 +289,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Speed": 1
                         },
@@ -307,6 +313,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -381,6 +388,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -398,6 +406,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -443,6 +452,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Speed": -4.31602e+008
                         },
@@ -476,6 +486,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -492,6 +503,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -561,6 +573,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "style": {
                                 "font": "system",
@@ -620,6 +633,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "cell_dims": [
                                 24,
@@ -661,6 +675,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Speed": 1
                         },
@@ -694,6 +709,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Speed": 1
                         },
@@ -711,6 +727,7 @@
             "struct pgn::cmp::cLevelPosition",
             "struct pgn::cmp::cLevelWindow",
             "struct pgn::cmp::cLog",
+            "struct pgn::cmp::cMapSprite",
             "struct pgn::cmp::cMapWindow",
             "struct pgn::cmp::cMovement",
             "struct pgn::cmp::cOutStream",

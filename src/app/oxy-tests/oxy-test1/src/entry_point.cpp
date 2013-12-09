@@ -66,7 +66,7 @@ void run()
 	DebugActor::initialize();
 
 	//create and add new DebugActor to root actor as child
-	getRoot()->addChild(new DebugActor());
+	//getRoot()->addChild(new DebugActor());
 
 
 	//initialization view and projection matrix 	

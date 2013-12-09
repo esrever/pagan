@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+
 #include "oxygine-framework.h"
 #include <Actor.h>
 
@@ -30,7 +32,14 @@ DECLARE_SMART(cTextWindow, spTextWindow);
 class cTextWindow : public Actor
 {
 public:
+	cTextWindow()
+	{
+		addEventListener(TouchEvent::MOVE, CLOSURE(this, &cTextWindow::onMotion));
+	}
 	void Init(Vector2 start, Vector2 size);
+	spTextActor text;
+
+	void onMotion(Event *);
 };
 
 struct cApplication
@@ -40,9 +49,14 @@ struct cApplication
 	void Update();
 	void Destroy();
 
-	static const int mWinWidth = 1024;
-	static const int mWinHeight = 640;
+	//static const int mWinWidth = 1024;
+	//static const int mWinHeight = 640;
+	static const int mWinWidth = 2528;
+	static const int mWinHeight = 1312;
 	static const int mTileSize = 32;
-	static const int mTileRows = 16;
-	static const int mTileCols = 24;
+	static const int mTileRows = 39;
+	static const int mTileCols = 79;
+
+	std::vector<spSprite> mSprites;
+	spTextWindow mTextWin;
 };

@@ -24,6 +24,7 @@ namespace pgn
 
 				spSprite sprite = new Sprite();
 				sprite->setAnimFrame(tilemap->getFrame(col, row));
+				sprite->setName(std::string(name));
 				mSprites[std::string(name)] = sprite;
 			}
 		}
