@@ -1,0 +1,838 @@
+{
+    "EntityMgr": {
+        "Archetypes": {
+            "common": {
+                "Name": "common",
+                "Mask": [
+                    "struct pgn::cmp::cDescription"
+                ],
+                "Tags": []
+            },
+            "common_world": {
+                "Name": "common_world",
+                "Mask": [
+                    "struct pgn::cmp::cDescription"
+                ],
+                "Tags": [
+                    "PartOfWorld"
+                ]
+            },
+            "creature": {
+                "Name": "creature",
+                "Mask": [
+                    "struct pgn::cmp::cDescription",
+                    "struct pgn::cmp::cLevelPosition",
+                    "struct pgn::cmp::cMapSprite",
+                    "struct pgn::cmp::cMovement"
+                ],
+                "Tags": []
+            },
+            "level": {
+                "Name": "level",
+                "Mask": [
+                    "struct pgn::cmp::cDescription",
+                    "struct pgn::cmp::cTileLayout"
+                ],
+                "Tags": []
+            },
+            "log": {
+                "Name": "log",
+                "Mask": [
+                    "struct pgn::cmp::cDescription",
+                    "struct pgn::cmp::cLog"
+                ],
+                "Tags": []
+            },
+            "pc": {
+                "Name": "pc",
+                "Mask": [
+                    "struct pgn::cmp::cDescription",
+                    "struct pgn::cmp::cKeyActionMapper",
+                    "struct pgn::cmp::cLevelPosition",
+                    "struct pgn::cmp::cMapSprite",
+                    "struct pgn::cmp::cMovement"
+                ],
+                "Tags": [
+                    "Player"
+                ]
+            },
+            "tile": {
+                "Name": "tile",
+                "Mask": [
+                    "struct pgn::cmp::cDescription",
+                    "struct pgn::cmp::cMapSprite",
+                    "struct pgn::cmp::cTileObstacle"
+                ],
+                "Tags": []
+            }
+        },
+        "Exemplars": {
+            "Hero": {
+                "Name": "Hero",
+                "Tags": [
+                    "Player"
+                ],
+                "Data": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cKeyActionMapper",
+                        "struct pgn::cmp::cLevelPosition",
+                        "struct pgn::cmp::cMapSprite",
+                        "struct pgn::cmp::cMovement"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        {
+                            "Position": [
+                                0,
+                                0
+                            ]
+                        },
+                        null,
+                        "UNUSED:monsters:human",
+                        null,
+                        {
+                            "Speed": -4.31602e+008
+                        },
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                }
+            },
+            "floor_common": {
+                "Name": "floor_common",
+                "Tags": [],
+                "Data": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cMapSprite",
+                        "struct pgn::cmp::cTileObstacle"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "dusty floor",
+                            "Short": "floor"
+                        },
+                        null,
+                        null,
+                        null,
+                        "dungeon:floor:dirt0",
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "IsObstacle": false
+                        }
+                    ]
+                }
+            },
+            "game_log": {
+                "Name": "game_log",
+                "Tags": [],
+                "Data": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cLog"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        {
+                            "MaxLineNum": 100000
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                }
+            },
+            "game_map_win": {
+                "Name": "game_map_win",
+                "Tags": [],
+                "Data": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cMapWindow"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "cell_dims": [
+                                24,
+                                16
+                            ],
+                            "tile_dims": [
+                                32,
+                                32
+                            ]
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                }
+            },
+            "human_common": {
+                "Name": "human_common",
+                "Tags": [],
+                "Data": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cLevelPosition",
+                        "struct pgn::cmp::cMapSprite",
+                        "struct pgn::cmp::cMovement"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "tall, dark-haired man",
+                            "Short": "human"
+                        },
+                        null,
+                        {
+                            "Position": [
+                                0,
+                                0
+                            ]
+                        },
+                        null,
+                        "monsters:human",
+                        null,
+                        {
+                            "Speed": 1
+                        },
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                }
+            },
+            "log_win": {
+                "Name": "log_win",
+                "Tags": [
+                    "log:game_log"
+                ],
+                "Data": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cTextWindow"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "style": {
+                                "font": "system",
+                                "color": "ffffffff",
+                                "halign": "left",
+                                "valign": "top",
+                                "fontSize2Scale": 0,
+                                "linesOffset": 0,
+                                "kerning": 0,
+                                "multiline": true
+                            },
+                            "bg": {
+                                "color": "444444ff",
+                                "size": [
+                                    0,
+                                    0
+                                ],
+                                "position": [
+                                    0,
+                                    0
+                                ]
+                            },
+                            "text": {
+                                "size": [
+                                    0,
+                                    0
+                                ],
+                                "text": "Hello\n log world"
+                            },
+                            "pos": [
+                                0,
+                                512
+                            ],
+                            "size": [
+                                768,
+                                128
+                            ]
+                        },
+                        null,
+                        null
+                    ]
+                }
+            },
+            "rat_common": {
+                "Name": "rat_common",
+                "Tags": [],
+                "Data": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cLevelPosition",
+                        "struct pgn::cmp::cMapSprite",
+                        "struct pgn::cmp::cMovement"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "fat, brown, hairy, vicious-looking rat",
+                            "Short": "rat"
+                        },
+                        null,
+                        {
+                            "Position": [
+                                0,
+                                0
+                            ]
+                        },
+                        null,
+                        "monsters:animals:grey_rat",
+                        null,
+                        {
+                            "Speed": 1
+                        },
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                }
+            },
+            "status_win": {
+                "Name": "status_win",
+                "Tags": [],
+                "Data": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cTextWindow"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "style": {
+                                "font": "system",
+                                "color": "ffffffff",
+                                "halign": "left",
+                                "valign": "top",
+                                "fontSize2Scale": 0,
+                                "linesOffset": 0,
+                                "kerning": 0,
+                                "multiline": true
+                            },
+                            "bg": {
+                                "color": "444444ff",
+                                "size": [
+                                    0,
+                                    0
+                                ],
+                                "position": [
+                                    0,
+                                    0
+                                ]
+                            },
+                            "text": {
+                                "size": [
+                                    0,
+                                    0
+                                ],
+                                "text": "Hello\nworld"
+                            },
+                            "pos": [
+                                768,
+                                0
+                            ],
+                            "size": [
+                                256,
+                                640
+                            ]
+                        },
+                        null,
+                        null
+                    ]
+                }
+            },
+            "wall_common": {
+                "Name": "wall_common",
+                "Tags": [],
+                "Data": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cMapSprite",
+                        "struct pgn::cmp::cTileObstacle"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "dusty wall",
+                            "Short": "wall"
+                        },
+                        null,
+                        null,
+                        null,
+                        "dungeon:wall:brick_brown0",
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "IsObstacle": true
+                        }
+                    ]
+                }
+            }
+        },
+        "Tagged Entities": {
+            "Player": [
+                0
+            ],
+            "log:game_log": [
+                3
+            ]
+        },
+        "Entity data": {
+            "0": {
+                "Name": "Hero",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cKeyActionMapper",
+                        "struct pgn::cmp::cLevelPosition",
+                        "struct pgn::cmp::cMapSprite",
+                        "struct pgn::cmp::cMovement"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        {
+                            "Position": [
+                                0,
+                                0
+                            ]
+                        },
+                        null,
+                        "UNUSED:monsters:human",
+                        null,
+                        {
+                            "Speed": -4.31602e+008
+                        },
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                }
+            },
+            "1": {
+                "Name": "game_log",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cLog"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        {
+                            "MaxLineNum": 100000
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                }
+            },
+            "2": {
+                "Name": "status_win",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cTextWindow"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "style": {
+                                "font": "system",
+                                "color": "ffffffff",
+                                "halign": "left",
+                                "valign": "top",
+                                "fontSize2Scale": 0,
+                                "linesOffset": 0,
+                                "kerning": 0,
+                                "multiline": true
+                            },
+                            "bg": {
+                                "color": "444444ff",
+                                "size": [
+                                    0,
+                                    0
+                                ],
+                                "position": [
+                                    0,
+                                    0
+                                ]
+                            },
+                            "text": {
+                                "size": [
+                                    0,
+                                    0
+                                ],
+                                "text": "Hello\nworld"
+                            },
+                            "pos": [
+                                768,
+                                0
+                            ],
+                            "size": [
+                                256,
+                                640
+                            ]
+                        },
+                        null,
+                        null
+                    ]
+                }
+            },
+            "3": {
+                "Name": "log_win",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cTextWindow"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "style": {
+                                "font": "system",
+                                "color": "ffffffff",
+                                "halign": "left",
+                                "valign": "top",
+                                "fontSize2Scale": 0,
+                                "linesOffset": 0,
+                                "kerning": 0,
+                                "multiline": true
+                            },
+                            "bg": {
+                                "color": "444444ff",
+                                "size": [
+                                    0,
+                                    0
+                                ],
+                                "position": [
+                                    0,
+                                    0
+                                ]
+                            },
+                            "text": {
+                                "size": [
+                                    0,
+                                    0
+                                ],
+                                "text": "Hello\n log world"
+                            },
+                            "pos": [
+                                0,
+                                512
+                            ],
+                            "size": [
+                                768,
+                                128
+                            ]
+                        },
+                        null,
+                        null
+                    ]
+                }
+            },
+            "4": {
+                "Name": "game_map_win",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cMapWindow"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "cell_dims": [
+                                24,
+                                16
+                            ],
+                            "tile_dims": [
+                                32,
+                                32
+                            ]
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                }
+            },
+            "5": {
+                "Name": "rat_common",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cLevelPosition",
+                        "struct pgn::cmp::cMapSprite",
+                        "struct pgn::cmp::cMovement"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "fat, brown, hairy, vicious-looking rat",
+                            "Short": "rat"
+                        },
+                        null,
+                        {
+                            "Position": [
+                                0,
+                                0
+                            ]
+                        },
+                        null,
+                        "monsters:animals:grey_rat",
+                        null,
+                        {
+                            "Speed": 1
+                        },
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                }
+            },
+            "6": {
+                "Name": "human_common",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cLevelPosition",
+                        "struct pgn::cmp::cMapSprite",
+                        "struct pgn::cmp::cMovement"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "tall, dark-haired man",
+                            "Short": "human"
+                        },
+                        null,
+                        {
+                            "Position": [
+                                0,
+                                0
+                            ]
+                        },
+                        null,
+                        "monsters:human",
+                        null,
+                        {
+                            "Speed": 1
+                        },
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                }
+            }
+        },
+        "ComponentTypeIds": [
+            "struct pgn::cmp::cDescription",
+            "struct pgn::cmp::cKeyActionMapper",
+            "struct pgn::cmp::cLevelPosition",
+            "struct pgn::cmp::cLog",
+            "struct pgn::cmp::cMapSprite",
+            "struct pgn::cmp::cMapWindow",
+            "struct pgn::cmp::cMovement",
+            "struct pgn::cmp::cOutStream",
+            "struct pgn::cmp::cTextWindow",
+            "struct pgn::cmp::cTileLayout",
+            "struct pgn::cmp::cTileObstacle"
+        ]
+    },
+    "SystemMgr": {
+        "Queries": {
+            "2426457603": {
+                "Tags": [],
+                "Tags-not": [],
+                "Mask": [
+                    "struct pgn::cmp::cLog"
+                ],
+                "Mask-not": []
+            },
+            "3918431051": {
+                "Tags": [],
+                "Tags-not": [],
+                "Mask": [
+                    "struct pgn::cmp::cKeyActionMapper"
+                ],
+                "Mask-not": []
+            },
+            "519867310": {
+                "Tags": [
+                    "log:game_log"
+                ],
+                "Tags-not": [],
+                "Mask": [],
+                "Mask-not": []
+            },
+            "alias": {
+                "Tags": [],
+                "Tags-not": [],
+                "Mask": [],
+                "Mask-not": []
+            }
+        },
+        "Systems": [
+            {
+                "4294967295": {
+                    "Base": {
+                        "Name": "KeyboardHandle",
+                        "Desc": "read keys and propagate to keyactionmap components. listens to keystate changes"
+                    },
+                    "QueryKeyActionMapper": {
+                        "Tags": [],
+                        "Tags-not": [],
+                        "Mask": [
+                            "struct pgn::cmp::cKeyActionMapper"
+                        ],
+                        "Mask-not": []
+                    },
+                    "QueryDevConsole": {
+                        "Tags": [],
+                        "Tags-not": [],
+                        "Mask": [
+                            "struct pgn::cmp::cKeyActionMapper"
+                        ],
+                        "Mask-not": []
+                    }
+                }
+            },
+            {
+                "4294967295": {
+                    "Base": {
+                        "Name": "AlmightyLogger",
+                        "Desc": "log events from the game or the system"
+                    },
+                    "QueryLog": {
+                        "Tags": [],
+                        "Tags-not": [],
+                        "Mask": [
+                            "struct pgn::cmp::cLog"
+                        ],
+                        "Mask-not": []
+                    },
+                    "QueryLogListener": {
+                        "Tags": [
+                            "log:game_log"
+                        ],
+                        "Tags-not": [],
+                        "Mask": [],
+                        "Mask-not": []
+                    }
+                }
+            },
+            {
+                "4294967295": {
+                    "Base": {
+                        "Name": "Move 'n' stuff",
+                        "Desc": "moves stuff"
+                    },
+                    "QueryLog": {
+                        "Tags": [],
+                        "Tags-not": [],
+                        "Mask": [
+                            "struct pgn::cmp::cLog"
+                        ],
+                        "Mask-not": []
+                    }
+                }
+            }
+        ]
+    }
+}
