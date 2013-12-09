@@ -12,6 +12,8 @@
 #include <rl/ActionMgrRL.h>
 #include <rl/GameApp.h>
 
+#include <rl/components/MapSprite.h>
+
 namespace pgn
 {
 	void cGameApp::Init()
@@ -48,6 +50,15 @@ namespace pgn
 		// Create 2 entities, a rat and a human
 		ecs.mEntityMgr->InstantiateExemplar("rat_common");
 		ecs.mEntityMgr->InstantiateExemplar("human_common");
+
+		// For all the created entities, add to the scene graph. TODO: later, add them only to the related level
+		for (auto ed : ecs.mEntityMgr->GetEntityData())
+		{
+			std::shared_ptr<cComponent<cmp::cMapSprite>> ptr;
+			ed.second.mComponents.GetComponent(ptr);
+			if (ptr && ptr->mData.mSprite)
+				oxygine::getRoot()->addChild(ptr->mData.mSprite);
+		}
 
 		FILE * fp = fopen("ecs_export.txt", "wt");
 		rapidjson::StringBuffer strbuf;

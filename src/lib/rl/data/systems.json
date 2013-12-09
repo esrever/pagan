@@ -18,6 +18,14 @@
         }
     },
     {
+        "Type" : "pgn::sys::cMove",
+        "Data" : {
+            "Name" : "Move 'n' stuff",
+            "Desc" : "moves stuff",
+            "QueryLog" : ["pgn::cmp::cLog"]
+        }
+    },
+    {
         "Type" : "pgn::sys::cMapWindow",
         "Data" : {
             "Name" : "MapWindow",

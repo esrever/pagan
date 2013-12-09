@@ -12,7 +12,8 @@
             "PlayerMoveSW" : [89],
             "PlayerMoveSE" : [91],
             "PlayerIdle" : [93]
-        }
+        },
+        "pgn::cmp::cMapSprite" : "UNUSED:monsters:human"
     },
     {
         "archetype" : "common",

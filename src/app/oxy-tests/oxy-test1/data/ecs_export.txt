@@ -92,7 +92,7 @@
                             ]
                         },
                         null,
-                        "null",
+                        "UNUSED:monsters:human",
                         null,
                         {
                             "Speed": -4.31602e+008
@@ -450,7 +450,7 @@
                             ]
                         },
                         null,
-                        "null",
+                        "UNUSED:monsters:human",
                         null,
                         {
                             "Speed": -4.31602e+008
@@ -810,6 +810,22 @@
                         ],
                         "Tags-not": [],
                         "Mask": [],
+                        "Mask-not": []
+                    }
+                }
+            },
+            {
+                "4294967295": {
+                    "Base": {
+                        "Name": "Move 'n' stuff",
+                        "Desc": "moves stuff"
+                    },
+                    "QueryLog": {
+                        "Tags": [],
+                        "Tags-not": [],
+                        "Mask": [
+                            "struct pgn::cmp::cLog"
+                        ],
                         "Mask-not": []
                     }
                 }

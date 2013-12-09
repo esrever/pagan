@@ -12,7 +12,7 @@ namespace pgn
 		std::string tilename;
         //from_json( tilename, zRoot["tile"]);
 		from_json(tilename, zRoot);
-		zData.mSprite = GAME.GetResources().mTileLib.GetSprite(tilename);
+		zData.mSprite = GAME.GetResources().mTileLib.GetSprite(tilename)->clone();
         return true;
 	}
 
