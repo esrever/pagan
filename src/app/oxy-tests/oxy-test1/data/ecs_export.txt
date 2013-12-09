@@ -22,6 +22,7 @@
                 "Mask": [
                     "struct pgn::cmp::cDescription",
                     "struct pgn::cmp::cLevelPosition",
+                    "struct pgn::cmp::cMapSprite",
                     "struct pgn::cmp::cMovement"
                 ],
                 "Tags": []
@@ -48,6 +49,7 @@
                     "struct pgn::cmp::cDescription",
                     "struct pgn::cmp::cKeyActionMapper",
                     "struct pgn::cmp::cLevelPosition",
+                    "struct pgn::cmp::cMapSprite",
                     "struct pgn::cmp::cMovement"
                 ],
                 "Tags": [
@@ -58,6 +60,7 @@
                 "Name": "tile",
                 "Mask": [
                     "struct pgn::cmp::cDescription",
+                    "struct pgn::cmp::cMapSprite",
                     "struct pgn::cmp::cTileObstacle"
                 ],
                 "Tags": []
@@ -74,6 +77,7 @@
                         "struct pgn::cmp::cDescription",
                         "struct pgn::cmp::cKeyActionMapper",
                         "struct pgn::cmp::cLevelPosition",
+                        "struct pgn::cmp::cMapSprite",
                         "struct pgn::cmp::cMovement"
                     ],
                     "Components": [
@@ -88,8 +92,7 @@
                             ]
                         },
                         null,
-                        null,
-                        null,
+                        "null",
                         null,
                         {
                             "Speed": -4.31602e+008
@@ -107,6 +110,7 @@
                 "Data": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cMapSprite",
                         "struct pgn::cmp::cTileObstacle"
                     ],
                     "Components": [
@@ -117,8 +121,7 @@
                         null,
                         null,
                         null,
-                        null,
-                        null,
+                        "dungeon:floor:dirt0",
                         null,
                         null,
                         null,
@@ -143,7 +146,6 @@
                             "Verbose": "",
                             "Short": ""
                         },
-                        null,
                         null,
                         null,
                         null,
@@ -173,6 +175,7 @@
                     "Mask": [
                         "struct pgn::cmp::cDescription",
                         "struct pgn::cmp::cLevelPosition",
+                        "struct pgn::cmp::cMapSprite",
                         "struct pgn::cmp::cMovement"
                     ],
                     "Components": [
@@ -188,8 +191,7 @@
                             ]
                         },
                         null,
-                        null,
-                        null,
+                        "monsters:human",
                         null,
                         {
                             "Speed": 1
@@ -214,7 +216,6 @@
                             "Verbose": "",
                             "Short": ""
                         },
-                        null,
                         null,
                         null,
                         null,
@@ -272,6 +273,7 @@
                     "Mask": [
                         "struct pgn::cmp::cDescription",
                         "struct pgn::cmp::cLevelPosition",
+                        "struct pgn::cmp::cMapSprite",
                         "struct pgn::cmp::cMovement"
                     ],
                     "Components": [
@@ -287,8 +289,7 @@
                             ]
                         },
                         null,
-                        null,
-                        null,
+                        "monsters:animals:grey_rat",
                         null,
                         {
                             "Speed": 1
@@ -313,7 +314,6 @@
                             "Verbose": "",
                             "Short": ""
                         },
-                        null,
                         null,
                         null,
                         null,
@@ -379,7 +379,6 @@
                         },
                         null,
                         null,
-                        null,
                         {
                             "MaxLineNum": 100000
                         },
@@ -399,6 +398,7 @@
                 "Data": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cMapSprite",
                         "struct pgn::cmp::cTileObstacle"
                     ],
                     "Components": [
@@ -409,8 +409,7 @@
                         null,
                         null,
                         null,
-                        null,
-                        null,
+                        "dungeon:wall:brick_brown0",
                         null,
                         null,
                         null,
@@ -436,6 +435,7 @@
                         "struct pgn::cmp::cDescription",
                         "struct pgn::cmp::cKeyActionMapper",
                         "struct pgn::cmp::cLevelPosition",
+                        "struct pgn::cmp::cMapSprite",
                         "struct pgn::cmp::cMovement"
                     ],
                     "Components": [
@@ -450,8 +450,7 @@
                             ]
                         },
                         null,
-                        null,
-                        null,
+                        "null",
                         null,
                         {
                             "Speed": -4.31602e+008
@@ -475,7 +474,6 @@
                             "Verbose": "",
                             "Short": ""
                         },
-                        null,
                         null,
                         null,
                         {
@@ -503,7 +501,6 @@
                             "Verbose": "",
                             "Short": ""
                         },
-                        null,
                         null,
                         null,
                         null,
@@ -573,7 +570,6 @@
                         null,
                         null,
                         null,
-                        null,
                         {
                             "style": {
                                 "font": "system",
@@ -633,7 +629,6 @@
                         null,
                         null,
                         null,
-                        null,
                         {
                             "cell_dims": [
                                 24,
@@ -658,6 +653,7 @@
                     "Mask": [
                         "struct pgn::cmp::cDescription",
                         "struct pgn::cmp::cLevelPosition",
+                        "struct pgn::cmp::cMapSprite",
                         "struct pgn::cmp::cMovement"
                     ],
                     "Components": [
@@ -673,8 +669,7 @@
                             ]
                         },
                         null,
-                        null,
-                        null,
+                        "monsters:animals:grey_rat",
                         null,
                         {
                             "Speed": 1
@@ -692,6 +687,7 @@
                     "Mask": [
                         "struct pgn::cmp::cDescription",
                         "struct pgn::cmp::cLevelPosition",
+                        "struct pgn::cmp::cMapSprite",
                         "struct pgn::cmp::cMovement"
                     ],
                     "Components": [
@@ -707,8 +703,7 @@
                             ]
                         },
                         null,
-                        null,
-                        null,
+                        "monsters:human",
                         null,
                         {
                             "Speed": 1
@@ -725,7 +720,6 @@
             "struct pgn::cmp::cDescription",
             "struct pgn::cmp::cKeyActionMapper",
             "struct pgn::cmp::cLevelPosition",
-            "struct pgn::cmp::cLevelWindow",
             "struct pgn::cmp::cLog",
             "struct pgn::cmp::cMapSprite",
             "struct pgn::cmp::cMapWindow",
@@ -747,7 +741,7 @@
                 "Mask": [],
                 "Mask-not": []
             },
-            "3526230300": {
+            "2426457603": {
                 "Tags": [],
                 "Tags-not": [],
                 "Mask": [

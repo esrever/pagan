@@ -11,7 +11,7 @@ namespace pgn
         //! 
         struct cLevelPosition
         {
-            glm::ivec2 mPos;
+            glm::uvec2 mPos;
         };
         
     }

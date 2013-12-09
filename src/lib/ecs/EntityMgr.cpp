@@ -175,8 +175,10 @@ namespace pgn
 				for( const auto& x : components)
 				{
 					auto idx = GetComponentTypeIndex(x);
-					if(idx != 0xFFFFFFFF)
+					if (idx != 0xFFFFFFFF)
 						archetype.mMask.set(idx);
+					else
+						ECS.mLog->Err(boost::str(boost::format("Component type %s is not registered") % x.c_str()));
 				}
 				
 				mArchetypes[name] = archetype;
@@ -214,6 +216,8 @@ namespace pgn
 							sptr->from_json(mitr->value);
 							componentPtrs.push_back(sptr);
 						}
+						else
+							ECS.mLog->Err(boost::str(boost::format("Component type %s is not registered") % componentType.c_str()));
 					}
 				}
 

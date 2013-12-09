@@ -7,10 +7,7 @@
             "Verbose" : "fat, brown, hairy, vicious-looking rat"
             },
         "pgn::cmp::cMovement" : {"Speed" : 1},
-        "pgn::cmp::cAsciiRep" : {
-            "char" : "h",
-            "color" : "EEE9E9"
-            }
+        "pgn::cmp::cMapSprite" : "monsters:animals:grey_rat"
     },
     {
         "archetype" : "creature",
@@ -20,10 +17,7 @@
             "Verbose" : "tall, dark-haired man"
             },
         "pgn::cmp::cMovement" : {"Speed" : 1},
-        "pgn::cmp::cAsciiRep" : {
-            "char" : "h",
-            "color" : "EEE9E9"
-            }
+        "pgn::cmp::cMapSprite" : "monsters:human"
     },
     {
         "archetype" : "tile",
@@ -33,10 +27,7 @@
             "Verbose" : "dusty wall"
             },
         "pgn::cmp::cTileObstacle" : {"IsObstacle" : true},
-        "pgn::cmp::cAsciiRep" : {
-            "char" : "#",
-            "color" : "EEEEEE"
-            }
+        "pgn::cmp::cMapSprite" : "dungeon:wall:brick_brown0"
     },
     {
         "archetype" : "tile",
@@ -46,9 +37,6 @@
             "Verbose" : "dusty floor"
             },
         "pgn::cmp::cTileObstacle" : {"IsObstacle" : false},
-        "pgn::cmp::cAsciiRep" : {
-            "char" : ".",
-            "color" : "EEEEEE"
-            }
+        "pgn::cmp::cMapSprite" : "dungeon:floor:dirt0"
     }
 ]

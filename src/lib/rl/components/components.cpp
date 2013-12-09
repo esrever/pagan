@@ -3,7 +3,6 @@
 #include "Description.h"
 #include "KeyActionMapper.h"
 #include "LevelPosition.h"
-#include "LevelWindow.h"
 #include "Log.h"
 #include "MapSprite.h"
 #include "MapWindow.h"
@@ -20,7 +19,6 @@ namespace pgn
 		zMgr.AddComponentType<pgn::cmp::cDescription>();
 		zMgr.AddComponentType<pgn::cmp::cKeyActionMapper>();
 		zMgr.AddComponentType<pgn::cmp::cLevelPosition>();
-		zMgr.AddComponentType<pgn::cmp::cLevelWindow>();
 		zMgr.AddComponentType<pgn::cmp::cLog>();
 		zMgr.AddComponentType<pgn::cmp::cMapSprite>();
 		zMgr.AddComponentType<pgn::cmp::cMapWindow>();
