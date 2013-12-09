@@ -5,6 +5,7 @@
 #include "LevelPosition.h"
 #include "LevelWindow.h"
 #include "Log.h"
+#include "MapWindow.h"
 #include "Movement.h"
 #include "OutStream.h"
 #include "TextWindow.h"
@@ -20,6 +21,7 @@ namespace pgn
 		zMgr.AddComponentType<pgn::cmp::cLevelPosition>();
 		zMgr.AddComponentType<pgn::cmp::cLevelWindow>();
 		zMgr.AddComponentType<pgn::cmp::cLog>();
+		zMgr.AddComponentType<pgn::cmp::cMapWindow>();
 		zMgr.AddComponentType<pgn::cmp::cMovement>();
 		zMgr.AddComponentType<pgn::cmp::cOutStream>();
 		zMgr.AddComponentType<pgn::cmp::cTextWindow>();

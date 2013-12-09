@@ -13,7 +13,7 @@ namespace pgn
 	}
 
 	template< class T >
-	inline void to_json(oxygine::intrusive_ptr<T>& zData, const rapidjson::Value& zRoot)
+	inline void to_json(const oxygine::intrusive_ptr<T>& zData, JsonWriter& zRoot)
 	{
 		zData ? to_json(*zData, zRoot) : 0;
 	}

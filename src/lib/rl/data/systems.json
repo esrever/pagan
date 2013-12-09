@@ -19,9 +19,9 @@
     {
         "Type" : "pgn::sys::cMapRender",
         "Data" : {
-            "Name" : "LevelRender",
+            "Name" : "MapRender",
             "Desc" : "renders the current level",
-            "Query" : ["tag:CurrentLevel"]
+            "Query" : ["pgn::cmp::cMapWindow"]
         }
     },
     {

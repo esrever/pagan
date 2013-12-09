@@ -10,6 +10,7 @@ namespace pgn
 		auto log_ptr = std::make_shared<pgn::cLogStream>(pgn::cLogStream());
 		log_ptr->SetChannel(&std::cout);
 		mLog = std::dynamic_pointer_cast<pgn::cLogBase>(log_ptr);
+		cLogStream::Default() = *log_ptr;
 		mLog->SetName("ECS");
 	}
 

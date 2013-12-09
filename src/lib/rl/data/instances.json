@@ -1,6 +1,7 @@
 [
     {
         "archetype" : "pc",
+        "name" : "Hero",
         "pgn::cmp::cKeyActionMapper" : {
             "MoveW" : [52],
             "MoveE" : [54],
@@ -39,7 +40,9 @@
             },
             "text":{
                 "text" : "Hello\nworld"
-            }
+            },
+            "pos" : [768, 0],
+            "size" : [256,640]
         }
     },
     {
@@ -61,12 +64,21 @@
             },
             "text":{
                 "text" : "Hello\n log world"
-            }
+            },
+            "pos" : [0, 512],
+            "size" : [768, 128]
         }
     },
     {
         "archetype" : "common",
-        "name" : "game_map_win"
+        "name" : "game_map_win",
+        "pgn::cmp::cMapWindow" : {
+            "cell_dims" : [24,16],
+            "tile_dims" : [32,32],
+            "bg":{
+                "color" : "0x00000000"
+            }
+        }
     }
 ]
     

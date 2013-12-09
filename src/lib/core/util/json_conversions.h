@@ -3,6 +3,7 @@
 #include <cassert>
 #include <set>
 #include <map>
+#include <typeindex>
 
 #include <rapidjson/rapidjson.h>
 #include <rapidjson/document.h>
@@ -321,4 +322,12 @@ namespace pgn
 	JSON_GLM_ALL(ivec, int)
 	JSON_GLM_ALL(uvec, unsigned)
 	JSON_GLM_ALL(vec, float)
+
+
+	template<>
+	inline void to_json<std::type_index>(const std::type_index& zObj, JsonWriter& zRoot)
+	{
+			to_json(zObj.name(), zRoot);
+	}
+
 }
