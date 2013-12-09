@@ -4,7 +4,8 @@
         "Data" : {
             "Name" : "KeyboardHandle",
             "Desc" : "read keys and propagate to keyactionmap components. listens to keystate changes",
-            "Query" : ["pgn::cmp::cKeyActionMapper"]
+            "QueryKeyActionMapper" : ["pgn::cmp::cKeyActionMapper"],
+            "QueryDevConsole" : ["pgn::cmp::cKeyActionMapper"]
         }
     },
     {

@@ -3,15 +3,15 @@
         "archetype" : "pc",
         "name" : "Hero",
         "pgn::cmp::cKeyActionMapper" : {
-            "MoveW" : [52],
-            "MoveE" : [54],
-            "MoveN" : [56],
-            "MoveS" : [50],
-            "MoveNW" : [55],
-            "MoveNE" : [57],
-            "MoveSW" : [49],
-            "MoveSE" : [51],
-            "Idle" : [53]
+            "PlayerMoveW" : [92],
+            "PlayerMoveE" : [94],
+            "PlayerMoveN" : [96],
+            "PlayerMoveS" : [90],
+            "PlayerMoveNW" : [95],
+            "PlayerMoveNE" : [97],
+            "PlayerMoveSW" : [89],
+            "PlayerMoveSE" : [91],
+            "PlayerIdle" : [93]
         }
     },
     {

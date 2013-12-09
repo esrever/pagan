@@ -101,7 +101,7 @@ void cApplication::Init()
 				{
 					spSprite sprite = it->second;
 					mSprites.push_back(sprite);
-					getRoot()->addChild(sprite);
+					//getRoot()->addChild(sprite); // TODO: remove this
 					//set sprite initial position
 					Vector2 sprite_pos(j*mTileSize, i*mTileSize);
 					sprite->setPosition(sprite_pos);

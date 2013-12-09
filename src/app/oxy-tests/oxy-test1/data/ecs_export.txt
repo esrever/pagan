@@ -749,6 +749,14 @@
                 ],
                 "Mask-not": []
             },
+            "3918431051": {
+                "Tags": [],
+                "Tags-not": [],
+                "Mask": [
+                    "struct pgn::cmp::cKeyActionMapper"
+                ],
+                "Mask-not": []
+            },
             "alias": {
                 "Tags": [],
                 "Tags-not": [],
@@ -766,13 +774,17 @@
                     "QueryKeyActionMapper": {
                         "Tags": [],
                         "Tags-not": [],
-                        "Mask": [],
+                        "Mask": [
+                            "struct pgn::cmp::cKeyActionMapper"
+                        ],
                         "Mask-not": []
                     },
                     "QueryDevConsole": {
                         "Tags": [],
                         "Tags-not": [],
-                        "Mask": [],
+                        "Mask": [
+                            "struct pgn::cmp::cKeyActionMapper"
+                        ],
                         "Mask-not": []
                     }
                 }

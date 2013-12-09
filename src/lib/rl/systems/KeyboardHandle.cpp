@@ -32,6 +32,16 @@ namespace pgn
 				assert(ec != ECS.mEntityMgr->GetEntityData().end());
 				ec->second.mComponents.GetComponent(kam_ptr);
 				cmp::cKeyActionMapper& kam = kam_ptr->mData;
+				
+				// if pressed
+				if (state.mPressed)
+				{
+					// if action is found
+					auto it = kam.mActions.find(key);
+					if (it != kam.mActions.end())
+						// execute action!
+						it->second();
+				}
 			}
 
 			for (auto e : mQueryDevConsole->Entities())
