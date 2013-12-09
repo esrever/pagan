@@ -14,6 +14,8 @@ namespace pgn
         struct cTileLayout
         {
 			cArray2D<cEntity> mData;
+			cEntity mDefaultWall;
+			cEntity mDefaultFloor;
         };
         
     }

@@ -78,6 +78,16 @@
             "cell_dims" : [24,16],
             "tile_dims" : [32,32]
         }
+    },
+    {
+        "archetype" : "common",
+        "name" : "the_level",
+        "pgn::cmp::cTileLayout" : {
+            "def_wall" : "wall_common",
+            "def_floor" : "floor_common",
+            "dims" : [24, 16]
+        },
+        "tags" : ["CurrentLevel"]
     }
 ]
     

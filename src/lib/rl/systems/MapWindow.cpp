@@ -1,0 +1,87 @@
+#include "MapWindow.h"
+
+#include <ecs/Event.h>
+#include <ecs/Component.h>
+#include <ecs/EntityData.h>
+
+#include <rl/components/MapWindow.h>
+#include <rl/components/TileLayout.h>
+#include <rl/components/MapSprite.h>
+#include <rl/components/LevelPosition.h>
+
+namespace pgn
+{
+	namespace sys
+	{
+		cMapWindow::cMapWindow()
+		:mOnLevelLoaded(Simple::slot(this, &cMapWindow::OnLevelLoaded))
+		,mOnLevelUnload(Simple::slot(this, &cMapWindow::OnLevelUnload))
+		{
+
+		}
+
+		void cMapWindow::OnLevelLoaded(cEntityWithData ed)
+		{ 
+			std::shared_ptr< cComponent<cmp::cTileLayout>> map_ptr;
+			ed->second.mComponents.GetComponent(map_ptr);
+			auto& curmap = map_ptr->mData;
+			auto& mapdata = curmap.mData;
+
+			for (auto e : mQueryMapWindow->Entities())
+			{
+				const auto& edmw = ECS.mEntityMgr->GetEntityData(e);
+				std::shared_ptr< cComponent<cmp::cMapWindow>> mwin_ptr;
+				edmw.mComponents.GetComponent(mwin_ptr);
+				auto & mwin = mwin_ptr->mData;	
+
+				
+				for (unsigned i = 0; i < mapdata.Height();++i)
+					for (unsigned j = 0; j < mapdata.Width(); ++j)
+					{
+						// get entity from 2d map
+						auto etile = mapdata(j, i);
+						const auto& tile = ECS.mEntityMgr->GetEntityData(etile);
+
+						// get sprite from entity
+						std::shared_ptr< cComponent<cmp::cMapSprite>> sprite_ptr;
+						tile.mComponents.GetComponent(sprite_ptr);
+						
+						// assign sprite
+						mwin.Tile(j, i)->setAnimFrame(sprite_ptr->mData.mSprite->getAnimFrame());
+						mwin.Tile(j, i)->setName(sprite_ptr->mData.mSprite->getName());
+					}
+			}
+
+			// TODO: Get player and position him in center of map. Do that to sprite too?
+		}
+
+		void cMapWindow::OnLevelUnload(cEntityWithData ed)
+		{
+			for (auto e : mQueryMapWindow->Entities())
+			{
+			}
+		}
+
+		void cMapWindow::Process()
+		{
+			
+		}
+
+		bool cMapWindow::from_json(const rapidjson::Value& zRoot)
+		{
+			cSystemBase::from_json(zRoot);
+
+			auto b0 = LoadQuery(mQueryMapWindow, zRoot, "QueryMapWindow");
+			return b0 ;
+		}
+
+		void cMapWindow::to_json(JsonWriter& zRoot) const
+		{
+			zRoot.StartObject();
+			zRoot.String("Base");
+			cSystemBase::to_json(zRoot);
+			JsonWriter_AddMember("QueryMapWindow", mQueryMapWindow, zRoot);
+			zRoot.EndObject();
+		}
+	}
+}

@@ -30,7 +30,7 @@
         "Data" : {
             "Name" : "MapWindow",
             "Desc" : "updates / handles events",
-            "Query" : ["pgn::cmp::cMapWindow"]
+            "QueryMapWindow" : ["pgn::cmp::cMapWindow"]
         }
     },
     {

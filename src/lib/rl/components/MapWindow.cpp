@@ -25,6 +25,7 @@ namespace pgn
 				tile->setPosition(float(j*zData.mTileDims.x), float(i*zData.mTileDims.y));
 				tile->attachTo(&zData);
 			}
+		oxygine::getRoot()->addChild(&zData); // TODO: on game state change
         return true;
 	}
 

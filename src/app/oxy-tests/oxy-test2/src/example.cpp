@@ -1,6 +1,7 @@
 #include "example.h"
 
 #include <rl/GameApp.h>
+#include <rl/events/events.h>
 
 
 using namespace oxygine;

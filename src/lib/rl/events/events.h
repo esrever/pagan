@@ -22,6 +22,8 @@ namespace pgn
 			TILE_IN_LEVEL_CHANGED = eBasicECS::num,
 			LEVEL_CREATED,
 			LEVEL_DESTROY,
+			LEVEL_LOADED,
+			LEVEL_UNLOAD,
 			EXIT_APPLICATION,
 			LOG,
 			ACTION_IDLE,
@@ -31,6 +33,8 @@ namespace pgn
 		typedef cEvent<size_t(eRL::TILE_IN_LEVEL_CHANGED), cEntityWithData> cTileInLevelChanged;
 		typedef cEvent<size_t(eRL::LEVEL_CREATED), cEntityWithData> cLevelCreated;
 		typedef cEvent<size_t(eRL::LEVEL_DESTROY), cEntityWithData> cLevelDestroy;
+		typedef cEvent<size_t(eRL::LEVEL_LOADED), cEntityWithData> cLevelLoaded;
+		typedef cEvent<size_t(eRL::LEVEL_UNLOAD), cEntityWithData> cLevelUnload;
 		typedef cEvent<size_t(eRL::EXIT_APPLICATION)> cExitApplication;
 		typedef cEvent<size_t(eRL::LOG), const std::string&, const std::string&> cLog;
 		

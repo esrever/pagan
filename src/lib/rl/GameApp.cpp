@@ -57,8 +57,16 @@ namespace pgn
 			std::shared_ptr<cComponent<cmp::cMapSprite>> ptr;
 			ed.second.mComponents.GetComponent(ptr);
 			if (ptr && ptr->mData.mSprite)
+			{
 				oxygine::getRoot()->addChild(ptr->mData.mSprite);
+				ptr->mData.mSprite->setPosition(-32, -32); // TODO: out of the field of view
+			}
 		}
+
+		// Now do the level loading stuff
+		auto& lvlEntity = *ECS.mEntityMgr->TaggedEntities().find("CurrentLevel")->second.begin();
+		auto ed = ECS.mEntityMgr->GetEntityData().find(lvlEntity);
+		pgn::evt::cLevelLoaded::mSig.emit(ed);
 
 		FILE * fp = fopen("ecs_export.txt", "wt");
 		rapidjson::StringBuffer strbuf;
