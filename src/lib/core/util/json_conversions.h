@@ -76,6 +76,14 @@ namespace pgn
 
 	//! type to json
 	template <class T>
+	inline void to_json(const T zObj[], JsonWriter& zRoot)
+	{
+		cLogStream::Default().Wrn(boost::str(boost::format("Type %s does not implement to_json(ptr)")% typeid(T).name()));
+		//zObj.to_json(zRoot);
+	}
+
+	//! type to json
+	template <class T>
 	inline void to_json(const T *& zObj, JsonWriter& zRoot)
 	{
 		cLogStream::Default().Wrn(boost::str(boost::format("Type %s does not implement to_json(ptr)")% typeid(T).name()));
@@ -122,6 +130,12 @@ namespace pgn
 
 	template <>
 	inline void to_json<char>(const char *& zObj, JsonWriter& zRoot)
+	{
+		zRoot.String(zObj);
+	}
+
+	template <>
+	inline void to_json<char>(const char zObj[], JsonWriter& zRoot)
 	{
 		zRoot.String(zObj);
 	}
