@@ -48,9 +48,10 @@ namespace pgn
 		//###############################
 		//# Demo
 		// Create 2 entities, a rat and a human
+		
 		ecs.mEntityMgr->InstantiateExemplar("rat_common");
 		ecs.mEntityMgr->InstantiateExemplar("human_common");
-
+		
 		// For all the created entities, add to the scene graph. TODO: later, add them only to the related level
 		for (auto ed : ecs.mEntityMgr->GetEntityData())
 		{

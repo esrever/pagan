@@ -2,6 +2,12 @@
 
 namespace pgn
 {
+	void cGameResources::Destroy()
+	{
+		mTileLib.Destroy();
+		mFontLib.Destroy();
+	}
+
 	template<>
 	bool from_json< cGameResources >(cGameResources & zData, const rapidjson::Value& zRoot)
 	{

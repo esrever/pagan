@@ -30,6 +30,12 @@ namespace pgn
 		}
 	}
 
+	void cTileLib::Destroy()
+	{
+		mSprites.clear();
+		mTileRes.free();
+	}
+
 	spSprite cTileLib::GetSprite(const std::string& name) const
 	{
 		auto it = mSprites.find(name);

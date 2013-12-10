@@ -11,6 +11,7 @@ namespace pgn
 	public:
 		oxygine::Font * Get(const std::string& zFontName) const; 
 		void Init(const std::string& zResFile);
+		void Destroy();
 	private:
 		DECL_JSON_PGN_FRIEND
 

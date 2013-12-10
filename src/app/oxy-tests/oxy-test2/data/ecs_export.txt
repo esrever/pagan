@@ -394,6 +394,34 @@
                     ]
                 }
             },
+            "the_level": {
+                "Name": "the_level",
+                "Tags": [
+                    "CurrentLevel"
+                ],
+                "Data": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cTileLayout"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {},
+                        null
+                    ]
+                }
+            },
             "wall_common": {
                 "Name": "wall_common",
                 "Tags": [],
@@ -425,6 +453,9 @@
             }
         },
         "Tagged Entities": {
+            "CurrentLevel": [
+                7
+            ],
             "Player": [
                 0
             ],
@@ -653,6 +684,87 @@
                 }
             },
             "5": {
+                "Name": "wall_common",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cMapSprite",
+                        "struct pgn::cmp::cTileObstacle"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "dusty wall",
+                            "Short": "wall"
+                        },
+                        null,
+                        null,
+                        null,
+                        "dungeon:wall:brick_brown0",
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "IsObstacle": true
+                        }
+                    ]
+                }
+            },
+            "6": {
+                "Name": "floor_common",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cMapSprite",
+                        "struct pgn::cmp::cTileObstacle"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "dusty floor",
+                            "Short": "floor"
+                        },
+                        null,
+                        null,
+                        null,
+                        "dungeon:floor:dirt0",
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "IsObstacle": false
+                        }
+                    ]
+                }
+            },
+            "7": {
+                "Name": "the_level",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cTileLayout"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {},
+                        null
+                    ]
+                }
+            },
+            "8": {
                 "Name": "rat_common",
                 "Components": {
                     "Mask": [
@@ -686,7 +798,7 @@
                     ]
                 }
             },
-            "6": {
+            "9": {
                 "Name": "human_common",
                 "Components": {
                     "Mask": [
@@ -761,6 +873,14 @@
                 "Mask": [],
                 "Mask-not": []
             },
+            "742208814": {
+                "Tags": [],
+                "Tags-not": [],
+                "Mask": [
+                    "struct pgn::cmp::cMapWindow"
+                ],
+                "Mask-not": []
+            },
             "alias": {
                 "Tags": [],
                 "Tags-not": [],
@@ -828,6 +948,22 @@
                         "Tags-not": [],
                         "Mask": [
                             "struct pgn::cmp::cLog"
+                        ],
+                        "Mask-not": []
+                    }
+                }
+            },
+            {
+                "4294967295": {
+                    "Base": {
+                        "Name": "MapWindow",
+                        "Desc": "updates / handles events"
+                    },
+                    "QueryMapWindow": {
+                        "Tags": [],
+                        "Tags-not": [],
+                        "Mask": [
+                            "struct pgn::cmp::cMapWindow"
                         ],
                         "Mask-not": []
                     }

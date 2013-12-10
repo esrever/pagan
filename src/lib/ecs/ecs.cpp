@@ -18,6 +18,7 @@ namespace pgn
 	{
 		mSystemMgr.reset();
 		mEntityMgr.reset();
+		mActionMgr.reset();
 	}
 
 	bool cECS::from_json(const rapidjson::Value& zRoot)

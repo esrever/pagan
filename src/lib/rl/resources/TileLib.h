@@ -26,6 +26,7 @@ namespace pgn
 
 		// Load xml file with all tiles and descriptors
 		void Init(const std::string& zResName, const std::string& zDescName);
+		void Destroy();
 
 		const SpriteMap& GetMap() const { return mSprites; }
 		oxygine::spSprite GetSprite(const std::string& name) const;

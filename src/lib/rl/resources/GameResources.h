@@ -11,6 +11,8 @@ namespace pgn
 	{
 		cTileLib mTileLib;
 		cFontLib mFontLib;
+
+		void Destroy();
 	};
 
 	DECL_JSON_PGN(cGameResources)

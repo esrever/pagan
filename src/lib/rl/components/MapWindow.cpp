@@ -13,6 +13,8 @@ namespace pgn
 		from_json(zData.mCellDims, zRoot["cell_dims"]);
 		from_json(zData.mTileDims, zRoot["tile_dims"]);
 
+		zData.mTileWin = new oxygine::Actor;
+
 		size_t tilenum = zData.mCellDims.x*zData.mCellDims.y;
 		zData.mTiles.resize(tilenum);
 		for (unsigned i = 0; i < zData.mCellDims.y;++i)
@@ -23,9 +25,9 @@ namespace pgn
 				tile = new Sprite;
 				tile->setSize(float(zData.mTileDims.x), float(zData.mTileDims.y));
 				tile->setPosition(float(j*zData.mTileDims.x), float(i*zData.mTileDims.y));
-				tile->attachTo(&zData);
+				tile->attachTo(zData.mTileWin);
 			}
-		oxygine::getRoot()->addChild(&zData); // TODO: on game state change
+		oxygine::getRoot()->addChild(zData.mTileWin); // TODO: on game state change
         return true;
 	}
 

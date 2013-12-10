@@ -14,6 +14,11 @@ namespace pgn
 	{
 		mFontResources.loadXML(zResFile);
 	}
+	
+	void cFontLib::Destroy()
+	{
+		mFontResources.free();
+	}
 
 	template<>
 	bool from_json< cFontLib >(cFontLib & zData, const rapidjson::Value& zRoot)

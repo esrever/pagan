@@ -14,7 +14,7 @@ namespace pgn
     {
     
         //! 
-        struct cMapWindow : public oxygine::Actor
+        struct cMapWindow
         {
 		public:
 
@@ -26,6 +26,7 @@ namespace pgn
 			std::vector<oxygine::spSprite> mTiles;
 			glm::uvec2 mCellDims;
 			glm::uvec2 mTileDims;
+			oxygine::spActor mTileWin;
 			
         };
         
