@@ -16,14 +16,16 @@ namespace pgn
 			to compress: ( bitval - numTimes)
 		*/
 		glm::uvec2 dims;
-		std::string dw, df;
+		std::string dw, df,dd;
 		from_json(dims, zRoot["dims"]);
 		from_json(dw, zRoot["def_wall"]);
 		from_json(df, zRoot["def_floor"]);
+		from_json(dd, zRoot["def_door"]);
 
 		auto& ecs = ECS;
 		zData.mDefaultWall = ecs.mEntityMgr->GetEntityData().find( ecs.mEntityMgr->InstantiateExemplar(dw));
 		zData.mDefaultFloor = ecs.mEntityMgr->GetEntityData().find(ecs.mEntityMgr->InstantiateExemplar(df));
+		zData.mDefaultDoor = ecs.mEntityMgr->GetEntityData().find(ecs.mEntityMgr->InstantiateExemplar(dd));
 
 		zData.mData.Resize(dims.x, dims.y);
 		for (unsigned i = 0; i < dims.y;++i)

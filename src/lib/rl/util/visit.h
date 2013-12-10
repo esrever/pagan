@@ -6,6 +6,7 @@
 namespace pgn
 {
 	//--------------------------------------------------------------
+	// Special visitor for cEntityData arrays, notably for the layout
 	template<class C, class Visitor>
 	void VisitArrayComponent(cArray2D<cEntityWithData>& data, Visitor& v)
 	{
@@ -15,9 +16,8 @@ namespace pgn
 			{
 				std::shared_ptr<C> ptr;
 				data(j, i)->second.mComponents.GetComponent(ptr);
-				v.visit(j, i, ptr->mData);
+				v.visit(j, i, ptr);
 			}
 		}
-		
 	}
 }

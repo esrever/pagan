@@ -5,17 +5,20 @@
 
 #include <ecs/EntityData.h>
 
+#include <rl/util/visit.h>
+
 namespace pgn
 {
     namespace cmp
     {
-    
         //! 
         struct cTileLayout
         {
 			cArray2D<cEntityWithData> mData;
+			
 			cEntityWithData mDefaultWall;
 			cEntityWithData mDefaultFloor;
+			cEntityWithData mDefaultDoor;
         };
         
     }
