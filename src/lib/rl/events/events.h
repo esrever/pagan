@@ -28,6 +28,10 @@ namespace pgn
 			LOG,
 			ACTION_IDLE,
 			ACTION_MOVE_ADJ,
+			ACTION_DOOR_OPEN,
+			ACTION_DOOR_CLOSE,
+			DOOR_OPENED,
+			DOOR_CLOSED
 		};
 
 		typedef cEvent<size_t(eRL::TILE_IN_LEVEL_CHANGED), cEntityWithData> cTileInLevelChanged;
@@ -38,7 +42,11 @@ namespace pgn
 		typedef cEvent<size_t(eRL::EXIT_APPLICATION)> cExitApplication;
 		typedef cEvent<size_t(eRL::LOG), const std::string&, const std::string&> cLog;
 		
-		typedef cEvent<size_t(eRL::ACTION_IDLE), cEntity> cActionIdle;
-		typedef cEvent<size_t(eRL::ACTION_MOVE_ADJ), cEntity, const glm::ivec2&> cActionMoveAdj;
+		typedef cEvent<size_t(eRL::ACTION_IDLE), cEntityWithData> cActionIdle;
+		typedef cEvent<size_t(eRL::ACTION_MOVE_ADJ), cEntityWithData, const glm::ivec2&> cActionMoveAdj;
+		typedef cEvent<size_t(eRL::ACTION_DOOR_OPEN), cEntityWithData, cEntityWithData> cActionDoorOpen;
+		typedef cEvent<size_t(eRL::ACTION_DOOR_CLOSE), cEntityWithData, cEntityWithData> cActionDoorClose;
+		typedef cEvent<size_t(eRL::DOOR_OPENED), cEntityWithData> cDoorOpened;
+		typedef cEvent<size_t(eRL::DOOR_CLOSED), cEntityWithData> cDoorClosed;
 	}
 }

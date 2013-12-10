@@ -21,18 +21,17 @@ namespace pgn
 
 		}
 
-		void cMove::OnActionMoveAdj(cEntity e, const glm::ivec2& vin)
+		void cMove::OnActionMoveAdj(cEntityWithData ed, const glm::ivec2& vin)
 		{ 
 			glm::ivec2 v = vin;
 
 			// Get entity data
-			auto ed = ECS.mEntityMgr->GetEntityData(e);
 			std::shared_ptr< cComponent<cmp::cMovement>> move_ptr;
 			std::shared_ptr< cComponent<cmp::cMapSprite>> sprite_ptr;
 			std::shared_ptr< cComponent<cmp::cLevelPosition>> pos_ptr;
-			ed.mComponents.GetComponent(move_ptr);
-			ed.mComponents.GetComponent(sprite_ptr);
-			ed.mComponents.GetComponent(pos_ptr);
+			ed->second.mComponents.GetComponent(move_ptr);
+			ed->second.mComponents.GetComponent(sprite_ptr);
+			ed->second.mComponents.GetComponent(pos_ptr);
 
 			// TODO: apply logic to check if we can move, apply movepoint reduction etc.
 
@@ -43,14 +42,13 @@ namespace pgn
 
 			// Log
 			int udir = v.x + 1 + (v.y + 1) * 3;
-			evt::cLog::mSig.emit("game_log", boost::str(boost::format("%s moved %s") % ed.mName.c_str()%dir2text_full[udir]));
+			evt::cLog::mSig.emit("game_log", boost::str(boost::format("%s moved %s") % ed->second.mName.c_str() % dir2text_full[udir]));
 
 		}
 
-		void cMove::OnActionIdle(cEntity e)
+		void cMove::OnActionIdle(cEntityWithData ed)
 		{
-			auto ed = ECS.mEntityMgr->GetEntityData(e);
-			evt::cLog::mSig.emit("game_log", boost::str(boost::format("%s moved %s") % ed.mName.c_str() % dir2text_full[4]));
+			evt::cLog::mSig.emit("game_log", boost::str(boost::format("%s moved %s") % ed->second.mName.c_str() % dir2text_full[4]));
 		}
 
 		void cMove::Process()

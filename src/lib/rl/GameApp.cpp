@@ -59,7 +59,7 @@ namespace pgn
 			ed.second.mComponents.GetComponent(ptr);
 			if (ptr && ptr->mData.mSprite)
 			{
-				oxygine::getRoot()->addChild(ptr->mData.mSprite);
+				oxygine::getRoot()->addChild(ptr->mData.mSprite); // This affects only the hero! The bg tiles are already in
 				ptr->mData.mSprite->setPosition(-32, -32); // TODO: out of the field of view
 			}
 		}

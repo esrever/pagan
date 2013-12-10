@@ -45,9 +45,9 @@ namespace pgn
 	void cEntityMgr::Tag(cEntity zEntity, const std::string& zTag)
 	{
 		if (zTag == "Player")
-			mGlobals.mPC = zEntity;
+			mGlobals.mPC = GetEntityData().find(zEntity);
 		else if (zTag == "World")
-			mGlobals.mWorld = zEntity;
+			mGlobals.mWorld = GetEntityData().find(zEntity);
 		mTaggedEntities[zTag].insert(zEntity);
 		evt::cEntityTagged::mSig.emit(zEntity, zTag);
 	}

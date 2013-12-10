@@ -1,12 +1,13 @@
 #pragma once
 
 #include "Entity.h"
+#include "EntityData.h"
 
 namespace pgn
 {
 	struct cEntityGlobals
 	{
-		cEntity mPC;
-		cEntity mWorld;
+		cEntityWithData mPC;
+		cEntityWithData mWorld;
 	};
 }

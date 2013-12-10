@@ -39,6 +39,7 @@ set(HEADER_FILES
     GameApp.h
     util/FormatString.h
     util/json_conversions.h
+    util/visit.h
     io/GameIO.h
     io/Keyboard.h
     resources/GameResources.h

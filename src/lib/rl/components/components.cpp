@@ -1,7 +1,9 @@
 #include "components.h"
 #include "ecs/EntityMgr.h"
 #include "Description.h"
+#include "Door.h"
 #include "KeyActionMapper.h"
+#include "Level.h"
 #include "LevelPosition.h"
 #include "Log.h"
 #include "MapSprite.h"
@@ -17,7 +19,9 @@ namespace pgn
     void RegisterAllComponents(cEntityMgr& zMgr) 
 	{
 		zMgr.AddComponentType<pgn::cmp::cDescription>();
+		zMgr.AddComponentType<pgn::cmp::cDoor>();
 		zMgr.AddComponentType<pgn::cmp::cKeyActionMapper>();
+		zMgr.AddComponentType<pgn::cmp::cLevel>();
 		zMgr.AddComponentType<pgn::cmp::cLevelPosition>();
 		zMgr.AddComponentType<pgn::cmp::cLog>();
 		zMgr.AddComponentType<pgn::cmp::cMapSprite>();

@@ -39,17 +39,18 @@ namespace pgn
 					for (unsigned j = 0; j < mapdata.Width(); ++j)
 					{
 						// get entity from 2d map
-						auto etile = mapdata(j, i);
-						const auto& tile = ECS.mEntityMgr->GetEntityData(etile);
+						auto tile = mapdata(j, i);
 
 						// get sprite from entity
 						std::shared_ptr< cComponent<cmp::cMapSprite>> sprite_ptr;
-						tile.mComponents.GetComponent(sprite_ptr);
+						tile->second.mComponents.GetComponent(sprite_ptr);
 						
 						// assign sprite
 						mwin.Tile(j, i)->setAnimFrame(sprite_ptr->mData.mSprite->getAnimFrame());
 						mwin.Tile(j, i)->setName(sprite_ptr->mData.mSprite->getName());
 					}
+
+				// TODO: attach all tiles to mapwindow actor or root.
 			}
 
 			// TODO: Get player and position him in center of map. Do that to sprite too?

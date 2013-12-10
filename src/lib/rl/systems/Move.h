@@ -26,8 +26,8 @@ namespace pgn
 			cEventHandler<evt::cActionIdle> mOnActionIdle;
 		private:
 			//! Receiving functions
-			void OnActionIdle(cEntity);
-			void OnActionMoveAdj(cEntity, const glm::ivec2&);
+			void OnActionIdle(cEntityWithData);
+			void OnActionMoveAdj(cEntityWithData, const glm::ivec2&);
 
 		private:
 

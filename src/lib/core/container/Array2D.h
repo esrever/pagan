@@ -31,4 +31,13 @@ namespace pgn
 		size_t		   mWidth;
 		std::vector<T> mData;
 	};
+
+	//--------------------------------------------------------------
+	template<class T, class Visitor>
+	void VisitArray(T& data, Visitor& v)
+	{ 
+		for (auto i = 0; i < data.Height();++i)
+			for (auto j = 0; j < data.Width(); ++i)
+				v.visit(j, i, data(j, i));
+	}
 }

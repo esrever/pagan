@@ -3,7 +3,7 @@
 #include <core/container/Array2D.h>
 #include <core/util/json_conversions.h>
 
-#include <ecs/Entity.h>
+#include <ecs/EntityData.h>
 
 namespace pgn
 {
@@ -13,9 +13,9 @@ namespace pgn
         //! 
         struct cTileLayout
         {
-			cArray2D<cEntity> mData;
-			cEntity mDefaultWall;
-			cEntity mDefaultFloor;
+			cArray2D<cEntityWithData> mData;
+			cEntityWithData mDefaultWall;
+			cEntityWithData mDefaultFloor;
         };
         
     }

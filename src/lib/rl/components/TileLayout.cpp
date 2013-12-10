@@ -22,8 +22,8 @@ namespace pgn
 		from_json(df, zRoot["def_floor"]);
 
 		auto& ecs = ECS;
-		zData.mDefaultWall = ecs.mEntityMgr->InstantiateExemplar(dw);
-		zData.mDefaultFloor = ecs.mEntityMgr->InstantiateExemplar(df);
+		zData.mDefaultWall = ecs.mEntityMgr->GetEntityData().find( ecs.mEntityMgr->InstantiateExemplar(dw));
+		zData.mDefaultFloor = ecs.mEntityMgr->GetEntityData().find(ecs.mEntityMgr->InstantiateExemplar(df));
 
 		zData.mData.Resize(dims.x, dims.y);
 		for (unsigned i = 0; i < dims.y;++i)
