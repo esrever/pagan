@@ -49,6 +49,11 @@ namespace pgn
 	{
 	public:
 
+		cEventHandler(const cEventHandler& eh)
+		{
+			mId = eh.mId;
+		}
+
 		cEventHandler&  operator=   (const cEventHandler& eh)
 		{
 			E::mSig -= mId;

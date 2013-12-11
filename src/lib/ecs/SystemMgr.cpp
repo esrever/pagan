@@ -6,6 +6,7 @@
 #include "ecs.h"
 #include "EntityMgr.h"
 #include "SystemBase.h"
+#include "EventHandlerQuery.h"
 
 namespace pgn
 {
@@ -30,6 +31,12 @@ namespace pgn
 		{
 			auto pdoc = file_to_json(ECS.GetDataPath() + s);
 			ImportQueries(pdoc.get());
+		}
+		read_json_vector(fnames, zRoot["EventHandlersFile"]);
+		for (auto s : fnames)
+		{
+			auto pdoc = file_to_json(ECS.GetDataPath() + s);
+			ImportEventHandlers(pdoc.get());
 		}
 		read_json_vector(fnames, zRoot["SystemsFile"]);
 		for(auto s : fnames)
@@ -99,6 +106,41 @@ namespace pgn
 					mQueries.insert(std::pair<std::string, cQueryExpressionSptr>(qname.GetString(), qexp));
 			}
 		}
+	}
+
+	//----------------------------------------------------------------
+	void cSystemMgr::ImportEventHandlers(const rapidjson::Document * zDoc)
+	{
+		if (!zDoc) return;
+		if (zDoc->IsArray())
+		for (auto itr = zDoc->Begin(); itr != zDoc->End(); ++itr)
+		{
+			// get the object
+			const auto& obj = *itr;
+			assert(obj.IsObject());
+
+			// Get evt name
+			const auto& s_evt = obj["Event"].GetString();
+
+			// Get query pointer
+			auto itr2 = mAllEventHandlerQueries.find(s_evt);
+			assert(itr2 != mAllEventHandlerQueries.end());
+
+			// Copy by value
+			auto ehq = itr2->second->clone();
+			
+			// Get query
+			auto query = std::shared_ptr< cQueryExpression>(new cQueryExpression());
+			if (pgn::from_json(*query, obj["Query"]))
+			{
+				ECS.mSystemMgr->AddQuery(to_string(query->Hash()), query);
+				
+				ehq->SetQuery(query);
+				mEventHandlerQueries.push_back(ehq);
+			}
+		}
+		else
+			ECS.mLog->Wrn("cSystemMgr::from_json: \"Systems\" array not found");
 	}
 
 	//----------------------------------------------------------------

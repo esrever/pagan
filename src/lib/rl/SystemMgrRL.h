@@ -10,6 +10,7 @@ namespace pgn
 	public:
 		cSystemMgrRL();
 		virtual void RegisterSystemTypes();
+		virtual void RegisterEventHandlers();
 		virtual bool UpdateFrame();
 
 		void OnExitApplication();

@@ -17,7 +17,8 @@
         }, 
         "SystemMgr" : {
             "QueriesFile" : ["queries.json"],
-            "SystemsFile" : ["systems.json"]
+            "SystemsFile" : ["systems.json"],
+            "EventHandlersFile" : ["event_handlers.json"]
         }
     }
 }

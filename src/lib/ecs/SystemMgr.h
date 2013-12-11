@@ -10,6 +10,7 @@
 namespace pgn
 {
 	class cSystemBase;
+	class cEventHandlerQueryBase;
 	typedef std::function< std::shared_ptr<cSystemBase> (void) > system_creator_fun;
 
 	class cSystemMgr
@@ -18,7 +19,6 @@ namespace pgn
 			typedef std::map<std::string, cQueryExpressionSptr> QueryMap;
 			typedef std::multimap<size_t, std::shared_ptr<cSystemBase> > SystemMap;
 		public:
-			virtual const std::string ReceiverName() const {return "SystemMgr";}
 			virtual ~cSystemMgr(){}
 
 			//! System add/remove
@@ -36,12 +36,14 @@ namespace pgn
 			bool from_json(const rapidjson::Value& zRoot);
 			void ImportSystems(const rapidjson::Document * zDoc);
 			void ImportQueries(const rapidjson::Document * zDoc);
+			void ImportEventHandlers(const rapidjson::Document * zDoc);
 
 			//! pointer generator
 			std::shared_ptr<cSystemBase> Create(const std::string& zName) const;
 
 			//! System type related
 			virtual void RegisterSystemTypes(){}
+			virtual void RegisterEventHandlers(){}
 			template<class T>
 			void AddSystemType();
 			
@@ -53,8 +55,12 @@ namespace pgn
 			QueryMap	mQueries;
 			SystemMap	mSystems;
 
+			//! Event handlers
+			std::vector<std::shared_ptr<cEventHandlerQueryBase>> mEventHandlerQueries;
+
 			//! All system types
 			std::map< std::string, system_creator_fun> mSystemCreators;
+			std::map<std::string, std::shared_ptr<cEventHandlerQueryBase>> mAllEventHandlerQueries;
 	};
 
 	//---------------------------------------------------------------

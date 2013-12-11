@@ -38,7 +38,7 @@ namespace pgn
 			// TODO: temp!
 			pos_ptr->mData.mPos += v;
 			auto curspritepos = sprite_ptr->mData.mSprite->getPosition();
-			sprite_ptr->mData.mSprite->setPosition(curspritepos + oxygine::Vector2(32 * v.x, -32 * v.y));
+			sprite_ptr->mData.mSprite->setPosition(curspritepos + oxygine::Vector2(32.0f * v.x, -32.0f * v.y));
 
 			// Log
 			int udir = v.x + 1 + (v.y + 1) * 3;

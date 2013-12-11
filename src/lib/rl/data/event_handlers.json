@@ -1,0 +1,6 @@
+[    
+    {
+        "Query" : ["pgn::cmp::cMapWindow"],
+        "Event" : "ActionMoveAdj"
+    }
+]

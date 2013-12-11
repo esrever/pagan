@@ -30,6 +30,7 @@ set(SOURCE_FILES
     resources/GameResources.cpp
     resources/FontLib.cpp
     resources/TileLib.cpp
+    events/evt_register.cpp
 )
 
 set(HEADER_FILES

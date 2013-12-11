@@ -1,96 +1,78 @@
-import sys
+events = [ ("level created",        ["cEntityWithData"]                                     ,False ) ,
+           ("level destroy",        ["cEntityWithData"]                                     ) ,
+           ("level loaded",         ["cEntityWithData"]                                     ) ,
+           ("level unload",         ["cEntityWithData"]                                     ) ,
+           ("exit application",     ["void"]                                                ) ,
+           ("log",                  ["const std::string&", "const std::string&"]            ) ,
+           ("action idle",          ["cEntityWithData"]                                     ) ,
+           ("action move adj",      ["cEntityWithData", "const glm::ivec2&"]                ) ,
+           ("action door open",     ["cEntityWithData","cEntityWithData"]                   ) ,
+           ("action door close",    ["cEntityWithData","cEntityWithData"]                   ) ,
+           ("door opened",          ["cEntityWithData"]                                     ) ,
+           ("door closed",          ["cEntityWithData"]                                     ) ,
+           ("tile in level changed",["cEntityWithData"]                                     ) ,
+           ]
 
-"""
-gen_component.py class=TileObstacle doxy="Can we move through this or not?" var=bool,mIsObstacle,IsObstacle
-"""
+typedefs = []
+evthandler_vars = []
+evthandler_funcs = []
 
-srcdict = dict();
+def write_to_file( fname, text):
+    fp = open(fname,'w')
+    fp.write(text)
+    fp.close()
 
-if len(sys.argv) < 3:
-    print "Need 6 arguments: cmd name doxy [inch] [inccpp] [type,name,var]]"
-    print sys.argv
-    sys.exit(0);
-else:
-    for i in range(1,len(sys.argv)):
-        [key, var] = sys.argv[i].split("=")
-        srcdict[key] = var;
-    
-    if 'inc_h' in srcdict.keys():
-        srcdict['includes_h'] = "\n".join(['#include ' + s for s in srcdict['inc_h'].split(',')])
-    else: 
-        srcdict['includes_h'] = '';
-    if 'inc_cpp' in srcdict.keys():
-        srcdict['includes_cpp'] = "\n".join(['#include ' + s for s in srcdict['inc_cpp'].split(',')])
-    else: 
-        srcdict['includes_cpp'] = '';
-    
-    vars = [];
-    for key in srcdict:
-        if key.startswith('var'):
-            var = srcdict[key].split(',');
-            vars.append(var);
-    srcdict['vars_decl'] = "\n\t\t".join(['{0} {1};'.format(var[0],var[1]) for var in vars]);
-    srcdict['from_json'] = "\n\t\t".join([ 'from_json( zData.{0}, zRoot["{1}"]);'.format(var[1],var[2]) for var in vars]);
-    srcdict['to_json'] = "\n\t\t".join([ 'JsonWriter_AddMember("{0}", zData.{1}, zRoot);'.format(var[2],var[1]) for var in vars]);
-
-
-src_h = """#pragma once
-
-#include <core/util/json_conversions.h>
-{includes_h}
+header_format = """
+#pragma once
+#include <ecs/SystemBase.h>
+#include <rl/events/events.h>
 
 namespace pgn
-{{
-    namespace cmp
-    {{
-    
-        //! {doxy}
-        struct c{class}
-        {{
-            {vars_decl}
-        }};
+{
+    namespace sys
+    {
+        class c%s : public cSystemBase
+        {
+        public:
+            c%s():mProcess(Simple::slot(this, &c%s::Process)){}
+        private:
+            cEventHandler<evt::c%s> mProcess;
+            void Process( %s);
+        };
+    }
+}
+"""
+
+source_format = """
+#include "%s.h"
+
+namespace pgn
+{
+    void sys::c%s::Process( %s )
+    {
+        assert(false);
+        auto q = ECS.mSystemMgr->GetQuery("which_query");
+        for( e : q.Entities())
+        {
         
-    }}
+        }
+    }
+}
+"""
 
-    //-----------------------------------------------------------------------
-    template<>
-    bool from_json< cmp::c{class}>( cmp::c{class}& zData, const rapidjson::Value& zRoot);
-    //-----------------------------------------------------------------------
-    template<>
-    void to_json< cmp::c{class}>( const cmp::c{class}& zData, JsonWriter& zRoot);
-}}""".format(**srcdict)
+def generate_system_header( name, evt, args):
+    return header_format%(name,name,name,evt,args)
 
-src_cpp = """#include "{class}.h"
-{includes_cpp}
+def generate_system_source( name, evt, args):
+    return source_format%(name,name,args)
 
-namespace pgn
-{{
-	//----------------------------------------------------------------------------------
-	template<>
-	bool from_json<cmp::c{class}>( cmp::c{class}& zData, const rapidjson::Value& zRoot)
-	{{
-        {from_json}
-        return true;
-	}}
+def generate_system( name, evt, args):
+    s = generate_system_source(name,evt, args)
+    h = generate_system_header(name,evt, args)
+    
+    write_to_file( "../systems/%s.h"%name,h);
+    write_to_file( "../systems/%s.cpp"%name,s);
 
-	//----------------------------------------------------------------------------------
-	template<>
-	void to_json<cmp::c{class}>( const cmp::c{class}& zData, JsonWriter& zRoot)
-	{{
-		zRoot.StartObject();
-        {to_json}
-		zRoot.EndObject();
-	}}
-}}""".format(**srcdict)
-
-print src_h
-print src_cpp
-
-
-fph = open('{class}.h'.format(**srcdict),'w')
-fph.write(src_h)
-fph.close()
-
-fph = open('{class}.cpp'.format(**srcdict),'w')
-fph.write(src_cpp)
-fph.close()
+    
+import sys
+generate_system( sys.argv[1].capitalize(), sys.argv[2], sys.argv[3])

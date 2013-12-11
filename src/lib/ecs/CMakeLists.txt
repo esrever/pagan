@@ -40,6 +40,7 @@ set(HEADER_FILES
     #TagQuery.h
     #QueryBase.h
     QueryExpression.h
+    EventHandlerQuery.h
 )
 
 add_definitions(
