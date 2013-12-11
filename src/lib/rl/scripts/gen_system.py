@@ -1,3 +1,10 @@
+"""Usage: gen_system name ecc [listeners/desc]
+    name:           name of class
+    ecc:            event type
+    queries/desc:   what is this going to be used for / who listens (optional)
+"""
+
+
 events = [ ("level created",        ["cEntityWithData"]                                     ,False ) ,
            ("level destroy",        ["cEntityWithData"]                                     ) ,
            ("level loaded",         ["cEntityWithData"]                                     ) ,
