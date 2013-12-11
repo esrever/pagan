@@ -306,8 +306,10 @@ namespace pgn
 	cEntity cEntityMgr::InstantiateExemplar(const std::string& zExemplarName)
 	{
 		cEntityData ed;
-		auto e = Create();
 		auto itEx = mExemplars.find(zExemplarName);
+		if (itEx == mExemplars.end())
+			return 0;
+		auto e = Create();
 		ed.mName = zExemplarName;// +"_instance";
 		ed.mComponents = itEx->second.mComponents;
 
