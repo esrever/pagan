@@ -85,6 +85,8 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
+                        null,
                         {
                             "Position": [
                                 0,
@@ -121,6 +123,8 @@
                         null,
                         null,
                         null,
+                        null,
+                        null,
                         "dungeon:floor:dirt0",
                         null,
                         null,
@@ -146,6 +150,8 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
+                        null,
                         null,
                         null,
                         {
@@ -174,6 +180,8 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
+                        null,
                         null,
                         null,
                         null,
@@ -212,6 +220,8 @@
                             "Short": "human"
                         },
                         null,
+                        null,
+                        null,
                         {
                             "Position": [
                                 0,
@@ -246,6 +256,8 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
+                        null,
                         null,
                         null,
                         null,
@@ -312,6 +324,8 @@
                             "Short": "rat"
                         },
                         null,
+                        null,
+                        null,
                         {
                             "Position": [
                                 0,
@@ -344,6 +358,8 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
+                        null,
                         null,
                         null,
                         null,
@@ -394,6 +410,36 @@
                     ]
                 }
             },
+            "the_level": {
+                "Name": "the_level",
+                "Tags": [
+                    "CurrentLevel"
+                ],
+                "Data": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cTileLayout"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {},
+                        null
+                    ]
+                }
+            },
             "wall_common": {
                 "Name": "wall_common",
                 "Tags": [],
@@ -411,6 +457,8 @@
                         null,
                         null,
                         null,
+                        null,
+                        null,
                         "dungeon:wall:brick_brown0",
                         null,
                         null,
@@ -425,6 +473,9 @@
             }
         },
         "Tagged Entities": {
+            "CurrentLevel": [
+                7
+            ],
             "Player": [
                 0
             ],
@@ -448,6 +499,8 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
+                        null,
                         {
                             "Position": [
                                 0,
@@ -481,6 +534,8 @@
                         },
                         null,
                         null,
+                        null,
+                        null,
                         {
                             "MaxLineNum": 100000
                         },
@@ -506,6 +561,8 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
+                        null,
                         null,
                         null,
                         null,
@@ -575,6 +632,8 @@
                         null,
                         null,
                         null,
+                        null,
+                        null,
                         {
                             "style": {
                                 "font": "system",
@@ -634,6 +693,8 @@
                         null,
                         null,
                         null,
+                        null,
+                        null,
                         {
                             "cell_dims": [
                                 24,
@@ -653,6 +714,93 @@
                 }
             },
             "5": {
+                "Name": "wall_common",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cMapSprite",
+                        "struct pgn::cmp::cTileObstacle"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "dusty wall",
+                            "Short": "wall"
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        "dungeon:wall:brick_brown0",
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "IsObstacle": true
+                        }
+                    ]
+                }
+            },
+            "6": {
+                "Name": "floor_common",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cMapSprite",
+                        "struct pgn::cmp::cTileObstacle"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "dusty floor",
+                            "Short": "floor"
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        "dungeon:floor:dirt0",
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "IsObstacle": false
+                        }
+                    ]
+                }
+            },
+            "7": {
+                "Name": "the_level",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cTileLayout"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {},
+                        null
+                    ]
+                }
+            },
+            "8": {
                 "Name": "rat_common",
                 "Components": {
                     "Mask": [
@@ -666,6 +814,8 @@
                             "Verbose": "fat, brown, hairy, vicious-looking rat",
                             "Short": "rat"
                         },
+                        null,
+                        null,
                         null,
                         {
                             "Position": [
@@ -686,7 +836,7 @@
                     ]
                 }
             },
-            "6": {
+            "9": {
                 "Name": "human_common",
                 "Components": {
                     "Mask": [
@@ -700,6 +850,8 @@
                             "Verbose": "tall, dark-haired man",
                             "Short": "human"
                         },
+                        null,
+                        null,
                         null,
                         {
                             "Position": [
@@ -723,7 +875,9 @@
         },
         "ComponentTypeIds": [
             "struct pgn::cmp::cDescription",
+            "struct pgn::cmp::cDoor",
             "struct pgn::cmp::cKeyActionMapper",
+            "struct pgn::cmp::cLevel",
             "struct pgn::cmp::cLevelPosition",
             "struct pgn::cmp::cLog",
             "struct pgn::cmp::cMapSprite",
@@ -737,102 +891,21 @@
     },
     "SystemMgr": {
         "Queries": {
-            "2426457603": {
-                "Tags": [],
-                "Tags-not": [],
-                "Mask": [
-                    "struct pgn::cmp::cLog"
-                ],
-                "Mask-not": []
-            },
-            "3918431051": {
-                "Tags": [],
-                "Tags-not": [],
-                "Mask": [
-                    "struct pgn::cmp::cKeyActionMapper"
-                ],
-                "Mask-not": []
-            },
-            "519867310": {
-                "Tags": [
-                    "log:game_log"
-                ],
-                "Tags-not": [],
-                "Mask": [],
-                "Mask-not": []
-            },
             "alias": {
                 "Tags": [],
                 "Tags-not": [],
                 "Mask": [],
                 "Mask-not": []
+            },
+            "pgn::cmp::cMapWindow": {
+                "Tags": [],
+                "Tags-not": [],
+                "Mask": [
+                    "struct pgn::cmp::cMapWindow"
+                ],
+                "Mask-not": []
             }
         },
-        "Systems": [
-            {
-                "4294967295": {
-                    "Base": {
-                        "Name": "KeyboardHandle",
-                        "Desc": "read keys and propagate to keyactionmap components. listens to keystate changes"
-                    },
-                    "QueryKeyActionMapper": {
-                        "Tags": [],
-                        "Tags-not": [],
-                        "Mask": [
-                            "struct pgn::cmp::cKeyActionMapper"
-                        ],
-                        "Mask-not": []
-                    },
-                    "QueryDevConsole": {
-                        "Tags": [],
-                        "Tags-not": [],
-                        "Mask": [
-                            "struct pgn::cmp::cKeyActionMapper"
-                        ],
-                        "Mask-not": []
-                    }
-                }
-            },
-            {
-                "4294967295": {
-                    "Base": {
-                        "Name": "AlmightyLogger",
-                        "Desc": "log events from the game or the system"
-                    },
-                    "QueryLog": {
-                        "Tags": [],
-                        "Tags-not": [],
-                        "Mask": [
-                            "struct pgn::cmp::cLog"
-                        ],
-                        "Mask-not": []
-                    },
-                    "QueryLogListener": {
-                        "Tags": [
-                            "log:game_log"
-                        ],
-                        "Tags-not": [],
-                        "Mask": [],
-                        "Mask-not": []
-                    }
-                }
-            },
-            {
-                "4294967295": {
-                    "Base": {
-                        "Name": "Move 'n' stuff",
-                        "Desc": "moves stuff"
-                    },
-                    "QueryLog": {
-                        "Tags": [],
-                        "Tags-not": [],
-                        "Mask": [
-                            "struct pgn::cmp::cLog"
-                        ],
-                        "Mask-not": []
-                    }
-                }
-            }
-        ]
+        "Systems": []
     }
 }

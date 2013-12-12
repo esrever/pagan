@@ -19,6 +19,8 @@ namespace pgn
 			LEVEL_DESTROY,
 			LEVEL_LOADED,
 			LEVEL_UNLOAD,
+			LEVEL_ENTERED,
+			LEVEL_LEAVE,
 			EXIT_APPLICATION,
 			LOG,
 			ACTION_IDLE,
@@ -36,6 +38,8 @@ namespace pgn
 		typedef cEvent<size_t(eRL::LEVEL_DESTROY), cEntityWithData> cLevelDestroy;
 		typedef cEvent<size_t(eRL::LEVEL_LOADED), cEntityWithData> cLevelLoaded;
 		typedef cEvent<size_t(eRL::LEVEL_UNLOAD), cEntityWithData> cLevelUnload;
+		typedef cEvent<size_t(eRL::LEVEL_ENTERED), cEntityWithData, cEntityWithData> cLevelEntered;
+		typedef cEvent<size_t(eRL::LEVEL_LEAVE), cEntityWithData, cEntityWithData> cLevelLeave;
 		typedef cEvent<size_t(eRL::EXIT_APPLICATION), void> cExitApplication;
 		typedef cEvent<size_t(eRL::LOG), const std::string&,const std::string&> cLog;
 		typedef cEvent<size_t(eRL::ACTION_IDLE), cEntityWithData> cActionIdle;
@@ -52,6 +56,8 @@ namespace pgn
 		void OnLevelDestroy(cEntityWithData);
 		void OnLevelLoaded(cEntityWithData);
 		void OnLevelUnload(cEntityWithData);
+		void OnLevelEntered(cEntityWithData,cEntityWithData);
+		void OnLevelLeave(cEntityWithData, cEntityWithData);
 		void OnExitApplication(void);
 		void OnLog(const std::string&, const std::string&);
 		void OnActionIdle(cEntityWithData);

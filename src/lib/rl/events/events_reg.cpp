@@ -10,6 +10,8 @@ namespace pgn
 		evt::cLevelDestroy::mSig += &evt::OnLevelDestroy;
 		evt::cLevelLoaded::mSig += &evt::OnLevelLoaded;
 		evt::cLevelUnload::mSig += &evt::OnLevelUnload;
+		evt::cLevelEntered::mSig += &evt::OnLevelEntered;
+		evt::cLevelLeave::mSig += &evt::OnLevelLeave;
 		evt::cExitApplication::mSig += &evt::OnExitApplication;
 		evt::cLog::mSig += &evt::OnLog;
 		evt::cActionIdle::mSig += &evt::OnActionIdle;

@@ -77,6 +77,16 @@ namespace pgn
 			assert(false);
 		}
 		//----------------------------------------------------------------------------------------------------
+		void OnLevelEntered(cEntityWithData arg0, cEntityWithData arg1)
+		{
+			assert(false);
+		}
+		//----------------------------------------------------------------------------------------------------
+		void OnLevelLeave(cEntityWithData arg0, cEntityWithData arg1)
+		{
+			assert(false);
+		}
+		//----------------------------------------------------------------------------------------------------
 		void OnExitApplication()
 		{
 			assert(false);
