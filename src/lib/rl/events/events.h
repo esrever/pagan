@@ -40,5 +40,20 @@ namespace pgn
 		typedef cEvent<size_t(eRL::DOOR_OPENED), cEntityWithData> cDoorOpened;
 		typedef cEvent<size_t(eRL::DOOR_CLOSED), cEntityWithData> cDoorClosed;
 		typedef cEvent<size_t(eRL::TILE_IN_LEVEL_CHANGED), cEntityWithData> cTileInLevelChanged;
+		
+
+		void OnLevelCreated(cEntityWithData);
+		void OnLevelDestroy(cEntityWithData);
+		void OnLevelLoaded(cEntityWithData);
+		void OnLevelUnload(cEntityWithData);
+		void OnExitApplication(void);
+		void OnLog(const std::string&, const std::string&);
+		void OnActionIdle(cEntityWithData);
+		void OnActionMoveAdj(cEntityWithData, const glm::ivec2&);
+		void OnActionDoorOpen(cEntityWithData, cEntityWithData);
+		void OnActionDoorClose(cEntityWithData, cEntityWithData);
+		void OnDoorOpened(cEntityWithData);
+		void OnDoorClosed(cEntityWithData);
+		void OnTileInLevelChanged(cEntityWithData);
 	}
 }

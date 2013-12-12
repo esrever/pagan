@@ -36,16 +36,16 @@ namespace pgn
 			bool from_json(const rapidjson::Value& zRoot);
 			void ImportSystems(const rapidjson::Document * zDoc);
 			void ImportQueries(const rapidjson::Document * zDoc);
-			void ImportEventHandlers(const rapidjson::Document * zDoc);
 
 			//! pointer generator
 			std::shared_ptr<cSystemBase> Create(const std::string& zName) const;
 
 			//! System type related
 			virtual void RegisterSystemTypes(){}
-			virtual void RegisterEventHandlers(){}
 			template<class T>
 			void AddSystemType();
+
+			virtual void RegisterAllEvents(){}
 			
 		private:
 			template<class T>

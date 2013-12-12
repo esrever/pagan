@@ -1,0 +1,28 @@
+
+Events can be listened to  ( 0+ args, 1+ queries) -- DoorOpened
+Events can be standalone   ( 0+ args, 0  queries) -- OpenDoor
+Events can be actions      ( 0  args, 0  queries) -- !! this does not make sense - no information
+Actions can be listened to ( 0  args, 1+ queries) -- ExitApplication
+
+Only actions are registered in the action manager: (0 args)
+Both events and actions should emit signals! -- so they are both events
+Actions are events with a special signature!
+    in .py file, create registration code if args.empty()
+        How to hook with the free functions though?
+        
+        
+-----
+What if all events/actions are free functions?
+    single .json creates all the required queries
+    single point of registration of all free functions, and actions
+        via python, bind argless as actions!
+    the event functions get the queries from the system mgr
+    each event function does all the required things/queries. order should not matter
+    cpp generated procedurally only for the first time
+        single header/cpp for all
+    what happens to systems?
+        no systems!
+        systemMgr calls evt::update
+        
+
+void 

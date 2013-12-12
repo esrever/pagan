@@ -9,11 +9,6 @@ namespace pgn
 	cSystemMgrRL::cSystemMgrRL()
 	:mOnExitApplication(Simple::slot(this, &cSystemMgrRL::OnExitApplication))
 	{}
-	//-------------------------------------------------
-	void cSystemMgrRL::RegisterSystemTypes()
-	{
-		RegisterAllSystems(*this);
-	}
 
 	//-------------------------------------------------
 	bool cSystemMgrRL::UpdateFrame()
@@ -25,8 +20,8 @@ namespace pgn
 			AsciiRenderSystem
 		*/
 		mLoop = true;
-		for(auto it : mSystems)
-			it.second->Process();
+		cEvent < size_t(evt::eBasicECS::UPDATE)>::mSig.emit();
+		// TODO: on update
 		return mLoop;
 	}
 

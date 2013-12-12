@@ -1,36 +1,10 @@
-events = [ ("level created",        ["cEntityWithData"]                                     ,False ) ,
-           ("level destroy",        ["cEntityWithData"]                                     ) ,
-           ("level loaded",         ["cEntityWithData"]                                     ) ,
-           ("level unload",         ["cEntityWithData"]                                     ) ,
-           ("exit application",     ["void"]                                                ) ,
-           ("log",                  ["const std::string&", "const std::string&"]            ) ,
-           ("action idle",          ["cEntityWithData"]                                     ) ,
-           ("action move adj",      ["cEntityWithData", "const glm::ivec2&"]                ) ,
-           ("action door open",     ["cEntityWithData","cEntityWithData"]                   ) ,
-           ("action door close",    ["cEntityWithData","cEntityWithData"]                   ) ,
-           ("door opened",          ["cEntityWithData"]                                     ) ,
-           ("door closed",          ["cEntityWithData"]                                     ) ,
-           ("tile in level changed",["cEntityWithData"]                                     ) ,
-           ]
+from rl_events import *
 
 typedefs = []
 evthandler_vars = []
 evthandler_funcs = []
            
 hev_includes = [ "<string>", "<glm/glm.hpp>", "<ecs/EntityData.h>"]
-
-def evt2camelcase(s):
-    return "".join([ s2.capitalize() for s2 in s.split()])
-def evt2constant(s):
-    return "_".join([ s2.upper() for s2 in s.split()])
-
-# pad the lines for namespace purposes
-def pad_lines( lines, tnum ):
-    ts = "".join([ "\t" for i in range(tnum)]);
-    return [ ts + s for s in lines]
-
-def nswrap( ns, lines):
-    return ["namespace " + ns, "{"] + pad_lines(lines,1) + ["}"]    
 
 def create_enum_decl():
     lines_pref = ["enum eRL", "{"];
@@ -76,7 +50,48 @@ def generate_events_header():
     pgnlines += create_enum_decl()
     pgnlines += ["\n"]
     pgnlines += create_typedefs()
+    pgnlines += ["\n"]
+    for e in events:
+        ecc = evt2camelcase(e[0])
+        args = ", ".join(e[1])
+        pgnlines += ["void On%s(%s);"%(ecc,args)]
     return lines + nswrap( "pgn", nswrap("evt", pgnlines))
+    
+    
+    
+def generate_events_source():
+    sev_includes = [];
+    lines = ["#include \"events.h\""];
+    lines += [ "#include " + s for s in sev_includes]
+    lines += ["\n"]
+    
+    sep = "//" + "".join(["-" for i in range(100)])
+    pgnlines = []
+    for e in events:
+        ecc = evt2camelcase(e[0])
+        args = []
+        for i in range(len(e[1])):
+            if e[1][i] != "void":
+                args.append("%s arg%d"%(e[1][i], i))
+        args = ", ".join(args)
+        pgnlines += [sep, "void On%s(%s)"%(ecc,args), "{","\tassert(false);","}"]
+    return lines + nswrap( "pgn", nswrap( "evt", pgnlines))
+    
+def generate_events_reg():
+    sev_includes = [];
+    lines = ["#include \"events.h\""];
+    lines += [ "#include " + s for s in ["<rl/SystemMgrRL.h>"]]
+    lines += ["\n"]
+    
+    pgnlines = ["void cSystemMgrRL::RegisterAllEvents()","{"]
+    
+    sep = "//" + "".join(["-" for i in range(100)])
+    for e in events:
+        ecc = evt2camelcase(e[0])
+        pgnlines += ["\tevt::c%s::mSig += &evt::On%s;"%(ecc,ecc)]
+        
+    pgnlines += ["}"]
+    return lines + nswrap( "pgn", pgnlines)
     
 def generate_event_mgr_header():
     lines = ["#pragma once\n"];
@@ -196,19 +211,17 @@ def generate_register_events():
         
     return lines + nswrap("pgn", ["void cSystemMgrRL::RegisterEventHandlers()","{"] + pad_lines(pgnlines,1) + ["}"])
     
-    
-def write_to_file( fname, text):
-    fp = open(fname,'w')
-    fp.write(text)
-    fp.close()
-    
 s_evt_header = "\n".join(generate_events_header())
+s_evt_source = "\n".join(generate_events_source())
+s_evtreg_source = "\n".join(generate_events_reg())
 #s_evt_mgr_header = "\n".join(generate_event_mgr_header())
 s_register_source = "\n".join(generate_register_events())
 s_ehq_header = "\n".join(generate_event_handler_query_header())
 s_ehq_source = "\n".join(generate_event_handler_query_source())
 
 write_to_file("../events/events.h",s_evt_header)
-write_to_file("../events/evt_register.cpp",s_register_source)
-write_to_file("../events/EventHandlerQueries.h",s_ehq_header)
-write_to_file("../events/EventHandlerQueries.cpp",s_ehq_source)
+write_to_file("../events/events.cpp",s_evt_source)
+write_to_file("../events/events_reg.cpp",s_evtreg_source)
+#write_to_file("../events/evt_register.cpp",s_register_source)
+#write_to_file("../events/EventHandlerQueries.h",s_ehq_header)
+#write_to_file("../events/EventHandlerQueries.cpp",s_ehq_source)

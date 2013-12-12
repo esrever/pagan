@@ -80,30 +80,6 @@ namespace pgn
 			}
 		}
 
-		void cLog::Process()
-		{
-			
-		}
-
-		bool cLog::from_json(const rapidjson::Value& zRoot)
-		{
-			cSystemBase::from_json(zRoot);
-
-			auto b0 = LoadQuery(mQueryLog, zRoot, "QueryLog");
-			auto b1 = LoadQuery(mQueryLogListener, zRoot, "QueryLogListener");
-			return b0 && b1;
-		}
-
-		void cLog::to_json(JsonWriter& zRoot) const
-		{
-			zRoot.StartObject();
-			zRoot.String("Base");
-			cSystemBase::to_json(zRoot);
-			JsonWriter_AddMember("QueryLog", mQueryLog, zRoot);
-			JsonWriter_AddMember("QueryLogListener", mQueryLogListener, zRoot);
-			zRoot.EndObject();
-		}
-
 		void cLog::ApplyLogTextWin(cmp::cTextWindow& zLogListener, const std::string& zLog)
 		{
 			zLogListener.SetText(zLog);

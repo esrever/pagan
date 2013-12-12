@@ -13,9 +13,6 @@ namespace pgn
 		{
 		public:
 			cKeyboardHandle();
-			virtual void Process();
-			virtual bool from_json(const rapidjson::Value& zRoot);
-			virtual void to_json(JsonWriter& zRoot) const;
 
 		private:
 			cEventHandler<evt::cKey> mOnKey;

@@ -49,29 +49,5 @@ namespace pgn
 				// TODO: ... 
 			}
 		}
-
-		void cKeyboardHandle::Process()
-		{
-			
-		}
-
-		bool cKeyboardHandle::from_json(const rapidjson::Value& zRoot)
-		{
-			cSystemBase::from_json(zRoot);
-
-			auto b0 = LoadQuery(mQueryKeyActionMapper, zRoot, "QueryKeyActionMapper");
-			auto b1 = LoadQuery(mQueryDevConsole, zRoot, "QueryDevConsole");
-			return b0;
-		}
-
-		void cKeyboardHandle::to_json(JsonWriter& zRoot) const
-		{
-			zRoot.StartObject();
-			zRoot.String("Base");
-			cSystemBase::to_json(zRoot);
-			JsonWriter_AddMember("QueryKeyActionMapper", mQueryKeyActionMapper, zRoot);
-			JsonWriter_AddMember("QueryDevConsole", mQueryDevConsole, zRoot);
-			zRoot.EndObject();
-		}
 	}
 }

@@ -50,27 +50,5 @@ namespace pgn
 		{
 			evt::cLog::mSig.emit("game_log", boost::str(boost::format("%s moved %s") % ed->second.mName.c_str() % dir2text_full[4]));
 		}
-
-		void cMove::Process()
-		{
-			
-		}
-
-		bool cMove::from_json(const rapidjson::Value& zRoot)
-		{
-			cSystemBase::from_json(zRoot);
-
-			auto b0 = LoadQuery(mQueryLog, zRoot, "QueryLog");
-			return b0 ;
-		}
-
-		void cMove::to_json(JsonWriter& zRoot) const
-		{
-			zRoot.StartObject();
-			zRoot.String("Base");
-			cSystemBase::to_json(zRoot);
-			JsonWriter_AddMember("QueryLog", mQueryLog, zRoot);
-			zRoot.EndObject();
-		}
 	}
 }

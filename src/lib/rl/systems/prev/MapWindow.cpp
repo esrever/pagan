@@ -62,27 +62,5 @@ namespace pgn
 			{
 			}
 		}
-
-		void cMapWindow::Process()
-		{
-			
-		}
-
-		bool cMapWindow::from_json(const rapidjson::Value& zRoot)
-		{
-			cSystemBase::from_json(zRoot);
-
-			auto b0 = LoadQuery(mQueryMapWindow, zRoot, "QueryMapWindow");
-			return b0 ;
-		}
-
-		void cMapWindow::to_json(JsonWriter& zRoot) const
-		{
-			zRoot.StartObject();
-			zRoot.String("Base");
-			cSystemBase::to_json(zRoot);
-			JsonWriter_AddMember("QueryMapWindow", mQueryMapWindow, zRoot);
-			zRoot.EndObject();
-		}
 	}
 }

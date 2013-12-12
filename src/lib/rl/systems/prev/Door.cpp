@@ -62,27 +62,5 @@ namespace pgn
 			sprite_ptr->mData = door_ptr->mData.mSprites[1];
 			// TODO: update mapwin's tiles? Above won't work unless I attach stuff to scenegraph
 		}
-
-		void cDoor::Process()
-		{
-			
-		}
-
-		bool cDoor::from_json(const rapidjson::Value& zRoot)
-		{
-			cSystemBase::from_json(zRoot);
-
-			auto b0 = LoadQuery(mQuery, zRoot, "Query");
-			return b0 ;
-		}
-
-		void cDoor::to_json(JsonWriter& zRoot) const
-		{
-			zRoot.StartObject();
-			zRoot.String("Base");
-			cSystemBase::to_json(zRoot);
-			JsonWriter_AddMember("Query", mQuery, zRoot);
-			zRoot.EndObject();
-		}
 	}
 }

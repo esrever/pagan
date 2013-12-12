@@ -14,7 +14,8 @@ namespace pgn
 	//------------------------------------------------------------------------
 	bool cExampleSystem::from_json(const rapidjson::Value& zRoot)
 	{
-		return cSystemBase::from_json(zRoot);
+		return false;
+		//return cSystemBase::from_json(zRoot);
 		//zObj.a = zRoot["an_int"].GetInt();
 		//zObj.b = zRoot["a_double"].GetDouble();
 		//zObj.c = float(zRoot["a_float"].GetDouble());

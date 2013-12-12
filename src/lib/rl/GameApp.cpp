@@ -30,7 +30,6 @@ namespace pgn
 
 		//! register system types
 		ecs.mSystemMgr->RegisterSystemTypes();
-		ecs.mSystemMgr->RegisterEventHandlers();
 
 		//! register action types
 		ecs.mActionMgr->RegisterActionTypes();

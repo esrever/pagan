@@ -19,19 +19,7 @@ namespace pgn
 	{
 		public:
 			//! ctors
-			cSystemBase();
-			virtual ~cSystemBase();
-
-			//! Process entities
-			virtual void Process() = 0;
-
-			//! Json related
-			virtual void to_json(JsonWriter& zRoot) const;
-			virtual bool from_json(const rapidjson::Value& zRoot);
-
-			//! System activity
-			void SetActive(bool zActive);
-			bool Active() const {return mActive;}
+			virtual ~cSystemBase(){}
 
 			//! Pointer generator
 			template<class T>
@@ -41,52 +29,18 @@ namespace pgn
 			bool LoadQuery(pgn::cQueryExpressionSptr& zQuery, const rapidjson::Value& zRoot, const char * zName) const;
 
 		protected:
-			bool mActive;
+			DECL_JSON_PGN_FRIEND
+
 			std::string mName;
 			std::string mDesc;
 	};
 
-	namespace evt
-	{
-		typedef cEvent<size_t(eBasicECS::SYSTEM_ACTIVE), cSystemBase *, bool> cSystemActive;
-	}
-
 	//--------------------------------------------------
-	//! sys to json
-	template<>
-	void to_json<cSystemBase>(const cSystemBase& zSys, JsonWriter& zRoot);
-	//! sys from json
-	template<>
-	bool from_json<cSystemBase>(cSystemBase& zSys, const rapidjson::Value& zRoot);
-	//! sys to string
-	template<>
-	std::string to_string<cSystemBase>(const cSystemBase& zSys);
+	DECL_JSON_PGN(cSystemBase)
 
 	template<class T>
 	std::shared_ptr<cSystemBase> cSystemBase::Create()
 	{
 		return std::shared_ptr<cSystemBase>(new T());
 	}
-
-	/*
-	template<class T>
-	void ProcessQuery(const std::string& zQueryName, T * const zPtr, std::function<void(T * const, const std::map< cEntity, cEntityComponents>::const_iterator&)> func)
-	{
-		// Get the query. This should be easily retrievable
-		auto qit = ECS.mSystemMgr->GetQueries().find(zQueryName);
-		if (qit != ECS.mSystemMgr->GetQueries().end())
-		{
-			// Get entities found by the query
-			auto ents = qit->second.Entities();
-			for (auto e : ents)
-			{
-				// Get the entities' components
-				auto ec = ECS.mEntityMgr->GetComponents().find(e);
-				func(zPtr, ec);
-			}
-		}
-	}
-	*/
-	
-	
 }
