@@ -16,6 +16,8 @@ What if all events/actions are free functions?
     single .json creates all the required queries
     single point of registration of all free functions, and actions
         via python, bind argless as actions!
+        separately, after the registration:
+            mActionEvents[ecc] = bind the function directly. Does not emit
     the event functions get the queries from the system mgr
     each event function does all the required things/queries. order should not matter
     cpp generated procedurally only for the first time
