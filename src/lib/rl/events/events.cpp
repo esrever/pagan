@@ -26,7 +26,7 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::LEVEL_CREATE), cEntityWithData>::Run(cEntityWithData arg0)
 	{
-		assert(false);
+		//assert(false);
 		return false;
 	}
 
@@ -35,7 +35,7 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::LEVEL_CREATE), cEntityWithData>::Event(cEntityWithData arg0)
 	{
-		assert(false);
+		//assert(false);
 	}
 
 
@@ -44,7 +44,7 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::LEVEL_DESTROY), cEntityWithData>::Run(cEntityWithData arg0)
 	{
-		assert(false);
+		//assert(false);
 		return false;
 	}
 
@@ -53,7 +53,7 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::LEVEL_DESTROY), cEntityWithData>::Event(cEntityWithData arg0)
 	{
-		assert(false);
+		//assert(false);
 	}
 
 
@@ -62,7 +62,7 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::LEVEL_LOAD), cEntityWithData>::Run(cEntityWithData arg0)
 	{
-		assert(false);
+		//assert(false);
 		return false;
 	}
 
@@ -113,7 +113,7 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::LEVEL_UNLOAD), cEntityWithData>::Run(cEntityWithData arg0)
 	{
-		assert(false);
+		//assert(false);
 		return false;
 	}
 
@@ -122,7 +122,7 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::LEVEL_UNLOAD), cEntityWithData>::Event(cEntityWithData arg0)
 	{
-		assert(false);
+		//assert(false);
 	}
 
 
@@ -131,7 +131,7 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::EXIT_APPLICATION)>::Run()
 	{
-		assert(false);
+		//assert(false);
 		return false;
 	}
 
@@ -140,7 +140,7 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::EXIT_APPLICATION)>::Event()
 	{
-		assert(false);
+		//assert(false);
 	}
 
 
@@ -216,7 +216,7 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::LOG), const std::string&, const std::string&>::Event(const std::string& arg0, const std::string& arg1)
 	{
-		assert(false);
+		//assert(false);
 	}
 
 
@@ -225,7 +225,7 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::ACTION_IDLE), cEntityWithData>::Run(cEntityWithData arg0)
 	{
-		assert(false);
+		//assert(false);
 		return false;
 	}
 
@@ -372,7 +372,7 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::KEY_STATE), const int, const oxygine::cKeyState&>::Event(const int, const oxygine::cKeyState&)
 	{
-		assert(false);
+		//assert(false);
 	}
 
 }
