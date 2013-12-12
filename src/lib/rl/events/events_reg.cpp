@@ -19,5 +19,6 @@ namespace pgn
 		evt::cDoorOpened::mSig += &evt::OnDoorOpened;
 		evt::cDoorClosed::mSig += &evt::OnDoorClosed;
 		evt::cTileInLevelChanged::mSig += &evt::OnTileInLevelChanged;
+        evt::cKeyState::mSig += &evt::OnKeyState;
 	}
 }

@@ -328,6 +328,34 @@ namespace pgn
 		}
 	}
 
+	//------------------------------------------------------------------------------
+	void cQueryExpression::AddString(const std::string& zName)
+	{
+		std::string name = zName;
+		bool zNot = false;
+		if (name[0] == '!')
+		{
+			zNot = true;
+			name.erase(name.begin());
+		}
+		std::vector<std::string> results;
+		if (pystring::startswith(name, "tag:"))
+		{
+			pystring::split(name, results, ":", 1);
+			if (zNot)
+				mTagsNot.push_back(results[1]);
+			else
+				mTags.push_back(results[1]);
+		}
+		else if (pystring::startswith(name, "pgn::cmp::"))
+		{
+			std::vector<std::string> components;
+			components.push_back(name);
+			read_component_mask(zNot ? mMaskNot : mMask, components);
+		}
+		Finalize();
+	}
+
 	//------------------------------------------------------------------------
 	template<>
 	void to_json<cQueryExpression>(const cQueryExpression& zMgr, JsonWriter& writer)

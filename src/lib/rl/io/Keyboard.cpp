@@ -5,6 +5,8 @@
 #include <Input.h>
 #include <ssignal.h>
 
+#include <rl/events/events.h>
+
 typedef Simple::Signal<void(const SDL_KeyboardEvent& evt)> key_evt_sig;
 static key_evt_sig sig;
 
@@ -48,6 +50,6 @@ namespace pgn
 	{
 		mKeyStates.at(key) = state;
 		// emit signal
-		evt::cKey::mSig.emit(key, state);
+		evt::cKeyState::mSig.emit(key, state);
 	}
 }

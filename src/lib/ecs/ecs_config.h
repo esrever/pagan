@@ -37,7 +37,6 @@ namespace evt
 		COMPONENTS_ADDED,
 		COMPONENT_REMOVE,
 		SYSTEM_ACTIVE,
-		KEY_EVT,
 		UPDATE,
 		num = 256
 	};

@@ -10,11 +10,6 @@ namespace oxygine
 
 namespace pgn
 {
-	namespace evt
-	{
-		typedef cEvent<size_t(eBasicECS::KEY_EVT), const int, const oxygine::cKeyState&> cKey;
-	}
-
 	class cKeyboard
 	{
 		public:

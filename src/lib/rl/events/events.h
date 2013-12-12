@@ -4,6 +4,10 @@
 #include <glm/glm.hpp>
 #include <ecs/EntityData.h>
 
+namespace oxygine
+{
+	struct cKeyState;
+}
 
 namespace pgn
 {
@@ -23,7 +27,8 @@ namespace pgn
 			ACTION_DOOR_CLOSE,
 			DOOR_OPENED,
 			DOOR_CLOSED,
-			TILE_IN_LEVEL_CHANGED
+			TILE_IN_LEVEL_CHANGED,
+            KEY_STATE
 		};
 		
 
@@ -40,6 +45,7 @@ namespace pgn
 		typedef cEvent<size_t(eRL::DOOR_OPENED), cEntityWithData> cDoorOpened;
 		typedef cEvent<size_t(eRL::DOOR_CLOSED), cEntityWithData> cDoorClosed;
 		typedef cEvent<size_t(eRL::TILE_IN_LEVEL_CHANGED), cEntityWithData> cTileInLevelChanged;
+		typedef cEvent<size_t(eRL::KEY_STATE), const int, const oxygine::cKeyState&> cKeyState;
 		
 
 		void OnLevelCreated(cEntityWithData);
@@ -55,5 +61,6 @@ namespace pgn
 		void OnDoorOpened(cEntityWithData);
 		void OnDoorClosed(cEntityWithData);
 		void OnTileInLevelChanged(cEntityWithData);
+        void OnKeyState(const int, const oxygine::cKeyState&);
 	}
 }

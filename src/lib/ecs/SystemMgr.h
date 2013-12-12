@@ -28,6 +28,8 @@ namespace pgn
 			//! Queries
 			const QueryMap& GetQueries() const {return mQueries;}
 			void AddQuery(const std::string& zName, const cQueryExpressionSptr& zPtr);
+			cQueryExpressionSptr GetQuery(const std::string& zName);
+
 
 			//! the main frame updater
 			virtual bool UpdateFrame(){return true;}

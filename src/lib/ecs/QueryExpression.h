@@ -29,6 +29,7 @@ namespace pgn
 		void OnTagRemove(const std::string& zTag);
 
 		void Reset();
+		void AddString(const std::string& zName);
 		bool Qualify(cEntity e) const;
 
 		//! Access data

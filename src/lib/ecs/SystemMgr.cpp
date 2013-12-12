@@ -34,12 +34,14 @@ namespace pgn
 			auto pdoc = file_to_json(ECS.GetDataPath() + s);
 			ImportQueries(pdoc.get());
 		}
+		/*
 		read_json_vector(fnames, zRoot["SystemsFile"]);
 		for(auto s : fnames)
 		{
 			auto pdoc = file_to_json(ECS.GetDataPath() + s);
 			ImportSystems(pdoc.get());
 		}
+		*/
 		return true;
 	}
 
@@ -110,6 +112,22 @@ namespace pgn
 		mQueries[zName] = zPtr;
 	}
 
+	//----------------------------------------------------------------
+	cQueryExpressionSptr cSystemMgr::GetQuery(const std::string& zName)
+	{
+		auto it = mQueries.find(zName);
+		if (it == mQueries.end())
+		{
+			auto qexp = std::shared_ptr<cQueryExpression>(new cQueryExpression());
+			qexp->AddString(zName);
+			AddQuery(zName, qexp);
+			return qexp;
+		}
+		else
+			return it->second;
+	}
+
+	//----------------------------------------------------------------
 	template<>
 	void to_json<cSystemMgr>(const cSystemMgr& zMgr, JsonWriter& writer)
 	{

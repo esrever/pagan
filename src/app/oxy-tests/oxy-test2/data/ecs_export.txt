@@ -891,126 +891,21 @@
     },
     "SystemMgr": {
         "Queries": {
-            "1494302680": {
+            "alias": {
                 "Tags": [],
                 "Tags-not": [],
-                "Mask": [
-                    "struct pgn::cmp::cKeyActionMapper"
-                ],
+                "Mask": [],
                 "Mask-not": []
             },
-            "3696222966": {
+            "pgn::cmp::cMapWindow": {
                 "Tags": [],
                 "Tags-not": [],
                 "Mask": [
                     "struct pgn::cmp::cMapWindow"
                 ],
                 "Mask-not": []
-            },
-            "519867310": {
-                "Tags": [
-                    "log:game_log"
-                ],
-                "Tags-not": [],
-                "Mask": [],
-                "Mask-not": []
-            },
-            "742208814": {
-                "Tags": [],
-                "Tags-not": [],
-                "Mask": [
-                    "struct pgn::cmp::cLog"
-                ],
-                "Mask-not": []
-            },
-            "alias": {
-                "Tags": [],
-                "Tags-not": [],
-                "Mask": [],
-                "Mask-not": []
             }
         },
-        "Systems": [
-            {
-                "4294967295": {
-                    "Base": {
-                        "Name": "KeyboardHandle",
-                        "Desc": "read keys and propagate to keyactionmap components. listens to keystate changes"
-                    },
-                    "QueryKeyActionMapper": {
-                        "Tags": [],
-                        "Tags-not": [],
-                        "Mask": [
-                            "struct pgn::cmp::cKeyActionMapper"
-                        ],
-                        "Mask-not": []
-                    },
-                    "QueryDevConsole": {
-                        "Tags": [],
-                        "Tags-not": [],
-                        "Mask": [
-                            "struct pgn::cmp::cKeyActionMapper"
-                        ],
-                        "Mask-not": []
-                    }
-                }
-            },
-            {
-                "4294967295": {
-                    "Base": {
-                        "Name": "AlmightyLogger",
-                        "Desc": "log events from the game or the system"
-                    },
-                    "QueryLog": {
-                        "Tags": [],
-                        "Tags-not": [],
-                        "Mask": [
-                            "struct pgn::cmp::cLog"
-                        ],
-                        "Mask-not": []
-                    },
-                    "QueryLogListener": {
-                        "Tags": [
-                            "log:game_log"
-                        ],
-                        "Tags-not": [],
-                        "Mask": [],
-                        "Mask-not": []
-                    }
-                }
-            },
-            {
-                "4294967295": {
-                    "Base": {
-                        "Name": "Move 'n' stuff",
-                        "Desc": "moves stuff"
-                    },
-                    "QueryLog": {
-                        "Tags": [],
-                        "Tags-not": [],
-                        "Mask": [
-                            "struct pgn::cmp::cLog"
-                        ],
-                        "Mask-not": []
-                    }
-                }
-            },
-            {
-                "4294967295": {
-                    "Base": {
-                        "Name": "MapWindow",
-                        "Desc": "updates / handles events"
-                    },
-                    "QueryMapWindow": {
-                        "Tags": [],
-                        "Tags-not": [],
-                        "Mask": [
-                            "struct pgn::cmp::cMapWindow"
-                        ],
-                        "Mask-not": []
-                    }
-                }
-            }
-        ]
+        "Systems": []
     }
 }
