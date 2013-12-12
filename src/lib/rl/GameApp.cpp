@@ -67,7 +67,7 @@ namespace pgn
 		// Now do the level loading stuff
 		auto& lvlEntity = *ECS.mEntityMgr->TaggedEntities().find("CurrentLevel")->second.begin();
 		auto ed = ECS.mEntityMgr->GetEntityData().find(lvlEntity);
-		pgn::evt::cLevelLoaded::mSig.emit(ed);
+		pgn::cActionLevelLoad::RunEvent(ed);
 
 		FILE * fp = fopen("ecs_export.txt", "wt");
 		rapidjson::StringBuffer strbuf;

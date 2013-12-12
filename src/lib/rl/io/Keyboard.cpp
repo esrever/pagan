@@ -50,6 +50,6 @@ namespace pgn
 	{
 		mKeyStates.at(key) = state;
 		// emit signal
-		evt::cKeyState::mSig.emit(key, state);
+		cActionKeyState::RunEvent(key, state);
 	}
 }

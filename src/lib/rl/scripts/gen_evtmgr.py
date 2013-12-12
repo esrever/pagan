@@ -40,6 +40,27 @@ def create_typedefs():
 #print "\n".join(create_enum_decl())
 #print "\n".join(create_typedefs())
 
+def generate_action_source():
+    pgnlines = []
+    sep1 = "//" + "".join(["-" for i in range(100)])
+    sep2 = "//" + "".join(["#" for i in range(100)])
+    for e in events:
+        eup = evt2constant(e[0])
+        ecc = evt2camelcase(e[0])
+        args_template = ", ".join(e[1])
+        args = []
+        for i in range(len(e[1])):
+            if e[1][i] != "void":
+                args.append("%s arg%d"%(e[1][i], i))
+        args = ", ".join(args)
+        
+    
+        
+        classname = "cAction<size_t(evt::eRL::%s), %s>"%( eup, args_template)
+        pgnlines += [sep2,sep1,"template<>","bool %s::Run(%s)"%(classname,args),"{","\tassert(false);","\treturn false;","}","\n",sep1]
+        pgnlines += ["template<>","void %s::Event(%s)"%(classname,args),"{","\tassert(false);","}","\n"]
+        
+    return nswrap( "pgn", pgnlines)
 
 def generate_events_header():
     lines = ["#pragma once\n"];
@@ -219,9 +240,9 @@ s_register_source = "\n".join(generate_register_events())
 s_ehq_header = "\n".join(generate_event_handler_query_header())
 s_ehq_source = "\n".join(generate_event_handler_query_source())
 
-write_to_file("../events/events.h",s_evt_header)
-write_to_file("../events/events.cpp",s_evt_source)
-write_to_file("../events/events_reg.cpp",s_evtreg_source)
-#write_to_file("../events/evt_register.cpp",s_register_source)
-#write_to_file("../events/EventHandlerQueries.h",s_ehq_header)
-#write_to_file("../events/EventHandlerQueries.cpp",s_ehq_source)
+
+print "\n".join(generate_action_source())
+
+#write_to_file("../events/events.h",s_evt_header)
+#write_to_file("../events/events.cpp",s_evt_source)
+#write_to_file("../events/events_reg.cpp",s_evtreg_source)

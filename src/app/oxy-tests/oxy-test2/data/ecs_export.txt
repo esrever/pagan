@@ -896,14 +896,6 @@
                 "Tags-not": [],
                 "Mask": [],
                 "Mask-not": []
-            },
-            "pgn::cmp::cMapWindow": {
-                "Tags": [],
-                "Tags-not": [],
-                "Mask": [
-                    "struct pgn::cmp::cMapWindow"
-                ],
-                "Mask-not": []
             }
         },
         "Systems": []
