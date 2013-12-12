@@ -58,12 +58,12 @@ namespace pgn
 			//! The event that others can listen to
 			static void Event(Args...);
 
-			inline static void RunEvent(Args...)
+			inline static void RunEvent(Args... args)
 			{
-				if ( Run( Args... ) )
+				if ( Run( args... ) )
 				{
-					cEvent< N, Args...>::mSig.emit(Args...);
-					Event(Args...);
+					cEvent< N, Args...>::mSig.emit(args...);
+					Event(args...);
 				}
 			}
 	};	
