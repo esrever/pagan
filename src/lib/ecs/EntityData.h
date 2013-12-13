@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include <string>
 
 #include "EntityComponents.h"
@@ -8,8 +9,9 @@ namespace pgn
 {
 	struct cEntityData
 	{
-		std::string		  mName;
-		cEntityComponents mComponents;
+		std::string					mName;
+		cEntityComponents			mComponents;
+		std::vector<std::string>	mTags;			// TODO: Add tags, entitymgr listen to tag add, etc
 	};
 
 	typedef std::map<cEntity, cEntityData>::const_iterator cEntityWithData;
@@ -28,6 +30,7 @@ namespace pgn
 		writer.StartObject();
 		JsonWriter_AddMember("Name", zObj.mName, writer);
 		JsonWriter_AddMember("Components", zObj.mComponents, writer);
+		JsonWriter_AddMember("Tags", zObj.mTags, writer);
 		writer.EndObject();
 	}
 }

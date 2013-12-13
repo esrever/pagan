@@ -21,10 +21,12 @@ static const char * dir2text_full[] = { "south-west", "south", "south-east", "we
 
 namespace pgn
 {
+	cActionBindings::action_map_type cActionBindings::mActionTypes;
+
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::LEVEL_CREATE), cEntityWithData>::Run(cEntityWithData arg0)
+	bool cAction<(evt::eRL::LEVEL_CREATE), cEntityWithData>::Run(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Run");
 		return true;
@@ -33,7 +35,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::LEVEL_CREATE), cEntityWithData>::Event(cEntityWithData arg0)
+	void cAction<(evt::eRL::LEVEL_CREATE), cEntityWithData>::Event(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Event");
 	}
@@ -42,7 +44,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::LEVEL_DESTROY), cEntityWithData>::Run(cEntityWithData arg0)
+	bool cAction<(evt::eRL::LEVEL_DESTROY), cEntityWithData>::Run(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelDestroy>::Run");
 		return true;
@@ -51,7 +53,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::LEVEL_DESTROY), cEntityWithData>::Event(cEntityWithData arg0)
+	void cAction<(evt::eRL::LEVEL_DESTROY), cEntityWithData>::Event(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Event");
 	}
@@ -60,7 +62,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::LEVEL_LOAD), cEntityWithData>::Run(cEntityWithData arg0)
+	bool cAction<(evt::eRL::LEVEL_LOAD), cEntityWithData>::Run(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelLoad>::Run");
 		return true;
@@ -69,17 +71,21 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::LEVEL_LOAD), cEntityWithData>::Event(cEntityWithData ed)
+	void cAction<(evt::eRL::LEVEL_LOAD), cEntityWithData>::Event(cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelLoad>::Run");
 
+		// TODO: Check if we have another level loaded, and unload if we do
+		auto queryLvl = ECS.mSystemMgr->GetQuery("tag:CurrentLevel");
+
+		// Get the tile layout from the input
 		std::shared_ptr< cComponent<pgn::cmp::cTileLayout>> map_ptr;
 		ed->second.mComponents.GetComponent(map_ptr);
 		auto& curmap = map_ptr->mData;
 		auto& mapdata = curmap.mData;
 
+		// Mapwindow response
 		auto queryWin = ECS.mSystemMgr->GetQuery("pgn::cmp::cMapWindow");
-
 		for (auto e : queryWin->Entities())
 		{
 			const auto& edmw = ECS.mEntityMgr->GetEntityData(e);
@@ -87,20 +93,27 @@ namespace pgn
 			edmw.mComponents.GetComponent(mwin_ptr);
 			auto & mwin = mwin_ptr->mData;
 
-
+			// for each tile
 			for (unsigned i = 0; i < mapdata.Height(); ++i)
-			for (unsigned j = 0; j < mapdata.Width(); ++j)
 			{
-				// get entity from 2d map
-				auto tile = mapdata(j, i);
+				for (unsigned j = 0; j < mapdata.Width(); ++j)
+				{
+					// get entity from 2d map
+					auto tile = mapdata(j, i);
 
-				// get sprite from entity
-				std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
-				tile->second.mComponents.GetComponent(sprite_ptr);
+					// get sprite from entity
+					std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
+					tile->second.mComponents.GetComponent(sprite_ptr);
 
-				// assign sprite
-				mwin.Tile(j, i)->setAnimFrame(sprite_ptr->mData.mSprite->getAnimFrame());
-				mwin.Tile(j, i)->setName(sprite_ptr->mData.mSprite->getName());
+					// assign sprite
+					mwin.Tile(j, i)->setAnimFrame(sprite_ptr->mData.mSprite->getAnimFrame());
+					mwin.Tile(j, i)->setName(sprite_ptr->mData.mSprite->getName());
+
+					// TODO: use visitor instead? 
+					// Also, mapwin should just reference! 
+					// On init, level tiles are already assigned to the level actor!
+					//	How does layout know at creation which level it's assigned to? have a separate func to connect them! or, templated OnComponentAdded
+				}
 			}
 
 			// TODO: attach all tiles to mapwindow actor or root.
@@ -113,7 +126,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::LEVEL_UNLOAD), cEntityWithData>::Run(cEntityWithData arg0)
+	bool cAction<(evt::eRL::LEVEL_UNLOAD), cEntityWithData>::Run(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelUnload>::Run");
 		return true;
@@ -122,7 +135,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::LEVEL_UNLOAD), cEntityWithData>::Event(cEntityWithData arg0)
+	void cAction<(evt::eRL::LEVEL_UNLOAD), cEntityWithData>::Event(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Event");
 	}
@@ -131,7 +144,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::EXIT_APPLICATION)>::Run()
+	bool cAction<(evt::eRL::EXIT_APPLICATION)>::Run()
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<ExitApplication>::Run");
 		return true;
@@ -140,7 +153,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::EXIT_APPLICATION)>::Event()
+	void cAction<(evt::eRL::EXIT_APPLICATION)>::Event()
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<ExitApplication>::Run");
 	}
@@ -149,7 +162,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::LOG), const std::string&, const std::string&>::Run(const std::string& zLoggerName, const std::string& zString)
+	bool cAction<(evt::eRL::LOG), const std::string&, const std::string&>::Run(const std::string& zLoggerName, const std::string& zString)
 	{
 		auto queryLog = ECS.mSystemMgr->GetQuery("pgn::cmp::cLog");
 		auto queryLogListener = ECS.mSystemMgr->GetQuery("tag:log:" + zLoggerName);
@@ -216,7 +229,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::LOG), const std::string&, const std::string&>::Event(const std::string& arg0, const std::string& arg1)
+	void cAction<(evt::eRL::LOG), const std::string&, const std::string&>::Event(const std::string& arg0, const std::string& arg1)
 	{
 		//assert(false);
 	}
@@ -225,7 +238,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::ACTION_IDLE), cEntityWithData>::Run(cEntityWithData arg0)
+	bool cAction<(evt::eRL::ACTION_IDLE), cEntityWithData>::Run(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<ActionIdle>::Run");
 		return true;
@@ -234,7 +247,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::ACTION_IDLE), cEntityWithData>::Event(cEntityWithData ed)
+	void cAction<(evt::eRL::ACTION_IDLE), cEntityWithData>::Event(cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<ActionIdle>::Event");
 		cActionLog::RunEvent("game_log", boost::str(boost::format("%s moved %s") % ed->second.mName.c_str() % dir2text_full[4]));
@@ -244,7 +257,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::ACTION_MOVE_ADJ), cEntityWithData, const glm::ivec2&>::Run(cEntityWithData ed, const glm::ivec2& vin)
+	bool cAction<(evt::eRL::ACTION_MOVE_ADJ), cEntityWithData, const glm::ivec2&>::Run(cEntityWithData ed, const glm::ivec2& vin)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<ActionMoveAdj>::Run");
 
@@ -271,7 +284,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::ACTION_MOVE_ADJ), cEntityWithData, const glm::ivec2&>::Event(cEntityWithData ed, const glm::ivec2& v)
+	void cAction<(evt::eRL::ACTION_MOVE_ADJ), cEntityWithData, const glm::ivec2&>::Event(cEntityWithData ed, const glm::ivec2& v)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<ActionMoveAdj>::Event");
 
@@ -284,7 +297,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::DOOR_OPEN), cEntityWithData, cEntityWithData>::Run(cEntityWithData ewho, cEntityWithData ed)
+	bool cAction<(evt::eRL::DOOR_OPEN), cEntityWithData, cEntityWithData>::Run(cEntityWithData ewho, cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<DoorOpen>::Run");
 
@@ -299,7 +312,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::DOOR_OPEN), cEntityWithData, cEntityWithData>::Event(cEntityWithData ewho, cEntityWithData ed)
+	void cAction<(evt::eRL::DOOR_OPEN), cEntityWithData, cEntityWithData>::Event(cEntityWithData ewho, cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<DoorOpen>::Event");
 
@@ -315,7 +328,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::DOOR_CLOSE), cEntityWithData, cEntityWithData>::Run(cEntityWithData ewho, cEntityWithData ed)
+	bool cAction<(evt::eRL::DOOR_CLOSE), cEntityWithData, cEntityWithData>::Run(cEntityWithData ewho, cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<DoorClose>::Run");
 
@@ -330,7 +343,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::DOOR_CLOSE), cEntityWithData, cEntityWithData>::Event(cEntityWithData ewho, cEntityWithData ed)
+	void cAction<(evt::eRL::DOOR_CLOSE), cEntityWithData, cEntityWithData>::Event(cEntityWithData ewho, cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<DoorClose>::Event");
 		std::shared_ptr< cComponent<pgn::cmp::cDoor>> door_ptr;
@@ -345,7 +358,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::KEY_STATE), const int, const oxygine::cKeyState&>::Run(const int key, const oxygine::cKeyState& state)
+	bool cAction<(evt::eRL::KEY_STATE), const int, const oxygine::cKeyState&>::Run(const int key, const oxygine::cKeyState& state)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<KeyState>::Run");
 
@@ -386,7 +399,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::KEY_STATE), const int, const oxygine::cKeyState&>::Event(const int, const oxygine::cKeyState&)
+	void cAction<(evt::eRL::KEY_STATE), const int, const oxygine::cKeyState&>::Event(const int, const oxygine::cKeyState&)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<KeyState>::Event");
 		//assert(false);

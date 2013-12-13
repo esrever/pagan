@@ -410,6 +410,36 @@
                     ]
                 }
             },
+            "system_log": {
+                "Name": "system_log",
+                "Tags": [],
+                "Data": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cLog"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "MaxLineNum": 100000
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                }
+            },
             "the_level": {
                 "Name": "the_level",
                 "Tags": [
@@ -474,13 +504,13 @@
         },
         "Tagged Entities": {
             "CurrentLevel": [
-                7
+                8
             ],
             "Player": [
                 0
             ],
             "log:game_log": [
-                3
+                4
             ]
         },
         "Entity data": {
@@ -518,7 +548,8 @@
                         null,
                         null
                     ]
-                }
+                },
+                "Tags": []
             },
             "1": {
                 "Name": "game_log",
@@ -547,9 +578,40 @@
                         null,
                         null
                     ]
-                }
+                },
+                "Tags": []
             },
             "2": {
+                "Name": "system_log",
+                "Components": {
+                    "Mask": [
+                        "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cLog"
+                    ],
+                    "Components": [
+                        {
+                            "Verbose": "",
+                            "Short": ""
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        {
+                            "MaxLineNum": 100000
+                        },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                "Tags": []
+            },
+            "3": {
                 "Name": "status_win",
                 "Components": {
                     "Mask": [
@@ -611,9 +673,10 @@
                         null,
                         null
                     ]
-                }
+                },
+                "Tags": []
             },
-            "3": {
+            "4": {
                 "Name": "log_win",
                 "Components": {
                     "Mask": [
@@ -675,9 +738,10 @@
                         null,
                         null
                     ]
-                }
+                },
+                "Tags": []
             },
-            "4": {
+            "5": {
                 "Name": "game_map_win",
                 "Components": {
                     "Mask": [
@@ -711,9 +775,10 @@
                         null,
                         null
                     ]
-                }
+                },
+                "Tags": []
             },
-            "5": {
+            "6": {
                 "Name": "wall_common",
                 "Components": {
                     "Mask": [
@@ -741,9 +806,10 @@
                             "IsObstacle": true
                         }
                     ]
-                }
+                },
+                "Tags": []
             },
-            "6": {
+            "7": {
                 "Name": "floor_common",
                 "Components": {
                     "Mask": [
@@ -771,9 +837,10 @@
                             "IsObstacle": false
                         }
                     ]
-                }
+                },
+                "Tags": []
             },
-            "7": {
+            "8": {
                 "Name": "the_level",
                 "Components": {
                     "Mask": [
@@ -798,9 +865,10 @@
                         {},
                         null
                     ]
-                }
+                },
+                "Tags": []
             },
-            "8": {
+            "9": {
                 "Name": "rat_common",
                 "Components": {
                     "Mask": [
@@ -834,9 +902,10 @@
                         null,
                         null
                     ]
-                }
+                },
+                "Tags": []
             },
-            "9": {
+            "10": {
                 "Name": "human_common",
                 "Components": {
                     "Mask": [
@@ -870,7 +939,8 @@
                         null,
                         null
                     ]
-                }
+                },
+                "Tags": []
             }
         },
         "ComponentTypeIds": [
@@ -893,6 +963,38 @@
         "Queries": {
             "alias": {
                 "Tags": [],
+                "Tags-not": [],
+                "Mask": [],
+                "Mask-not": []
+            },
+            "pgn::cmp::cLog": {
+                "Tags": [],
+                "Tags-not": [],
+                "Mask": [
+                    "struct pgn::cmp::cLog"
+                ],
+                "Mask-not": []
+            },
+            "pgn::cmp::cMapWindow": {
+                "Tags": [],
+                "Tags-not": [],
+                "Mask": [
+                    "struct pgn::cmp::cMapWindow"
+                ],
+                "Mask-not": []
+            },
+            "tag:CurrentLevel": {
+                "Tags": [
+                    "CurrentLevel"
+                ],
+                "Tags-not": [],
+                "Mask": [],
+                "Mask-not": []
+            },
+            "tag:log:system_log": {
+                "Tags": [
+                    "log:system_log"
+                ],
                 "Tags-not": [],
                 "Mask": [],
                 "Mask-not": []

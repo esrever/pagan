@@ -1,6 +1,9 @@
 #pragma once
 
+#include <vector>
+#include <oxygine-framework.h>
 #include <core/util/json_conversions.h>
+#include <ecs/EntityData.h>
 
 
 namespace pgn
@@ -11,7 +14,9 @@ namespace pgn
         //! 
         struct cLevel
         {
-            
+			//! Scene graph node that entities attach to 
+			oxygine::spActor mActor;
+			std::vector<cEntityWithData> mEntities;
         };
         
     }

@@ -11,7 +11,9 @@
             "PlayerMoveNE" : [97],
             "PlayerMoveSW" : [89],
             "PlayerMoveSE" : [91],
-            "PlayerIdle" : [93]
+            "PlayerIdle" : [93],
+            "AppQuit" : [41],
+            "AppHelp" : [58]
         },
         "pgn::cmp::cMapSprite" : "UNUSED:monsters:human"
     },
