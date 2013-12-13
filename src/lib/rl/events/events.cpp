@@ -26,8 +26,8 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::LEVEL_CREATE), cEntityWithData>::Run(cEntityWithData arg0)
 	{
-		//assert(false);
-		return false;
+		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Run");
+		return true;
 	}
 
 
@@ -35,7 +35,7 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::LEVEL_CREATE), cEntityWithData>::Event(cEntityWithData arg0)
 	{
-		//assert(false);
+		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Event");
 	}
 
 
@@ -44,8 +44,8 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::LEVEL_DESTROY), cEntityWithData>::Run(cEntityWithData arg0)
 	{
-		//assert(false);
-		return false;
+		cActionLog::RunEvent("system_log", "Called cAction<LevelDestroy>::Run");
+		return true;
 	}
 
 
@@ -53,7 +53,7 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::LEVEL_DESTROY), cEntityWithData>::Event(cEntityWithData arg0)
 	{
-		//assert(false);
+		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Event");
 	}
 
 
@@ -62,8 +62,8 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::LEVEL_LOAD), cEntityWithData>::Run(cEntityWithData arg0)
 	{
-		//assert(false);
-		return false;
+		cActionLog::RunEvent("system_log", "Called cAction<LevelLoad>::Run");
+		return true;
 	}
 
 
@@ -71,6 +71,8 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::LEVEL_LOAD), cEntityWithData>::Event(cEntityWithData ed)
 	{
+		cActionLog::RunEvent("system_log", "Called cAction<LevelLoad>::Run");
+
 		std::shared_ptr< cComponent<pgn::cmp::cTileLayout>> map_ptr;
 		ed->second.mComponents.GetComponent(map_ptr);
 		auto& curmap = map_ptr->mData;
@@ -113,8 +115,8 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::LEVEL_UNLOAD), cEntityWithData>::Run(cEntityWithData arg0)
 	{
-		//assert(false);
-		return false;
+		cActionLog::RunEvent("system_log", "Called cAction<LevelUnload>::Run");
+		return true;
 	}
 
 
@@ -122,7 +124,7 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::LEVEL_UNLOAD), cEntityWithData>::Event(cEntityWithData arg0)
 	{
-		//assert(false);
+		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Event");
 	}
 
 
@@ -131,8 +133,8 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::EXIT_APPLICATION)>::Run()
 	{
-		//assert(false);
-		return false;
+		cActionLog::RunEvent("system_log", "Called cAction<ExitApplication>::Run");
+		return true;
 	}
 
 
@@ -140,7 +142,7 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::EXIT_APPLICATION)>::Event()
 	{
-		//assert(false);
+		cActionLog::RunEvent("system_log", "Called cAction<ExitApplication>::Run");
 	}
 
 
@@ -225,8 +227,8 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::ACTION_IDLE), cEntityWithData>::Run(cEntityWithData arg0)
 	{
-		//assert(false);
-		return false;
+		cActionLog::RunEvent("system_log", "Called cAction<ActionIdle>::Run");
+		return true;
 	}
 
 
@@ -234,6 +236,7 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::ACTION_IDLE), cEntityWithData>::Event(cEntityWithData ed)
 	{
+		cActionLog::RunEvent("system_log", "Called cAction<ActionIdle>::Event");
 		cActionLog::RunEvent("game_log", boost::str(boost::format("%s moved %s") % ed->second.mName.c_str() % dir2text_full[4]));
 	}
 
@@ -243,6 +246,8 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::ACTION_MOVE_ADJ), cEntityWithData, const glm::ivec2&>::Run(cEntityWithData ed, const glm::ivec2& vin)
 	{
+		cActionLog::RunEvent("system_log", "Called cAction<ActionMoveAdj>::Run");
+
 		glm::ivec2 v = vin;
 
 		// Get entity data
@@ -268,6 +273,8 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::ACTION_MOVE_ADJ), cEntityWithData, const glm::ivec2&>::Event(cEntityWithData ed, const glm::ivec2& v)
 	{
+		cActionLog::RunEvent("system_log", "Called cAction<ActionMoveAdj>::Event");
+
 		// Log
 		int udir = v.x + 1 + (v.y + 1) * 3;
 		cActionLog::RunEvent("game_log", boost::str(boost::format("%s moved %s") % ed->second.mName.c_str() % dir2text_full[udir]));
@@ -279,6 +286,8 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::DOOR_OPEN), cEntityWithData, cEntityWithData>::Run(cEntityWithData ewho, cEntityWithData ed)
 	{
+		cActionLog::RunEvent("system_log", "Called cAction<DoorOpen>::Run");
+
 		std::shared_ptr< cComponent<pgn::cmp::cDoor>> door_ptr;
 		ed->second.mComponents.GetComponent(door_ptr);
 		bool ok = door_ptr->mData.mIsClosed;
@@ -292,6 +301,8 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::DOOR_OPEN), cEntityWithData, cEntityWithData>::Event(cEntityWithData ewho, cEntityWithData ed)
 	{
+		cActionLog::RunEvent("system_log", "Called cAction<DoorOpen>::Event");
+
 		std::shared_ptr< cComponent<pgn::cmp::cDoor>> door_ptr;
 		std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
 		ed->second.mComponents.GetComponent(door_ptr);
@@ -306,6 +317,8 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::DOOR_CLOSE), cEntityWithData, cEntityWithData>::Run(cEntityWithData ewho, cEntityWithData ed)
 	{
+		cActionLog::RunEvent("system_log", "Called cAction<DoorClose>::Run");
+
 		std::shared_ptr< cComponent<pgn::cmp::cDoor>> door_ptr;
 		ed->second.mComponents.GetComponent(door_ptr);
 		bool ok = !door_ptr->mData.mIsClosed;
@@ -319,6 +332,7 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::DOOR_CLOSE), cEntityWithData, cEntityWithData>::Event(cEntityWithData ewho, cEntityWithData ed)
 	{
+		cActionLog::RunEvent("system_log", "Called cAction<DoorClose>::Event");
 		std::shared_ptr< cComponent<pgn::cmp::cDoor>> door_ptr;
 		std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
 		ed->second.mComponents.GetComponent(door_ptr);
@@ -333,6 +347,8 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::KEY_STATE), const int, const oxygine::cKeyState&>::Run(const int key, const oxygine::cKeyState& state)
 	{
+		cActionLog::RunEvent("system_log", "Called cAction<KeyState>::Run");
+
 		// Debug key presses
 		//std::cout << boost::str(boost::format("%s - %s - %d\n")% (state.mPressed ? "pressed" : "released")%(state.mRepeat ? "repeat" : "no-repeat")%key );
 
@@ -372,6 +388,7 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eRL::KEY_STATE), const int, const oxygine::cKeyState&>::Event(const int, const oxygine::cKeyState&)
 	{
+		cActionLog::RunEvent("system_log", "Called cAction<KeyState>::Event");
 		//assert(false);
 	}
 

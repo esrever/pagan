@@ -62,8 +62,8 @@ namespace pgn
 			{
 				if ( Run( args... ) )
 				{
-					cEvent< N, Args...>::mSig.emit(args...);
 					Event(args...);
+					cEvent< N, Args...>::mSig.emit(args...);
 				}
 			}
 	};	

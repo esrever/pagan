@@ -22,6 +22,14 @@
             "MaxLineNum" : 100000
             }
     },
+    
+    {
+        "archetype" : "common",
+        "name" : "system_log",
+        "pgn::cmp::cLog" : {
+            "MaxLineNum" : 100000
+            }
+    },
     {
         "archetype" : "common",
         "name" : "status_win",
