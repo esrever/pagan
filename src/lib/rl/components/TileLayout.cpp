@@ -1,4 +1,5 @@
 #include "TileLayout.h"
+#include "MapSprite.h"
 
 #include <ecs/ecs.h>
 
@@ -27,10 +28,28 @@ namespace pgn
 		zData.mDefaultFloor = ecs.mEntityMgr->GetEntityData().find(ecs.mEntityMgr->InstantiateExemplar(df));
 		zData.mDefaultDoor = ecs.mEntityMgr->GetEntityData().find(ecs.mEntityMgr->InstantiateExemplar(dd));
 
+		zData.mLayoutNode = new oxygine::Actor;
+
 		zData.mData.Resize(dims.x, dims.y);
-		for (unsigned i = 0; i < dims.y;++i)
+		for (unsigned i = 0; i < dims.y; ++i)
+		{
 			for (unsigned j = 0; j < dims.x; ++j)
-				zData.mData(j, i) = rand() & 1 ? zData.mDefaultWall : zData.mDefaultFloor;
+			{
+				// TODO: use visitors?
+				auto ed = rand() & 1 ? ECS.mEntityMgr->CloneEntity(zData.mDefaultWall) : ECS.mEntityMgr->CloneEntity(zData.mDefaultFloor);
+				std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
+				ed->second.mComponents.GetComponent(sprite_ptr);
+
+				//set positions
+				sprite_ptr->mData.mSprite->setPosition(float(j), float(i));
+
+				//Attach to layout node
+				sprite_ptr->mData.mSprite->attachTo(zData.mLayoutNode);
+				zData.mData(j, i) = ed;
+
+				//TODO: add level position component!
+			}
+		}
 
         return true;
 	}

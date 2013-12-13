@@ -49,6 +49,7 @@ namespace pgn
 			cEntity InstantiateEntity(const std::string& zArchName,const std::string& zExemplarName);
 			cExemplar ArchetypeToExemplar(const std::string& zArchName);
 			cEntity InstantiateExemplar(const std::string& zExemplarName);
+			cEntityWithData CloneEntity(cEntityWithData ed);
 
 			//! Component add/remove
 			void AddComponentPtr(cEntity zEntity, cComponentBaseSptr zComponent); 

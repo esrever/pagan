@@ -34,4 +34,17 @@ namespace pgn
 		JsonWriter_AddMember("Components", zObj.Components(), writer);
 		writer.EndObject();
 	}
+
+	cEntityComponents cEntityComponents::Clone() const
+	{
+		cEntityComponents ec;
+		ec.mMask = mMask;
+		for (auto x : mComponents)
+		{
+			if (x)
+				ec.AddComponent(x->Clone());
+		}
+
+		return ec;
+	}
 }

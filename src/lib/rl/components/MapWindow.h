@@ -12,21 +12,25 @@ namespace pgn
 {
     namespace cmp
     {
-    
+		struct cLevelPosition;
         //! 
         struct cMapWindow
         {
 		public:
 
-			oxygine::spSprite& Tile(size_t col, size_t row) { return mTiles.at(col + row*mCellDims.x); }
+			//oxygine::spSprite& Tile(size_t col, size_t row) { return mTiles.at(col + row*mCellDims.x); }
 
-		private:
-			DECL_JSON_PGN_FRIEND
+		//private:
+		//	DECL_JSON_PGN_FRIEND
 
-			std::vector<oxygine::spSprite> mTiles;
+			//std::vector<oxygine::spSprite> mTiles;
+			glm::uvec2 mStartPos;
 			glm::uvec2 mCellDims;
 			glm::uvec2 mTileDims;
 			oxygine::spActor mTileWin;
+
+			
+			oxygine::Vector2 LevelToScreenCoords(const cLevelPosition& pos);
 			
         };
         

@@ -21,6 +21,8 @@ namespace pgn
 		virtual void to_json(JsonWriter& zRoot) const = 0;//{}
 		virtual bool from_json(const rapidjson::Value& zRoot)=0;//{}
 
+		virtual std::shared_ptr<cComponentBase> Clone() const { return std::shared_ptr<cComponentBase>(); }
+
 	protected:
 		cComponentBase(){}
 	};

@@ -324,6 +324,19 @@ namespace pgn
 		return e;
 	}
 
+	cEntityWithData cEntityMgr::CloneEntity(cEntityWithData ed)
+	{
+		auto e = Create();
+		cEntityData edout;
+		auto& edin = ed->second;
+		edout.mName = edin.mName;
+		edout.mTags = edin.mTags;
+		edout.mComponents = edin.mComponents.Clone();
+		auto res = mEntityData.find(e);
+		res->second = edout;
+		return res;
+	}
+
 	//-------------------------------------------------------------------------------------------------
 	template<>
 	void to_json<cEntityMgr>(const cEntityMgr& zMgr, JsonWriter& writer)

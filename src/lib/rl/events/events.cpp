@@ -12,6 +12,7 @@
 #include <rl/components/Description.h>
 #include <rl/components/KeyActionMapper.h>
 #include <rl/components/LevelPosition.h>
+#include <rl/components/Level.h>
 #include <rl/components/Log.h>
 #include <rl/components/OutStream.h>
 #include <rl/components/TextWindow.h>
@@ -35,9 +36,19 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<(evt::eRL::LEVEL_CREATE), cEntityWithData>::Event(cEntityWithData arg0)
+	void cAction<(evt::eRL::LEVEL_CREATE), cEntityWithData>::Event(cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Event");
+
+		std::shared_ptr< cComponent<pgn::cmp::cTileLayout>> layout_ptr;
+		std::shared_ptr< cComponent<pgn::cmp::cLevel>> lvl_ptr;
+		ed->second.mComponents.GetComponent(layout_ptr);
+		ed->second.mComponents.GetComponent(lvl_ptr);
+		auto& curmap = layout_ptr->mData;
+		auto& mapdata = curmap.mData;
+
+		// Layout response: attach layout node to level node
+		layout_ptr->mData.mLayoutNode->attachTo(lvl_ptr->mData.mLevelNode);
 	}
 
 
@@ -78,10 +89,12 @@ namespace pgn
 		// TODO: Check if we have another level loaded, and unload if we do
 		auto queryLvl = ECS.mSystemMgr->GetQuery("tag:CurrentLevel");
 
-		// Get the tile layout from the input
-		std::shared_ptr< cComponent<pgn::cmp::cTileLayout>> map_ptr;
-		ed->second.mComponents.GetComponent(map_ptr);
-		auto& curmap = map_ptr->mData;
+		// Get the tile layout & level from the input
+		std::shared_ptr< cComponent<pgn::cmp::cTileLayout>> layout_ptr;
+		std::shared_ptr< cComponent<pgn::cmp::cLevel>> lvl_ptr;
+		ed->second.mComponents.GetComponent(layout_ptr);
+		ed->second.mComponents.GetComponent(lvl_ptr);
+		auto& curmap = layout_ptr->mData;
 		auto& mapdata = curmap.mData;
 
 		// Mapwindow response
@@ -93,7 +106,10 @@ namespace pgn
 			edmw.mComponents.GetComponent(mwin_ptr);
 			auto & mwin = mwin_ptr->mData;
 
-			// for each tile
+			// Attach level node to window node
+			lvl_ptr->mData.mLevelNode->attachTo(mwin.mTileWin);
+
+			// for each tile // TODO: use visitor instead? 
 			for (unsigned i = 0; i < mapdata.Height(); ++i)
 			{
 				for (unsigned j = 0; j < mapdata.Width(); ++j)
@@ -105,14 +121,8 @@ namespace pgn
 					std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
 					tile->second.mComponents.GetComponent(sprite_ptr);
 
-					// assign sprite
-					mwin.Tile(j, i)->setAnimFrame(sprite_ptr->mData.mSprite->getAnimFrame());
-					mwin.Tile(j, i)->setName(sprite_ptr->mData.mSprite->getName());
-
-					// TODO: use visitor instead? 
-					// Also, mapwin should just reference! 
-					// On init, level tiles are already assigned to the level actor!
-					//	How does layout know at creation which level it's assigned to? have a separate func to connect them! or, templated OnComponentAdded
+					sprite_ptr->mData.mSprite->setSize(float(mwin.mTileDims.x), float(mwin.mTileDims.y));
+					sprite_ptr->mData.mSprite->setPosition(float((j + mwin.mStartPos.x)*mwin.mTileDims.x), float((i + mwin.mStartPos.y)*mwin.mTileDims.y));
 				}
 			}
 
@@ -273,8 +283,10 @@ namespace pgn
 
 		// TODO: apply logic to check if we can move, apply movepoint reduction etc.
 
-		// TODO: temp!
+		// TODO: map to window! I need mapwindow's function to convert from level coords to screen coords
+		// TODO: use the function in the other events. Add LevelPositions where needed. Check render priority / attachTo order.
 		pos_ptr->mData.mPos += v;
+		sprite_ptr->mData.mSprite->setPosition( )
 		auto curspritepos = sprite_ptr->mData.mSprite->getPosition();
 		sprite_ptr->mData.mSprite->setPosition(curspritepos + oxygine::Vector2(32.0f * v.x, -32.0f * v.y));
 

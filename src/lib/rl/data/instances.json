@@ -92,6 +92,7 @@
     {
         "archetype" : "common",
         "name" : "the_level",
+        "pgn::cmp::cLevel" : {},
         "pgn::cmp::cTileLayout" : {
             "def_wall" : "wall_common",
             "def_floor" : "floor_common",

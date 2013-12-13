@@ -32,6 +32,8 @@ namespace pgn
 		template<class T>
 		bool HasComponent() const;
 
+		cEntityComponents Clone() const;
+
 	private:
 		ComponentSet mComponents;
 		component_mask_type mMask;

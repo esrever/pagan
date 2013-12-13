@@ -51,7 +51,14 @@ namespace pgn
 		
 		ecs.mEntityMgr->InstantiateExemplar("rat_common");
 		ecs.mEntityMgr->InstantiateExemplar("human_common");
-		
+	
+
+		// Now do the level loading stuff
+		auto& lvlEntity = *ECS.mEntityMgr->TaggedEntities().find("CurrentLevel")->second.begin();
+		auto ed = ECS.mEntityMgr->GetEntityData().find(lvlEntity);
+		pgn::cActionLevelCreate::RunEvent(ed);
+		pgn::cActionLevelLoad::RunEvent(ed);
+
 		// For all the created entities, add to the scene graph. TODO: later, add them only to the related level
 		for (auto ed : ecs.mEntityMgr->GetEntityData())
 		{
@@ -60,14 +67,9 @@ namespace pgn
 			if (ptr && ptr->mData.mSprite)
 			{
 				oxygine::getRoot()->addChild(ptr->mData.mSprite); // This affects only the hero! The bg tiles are already in
-				ptr->mData.mSprite->setPosition(-32, -32); // TODO: out of the field of view
+				//ptr->mData.mSprite->setPosition(-32, -32); // TODO: out of the field of view
 			}
 		}
-
-		// Now do the level loading stuff
-		auto& lvlEntity = *ECS.mEntityMgr->TaggedEntities().find("CurrentLevel")->second.begin();
-		auto ed = ECS.mEntityMgr->GetEntityData().find(lvlEntity);
-		pgn::cActionLevelLoad::RunEvent(ed);
 
 		FILE * fp = fopen("ecs_export.txt", "wt");
 		rapidjson::StringBuffer strbuf;

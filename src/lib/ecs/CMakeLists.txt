@@ -25,6 +25,7 @@ set(HEADER_FILES
     Component.h
     SystemBase.h
     Entity.h
+    EntityData.h
     Event.h
     EntityMgr.h
     ecs_config.h

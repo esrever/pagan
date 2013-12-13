@@ -15,7 +15,8 @@ namespace pgn
 	{
 		public:
 			typedef T datatype;
-		public:			
+		public:		
+			cComponent(const T& data = T()):mData(data){}
 			//! Get type index(for masks), statically
 			static unsigned short StaticTypeIndex() {return msTypeIndex;}
 			//! Get type index(for masks), virtually
@@ -28,6 +29,10 @@ namespace pgn
 
 			//! Object creator function
 			static std::shared_ptr<cComponentBase> Create() { return std::shared_ptr<cComponentBase>(new cComponent<T>());}
+
+
+			//! Component-specific cloning. Need to implement "T Clone(const T& val)"
+			virtual std::shared_ptr<cComponentBase> Clone() const { return std::dynamic_pointer_cast< cComponentBase >( std::make_shared<cComponent<T>>(::pgn::Clone(mData))); }
 			
 		public:
 			T mData;

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <oxygine-framework.h>
 #include <core/container/Array2D.h>
 #include <core/util/json_conversions.h>
 
@@ -14,6 +15,8 @@ namespace pgn
         //! 
         struct cTileLayout
         {
+			oxygine::spActor mLayoutNode;
+
 			cArray2D<cEntityWithData> mData;
 			
 			cEntityWithData mDefaultWall;

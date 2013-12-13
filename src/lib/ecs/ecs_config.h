@@ -42,4 +42,9 @@ namespace evt
 	};
 }
 
+//------------------------------------------------------------------------
+//! At the moment I'm using these for entities that have location. Not sure when I'll be cloning monsters
+template<class T>
+T Clone(const T& val) { return val; }
+
 }
