@@ -11,16 +11,22 @@ namespace pgn
 	{
 		std::string					mName;
 		cEntityComponents			mComponents;
-		std::vector<std::string>	mTags;			// TODO: Add tags, entitymgr listen to tag add, etc
+		std::set<std::string>		mTags;
 	};
 
-	typedef std::map<cEntity, cEntityData>::const_iterator cEntityWithData;
+	//typedef std::map<cEntity, cEntityData>::value_type	   cEntityWithData;
+	typedef std::map<cEntity, cEntityData>::iterator cEntityWithData;
+	typedef std::map<cEntity, cEntityData>::const_iterator cEntityWithDataConst;
 
 	namespace evt
 	{
+		typedef cEvent<size_t(eBasicECS::ENTITY_CREATED), cEntityWithData> cEntityCreated;
+		typedef cEvent<size_t(eBasicECS::ENTITY_DESTROY), cEntityWithData> cEntityDestroy;
 		typedef cEvent<size_t(eBasicECS::COMPONENT_ADDED), cEntityWithData, unsigned short> cComponentAdded;
 		typedef cEvent<size_t(eBasicECS::COMPONENTS_ADDED), cEntityWithData> cComponentsAdded;
 		typedef cEvent<size_t(eBasicECS::COMPONENT_REMOVE), cEntityWithData, unsigned short> cComponentRemove;
+		typedef cEvent<size_t(eBasicECS::ENTITY_TAGGED), cEntityWithData, const std::string&> cEntityTagged;
+		typedef cEvent<size_t(eBasicECS::ENTITY_UNTAG), cEntityWithData, const std::string&> cEntityUntag;
 	}
 
 	//---------------------------------------------
@@ -34,3 +40,15 @@ namespace pgn
 		writer.EndObject();
 	}
 }
+
+/*
+inline bool operator < (const pgn::cEntityWithData& e0, const pgn::cEntityWithData& e1)
+{
+	return e0->first < e1->first;
+}
+
+inline bool operator < (const pgn::cEntityWithDataConst& e0, const pgn::cEntityWithDataConst& e1)
+{
+	return e0->first < e1->first;
+}
+*/

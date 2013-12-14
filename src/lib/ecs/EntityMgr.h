@@ -34,7 +34,6 @@ namespace pgn
 	class cEntityMgr
 	{
 		public:
-			typedef std::map<std::string, std::set<cEntity>> tagged_entity_map;
 			typedef std::function< std::shared_ptr<cComponentBase>() > component_creator_fun;
 		public:
 			cEntityMgr();
@@ -42,38 +41,40 @@ namespace pgn
 			virtual ~cEntityMgr(){}
 
 			//! Entity create/destroy
-			cEntity Create();
-			void Destroy(cEntity zEntity);
+			cEntityWithData Create();
+			void Destroy(cEntityWithData zEntity);
 
 			//! Instantiations
-			cEntity InstantiateEntity(const std::string& zArchName,const std::string& zExemplarName);
+			cEntityWithData InstantiateEntity(const std::string& zArchName,const std::string& zExemplarName);
 			cExemplar ArchetypeToExemplar(const std::string& zArchName);
-			cEntity InstantiateExemplar(const std::string& zExemplarName);
+			cEntityWithData InstantiateExemplar(const std::string& zExemplarName);
 			cEntityWithData CloneEntity(cEntityWithData ed);
 
 			//! Component add/remove
-			void AddComponentPtr(cEntity zEntity, cComponentBaseSptr zComponent); 
-			void RemoveComponentPtr(cEntity zEntity, cComponentBaseWptr zComponent); 
+			void AddComponentPtr(cEntityWithData zEntity, cComponentBaseSptr zComponent);
+			void RemoveComponentPtr(cEntityWithData zEntity, cComponentBaseWptr zComponent);
 			template<class T>
-			void AddComponent(cEntity zEntity, const T& zComponent); 
+			void AddComponent(cEntityWithData zEntity, const T& zComponent);
 			template<class T>
-			void RemoveComponent(cEntity zEntity, const T& zComponent); 
+			void RemoveComponent(cEntityWithData zEntity, const T& zComponent);
 
 			//! Entity marking/unmarking functions
-			void Tag(cEntity zEntity, const std::string& zTag);
-			void Untag(cEntity zEntity, const std::string& zTag);
+			void Tag(cEntityWithData zEntity, const std::string& zTag);
+			void Untag(cEntityWithData zEntity, const std::string& zTag);
 			void Untag(const std::string& zTag);
-			void Untag(cEntity zEntity);
+			void Untag(cEntityWithData zEntity);
+			void TaggedEntities(std::vector<cEntityWithData>& e, const std::string s);
+			cEntityWithData TaggedEntity(const std::string s);
 
 			//! Receiving functions
-			void OnEntityCreated(cEntity e);
-			void OnEntityDestroy(cEntity e);
+			void OnEntityCreated(cEntityWithData e);
+			void OnEntityDestroy(cEntityWithData e);
 
 			//! Accessors
 			const cEntityGlobals& Globals() const { return mGlobals; }
 			const cEntityData& GetEntityData(const cEntity& zEntity) const;
-			const std::map<cEntity, cEntityData>& GetEntityData() const;
-			const tagged_entity_map& TaggedEntities() const {return mTaggedEntities;}
+			const std::map<cEntity, cEntityData>& GetEntityData() const { return mEntityData; }
+			std::map<cEntity, cEntityData>& GetEntityData() { return mEntityData; }
 
 			//! Json
 			bool from_json(const rapidjson::Value& zRoot);
@@ -108,8 +109,6 @@ namespace pgn
 			//! Exemplars
 			std::map<std::string, cExemplar> mExemplars;
 
-			//! tags to entities
-			std::map<std::string, std::set<cEntity>> mTaggedEntities;
 			//! entities and components
 			std::map<cEntity, cEntityData> mEntityData;
 
@@ -127,16 +126,16 @@ namespace pgn
 
 	//------------------------------------------------------------------------
 	template<class T>
-	void cEntityMgr::AddComponent(cEntity zEntity, const T& zComponent)
+	void cEntityMgr::AddComponent(cEntityWithData zEntity, const T& zComponent)
 	{
-		AddComponentPtr(zEntity, std::make_shared<T>(zComponent) );
+		AddComponentPtr(zEntity, std::make_shared<T>(zComponent));
 	}
 
 	//------------------------------------------------------------------------
 	template<class T>
-	void cEntityMgr::RemoveComponent(cEntity zEntity, const T& zComponent)
+	void cEntityMgr::RemoveComponent(cEntityWithData zEntity, const T& zComponent)
 	{
-		RemoveComponentPtr(zEntity, std::make_shared<T>(zComponent) );
+		RemoveComponentPtr(zEntity, std::make_shared<T>(zComponent));
 	}
 
 	//------------------------------------------------------------------------

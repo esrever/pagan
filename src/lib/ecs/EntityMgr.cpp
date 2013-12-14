@@ -12,97 +12,89 @@ namespace pgn
 	,mOnEntityDestroy(Simple::slot(this, &cEntityMgr::OnEntityDestroy))
 	{}
 	//----------------------------------------------------------------
-	cEntity cEntityMgr::Create() 
+	cEntityWithData cEntityMgr::Create()
 	{ 
 		const auto& e = mEntityIdGen.New();
 		auto it = mEntityData.insert(std::pair<cEntity,cEntityData>(e,cEntityData()));
-		evt::cEntityCreated::mSig.emit(e);
-		return e;
+		evt::cEntityCreated::mSig.emit(it.first);
+		return it.first;
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Destroy(cEntity zEntity)
+	void cEntityMgr::Destroy(cEntityWithData zEntity)
 	{
 		evt::cEntityDestroy::mSig.emit(zEntity);
 		// and finally erase it
+		mEntityIdGen.Destroy(zEntity->first);
 		mEntityData.erase(zEntity);
-		mEntityIdGen.Destroy(zEntity);
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::OnEntityCreated(cEntity e)
+	void cEntityMgr::OnEntityCreated(cEntityWithData e)
 	{
 	}
 	
 	//----------------------------------------------------------------
-	void cEntityMgr::OnEntityDestroy( cEntity e)
+	void cEntityMgr::OnEntityDestroy( cEntityWithData e)
 	{
 		// untag from all groups
 		Untag(e);
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Tag(cEntity zEntity, const std::string& zTag)
+	void cEntityMgr::Tag(cEntityWithData zEntity, const std::string& zTag)
 	{
 		if (zTag == "Player")
-			mGlobals.mPC = GetEntityData().find(zEntity);
+			mGlobals.mPC = zEntity;
 		else if (zTag == "World")
-			mGlobals.mWorld = GetEntityData().find(zEntity);
-		mTaggedEntities[zTag].insert(zEntity);
+			mGlobals.mWorld = zEntity;
+		mEntityData[zEntity->first].mTags.insert(zTag);
 		evt::cEntityTagged::mSig.emit(zEntity, zTag);
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Untag(cEntity zEntity, const std::string& zTag)
+	void cEntityMgr::Untag(cEntityWithData zEntity, const std::string& zTag)
 	{
-		// Look for the tag
-		auto i1 = mTaggedEntities.find(zTag);
-		if(i1 != mTaggedEntities.end())
-		{
-			evt::cEntityUntag::mSig.emit(zEntity, zTag);
-			i1->second.erase(zEntity);
-		}
+		evt::cEntityUntag::mSig.emit(zEntity, zTag);
+		mEntityData[zEntity->first].mTags.erase(zTag);
 	}
 
 	//----------------------------------------------------------------
 	void cEntityMgr::Untag(const std::string& zTag)
 	{
 		// Look for the tag
-		auto i1 = mTaggedEntities.find(zTag);
-		if(i1 != mTaggedEntities.end())
+		foreach(ited,mEntityData)
 		{
-			evt::cTagRemove::mSig.emit(zTag);
-			i1->second.clear();
-			mTaggedEntities.erase(i1);
+			Untag(ited, zTag);
 		}
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::Untag(cEntity zEntity)
+	void cEntityMgr::Untag(cEntityWithData zEntity)
 	{
-		for(auto i : mTaggedEntities)
-			i.second.erase(zEntity);
+		foreach(ited, mEntityData)
+			if (ited->first == zEntity->first) // TODO: check for normal equality
+			{
+				for (const auto& tag : ited->second.mTags)
+					evt::cEntityUntag::mSig.emit(zEntity, tag);
+				ited->second.mTags.clear();
+			}
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::AddComponentPtr(cEntity zEntity, cComponentBaseSptr zComponent)
+	void cEntityMgr::AddComponentPtr(cEntityWithData zEntity, cComponentBaseSptr zComponent)
 	{
-		const auto& e = zEntity;
-		auto i = mEntityData.find(e);
-		assert(i !=mEntityData.end());
-		i->second.mComponents.AddComponent(zComponent);
-		evt::cComponentAdded::mSig.emit(i, zComponent->TypeIndex());
+		zEntity->second.mComponents.AddComponent(zComponent);
+		evt::cComponentAdded::mSig.emit(zEntity, zComponent->TypeIndex());
 	}
 
 	//----------------------------------------------------------------
-	void cEntityMgr::RemoveComponentPtr(cEntity zEntity, cComponentBaseWptr zComponent)
+	void cEntityMgr::RemoveComponentPtr(cEntityWithData zEntity, cComponentBaseWptr zComponent)
 	{
-		auto i = mEntityData.find(zEntity);
-		assert(i !=mEntityData.end());
-		evt::cComponentRemove::mSig.emit(i, zComponent.lock()->TypeIndex());
-		i->second.mComponents.RemoveComponent(zComponent.lock()->TypeIndex());
+		evt::cComponentRemove::mSig.emit(zEntity, zComponent.lock()->TypeIndex());
+		zEntity->second.mComponents.RemoveComponent(zComponent.lock()->TypeIndex());
 		//! No components -> destroy entity
-		if (i->second.mComponents.Mask().none())
+		if (zEntity->second.mComponents.Mask().none())
 			Destroy(zEntity);
 	}
 
@@ -129,12 +121,6 @@ namespace pgn
 		auto f = mEntityData.find(zEntity);
 		assert(f != mEntityData.end());
 		return f->second;
-	}
-
-	//----------------------------------------------------------------
-	const std::map<cEntity, cEntityData>& cEntityMgr::GetEntityData() const
-	{
-		return mEntityData;
 	}
 
 	//----------------------------------------------------------------
@@ -165,12 +151,15 @@ namespace pgn
 
 				cArchetype archetype;
 				archetype.mName = name;
-				archetype.mTags = tags;
+				archetype.mTags.insert( tags.begin(), tags.end());
 				for( const auto& x : inherited)
 				{
 					auto iter = mArchetypes.find(x);
-					if(iter != mArchetypes.end())
+					if (iter != mArchetypes.end())
+					{
 						archetype.mMask |= iter->second.mMask;
+						archetype.mTags.insert(iter->second.mTags.begin(), iter->second.mTags.end());
+					}
 				}
 				for( const auto& x : components)
 				{
@@ -227,7 +216,7 @@ namespace pgn
 					// Archetype to exemplar
 					cExemplar exemplar = ArchetypeToExemplar(archname);
 					exemplar.mName = instname;
-					exemplar.mTags.insert(exemplar.mTags.end(), tags.begin(), tags.end());
+					exemplar.mTags.insert( tags.begin(), tags.end());
 					for (auto c : componentPtrs)
 						exemplar.mComponents.AddComponent(c);
 
@@ -303,19 +292,19 @@ namespace pgn
 	}
 
 	//-------------------------------------------------------------------------------------------------
-	cEntity cEntityMgr::InstantiateExemplar(const std::string& zExemplarName)
+	cEntityWithData cEntityMgr::InstantiateExemplar(const std::string& zExemplarName)
 	{
 		cEntityData ed;
 		auto itEx = mExemplars.find(zExemplarName);
 		if (itEx == mExemplars.end())
-			return 0;
+			return mEntityData.end();
 		auto e = Create();
 		ed.mName = zExemplarName;// +"_instance";
 		ed.mComponents = itEx->second.mComponents;
+		ed.mTags = itEx->second.mTags;
 
-		auto it = mEntityData.find(e);
-		it->second = ed;
-		evt::cComponentsAdded::mSig.emit(it);
+		e->second = ed;
+		evt::cComponentsAdded::mSig.emit(e);
 
 		// Add tags
 		for (const auto& t : itEx->second.mTags)
@@ -326,15 +315,15 @@ namespace pgn
 
 	cEntityWithData cEntityMgr::CloneEntity(cEntityWithData ed)
 	{
+		// TODO: tags?
 		auto e = Create();
 		cEntityData edout;
 		auto& edin = ed->second;
 		edout.mName = edin.mName;
 		edout.mTags = edin.mTags;
 		edout.mComponents = edin.mComponents.Clone();
-		auto res = mEntityData.find(e);
-		res->second = edout;
-		return res;
+		e->second = edout;
+		return e;
 	}
 
 	//-------------------------------------------------------------------------------------------------
@@ -349,9 +338,6 @@ namespace pgn
 		// Exemplars
 		JsonWriter_AddMember("Exemplars", zMgr.mExemplars, writer);
 
-		// Tagged entities
-		JsonWriter_AddMember("Tagged Entities", zMgr.mTaggedEntities, writer);
-
 		// Entity Components
 		JsonWriter_AddMember("Entity data", zMgr.mEntityData, writer);
 
@@ -359,5 +345,24 @@ namespace pgn
 		JsonWriter_AddMember("ComponentTypeIds", zMgr.mComponentTypeIds, writer);
 
 		writer.EndObject();
+	}
+
+	void cEntityMgr::TaggedEntities(std::vector<cEntityWithData>& e, const std::string s)
+	{
+		e.clear();
+		foreach(ited, mEntityData)
+		{
+			auto it = std::find(ited->second.mTags.begin(), ited->second.mTags.end(), s);
+			if (it != ited->second.mTags.end())
+				e.push_back(ited);
+		}
+	}
+
+	cEntityWithData cEntityMgr::TaggedEntity(const std::string s)
+	{
+		std::vector<cEntityWithData> v;
+		TaggedEntities(v, s);
+		assert(v.size() == 1);
+		return v.at(0);
 	}
 }

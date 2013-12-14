@@ -11,7 +11,7 @@ namespace pgn
 	struct cArchetype
 	{
 		std::string				 mName;
-		std::vector<std::string> mTags;
+		std::set<std::string>	 mTags;
 		component_mask_type		 mMask;
 	};
 

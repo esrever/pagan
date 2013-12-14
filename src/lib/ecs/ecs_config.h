@@ -6,6 +6,8 @@
 
 #include <core/util/json_conversions.h>
 
+#define foreach( it, cont) for( auto it = cont##.begin(); it != cont##.end(); ++##it )
+
 namespace pgn
 {
 //! Declare constants

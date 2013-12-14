@@ -87,10 +87,10 @@ namespace pgn
 	void cQueryExpression::ScanEntities()
 	{
 		// Fetch all components that match the mask, from cEntityMgr
-		for (auto x : ECS.mEntityMgr->GetEntityData())
+		foreach(ited, ECS.mEntityMgr->GetEntityData())
 		{
-			if (Qualify(x.first))
-				mEntities.insert(x.first);
+			if (Qualify(ited))
+				mEntities.push_back(ited);
 		}
 	}
 
@@ -102,52 +102,50 @@ namespace pgn
 	//------------------------------------------------------------------------------
 	void cQueryExpression::OnComponentsAdded(cEntityWithData ec)
 	{
-		const auto& e = ec->first;
-		if (Qualify(e))
-			mEntities.insert(e);
+		if (Qualify(ec))
+			mEntities.push_back(ec);
 		else
-			mEntities.erase(e);
+			std::remove(mEntities.begin(), mEntities.end(), ec);
 	}
 	//------------------------------------------------------------------------------
 	void cQueryExpression::OnComponentRemove(cEntityWithData ec, unsigned short cid)
 	{
-		const auto& e = ec->first;
-		if (Qualify(e))
-			mEntities.insert(e);
+		if (Qualify(ec))
+			mEntities.push_back(ec);
 		else
-			mEntities.erase(e);
+			std::remove(mEntities.begin(), mEntities.end(), ec);
 	}
 
 	//------------------------------------------------------------------------------
-	void cQueryExpression::OnEntityCreated(cEntity e)
+	void cQueryExpression::OnEntityCreated(cEntityWithData e)
 	{
 		if (Qualify(e))
-			mEntities.insert(e);
+			mEntities.push_back(e);
 		else
-			mEntities.erase(e);
+			std::remove(mEntities.begin(), mEntities.end(), e);
 
 	}
 	//------------------------------------------------------------------------------
-	void cQueryExpression::OnEntityDestroy(cEntity e)
+	void cQueryExpression::OnEntityDestroy(cEntityWithData e)
 	{
-		mEntities.erase(e);
+		std::remove(mEntities.begin(), mEntities.end(), e);
 	}
 
 	//------------------------------------------------------------------------------
-	void cQueryExpression::OnEntityTagged(cEntity e, const std::string& zTag)
+	void cQueryExpression::OnEntityTagged(cEntityWithData e, const std::string& zTag)
 	{
 		if (Qualify(e))
-			mEntities.insert(e);
+			mEntities.push_back(e);
 		else
-			mEntities.erase(e);
+			std::remove(mEntities.begin(), mEntities.end(), e);
 	}
 	//------------------------------------------------------------------------------
-	void cQueryExpression::OnEntityUntag(cEntity e, const std::string& zTag)
+	void cQueryExpression::OnEntityUntag(cEntityWithData e, const std::string& zTag)
 	{
 		if (Qualify(e))
-			mEntities.insert(e);
+			mEntities.push_back(e);
 		else
-			mEntities.erase(e);
+			std::remove(mEntities.begin(), mEntities.end(), e);
 	}
 
 	//------------------------------------------------------------------------------
@@ -158,45 +156,28 @@ namespace pgn
 	}
 
 	//------------------------------------------------------------------------
-	bool cQueryExpression::Qualify(cEntity e) const
+	bool cQueryExpression::Qualify(cEntityWithData e) const
 	{
 		bool ret = true;
-
-		const auto& tagged_ents = ECS.mEntityMgr->TaggedEntities();
+		std::vector<cEntityWithData> tagged_ents;
 		// TAGS
-		// TODO: perhaps store iterators to the entity sets in ecs mgr for the selected tags?
+		// find if the entity 
+		const auto& etags = e->second.mTags;
 		for (const auto& x : mTags)
 		{
-			auto itset = tagged_ents.find(x);
-			if (itset != tagged_ents.end())
-			{
-				auto itent = itset->second.find(e);
-				if (itent == itset->second.end())
-					return false;
-			}
-			else
+			if (std::find(etags.begin(), etags.end(), x) == etags.end())
 				return false;
 		}
 
 		// TAGS_NOT
 		for (const auto& x : mTagsNot)
 		{
-			auto itset = tagged_ents.find(x);
-			if (itset != tagged_ents.end())
-			{
-				auto itent = itset->second.find(e);
-				if (itent != itset->second.end())
-					return false;
-			}
+			if (std::find(etags.begin(), etags.end(), x) != etags.end())
+				return false;
 		}
 		
-		const auto& entity_components = ECS.mEntityMgr->GetEntityData();
-		const auto& it = entity_components.find(e);
-		if (it == entity_components.end())
-			return false;
-		
 		// MASK
-		const component_mask_type& allmask = it->second.mComponents.Mask();
+		const component_mask_type& allmask = e->second.mComponents.Mask();
 		if (!is_subset(allmask,mMask))
 			return false;
 		// MASK_NOT

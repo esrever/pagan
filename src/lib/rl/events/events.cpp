@@ -101,9 +101,8 @@ namespace pgn
 		auto queryWin = ECS.mSystemMgr->GetQuery("pgn::cmp::cMapWindow");
 		for (auto e : queryWin->Entities())
 		{
-			const auto& edmw = ECS.mEntityMgr->GetEntityData(e);
 			std::shared_ptr< cComponent<pgn::cmp::cMapWindow>> mwin_ptr;
-			edmw.mComponents.GetComponent(mwin_ptr);
+			e->second.mComponents.GetComponent(mwin_ptr);
 			auto & mwin = mwin_ptr->mData;
 
 			// Attach level node to window node
@@ -177,12 +176,10 @@ namespace pgn
 		auto queryLog = ECS.mSystemMgr->GetQuery("pgn::cmp::cLog");
 		auto queryLogListener = ECS.mSystemMgr->GetQuery("tag:log:" + zLoggerName);
 		bool ok = true;
-		for (auto e : queryLog->Entities())
+		for (auto ec : queryLog->Entities())
 		{
 			// Get the log
 			std::shared_ptr< cComponent<pgn::cmp::cLog>> log_ptr;
-			auto ec = ECS.mEntityMgr->GetEntityData().find(e);
-			assert(ec != ECS.mEntityMgr->GetEntityData().end());
 
 			// Move to the next logger if it's not the one we're looking for
 			if (ec->second.mName != zLoggerName)
@@ -211,11 +208,8 @@ namespace pgn
 			auto log_string = pystring::join("\n", a_log.mLines);
 
 			// Find out all the listeners
-			for (auto e : queryLogListener->Entities())
+			for (auto ec : queryLogListener->Entities())
 			{
-				auto ec = ECS.mEntityMgr->GetEntityData().find(e);
-				assert(ec != ECS.mEntityMgr->GetEntityData().end());
-
 				// Does it have a TextWin?
 				std::shared_ptr< cComponent<pgn::cmp::cTextWindow>> twin_ptr;
 				ec->second.mComponents.GetComponent(twin_ptr);
@@ -283,12 +277,17 @@ namespace pgn
 
 		// TODO: apply logic to check if we can move, apply movepoint reduction etc.
 
-		// TODO: map to window! I need mapwindow's function to convert from level coords to screen coords
+		// TODO: MapWindow, with other single entities, should be in globals
 		// TODO: use the function in the other events. Add LevelPositions where needed. Check render priority / attachTo order.
 		pos_ptr->mData.mPos += v;
-		sprite_ptr->mData.mSprite->setPosition( )
-		auto curspritepos = sprite_ptr->mData.mSprite->getPosition();
-		sprite_ptr->mData.mSprite->setPosition(curspritepos + oxygine::Vector2(32.0f * v.x, -32.0f * v.y));
+		auto queryWin = ECS.mSystemMgr->GetQuery("pgn::cmp::cMapWindow");
+		for (auto e : queryWin->Entities())
+		{
+			std::shared_ptr< cComponent<pgn::cmp::cMapWindow>> mwin_ptr;
+			e->second.mComponents.GetComponent(mwin_ptr);
+			auto & mwin = mwin_ptr->mData;
+			sprite_ptr->mData.mSprite->setPosition(mwin.LevelToScreenCoords(pos_ptr->mData));
+		}
 
 		return true;
 	}
@@ -379,12 +378,10 @@ namespace pgn
 
 		auto queryKam = ECS.mSystemMgr->GetQuery("pgn::cmp::cKeyActionMapper");
 
-		for (auto e : queryKam->Entities())
+		for (auto ec : queryKam->Entities())
 		{
 			// Get the action mapper
 			std::shared_ptr< cComponent<pgn::cmp::cKeyActionMapper>> kam_ptr;
-			auto ec = ECS.mEntityMgr->GetEntityData().find(e);
-			assert(ec != ECS.mEntityMgr->GetEntityData().end());
 			ec->second.mComponents.GetComponent(kam_ptr);
 			pgn::cmp::cKeyActionMapper& kam = kam_ptr->mData;
 

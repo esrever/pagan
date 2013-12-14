@@ -12,7 +12,8 @@
     {
         "name" : "creature",
         "components" : ["pgn::cmp::cMovement","pgn::cmp::cLevelPosition","pgn::cmp::cMapSprite"],
-        "inherits" : ["common"]
+        "inherits" : ["common"],
+        "tags" : ["type:creature"]
     },
     {
         "name" : "pc",
@@ -23,7 +24,8 @@
     {
         "name" : "tile",
         "components" : ["pgn::cmp::cMapSprite","pgn::cmp::cTileObstacle"],
-        "inherits" : ["common"]
+        "inherits" : ["common"],
+        "tags" : ["type:tile"]
     },
     {
         "name" : "level",

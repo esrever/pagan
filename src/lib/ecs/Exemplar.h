@@ -12,7 +12,7 @@ namespace pgn
 	struct cExemplar
 	{
 		std::string				 mName;
-		std::vector<std::string> mTags;
+		std::set<std::string>	 mTags;
 		cEntityComponents		 mComponents;
 	};
 

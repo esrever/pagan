@@ -22,19 +22,19 @@ namespace pgn
 		void OnComponentAdded(cEntityWithData ec, unsigned short cid);
 		void OnComponentsAdded(cEntityWithData ec);
 		void OnComponentRemove(cEntityWithData ec, unsigned short cid);
-		void OnEntityCreated(cEntity e);
-		void OnEntityDestroy(cEntity e);
-		void OnEntityTagged(cEntity e, const std::string& zTag);
-		void OnEntityUntag(cEntity e, const std::string& zTag);
+		void OnEntityCreated(cEntityWithData e);
+		void OnEntityDestroy(cEntityWithData e);
+		void OnEntityTagged(cEntityWithData e, const std::string& zTag);
+		void OnEntityUntag(cEntityWithData e, const std::string& zTag);
 		void OnTagRemove(const std::string& zTag);
 
 		void Reset();
 		void AddString(const std::string& zName);
-		bool Qualify(cEntity e) const;
+		bool Qualify(cEntityWithData e) const;
 
 		//! Access data
 		size_t Hash() const { return mHash; }
-		const std::set<cEntity>& Entities() const { return mEntities; }
+		const std::vector<cEntityWithData>& Entities() const { return mEntities; }
 
 		bool operator < (const cQueryExpression &rhs) const;
 		bool operator == (const cQueryExpression &rhs) const;
@@ -69,7 +69,7 @@ namespace pgn
 		template<class T>
 		friend void to_json(const T& zObj, JsonWriter& zRoot);
 
-		std::set<cEntity> mEntities;
+		std::vector<cEntityWithData> mEntities;
 		
 		std::vector<std::string> mTags;
 		std::vector<std::string> mTagsNot;

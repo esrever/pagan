@@ -13,6 +13,7 @@
 #include <rl/GameApp.h>
 
 #include <rl/components/MapSprite.h>
+#include <rl/components/Level.h>
 
 namespace pgn
 {
@@ -54,22 +55,49 @@ namespace pgn
 	
 
 		// Now do the level loading stuff
-		auto& lvlEntity = *ECS.mEntityMgr->TaggedEntities().find("CurrentLevel")->second.begin();
-		auto ed = ECS.mEntityMgr->GetEntityData().find(lvlEntity);
+		auto ed = ecs.mEntityMgr->TaggedEntity("CurrentLevel");
 		pgn::cActionLevelCreate::RunEvent(ed);
 		pgn::cActionLevelLoad::RunEvent(ed);
 
 		// For all the created entities, add to the scene graph. TODO: later, add them only to the related level
+		std::shared_ptr<cComponent<cmp::cLevel>> lvl_ptr;
+		ed->second.mComponents.GetComponent(lvl_ptr);
+		std::vector<cEntityWithData> creature_ed, tile_ed;
+		ecs.mEntityMgr->TaggedEntities(creature_ed, "type:creature");
+		ecs.mEntityMgr->TaggedEntities(tile_ed, "type:tile");
+		for (auto ced : creature_ed)
+		{
+			std::shared_ptr<cComponent<cmp::cMapSprite>> ptr;
+			ced->second.mComponents.GetComponent(ptr);
+			if (ptr && ptr->mData.mSprite)
+			{
+				ptr->mData.mSprite->setPriority(1000);
+				ptr->mData.mSprite->attachTo(lvl_ptr->mData.mLevelNode);
+			}
+		}
+		for (auto ted : tile_ed)
+		{
+			std::shared_ptr<cComponent<cmp::cMapSprite>> ptr;
+			ted->second.mComponents.GetComponent(ptr);
+			if (ptr && ptr->mData.mSprite)
+				ptr->mData.mSprite->setPriority(0);
+		}
+			/*
 		for (auto ed : ecs.mEntityMgr->GetEntityData())
 		{
 			std::shared_ptr<cComponent<cmp::cMapSprite>> ptr;
 			ed.second.mComponents.GetComponent(ptr);
 			if (ptr && ptr->mData.mSprite)
 			{
-				oxygine::getRoot()->addChild(ptr->mData.mSprite); // This affects only the hero! The bg tiles are already in
-				//ptr->mData.mSprite->setPosition(-32, -32); // TODO: out of the field of view
+				auto pr = ptr->mData.mSprite->getPriority();
+				auto s = ptr->mData.mSprite->getName();
+				if (pystring::startswith(s, "UNUSED"))
+					oxygine::getRoot()->addChild(ptr->mData.mSprite); // This affects only the hero! The bg tiles are already in
+				// TODO: the above check is what saves me and shows the human. Otherwise tiles are top
+				// I need to set priorities! BG -> FG layers -> ITEM -> CHAR. Could do that in the xml file!
 			}
 		}
+		*/
 
 		FILE * fp = fopen("ecs_export.txt", "wt");
 		rapidjson::StringBuffer strbuf;

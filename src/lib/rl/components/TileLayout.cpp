@@ -24,9 +24,9 @@ namespace pgn
 		from_json(dd, zRoot["def_door"]);
 
 		auto& ecs = ECS;
-		zData.mDefaultWall = ecs.mEntityMgr->GetEntityData().find( ecs.mEntityMgr->InstantiateExemplar(dw));
-		zData.mDefaultFloor = ecs.mEntityMgr->GetEntityData().find(ecs.mEntityMgr->InstantiateExemplar(df));
-		zData.mDefaultDoor = ecs.mEntityMgr->GetEntityData().find(ecs.mEntityMgr->InstantiateExemplar(dd));
+		zData.mDefaultWall =  ecs.mEntityMgr->InstantiateExemplar(dw);
+		zData.mDefaultFloor = ecs.mEntityMgr->InstantiateExemplar(df);
+		zData.mDefaultDoor = ecs.mEntityMgr->InstantiateExemplar(dd);
 
 		zData.mLayoutNode = new oxygine::Actor;
 
