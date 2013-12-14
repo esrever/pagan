@@ -17,6 +17,10 @@ file(GLOB_RECURSE EVENT_SRCS
          RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
          ${CMAKE_CURRENT_SOURCE_DIR}/events/*.cpp
          ${CMAKE_CURRENT_SOURCE_DIR}/events/*.h)
+         
+file(GLOB_RECURSE RLLIB_SRCS
+         RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+         ${CMAKE_CURRENT_SOURCE_DIR}/map/gen/*.h)
 
 set(SOURCE_FILES
     EntityMgrRL.cpp
@@ -30,6 +34,7 @@ set(SOURCE_FILES
     resources/GameResources.cpp
     resources/FontLib.cpp
     resources/TileLib.cpp
+    map/dungen.cpp
 )
 
 set(HEADER_FILES
@@ -45,9 +50,11 @@ set(HEADER_FILES
     resources/GameResources.h
     resources/FontLib.h
     resources/TileLib.h
+    map/dungen.h
     ${COMPONENT_SRCS}
     #${SYSTEM_SRCS}
     ${EVENT_SRCS}
+    ${RLLIB_SRCS}
     
 )
 
