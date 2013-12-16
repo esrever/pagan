@@ -59,29 +59,6 @@ namespace pgn
 		pgn::cActionLevelCreate::RunEvent(ed);
 		pgn::cActionLevelLoad::RunEvent(ed);
 
-		// For all the created entities, add to the scene graph. TODO: later, add them only to the related level
-		std::shared_ptr<cComponent<cmp::cLevel>> lvl_ptr;
-		ed->second.mComponents.GetComponent(lvl_ptr);
-		std::vector<cEntityWithData> creature_ed, tile_ed;
-		ecs.mEntityMgr->TaggedEntities(creature_ed, "type:creature");
-		ecs.mEntityMgr->TaggedEntities(tile_ed, "type:tile");
-		for (auto ced : creature_ed)
-		{
-			std::shared_ptr<cComponent<cmp::cMapSprite>> ptr;
-			ced->second.mComponents.GetComponent(ptr);
-			if (ptr && ptr->mData.mSprite)
-			{
-				ptr->mData.mSprite->setPriority(1000);
-				ptr->mData.mSprite->attachTo(lvl_ptr->mData.mLevelNode);
-			}
-		}
-		for (auto ted : tile_ed)
-		{
-			std::shared_ptr<cComponent<cmp::cMapSprite>> ptr;
-			ted->second.mComponents.GetComponent(ptr);
-			if (ptr && ptr->mData.mSprite)
-				ptr->mData.mSprite->setPriority(0);
-		}
 			/*
 		for (auto ed : ecs.mEntityMgr->GetEntityData())
 		{

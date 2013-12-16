@@ -3,6 +3,7 @@
 #include <memory>
 #include <tuple>
 #include <bitset>
+#include <type_traits>
 
 #include <core/util/json_conversions.h>
 
@@ -15,6 +16,12 @@ struct Enum2String< T , size_t( T##::##V )>{\
 
 namespace pgn
 {
+	template<typename E>
+	const typename std::underlying_type<E>::type to_integral(E e)
+	{
+		return static_cast<typename std::underlying_type<E>::type>(e);
+	}
+
 	template<class T, size_t N>
 	struct Enum2String{};
 

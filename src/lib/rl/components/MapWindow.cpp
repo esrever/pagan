@@ -9,8 +9,8 @@ namespace pgn
 	//----------------------------------------------------------------------------------
 	oxygine::Vector2 cmp::cMapWindow::LevelToScreenCoords(const cmp::cLevelPosition& pos)
 	{
-		auto vpos = (mStartPos + pos.mPos)*mTileDims;
-		vpos.y = mCellDims.y*mTileDims.y - vpos.y;
+		auto vpos = (mStartPos + pos.mPos)*glm::ivec2(mTileDims);
+		vpos.y = (mCellDims.y-1)*mTileDims.y - vpos.y;
 		return oxygine::Vector2(vpos.x, vpos.y);
 	}
 

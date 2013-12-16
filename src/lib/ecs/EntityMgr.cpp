@@ -47,6 +47,8 @@ namespace pgn
 			mGlobals.mPC = zEntity;
 		else if (zTag == "World")
 			mGlobals.mWorld = zEntity;
+		else if (zTag == "MapWindow")
+			mGlobals.mMapWindow = zEntity;
 		mEntityData[zEntity->first].mTags.insert(zTag);
 		evt::cEntityTagged::mSig.emit(zEntity, zTag);
 	}

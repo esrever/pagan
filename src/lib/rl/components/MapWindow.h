@@ -24,7 +24,7 @@ namespace pgn
 		//	DECL_JSON_PGN_FRIEND
 
 			//std::vector<oxygine::spSprite> mTiles;
-			glm::uvec2 mStartPos;
+			glm::ivec2 mStartPos;
 			glm::uvec2 mCellDims;
 			glm::uvec2 mTileDims;
 			oxygine::spActor mTileWin;

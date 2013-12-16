@@ -3,6 +3,7 @@
 #include <ecs/ecs.h>
 
 #include "MapSprite.h"
+#include "LevelPosition.h"
 
 #include <rl/map/dungenrllib.h>
 
@@ -33,9 +34,13 @@ namespace pgn
 
 		zData.mLayoutNode = new oxygine::Actor;
 
-		cArray2D<size_t> mapvalues;
-		cDunGenRLLib_StdDungeon generator(10,true);
-		generator.Generate(mapvalues, dims.x, dims.y);
+		//RL::InitRandomness();
+		//cArray2D<size_t> mapvalues;
+		//cDunGenRLLib_StdDungeon generator(20,false);
+		//cDunGenRLLib_Caves generator;
+		//cDunGenRLLib_SpaceShuttle generator;
+		//cDunGenRLLib_AntNest generator;
+		//generator.Generate(mapvalues, dims.x, dims.y);
 
 		zData.mData.Resize(dims.x, dims.y);
 		for (unsigned i = 0; i < dims.y; ++i)
@@ -43,7 +48,8 @@ namespace pgn
 			for (unsigned j = 0; j < dims.x; ++j)
 			{
 				// TODO: use visitors?
-				//auto ed = rand() & 1 ? ECS.mEntityMgr->CloneEntity(zData.mDefaultWall) : ECS.mEntityMgr->CloneEntity(zData.mDefaultFloor);
+				auto ed = rand() & 1 ? ECS.mEntityMgr->CloneEntity(zData.mDefaultWall) : ECS.mEntityMgr->CloneEntity(zData.mDefaultFloor);
+				/*
 				cEntityWithData ed;
 				switch (mapvalues(j, i))
 				{
@@ -61,6 +67,7 @@ namespace pgn
 					default:
 						assert(false);
 				}
+				*/
 
 				std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
 				ed->second.mComponents.GetComponent(sprite_ptr);
@@ -73,6 +80,9 @@ namespace pgn
 				zData.mData(j, i) = ed;
 
 				//TODO: add level position component!
+				std::shared_ptr< cComponent<pgn::cmp::cLevelPosition>> lvlpos_ptr = std::make_shared< cComponent<pgn::cmp::cLevelPosition>>();
+				lvlpos_ptr->mData.mPos = glm::uvec2(j, i);
+				ed->second.mComponents.AddComponent(lvlpos_ptr);
 			}
 		}
 

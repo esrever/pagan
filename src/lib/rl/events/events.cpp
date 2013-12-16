@@ -96,37 +96,35 @@ namespace pgn
 		auto& mapdata = curmap.mData;
 
 		// Mapwindow response
-		auto queryWin = ECS.mSystemMgr->GetQuery("pgn::cmp::cMapWindow");
-		for (auto e : queryWin->Entities())
+		auto e = ECS.mEntityMgr->Globals().mMapWindow;
+		std::shared_ptr< cComponent<pgn::cmp::cMapWindow>> mwin_ptr;
+		e->second.mComponents.GetComponent(mwin_ptr);
+		auto & mwin = mwin_ptr->mData;
+
+		// Attach level node to window node
+		lvl_ptr->mData.mLevelNode->attachTo(mwin.mTileWin);
+
+		// for each tile // TODO: use visitor instead? 
+		for (unsigned i = 0; i < mapdata.Height(); ++i)
 		{
-			std::shared_ptr< cComponent<pgn::cmp::cMapWindow>> mwin_ptr;
-			e->second.mComponents.GetComponent(mwin_ptr);
-			auto & mwin = mwin_ptr->mData;
-
-			// Attach level node to window node
-			lvl_ptr->mData.mLevelNode->attachTo(mwin.mTileWin);
-
-			// for each tile // TODO: use visitor instead? 
-			for (unsigned i = 0; i < mapdata.Height(); ++i)
+			for (unsigned j = 0; j < mapdata.Width(); ++j)
 			{
-				for (unsigned j = 0; j < mapdata.Width(); ++j)
-				{
-					// get entity from 2d map
-					auto tile = mapdata(j, i);
+				// get entity from 2d map
+				auto tile = mapdata(j, i);
 
-					// get sprite from entity
-					std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
-					tile->second.mComponents.GetComponent(sprite_ptr);
-
-					sprite_ptr->mData.mSprite->setSize(float(mwin.mTileDims.x), float(mwin.mTileDims.y));
-					sprite_ptr->mData.mSprite->setPosition(float((j + mwin.mStartPos.x)*mwin.mTileDims.x), float((i + mwin.mStartPos.y)*mwin.mTileDims.y));
-				}
+				// get sprite from entity
+				std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
+				std::shared_ptr< cComponent<pgn::cmp::cLevelPosition>> pos_ptr;
+				tile->second.mComponents.GetComponent(sprite_ptr);
+				tile->second.mComponents.GetComponent(pos_ptr);
+				pos_ptr->mData.mLevel = ed;
+				sprite_ptr->mData.mSprite->setSize(float(mwin.mTileDims.x), float(mwin.mTileDims.y));
+				sprite_ptr->mData.mSprite->setPosition(mwin.LevelToScreenCoords(pos_ptr->mData));
 			}
-
-			// TODO: attach all tiles to mapwindow actor or root.
 		}
-
-		// TODO: Get player and position him in center of map. Do that to sprite too?
+		
+		auto epc = ECS.mEntityMgr->Globals().mPC;
+		cActionLocationChange::RunEvent(epc, ed, glm::ivec2(0, 0));
 	}
 
 
@@ -171,6 +169,7 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::LOG), const std::string&, const std::string&>::Run(const std::string& zLoggerName, const std::string& zString)
 	{
+		return true;
 		auto queryLog = ECS.mSystemMgr->GetQuery("pgn::cmp::cLog");
 		auto queryLogListener = ECS.mSystemMgr->GetQuery("tag:log:" + zLoggerName);
 		bool ok = true;
@@ -217,12 +216,14 @@ namespace pgn
 				}
 
 				// Does it have an OutStream?
+				/*
 				std::shared_ptr< cComponent<pgn::cmp::cOutStream>> os_ptr;
 				ec->second.mComponents.GetComponent(os_ptr);
 				if (os_ptr)
 				{
 
 				}
+				*/
 			}
 		}
 		return true;
@@ -267,25 +268,16 @@ namespace pgn
 
 		// Get entity data
 		std::shared_ptr< cComponent<pgn::cmp::cMovement>> move_ptr;
-		std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
 		std::shared_ptr< cComponent<pgn::cmp::cLevelPosition>> pos_ptr;
 		ed->second.mComponents.GetComponent(move_ptr);
-		ed->second.mComponents.GetComponent(sprite_ptr);
 		ed->second.mComponents.GetComponent(pos_ptr);
 
 		// TODO: apply logic to check if we can move, apply movepoint reduction etc.
 
 		// TODO: MapWindow, with other single entities, should be in globals
-		// TODO: use the function in the other events. Add LevelPositions where needed. Check render priority / attachTo order.
-		pos_ptr->mData.mPos += v;
-		auto queryWin = ECS.mSystemMgr->GetQuery("pgn::cmp::cMapWindow");
-		for (auto e : queryWin->Entities())
-		{
-			std::shared_ptr< cComponent<pgn::cmp::cMapWindow>> mwin_ptr;
-			e->second.mComponents.GetComponent(mwin_ptr);
-			auto & mwin = mwin_ptr->mData;
-			sprite_ptr->mData.mSprite->setPosition(mwin.LevelToScreenCoords(pos_ptr->mData));
-		}
+		// TODO: use the function in the other events. Add LevelPositions where needed.
+		glm::ivec2 newpos = pos_ptr->mData.mPos + v;
+		cActionLocationChange::RunEvent(ed, pos_ptr->mData.mLevel, newpos);
 
 		return true;
 	}
@@ -426,9 +418,57 @@ namespace pgn
 	template<>
 	void cAction<size_t(evt::eBasicECS::ENTITY_CREATED), cEntityWithData>::Event(cEntityWithData ed)
 	{
-		cActionLog::RunEvent("system_log", "Called cAction<EntityCreated>::Event");
-		// TODO: glue entity to level
-		// TODO: set render priority dep. on type
+		cActionLog::RunEvent("system_log", "Called cAction<EntityCreated>::Event");		
+		
+		// Set render priority dep. on type
+		std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
+		ed->second.mComponents.GetComponent(sprite_ptr);
+		if (sprite_ptr)
+		{
+			if (ed->second.mTags.find("type:tile_bg") != ed->second.mTags.end())
+				sprite_ptr->mData.mRenderPriority = eMapRenderOrder::DungeonElementBG;
+			else if (ed->second.mTags.find("type:creature") != ed->second.mTags.end())
+				sprite_ptr->mData.mRenderPriority = eMapRenderOrder::Creature;
+			else
+				sprite_ptr->mData.mRenderPriority = eMapRenderOrder::DungeonElementBG;
+			sprite_ptr->mData.mSprite->setPriority(to_integral(sprite_ptr->mData.mRenderPriority));
+		}
+	}
+
+	//####################################################################################################
+	//----------------------------------------------------------------------------------------------------
+	template<>
+	bool cAction<size_t(evt::eRL::LOCATION_CHANGE), cEntityWithData, cEntityWithData, const glm::ivec2&>::Run(cEntityWithData ewho, cEntityWithData elvl, const glm::ivec2& pos)
+	{	
+		std::shared_ptr< cComponent<pgn::cmp::cLevelPosition>> pos_ptr;
+		ewho->second.mComponents.GetComponent(pos_ptr);
+		pos_ptr->mData.mPos = pos;
+		return true;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------
+	template<>
+	void cAction<size_t(evt::eRL::LOCATION_CHANGE), cEntityWithData, cEntityWithData, const glm::ivec2&>::Event(cEntityWithData ewho, cEntityWithData elvl, const glm::ivec2& pos)
+	{
+		cActionLog::RunEvent("system_log", "Called cAction<LocationChange>::Run");
+
+		std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
+		std::shared_ptr< cComponent<pgn::cmp::cLevelPosition>> pos_ptr;
+		ewho->second.mComponents.GetComponent(sprite_ptr);
+		ewho->second.mComponents.GetComponent(pos_ptr);
+		auto e = ECS.mEntityMgr->Globals().mMapWindow;
+		std::shared_ptr< cComponent<pgn::cmp::cMapWindow>> mwin_ptr;
+		e->second.mComponents.GetComponent(mwin_ptr);
+		auto & mwin = mwin_ptr->mData;
+		sprite_ptr->mData.mSprite->setPosition(mwin.LevelToScreenCoords(pos_ptr->mData));
+
+		// Attach to level
+		pos_ptr->mData.mLevel = elvl;
+		std::shared_ptr< cComponent<pgn::cmp::cLevel>> level_ptr;
+		elvl->second.mComponents.GetComponent(level_ptr);
+		if ( level_ptr->mData.mLevelNode != sprite_ptr->mData.mSprite->getParent())
+			sprite_ptr->mData.mSprite->attachTo(level_ptr->mData.mLevelNode);
 	}
 
 }

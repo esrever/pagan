@@ -3,6 +3,8 @@
 #include <core/util/json_conversions.h>
 #include <glm/glm.hpp>
 
+#include <ecs/EntityData.h>
+
 namespace pgn
 {
     namespace cmp
@@ -11,7 +13,8 @@ namespace pgn
         //! 
         struct cLevelPosition
         {
-            glm::uvec2 mPos;
+            glm::ivec2 mPos;
+			cEntityWithData mLevel;
         };
         
     }

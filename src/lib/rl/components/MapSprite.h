@@ -7,13 +7,23 @@
 
 namespace pgn
 {
+	enum class eMapRenderOrder : short
+	{
+		DungeonElementBG = 0,
+		DungeonElementFG,
+		Item,
+		Creature,
+		Effect,
+		UI,
+	};
+
     namespace cmp
     {
-    
         //! 
         struct cMapSprite
         {
 			oxygine::spSprite mSprite;
+			eMapRenderOrder	  mRenderPriority;
         };
         
     }

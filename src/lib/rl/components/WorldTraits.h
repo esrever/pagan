@@ -6,7 +6,7 @@
 namespace pgn
 {
 	//! Type of entity wrt map
-	enum eMapType
+	enum class eMapType
 	{
 		MapBackground, // floor, wall, etc
 		MapObject,	   // altars, statues, etc

@@ -27,7 +27,8 @@ namespace pgn
 			ACTION_MOVE_ADJ,
 			DOOR_OPEN,
 			DOOR_CLOSE,
-            KEY_STATE
+            KEY_STATE,
+			LOCATION_CHANGE
 		};		
 
 		typedef cEvent<size_t(eRL::LEVEL_CREATE), cEntityWithData> cLevelCreate;
@@ -43,6 +44,7 @@ namespace pgn
 		typedef cEvent<size_t(eRL::DOOR_OPEN), cEntityWithData,cEntityWithData> cDoorOpen;
 		typedef cEvent<size_t(eRL::DOOR_CLOSE), cEntityWithData,cEntityWithData> cDoorClose;
 		typedef cEvent<size_t(eRL::KEY_STATE), const int, const oxygine::cKeyState&> cKeyState;
+		typedef cEvent<size_t(eRL::LOCATION_CHANGE), cEntityWithData, cEntityWithData, const glm::ivec2&> cLocationChange;
 	}
 
 	typedef cAction<size_t(evt::eRL::LEVEL_CREATE), cEntityWithData> cActionLevelCreate;
@@ -58,4 +60,5 @@ namespace pgn
 	typedef cAction<size_t(evt::eRL::DOOR_OPEN), cEntityWithData, cEntityWithData> cActionDoorOpen;
 	typedef cAction<size_t(evt::eRL::DOOR_CLOSE), cEntityWithData, cEntityWithData> cActionDoorClose;
 	typedef cAction<size_t(evt::eRL::KEY_STATE), const int, const oxygine::cKeyState&> cActionKeyState;
+	typedef cAction<size_t(evt::eRL::LOCATION_CHANGE), cEntityWithData, cEntityWithData, const glm::ivec2&> cActionLocationChange;
 }

@@ -87,7 +87,8 @@
         "pgn::cmp::cMapWindow" : {
             "cell_dims" : [24,16],
             "tile_dims" : [32,32]
-        }
+        },
+        "tags" : ["MapWindow"]
     },
     {
         "archetype" : "common",

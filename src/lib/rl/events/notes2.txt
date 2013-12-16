@@ -2,85 +2,24 @@ OnEntiyCreated: AFTER components have been added, do glueing stuff like layout t
 EntityType: categories and subcategories
 
 
-Tile Types:
-    DungeonElementBG
+MapRenderOrder (MapSprite)
+    DungeonElementBG=0
     DungeonElementFG
-    Creature
     Item
+    Creature
     Effect
     UI
     
+Create python script to generate the type hierarchy with categories and subcategories?
+But there's no single unique type... the above can be used as rendering types (MapRenderOrder)
     
-/--------------------------------------------------------
     
-#include <iostream>
-#include <cassert>
-
-using namespace std;
-
-template<class T, size_t N>
-struct Enum2String{};
-
-enum eMap
-{
-    tile,
-    creature
-};
-
-
-template<>
-struct Enum2String<eMap,size_t(eMap::tile)>{ 
-    static const char * Get() {return "tile";}
+// Visitors/Views:
+coord place_at_distance ( start )
+    start from given coord
+    for dir in directions:
+        res = CalcPath( start, dir, out_c)
+        if res
+            break
     
-    };
-    
-template<>
-struct StringEnum<eMap>
-{     
-    static StringEnum& Instance() {static StringEnum se; return se;}
-    
-    void Add(size_t e, const std::string& s) 
-    {
-        e2s[e] = s;
-    }
-    
-    const std::string& Get(size_t e) 
-    { 
-        return e2s[e];
-    }
-    
-    private:
-        std::map<size_t, std::string> e2s;
-};
-
-
-// decl bit
-template<> StringEnum< E >
-
-
-int main()
-{
-   cout << "Hello World" << endl; 
-   
-   
-   cout << Enum2String<eMap, eMap::tile>::Get();
-   
-   return 0;
-}
-
-//----------------------------------------------------------
-
-class cEnumString
-{
-    public:
-        
-        const std::string& String( size_t e)  const {return mEnum2String[e];}
-        const size_t Enum( const std::string& s)  const {return mString2Enum[s];}
-        static const size_t ... = ...;
-        public cEnumString(): ... {}
-        
-    private:
-        std::map<std::string, size_t > mString2Enum;
-        std::map<size_t, std::string > mEnum2String;
-};
-    
+function CalcPath( start, cur, dir)
