@@ -34,7 +34,7 @@ set(SOURCE_FILES
     resources/GameResources.cpp
     resources/FontLib.cpp
     resources/TileLib.cpp
-    map/dungen.cpp
+    map/dungenrllib.cpp
 )
 
 set(HEADER_FILES
@@ -64,6 +64,7 @@ add_definitions(
 
 source_group("Sources" FILES ${SOURCE_FILES})
 source_group("Headers" FILES ${HEADER_FILES})
+source_group("RogueLikeLib" FILES ${RLLIB_SRCS})
 source_group("_Components"   FILES ${COMPONENT_SRCS})
 source_group("_Systems"      FILES ${SYSTEM_SRCS})
 source_group("_Events"      FILES ${EVENT_SRCS})

@@ -15,12 +15,6 @@ namespace pgn
 		Effect,		   // spells, arrows, fire, etc
 	};
 
-	DECL_ENUMSTR(eMapType, MapBackground);
-	DECL_ENUMSTR(eMapType, MapObject);
-	DECL_ENUMSTR(eMapType, Item);
-	DECL_ENUMSTR(eMapType, Creature);
-	DECL_ENUMSTR(eMapType, Effect);
-
     namespace cmp
     {
     

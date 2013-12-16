@@ -1,7 +1,10 @@
 #include "TileLayout.h"
-#include "MapSprite.h"
 
 #include <ecs/ecs.h>
+
+#include "MapSprite.h"
+
+#include <rl/map/dungenrllib.h>
 
 
 namespace pgn
@@ -30,13 +33,35 @@ namespace pgn
 
 		zData.mLayoutNode = new oxygine::Actor;
 
+		cArray2D<size_t> mapvalues;
+		cDunGenRLLib_StdDungeon generator(10,true);
+		generator.Generate(mapvalues, dims.x, dims.y);
+
 		zData.mData.Resize(dims.x, dims.y);
 		for (unsigned i = 0; i < dims.y; ++i)
 		{
 			for (unsigned j = 0; j < dims.x; ++j)
 			{
 				// TODO: use visitors?
-				auto ed = rand() & 1 ? ECS.mEntityMgr->CloneEntity(zData.mDefaultWall) : ECS.mEntityMgr->CloneEntity(zData.mDefaultFloor);
+				//auto ed = rand() & 1 ? ECS.mEntityMgr->CloneEntity(zData.mDefaultWall) : ECS.mEntityMgr->CloneEntity(zData.mDefaultFloor);
+				cEntityWithData ed;
+				switch (mapvalues(j, i))
+				{
+					case RL::LevelElementWall:
+						ed = ECS.mEntityMgr->CloneEntity(zData.mDefaultWall); break;
+					case RL::LevelElementCorridor:
+					case RL::LevelElementRoom:
+					case RL::LevelElementGrass:
+					case RL::LevelElementPlant:
+					case RL::LevelElementWater:
+					case RL::LevelElementDoorOpen:
+					case RL::LevelElementDoorClose:
+						ed = ECS.mEntityMgr->CloneEntity(zData.mDefaultFloor); break;
+						//ed = ECS.mEntityMgr->CloneEntity(zData.mDefaultDoor); break;
+					default:
+						assert(false);
+				}
+
 				std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
 				ed->second.mComponents.GetComponent(sprite_ptr);
 
