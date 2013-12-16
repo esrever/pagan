@@ -10,6 +10,7 @@
 #include <rl/components/Movement.h>
 #include <rl/components/Door.h>
 #include <rl/components/Description.h>
+#include <rl/components/GameStats.h>
 #include <rl/components/KeyActionMapper.h>
 #include <rl/components/LevelPosition.h>
 #include <rl/components/Level.h>
@@ -330,7 +331,19 @@ namespace pgn
 			std::shared_ptr< cComponent<pgn::cmp::cTileObstacle>> obstacle_ptr;
 			mapdata(newpos)->second.mComponents.GetComponent(obstacle_ptr);
 			if (!obstacle_ptr->mData.mIsObstacle)
+			{
 				cActionLocationChange::RunEvent(ed, pos_ptr->mData.mLevel, newpos);
+			
+				std::shared_ptr< cComponent<pgn::cmp::cGameStats>> gamestats_ptr;
+				ECS.mEntityMgr->Globals().mWorld->second.mComponents.GetComponent(gamestats_ptr);
+				gamestats_ptr->mData.mTotalTurns[ed->first]++;
+
+				// Update status text
+				if (ed->first == ECS.mEntityMgr->Globals().mPC->first)
+				{
+					assert(false);
+				}
+			}
 		}
 		
 

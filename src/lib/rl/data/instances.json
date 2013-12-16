@@ -1,5 +1,11 @@
 [
     {
+        "archetype" : "common",
+        "name" : "World",
+        "pgn::cmp::cGameStats" : {},
+        "tags" : ["World"]
+    },
+    {
         "archetype" : "pc",
         "name" : "Hero",
         "pgn::cmp::cKeyActionMapper" : {
@@ -50,7 +56,7 @@
                 "color" : "0x444444ff"
             },
             "text":{
-                "text" : ""
+                "text" : "Hero total turns ${htt}\nBlah"
             },
             "pos" : [768, 0],
             "size" : [256,640]
