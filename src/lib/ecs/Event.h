@@ -74,4 +74,71 @@ namespace pgn
 	private:
 		unsigned mId;
 	};
+
+	//-----------------------------------------------------------------
+	//! Represents an action of an entity or a system.
+	template< size_t N, class... Args>
+	class cAction
+	{
+	public:
+		//! runs the action - nobody listens
+		static bool Run(Args...);
+		//! The event that others can listen to
+		static void Event(Args...);
+
+		inline static void RunEvent(Args... args)
+		{
+			if (Run(args...))
+			{
+				Event(args...);
+				cEvent< N, Args...>::mSig.emit(args...);
+			}
+		}
+	};
+
+	//! Automatic storage for 0-argument functions
+	struct cActionBindings
+	{
+		typedef std::function<void(void)> action_type;
+		typedef std::map< std::string, action_type> action_map_type;
+
+		static cActionBindings& Instance() { static cActionBindings inst = cActionBindings(); return inst; }
+
+		template<class T>
+		cActionBindings& AddFrom()
+		{
+			const std::type_info& ti = typeid(T);
+			mActionTypes[std::string(ti.name())] = &T::RunEvent;
+			return *this;
+		}
+
+		const action_map_type& Get() { return mActionTypes; }
+	private:
+		action_map_type mActionTypes;
+	};
+
+	//! Specialisation, usable for special handling of no-argument functions. perhaps if they are ADDED to the other actions, so I don't have to create PLAYER_MOVE_NORTH events
+	template< size_t N>
+	class cAction<N>
+	{
+	public:
+		//! runs the action - nobody listens
+		static bool Run();
+		//! The event that others can listen to
+		static void Event();
+
+		inline static void RunEvent()
+		{
+			mActionBinding;  // I just need to instantiate it
+			if (Run())
+			{
+				Event();
+				cEvent< N>::mSig.emit();
+			}
+		}
+	private:
+		static cActionBindings& mActionBinding;
+	};
+	template< size_t N>
+	cActionBindings& cAction<N>::mActionBinding = cActionBindings::Instance().AddFrom<cAction<N> >();
 }

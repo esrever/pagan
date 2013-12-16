@@ -29,6 +29,10 @@ namespace pgn
 		typedef cEvent<size_t(eBasicECS::ENTITY_UNTAG), cEntityWithData, const std::string&> cEntityUntag;
 	}
 
+	//--------------------------------------------------------------
+	typedef cAction<size_t(evt::eBasicECS::ENTITY_CREATED), cEntityWithData> cActionEntityCreated;
+	// TODO: typedef the rest
+
 	//---------------------------------------------
 	template<>
 	inline void to_json<cEntityData>(const cEntityData& zObj, JsonWriter& writer)

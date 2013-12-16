@@ -8,8 +8,17 @@
 
 #define foreach( it, cont) for( auto it = cont##.begin(); it != cont##.end(); ++##it )
 
+#define DECL_ENUMSTR(T, V) template<> \
+struct Enum2String< T , size_t( T##::##V )>{\
+	static const char * Get() { return #V; }};
+
+
 namespace pgn
 {
+	template<class T, size_t N>
+	struct Enum2String{};
+
+
 //! Declare constants
 #define MAX_COMPONENTS 64
 

@@ -16,7 +16,6 @@ namespace pgn
 	{ 
 		const auto& e = mEntityIdGen.New();
 		auto it = mEntityData.insert(std::pair<cEntity,cEntityData>(e,cEntityData()));
-		evt::cEntityCreated::mSig.emit(it.first);
 		return it.first;
 	}
 
@@ -222,7 +221,9 @@ namespace pgn
 
 					mExemplars[exemplar.mName] = exemplar;
 					if (!zIsExemplar)
+					{
 						InstantiateExemplar(exemplar.mName);
+					}
 				}
 			}
 		}
@@ -310,6 +311,7 @@ namespace pgn
 		for (const auto& t : itEx->second.mTags)
 			Tag(e,t);
 
+		cActionEntityCreated::RunEvent(e);
 		return e;
 	}
 
@@ -323,6 +325,7 @@ namespace pgn
 		edout.mTags = edin.mTags;
 		edout.mComponents = edin.mComponents.Clone();
 		e->second = edout;
+		cActionEntityCreated::RunEvent(e);
 		return e;
 	}
 
