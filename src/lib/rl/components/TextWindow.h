@@ -12,7 +12,7 @@ namespace pgn
     {
     
         //! 
-        struct cTextWindow : public oxygine::Actor
+        struct cTextWindow 
         {
 		public:
 			void SetText(const std::string& zText);

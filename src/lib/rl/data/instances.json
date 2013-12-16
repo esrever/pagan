@@ -21,7 +21,7 @@
         "archetype" : "common",
         "name" : "game_log",
         "pgn::cmp::cLog" : {
-            "MaxLineNum" : 100000
+            "MaxLineNum" : 10
             }
     },
     
@@ -50,7 +50,7 @@
                 "color" : "0x444444ff"
             },
             "text":{
-                "text" : "Hello\nworld"
+                "text" : ""
             },
             "pos" : [768, 0],
             "size" : [256,640]

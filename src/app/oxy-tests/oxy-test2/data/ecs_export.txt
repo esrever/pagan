@@ -165,7 +165,7 @@
                         null,
                         null,
                         {
-                            "MaxLineNum": 100000
+                            "MaxLineNum": 10
                         },
                         null,
                         null,
@@ -296,18 +296,18 @@
                             "bg": {
                                 "color": "444444ff",
                                 "size": [
-                                    0,
-                                    0
+                                    768,
+                                    128
                                 ],
                                 "position": [
                                     0,
-                                    0
+                                    512
                                 ]
                             },
                             "text": {
                                 "size": [
-                                    0,
-                                    0
+                                    768,
+                                    128
                                 ],
                                 "text": "Hello\n log world"
                             },
@@ -402,20 +402,20 @@
                             "bg": {
                                 "color": "444444ff",
                                 "size": [
-                                    0,
-                                    0
+                                    256,
+                                    640
                                 ],
                                 "position": [
-                                    0,
+                                    768,
                                     0
                                 ]
                             },
                             "text": {
                                 "size": [
-                                    0,
-                                    0
+                                    256,
+                                    640
                                 ],
-                                "text": "Hello\nworld"
+                                "text": ""
                             },
                             "pos": [
                                 768,
@@ -589,7 +589,7 @@
                         null,
                         null,
                         {
-                            "MaxLineNum": 100000
+                            "MaxLineNum": 10
                         },
                         null,
                         null,
@@ -669,20 +669,20 @@
                             "bg": {
                                 "color": "444444ff",
                                 "size": [
-                                    0,
-                                    0
+                                    256,
+                                    640
                                 ],
                                 "position": [
-                                    0,
+                                    768,
                                     0
                                 ]
                             },
                             "text": {
                                 "size": [
-                                    0,
-                                    0
+                                    256,
+                                    640
                                 ],
-                                "text": "Hello\nworld"
+                                "text": ""
                             },
                             "pos": [
                                 768,
@@ -735,18 +735,18 @@
                             "bg": {
                                 "color": "444444ff",
                                 "size": [
-                                    0,
-                                    0
+                                    768,
+                                    128
                                 ],
                                 "position": [
                                     0,
-                                    0
+                                    512
                                 ]
                             },
                             "text": {
                                 "size": [
-                                    0,
-                                    0
+                                    768,
+                                    128
                                 ],
                                 "text": "Hello\n log world"
                             },

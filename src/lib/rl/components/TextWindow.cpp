@@ -47,9 +47,13 @@ namespace pgn
 		from_json(zData.mPos, zRoot["pos"]);
 		from_json(zData.mSize, zRoot["size"]);
 
-		zData.mBg->attachTo(&zData);
+		oxygine::getRoot()->addChild(zData.mBg);
 		zData.mText->attachTo(zData.mBg);
 		zData.mText->setStyle(zData.mStyle);
+		
+		zData.mText->setSize(zData.mSize);
+		zData.mBg->setSize(zData.mSize);
+		zData.mBg->setPosition(zData.mPos);
         return true;
 	}
 

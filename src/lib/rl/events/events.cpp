@@ -214,7 +214,7 @@ namespace pgn
 	template<>
 	bool cAction<size_t(evt::eRL::LOG), const std::string&, const std::string&>::Run(const std::string& zLoggerName, const std::string& zString)
 	{
-		return true;
+		if (zLoggerName != "game_log") return true;
 		auto queryLog = ECS.mSystemMgr->GetQuery("pgn::cmp::cLog");
 		auto queryLogListener = ECS.mSystemMgr->GetQuery("tag:log:" + zLoggerName);
 		bool ok = true;
