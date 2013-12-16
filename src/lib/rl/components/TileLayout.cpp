@@ -49,7 +49,7 @@ namespace pgn
 			for (unsigned j = 0; j < dims.x; ++j)
 			{
 				// TODO: use visitors?
-				auto ed = rand() & 1 ? ECS.mEntityMgr->CloneEntity(zData.mDefaultWall) : ECS.mEntityMgr->CloneEntity(zData.mDefaultFloor);
+				auto ed = rand() & 3 ? ECS.mEntityMgr->CloneEntity(zData.mDefaultFloor) : ECS.mEntityMgr->CloneEntity(zData.mDefaultWall);
 				/*
 				cEntityWithData ed;
 				switch (mapvalues(j, i))
