@@ -32,4 +32,8 @@ namespace pgn
     //-----------------------------------------------------------------------
     template<>
     void to_json< cmp::cTileLayout>( const cmp::cTileLayout& zData, JsonWriter& zRoot);
+
+	//-----------------------------------------------------------------------
+	// Misc functions
+	glm::ivec2 GetRandomStartPos(const cmp::cTileLayout& layout);
 }

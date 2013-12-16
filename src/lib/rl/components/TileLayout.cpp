@@ -4,6 +4,7 @@
 
 #include "MapSprite.h"
 #include "LevelPosition.h"
+#include "TileObstacle.h"
 
 #include <rl/map/dungenrllib.h>
 
@@ -96,5 +97,20 @@ namespace pgn
 		zRoot.StartObject();
         
 		zRoot.EndObject();
+	}
+
+	//---------------------------------------------------------------------------------------
+	glm::ivec2 GetRandomStartPos(const cmp::cTileLayout& layout)
+	{
+		while (true)
+		{
+			int coord = rand();
+			int y = int(coord / layout.mData.Width()) % layout.mData.Height();
+			int x = coord % layout.mData.Width();
+			std::shared_ptr< cComponent<pgn::cmp::cTileObstacle>> obstacle_ptr;
+			layout.mData(x, y)->second.mComponents.GetComponent(obstacle_ptr);
+			if ( !(obstacle_ptr && obstacle_ptr->mData.mIsObstacle))
+				return glm::ivec2(x, y);
+		}
 	}
 }

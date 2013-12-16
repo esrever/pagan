@@ -123,8 +123,9 @@ namespace pgn
 			}
 		}
 		
+		// TODO: make sure we end up in a valid square. should be in helper functions for a level
 		auto epc = ECS.mEntityMgr->Globals().mPC;
-		cActionLocationChange::RunEvent(epc, ed, glm::ivec2(0, 0));
+		cActionLocationChange::RunEvent(epc, ed, GetRandomStartPos(layout_ptr->mData));
 	}
 
 
@@ -272,12 +273,20 @@ namespace pgn
 		ed->second.mComponents.GetComponent(move_ptr);
 		ed->second.mComponents.GetComponent(pos_ptr);
 
-		// TODO: apply logic to check if we can move, apply movepoint reduction etc.
-
-		// TODO: MapWindow, with other single entities, should be in globals
-		// TODO: use the function in the other events. Add LevelPositions where needed.
-		glm::ivec2 newpos = pos_ptr->mData.mPos + v;
-		cActionLocationChange::RunEvent(ed, pos_ptr->mData.mLevel, newpos);
+		// TODO: apply movepoint reduction etc.
+		std::shared_ptr< cComponent<pgn::cmp::cTileLayout>> layout_ptr;
+		pos_ptr->mData.mLevel->second.mComponents.GetComponent(layout_ptr);
+		const auto& mapdata = layout_ptr->mData.mData;
+		
+		const glm::ivec2 newpos = pos_ptr->mData.mPos + v;
+		if (mapdata.InRange(newpos))
+		{
+			std::shared_ptr< cComponent<pgn::cmp::cTileObstacle>> obstacle_ptr;
+			mapdata(newpos)->second.mComponents.GetComponent(obstacle_ptr);
+			if (!obstacle_ptr->mData.mIsObstacle)
+				cActionLocationChange::RunEvent(ed, pos_ptr->mData.mLevel, newpos);
+		}
+		
 
 		return true;
 	}

@@ -20,9 +20,12 @@ namespace pgn
 		const T * Raw() const												{return &mData.first();}
 		void SetRaw(T * ptr, size_t zW, size_t zH)					{Resize(zW,zH);memcpy(&mData.front(),ptr,mData.size()*sizeof(T));}
 
+		bool InRange(const glm::ivec2& v) const						{ return InRange(v.x, v.y); }
+		bool InRange(int x, int y) const							{ return (x >= 0) && (x < int(mWidth)) && (y >= 0) && (y < int(mHeight)); }
+
 		//! Alternative accessors
-		const T& operator()(const glm::ivec2& zV) const		{return (*this)(v.x,v.y);}
-		T& operator()(const glm::ivec2& zV)					{return (*this)(v.x,v.y);}
+		const T& operator()(const glm::ivec2& zV) const		{ return (*this)(zV.x, zV.y); }
+		T& operator()(const glm::ivec2& zV)					{ return (*this)(zV.x, zV.y); }
 		
 	protected:
 		size_t LinearIdx(const size_t zRow, const size_t zCol) const		{return zRow*mWidth + zCol;}
