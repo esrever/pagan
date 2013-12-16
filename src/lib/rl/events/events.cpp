@@ -123,7 +123,7 @@ namespace pgn
 			}
 		}
 		
-		// TODO: make sure we end up in a valid square. should be in helper functions for a level
+        // Put pc on a valid square
 		auto epc = ECS.mEntityMgr->Globals().mPC;
 		cActionLocationChange::RunEvent(epc, ed, GetRandomStartPos(layout_ptr->mData));
 	}
@@ -273,14 +273,16 @@ namespace pgn
 		ed->second.mComponents.GetComponent(move_ptr);
 		ed->second.mComponents.GetComponent(pos_ptr);
 
-		// TODO: apply movepoint reduction etc.
+        // Get layout of level
 		std::shared_ptr< cComponent<pgn::cmp::cTileLayout>> layout_ptr;
 		pos_ptr->mData.mLevel->second.mComponents.GetComponent(layout_ptr);
 		const auto& mapdata = layout_ptr->mData.mData;
 		
+        // if the new position is within the bounds of the level
 		const glm::ivec2 newpos = pos_ptr->mData.mPos + v;
 		if (mapdata.InRange(newpos))
 		{
+            // Check if we hit an obstacle
 			std::shared_ptr< cComponent<pgn::cmp::cTileObstacle>> obstacle_ptr;
 			mapdata(newpos)->second.mComponents.GetComponent(obstacle_ptr);
 			if (!obstacle_ptr->mData.mIsObstacle)
@@ -330,8 +332,7 @@ namespace pgn
 		std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
 		ed->second.mComponents.GetComponent(door_ptr);
 		ed->second.mComponents.GetComponent(sprite_ptr);
-		sprite_ptr->mData = door_ptr->mData.mSprites[0];
-		// TODO: update mapwin's tiles? Above won't work unless I attach stuff to scenegraph
+		sprite_ptr->mData.mSprite->setResAnim(door_ptr->mData.mSprites[0].mSprite->getResAnim());
 	}
 
 
@@ -360,8 +361,7 @@ namespace pgn
 		std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
 		ed->second.mComponents.GetComponent(door_ptr);
 		ed->second.mComponents.GetComponent(sprite_ptr);
-		sprite_ptr->mData = door_ptr->mData.mSprites[1];
-		// TODO: update mapwin's tiles? Above won't work unless I attach stuff to scenegraph
+		sprite_ptr->mData.mSprite->setResAnim(door_ptr->mData.mSprites[1].mSprite->getResAnim());
 	}
 
 

@@ -12,15 +12,8 @@ namespace pgn
 	//-------------------------------------------------
 	bool cSystemMgrRL::UpdateFrame()
 	{
-		/* TODO: 
-			TimeKeeperSystem
-			ActionMappingSystem
-			GameTurnSystem
-			AsciiRenderSystem
-		*/
 		mLoop = true;
 		cEvent < size_t(evt::eBasicECS::UPDATE)>::mSig.emit();
-		// TODO: on update
 		return mLoop;
 	}
 

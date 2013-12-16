@@ -59,23 +59,6 @@ namespace pgn
 		pgn::cActionLevelCreate::RunEvent(ed);
 		pgn::cActionLevelLoad::RunEvent(ed);
 
-			/*
-		for (auto ed : ecs.mEntityMgr->GetEntityData())
-		{
-			std::shared_ptr<cComponent<cmp::cMapSprite>> ptr;
-			ed.second.mComponents.GetComponent(ptr);
-			if (ptr && ptr->mData.mSprite)
-			{
-				auto pr = ptr->mData.mSprite->getPriority();
-				auto s = ptr->mData.mSprite->getName();
-				if (pystring::startswith(s, "UNUSED"))
-					oxygine::getRoot()->addChild(ptr->mData.mSprite); // This affects only the hero! The bg tiles are already in
-				// TODO: the above check is what saves me and shows the human. Otherwise tiles are top
-				// I need to set priorities! BG -> FG layers -> ITEM -> CHAR. Could do that in the xml file!
-			}
-		}
-		*/
-
 		FILE * fp = fopen("ecs_export.txt", "wt");
 		rapidjson::StringBuffer strbuf;
 		JsonWriter writer(strbuf);

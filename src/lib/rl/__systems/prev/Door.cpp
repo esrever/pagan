@@ -45,22 +45,10 @@ namespace pgn
 
 		void cDoor::OnDoorOpened(cEntityWithData ed)
 		{
-			std::shared_ptr< cComponent<cmp::cDoor>> door_ptr;
-			std::shared_ptr< cComponent<cmp::cMapSprite>> sprite_ptr;
-			ed->second.mComponents.GetComponent(door_ptr);
-			ed->second.mComponents.GetComponent(sprite_ptr);
-			sprite_ptr->mData = door_ptr->mData.mSprites[0];
-			// TODO: update mapwin's tiles? Above won't work unless I attach stuff to scenegraph
 		}
 
 		void cDoor::OnDoorClosed(cEntityWithData ed)
 		{
-			std::shared_ptr< cComponent<cmp::cDoor>> door_ptr;
-			std::shared_ptr< cComponent<cmp::cMapSprite>> sprite_ptr;
-			ed->second.mComponents.GetComponent(door_ptr);
-			ed->second.mComponents.GetComponent(sprite_ptr);
-			sprite_ptr->mData = door_ptr->mData.mSprites[1];
-			// TODO: update mapwin's tiles? Above won't work unless I attach stuff to scenegraph
 		}
 	}
 }

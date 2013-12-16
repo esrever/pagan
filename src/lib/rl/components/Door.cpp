@@ -14,6 +14,8 @@ namespace pgn
 		from_json(zData.mSprites[0], zRoot["tile_open"]);
 		from_json(zData.mSprites[1], zRoot["tile_closed"]);
 		from_json(zData.mIsClosed, zRoot["is_closed"]);
+		zData.mSprites[0].mRenderPriority = eMapRenderOrder::DungeonElementFG;
+		zData.mSprites[1].mRenderPriority = eMapRenderOrder::DungeonElementFG;
         return true;
 	}
 

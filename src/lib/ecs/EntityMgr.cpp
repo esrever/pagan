@@ -319,7 +319,6 @@ namespace pgn
 
 	cEntityWithData cEntityMgr::CloneEntity(cEntityWithData ed)
 	{
-		// TODO: tags?
 		auto e = Create();
 		cEntityData edout;
 		auto& edin = ed->second;

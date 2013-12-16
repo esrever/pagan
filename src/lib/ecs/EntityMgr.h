@@ -21,14 +21,6 @@
 #include "Archetype.h"
 #include "Exemplar.h"
 
-/*
-TODO:
-	Would I have multiple components of the same type per entity?
-		No. Items are stored as "ItemList"
-	Components can be referenced by other components
-		Sword component by inventory and equipment components
-*/
-
 namespace pgn
 {
 	class cEntityMgr
