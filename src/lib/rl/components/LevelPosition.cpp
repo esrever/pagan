@@ -1,8 +1,11 @@
 #include "LevelPosition.h"
 
+#include <ecs/ecs.h>
+#include <ecs/EntityMgr.h>
 
 namespace pgn
 {
+	cmp::cLevelPosition::cLevelPosition() :mPos(0, 0), mLevel(ECS.mEntityMgr->GetEntityData().end()){}
 	//----------------------------------------------------------------------------------
 	template<>
 	bool from_json<cmp::cLevelPosition>( cmp::cLevelPosition& zData, const rapidjson::Value& zRoot)

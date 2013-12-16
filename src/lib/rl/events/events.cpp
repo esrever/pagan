@@ -146,6 +146,50 @@ namespace pgn
 		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Event");
 	}
 
+	//####################################################################################################
+	//----------------------------------------------------------------------------------------------------
+	template<>
+	bool cAction<size_t(evt::eRL::LEVEL_ENTER), cEntityWithData, cEntityWithData>::Run(cEntityWithData arg0, cEntityWithData arg1)
+	{
+		cActionLog::RunEvent("system_log", "Called cAction<LevelEnter>::Run");
+		return true;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------
+	template<>
+	void cAction<size_t(evt::eRL::LEVEL_ENTER), cEntityWithData, cEntityWithData>::Event(cEntityWithData ewho, cEntityWithData elvl)
+	{
+		cActionLog::RunEvent("system_log", "Called cAction<LevelEnter>::Event");
+
+		std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
+		std::shared_ptr< cComponent<pgn::cmp::cLevelPosition>> pos_ptr;
+		ewho->second.mComponents.GetComponent(sprite_ptr);
+		ewho->second.mComponents.GetComponent(pos_ptr);
+		pos_ptr->mData.mLevel = elvl;
+		std::shared_ptr< cComponent<pgn::cmp::cLevel>> level_ptr;
+		elvl->second.mComponents.GetComponent(level_ptr);
+		if (level_ptr->mData.mLevelNode != sprite_ptr->mData.mSprite->getParent())
+			sprite_ptr->mData.mSprite->attachTo(level_ptr->mData.mLevelNode);
+	}
+
+	//####################################################################################################
+	//----------------------------------------------------------------------------------------------------
+	template<>
+	bool cAction<size_t(evt::eRL::LEVEL_LEAVE), cEntityWithData, cEntityWithData>::Run(cEntityWithData arg0, cEntityWithData arg1)
+	{
+		cActionLog::RunEvent("system_log", "Called cAction<LevelLeave>::Run");
+		return true;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------
+	template<>
+	void cAction<size_t(evt::eRL::LEVEL_LEAVE), cEntityWithData, cEntityWithData>::Event(cEntityWithData arg0, cEntityWithData arg1)
+	{
+		cActionLog::RunEvent("system_log", "Called cAction<LevelLeave>::Event");
+	}
+
 
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
@@ -473,11 +517,11 @@ namespace pgn
 		sprite_ptr->mData.mSprite->setPosition(mwin.LevelToScreenCoords(pos_ptr->mData));
 
 		// Attach to level
-		pos_ptr->mData.mLevel = elvl;
-		std::shared_ptr< cComponent<pgn::cmp::cLevel>> level_ptr;
-		elvl->second.mComponents.GetComponent(level_ptr);
-		if ( level_ptr->mData.mLevelNode != sprite_ptr->mData.mSprite->getParent())
-			sprite_ptr->mData.mSprite->attachTo(level_ptr->mData.mLevelNode);
+		if (pos_ptr->mData.mLevel != elvl)
+		{
+			cActionLevelLeave::RunEvent(ewho, pos_ptr->mData.mLevel);
+			cActionLevelEnter::RunEvent(ewho, elvl);
+		}
 	}
 
 }

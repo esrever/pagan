@@ -13,6 +13,7 @@ namespace pgn
         //! 
         struct cLevelPosition
         {
+			cLevelPosition();
             glm::ivec2 mPos;
 			cEntityWithData mLevel;
         };

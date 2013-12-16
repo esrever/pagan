@@ -28,7 +28,7 @@ namespace pgn
 			DOOR_OPEN,
 			DOOR_CLOSE,
             KEY_STATE,
-			LOCATION_CHANGE
+			LOCATION_CHANGE,
 		};		
 
 		typedef cEvent<size_t(eRL::LEVEL_CREATE), cEntityWithData> cLevelCreate;
