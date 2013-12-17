@@ -80,7 +80,7 @@
                 "color" : "0x444444ff"
             },
             "text":{
-                "text" : "Hello\n log world"
+                "text" : "-- This is the log window --"
             },
             "pos" : [0, 512],
             "size" : [768, 128]

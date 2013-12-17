@@ -26,7 +26,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::LEVEL_CREATE), cEntityWithData>::Run(cEntityWithData arg0)
+	bool cActionLevelCreate::Run(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Run");
 		return true;
@@ -35,14 +35,11 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::LEVEL_CREATE), cEntityWithData>::Event(cEntityWithData ed)
+	void cActionLevelCreate::Event(cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Event");
-
-		std::shared_ptr< cComponent<pgn::cmp::cTileLayout>> layout_ptr;
-		std::shared_ptr< cComponent<pgn::cmp::cLevel>> lvl_ptr;
-		ed->second.mComponents.GetComponent(layout_ptr);
-		ed->second.mComponents.GetComponent(lvl_ptr);
+		auto layout_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cTileLayout>();
+		auto lvl_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cLevel>();
 		auto& curmap = layout_ptr->mData;
 		auto& mapdata = curmap.mData;
 
@@ -54,7 +51,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::LEVEL_DESTROY), cEntityWithData>::Run(cEntityWithData arg0)
+	bool cActionLevelDestroy::Run(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelDestroy>::Run");
 		return true;
@@ -63,7 +60,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::LEVEL_DESTROY), cEntityWithData>::Event(cEntityWithData arg0)
+	void cActionLevelDestroy::Event(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Event");
 	}
@@ -72,7 +69,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::LEVEL_LOAD), cEntityWithData>::Run(cEntityWithData arg0)
+	bool cActionLevelLoad::Run(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelLoad>::Run");
 		return true;
@@ -81,7 +78,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::LEVEL_LOAD), cEntityWithData>::Event(cEntityWithData ed)
+	void cActionLevelLoad::Event(cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelLoad>::Run");
 
@@ -89,17 +86,14 @@ namespace pgn
 		auto queryLvl = ECS.mSystemMgr->GetQuery("tag:CurrentLevel");
 
 		// Get the tile layout & level from the input
-		std::shared_ptr< cComponent<pgn::cmp::cTileLayout>> layout_ptr;
-		std::shared_ptr< cComponent<pgn::cmp::cLevel>> lvl_ptr;
-		ed->second.mComponents.GetComponent(layout_ptr);
-		ed->second.mComponents.GetComponent(lvl_ptr);
+		auto layout_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cTileLayout>();
+		auto lvl_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cLevel>();
 		auto& curmap = layout_ptr->mData;
 		auto& mapdata = curmap.mData;
 
 		// Mapwindow response
 		auto e = ECS.mEntityMgr->Globals().mMapWindow;
-		std::shared_ptr< cComponent<pgn::cmp::cMapWindow>> mwin_ptr;
-		e->second.mComponents.GetComponent(mwin_ptr);
+		auto mwin_ptr = e->second.mComponents.GetComponent<pgn::cmp::cMapWindow>();
 		auto & mwin = mwin_ptr->mData;
 
 		// Attach level node to window node
@@ -114,10 +108,8 @@ namespace pgn
 				auto tile = mapdata(j, i);
 
 				// get sprite from entity
-				std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
-				std::shared_ptr< cComponent<pgn::cmp::cLevelPosition>> pos_ptr;
-				tile->second.mComponents.GetComponent(sprite_ptr);
-				tile->second.mComponents.GetComponent(pos_ptr);
+				auto sprite_ptr = tile->second.mComponents.GetComponent<pgn::cmp::cMapSprite>();
+				auto pos_ptr = tile->second.mComponents.GetComponent<pgn::cmp::cLevelPosition>();
 				pos_ptr->mData.mLevel = ed;
 				sprite_ptr->mData.mSprite->setSize(float(mwin.mTileDims.x), float(mwin.mTileDims.y));
 				sprite_ptr->mData.mSprite->setPosition(mwin.LevelToScreenCoords(pos_ptr->mData));
@@ -133,7 +125,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::LEVEL_UNLOAD), cEntityWithData>::Run(cEntityWithData arg0)
+	bool cActionLevelUnload::Run(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelUnload>::Run");
 		return true;
@@ -142,7 +134,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::LEVEL_UNLOAD), cEntityWithData>::Event(cEntityWithData arg0)
+	void cActionLevelUnload::Event(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Event");
 	}
@@ -150,7 +142,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::LEVEL_ENTER), cEntityWithData, cEntityWithData>::Run(cEntityWithData arg0, cEntityWithData arg1)
+	bool cActionLevelEnter::Run(cEntityWithData arg0, cEntityWithData arg1)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelEnter>::Run");
 		return true;
@@ -159,17 +151,14 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::LEVEL_ENTER), cEntityWithData, cEntityWithData>::Event(cEntityWithData ewho, cEntityWithData elvl)
+	void cActionLevelEnter::Event(cEntityWithData ewho, cEntityWithData elvl)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelEnter>::Event");
 
-		std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
-		std::shared_ptr< cComponent<pgn::cmp::cLevelPosition>> pos_ptr;
-		ewho->second.mComponents.GetComponent(sprite_ptr);
-		ewho->second.mComponents.GetComponent(pos_ptr);
+		auto sprite_ptr = ewho->second.mComponents.GetComponent<pgn::cmp::cMapSprite>();
+		auto pos_ptr = ewho->second.mComponents.GetComponent<pgn::cmp::cLevelPosition>();
 		pos_ptr->mData.mLevel = elvl;
-		std::shared_ptr< cComponent<pgn::cmp::cLevel>> level_ptr;
-		elvl->second.mComponents.GetComponent(level_ptr);
+		auto level_ptr = elvl->second.mComponents.GetComponent<pgn::cmp::cLevel>();
 		if (level_ptr->mData.mLevelNode != sprite_ptr->mData.mSprite->getParent())
 			sprite_ptr->mData.mSprite->attachTo(level_ptr->mData.mLevelNode);
 	}
@@ -177,7 +166,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::LEVEL_LEAVE), cEntityWithData, cEntityWithData>::Run(cEntityWithData arg0, cEntityWithData arg1)
+	bool cActionLevelLeave::Run(cEntityWithData arg0, cEntityWithData arg1)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelLeave>::Run");
 		return true;
@@ -186,7 +175,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::LEVEL_LEAVE), cEntityWithData, cEntityWithData>::Event(cEntityWithData arg0, cEntityWithData arg1)
+	void cActionLevelLeave::Event(cEntityWithData arg0, cEntityWithData arg1)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelLeave>::Event");
 	}
@@ -195,7 +184,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::EXIT_APPLICATION)>::Run()
+	bool cActionExitApplication::Run()
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<ExitApplication>::Run");
 		return true;
@@ -204,7 +193,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::EXIT_APPLICATION)>::Event()
+	void cActionExitApplication::Event()
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<ExitApplication>::Run");
 	}
@@ -213,7 +202,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::LOG), const std::string&, const std::string&>::Run(const std::string& zLoggerName, const std::string& zString)
+	bool cActionLog::Run(const std::string& zLoggerName, const std::string& zString)
 	{
 		if (zLoggerName != "game_log") return true;
 		auto queryLog = ECS.mSystemMgr->GetQuery("pgn::cmp::cLog");
@@ -221,15 +210,12 @@ namespace pgn
 		bool ok = true;
 		for (auto ec : queryLog->Entities())
 		{
-			// Get the log
-			std::shared_ptr< cComponent<pgn::cmp::cLog>> log_ptr;
-
 			// Move to the next logger if it's not the one we're looking for
 			if (ec->second.mName != zLoggerName)
 				continue;
 
 			// Get the log
-			ec->second.mComponents.GetComponent(log_ptr);
+			auto log_ptr = ec->second.mComponents.GetComponent<pgn::cmp::cLog>();
 			pgn::cmp::cLog& a_log = log_ptr->mData;
 
 			// Do we have available lines to write?
@@ -254,8 +240,7 @@ namespace pgn
 			for (auto ec : queryLogListener->Entities())
 			{
 				// Does it have a TextWin?
-				std::shared_ptr< cComponent<pgn::cmp::cTextWindow>> twin_ptr;
-				ec->second.mComponents.GetComponent(twin_ptr);
+				auto twin_ptr = ec->second.mComponents.GetComponent<pgn::cmp::cTextWindow>();
 				if (twin_ptr)
 				{
 					twin_ptr->mData.SetText(log_string);
@@ -278,7 +263,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::LOG), const std::string&, const std::string&>::Event(const std::string& arg0, const std::string& arg1)
+	void cActionLog::Event(const std::string& arg0, const std::string& arg1)
 	{
 		//assert(false);
 	}
@@ -287,7 +272,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::ACTION_IDLE), cEntityWithData>::Run(cEntityWithData arg0)
+	bool cActionActionIdle::Run(cEntityWithData arg0)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<ActionIdle>::Run");
 		return true;
@@ -296,7 +281,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::ACTION_IDLE), cEntityWithData>::Event(cEntityWithData ed)
+	void cActionActionIdle::Event(cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<ActionIdle>::Event");
 		cActionLog::RunEvent("game_log", boost::str(boost::format("%s moved %s") % ed->second.mName.c_str() % dir2text_full[4]));
@@ -306,21 +291,20 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::ACTION_MOVE_ADJ), cEntityWithData, const glm::ivec2&>::Run(cEntityWithData ed, const glm::ivec2& vin)
+	bool cActionActionMoveAdj::Run(cEntityWithData ed, const glm::ivec2& vin)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<ActionMoveAdj>::Run");
 
 		glm::ivec2 v = vin;
 
 		// Get entity data
-		std::shared_ptr< cComponent<pgn::cmp::cMovement>> move_ptr;
-		std::shared_ptr< cComponent<pgn::cmp::cLevelPosition>> pos_ptr;
-		ed->second.mComponents.GetComponent(move_ptr);
-		ed->second.mComponents.GetComponent(pos_ptr);
+		auto move_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cMovement>();
+		auto pos_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cLevelPosition>();
 
         // Get layout of level
-		std::shared_ptr< cComponent<pgn::cmp::cTileLayout>> layout_ptr;
-		pos_ptr->mData.mLevel->second.mComponents.GetComponent(layout_ptr);
+		//std::shared_ptr< cComponent<pgn::cmp::cTileLayout>> layout_ptr;
+		//pos_ptr->mData.mLevel->second.mComponents.GetComponent(layout_ptr);
+		auto layout_ptr = pos_ptr->mData.mLevel->second.mComponents.GetComponent<pgn::cmp::cTileLayout>();
 		const auto& mapdata = layout_ptr->mData.mData;
 		
         // if the new position is within the bounds of the level
@@ -328,14 +312,11 @@ namespace pgn
 		if (mapdata.InRange(newpos))
 		{
             // Check if we hit an obstacle
-			std::shared_ptr< cComponent<pgn::cmp::cTileObstacle>> obstacle_ptr;
-			mapdata(newpos)->second.mComponents.GetComponent(obstacle_ptr);
+			auto obstacle_ptr = mapdata(newpos)->second.mComponents.GetComponent<pgn::cmp::cTileObstacle>();
 			if (!obstacle_ptr->mData.mIsObstacle)
 			{
 				cActionLocationChange::RunEvent(ed, pos_ptr->mData.mLevel, newpos);
-			
-				std::shared_ptr< cComponent<pgn::cmp::cGameStats>> gamestats_ptr;
-				ECS.mEntityMgr->Globals().mWorld->second.mComponents.GetComponent(gamestats_ptr);
+				auto gamestats_ptr = ECS.mEntityMgr->Globals().mWorld->second.mComponents.GetComponent<pgn::cmp::cGameStats>();
 				gamestats_ptr->mData.mTotalTurns[ed->first]++;
 
 				// Update status text
@@ -353,7 +334,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::ACTION_MOVE_ADJ), cEntityWithData, const glm::ivec2&>::Event(cEntityWithData ed, const glm::ivec2& v)
+	void cActionActionMoveAdj::Event(cEntityWithData ed, const glm::ivec2& v)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<ActionMoveAdj>::Event");
 
@@ -366,12 +347,11 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::DOOR_OPEN), cEntityWithData, cEntityWithData>::Run(cEntityWithData ewho, cEntityWithData ed)
+	bool cActionDoorOpen::Run(cEntityWithData ewho, cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<DoorOpen>::Run");
 
-		std::shared_ptr< cComponent<pgn::cmp::cDoor>> door_ptr;
-		ed->second.mComponents.GetComponent(door_ptr);
+		auto door_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cDoor>();
 		bool ok = door_ptr->mData.mIsClosed;
 		if (ok)
 			door_ptr->mData.mIsClosed = false;
@@ -381,14 +361,12 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::DOOR_OPEN), cEntityWithData, cEntityWithData>::Event(cEntityWithData ewho, cEntityWithData ed)
+	void cActionDoorOpen::Event(cEntityWithData ewho, cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<DoorOpen>::Event");
 
-		std::shared_ptr< cComponent<pgn::cmp::cDoor>> door_ptr;
-		std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
-		ed->second.mComponents.GetComponent(door_ptr);
-		ed->second.mComponents.GetComponent(sprite_ptr);
+		auto door_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cDoor>();
+		auto sprite_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cMapSprite>();
 		sprite_ptr->mData.mSprite->setResAnim(door_ptr->mData.mSprites[0].mSprite->getResAnim());
 	}
 
@@ -396,12 +374,11 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::DOOR_CLOSE), cEntityWithData, cEntityWithData>::Run(cEntityWithData ewho, cEntityWithData ed)
+	bool cActionDoorClose::Run(cEntityWithData ewho, cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<DoorClose>::Run");
 
-		std::shared_ptr< cComponent<pgn::cmp::cDoor>> door_ptr;
-		ed->second.mComponents.GetComponent(door_ptr);
+		auto door_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cDoor>();
 		bool ok = !door_ptr->mData.mIsClosed;
 		if (ok)
 			door_ptr->mData.mIsClosed = true;
@@ -411,13 +388,11 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::DOOR_CLOSE), cEntityWithData, cEntityWithData>::Event(cEntityWithData ewho, cEntityWithData ed)
+	void cActionDoorClose::Event(cEntityWithData ewho, cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<DoorClose>::Event");
-		std::shared_ptr< cComponent<pgn::cmp::cDoor>> door_ptr;
-		std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
-		ed->second.mComponents.GetComponent(door_ptr);
-		ed->second.mComponents.GetComponent(sprite_ptr);
+		auto door_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cDoor>();
+		auto sprite_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cMapSprite>();
 		sprite_ptr->mData.mSprite->setResAnim(door_ptr->mData.mSprites[1].mSprite->getResAnim());
 	}
 
@@ -425,7 +400,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::KEY_STATE), const int, const oxygine::cKeyState&>::Run(const int key, const oxygine::cKeyState& state)
+	bool cActionKeyState::Run(const int key, const oxygine::cKeyState& state)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<KeyState>::Run");
 
@@ -437,8 +412,7 @@ namespace pgn
 		for (auto ec : queryKam->Entities())
 		{
 			// Get the action mapper
-			std::shared_ptr< cComponent<pgn::cmp::cKeyActionMapper>> kam_ptr;
-			ec->second.mComponents.GetComponent(kam_ptr);
+			auto kam_ptr = ec->second.mComponents.GetComponent<pgn::cmp::cKeyActionMapper>();
 			pgn::cmp::cKeyActionMapper& kam = kam_ptr->mData;
 
 			// if pressed
@@ -464,7 +438,7 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::KEY_STATE), const int, const oxygine::cKeyState&>::Event(const int, const oxygine::cKeyState&)
+	void cActionKeyState::Event(const int, const oxygine::cKeyState&)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<KeyState>::Event");
 		//assert(false);
@@ -473,7 +447,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eBasicECS::ENTITY_CREATED), cEntityWithData>::Run(cEntityWithData)
+	bool cActionEntityCreated::Run(cEntityWithData)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<EntityCreated>::Run");
 		return true;
@@ -482,13 +456,12 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eBasicECS::ENTITY_CREATED), cEntityWithData>::Event(cEntityWithData ed)
+	void cActionEntityCreated::Event(cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<EntityCreated>::Event");		
 		
 		// Set render priority dep. on type
-		std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
-		ed->second.mComponents.GetComponent(sprite_ptr);
+		auto sprite_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cMapSprite>();
 		if (sprite_ptr)
 		{
 			if (ed->second.mTags.find("type:tile_bg") != ed->second.mTags.end())
@@ -504,10 +477,9 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cAction<size_t(evt::eRL::LOCATION_CHANGE), cEntityWithData, cEntityWithData, const glm::ivec2&>::Run(cEntityWithData ewho, cEntityWithData elvl, const glm::ivec2& pos)
+	bool cActionLocationChange::Run(cEntityWithData ewho, cEntityWithData elvl, const glm::ivec2& pos)
 	{	
-		std::shared_ptr< cComponent<pgn::cmp::cLevelPosition>> pos_ptr;
-		ewho->second.mComponents.GetComponent(pos_ptr);
+		auto pos_ptr = ewho->second.mComponents.GetComponent<pgn::cmp::cLevelPosition>();
 		pos_ptr->mData.mPos = pos;
 		return true;
 	}
@@ -515,17 +487,14 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cAction<size_t(evt::eRL::LOCATION_CHANGE), cEntityWithData, cEntityWithData, const glm::ivec2&>::Event(cEntityWithData ewho, cEntityWithData elvl, const glm::ivec2& pos)
+	void cActionLocationChange::Event(cEntityWithData ewho, cEntityWithData elvl, const glm::ivec2& pos)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LocationChange>::Run");
 
-		std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
-		std::shared_ptr< cComponent<pgn::cmp::cLevelPosition>> pos_ptr;
-		ewho->second.mComponents.GetComponent(sprite_ptr);
-		ewho->second.mComponents.GetComponent(pos_ptr);
+		auto sprite_ptr = ewho->second.mComponents.GetComponent<pgn::cmp::cMapSprite>();
+		auto pos_ptr = ewho->second.mComponents.GetComponent<pgn::cmp::cLevelPosition>();
 		auto e = ECS.mEntityMgr->Globals().mMapWindow;
-		std::shared_ptr< cComponent<pgn::cmp::cMapWindow>> mwin_ptr;
-		e->second.mComponents.GetComponent(mwin_ptr);
+		auto mwin_ptr = e->second.mComponents.GetComponent<pgn::cmp::cMapWindow>();
 		auto & mwin = mwin_ptr->mData;
 		sprite_ptr->mData.mSprite->setPosition(mwin.LevelToScreenCoords(pos_ptr->mData));
 

@@ -30,6 +30,9 @@ namespace pgn
 		void GetComponent(std::shared_ptr<T >& zPtr) const;
 
 		template<class T>
+		inline std::shared_ptr<cComponent<T> > GetComponent() const { std::shared_ptr<cComponent<T>>  ptr; GetComponent(ptr); return ptr; }
+
+		template<class T>
 		bool HasComponent() const;
 
 		cEntityComponents Clone() const;
