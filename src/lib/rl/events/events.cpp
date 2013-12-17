@@ -3,6 +3,8 @@
 #include <ecs/ecs.h>
 #include <ecs/SystemMgr.h>
 
+#include <rl/util/FormatString.h>
+
 #include <rl/components/components.h>
 #include <rl/components/TileLayout.h>
 #include <rl/components/MapSprite.h>
@@ -16,6 +18,7 @@
 #include <rl/components/Level.h>
 #include <rl/components/Log.h>
 #include <rl/components/OutStream.h>
+#include <rl/components/Text.h>
 #include <rl/components/TextWindow.h>
 #include <rl/components/TileObstacle.h>
 
@@ -322,13 +325,19 @@ namespace pgn
 				// Update status text
 				if (ed->first == ECS.mEntityMgr->Globals().mPC->first)
 				{
-					assert(false);
+					auto text_ptr = ECS.mEntityMgr->Globals().mStatusWindow->second.mComponents.GetComponent<pgn::cmp::cText>();
+					auto textwin_ptr = ECS.mEntityMgr->Globals().mStatusWindow->second.mComponents.GetComponent<pgn::cmp::cTextWindow>();
+					
+					auto text = text_ptr->mData.mText;
+					cDict dict;
+					dict.insert(cDict::value_type("htt", std::to_string(gamestats_ptr->mData.mTotalTurns[ed->first])));
+					EvalFormatString(dict, text);
+					textwin_ptr->mData.SetText(text);
 				}
+				return true;
 			}
 		}
-		
-
-		return true;
+		return false;
 	}
 
 

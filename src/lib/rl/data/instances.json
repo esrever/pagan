@@ -41,6 +41,7 @@
     {
         "archetype" : "common",
         "name" : "status_win",
+        "pgn::cmp::cText" : { "text" : "Hero total turns ${htt}\nBlah" },
         "pgn::cmp::cTextWindow" : {
             "style":{
                 "font" : "system",
@@ -56,11 +57,12 @@
                 "color" : "0x444444ff"
             },
             "text":{
-                "text" : "Hero total turns ${htt}\nBlah"
+                "text" : "-- this is the status window --"
             },
             "pos" : [768, 0],
             "size" : [256,640]
-        }
+        },
+        "tags" : ["StatusWindow"]
     },
     {
         "archetype" : "common",

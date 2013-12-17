@@ -10,5 +10,6 @@ namespace pgn
 		cEntityWithData mPC;
 		cEntityWithData mWorld;
 		cEntityWithData mMapWindow;
+		cEntityWithData mStatusWindow;
 	};
 }

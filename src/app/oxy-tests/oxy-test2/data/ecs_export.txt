@@ -110,6 +110,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -131,6 +132,7 @@
                         },
                         null,
                         {},
+                        null,
                         null,
                         null,
                         null,
@@ -174,6 +176,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -202,6 +205,7 @@
                         {
                             "MaxLineNum": 10
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -250,6 +254,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -291,6 +296,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -310,6 +316,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -401,16 +408,20 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
             },
             "status_win": {
                 "Name": "status_win",
-                "Tags": [],
+                "Tags": [
+                    "StatusWindow"
+                ],
                 "Data": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cText",
                         "struct pgn::cmp::cTextWindow"
                     ],
                     "Components": [
@@ -428,6 +439,9 @@
                         null,
                         null,
                         null,
+                        {
+                            "text": "Hero total turns ${htt}\nBlah"
+                        },
                         {
                             "style": {
                                 "font": "system",
@@ -455,7 +469,7 @@
                                     256,
                                     640
                                 ],
-                                "text": "Hero total turns ${htt}\nBlah"
+                                "text": "-- this is the status window --"
                             },
                             "pos": [
                                 768,
@@ -500,6 +514,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 }
@@ -524,6 +539,7 @@
                         null,
                         null,
                         {},
+                        null,
                         null,
                         null,
                         null,
@@ -565,6 +581,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -588,6 +605,7 @@
                         },
                         null,
                         {},
+                        null,
                         null,
                         null,
                         null,
@@ -640,6 +658,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 },
@@ -668,6 +687,7 @@
                         {
                             "MaxLineNum": 10
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -707,6 +727,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 },
@@ -717,6 +738,7 @@
                 "Components": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
+                        "struct pgn::cmp::cText",
                         "struct pgn::cmp::cTextWindow"
                     ],
                     "Components": [
@@ -734,6 +756,9 @@
                         null,
                         null,
                         null,
+                        {
+                            "text": "Hero total turns ${htt}\nBlah"
+                        },
                         {
                             "style": {
                                 "font": "system",
@@ -761,7 +786,7 @@
                                     256,
                                     640
                                 ],
-                                "text": "Hero total turns ${htt}\nBlah"
+                                "text": "-- this is the status window --"
                             },
                             "pos": [
                                 768,
@@ -777,7 +802,9 @@
                         null
                     ]
                 },
-                "Tags": []
+                "Tags": [
+                    "StatusWindow"
+                ]
             },
             "5": {
                 "Name": "log_win",
@@ -791,6 +818,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -882,6 +910,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 },
@@ -909,6 +938,7 @@
                         null,
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -944,6 +974,7 @@
                         null,
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -990,6 +1021,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -1026,6 +1058,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -1072,6 +1105,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -1108,6 +1142,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -1154,6 +1189,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -1190,6 +1226,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -1236,6 +1273,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -1272,6 +1310,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -1318,6 +1357,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -1354,6 +1394,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -1400,6 +1441,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -1436,6 +1478,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -1482,6 +1525,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -1518,6 +1562,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -1564,6 +1609,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -1600,6 +1646,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -1646,6 +1693,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -1682,6 +1730,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -1728,6 +1777,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -1764,6 +1814,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -1810,6 +1861,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -1846,6 +1898,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -1892,6 +1945,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -1928,6 +1982,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -1974,6 +2029,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -2010,6 +2066,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -2056,6 +2113,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -2092,6 +2150,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -2138,6 +2197,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -2174,6 +2234,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -2220,6 +2281,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -2256,6 +2318,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -2302,6 +2365,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -2338,6 +2402,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -2384,6 +2449,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -2420,6 +2486,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -2466,6 +2533,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -2502,6 +2570,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -2548,6 +2617,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -2584,6 +2654,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -2630,6 +2701,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -2666,6 +2738,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -2712,6 +2785,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -2748,6 +2822,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -2794,6 +2869,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -2830,6 +2906,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -2876,6 +2953,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -2912,6 +2990,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -2958,6 +3037,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -2994,6 +3074,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -3040,6 +3121,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -3076,6 +3158,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -3122,6 +3205,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -3158,6 +3242,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -3204,6 +3289,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -3240,6 +3326,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -3286,6 +3373,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -3322,6 +3410,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -3368,6 +3457,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -3404,6 +3494,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -3450,6 +3541,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -3486,6 +3578,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -3532,6 +3625,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -3568,6 +3662,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -3614,6 +3709,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -3650,6 +3746,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -3696,6 +3793,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -3732,6 +3830,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -3778,6 +3877,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -3814,6 +3914,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -3860,6 +3961,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -3896,6 +3998,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -3942,6 +4045,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -3978,6 +4082,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -4024,6 +4129,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -4060,6 +4166,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -4106,6 +4213,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -4142,6 +4250,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -4188,6 +4297,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -4224,6 +4334,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -4270,6 +4381,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -4306,6 +4418,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -4352,6 +4465,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -4388,6 +4502,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -4434,6 +4549,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -4470,6 +4586,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -4516,6 +4633,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -4552,6 +4670,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -4598,6 +4717,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -4634,6 +4754,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -4680,6 +4801,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -4716,6 +4838,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -4762,6 +4885,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -4798,6 +4922,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -4844,6 +4969,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -4880,6 +5006,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -4926,6 +5053,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -4962,6 +5090,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -5008,6 +5137,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -5044,6 +5174,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -5090,6 +5221,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -5126,6 +5258,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -5172,6 +5305,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -5208,6 +5342,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -5254,6 +5389,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -5290,6 +5426,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -5336,6 +5473,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -5372,6 +5510,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -5418,6 +5557,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -5454,6 +5594,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -5500,6 +5641,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -5536,6 +5678,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -5582,6 +5725,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -5618,6 +5762,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -5664,6 +5809,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -5700,6 +5846,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -5746,6 +5893,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -5782,6 +5930,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -5828,6 +5977,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -5864,6 +6014,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -5910,6 +6061,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -5946,6 +6098,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -5992,6 +6145,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -6028,6 +6182,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -6074,6 +6229,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -6110,6 +6266,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -6156,6 +6313,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -6192,6 +6350,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -6238,6 +6397,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -6274,6 +6434,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -6320,6 +6481,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -6356,6 +6518,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -6402,6 +6565,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -6438,6 +6602,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -6484,6 +6649,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -6520,6 +6686,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -6566,6 +6733,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -6602,6 +6770,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -6648,6 +6817,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -6684,6 +6854,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -6730,6 +6901,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -6766,6 +6938,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -6812,6 +6985,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -6848,6 +7022,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -6894,6 +7069,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -6930,6 +7106,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -6976,6 +7153,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -7012,6 +7190,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -7058,6 +7237,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -7094,6 +7274,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -7140,6 +7321,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -7176,6 +7358,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -7222,6 +7405,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -7258,6 +7442,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -7304,6 +7489,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -7340,6 +7526,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -7386,6 +7573,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -7422,6 +7610,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -7468,6 +7657,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -7504,6 +7694,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -7550,6 +7741,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -7586,6 +7778,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -7632,6 +7825,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -7668,6 +7862,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -7714,6 +7909,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -7750,6 +7946,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -7796,6 +7993,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -7832,6 +8030,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -7878,6 +8077,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -7914,6 +8114,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -7960,6 +8161,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -7996,6 +8198,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -8042,6 +8245,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -8078,6 +8282,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -8124,6 +8329,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -8160,6 +8366,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -8206,6 +8413,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -8242,6 +8450,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -8288,6 +8497,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -8324,6 +8534,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -8370,6 +8581,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -8406,6 +8618,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -8452,6 +8665,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -8488,6 +8702,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -8534,6 +8749,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -8570,6 +8786,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -8616,6 +8833,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -8652,6 +8870,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -8698,6 +8917,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -8734,6 +8954,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -8780,6 +9001,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -8816,6 +9038,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -8862,6 +9085,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -8898,6 +9122,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -8944,6 +9169,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -8980,6 +9206,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -9026,6 +9253,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -9062,6 +9290,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -9108,6 +9337,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -9144,6 +9374,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -9190,6 +9421,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -9226,6 +9458,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -9272,6 +9505,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -9308,6 +9542,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -9354,6 +9589,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -9390,6 +9626,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -9436,6 +9673,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -9472,6 +9710,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -9518,6 +9757,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -9554,6 +9794,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -9600,6 +9841,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -9636,6 +9878,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -9682,6 +9925,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -9718,6 +9962,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -9764,6 +10009,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -9800,6 +10046,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -9846,6 +10093,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -9882,6 +10130,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -9928,6 +10177,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -9964,6 +10214,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -10010,6 +10261,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -10046,6 +10298,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -10092,6 +10345,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -10128,6 +10382,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -10174,6 +10429,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -10210,6 +10466,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -10256,6 +10513,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -10292,6 +10550,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -10338,6 +10597,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -10374,6 +10634,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -10420,6 +10681,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -10456,6 +10718,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -10502,6 +10765,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -10538,6 +10802,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -10584,6 +10849,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -10620,6 +10886,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -10666,6 +10933,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -10702,6 +10970,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -10748,6 +11017,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -10784,6 +11054,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -10830,6 +11101,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -10866,6 +11138,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -10912,6 +11185,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -10948,6 +11222,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -10994,6 +11269,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -11030,6 +11306,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -11076,6 +11353,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -11112,6 +11390,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -11158,6 +11437,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -11194,6 +11474,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -11240,6 +11521,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -11276,6 +11558,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -11322,6 +11605,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -11358,6 +11642,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -11404,6 +11689,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -11440,6 +11726,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -11486,6 +11773,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -11522,6 +11810,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -11568,6 +11857,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -11604,6 +11894,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -11650,6 +11941,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -11686,6 +11978,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -11732,6 +12025,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -11768,6 +12062,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -11814,6 +12109,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -11850,6 +12146,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -11896,6 +12193,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -11932,6 +12230,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -11978,6 +12277,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -12014,6 +12314,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -12060,6 +12361,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -12096,6 +12398,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -12142,6 +12445,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -12178,6 +12482,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -12224,6 +12529,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -12260,6 +12566,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -12306,6 +12613,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -12342,6 +12650,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -12388,6 +12697,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -12424,6 +12734,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -12470,6 +12781,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -12506,6 +12818,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -12552,6 +12865,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -12588,6 +12902,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -12634,6 +12949,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -12670,6 +12986,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -12716,6 +13033,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -12752,6 +13070,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -12798,6 +13117,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -12834,6 +13154,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -12880,6 +13201,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -12916,6 +13238,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -12962,6 +13285,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -12998,6 +13322,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -13044,6 +13369,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -13080,6 +13406,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -13126,6 +13453,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -13162,6 +13490,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -13208,6 +13537,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -13244,6 +13574,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -13290,6 +13621,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -13326,6 +13658,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -13372,6 +13705,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -13408,6 +13742,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -13454,6 +13789,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -13490,6 +13826,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -13536,6 +13873,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -13572,6 +13910,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -13618,6 +13957,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -13654,6 +13994,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -13700,6 +14041,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -13736,6 +14078,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -13782,6 +14125,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -13818,6 +14162,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -13864,6 +14209,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -13900,6 +14246,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -13946,6 +14293,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -13982,6 +14330,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -14028,6 +14377,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -14064,6 +14414,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -14110,6 +14461,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -14146,6 +14498,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -14192,6 +14545,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -14228,6 +14582,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -14274,6 +14629,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -14310,6 +14666,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -14356,6 +14713,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -14392,6 +14750,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -14438,6 +14797,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -14474,6 +14834,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -14520,6 +14881,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -14556,6 +14918,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -14602,6 +14965,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -14638,6 +15002,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -14684,6 +15049,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -14720,6 +15086,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -14766,6 +15133,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -14802,6 +15170,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -14848,6 +15217,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -14884,6 +15254,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -14930,6 +15301,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -14966,6 +15338,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -15012,6 +15385,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -15048,6 +15422,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -15094,6 +15469,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -15130,6 +15506,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -15176,6 +15553,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -15212,6 +15590,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -15258,6 +15637,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -15294,6 +15674,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -15340,6 +15721,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -15376,6 +15758,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -15422,6 +15805,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -15458,6 +15842,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -15504,6 +15889,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -15540,6 +15926,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -15586,6 +15973,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -15622,6 +16010,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -15668,6 +16057,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -15704,6 +16094,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -15750,6 +16141,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -15786,6 +16178,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -15832,6 +16225,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -15868,6 +16262,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -15914,6 +16309,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -15950,6 +16346,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -15996,6 +16393,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -16032,6 +16430,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -16078,6 +16477,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -16114,6 +16514,7 @@
                         },
                         null,
                         "dungeon:wall:brick_brown0",
+                        null,
                         null,
                         null,
                         null,
@@ -16160,6 +16561,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -16196,6 +16598,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -16242,6 +16645,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -16278,6 +16682,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -16324,6 +16729,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -16360,6 +16766,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -16406,6 +16813,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -16442,6 +16850,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -16488,6 +16897,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": true
                         },
@@ -16524,6 +16934,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -16570,6 +16981,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -16606,6 +17018,7 @@
                         },
                         null,
                         "dungeon:floor:dirt0",
+                        null,
                         null,
                         null,
                         null,
@@ -16652,6 +17065,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -16693,6 +17107,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "IsObstacle": false
                         },
@@ -16720,6 +17135,7 @@
                         null,
                         null,
                         {},
+                        null,
                         null,
                         null,
                         null,
@@ -16770,6 +17186,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 },
@@ -16811,6 +17228,7 @@
                         null,
                         null,
                         null,
+                        null,
                         null
                     ]
                 },
@@ -16831,6 +17249,7 @@
             "struct pgn::cmp::cMapWindow",
             "struct pgn::cmp::cMovement",
             "struct pgn::cmp::cOutStream",
+            "struct pgn::cmp::cText",
             "struct pgn::cmp::cTextWindow",
             "struct pgn::cmp::cTileLayout",
             "struct pgn::cmp::cTileObstacle",

@@ -11,6 +11,7 @@
 #include "MapWindow.h"
 #include "Movement.h"
 #include "OutStream.h"
+#include "Text.h"
 #include "TextWindow.h"
 #include "TileLayout.h"
 #include "TileObstacle.h"
@@ -31,6 +32,7 @@ namespace pgn
 		zMgr.AddComponentType<pgn::cmp::cMapWindow>();
 		zMgr.AddComponentType<pgn::cmp::cMovement>();
 		zMgr.AddComponentType<pgn::cmp::cOutStream>();
+		zMgr.AddComponentType<pgn::cmp::cText>();
 		zMgr.AddComponentType<pgn::cmp::cTextWindow>();
 		zMgr.AddComponentType<pgn::cmp::cTileLayout>();
 		zMgr.AddComponentType<pgn::cmp::cTileObstacle>();
