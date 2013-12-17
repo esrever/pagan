@@ -1,5 +1,7 @@
 #include "events.h"
 
+#include <glm/ext.hpp>
+
 #include <ecs/ecs.h>
 #include <ecs/SystemMgr.h>
 
@@ -18,7 +20,7 @@
 #include <rl/components/Level.h>
 #include <rl/components/Log.h>
 #include <rl/components/OutStream.h>
-#include <rl/components/Text.h>
+#include <rl/components/FormatString.h>
 #include <rl/components/TextWindow.h>
 #include <rl/components/TileObstacle.h>
 
@@ -122,6 +124,19 @@ namespace pgn
         // Put pc on a valid square
 		auto epc = ECS.mEntityMgr->Globals().mPC;
 		cActionLocationChange::RunEvent(epc, ed, GetRandomStartPos(layout_ptr->mData));
+
+		// Update level name in status window
+
+		if (ECS.mEntityMgr->Globals().mStatusWindow != ECS.mEntityMgr->GetEntityData().end())
+		{
+			// Add to status info
+			auto fstring_ptr = ECS.mEntityMgr->Globals().mStatusWindow->second.mComponents.GetComponent<pgn::cmp::cFormatString>();
+			auto textwin_ptr = ECS.mEntityMgr->Globals().mStatusWindow->second.mComponents.GetComponent<pgn::cmp::cTextWindow>();
+			fstring_ptr->mData.mDict["cln"] = ed->second.mName;
+			auto text = fstring_ptr->mData.mText;
+			EvalFormatString(fstring_ptr->mData.mDict, text);
+			textwin_ptr->mData.SetText(text);
+		}
 	}
 
 
@@ -325,13 +340,11 @@ namespace pgn
 				// Update status text
 				if (ed->first == ECS.mEntityMgr->Globals().mPC->first)
 				{
-					auto text_ptr = ECS.mEntityMgr->Globals().mStatusWindow->second.mComponents.GetComponent<pgn::cmp::cText>();
+					auto fstring_ptr = ECS.mEntityMgr->Globals().mStatusWindow->second.mComponents.GetComponent<pgn::cmp::cFormatString>();
 					auto textwin_ptr = ECS.mEntityMgr->Globals().mStatusWindow->second.mComponents.GetComponent<pgn::cmp::cTextWindow>();
-					
-					auto text = text_ptr->mData.mText;
-					cDict dict;
-					dict.insert(cDict::value_type("htt", std::to_string(gamestats_ptr->mData.mTotalTurns[ed->first])));
-					EvalFormatString(dict, text);
+					fstring_ptr->mData.mDict["htt"] = std::to_string(gamestats_ptr->mData.mTotalTurns[ed->first]);
+					auto text = fstring_ptr->mData.mText;
+					EvalFormatString(fstring_ptr->mData.mDict, text);
 					textwin_ptr->mData.SetText(text);
 				}
 				return true;
@@ -481,6 +494,17 @@ namespace pgn
 				sprite_ptr->mData.mRenderPriority = eMapRenderOrder::DungeonElementBG;
 			sprite_ptr->mData.mSprite->setPriority(to_integral(sprite_ptr->mData.mRenderPriority));
 		}
+
+		if (ECS.mEntityMgr->Globals().mStatusWindow != ECS.mEntityMgr->GetEntityData().end())
+		{
+			// Add to status info
+			auto fstring_ptr = ECS.mEntityMgr->Globals().mStatusWindow->second.mComponents.GetComponent<pgn::cmp::cFormatString>();
+			auto textwin_ptr = ECS.mEntityMgr->Globals().mStatusWindow->second.mComponents.GetComponent<pgn::cmp::cTextWindow>();
+			fstring_ptr->mData.mDict["tee"] = std::to_string(ECS.mEntityMgr->GetEntityData().size());
+			auto text = fstring_ptr->mData.mText;
+			EvalFormatString(fstring_ptr->mData.mDict, text);
+			textwin_ptr->mData.SetText(text);
+		}
 	}
 
 	//####################################################################################################
@@ -512,6 +536,17 @@ namespace pgn
 		{
 			cActionLevelLeave::RunEvent(ewho, pos_ptr->mData.mLevel);
 			cActionLevelEnter::RunEvent(ewho, elvl);
+		}
+
+		// Update position in status window
+		if (ewho->first == ECS.mEntityMgr->Globals().mPC->first)
+		{
+			auto fstring_ptr = ECS.mEntityMgr->Globals().mStatusWindow->second.mComponents.GetComponent<pgn::cmp::cFormatString>();
+			auto textwin_ptr = ECS.mEntityMgr->Globals().mStatusWindow->second.mComponents.GetComponent<pgn::cmp::cTextWindow>();
+			fstring_ptr->mData.mDict["cpp"] = glm::to_string( pos);
+			auto text = fstring_ptr->mData.mText;
+			EvalFormatString(fstring_ptr->mData.mDict, text);
+			textwin_ptr->mData.SetText(text);
 		}
 	}
 

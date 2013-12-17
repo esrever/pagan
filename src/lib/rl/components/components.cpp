@@ -2,6 +2,7 @@
 #include "ecs/EntityMgr.h"
 #include "Description.h"
 #include "Door.h"
+#include "FormatString.h"
 #include "GameStats.h"
 #include "KeyActionMapper.h"
 #include "Level.h"
@@ -23,6 +24,7 @@ namespace pgn
 	{
 		zMgr.AddComponentType<pgn::cmp::cDescription>();
 		zMgr.AddComponentType<pgn::cmp::cDoor>();
+		zMgr.AddComponentType<pgn::cmp::cFormatString>();
 		zMgr.AddComponentType<pgn::cmp::cGameStats>();
 		zMgr.AddComponentType<pgn::cmp::cKeyActionMapper>();
 		zMgr.AddComponentType<pgn::cmp::cLevel>();

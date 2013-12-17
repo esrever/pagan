@@ -94,6 +94,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 2,
@@ -130,6 +131,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         {},
                         null,
@@ -170,6 +172,7 @@
                         null,
                         null,
                         null,
+                        null,
                         "dungeon:floor:dirt0",
                         null,
                         null,
@@ -197,6 +200,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -232,6 +236,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -280,6 +285,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 0,
@@ -316,6 +322,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -392,6 +399,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 0,
@@ -421,7 +429,7 @@
                 "Data": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
-                        "struct pgn::cmp::cText",
+                        "struct pgn::cmp::cFormatString",
                         "struct pgn::cmp::cTextWindow"
                     ],
                     "Components": [
@@ -430,18 +438,23 @@
                             "Short": ""
                         },
                         null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
                         {
-                            "text": "Hero total turns ${htt}\nBlah"
+                            "dict": {
+                                "cln": "the_level",
+                                "cpp": "ivec2(2, 9)",
+                                "tee": "396"
+                            }
                         },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
                         {
                             "style": {
                                 "font": "system",
@@ -469,7 +482,7 @@
                                     256,
                                     640
                                 ],
-                                "text": "-- this is the status window --"
+                                "text": "Hero total turns ${htt}\nTotal entities: 396\nCurrent player position: ivec2(2, 9)\nCurrent level name: the_level"
                             },
                             "pos": [
                                 768,
@@ -499,6 +512,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -535,6 +549,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -575,6 +590,7 @@
                         null,
                         null,
                         null,
+                        null,
                         "dungeon:wall:brick_brown0",
                         null,
                         null,
@@ -603,6 +619,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         {},
                         null,
@@ -639,6 +656,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -684,6 +702,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "MaxLineNum": 10
                         },
@@ -717,6 +736,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "MaxLineNum": 100000
                         },
@@ -738,7 +758,7 @@
                 "Components": {
                     "Mask": [
                         "struct pgn::cmp::cDescription",
-                        "struct pgn::cmp::cText",
+                        "struct pgn::cmp::cFormatString",
                         "struct pgn::cmp::cTextWindow"
                     ],
                     "Components": [
@@ -747,18 +767,23 @@
                             "Short": ""
                         },
                         null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
                         {
-                            "text": "Hero total turns ${htt}\nBlah"
+                            "dict": {
+                                "cln": "the_level",
+                                "cpp": "ivec2(2, 9)",
+                                "tee": "396"
+                            }
                         },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
                         {
                             "style": {
                                 "font": "system",
@@ -786,7 +811,7 @@
                                     256,
                                     640
                                 ],
-                                "text": "-- this is the status window --"
+                                "text": "Hero total turns ${htt}\nTotal entities: 396\nCurrent player position: ivec2(2, 9)\nCurrent level name: the_level"
                             },
                             "pos": [
                                 768,
@@ -818,6 +843,7 @@
                             "Verbose": "",
                             "Short": ""
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -895,6 +921,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "cell_dims": [
                                 24,
@@ -937,6 +964,7 @@
                         null,
                         null,
                         null,
+                        null,
                         "dungeon:wall:brick_brown0",
                         null,
                         null,
@@ -967,6 +995,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -1004,6 +1033,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -1050,6 +1080,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -1088,6 +1119,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -1134,6 +1166,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -1172,6 +1205,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -1218,6 +1252,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -1256,6 +1291,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -1302,6 +1338,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -1340,6 +1377,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -1386,6 +1424,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -1424,6 +1463,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -1470,6 +1510,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -1508,6 +1549,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -1554,6 +1596,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -1592,6 +1635,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -1638,6 +1682,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -1676,6 +1721,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -1722,6 +1768,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -1760,6 +1807,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -1806,6 +1854,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -1844,6 +1893,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -1890,6 +1940,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -1928,6 +1979,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -1974,6 +2026,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -2012,6 +2065,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -2058,6 +2112,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -2096,6 +2151,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -2142,6 +2198,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -2180,6 +2237,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -2226,6 +2284,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -2264,6 +2323,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -2310,6 +2370,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -2348,6 +2409,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -2394,6 +2456,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -2432,6 +2495,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -2478,6 +2542,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -2516,6 +2581,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -2562,6 +2628,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -2600,6 +2667,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -2646,6 +2714,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -2684,6 +2753,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -2730,6 +2800,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -2768,6 +2839,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -2814,6 +2886,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -2852,6 +2925,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -2898,6 +2972,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -2936,6 +3011,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -2982,6 +3058,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -3020,6 +3097,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -3066,6 +3144,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -3104,6 +3183,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -3150,6 +3230,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -3188,6 +3269,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -3234,6 +3316,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -3272,6 +3355,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -3318,6 +3402,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -3356,6 +3441,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -3402,6 +3488,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -3440,6 +3527,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -3486,6 +3574,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -3524,6 +3613,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -3570,6 +3660,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -3608,6 +3699,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -3654,6 +3746,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -3692,6 +3785,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -3738,6 +3832,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -3776,6 +3871,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -3822,6 +3918,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -3860,6 +3957,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -3906,6 +4004,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -3944,6 +4043,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -3990,6 +4090,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -4028,6 +4129,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -4074,6 +4176,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -4112,6 +4215,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -4158,6 +4262,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -4196,6 +4301,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -4242,6 +4348,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -4280,6 +4387,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -4326,6 +4434,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -4364,6 +4473,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -4410,6 +4520,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -4448,6 +4559,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -4494,6 +4606,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -4532,6 +4645,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -4578,6 +4692,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -4616,6 +4731,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -4662,6 +4778,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -4700,6 +4817,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -4746,6 +4864,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -4784,6 +4903,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -4830,6 +4950,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -4868,6 +4989,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -4914,6 +5036,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -4952,6 +5075,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -4998,6 +5122,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -5036,6 +5161,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -5082,6 +5208,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -5120,6 +5247,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -5166,6 +5294,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -5204,6 +5333,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -5250,6 +5380,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -5288,6 +5419,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -5334,6 +5466,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -5372,6 +5505,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -5418,6 +5552,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -5456,6 +5591,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -5502,6 +5638,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -5540,6 +5677,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -5586,6 +5724,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -5624,6 +5763,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -5670,6 +5810,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -5708,6 +5849,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -5754,6 +5896,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -5792,6 +5935,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -5838,6 +5982,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -5876,6 +6021,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -5922,6 +6068,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -5960,6 +6107,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -6006,6 +6154,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -6044,6 +6193,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -6090,6 +6240,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -6128,6 +6279,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -6174,6 +6326,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -6212,6 +6365,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -6258,6 +6412,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -6296,6 +6451,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -6342,6 +6498,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -6380,6 +6537,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -6426,6 +6584,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -6464,6 +6623,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -6510,6 +6670,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -6548,6 +6709,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -6594,6 +6756,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -6632,6 +6795,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -6678,6 +6842,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -6716,6 +6881,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -6762,6 +6928,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -6800,6 +6967,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -6846,6 +7014,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -6884,6 +7053,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -6930,6 +7100,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -6968,6 +7139,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -7014,6 +7186,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -7052,6 +7225,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -7098,6 +7272,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -7136,6 +7311,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -7182,6 +7358,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -7220,6 +7397,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -7266,6 +7444,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -7304,6 +7483,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -7350,6 +7530,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -7388,6 +7569,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -7434,6 +7616,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -7472,6 +7655,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -7518,6 +7702,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -7556,6 +7741,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -7602,6 +7788,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -7640,6 +7827,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -7686,6 +7874,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -7724,6 +7913,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -7770,6 +7960,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -7808,6 +7999,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -7854,6 +8046,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -7892,6 +8085,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -7938,6 +8132,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -7976,6 +8171,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -8022,6 +8218,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -8060,6 +8257,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -8106,6 +8304,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -8144,6 +8343,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -8190,6 +8390,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -8228,6 +8429,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -8274,6 +8476,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -8312,6 +8515,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -8358,6 +8562,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -8396,6 +8601,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -8442,6 +8648,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -8480,6 +8687,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -8526,6 +8734,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -8564,6 +8773,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -8610,6 +8820,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -8648,6 +8859,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -8694,6 +8906,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -8732,6 +8945,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -8778,6 +8992,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -8816,6 +9031,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -8862,6 +9078,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -8900,6 +9117,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -8946,6 +9164,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -8984,6 +9203,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -9030,6 +9250,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -9068,6 +9289,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -9114,6 +9336,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -9152,6 +9375,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -9198,6 +9422,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -9236,6 +9461,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -9282,6 +9508,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -9320,6 +9547,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -9366,6 +9594,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -9404,6 +9633,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -9450,6 +9680,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -9488,6 +9719,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -9534,6 +9766,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -9572,6 +9805,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -9618,6 +9852,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -9656,6 +9891,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -9702,6 +9938,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -9740,6 +9977,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -9786,6 +10024,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -9824,6 +10063,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -9870,6 +10110,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -9908,6 +10149,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -9954,6 +10196,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -9992,6 +10235,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -10038,6 +10282,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -10076,6 +10321,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -10122,6 +10368,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -10160,6 +10407,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -10206,6 +10454,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -10244,6 +10493,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -10290,6 +10540,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -10328,6 +10579,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -10374,6 +10626,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -10412,6 +10665,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -10458,6 +10712,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -10496,6 +10751,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -10542,6 +10798,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -10580,6 +10837,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -10626,6 +10884,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -10664,6 +10923,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -10710,6 +10970,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -10748,6 +11009,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -10794,6 +11056,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -10832,6 +11095,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -10878,6 +11142,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -10916,6 +11181,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -10962,6 +11228,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -11000,6 +11267,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -11046,6 +11314,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -11084,6 +11353,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -11130,6 +11400,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -11168,6 +11439,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -11214,6 +11486,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -11252,6 +11525,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -11298,6 +11572,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -11336,6 +11611,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -11382,6 +11658,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -11420,6 +11697,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -11466,6 +11744,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -11504,6 +11783,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -11550,6 +11830,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -11588,6 +11869,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -11634,6 +11916,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -11672,6 +11955,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -11718,6 +12002,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -11756,6 +12041,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -11802,6 +12088,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -11840,6 +12127,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -11886,6 +12174,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -11924,6 +12213,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -11970,6 +12260,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -12008,6 +12299,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -12054,6 +12346,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -12092,6 +12385,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -12138,6 +12432,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -12176,6 +12471,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -12222,6 +12518,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -12260,6 +12557,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -12306,6 +12604,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -12344,6 +12643,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -12390,6 +12690,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -12428,6 +12729,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -12474,6 +12776,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -12512,6 +12815,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -12558,6 +12862,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -12596,6 +12901,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -12642,6 +12948,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -12680,6 +12987,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -12726,6 +13034,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -12764,6 +13073,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -12810,6 +13120,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -12848,6 +13159,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -12894,6 +13206,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -12932,6 +13245,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -12978,6 +13292,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -13016,6 +13331,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -13062,6 +13378,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -13100,6 +13417,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -13146,6 +13464,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -13184,6 +13503,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -13230,6 +13550,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -13268,6 +13589,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -13314,6 +13636,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -13352,6 +13675,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -13398,6 +13722,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -13436,6 +13761,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -13482,6 +13808,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -13520,6 +13847,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -13566,6 +13894,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -13604,6 +13933,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -13650,6 +13980,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -13688,6 +14019,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -13734,6 +14066,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -13772,6 +14105,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -13818,6 +14152,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -13856,6 +14191,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -13902,6 +14238,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -13940,6 +14277,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -13986,6 +14324,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -14024,6 +14363,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -14070,6 +14410,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -14108,6 +14449,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -14154,6 +14496,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -14192,6 +14535,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -14238,6 +14582,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -14276,6 +14621,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -14322,6 +14668,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -14360,6 +14707,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -14406,6 +14754,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -14444,6 +14793,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -14490,6 +14840,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -14528,6 +14879,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -14574,6 +14926,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -14612,6 +14965,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -14658,6 +15012,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -14696,6 +15051,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -14742,6 +15098,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -14780,6 +15137,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -14826,6 +15184,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -14864,6 +15223,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -14910,6 +15270,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -14948,6 +15309,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -14994,6 +15356,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -15032,6 +15395,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -15078,6 +15442,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -15116,6 +15481,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -15162,6 +15528,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -15200,6 +15567,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -15246,6 +15614,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -15284,6 +15653,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -15330,6 +15700,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -15368,6 +15739,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -15414,6 +15786,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -15452,6 +15825,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -15498,6 +15872,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -15536,6 +15911,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -15582,6 +15958,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -15620,6 +15997,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -15666,6 +16044,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -15704,6 +16083,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -15750,6 +16130,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -15788,6 +16169,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -15834,6 +16216,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -15872,6 +16255,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -15918,6 +16302,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -15956,6 +16341,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -16002,6 +16388,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -16040,6 +16427,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -16086,6 +16474,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -16124,6 +16513,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -16170,6 +16560,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 1,
@@ -16208,6 +16599,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -16254,6 +16646,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 3,
@@ -16292,6 +16685,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -16338,6 +16732,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 5,
@@ -16376,6 +16771,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -16422,6 +16818,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 7,
@@ -16460,6 +16857,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -16506,6 +16904,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 9,
@@ -16544,6 +16943,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -16590,6 +16990,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 11,
@@ -16628,6 +17029,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -16674,6 +17076,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 13,
@@ -16712,6 +17115,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -16758,6 +17162,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 15,
@@ -16796,6 +17201,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -16842,6 +17248,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 17,
@@ -16880,6 +17287,7 @@
                             "Verbose": "dusty wall",
                             "Short": "wall"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -16926,6 +17334,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 19,
@@ -16964,6 +17373,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -17010,6 +17420,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 21,
@@ -17048,6 +17459,7 @@
                             "Verbose": "dusty floor",
                             "Short": "floor"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -17094,6 +17506,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 23,
@@ -17134,6 +17547,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {},
                         null,
                         null,
@@ -17166,6 +17580,7 @@
                             "Verbose": "fat, brown, hairy, vicious-looking rat",
                             "Short": "rat"
                         },
+                        null,
                         null,
                         null,
                         null,
@@ -17212,6 +17627,7 @@
                         null,
                         null,
                         null,
+                        null,
                         {
                             "Position": [
                                 0,
@@ -17240,6 +17656,7 @@
         "ComponentTypeIds": [
             "struct pgn::cmp::cDescription",
             "struct pgn::cmp::cDoor",
+            "struct pgn::cmp::cFormatString",
             "struct pgn::cmp::cGameStats",
             "struct pgn::cmp::cKeyActionMapper",
             "struct pgn::cmp::cLevel",

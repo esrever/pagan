@@ -41,7 +41,7 @@
     {
         "archetype" : "common",
         "name" : "status_win",
-        "pgn::cmp::cText" : { "text" : "Hero total turns ${htt}\nBlah" },
+        "pgn::cmp::cFormatString" : { "text" : "Hero total turns ${htt}\nTotal entities: ${tee}\nCurrent player position: ${cpp}\nCurrent level name: ${cln}" },
         "pgn::cmp::cTextWindow" : {
             "style":{
                 "font" : "system",

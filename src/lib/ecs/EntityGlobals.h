@@ -7,6 +7,7 @@ namespace pgn
 {
 	struct cEntityGlobals
 	{
+		cEntityGlobals(cEntityWithData);
 		cEntityWithData mPC;
 		cEntityWithData mWorld;
 		cEntityWithData mMapWindow;

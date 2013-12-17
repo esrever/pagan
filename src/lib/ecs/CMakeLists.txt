@@ -17,6 +17,7 @@ set(SOURCE_FILES
     #QueryBase.cpp
     QueryExpression.cpp
     ActionMgr.cpp
+    EntityGlobals.cpp
 )
 
 set(HEADER_FILES
@@ -41,6 +42,7 @@ set(HEADER_FILES
     #TagQuery.h
     #QueryBase.h
     QueryExpression.h
+    EntityGlobals.h
     #EventHandlerQuery.h
 )
 

@@ -10,6 +10,8 @@ namespace pgn
 	cEntityMgr::cEntityMgr()
 	:mOnEntityCreated(Simple::slot(this, &cEntityMgr::OnEntityCreated))
 	,mOnEntityDestroy(Simple::slot(this, &cEntityMgr::OnEntityDestroy))
+	, mEntityData()
+	, mGlobals(mEntityData.end())
 	{}
 	//----------------------------------------------------------------
 	cEntityWithData cEntityMgr::Create()
