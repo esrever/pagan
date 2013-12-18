@@ -16,7 +16,9 @@ namespace pgn
         //! 
         struct cTileLayout
         {
+			//! Array of indices to the defaults of the layout
 			cArray2D<uint8_t> mData;
+			//! Defaults of the layout
 			std::vector<cEntityWithData> mDefaults;
 
 			//! General functions

@@ -14,23 +14,25 @@ namespace pgn
     namespace cmp
     {
 		struct cLevelPosition;
-        //! 
+        //! Represents the map window, converts between level<->map coords and stores the BG sprites of the map
         struct cMapWindow
         {
 		public:
 
 			oxygine::Vector2 LevelToScreenCoords(const cLevelPosition& pos);
-			//oxygine::spSprite& Tile(size_t col, size_t row) { return mTiles.at(col + row*mCellDims.x); }
 
 		//private:
 		//	DECL_JSON_PGN_FRIEND
 
-			//std::vector<oxygine::spSprite> mTiles;
+			//! Start position in level coordinates
 			glm::ivec2 mStartPos;
+			//! Number of tiles
 			glm::uvec2 mCellDims;
+			//! Pixel size of each tile
 			glm::uvec2 mTileDims;
+			//! The window actor, all tiles attach to this
 			oxygine::spClipRectActor mTileWin;
-
+			//! All sprites, cloned from the few entities of the level
 			cArray2D<oxygine::spSprite> mSprites;
         };
         
