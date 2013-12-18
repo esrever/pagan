@@ -23,7 +23,12 @@ namespace pgn
 		from_json(zData.mCellDims, zRoot["cell_dims"]);
 		from_json(zData.mTileDims, zRoot["tile_dims"]);
 
-		zData.mTileWin = new oxygine::Actor;
+		auto mapsize = zData.mCellDims * zData.mTileDims;
+
+		zData.mTileWin = new oxygine::ClipRectActor;
+		zData.mTileWin->setEnableClipping(true);
+		zData.mTileWin->setPosition(0, 0);
+		zData.mTileWin->setSize(mapsize.x, mapsize.y);
 		oxygine::getRoot()->addChild(zData.mTileWin); // TODO: on game state change
         return true;
 	}

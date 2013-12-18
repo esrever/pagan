@@ -29,7 +29,7 @@ namespace pgn
 			glm::ivec2 mStartPos;
 			glm::uvec2 mCellDims;
 			glm::uvec2 mTileDims;
-			oxygine::spActor mTileWin;
+			oxygine::spClipRectActor mTileWin;
 
 			cArray2D<oxygine::spSprite> mSprites;
         };
