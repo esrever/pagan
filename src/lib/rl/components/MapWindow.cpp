@@ -11,7 +11,7 @@ namespace pgn
 	{
 		auto vpos = (mStartPos + pos.mPos)*glm::ivec2(mTileDims);
 		vpos.y = (mCellDims.y-1)*mTileDims.y - vpos.y;
-		return oxygine::Vector2(vpos.x, vpos.y);
+		return oxygine::Vector2(float(vpos.x), float(vpos.y));
 	}
 
 	//----------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ namespace pgn
 		zData.mTileWin = new oxygine::ClipRectActor;
 		zData.mTileWin->setEnableClipping(true);
 		zData.mTileWin->setPosition(0, 0);
-		zData.mTileWin->setSize(mapsize.x, mapsize.y);
+		zData.mTileWin->setSize(float(mapsize.x), float(mapsize.y));
 		oxygine::getRoot()->addChild(zData.mTileWin); // TODO: on game state change
         return true;
 	}

@@ -10,9 +10,9 @@ namespace pgn
 		GenerateRLLib(mMap);
 		zMap.Resize(w, h);
 
-		for (auto i = 0; i < mMap.GetHeight();++i)
+		for (unsigned i = 0; i < mMap.GetHeight();++i)
 		{
-			for (auto j = 0; j < mMap.GetWidth(); ++j)
+			for (unsigned j = 0; j < mMap.GetWidth(); ++j)
 			{
 				zMap(j, i) = size_t(mMap.GetCell(j, i));
 			}
