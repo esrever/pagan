@@ -43,4 +43,14 @@ namespace pgn
 			for (auto j = 0; j < data.Width(); ++i)
 				v.visit(j, i, data(j, i));
 	}
+	
+	/*
+		template<class T>
+		class cExampleVisitor
+		{
+			public:
+				void visit(uint x, uint y, const T& data);  // const visit
+				void visit(uint x, uint y, T& data);		// const visit
+		}
+	*/
 }

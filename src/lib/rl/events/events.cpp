@@ -47,9 +47,6 @@ namespace pgn
 		auto lvl_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cLevel>();
 		auto& curmap = layout_ptr->mData;
 		auto& mapdata = curmap.mData;
-
-		// Layout response: attach layout node to level node
-		layout_ptr->mData.mLayoutNode->attachTo(lvl_ptr->mData.mLevelNode);
 	}
 
 
@@ -74,9 +71,12 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cActionLevelLoad::Run(cEntityWithData arg0)
+	bool cActionLevelLoad::Run(cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelLoad>::Run");
+		auto lvl_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cLevel>();
+		auto mwin_ptr = ECS.mEntityMgr->Globals().mMapWindow->second.mComponents.GetComponent<pgn::cmp::cMapWindow>();
+		lvl_ptr->mData.mLevelNode->attachTo(mwin_ptr->mData.mTileWin);
 		return true;
 	}
 
@@ -101,8 +101,7 @@ namespace pgn
 		auto mwin_ptr = e->second.mComponents.GetComponent<pgn::cmp::cMapWindow>();
 		auto & mwin = mwin_ptr->mData;
 
-		// Attach level node to window node
-		lvl_ptr->mData.mLevelNode->attachTo(mwin.mTileWin);
+		mwin.mSprites.Resize(mapdata.Width(), mapdata.Height());
 
 		// for each tile // TODO: use visitor instead? 
 		for (unsigned i = 0; i < mapdata.Height(); ++i)
@@ -110,14 +109,19 @@ namespace pgn
 			for (unsigned j = 0; j < mapdata.Width(); ++j)
 			{
 				// get entity from 2d map
-				auto tile = mapdata(j, i);
+				auto tile = curmap.mDefaults[ mapdata(j, i) ];
 
-				// get sprite from entity
+				// get sprite from entity, clone it and set data
 				auto sprite_ptr = tile->second.mComponents.GetComponent<pgn::cmp::cMapSprite>();
-				auto pos_ptr = tile->second.mComponents.GetComponent<pgn::cmp::cLevelPosition>();
-				pos_ptr->mData.mLevel = ed;
-				sprite_ptr->mData.mSprite->setSize(float(mwin.mTileDims.x), float(mwin.mTileDims.y));
-				sprite_ptr->mData.mSprite->setPosition(mwin.LevelToScreenCoords(pos_ptr->mData));
+				auto& winsprite = mwin.mSprites(j, i);
+				winsprite = sprite_ptr->mData.mSprite->clone();
+				winsprite->setSize(float(mwin.mTileDims.x), float(mwin.mTileDims.y));
+
+				cmp::cLevelPosition pos;
+				pos.mPos = glm::ivec2(j, i);
+				winsprite->setPosition(mwin.LevelToScreenCoords(pos));
+				winsprite->attachTo(lvl_ptr->mData.mLevelNode);
+				winsprite->setPriority(short(sprite_ptr->mData.mRenderPriority));
 			}
 		}
 		
@@ -143,18 +147,21 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cActionLevelUnload::Run(cEntityWithData arg0)
+	bool cActionLevelUnload::Run(cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelUnload>::Run");
+		auto lvl_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cLevel>();
+		lvl_ptr->mData.mLevelNode->detach();
 		return true;
 	}
 
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cActionLevelUnload::Event(cEntityWithData arg0)
+	void cActionLevelUnload::Event(cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Event");
+		
 	}
 
 	//####################################################################################################
@@ -330,7 +337,8 @@ namespace pgn
 		if (mapdata.InRange(newpos))
 		{
             // Check if we hit an obstacle
-			auto obstacle_ptr = mapdata(newpos)->second.mComponents.GetComponent<pgn::cmp::cTileObstacle>();
+			//auto obstacle_ptr = mapdata(newpos)->second.mComponents.GetComponent<pgn::cmp::cTileObstacle>();
+			auto obstacle_ptr = layout_ptr->mData.LookupEntity(newpos.x,newpos.y)->second.mComponents.GetComponent<pgn::cmp::cTileObstacle>();
 			if (!obstacle_ptr->mData.mIsObstacle)
 			{
 				cActionLocationChange::RunEvent(ed, pos_ptr->mData.mLevel, newpos);

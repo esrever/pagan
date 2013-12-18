@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <oxygine-framework.h>
 #include <core/container/Array2D.h>
 #include <core/util/json_conversions.h>
@@ -15,13 +16,11 @@ namespace pgn
         //! 
         struct cTileLayout
         {
-			oxygine::spActor mLayoutNode;
+			cArray2D<uint8_t> mData;
+			std::vector<cEntityWithData> mDefaults;
 
-			cArray2D<cEntityWithData> mData;
-			
-			cEntityWithData mDefaultWall;
-			cEntityWithData mDefaultFloor;
-			cEntityWithData mDefaultDoor;
+			//! General functions
+			cEntityWithData LookupEntity(int x, int y) { return mDefaults.at(mData(x, y)); }
         };
         
     }

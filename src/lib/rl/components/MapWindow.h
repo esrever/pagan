@@ -5,6 +5,7 @@
 
 #include <glm/glm.hpp>
 #include <oxygine-framework.h>
+#include <core/container/Array2D.h>
 #include <core/util/json_conversions.h>
 
 
@@ -18,6 +19,7 @@ namespace pgn
         {
 		public:
 
+			oxygine::Vector2 LevelToScreenCoords(const cLevelPosition& pos);
 			//oxygine::spSprite& Tile(size_t col, size_t row) { return mTiles.at(col + row*mCellDims.x); }
 
 		//private:
@@ -29,9 +31,7 @@ namespace pgn
 			glm::uvec2 mTileDims;
 			oxygine::spActor mTileWin;
 
-			
-			oxygine::Vector2 LevelToScreenCoords(const cLevelPosition& pos);
-			
+			cArray2D<oxygine::spSprite> mSprites;
         };
         
     }

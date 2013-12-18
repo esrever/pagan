@@ -22,18 +22,16 @@ namespace pgn
 			to compress: ( bitval - numTimes)
 		*/
 		glm::uvec2 dims;
-		std::string dw, df,dd;
 		from_json(dims, zRoot["dims"]);
-		from_json(dw, zRoot["def_wall"]);
-		from_json(df, zRoot["def_floor"]);
-		from_json(dd, zRoot["def_door"]);
 
 		auto& ecs = ECS;
-		zData.mDefaultWall =  ecs.mEntityMgr->InstantiateExemplar(dw);
-		zData.mDefaultFloor = ecs.mEntityMgr->InstantiateExemplar(df);
-		zData.mDefaultDoor = ecs.mEntityMgr->InstantiateExemplar(dd);
-
-		zData.mLayoutNode = new oxygine::Actor;
+		const auto& defaults = zRoot["defaults"];
+		for (auto it = defaults.Begin(); it != defaults.End(); ++it)
+		{
+			std::string name = it->GetString();
+			auto ed = ecs.mEntityMgr->InstantiateExemplar(name);
+			zData.mDefaults.push_back(ed);
+		}
 
 		//RL::InitRandomness();
 		//cArray2D<size_t> mapvalues;
@@ -49,7 +47,7 @@ namespace pgn
 			for (unsigned j = 0; j < dims.x; ++j)
 			{
 				// TODO: use visitors?
-				auto ed = rand() & 3 ? ECS.mEntityMgr->CloneEntity(zData.mDefaultFloor) : ECS.mEntityMgr->CloneEntity(zData.mDefaultWall);
+				//auto ed = rand() & 3 ? ECS.mEntityMgr->CloneEntity(zData.mDefaultFloor) : ECS.mEntityMgr->CloneEntity(zData.mDefaultWall);
 				/*
 				cEntityWithData ed;
 				switch (mapvalues(j, i))
@@ -69,21 +67,7 @@ namespace pgn
 						assert(false);
 				}
 				*/
-
-				std::shared_ptr< cComponent<pgn::cmp::cMapSprite>> sprite_ptr;
-				ed->second.mComponents.GetComponent(sprite_ptr);
-
-				//set positions
-				sprite_ptr->mData.mSprite->setPosition(float(j), float(i));
-
-				//Attach to layout node
-				sprite_ptr->mData.mSprite->attachTo(zData.mLayoutNode);
-				zData.mData(j, i) = ed;
-
-				//TODO: add level position component!
-				std::shared_ptr< cComponent<pgn::cmp::cLevelPosition>> lvlpos_ptr = std::make_shared< cComponent<pgn::cmp::cLevelPosition>>();
-				lvlpos_ptr->mData.mPos = glm::uvec2(j, i);
-				ed->second.mComponents.AddComponent(lvlpos_ptr);
+				zData.mData(j, i) = (rand() & 3) > 0;
 			}
 		}
 
@@ -102,14 +86,19 @@ namespace pgn
 	//---------------------------------------------------------------------------------------
 	glm::ivec2 GetRandomStartPos(const cmp::cTileLayout& layout)
 	{
+		std::vector< pgn::cmp::cTileObstacle> obstacles;
+		for (auto x : layout.mDefaults)
+		{
+			auto obstacle_ptr = x->second.mComponents.GetComponent<pgn::cmp::cTileObstacle>();
+			obstacles.push_back(obstacle_ptr->mData);
+		}
 		while (true)
 		{
 			int coord = rand();
 			int y = int(coord / layout.mData.Width()) % layout.mData.Height();
 			int x = coord % layout.mData.Width();
-			std::shared_ptr< cComponent<pgn::cmp::cTileObstacle>> obstacle_ptr;
-			layout.mData(x, y)->second.mComponents.GetComponent(obstacle_ptr);
-			if ( !(obstacle_ptr && obstacle_ptr->mData.mIsObstacle))
+			auto idx = layout.mData(x, y);
+			if ( ! obstacles.at(idx).mIsObstacle)
 				return glm::ivec2(x, y);
 		}
 	}
