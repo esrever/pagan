@@ -9,11 +9,10 @@ namespace pgn
 	template<>
 	bool from_json<cmp::cDoor>(cmp::cDoor& zData, const rapidjson::Value& zRoot)
 	{
-		std::string tile_open;
-		std::string tile_closed;
-		from_json(zData.mSprites[0], zRoot["tile_open"]);
-		from_json(zData.mSprites[1], zRoot["tile_closed"]);
-		from_json(zData.mIsClosed, zRoot["is_closed"]);
+		const auto& states = zRoot["sprites"];
+		int i = 0;
+		for (auto it = states.Begin(); it != states.End(); ++it)
+			from_json(zData.mSprites[i++], *it);
 		zData.mSprites[0].mRenderPriority = eMapRenderOrder::DungeonElementFG;
 		zData.mSprites[1].mRenderPriority = eMapRenderOrder::DungeonElementFG;
         return true;

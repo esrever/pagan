@@ -24,8 +24,7 @@
     {
         "name" : "tile",
         "components" : ["pgn::cmp::cMapSprite","pgn::cmp::cTileObstacle"],
-        "inherits" : ["common"],
-        "tags" : ["type:tile"]
+        "inherits" : ["common"]
     },
     {
         "name" : "level",
@@ -36,5 +35,10 @@
         "name" : "log",
         "components" : ["pgn::cmp::cLog"],
         "inherits" : ["common"]
+    },
+    {
+        "name" : "door",
+        "components" : ["pgn::cmp::cDoor"],
+        "inherits" : ["type:tile_fg"]
     }
 ]

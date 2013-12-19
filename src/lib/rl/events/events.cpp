@@ -494,6 +494,10 @@ namespace pgn
 		{
 			if (ed->second.mTags.find("type:tile_bg") != ed->second.mTags.end())
 				sprite_ptr->mData.mRenderPriority = eMapRenderOrder::DungeonElementBG;
+			else if (ed->second.mTags.find("type:tile_fg") != ed->second.mTags.end())
+				sprite_ptr->mData.mRenderPriority = eMapRenderOrder::DungeonElementFG;
+			else if (ed->second.mTags.find("type:item") != ed->second.mTags.end())
+				sprite_ptr->mData.mRenderPriority = eMapRenderOrder::Item;
 			else if (ed->second.mTags.find("type:creature") != ed->second.mTags.end())
 				sprite_ptr->mData.mRenderPriority = eMapRenderOrder::Creature;
 			else

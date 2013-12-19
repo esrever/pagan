@@ -50,7 +50,7 @@ namespace pgn
 		for (auto x : mDefaults)
 		{
 			auto obstacle_ptr = x->second.mComponents.GetComponent<pgn::cmp::cTileObstacle>();
-			obstacles.push_back(obstacle_ptr->mData);
+			obstacle_ptr ? obstacles.push_back(obstacle_ptr->mData) : obstacles.push_back(pgn::cmp::cTileObstacle());
 		}
 		while (true)
 		{

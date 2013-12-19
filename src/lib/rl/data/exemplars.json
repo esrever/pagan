@@ -38,5 +38,17 @@
             },
         "pgn::cmp::cTileObstacle" : {"IsObstacle" : false},
         "pgn::cmp::cMapSprite" : "dungeon:floor:dirt0"
+    },
+    {
+        "archetype" : "door",
+        "name" : "door_common",
+        "pgn::cmp::cDescription" : {
+            "Short" : "door",
+            "Verbose" : "wooden door"
+            },
+        "pgn::cmp::cDoor" : {
+            "closed" : true,
+            "sprites" : ["dungeon:dngn_open_door","dungeon:dngn_closed_door"]
+        }
     }
 ]

@@ -102,7 +102,7 @@
         "archetype" : "common",
         "name" : "the_level",
         "pgn::cmp::cLevel" : {
-            "defaults" : ["wall_common", "floor_common"],
+            "defaults" : ["wall_common", "floor_common", "door_common","human_common", "rat_common"],
             "dims" : [24, 16]
         },
         "tags" : ["CurrentLevel"]

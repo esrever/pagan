@@ -11,6 +11,7 @@ namespace pgn
         //! Can we move through this or not?
         struct cTileObstacle
         {
+			cTileObstacle() :mIsObstacle(false){}
             bool mIsObstacle;
         };
         
