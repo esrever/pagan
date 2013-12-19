@@ -49,6 +49,7 @@
         "pgn::cmp::cDoor" : {
             "closed" : true,
             "sprites" : ["dungeon:dngn_open_door","dungeon:dngn_closed_door"]
-        }
+        },
+        "pgn::cmp::cMapSprite" : "dungeon:dngn_closed_door"
     }
 ]

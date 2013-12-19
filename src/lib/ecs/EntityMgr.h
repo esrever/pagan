@@ -67,6 +67,7 @@ namespace pgn
 			const cEntityData& GetEntityData(const cEntity& zEntity) const;
 			const std::map<cEntity, cEntityData>& GetEntityData() const { return mEntityData; }
 			std::map<cEntity, cEntityData>& GetEntityData() { return mEntityData; }
+			bool IsValid(cEntityWithData ed) const { return ed != mEntityData.end(); }
 
 			//! Json
 			bool from_json(const rapidjson::Value& zRoot);

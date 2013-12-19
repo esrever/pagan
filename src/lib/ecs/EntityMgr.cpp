@@ -307,7 +307,7 @@ namespace pgn
 			return mEntityData.end();
 		auto e = Create();
 		ed.mName = zExemplarName;// +"_instance";
-		ed.mComponents = itEx->second.mComponents;
+		ed.mComponents = itEx->second.mComponents.Clone();
 		ed.mTags = itEx->second.mTags;
 
 		e->second = ed;

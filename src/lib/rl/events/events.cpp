@@ -88,7 +88,7 @@ namespace pgn
 		// Get the tile layout & level from the input
 		auto lvl_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cLevel>();
 		auto& curlvl = lvl_ptr->mData;
-		auto& mapdata = curlvl.mLayoutData;
+		auto& mapdata = curlvl.mMapTileBg;
 
 		// Mapwindow response
 		auto e = ECS.mEntityMgr->Globals().mMapWindow;
@@ -103,7 +103,7 @@ namespace pgn
 			for (unsigned j = 0; j < mapdata.Width(); ++j)
 			{
 				// get entity from 2d map
-				auto tile = curlvl.mDefaults[ mapdata(j, i) ];
+				auto tile = curlvl.mDefaultTilesBg[ mapdata(j, i) ];
 
 				// get sprite from entity, clone it and set data
 				auto sprite_ptr = tile->second.mComponents.GetComponent<pgn::cmp::cMapSprite>();
@@ -117,6 +117,13 @@ namespace pgn
 				winsprite->attachTo(lvl_ptr->mData.mLevelNode);
 				winsprite->setPriority(short(sprite_ptr->mData.mRenderPriority));
 			}
+		}
+
+		// For each entity, fix position
+		for (const auto& x : curlvl.mMapTileRest.Store().mData)
+		{
+			auto pos = x.second->second.mComponents.GetComponent<cmp::cLevelPosition>();
+			cActionLocationChange::RunEvent(x.second, ed, pos->mData.mPos);
 		}
 		
         // Put pc on a valid square
@@ -328,7 +335,7 @@ namespace pgn
 
         // Get layout of level
 		auto level_ptr = pos_ptr->mData.mLevel->second.mComponents.GetComponent<pgn::cmp::cLevel>();
-		const auto& mapdata = level_ptr->mData.mLayoutData;
+		const auto& mapdata = level_ptr->mData.mMapTileBg;
 		
         // if the new position is within the bounds of the level
 		const glm::ivec2 newpos = pos_ptr->mData.mPos + v;
@@ -336,7 +343,7 @@ namespace pgn
 		{
             // Check if we hit an obstacle
 			//auto obstacle_ptr = mapdata(newpos)->second.mComponents.GetComponent<pgn::cmp::cTileObstacle>();
-			auto obstacle_ptr = level_ptr->mData.LookupEntity(newpos.x,newpos.y)->second.mComponents.GetComponent<pgn::cmp::cTileObstacle>();
+			auto obstacle_ptr = level_ptr->mData.LookupTileBg(newpos.x,newpos.y)->second.mComponents.GetComponent<pgn::cmp::cTileObstacle>();
 			if (!obstacle_ptr->mData.mIsObstacle)
 			{
 				cActionLocationChange::RunEvent(ed, pos_ptr->mData.mLevel, newpos);
@@ -475,9 +482,20 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cActionEntityCreated::Run(cEntityWithData)
+	bool cActionEntityCreated::Run(cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<EntityCreated>::Run");
+		
+		// Is it a door?
+		auto door_ptr = ed->second.mComponents.GetComponent<cmp::cDoor>();
+		if (door_ptr)
+		{
+			// set the initial state
+			if (door_ptr->mData.mIsClosed)
+				cActionDoorClose::Event(ed,ed);
+			else
+				cActionDoorOpen::Event(ed,ed);
+		}
 		return true;
 	}
 

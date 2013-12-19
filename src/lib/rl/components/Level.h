@@ -29,13 +29,15 @@ namespace pgn
 			//! TODO: add the spatial level graph here!
 
 			//! Array of indices to the defaults of the layout
-			cArray2D<uint8_t> mLayoutData;
+			cArray2D<uint8_t> mMapTileBg;
+			cArray2D<cEntityWithData, cArrayDataSparse<cEntityWithData>> mMapTileRest;
 
 			//! Default entities of the level
-			std::vector<cEntityWithData> mDefaults;
+			std::vector<cEntityWithData> mDefaultTilesBg;
+			std::vector<std::string>     mDefaultExemplars;
 
 			//! General functions
-			cEntityWithData LookupEntity(int x, int y) { return mDefaults.at(mLayoutData(x, y)); }
+			cEntityWithData LookupTileBg(int x, int y) { return mDefaultTilesBg.at(mMapTileBg(x, y)); }
 			glm::ivec2 GetRandomStartPos();
 		};
 
