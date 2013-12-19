@@ -22,8 +22,11 @@ namespace pgn
         //! 
         struct cMapSprite
         {
+			cMapSprite();
 			oxygine::spSprite mSprite;
 			eMapRenderOrder	  mRenderPriority;
+
+			void ReplaceFrame(const cmp::cMapSprite& s);
         };
         
     }

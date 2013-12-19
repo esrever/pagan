@@ -27,6 +27,11 @@
         "inherits" : ["common"]
     },
     {
+        "name" : "tile_bg",
+        "inherits" : ["tile"],
+        "tags" : ["type:tile_bg"]
+    },
+    {
         "name" : "level",
         "components" : ["pgn::cmp::cTileLayout"],
         "inherits" : ["common"]
@@ -39,6 +44,7 @@
     {
         "name" : "door",
         "components" : ["pgn::cmp::cDoor"],
-        "inherits" : ["type:tile_fg"]
+        "inherits" : ["tile"],
+        "tags" : ["type:tile_fg"]
     }
 ]

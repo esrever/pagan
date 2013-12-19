@@ -402,7 +402,7 @@ namespace pgn
 
 		auto door_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cDoor>();
 		auto sprite_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cMapSprite>();
-		sprite_ptr->mData.mSprite->setAnimFrame(door_ptr->mData.mSprites[0].mSprite->getAnimFrame());
+		sprite_ptr->mData.ReplaceFrame(door_ptr->mData.mSprites[0]);
 	}
 
 
@@ -428,7 +428,7 @@ namespace pgn
 		cActionLog::RunEvent("system_log", "Called cAction<DoorClose>::Event");
 		auto door_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cDoor>();
 		auto sprite_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cMapSprite>();
-		sprite_ptr->mData.mSprite->setAnimFrame(door_ptr->mData.mSprites[1].mSprite->getAnimFrame());
+		sprite_ptr->mData.ReplaceFrame(door_ptr->mData.mSprites[1]);
 	}
 
 

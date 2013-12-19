@@ -20,7 +20,7 @@
         "pgn::cmp::cMapSprite" : "monsters:human"
     },
     {
-        "archetype" : "tile",
+        "archetype" : "tile_bg",
         "name" : "wall_common",
         "pgn::cmp::cDescription" : {
             "Short" : "wall",
@@ -30,7 +30,7 @@
         "pgn::cmp::cMapSprite" : "dungeon:wall:brick_brown0"
     },
     {
-        "archetype" : "tile",
+        "archetype" : "tile_bg",
         "name" : "floor_common",
         "pgn::cmp::cDescription" : {
             "Short" : "floor",
@@ -49,7 +49,6 @@
         "pgn::cmp::cDoor" : {
             "closed" : true,
             "sprites" : ["dungeon:dngn_open_door","dungeon:dngn_closed_door"]
-        },
-        "pgn::cmp::cMapSprite" : "dungeon:dngn_closed_door"
+        }
     }
 ]
