@@ -8,7 +8,6 @@
 #include <rl/util/FormatString.h>
 
 #include <rl/components/components.h>
-#include <rl/components/TileLayout.h>
 #include <rl/components/MapSprite.h>
 #include <rl/components/MapWindow.h>
 #include <rl/components/Movement.h>
@@ -43,10 +42,6 @@ namespace pgn
 	void cActionLevelCreate::Event(cEntityWithData ed)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelCreate>::Event");
-		auto layout_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cTileLayout>();
-		auto lvl_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cLevel>();
-		auto& curmap = layout_ptr->mData;
-		auto& mapdata = curmap.mData;
 	}
 
 
@@ -91,10 +86,9 @@ namespace pgn
 		auto queryLvl = ECS.mSystemMgr->GetQuery("tag:CurrentLevel");
 
 		// Get the tile layout & level from the input
-		auto layout_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cTileLayout>();
 		auto lvl_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cLevel>();
-		auto& curmap = layout_ptr->mData;
-		auto& mapdata = curmap.mData;
+		auto& curlvl = lvl_ptr->mData;
+		auto& mapdata = curlvl.mLayoutData;
 
 		// Mapwindow response
 		auto e = ECS.mEntityMgr->Globals().mMapWindow;
@@ -109,7 +103,7 @@ namespace pgn
 			for (unsigned j = 0; j < mapdata.Width(); ++j)
 			{
 				// get entity from 2d map
-				auto tile = curmap.mDefaults[ mapdata(j, i) ];
+				auto tile = curlvl.mDefaults[ mapdata(j, i) ];
 
 				// get sprite from entity, clone it and set data
 				auto sprite_ptr = tile->second.mComponents.GetComponent<pgn::cmp::cMapSprite>();
@@ -127,7 +121,7 @@ namespace pgn
 		
         // Put pc on a valid square
 		auto epc = ECS.mEntityMgr->Globals().mPC;
-		cActionLocationChange::RunEvent(epc, ed, GetRandomStartPos(layout_ptr->mData));
+		cActionLocationChange::RunEvent(epc, ed, curlvl.GetRandomStartPos());
 
 		// Update level name in status window
 
@@ -167,7 +161,7 @@ namespace pgn
 	//####################################################################################################
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	bool cActionLevelEnter::Run(cEntityWithData arg0, cEntityWithData arg1)
+	bool cActionLevelEnter::Run(cEntityWithData ewho, cEntityWithData elvl)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelEnter>::Run");
 		return true;
@@ -182,8 +176,12 @@ namespace pgn
 
 		auto sprite_ptr = ewho->second.mComponents.GetComponent<pgn::cmp::cMapSprite>();
 		auto pos_ptr = ewho->second.mComponents.GetComponent<pgn::cmp::cLevelPosition>();
+		// set level to position entity
 		pos_ptr->mData.mLevel = elvl;
+		// add ewho to level entity list
 		auto level_ptr = elvl->second.mComponents.GetComponent<pgn::cmp::cLevel>();
+		level_ptr->mData.mEntities.insert(ewho);
+		// attach to render scenegraph
 		if (level_ptr->mData.mLevelNode != sprite_ptr->mData.mSprite->getParent())
 			sprite_ptr->mData.mSprite->attachTo(level_ptr->mData.mLevelNode);
 	}
@@ -200,9 +198,11 @@ namespace pgn
 
 	//----------------------------------------------------------------------------------------------------
 	template<>
-	void cActionLevelLeave::Event(cEntityWithData arg0, cEntityWithData arg1)
+	void cActionLevelLeave::Event(cEntityWithData ewho, cEntityWithData elvl)
 	{
 		cActionLog::RunEvent("system_log", "Called cAction<LevelLeave>::Event");
+		auto level_ptr = elvl->second.mComponents.GetComponent<pgn::cmp::cLevel>();
+		level_ptr->mData.mEntities.erase(ewho);
 	}
 
 
@@ -327,10 +327,8 @@ namespace pgn
 		auto pos_ptr = ed->second.mComponents.GetComponent<pgn::cmp::cLevelPosition>();
 
         // Get layout of level
-		//std::shared_ptr< cComponent<pgn::cmp::cTileLayout>> layout_ptr;
-		//pos_ptr->mData.mLevel->second.mComponents.GetComponent(layout_ptr);
-		auto layout_ptr = pos_ptr->mData.mLevel->second.mComponents.GetComponent<pgn::cmp::cTileLayout>();
-		const auto& mapdata = layout_ptr->mData.mData;
+		auto level_ptr = pos_ptr->mData.mLevel->second.mComponents.GetComponent<pgn::cmp::cLevel>();
+		const auto& mapdata = level_ptr->mData.mLayoutData;
 		
         // if the new position is within the bounds of the level
 		const glm::ivec2 newpos = pos_ptr->mData.mPos + v;
@@ -338,7 +336,7 @@ namespace pgn
 		{
             // Check if we hit an obstacle
 			//auto obstacle_ptr = mapdata(newpos)->second.mComponents.GetComponent<pgn::cmp::cTileObstacle>();
-			auto obstacle_ptr = layout_ptr->mData.LookupEntity(newpos.x,newpos.y)->second.mComponents.GetComponent<pgn::cmp::cTileObstacle>();
+			auto obstacle_ptr = level_ptr->mData.LookupEntity(newpos.x,newpos.y)->second.mComponents.GetComponent<pgn::cmp::cTileObstacle>();
 			if (!obstacle_ptr->mData.mIsObstacle)
 			{
 				cActionLocationChange::RunEvent(ed, pos_ptr->mData.mLevel, newpos);
@@ -542,7 +540,8 @@ namespace pgn
 		// Attach to level
 		if (pos_ptr->mData.mLevel != elvl)
 		{
-			cActionLevelLeave::RunEvent(ewho, pos_ptr->mData.mLevel);
+			if (pos_ptr->mData.mLevel != ECS.mEntityMgr->GetEntityData().end())
+				cActionLevelLeave::RunEvent(ewho, pos_ptr->mData.mLevel);
 			cActionLevelEnter::RunEvent(ewho, elvl);
 		}
 

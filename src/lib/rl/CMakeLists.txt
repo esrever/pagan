@@ -51,6 +51,7 @@ set(HEADER_FILES
     resources/FontLib.h
     resources/TileLib.h
     map/dungen.h
+    map/mapview.h
     ${COMPONENT_SRCS}
     #${SYSTEM_SRCS}
     ${EVENT_SRCS}

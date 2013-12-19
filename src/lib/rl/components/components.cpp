@@ -14,7 +14,6 @@
 #include "OutStream.h"
 #include "Text.h"
 #include "TextWindow.h"
-#include "TileLayout.h"
 #include "TileObstacle.h"
 #include "WorldTraits.h"
 
@@ -36,7 +35,6 @@ namespace pgn
 		zMgr.AddComponentType<pgn::cmp::cOutStream>();
 		zMgr.AddComponentType<pgn::cmp::cText>();
 		zMgr.AddComponentType<pgn::cmp::cTextWindow>();
-		zMgr.AddComponentType<pgn::cmp::cTileLayout>();
 		zMgr.AddComponentType<pgn::cmp::cTileObstacle>();
 		zMgr.AddComponentType<pgn::cmp::cWorldTraits>();
 	}

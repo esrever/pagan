@@ -22,6 +22,7 @@ namespace pgn
 
 		bool InRange(const glm::ivec2& v) const						{ return InRange(v.x, v.y); }
 		bool InRange(int x, int y) const							{ return (x >= 0) && (x < int(mWidth)) && (y >= 0) && (y < int(mHeight)); }
+		void Fill(int x, int y, int w, int h, const T& val);
 
 		//! Alternative accessors
 		const T& operator()(const glm::ivec2& zV) const		{ return (*this)(zV.x, zV.y); }
@@ -35,12 +36,23 @@ namespace pgn
 		std::vector<T> mData;
 	};
 
+	//-------------------------------------------------------------
+	template<class T>
+	void cArray2D<T>::Fill(int x, int y, int w, int h, const T& val)
+	{
+		int ye = y + h;
+		for (int i = y; i < ye; ++i)
+		{
+			std::fill_n(mData.begin() + LinearIdx(i, x), w, val);
+		}		
+	}
+
 	//--------------------------------------------------------------
 	template<class T, class Visitor>
 	void VisitArray(T& data, Visitor& v)
 	{ 
 		for (auto i = 0; i < data.Height();++i)
-			for (auto j = 0; j < data.Width(); ++i)
+			for (auto j = 0; j < data.Width(); ++j)
 				v.visit(j, i, data(j, i));
 	}
 	

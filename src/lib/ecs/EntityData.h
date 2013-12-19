@@ -45,6 +45,12 @@ namespace pgn
 	}
 }
 
+template<>
+inline bool std::less<pgn::cEntityWithData>::operator()(const pgn::cEntityWithData& e0, const pgn::cEntityWithData& e1) const
+{
+	return e0->first < e1->first;
+}
+
 /*
 inline bool operator < (const pgn::cEntityWithData& e0, const pgn::cEntityWithData& e1)
 {

@@ -267,6 +267,18 @@ namespace pgn
 		zRoot.EndArray();
 	}
 
+
+	template <class T, class U>
+	inline bool from_json(std::map<T, U>& zObj, const rapidjson::Value& zRoot)
+	{
+		if (zRoot.IsObject())
+			for (auto it = zRoot.MemberBegin(); it != zRoot.MemberEnd(); ++it)
+			{
+				from_json(zObj[std::string(it->name.GetString())], it->value);
+			}
+		return zRoot.IsObject();
+	}
+
 	template <class T, class U>
 	inline void to_json(const std::map<T,U>& zObj, JsonWriter& zRoot)
 	{
