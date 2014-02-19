@@ -1,92 +1,46 @@
 #pragma once
 
-#include <vector>
-#include <map>
+#include "ArrayStorage.h"
+#include "Array2DView.h"
 
 #include <glm/glm.hpp>
 
 namespace pgn
 {
-	template<class T>
-	struct cArrayDataDense
-	{
-		T& Get(size_t o) { return mData.at(o); }
-		const T& Get(size_t o) const { return mData.at(o); }
-		void Resize(size_t s) { mData.resize(s); }
-		
-		std::vector<T> mData;
-	};
 
-	template<class T>
-	struct cArrayDataSparse
-	{
-		T& Get(size_t o) { assert(o < mTotal);  return mData[o]; }
-		const T& Get(size_t o) const { assert(o < mTotal);  return mData[o]; }
-		void Resize(size_t s) { mTotal = s; }
-
-		std::map<size_t,T> mData;
-		size_t mTotal;
-	};
-
-	//! 2D array data. TODO: Sub-array if needed
-	template<typename T, typename D = cArrayDataDense<T> >
+	template<class T, class S = cDenseStorage<T>>
 	struct cArray2D
 	{
-	public:
-		typedef T value_type;
-		typedef D storage_type;
-		virtual ~cArray2D(){}
-		void Resize(size_t zW, size_t zH)								{mWidth=zW;mHeight=zH;mData.Resize(mWidth*mHeight);}
-		size_t Width() const													{return mWidth;}
-		size_t Height() const													{return mHeight;}
-		const T& operator()(const size_t zX, const size_t zY) const		{return mData.Get(LinearIdx(zY,zX));}
-		T& operator()(const size_t zX, const size_t zY)					{return mData.Get(LinearIdx(zY,zX));}
+		// typedefs 
+		typedef S storage_type;
+		typedef T data_type;
+		typedef cArrayView< S > view_type;
 
-		bool InRange(const glm::ivec2& v) const						{ return InRange(v.x, v.y); }
-		bool InRange(int x, int y) const							{ return (x >= 0) && (x < int(mWidth)) && (y >= 0) && (y < int(mHeight)); }
-		void Fill(int x, int y, int w, int h, const T& val);
+		// ctor
+		cArray2D(size_t w = 0, size_t h = 0, const T& v = T()) :mStorage(), mView(mStorage, w, h){ Resize(w, h, v); }
 
-		//! Alternative accessors
-		const T& operator()(const glm::ivec2& zV) const		{ return (*this)(zV.x, zV.y); }
-		T& operator()(const glm::ivec2& zV)					{ return (*this)(zV.x, zV.y); }
+		// functions
+		const view_type& View() const { return mView; }
+		view_type& View() { return mView; }
+		view_type CreateView(size_t w, size_t h, size_t x, size_t y) { return view_type(mStorage, w, h, x, y); }
+		void Resize(size_t w, size_t h, const T& v = T()) { mStorage.Resize(w* h, v); mView = CreateView(w, h, 0, 0); }
 
-		const D& Store() const { return mData; }
-		
-	protected:
-		size_t LinearIdx(const size_t zRow, const size_t zCol) const		{return zRow*mWidth + zCol;}
-	protected:
-		size_t		   mHeight;
-		size_t		   mWidth;
-		D			   mData;
+		// helpers - access shape
+		size_t Width() const { return mView.Shape().Width(); }
+		size_t Height() const { return mView.Shape().Height(); }
+
+		// helpers - access view
+		typename data_type&       operator()(size_t x, size_t y)       { return mStorage.Get(mView.Shape().LinearIdx(x, y)); }
+		const typename data_type& operator()(size_t x, size_t y) const  { return mStorage.Get(mView.Shape().LinearIdx(x, y)); }
+		bool InRange(size_t x, size_t y) const { return mView.Shape().InRange(x, y); }
+
+		const T& operator()(const glm::ivec2& v) const { return (*this)(v.x, v.y); }
+		T& operator()(const glm::ivec2& v)             { return (*this)(v.x, v.y); }
+		bool InRange(const glm::ivec2& v) const        { return InRange(v.x, v.y); }
+
+	private:
+		storage_type    mStorage;
+		view_type       mView;
 	};
 
-	//-------------------------------------------------------------
-	template<class T,class D>
-	void cArray2D<T,D>::Fill(int x, int y, int w, int h, const T& val)
-	{
-		int ye = y + h;
-		for (int i = y; i < ye; ++i)
-		{
-			std::fill_n(mData.mData.begin() + LinearIdx(i, x), w, val);
-		}		
-	}
-
-	//--------------------------------------------------------------
-	template<class T, class Visitor>
-	void VisitArray(T& data, Visitor& v)
-	{ 
-		for (auto i = 0; i < data.Height();++i)
-			for (auto j = 0; j < data.Width(); ++j)
-				v.visit(j, i, data(j, i));
-	}
-	
-	/*
-		template<class T>
-		class cExampleVisitor
-		{
-			public:
-				void visit(uint x, uint y, const T& data);  // const visit
-				void visit(uint x, uint y, T& data);		// const visit
-		}
-	*/
 }

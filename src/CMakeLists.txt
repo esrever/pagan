@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 2.8.6)
 message(STATUS "Compiling ${CMAKE_PROJECT_NAME}")
 message(STATUS "Using cmake version ${CMAKE_VERSION}")
 
-if( ${CMAKE_GENERATOR} STREQUAL "Visual Studio 12" )
+if( ${CMAKE_SIZEOF_VOID_P} EQUAL 4)
     set( ARCH "x86")
 else()
     set( ARCH "x64")
@@ -173,13 +173,41 @@ if(BUILD_DOCUMENTATION)
 endif()
 
 ##############################################
+# First for the generic no-config case (e.g. with mingw)
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH} )
+set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH} )
+set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH} )
+# Second, for multi-config builds (e.g. msvc)
+foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
+    string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
+    set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${EXECUTABLE_OUTPUT_PATH} )
+    set( CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${EXECUTABLE_OUTPUT_PATH} )
+    set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${EXECUTABLE_OUTPUT_PATH} )
+endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
 
-macro(copy_dll TGT DLLPATH)
-    add_custom_command(TARGET ${TGT} POST_BUILD        # Adds a post-build event to MyTest
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
-        "${DLLPATH}"      # <--this is in-file
-        $<TARGET_FILE_DIR:${TGT}>)                 # <--this is out-file path
-endmacro(copy_dll)
+##############################################
+
+macro(copy_dlls TGT)
+    set (DLLPATH "${CMAKE_SOURCE_DIR}/bin/${ARCH}")
+    file(GLOB DLL_LIST
+        "${DLLPATH}/*.dll"
+    )
+    foreach( dll ${DLL_LIST})
+        add_custom_command(TARGET ${TGT} POST_BUILD        # Adds a post-build event to MyTest
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
+            "${dll}"                                   # <--this is in-file
+            ${EXECUTABLE_OUTPUT_PATH})                 # <--this is out-file path
+    endforeach(dll)
+endmacro(copy_dlls)
+
+##############################################
+
+macro(using_lib INC LIB)
+    set (APP_LIBS
+         ${APP_LIBS} LIB)
+    set (APP_INCLUDES
+         ${APP_INCLUDES} INC)
+endmacro(using_lib)
 
 #################################################################
 # Packages
@@ -191,13 +219,13 @@ endif()
 find_package(Pystring)
 SET(ENV{BOOST_ROOT} ${PROJECT_SOURCE_DIR}/contrib/boost_1_54_0)
 find_package(BOOST 1.54.0 REQUIRED COMPONENTS program_options)
-#find_package(JSONSPIRIT)
 find_package(Rapidjson)
 find_package(Curses)
 find_package(pugixml)
-#find_package(Artemis)
 find_package(Signal)
 find_package(GLM)
+find_package(SDL)
+find_package(SDL_image)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/contrib/oxygine-framework ${CMAKE_CURRENT_BINARY_DIR}/contrib/oxygine-framework)
 add_definitions(${OXYGINE_DEFINITIONS})

@@ -1,25 +1,32 @@
 set(SOURCE_FILES
-    util/cmdopt.cpp
+#    util/cmdopt.cpp
     util/logstream.cpp
-    util/cfgtree.cpp
-    util/cfgdata.cpp
-    util/conversions.cpp
-    util/json_conversions.cpp
-    util/xml_conversions.cpp
-    app/application.cpp
+#    util/cfgtree.cpp
+#    util/cfgdata.cpp
+#    util/conversions.cpp
+#    util/json_conversions.cpp
+#    util/xml_conversions.cpp
+#    app/application.cpp
 )
 
 set(HEADER_FILES
+    container/ArrayStorage.h
+    container/Array2DView.h
     container/Array2D.h
-    util/cmdopt.h
+    container/Array2D_utils.h
+    container/ArrayShape2D.h
+    container/dict.h
+#    util/cmdopt.h
     util/logstream.h
-    util/cfgtree.h
-    util/conversions.h
-    util/json_conversions.h
-    util/xml_conversions.h
+#    util/cfgtree.h
+#    util/conversions.h
+#    util/json_conversions.h
+#    util/xml_conversions.h
     util/idgen.h
-    app/application.h
-    util/textmod.h
+    util/glm_utils.h
+    math/norm.h
+#    app/application.h
+#    util/textmod.h
 )
 
 add_definitions(
