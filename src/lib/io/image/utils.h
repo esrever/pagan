@@ -8,7 +8,10 @@ struct SDL_Color;
 
 namespace pgn
 {
-	void SavePaletteImage(const std::string& fname,
-						  const cArray2D<char>& cidxMap,
-						  const std::vector<SDL_Color>& colorMap);
+	namespace io
+	{
+		void SavePaletteImage(const std::string& fname,
+			const cArray2D<char>& cidxMap,
+			const std::vector<SDL_Color>& colorMap);
+	}
 }

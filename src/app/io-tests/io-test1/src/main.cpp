@@ -38,7 +38,7 @@ int main(int argc, char ** argv)
 	c.r = 0; c.g = 0; c.b = 255; c.a = 255; colorMap.push_back(c);
 	cidxMap.View().Visit([](size_t x, size_t y, char& c){ c = (x&1) + (y&1); });
 
-	pgn::SavePaletteImage(outfname, cidxMap, colorMap);
+	pgn::io::SavePaletteImage(outfname, cidxMap, colorMap);
 
 	return 0;
 }
