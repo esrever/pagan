@@ -1,6 +1,8 @@
 set (APP_LIBS 
      pagan_core
      pagan_io
+     pagan_ai
+     pagan_dungen
      ${Boost_LIBRARIES}
      ${SDL_LIBRARY}
      ${SDL_image_LIBRARY})
@@ -30,3 +32,4 @@ set (APP_INCLUDES
 #add_subdirectory(oxy-tests)
 add_subdirectory(ai-tests)
 add_subdirectory(io-tests)
+add_subdirectory(dungen-tests)

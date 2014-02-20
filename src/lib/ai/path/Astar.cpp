@@ -107,8 +107,8 @@ namespace pgn
 			// for each visited node, reinitialize
 			for (const auto& v : mVisitedSet)
 			{
-				mFScore(v) = 1e5f;
-				mGScore(v) = 1e5f;
+				mFScore(v) = std::numeric_limits<float>::max();
+				mGScore(v) = std::numeric_limits<float>::max();
 			}
 			return res;
 		}

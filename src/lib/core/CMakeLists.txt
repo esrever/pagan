@@ -1,6 +1,8 @@
 set(SOURCE_FILES
 #    util/cmdopt.cpp
     util/logstream.cpp
+    util/color.cpp
+    util/rand.cpp
 #    util/cfgtree.cpp
 #    util/cfgdata.cpp
 #    util/conversions.cpp
@@ -18,6 +20,8 @@ set(HEADER_FILES
     container/dict.h
 #    util/cmdopt.h
     util/logstream.h
+    util/color.h
+    util/rand.h
 #    util/cfgtree.h
 #    util/conversions.h
 #    util/json_conversions.h

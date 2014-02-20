@@ -3,6 +3,7 @@
 #undef main
 #include <SDL_image.h>
 
+#include <core/util/color.h>
 #include <io/image/utils.h>
 
 int main(int argc, char ** argv)
@@ -36,9 +37,18 @@ int main(int argc, char ** argv)
 	c.r = 255; c.g = 0; c.b = 0; c.a = 255; colorMap.push_back(c);
 	c.r = 0; c.g = 255; c.b = 0; c.a = 255; colorMap.push_back(c);
 	c.r = 0; c.g = 0; c.b = 255; c.a = 255; colorMap.push_back(c);
-	cidxMap.View().Visit([](size_t x, size_t y, char& c){ c = (x&1) + (y&1); });
+	cidxMap.View().VisitWext([](size_t x, size_t y, char& c){ c = (x&1) + (y&1); });
 
 	pgn::io::SavePaletteImage(outfname, cidxMap, colorMap);
 
+
+	pgn::cArray2D<char> gradMap;
+	gradMap.Resize(256, 1, 0);
+	std::vector<SDL_Color> gradColorMap;
+	pgn::GenGrayscaleGradient(gradColorMap);
+	gradMap.View().VisitWext([](size_t x, size_t y, char& c){ c = x; });
+
+	const auto outfname2 = exepath + "io-test1-grad.png";
+	pgn::io::SavePaletteImage(outfname2, gradMap, gradColorMap);
 	return 0;
 }
