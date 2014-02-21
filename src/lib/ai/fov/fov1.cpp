@@ -122,121 +122,69 @@ namespace pgn
 			mLoS = los;
 		}
 
-		static void ConstantDir(glm::ivec2 start, 
-								const glm::ivec2& end, 
-								const cArray2D<bool>& vismap, 
-								std::vector<glm::ivec2>& lospts, 
-								cArray2D<float>& vis)
+
+		static void CastLight( int row, float start, float end, int xx, int xy, int yx, int yy,
+							   const glm::ivec2& p, const cArray2D<bool>& vismap, std::vector<glm::ivec2>& lospts, cArray2D<float>& vis, size_t los)
 		{
-			glm::ivec2 p_abs_cur = start;
-			glm::ivec2 p_abs_prev = start;
-
-			glm::ivec2 vd = end - start;
-			glm::ivec2 vd_abs = glm::abs(end - start);
-			int d = glm::max(vd_abs.x, vd_abs.y);
+			float newStart = 0.0f;
+			if (start < end)
+				return;
 			
-			glm::ivec2 incr = glm::sign(vd);
+			bool blocked = false;
+			for (int distance = row; distance <= int(los) && !blocked; distance++) {
+				int deltaY = -distance;
+				for (int deltaX = -distance; deltaX <= 0; deltaX++) {
+					int currentX = p.x + deltaX * xx + deltaY * xy;
+					int currentY = p.y + deltaX * yx + deltaY * yy;
+					float leftSlope = (deltaX - 0.5f) / (deltaY + 0.5f);
+					float rightSlope = (deltaX + 0.5f) / (deltaY - 0.5f);
 
-			for (int i = 1; i < d; ++i)
-			{
-				p_abs_prev = p_abs_cur;
-				p_abs_cur += incr;
+					if (!(currentX >= 0 && currentY >= 0 && currentX < int(vismap.Width()) && currentY < int(vismap.Height())) || start < rightSlope) {
+						continue;
+					}
+					else if (end > leftSlope) {
+						break;
+					}
 
-				if (!vismap(p_abs_prev))
-					break;
-				
-				vis(p_abs_cur) = 1.0f;
-				lospts.push_back(p_abs_cur);
+					//check if it's within the lightable area and light if needed
+					auto d = pgn::norm_2(glm::ivec2(deltaX, deltaY));
+					if (d <= los) {
+						float bright = (float)(1 - (d / los));
+						vis( glm::ivec2(currentX,currentY)) = bright;
+					}
+
+					if (blocked) { //previous cell was a blocking one
+						if (vismap(currentX,currentY) == 0.0f ) {//hit a wall
+							newStart = rightSlope;
+							continue;
+						}
+						else {
+							blocked = false;
+							start = newStart;
+						}
+					}
+					else {
+						if (vismap(currentX, currentY) == 0.0f && distance < int(los)) {//hit a wall within sight line
+							blocked = true;
+							CastLight(distance + 1, start, leftSlope, xx, xy, yx, yy, p, vismap, lospts, vis, los);
+							newStart = rightSlope;
+						}
+					}
+				}
 			}
 		}
 
 		void cFov1::Calc(const glm::ivec2& p, const cArray2D<bool>& vismap, std::vector<glm::ivec2>& lospts, cArray2D<float>& vis)
 		{
-			auto iters = pgn::ai::cShapeCalc<pgn::ai::cDiskDistance>::Get(mLoS, mLoS);
-			for (auto it = iters.first; it != iters.second; ++it)
+			vis(p) = 1.0f;
+			lospts.clear();
+			lospts.push_back(p);
+
+			glm::ivec2 dirs[4] = { glm::ivec2(1, 1), glm::ivec2(1, -1), glm::ivec2(-1, 1), glm::ivec2(-1, -1) };
+			for (size_t i = 0; i < 4; ++i)
 			{
-				lospts.clear();
-				lospts.push_back(p);
-				vis(p) = 1.0f;
-
-				const auto& tgt_rel = *it;
-				
-				if ((tgt_rel.x == 0) || (tgt_rel.y == 0) ||  (glm::abs(tgt_rel.x) == glm::abs(tgt_rel.y)))
-				{
-					ConstantDir(p, p + tgt_rel, vismap, lospts, vis);
-				}
-				else
-				{
-					float slope = tgt_rel.y / float(tgt_rel.x);
-					
-					float curvis = 1.0f;
-					// y-major
-					if (glm::abs(tgt_rel.y) > glm::abs(tgt_rel.x))
-					{
-						for (int i = 1; i < glm::abs(tgt_rel.y); ++i)
-						{
-							int cury = i*glm::sign(tgt_rel.y);
-							float x = cury / slope;
-							int x0 = int(x);
-							float t = fabs(x - x0);
-							int x1 = x0 + (x < 0 ? -1 : 1);
-
-							auto p0 = glm::ivec2(x0, cury) + p;
-							auto p1 = glm::ivec2(x1, cury) + p;
-
-							float v0 = 0.0f;
-							float v1 = 0.0f;
-							if (vis.InRange(p0))
-							{
-								if (t <= 0.5)
-								vis(p0) = std::max(vis(p0), curvis);
-								v0 = vismap(p0) ? 1.0f : 0.0f;
-							}
-							
-							if (vis.InRange(p1))
-							{
-								if (t >= 0.5)
-								vis(p1) = std::max(vis(p1), curvis);
-								v1 = vismap(p1) ? 1.0f : 0.0f;
-							}
-
-							curvis = (1 - t)*v0 + t*v1;
-						}
-					}
-					else
-					{
-						for (int i = 1; i < glm::abs(tgt_rel.x); ++i)
-						{
-							int curx = i*glm::sign(tgt_rel.x);
-							float y = slope * curx;
-							int y0 = int(y);
-							float t = fabs(y - y0);
-							int y1 = y0 + (y < 0 ? -1 : 1);
-
-							auto p0 = glm::ivec2(curx, y0) + p;
-							auto p1 = glm::ivec2(curx, y1) + p;
-							
-							float v0 = 0.0f;
-							float v1 = 0.0f;
-							if (vis.InRange(p0))
-							{
-								if (t <= 0.5)
-								vis(p0) = std::max(vis(p0), curvis);
-								v0 = vismap(p0) ? 1.0f : 0.0f;
-							}
-
-							if (vis.InRange(p1))
-							{
-								if (t >= 0.5)
-								vis(p1) = std::max(vis(p1), curvis);
-								v1 = vismap(p1) ? 1.0f : 0.0f;
-							}
-
-
-							curvis = (1 - t)*v0 + t*v1;
-						}
-					}
-				}
+				CastLight(1, 1.0f, 0.0f, 0, dirs[i].x, dirs[i].y, 0, p, vismap, lospts, vis,mLoS);
+				CastLight(1, 1.0f, 0.0f, dirs[i].x, 0, 0, dirs[i].y, p, vismap, lospts, vis, mLoS);
 			}
 		}
 

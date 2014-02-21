@@ -136,7 +136,7 @@ int main(int argc, char ** argv)
 				if (elem & pgn::dungen::eMapData::corridor)
 					col += glm::ivec3(255, 255, 0);
 				if (elem & pgn::dungen::eMapData::room)
-					col += glm::ivec3(0, 255, 255);
+					col += glm::ivec3(0, 25, 25);
 				if (elem & pgn::dungen::eMapData::blocked)
 					col -= glm::ivec3(16, 16, 16);
 				if (elem & pgn::dungen::eMapData::perimeter)
