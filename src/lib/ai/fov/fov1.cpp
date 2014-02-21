@@ -70,58 +70,11 @@ namespace pgn
 			}
 		}
 
-		static void diamond(int r, std::vector<glm::ivec2>& pts)
-		{
-			pts.resize(4 * r);
-			for (int xo = 0; xo < r; ++xo)
-			{
-				auto * p = &pts.at(4 * xo);
-				*p = glm::ivec2(xo, r - xo); ++p;
-				*p = glm::ivec2(r - xo, -xo); ++p;
-				*p = glm::ivec2(-xo, xo - r); ++p;
-				*p = glm::ivec2(xo - r, xo); ++p;
-			}
-		}
-
-		static void diamond_full(int r, std::vector<glm::ivec2>& pts)
-		{
-			pts.clear();
-			for (int i = -r; i <= r; ++i)
-			{
-				auto jbnd = r - abs(i);
-				for (int j = -jbnd; j <= jbnd; ++j)
-				{
-					if (i | j)
-					{
-						auto nb = glm::ivec2(j, i);
-						pts.push_back(nb);
-					}
-				}
-			}
-		}
-
-		static float distance_point_to_line(const glm::ivec2& pt, const glm::ivec2& l0i, const glm::ivec2& l1i)
-		{
-			glm::vec2 p(pt.x, pt.y);
-			glm::vec2 l0(l0i.x, l0i.y);
-			glm::vec2 l1(l1i.x, l1i.y);
-
-			const auto l01 = l1 - l0;
-			const auto line_len_sq = glm::dot(l01, l01);
-			const auto vp = p - l0;
-			const auto vw = l01;
-			const float t = glm::dot(vp, vw) / float(line_len_sq);
-
-			auto proj = glm::vec2(l0 + t * vw);
-			return glm::distance(p, proj);
-		}
-
 		//-----------------------------------------------------------------------------------
 		void cFov1::Init(size_t los)
 		{
 			mLoS = los;
 		}
-
 
 		static void CastLight( int row, float start, float end, int xx, int xy, int yx, int yy,
 							   const glm::ivec2& p, const cArray2D<bool>& vismap, std::vector<glm::ivec2>& lospts, cArray2D<float>& vis, size_t los)
