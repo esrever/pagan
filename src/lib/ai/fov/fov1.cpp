@@ -3,6 +3,8 @@
 #include <core/math/norm.h>
 #include <ai/utils/shape/ShapeCalc.h>
 
+#include <iostream>
+
 namespace pgn
 {
 	namespace ai
@@ -104,6 +106,8 @@ namespace pgn
 					if (d <= los) {
 						float bright = (float)(1 - (d / los));
 						vis( glm::ivec2(currentX,currentY)) = bright;
+						if (std::find(lospts.begin(), lospts.end(), glm::ivec2(currentX, currentY)) == lospts.end())
+							lospts.push_back(glm::ivec2(currentX, currentY));
 					}
 
 					if (blocked) { //previous cell was a blocking one
