@@ -13,14 +13,16 @@ namespace pgn
 		// typedefs
 		typedef T data_type;
 		typedef std::vector<T> container_type;
+		typedef typename container_type::reference reference;
+		typedef typename container_type::const_reference const_reference;
 
 		// funcs
 		void Resize(size_t n, const T& val = T()) { mData.resize(n, val); }
 		void Fill(const T& val)        { mData.assign(mData.size(), val); }
 
 		// access
-		T& Get(size_t idx)             { return mData.at(idx); }
-		const T& Get(size_t idx) const { return mData.at(idx); }
+		reference Get(size_t idx)             { return mData.at(idx); }
+		const_reference Get(size_t idx) const { return mData.at(idx); }
 
 		//! type-specific
 		const container_type& Raw() const { return mData; }
@@ -35,14 +37,16 @@ namespace pgn
 		// typedefs
 		typedef T data_type;
 		typedef std::map<size_t, T> container_type;
+		typedef T& reference;
+		typedef const T& const_reference;
 
 		// funcs
 		void Resize(size_t n, const T& val = T()) { mData.clear(); mDefault = val; }
 		void Fill(const T& val)        { mData.clear(); mDefault = val; }
 
 		// access
-		const T& Get(size_t idx) const { auto it = mData.find(idx); return it == mData.end() ? mDefault : *it; }
-		T& Get(size_t idx) { auto it = mData.find(idx); return it == mData.end() ? mDefault : *it; }
+		const_reference Get(size_t idx) const { auto it = mData.find(idx); return it == mData.end() ? mDefault : *it; }
+		reference Get(size_t idx) { auto it = mData.find(idx); return it == mData.end() ? mDefault : *it; }
 
 		//! type-specific
 		const container_type& Raw() const { return mData; }

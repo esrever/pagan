@@ -14,8 +14,7 @@ namespace pgn
 			const cArray2D<char>& cidxMap,
 			const std::vector<SDL_Color>& colorMap);
 		void SaveImage(const std::string& fname,
-			const cArray2D<SDL_Color>& cMap,
-			size_t scale = 1);
+			const cArray2D<SDL_Color>& cMap);
 		
 	}
 }

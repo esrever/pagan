@@ -1,10 +1,13 @@
 set(SOURCE_FILES
     path/Astar.cpp
+    fov/fov0.cpp
 )
 
 set(HEADER_FILES
     path/Astar.h
     utils/shape/ShapeCalc.h
+    fov/FovLookup.h
+    fov/fov0.h
 )
 
 add_definitions(

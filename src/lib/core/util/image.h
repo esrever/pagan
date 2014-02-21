@@ -6,5 +6,5 @@
 
 namespace pgn
 {
-	void ResizeSurface(SDL_Surface *& surface, size_t tgtW, size_t tgtH);
+	SDL_Surface * ResizeSurface(SDL_Surface * surface, size_t tgtW, size_t tgtH);
 }

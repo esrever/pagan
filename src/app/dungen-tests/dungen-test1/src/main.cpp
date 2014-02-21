@@ -21,7 +21,7 @@ int main(int argc, char ** argv)
 	ws.mConstraints.RoomRectW(glm::ivec2(3, 12))
 		.RoomRectH(glm::ivec2(3, 12))
 		.DoorToDoorMinDistance(glm::ivec2(2, 2))
-		.DoorsPerRoom(glm::ivec2(10, 40))
+		.DoorsPerRoom(glm::ivec2(1, 4))
 		.ConnectIslands(false)
 		.StoreRoomConnectivity(true)
 		.OverrideMaxConns(false)
@@ -31,7 +31,7 @@ int main(int argc, char ** argv)
 	//ws.Init(1024, 1024);
 	//ws.Init(299, 93);
 	//ws.Init(1024, 1024);
-	ws.Init(800, 250);
+	ws.Init(80, 25);
 	//ws.Init(150, 50);
 	//ws.Init(10, 20);
 	//initscr();ws.Init(COLS-1, LINES-1);
@@ -80,6 +80,6 @@ int main(int argc, char ** argv)
 
 	ws.mMapData.View().VisitRext(cmapfunc);
 
-	pgn::io::SaveImage(exepath + "dungen-test1.png",imgData,16);
+	pgn::io::SaveImage(exepath + "dungen-test1.png",imgData);
 	return 0;
 }

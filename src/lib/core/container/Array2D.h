@@ -30,12 +30,12 @@ namespace pgn
 		size_t Height() const { return mView.Shape().Height(); }
 
 		// helpers - access view
-		typename data_type&       operator()(size_t x, size_t y)       { return mStorage.Get(mView.LinearIdx(x, y)); }
-		const typename data_type& operator()(size_t x, size_t y) const  { return mStorage.Get(mView.LinearIdx(x, y)); }
+		typename S::reference operator()(size_t x, size_t y)       { return mStorage.Get(mView.LinearIdx(x, y)); }
+		typename S::const_reference operator()(size_t x, size_t y) const  { return mStorage.Get(mView.LinearIdx(x, y)); }
 		bool InRange(size_t x, size_t y) const { return mView.Shape().InRange(x, y); }
 
-		const T& operator()(const glm::ivec2& v) const { return (*this)(v.x, v.y); }
-		T& operator()(const glm::ivec2& v)             { return (*this)(v.x, v.y); }
+		typename S::const_reference operator()(const glm::ivec2& v) const { return (*this)(v.x, v.y); }
+		typename S::reference operator()(const glm::ivec2& v)             { return (*this)(v.x, v.y); }
 		bool InRange(const glm::ivec2& v) const        { return InRange(v.x, v.y); }
 
 		// helpers - fill
