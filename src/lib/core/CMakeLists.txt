@@ -3,6 +3,7 @@ set(SOURCE_FILES
     util/logstream.cpp
     util/color.cpp
     util/rand.cpp
+    util/image.cpp
 #    util/cfgtree.cpp
 #    util/cfgdata.cpp
 #    util/conversions.cpp
@@ -21,6 +22,7 @@ set(HEADER_FILES
 #    util/cmdopt.h
     util/logstream.h
     util/color.h
+    util/image.h
     util/rand.h
 #    util/cfgtree.h
 #    util/conversions.h
