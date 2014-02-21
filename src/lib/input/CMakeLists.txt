@@ -1,15 +1,8 @@
 set(SOURCE_FILES
-    path/Astar.cpp
-    fov/fov0.cpp
-    fov/fov1.cpp
+    
 )
 
 set(HEADER_FILES
-    path/Astar.h
-    utils/shape/ShapeCalc.h
-    fov/FovLookup.h
-    fov/fov0.h
-    fov/fov1.h
 )
 
 add_definitions(
@@ -26,12 +19,12 @@ include_directories(
     ${glm_INCLUDE_DIR}
 )
 
-add_library(pagan_ai STATIC
+add_library(pagan_input STATIC
             ${SOURCE_FILES}
             ${HEADER_FILES}
         )
-set_target_properties(pagan_ai PROPERTIES OUTPUT_NAME pagan_ai CLEAN_DIRECT_OUTPUT 1)
-target_link_libraries(pagan_ai
+set_target_properties(pagan_input PROPERTIES OUTPUT_NAME pagan_input CLEAN_DIRECT_OUTPUT 1)
+target_link_libraries(pagan_input
     pagan_core
     #${PLATFORM_LIBRARIES} what is this?
     ${Boost_LIBRARIES}

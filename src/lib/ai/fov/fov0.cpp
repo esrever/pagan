@@ -151,15 +151,10 @@ namespace pgn
 
 		}
 
-		static float block_vis(const cArray2D<bool>& dmap, const glm::ivec2& p, const glm::ivec2& off)
-		{
-			return dmap(p + off) ? 0.0f : 1.0f;
-		}
-
 		static float calc_vis(const cArray2D<bool>& dmap, const glm::ivec2&p, const glm::ivec2& off, const cArray2D<float>& visf, size_t los)
 		{
 			auto vcur = visf(off.x + los, off.y + los);
-			auto bcur = block_vis(dmap, p, off);
+			auto bcur = dmap(p + off) ? 1.0f : 0.0f;
 			auto curvis = vcur * bcur;
 			return curvis;
 		}
@@ -182,7 +177,7 @@ namespace pgn
 					auto pt_rel_abs = glm::abs(pt_rel);
 					auto pt_sign = glm::sign(pt_rel);
 					auto pt_prev = pt_rel - pt_sign;
-					const float curvis_cmp = 0.005f;
+					const float curvis_cmp = 0.05f;
 					float curvis;
 					if (((pt_rel.x == 0) | (pt_rel.y == 0)) || (pt_rel_abs.x == pt_rel_abs.y))
 					{
@@ -200,8 +195,8 @@ namespace pgn
 						nb_far[max_mag_coord] = pt_prev[max_mag_coord];
 
 						// Use a custom distance function to generate percentages: for starters, manh distance. Alts: eucli, eucli^2, more TODO
-						auto dnear = pgn::norm_2(nb_near);
-						auto dfar = pgn::norm_2(nb_far);
+						auto dnear = pgn::norm_inf(nb_near);
+						auto dfar = pgn::norm_inf(nb_far);
 						auto ddenom = 1.0f / float(dnear + dfar);
 						float pc_near = dfar*ddenom;
 						float pc_far = dnear*ddenom;
@@ -221,11 +216,12 @@ namespace pgn
 
 						float f0 = 0.5f, f1 = 0.5f;
 
-						//curvis = (bnear && bfar) ? 0.0f : vis_near*pc_near + vis_far*pc_far;
-						curvis = (bnear && bfar) ? 0.0f : vis_near*f0 + vis_far*f1;
+						curvis = (bnear && bfar) ? 0.0f : vis_near*pc_near + vis_far*pc_far;
+						//curvis = (bnear && bfar) ? 0.0f : vis_near*f0 + vis_far*f1;
 						mBlockMap(glm::ivec2(pt_rel.x + mLoS, pt_rel.y + mLoS))= bnear || bfar || bthis || (curvis < curvis_cmp);
 					}
 					mVisMap(pt_rel.x + mLoS, pt_rel.y + mLoS) = curvis;
+					vis(p + pt_rel) = curvis;
 					if (curvis > curvis_cmp)
 						lospts.push_back(glm::ivec2(p.x + pt_rel.x, p.y + pt_rel.y));
 				}

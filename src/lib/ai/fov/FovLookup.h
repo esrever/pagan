@@ -9,18 +9,19 @@ namespace pgn
     {
     
         template<class F>
-        class cFovLutSet
+		class cFovLookup
         {
             public:
                 typedef F fov_type;
                 
-                const F& Get(size_t los) const;
+                fov_type& Get(size_t los);
             private:
                 std::vector<F> mFovLuts;
         };
         
         //------------------------------------------------------------
-        const typename cFovLookup::fov_type& cFovLutSet::Get(size_t los)
+		template<class T>
+		typename cFovLookup<T>::fov_type& cFovLookup<T>::Get(size_t los)
         {
             if (los > mFovLuts.size())
                 mFovLuts.resize(los);

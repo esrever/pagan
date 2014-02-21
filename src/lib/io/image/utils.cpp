@@ -29,7 +29,7 @@ namespace pgn
 		void SaveImage(const std::string& fname, const cArray2D<SDL_Color>& cMap)
 		{
 			void * pixels = (void *)&cMap.View().Storage().Raw().front();
-			auto * surface = SDL_CreateRGBSurfaceFrom(pixels, cMap.Width(), cMap.Height(), 32, cMap.Width() * 4, 0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff);
+			auto * surface = SDL_CreateRGBSurfaceFrom(pixels, cMap.Width(), cMap.Height(), 32, cMap.Width() * 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000 );
 
 			IMG_SavePNG(surface, fname.c_str());
 			SDL_FreeSurface(surface);
