@@ -1,5 +1,7 @@
 set(SOURCE_FILES
 #    util/cmdopt.cpp
+    app/sdlapp.cpp
+    app/sdlwin.cpp
     util/logstream.cpp
     util/color.cpp
     util/rand.cpp
@@ -13,6 +15,8 @@ set(SOURCE_FILES
 )
 
 set(HEADER_FILES
+    app/sdlapp.h
+    app/sdlwin.h
     container/ArrayStorage.h
     container/Array2DView.h
     container/Array2D.h
@@ -49,6 +53,9 @@ include_directories(
     ${Rapidjson_INCLUDE_DIR}
     ${glm_INCLUDE_DIR}
     ${pugixml_INCLUDE_DIR}
+    ${SDL_INCLUDE_DIR}
+    ${SDL_image_INCLUDE_DIR}
+    #${SDL_ttf_INCLUDE_DIR}
 )
 
 add_library(pagan_core STATIC
