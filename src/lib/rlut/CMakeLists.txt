@@ -1,6 +1,7 @@
 set(SOURCE_FILES
     path/Astar.cpp
     path/Astar-impl.cpp
+    path/difi.cpp
     fov/fov0.cpp
     fov/fov1.cpp
     
@@ -17,6 +18,7 @@ set(SOURCE_FILES
 
 set(HEADER_FILES
     path/Astar.h
+    path/difi.h
     utils/shape/ShapeCalc.h
     fov/FovLookup.h
     fov/fov0.h
