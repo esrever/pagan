@@ -6,6 +6,8 @@ set(SOURCE_FILES
     util/color.cpp
     util/rand.cpp
     util/image.cpp
+    sdl/font.cpp
+    sdl/pointers.cpp
 #    util/cfgtree.cpp
 #    util/cfgdata.cpp
 #    util/conversions.cpp
@@ -23,6 +25,8 @@ set(HEADER_FILES
     container/Array2D_utils.h
     container/ArrayShape2D.h
     container/dict.h
+    sdl/font.h
+    sdl/pointers.h
 #    util/cmdopt.h
     util/logstream.h
     util/color.h
@@ -55,7 +59,7 @@ include_directories(
     ${pugixml_INCLUDE_DIR}
     ${SDL_INCLUDE_DIR}
     ${SDL_image_INCLUDE_DIR}
-    #${SDL_ttf_INCLUDE_DIR}
+    ${SDL_ttf_INCLUDE_DIR}
 )
 
 add_library(pagan_core STATIC

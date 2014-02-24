@@ -2,6 +2,8 @@
 
 #include <memory>
 
+#include <SDL.h>
+
 namespace pgn
 {
 	class cSDLWindow;
@@ -11,7 +13,16 @@ namespace pgn
 	public:
 		cSDLApp(int argc, char ** argv);
 		virtual ~cSDLApp();
-		virtual void Run();
+		void Run();
+
+		virtual void Init(){}
+		virtual void Render(){}
+		virtual bool Update(){ return false; }
+		virtual void Destroy(){}
+		
+		bool HandleEvents();
+
+		const std::shared_ptr<cSDLWindow>& MainWindow() const { return mMainWindow; }
 	private:
 		std::shared_ptr<cSDLWindow> mMainWindow;
 	};

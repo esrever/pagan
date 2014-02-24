@@ -226,6 +226,7 @@ find_package(Signal)
 find_package(GLM)
 find_package(SDL)
 find_package(SDL_image)
+find_package(SDL_ttf)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/contrib/oxygine-framework ${CMAKE_CURRENT_BINARY_DIR}/contrib/oxygine-framework)
 add_definitions(${OXYGINE_DEFINITIONS})
