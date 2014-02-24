@@ -19,7 +19,7 @@ if (WIN32)
         NAMES
             pugixml
         PATHS
-            ${PROJECT_SOURCE_DIR}/contrib/pugixml/lib/${ARCH}/debug
+            ${PROJECT_SOURCE_DIR}/contrib/pugixml/lib/${ARCH}/release
 
             DOC "The pugixml library")
             
@@ -27,7 +27,7 @@ if (WIN32)
         NAMES
             pugixml
         PATHS
-            ${PROJECT_SOURCE_DIR}/contrib/pugixml/lib/${ARCH}/release
+            ${PROJECT_SOURCE_DIR}/contrib/pugixml/lib/${ARCH}/debug
 
             DOC "The pugixml library")
 endif ()

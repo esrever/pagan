@@ -1,5 +1,6 @@
 set(SOURCE_FILES
     path/Astar.cpp
+    path/Astar-impl.cpp
     fov/fov0.cpp
     fov/fov1.cpp
     
@@ -9,6 +10,9 @@ set(SOURCE_FILES
     dungen/dungen.cpp
     dungen/constraints.cpp
     dungen/util.cpp
+    
+    sprite/atlas.cpp
+    sprite/sprite.cpp
 )
 
 set(HEADER_FILES
@@ -24,6 +28,9 @@ set(HEADER_FILES
     dungen/dungen.h
     dungen/constraints.h
     dungen/util.h
+    
+    sprite/atlas.h
+    sprite/sprite.h
 )
 
 add_definitions(
@@ -38,6 +45,8 @@ include_directories(
     ${PYSTRING_INCLUDE_DIR}
     ${Boost_INCLUDE_DIRS}
     ${glm_INCLUDE_DIR}
+    ${SDL_INCLUDE_DIR}
+    ${SDL_image_INCLUDE_DIR}
 )
 
 add_library(pagan_rlut STATIC
@@ -51,6 +60,3 @@ target_link_libraries(pagan_rlut
     ${Boost_LIBRARIES}
     ${PYSTRING_LIBRARY}
 )
-
-
-

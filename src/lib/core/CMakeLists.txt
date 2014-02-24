@@ -8,6 +8,7 @@ set(SOURCE_FILES
     util/image.cpp
     sdl/font.cpp
     sdl/pointers.cpp
+    img/imglib.cpp
 #    util/cfgtree.cpp
 #    util/cfgdata.cpp
 #    util/conversions.cpp
@@ -39,6 +40,7 @@ set(HEADER_FILES
     util/idgen.h
     util/glm_utils.h
     math/norm.h
+    img/imglib.h
 #    app/application.h
 #    util/textmod.h
 )

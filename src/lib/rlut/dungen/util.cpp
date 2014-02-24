@@ -1,7 +1,7 @@
 #include "util.h"
 
 #include <rlut/path/Astar.h>
-#include <rlut/path/Astar.cpp>
+#include <rlut/path/Astar-impl.cpp>
 
 #include "dungen.h"
 #include "area.h"

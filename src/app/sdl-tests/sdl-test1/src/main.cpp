@@ -12,6 +12,8 @@
 
 #include <glm/glm.hpp>
 
+#include <rlut/sprite/atlas.h>
+
 struct cTestApp : public pgn::cSDLApp
 {
 	cTestApp(int argc, char ** argv) : pgn::cSDLApp(argc, argv)
@@ -22,7 +24,7 @@ struct cTestApp : public pgn::cSDLApp
 	//------------------------------------------------
 	virtual void Init()
 	{
-		static const glm::uvec2 gridDims(80,40);
+		static const glm::uvec2 gridDims(40,20);
 		static const size_t  numLines = 4;
 
 		mGridDims = gridDims;
@@ -37,6 +39,9 @@ struct cTestApp : public pgn::cSDLApp
 		mGridStart = glm::uvec2(0, 0);
 		mLogStart = glm::uvec2(5, mTileDim*mGridDims.y + msTextHeight / 4);
 		mStatusStart = glm::uvec2(5+mTileDim*mGridDims.x, 0);
+
+
+		mSpriteAtlas.Init(MainWindow()->ImgLib(), "C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml");
 	}
 
 	//------------------------------------------------
@@ -46,9 +51,17 @@ struct cTestApp : public pgn::cSDLApp
 		for (size_t j = 0; j < mGridDims.x; ++j)
 		{
 			//SDL_Color c = { j % 256, i % 256, 0, 255 };
+			/*
 			SDL_Color c = { rand() % 256, rand() % 256, rand() % 256, 255 };
 			SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
 			MainWindow()->Render(c,&rect);
+			*/
+			size_t o = i*mGridDims.x + j;
+			size_t tgtx = o % mSpriteAtlas.Dims().x;
+			size_t tgty = (o / mSpriteAtlas.Dims().x) % mSpriteAtlas.Dims().y;
+			auto sprite = mSpriteAtlas.GetSprite(tgtx, tgty);
+			SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
+			MainWindow()->RenderEx(sprite.first, {255,255,255,255}, &sprite.second, &rect);
 		}
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), "c:\\Windows\\fonts\\DejaVuSerif.ttf", 32);
@@ -77,6 +90,7 @@ struct cTestApp : public pgn::cSDLApp
 	//------------------------------------------------
 	glm::uvec2 mGridDims;
 	size_t	   mNumLines;
+	pgn::rlut::cSpriteAtlas mSpriteAtlas;
 
 	size_t	   mTileDim;
 	glm::uvec2 mGridStart;
