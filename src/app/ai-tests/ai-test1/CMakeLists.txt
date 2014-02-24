@@ -37,7 +37,7 @@ add_executable (ai-test1
 #set_target_properties(CMakeTest PROPERTIES OUTPUT_NAME pagan_core CLEAN_DIRECT_OUTPUT 1)
 target_link_libraries(ai-test1
     pagan_core
-    pagan_ai
+    pagan_rlut
     ${Boost_LIBRARIES}
     ${PYSTRING_LIBRARY}
     ${pugixml_LIBRARY}

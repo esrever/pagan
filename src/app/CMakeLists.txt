@@ -1,8 +1,7 @@
 set (APP_LIBS 
      pagan_core
      pagan_io
-     pagan_ai
-     pagan_dungen
+     pagan_rlut
      ${Boost_LIBRARIES}
      ${SDL_LIBRARY}
      ${SDL_image_LIBRARY}

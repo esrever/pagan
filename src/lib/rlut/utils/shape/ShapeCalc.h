@@ -6,7 +6,7 @@
 
 namespace pgn
 {
-	namespace ai
+	namespace rlut
 	{
 		struct cBoxDistance { size_t operator ()(const glm::ivec2& v) const { return norm_inf(v); } };
 		struct cDiskDistance { size_t operator ()(const glm::ivec2& v) const { return size_t(norm_2(v)); } };

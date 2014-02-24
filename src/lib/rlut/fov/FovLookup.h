@@ -5,7 +5,7 @@
 
 namespace pgn
 {
-    namespace ai
+    namespace rlut
     {
     
         template<class F>

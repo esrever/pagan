@@ -5,12 +5,12 @@
 #include <vector>
 
 #include <core/container/Array2D.h>
-#include <ai/path/Astar.h>
+#include <rlut/path/Astar.h>
 #include "Constraints.h"
 
 namespace pgn
 {
-	namespace dungen
+	namespace rlut
 	{
 		struct cDiagDistMatrix
 		{
@@ -63,7 +63,7 @@ namespace pgn
 			cArray2D<::std::vector<size_t>>			mConnectionMap;
 			::std::vector<cAreaPtr>						mAreas;
 			cArray2D<int>							mMapData;
-			ai::cAstar									mAstar;
+			cAstar									mAstar;
 			::std::deque<glm::ivec2>						mAstarPath;
 			cConstraints								mConstraints;
 			cArray2D<size_t>						mAreaDistances;

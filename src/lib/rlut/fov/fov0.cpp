@@ -4,7 +4,7 @@
 
 namespace pgn
 {
-	namespace ai
+	namespace rlut
 	{
 
 		static void bresenham_line(const glm::ivec2& start, const glm::ivec2& end, std::vector<glm::ivec2>& pts)
@@ -127,7 +127,7 @@ namespace pgn
 			mBlockMap.Resize(los * 2 + 1, los * 2 + 1);
 			mBlockMap.Fill(false);
 
-			//auto iters = dungen::cShapeCalc<dungen::cShapeDisk>::Get(1, los);
+			//auto iters = rlut::cShapeCalc<rlut::cShapeDisk>::Get(1, los);
 			//for (auto it = iters.first; it != iters.second; ++it)
 			//	 mTierMap[it->x*it->x + it->y*it->y].push_back(*it);
 

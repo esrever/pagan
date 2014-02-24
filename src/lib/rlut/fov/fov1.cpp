@@ -1,13 +1,13 @@
 #include "fov1.h"
 
 #include <core/math/norm.h>
-#include <ai/utils/shape/ShapeCalc.h>
+#include <rlut/utils/shape/ShapeCalc.h>
 
 #include <iostream>
 
 namespace pgn
 {
-	namespace ai
+	namespace rlut
 	{
 
 		static void bresenham_line(const glm::ivec2& start, const glm::ivec2& end, std::vector<glm::ivec2>& pts)

@@ -6,7 +6,7 @@
 
 #include <core/container/Array2D.h>
 #include <core/util/glm_utils.h>
-#include <ai/utils/shape/ShapeCalc.h>
+#include <rlut/utils/shape/ShapeCalc.h>
 
 /*
 	Provide:
@@ -38,7 +38,7 @@
 
 namespace pgn
 {
-	namespace ai
+	namespace rlut
 	{
 		typedef std::function<float(const glm::ivec2&, const glm::ivec2&)> astar_norm_func_type;
 

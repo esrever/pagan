@@ -7,10 +7,10 @@
 #include <io/image/utils.h>
 
 #include <core/container/Array2D.h>
-#include <ai/fov/FovLookup.h>
-#include <ai/fov/Fov0.h>
-#include <ai/fov/Fov1.h>
-#include <dungen/dungen.h>
+#include <rlut/fov/FovLookup.h>
+#include <rlut/fov/Fov0.h>
+#include <rlut/fov/Fov1.h>
+#include <rlut/dungen/dungen.h>
 
 struct cTestCase
 {
@@ -26,19 +26,19 @@ void GenerateWiggly()
 	// WIGGLY
 	pgn::cArray2D<int> testmap;
 	testmap.Resize(10, 4);
-	testmap.Fill(pgn::dungen::eMapData::perimeter);
-	testmap(1, 1) = pgn::dungen::eMapData::room;
-	testmap(2, 1) = pgn::dungen::eMapData::room;
-	testmap(2, 2) = pgn::dungen::eMapData::room;
-	testmap(3, 2) = pgn::dungen::eMapData::room;
-	testmap(4, 2) = pgn::dungen::eMapData::room;
-	testmap(4, 1) = pgn::dungen::eMapData::room;
-	testmap(5, 1) = pgn::dungen::eMapData::room;
-	testmap(6, 1) = pgn::dungen::eMapData::room;
-	testmap(6, 2) = pgn::dungen::eMapData::room;
-	testmap(7, 2) = pgn::dungen::eMapData::room;
-	testmap(8, 2) = pgn::dungen::eMapData::room;
-	testmap(8, 1) = pgn::dungen::eMapData::room;
+	testmap.Fill(pgn::rlut::eMapData::perimeter);
+	testmap(1, 1) = pgn::rlut::eMapData::room;
+	testmap(2, 1) = pgn::rlut::eMapData::room;
+	testmap(2, 2) = pgn::rlut::eMapData::room;
+	testmap(3, 2) = pgn::rlut::eMapData::room;
+	testmap(4, 2) = pgn::rlut::eMapData::room;
+	testmap(4, 1) = pgn::rlut::eMapData::room;
+	testmap(5, 1) = pgn::rlut::eMapData::room;
+	testmap(6, 1) = pgn::rlut::eMapData::room;
+	testmap(6, 2) = pgn::rlut::eMapData::room;
+	testmap(7, 2) = pgn::rlut::eMapData::room;
+	testmap(8, 2) = pgn::rlut::eMapData::room;
+	testmap(8, 1) = pgn::rlut::eMapData::room;
 	glm::ivec2 start(8, 2);;
 	
 	cTestCase test;
@@ -53,9 +53,9 @@ void GenerateDiag()
 	// DIAG
 	pgn::cArray2D<int> testmap;
 	testmap.Resize(80, 80);
-	testmap.Fill(pgn::dungen::eMapData::room);
+	testmap.Fill(pgn::rlut::eMapData::room);
 	for (size_t i = 0; i < 80; ++i)
-		testmap(i, i) = pgn::dungen::eMapData::perimeter;
+		testmap(i, i) = pgn::rlut::eMapData::perimeter;
 	glm::ivec2 start(21, 20);
 
 	cTestCase test;
@@ -70,8 +70,8 @@ void GeneratePillar()
 	// PILLAR
 	pgn::cArray2D<int> testmap;
 	testmap.Resize(40, 40);
-	testmap.Fill(pgn::dungen::eMapData::room);
-	testmap(20, 20) = pgn::dungen::eMapData::perimeter;
+	testmap.Fill(pgn::rlut::eMapData::room);
+	testmap(20, 20) = pgn::rlut::eMapData::perimeter;
 	glm::ivec2 start(20, 18);
 
 	cTestCase test;
@@ -86,7 +86,7 @@ void GenerateEmpty()
 	// PILLAR
 	pgn::cArray2D<int> testmap;
 	testmap.Resize(40, 40);
-	testmap.Fill(pgn::dungen::eMapData::room);
+	testmap.Fill(pgn::rlut::eMapData::room);
 	glm::ivec2 start(20, 20);
 
 	cTestCase test;
@@ -109,11 +109,11 @@ int main(int argc, char ** argv)
 	GenerateWiggly();
 	GenerateEmpty();
 
-	int visBits = pgn::dungen::eMapData::room | pgn::dungen::eMapData::corridor | pgn::dungen::eMapData::conn;
+	int visBits = pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor | pgn::rlut::eMapData::conn;
 
 	for (size_t los = 10; los < 11; ++los)
 	{
-		pgn::ai::cFovLookup<pgn::ai::cFov1> flut;
+		pgn::rlut::cFovLookup<pgn::rlut::cFov1> flut;
 		auto& fov = flut.Get(los);
 
 		for (const auto& test : fovtests)
@@ -133,19 +133,19 @@ int main(int argc, char ** argv)
 			{
 				const auto& elem = test.dmap(x, y);
 				glm::ivec3 col(0, 0, 0);
-				if (elem & pgn::dungen::eMapData::corridor)
+				if (elem & pgn::rlut::eMapData::corridor)
 					col += glm::ivec3(255, 255, 0);
-				if (elem & pgn::dungen::eMapData::room)
+				if (elem & pgn::rlut::eMapData::room)
 					col += glm::ivec3(0, 25, 25);
-				if (elem & pgn::dungen::eMapData::blocked)
+				if (elem & pgn::rlut::eMapData::blocked)
 					col -= glm::ivec3(16, 16, 16);
-				if (elem & pgn::dungen::eMapData::perimeter)
+				if (elem & pgn::rlut::eMapData::perimeter)
 					col += glm::ivec3(64, 64, 64);
 				// conn -> green
-				if (elem & pgn::dungen::eMapData::conn)
+				if (elem & pgn::rlut::eMapData::conn)
 					col += glm::ivec3(255, -255, -255);
 
-				if (elem & (pgn::dungen::eMapData::entry | pgn::dungen::eMapData::exit))
+				if (elem & (pgn::rlut::eMapData::entry | pgn::rlut::eMapData::exit))
 					col = glm::ivec3(0, 0, 255);
 				imgData(x, y).r = std::min(std::max(col.x, 0), 127) + Uint8(128*visf(x,y));
 				imgData(x, y).g = std::min(std::max(col.y, 0), 255);

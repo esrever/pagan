@@ -5,7 +5,7 @@
 
 namespace pgn
 {
-	namespace ai
+	namespace rlut
 	{
 		//! Single goal search
 		template<class T>
