@@ -1,4 +1,5 @@
 set(SOURCE_FILES
+    app/rlapp.cpp
     path/Astar.cpp
     path/Astar-impl.cpp
     path/difi.cpp
@@ -17,6 +18,7 @@ set(SOURCE_FILES
 )
 
 set(HEADER_FILES
+    app/rlapp.h
     path/Astar.h
     path/difi.h
     utils/shape/ShapeCalc.h
@@ -49,6 +51,7 @@ include_directories(
     ${glm_INCLUDE_DIR}
     ${SDL_INCLUDE_DIR}
     ${SDL_image_INCLUDE_DIR}
+    ${SDL_ttf_INCLUDE_DIR}
 )
 
 add_library(pagan_rlut STATIC
