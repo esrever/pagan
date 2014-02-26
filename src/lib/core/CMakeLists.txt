@@ -9,6 +9,7 @@ set(SOURCE_FILES
     sdl/font.cpp
     sdl/pointers.cpp
     img/imglib.cpp
+    serialize/serialize.cpp
 #    util/cfgtree.cpp
 #    util/cfgdata.cpp
 #    util/conversions.cpp
@@ -41,6 +42,7 @@ set(HEADER_FILES
     util/glm_utils.h
     math/norm.h
     img/imglib.h
+    serialize/serialize.h
 #    app/application.h
 #    util/textmod.h
 )

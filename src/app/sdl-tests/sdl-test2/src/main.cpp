@@ -17,6 +17,8 @@
 #include <rlut/dungen/dungen.h>
 #include <rlut/path/difi.h>
 
+#include <core/serialize/serialize.h>
+
 struct cTestApp : public pgn::cSDLApp
 {
 	cTestApp(int argc, char ** argv) : pgn::cSDLApp(argc, argv)
@@ -139,6 +141,18 @@ struct cTestApp : public pgn::cSDLApp
 
 int main(int argc, char ** argv)
 {
+	pugi::xml_document doc_out;
+	pgn::SerializeOut(doc_out, "int", -5);
+	pgn::SerializeOut(doc_out, "float", 5.6f);
+	pgn::SerializeOut(doc_out, "double", 5.6);
+	pgn::SerializeOut(doc_out, "uint", 4);
+	doc_out.save_file("testmich.xml");
+	doc_out.print(std::cout);
+
+	pugi::xml_document doc_in;
+	doc_in.load_file("testmich.xml");
+	doc_in.print(std::cout);
+
 	std::string exepath = argv[0];
 	exepath = pystring::replace(exepath, "/", "\\");
 	std::vector<std::string> chunks;
