@@ -51,6 +51,30 @@ namespace pgn
 		return true;
 	}
 
+	// list
+	template<class T> inline void SerializeOut(pugi::xml_node& writer, const std::string& key, const std::list< T > & val)
+	{
+		auto& child = writer.append_child(key.c_str());
+		for (const auto& v : val)
+		{
+			SerializeOut(child, "list_elem", v);
+		}
+	}
+
+	template<class T> inline bool SerializeIn(const pugi::xml_node& reader, std::list < T > & val)
+	{
+		for (auto it = reader.begin(); it != reader.end(); ++it)
+		{
+			T v;
+			if (SerializeIn(*it, v))
+				val.push_back(v);
+			else
+				return false;
+
+		}
+		return true;
+	}
+
 	// map
 	template<class T, class U> inline void SerializeOut(pugi::xml_node& writer, const std::string& key, const std::map< T, U > & val)
 	{
@@ -84,5 +108,27 @@ namespace pgn
 
 		}
 		return true;
+	}
+
+
+	// pointers
+	template<class T> inline void SerializeOut(pugi::xml_node& writer, const std::string& key, const std::shared_ptr< T > & val)
+	{
+		if (val)
+			SerializeOut(writer, key, *val);
+		else
+			SerializeOut(writer, key, "null");
+	}
+
+	template<class T> inline bool SerializeIn(const pugi::xml_node& reader, std::shared_ptr < T > & pval)
+	{
+		T val;
+		if (SerializeIn(reader, val))
+		{
+			pval = std::make_shared(val);
+			return true;
+		}
+		else
+			return false;
 	}
 }

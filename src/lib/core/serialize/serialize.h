@@ -4,7 +4,9 @@
 #include <cassert>
 #include <vector>
 #include <set>
+#include <list>
 #include <map>
+#include <memory>
 #include <string>
 
 #include <glm/glm.hpp>
@@ -29,6 +31,10 @@ namespace pgn
 
 	template<class T>
 	inline bool SerializeIn(const node_type& reader, T& value) { assert(false); return false; }
+
+#define DECL_SERIALIZE_INTERFACE( T )\
+	void SerializeOut(node_type& writer, const std::string& key, const T & value);\
+	bool SerializeIn(const node_type& reader, T & value);
 
 	template<class T>
 	inline bool SerializeIn(const node_type& reader, const std::string& key, T& value, const T& defVal = T())
@@ -66,9 +72,13 @@ namespace pgn
 	DECL_SERIAL_CONT1(std::vector);
 	DECL_SERIAL_CONT2(std::map);
 	DECL_SERIAL_CONT1(std::set);
+	DECL_SERIAL_CONT1(std::list);
 	DECL_SERIAL_CONT1(glm::detail::tvec2);
 	DECL_SERIAL_CONT1(glm::detail::tvec3);
 	DECL_SERIAL_CONT1(glm::detail::tvec4);
+
+	// pointers
+	DECL_SERIAL_CONT1(std::shared_ptr);
 
 #undef DECL_SERIAL_SPECIAL
 #undef DECL_SERIAL_CONT1
