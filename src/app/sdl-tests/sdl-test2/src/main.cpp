@@ -151,11 +151,13 @@ int main(int argc, char ** argv)
 
 	std::set<std::string> sset = {"John", "Kelly", "Amanda", "Kim"};
 	std::vector<float> fvec = { 2.2f, 3.4f, 5.4f };
-	//std::map<int, std::string> vmap = { { 0, "num0" }, { 5, "num5" }, { 2, "hey you" } };
-	std::map<std::string, int> vmap = { {  "num0",0 }, { "num5",5 }, { "hey_you", 2} };
+	std::map<int, std::string> vmap = { { 0, "num0" }, { 5, "num5" }, { 2, "hey you" } };
+	//std::map<std::string, int> vmap = { {  "num0",0 }, { "num5",5 }, { "hey_you", 2} };
+	std::map< std::set<std::string>, std::vector<float>> weirdmap; weirdmap[sset] = fvec;
 	pgn::SerializeOut(doc_out, "set", sset);
 	pgn::SerializeOut(doc_out, "fvec", fvec);
 	pgn::SerializeOut(doc_out, "vmap", vmap);
+	pgn::SerializeOut(doc_out, "wmap", weirdmap);
 
 	doc_out.save_file("testmich.xml");
 	doc_out.print(std::cout);

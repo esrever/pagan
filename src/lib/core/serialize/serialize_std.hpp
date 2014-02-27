@@ -57,24 +57,30 @@ namespace pgn
 		auto& child = writer.append_child(key.c_str());
 		for (const auto& v : val)
 		{
-			SerializeOut(child, std::to_string(v.first), v.second);
+			//SerializeOut(child, std::to_string(v.first), v.second);
+			SerializeOut(child, "map_key", v.first);
+			SerializeOut(child, "map_value", v.second);
 		}
 	}
 	
-	template<class T, class U> inline bool SerializeIn(const pugi::xml_node& reader, std::map < T, U > & val)
+	template<class T, class U> inline bool SerializeIn(const pugi::xml_node& reader, std::map < T, U > & mval)
 	{
+		size_t i = 0;
+		T key, U val;
 		for (auto it = reader.begin(); it != reader.end(); ++it)
 		{
-			// read key
-			T k;
-			std::stringstream(it->name()) >> k;
-
-			// read value
-			U v;
-			if (SerializeIn(*it, v))
-				val.insert(std::make_pair(k,v));
+			bool ok = true;
+			if (i & 1)
+			{
+				ok = SerializeIn(reader, val);
+				if (ok)
+					mval[key] = val;
+			}
 			else
+				ok = SerializeIn(reader, key);
+			if (!ok)
 				return false;
+			++i;
 
 		}
 		return true;
