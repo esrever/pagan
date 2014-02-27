@@ -19,3 +19,12 @@ namespace pgn
 typedef std::shared_ptr< T > T##_sptr;\
 typedef std::weak_ptr< T > T##_wptr;\
 typedef std::unique_ptr< T > T##_uptr;
+
+
+#define SUPPORT_DERIVED(T)\
+	public:\
+	virtual ~ T (){}\
+	protected:\
+	virtual void SerializeOut(node_type& writer, const std::string& key) const { pgn::SerializeOut( writer, key, *this); }\
+	virtual bool SerializeIn(const node_type& reader)  { return pgn::SerializeIn( reader, *this); };\
+	private:

@@ -25,23 +25,30 @@ namespace pgn
 	{
 		DECL_MAP_MEMBER_R(cEntity, cEntityData, EntitiesToData);
 		DECL_MAP_MEMBER_R(std::string, cEntityData, Archetypes);
-		DECL_MAP_MEMBER_R(std::string, cEntity, TagsToEntities);
+		DECL_MAP_MEMBER_R(std::string, std::set<cEntity>, TagsToEntities);
 		DECL_MAP_MEMBER_R(std::string, cQueryFunc, Queries);
+
+		SUPPORT_DERIVED(cECS);
 
 	public:
 		typedef std::map<cEntity, cEntityData>::const_iterator  cEntityWithDataConst;
 		typedef std::map<cEntity, cEntityData>::iterator        cEntityWithData;
 
-		void Tag(const std::string&, const cEntityWithData);
-		void Untag(const std::string&, const cEntityWithData);
+	public:
+		void Tag(const std::string&, cEntityWithData);
+		void Untag(const std::string&, cEntityWithData);
 
+	protected:
 		template<class T>
 		void RegisterComponent();
 
-	protected:
+	private:
+		unsigned short AddComponentType(const std::type_index& zTi);
 
 	private:
 		std::vector<ComponentCreatorFunction> mComponentCreators;
+		std::vector< std::type_index>		  mComponentTypeIds;
+		std::map< std::string, size_t >		  mComponentTypeNamesToIds;
 	};
 
 	DECL_SERIALIZE_INTERFACE(cECS);

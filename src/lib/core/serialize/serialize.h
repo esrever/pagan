@@ -27,7 +27,7 @@ namespace pgn
 
 	// Generic functions
 	template<class T>
-	inline void SerializeOut(node_type& writer, const std::string& key, const T& value) { assert(false); }
+	inline void SerializeOut(node_type& writer, const std::string& key, const T& value) { SerializeOut(writer, key, std::string("unserializable: ") + typeid(T).name()); }
 
 	template<class T>
 	inline bool SerializeIn(const node_type& reader, T& value) { assert(false); return false; }

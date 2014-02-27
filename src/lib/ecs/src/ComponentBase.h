@@ -10,7 +10,7 @@ namespace pgn
 	class cComponentBase
 	{
 	public:
-		virtual ~cComponentBase(){}
+		SUPPORT_DERIVED(cComponentBase)
 		//! Get type index(for masks), virtually
 		virtual unsigned short TypeIndex() const =0;
 
