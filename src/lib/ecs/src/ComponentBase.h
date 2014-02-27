@@ -9,8 +9,8 @@ namespace pgn
 	//! Class used for common storage.
 	class cComponentBase
 	{
-	public:
 		SUPPORT_DERIVED(cComponentBase)
+	public:
 		//! Get type index(for masks), virtually
 		virtual unsigned short TypeIndex() const =0;
 

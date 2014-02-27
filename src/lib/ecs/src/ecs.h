@@ -8,6 +8,8 @@
 #include <typeinfo>
 #include <typeindex>
 
+#include <core/util/idgen.h>
+
 #include "ecs-config.h"
 #include "component.h"
 
@@ -35,8 +37,11 @@ namespace pgn
 		typedef std::map<cEntity, cEntityData>::iterator        cEntityWithData;
 
 	public:
+		cEntityWithData Create();
 		void Tag(const std::string&, cEntityWithData);
 		void Untag(const std::string&, cEntityWithData);
+
+		cEntityWithData InstantiateArchetype(const cEntityData& arch);
 
 	protected:
 		template<class T>
@@ -46,6 +51,7 @@ namespace pgn
 		unsigned short AddComponentType(const std::type_index& zTi);
 
 	private:
+		cIdGen<cEntity>						  mEntityIdGen;
 		std::vector<ComponentCreatorFunction> mComponentCreators;
 		std::vector< std::type_index>		  mComponentTypeIds;
 		std::map< std::string, size_t >		  mComponentTypeNamesToIds;

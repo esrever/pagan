@@ -22,6 +22,11 @@ namespace pgn
 	*/
 	struct cEntityData
 	{
+	public:
+		cEntityData() :mArchetype(nullptr){};
+		void AddComponent(cComponentBase_sptr comp);
+
+	public:
 		//! List of component pointers
 		std::vector<cComponentBase_sptr> mComponents;
 		//! Mask of supported components
@@ -29,9 +34,9 @@ namespace pgn
 		//! Mask of shared/read-only components
 		cComponentMask				 mSharedMask;
 		//! Archetype
-		std::weak_ptr<cEntityData>	 mArchetype;
+		const cEntityData *			 mArchetype;
 		//! List of tags
-		std::list<std::string>     mTags;
+		std::set<std::string>     mTags;
 	};
 
 	DECL_SERIALIZE_INTERFACE(cEntityData);

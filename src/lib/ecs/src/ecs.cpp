@@ -6,6 +6,14 @@
 namespace pgn
 {
 	//---------------------------------------------------------------------------------------------------
+	cECS::cEntityWithData cECS::Create()
+	{
+		const auto& e = mEntityIdGen.New();
+		auto it = mEntitiesToData.emplace(e, cEntityData());
+		return it.first;
+	}
+
+	//---------------------------------------------------------------------------------------------------
 	unsigned short cECS::AddComponentType(const std::type_index& zTi)
 	{
 		// if it's already in our list, do nothing and return the index
@@ -29,24 +37,42 @@ namespace pgn
 	void cECS::Tag(const std::string& tag, cEntityWithData ed)
 	{
 		mTagsToEntities[tag].insert(ed->first);
-		ed->second.mTags.push_back(tag);
+		ed->second.mTags.insert(tag);
 	}
 
 	//---------------------------------------------------------------------------------------------------
 	void cECS::Untag(const std::string& tag, cEntityWithData ed)
 	{
 		mTagsToEntities[tag].erase(ed->first);
-		ed->second.mTags.remove(tag);
+		ed->second.mTags.erase(tag);
+	}
+
+	//---------------------------------------------------------------------------------------------------
+	cECS::cEntityWithData cECS::InstantiateArchetype(const cEntityData& arch)
+	{
+		// TODO: generate entity
+		cEntityWithData ewd = Create();
+		
+		// copy the data
+		cEntityData& ed = ewd->second;
+		ed = arch;
+		// set the archetype
+		ed.mArchetype = &arch;
+		// archetype's support is the instance's shared
+		ed.mSharedMask = arch.mSupportMask;
+
+		return ewd;
 	}
 
 	//---------------------------------------------------------------------------------------------------
 	void SerializeOut(node_type& writer, const std::string& key, const cECS& value) 
 	{ 
+		auto& child = writer.append_child(key.c_str());
 		// export a dump of the object
-		SerializeOut(writer, "EntitiesToData", value.EntitiesToData());
-		SerializeOut(writer, "Archetypes", value.Archetypes());
-		SerializeOut(writer, "TagsToEntities", value.TagsToEntities());
-		SerializeOut(writer, "Queries", value.Queries());
+		SerializeOut(child, "EntitiesToData", value.EntitiesToData());
+		SerializeOut(child, "Archetypes", value.Archetypes());
+		SerializeOut(child, "TagsToEntities", value.TagsToEntities());
+		SerializeOut(child, "Queries", value.Queries());
 	}
 
 	//---------------------------------------------------------------------------------------------------

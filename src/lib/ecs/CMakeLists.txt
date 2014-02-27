@@ -2,6 +2,7 @@ set(SOURCE_FILES
     src/ecs.cpp
     src/ComponentBase.cpp
     src/EntityData.cpp
+    src/serialize_ecs.cpp
 )
 
 set(HEADER_FILES
@@ -10,7 +11,7 @@ set(HEADER_FILES
     src/Component.h
     src/ComponentBase.h
     src/EntityData.h
-    
+    src/serialize_ecs.h
 )
 
 add_definitions(
