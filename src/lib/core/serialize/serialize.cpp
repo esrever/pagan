@@ -3,6 +3,20 @@
 namespace pgn
 {
 	// PODs
+	// General
+	template<class T>
+	static bool read_pod(const pugi::xml_node& child, T& v)
+	{
+		const auto& attr = child.attribute("value");
+		if (attr.empty())
+			return false;
+		else
+		{
+			std::stringstream(attr.as_string()) >> v;
+			return true;
+		}
+	}
+	
 	// int
 	template<> void SerializeOut(pugi::xml_node& writer, const std::string& key, const int & val)
 	{
@@ -10,19 +24,9 @@ namespace pgn
 		child.append_attribute("value").set_value(std::to_string(val).c_str());
 	}
 
-	template<> bool SerializeIn(const pugi::xml_node& reader, const std::string& key, int & val, const int & defVal)
+	template<> bool SerializeIn(const pugi::xml_node& child, int & val)
 	{
-		const auto& child = reader.child(key.c_str());
-		if (child.empty())
-		{
-			val = defVal;
-			return false;
-		}
-		else
-		{
-			val = child.attribute("value").as_int();
-			return true;
-		}
+		return read_pod(child, val);
 	}
 
 	// unsigned
@@ -32,19 +36,9 @@ namespace pgn
 		child.append_attribute("value").set_value(std::to_string(val).c_str());
 	}
 
-	template<> bool SerializeIn(const pugi::xml_node& reader, const std::string& key, unsigned & val, const unsigned & defVal)
+	template<> bool SerializeIn(const pugi::xml_node& child, unsigned & val)
 	{
-		const auto& child = reader.child(key.c_str());
-		if (child.empty())
-		{
-			val = defVal;
-			return false;
-		}
-		else
-		{
-			val = child.attribute("value").as_uint();
-			return true;
-		}
+		return read_pod(child, val);
 	}
 
 	// float
@@ -54,19 +48,9 @@ namespace pgn
 		child.append_attribute("value").set_value(std::to_string(val).c_str());
 	}
 
-	template<> bool SerializeIn(const pugi::xml_node& reader, const std::string& key, float & val, const float & defVal)
+	template<> bool SerializeIn(const pugi::xml_node& child, float & val)
 	{
-		const auto& child = reader.child(key.c_str());
-		if (child.empty())
-		{
-			val = defVal;
-			return false;
-		}
-		else
-		{
-			val = child.attribute("value").as_float();
-			return true;
-		}
+		return read_pod(child, val);
 	}
 
 	// double
@@ -76,19 +60,9 @@ namespace pgn
 		child.append_attribute("value").set_value(std::to_string(val).c_str());
 	}
 
-	template<> bool SerializeIn(const pugi::xml_node& reader, const std::string& key, double & val, const double & defVal)
+	template<> bool SerializeIn(const pugi::xml_node& child, double & val)
 	{
-		const auto& child = reader.child(key.c_str());
-		if (child.empty())
-		{
-			val = defVal;
-			return false;
-		}
-		else
-		{
-			val = child.attribute("value").as_double();
-			return true;
-		}
+		return read_pod(child, val);
 	}
 
 	// bool
@@ -98,19 +72,9 @@ namespace pgn
 		child.append_attribute("value").set_value(std::to_string(val).c_str());
 	}
 
-	template<> bool SerializeIn(const pugi::xml_node& reader, const std::string& key, bool & val, const bool & defVal)
+	template<> bool SerializeIn(const pugi::xml_node& child, bool & val)
 	{
-		const auto& child = reader.child(key.c_str());
-		if (child.empty())
-		{
-			val = defVal;
-			return false;
-		}
-		else
-		{
-			val = child.attribute("value").as_bool();
-			return true;
-		}
+		return read_pod(child, val);
 	}
 
 	// std::string
@@ -120,62 +84,8 @@ namespace pgn
 		child.append_attribute("value").set_value(val.c_str());
 	}
 
-	template<> bool SerializeIn(const pugi::xml_node& reader, const std::string& key, std::string & val, const std::string & defVal)
+	template<> bool SerializeIn(const pugi::xml_node& reader, std::string & val)
 	{
-		const auto& child = reader.child(key.c_str());
-		if (child.empty())
-		{
-			val = defVal;
-			return false;
-		}
-		else
-		{
-			val = child.attribute("value").as_string();
-			return true;
-		}
-	}
-
-	template<class T>
-	static void write_glm(pugi::xml_node& writer, const std::string& key, int components, T * val)
-	{
-		auto& child = writer.append_child(key.c_str());
-		const char * s = "xyzw";
-		for (int i = 0; i < components; ++i)
-		{
-			child.append_attribute( std::string(s[i]).c_str()).set_value( std::to_string(val[i]));
-		}
-	}
-
-	template<class T>
-	static void read_glm(pugi::xml_node& writer, const std::string& key, int components, T * val, const T& val)
-	{
-		const auto& child = reader.child(key.c_str());
-		if (child.empty())
-		{
-			val = defVal;
-			return false;
-		}
-		else
-		{
-			const char * s = "xyzw";
-			for (int i = 0; i < components; ++i)
-			{
-				const char * v = child.attribute(std::string(s[i]).c_str()).value();
-				std::stringstream(v) >> val[i];
-			}
-			return true;
-		}
-	}
-
-	// glm::vec2
-	// std::string
-	template<class T> void SerializeOut(pugi::xml_node& writer, const std::string& key, const glm::detail::tvec2<T> & val)
-	{
-		write_glm(writer, key, 2, &val.x);
-	}
-
-	template<> bool SerializeIn(const pugi::xml_node& reader, const std::string& key, std::string & val, const std::string & defVal)
-	{
-		read_glm(reader, key, 2, &val.x);
+		return read_pod(reader, val);
 	}
 }

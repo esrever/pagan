@@ -43,6 +43,8 @@ set(HEADER_FILES
     math/norm.h
     img/imglib.h
     serialize/serialize.h
+    serialize/serialize_glm.hpp
+    serialize/serialize_std.hpp
 #    app/application.h
 #    util/textmod.h
 )

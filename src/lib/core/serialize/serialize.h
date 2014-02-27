@@ -11,6 +11,14 @@
 
 #include <pugixml.hpp>
 
+namespace std
+{
+	inline const string& to_string(const std::string& v)
+	{	
+		return v;
+	}
+}
+
 namespace pgn
 {
 	typedef pugi::xml_node node_type;
@@ -20,34 +28,31 @@ namespace pgn
 	inline void SerializeOut(node_type& writer, const std::string& key, const T& value) { assert(false); }
 
 	template<class T>
-	inline bool SerializeIn(const node_type& reader, const std::string& key, T& value) { assert(false); return false; }
+	inline bool SerializeIn(const node_type& reader, T& value) { assert(false); return false; }
 
 	template<class T>
 	inline bool SerializeIn(const node_type& reader, const std::string& key, T& value, const T& defVal = T())
 	{
 		const auto& child = reader.child(key.c_str());
-		if (child.empty())
-		{
-			val = defVal;
+		if (child.empty()) 
 			return false;
-		}
-		else
-		{
-			return SerializeIn(reader, key, value);
-		}
+		bool ok = SerializeIn(child, value);
+		if (!ok) 
+			value = defVal;
+		return ok;
 	}
 
 #define DECL_SERIAL_SPECIAL( T ) \
 	template<> void SerializeOut(pugi::xml_node& writer, const std::string& key, const T & val);\
-	template<> bool SerializeIn(const pugi::xml_node& writer, const std::string& key, T & val, const T & defVal);
+	template<> bool SerializeIn(const pugi::xml_node& reader, T & val);
 
 #define DECL_SERIAL_CONT1( N ) \
 	template<class T> void SerializeOut(pugi::xml_node& writer, const std::string& key, const N < T > & val); \
-	template<class T> bool SerializeIn(const pugi::xml_node& writer, const std::string& key, N < T > & val, const N < T > & defVal);
+	template<class T> bool SerializeIn(const pugi::xml_node& reader,  N < T > & val);
 
 #define DECL_SERIAL_CONT2( N ) \
 	template<class T0, class T1> void SerializeOut(pugi::xml_node& writer, const std::string& key, const N < T0 , T1 > & val); \
-	template<class T0, class T1> bool SerializeIn(const pugi::xml_node& writer, const std::string& key, N < T0 , T1 > & val, const N < T0 , T1 > & defVal);
+	template<class T0, class T1> bool SerializeIn(const pugi::xml_node& reader, N < T0, T1 > & val);
 
 	// PODs
 	DECL_SERIAL_SPECIAL(int);
@@ -69,3 +74,6 @@ namespace pgn
 #undef DECL_SERIAL_CONT1
 #undef DECL_SERIAL_CONT2
 }
+
+#include "serialize_glm.hpp"
+#include "serialize_std.hpp"
