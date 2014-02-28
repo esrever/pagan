@@ -50,17 +50,12 @@ namespace pgn
 	//---------------------------------------------------------------------------------------------------
 	cECS::cEntityWithData cECS::InstantiateArchetype(const cEntityData& arch)
 	{
-		// TODO: generate entity
+		// generate entity
 		cEntityWithData ewd = Create();
 		
 		// copy the data
 		cEntityData& ed = ewd->second;
-		ed = arch;
-		// set the archetype
-		ed.mArchetype = &arch;
-		// archetype's support is the instance's shared
-		ed.mSharedMask = arch.mSupportMask;
-
+		ed.SetArchetype(arch);
 		return ewd;
 	}
 

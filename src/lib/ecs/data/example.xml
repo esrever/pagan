@@ -3,11 +3,13 @@
     <Entity arhetype = "false">
         <Name value = "TestName"/>
         <Archetype value = "TestArch"/>
-        <Define>
-            <array_elem value="cmp0"/>
+        <Components>
+            <array_elem value="cmp0">
+                
+            </array_elem>
             <array_elem value="cmp1"/>
             <array_elem value="cmp2"/>
-        </Define>
+        </Components>
         <Tags>
             <array_elem value="tag0"/>
             <array_elem value="tag1"/>

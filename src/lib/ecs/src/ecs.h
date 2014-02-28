@@ -8,15 +8,18 @@
 #include <typeinfo>
 #include <typeindex>
 
+#include <core/util/singleton.h>
 #include <core/util/idgen.h>
 
 #include "ecs-config.h"
 #include "component.h"
 
-
 #define DECL_MAP_MEMBER_R(A,B, N) \
 	public: const std::map< A , B > & N () const { return m##N ; }\
 	private: std::map< A , B > m##N ; 
+#define DECL_MEMBER_R(T, N) \
+	public: const T & N () const { return m##N ; }\
+	private: T m##N ; 
 
 namespace pgn
 {
@@ -29,6 +32,8 @@ namespace pgn
 		DECL_MAP_MEMBER_R(std::string, cEntityData, Archetypes);
 		DECL_MAP_MEMBER_R(std::string, std::set<cEntity>, TagsToEntities);
 		DECL_MAP_MEMBER_R(std::string, cQueryFunc, Queries);
+		DECL_MAP_MEMBER_R(std::string, size_t, ComponentTypeNamesToIds);
+		DECL_MEMBER_R(std::vector<ComponentCreatorFunction>, ComponentCreators);
 
 		SUPPORT_DERIVED(cECS);
 
@@ -52,10 +57,10 @@ namespace pgn
 
 	private:
 		cIdGen<cEntity>						  mEntityIdGen;
-		std::vector<ComponentCreatorFunction> mComponentCreators;
 		std::vector< std::type_index>		  mComponentTypeIds;
-		std::map< std::string, size_t >		  mComponentTypeNamesToIds;
 	};
+
+	static inline cECS& ECS() { return pgn::cSingleton<pgn::cECS>::Instance(); }
 
 	DECL_SERIALIZE_INTERFACE(cECS);
 
