@@ -3,9 +3,7 @@
     <Entity archetype = "true">
         <Name value = "Arch0"/>
         <Components>
-            <array_elem value="cmp0"/>
-            <array_elem value="cmp1"/>
-            <array_elem value="cmp2"/>
+            <array_elem value="CmpTest"/>
         </Components>
         <Tags>
             <array_elem value="tag0"/>
@@ -17,14 +15,10 @@
         <Name value = "TestName"/>
         <Archetype value = "Arch0"/>
         <Components>
-            <array_elem value="cmp0">
-                
-            </array_elem>
-            <array_elem value="cmp1"/>
-            <array_elem value="cmp2"/>
+            <array_elem value="CmpTest"/>
         </Components>
         <Tags>
-            <array_elem value="tag0"/>
+            <array_elem value="tag3"/>
             <array_elem value="tag1"/>
             <array_elem value="tag2"/>
         </Tags>

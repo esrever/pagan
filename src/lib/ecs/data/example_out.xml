@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<ECS>
+	<EntitiesToData>
+		<map_key value="0" />
+		<map_value>
+			<Name value="TestName" />
+			<Components>
+				<array_elem>
+					<DataValue value="5" />
+				</array_elem>
+			</Components>
+			<SupportMask value="00000000000000000000000000000001" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Archetype value="unserializable: struct pgn::cEntityData const *" />
+			<Tags>
+				<set_elem value="tag1" />
+				<set_elem value="tag2" />
+				<set_elem value="tag3" />
+			</Tags>
+		</map_value>
+	</EntitiesToData>
+	<Archetypes>
+		<map_key value="Arch0" />
+		<map_value>
+			<Name value="Arch0" />
+			<Components>
+				<array_elem>
+					<DataValue value="5" />
+				</array_elem>
+			</Components>
+			<SupportMask value="00000000000000000000000000000001" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Archetype value="unserializable: struct pgn::cEntityData const *" />
+			<Tags>
+				<set_elem value="tag0" />
+				<set_elem value="tag1" />
+				<set_elem value="tag2" />
+			</Tags>
+		</map_value>
+	</Archetypes>
+	<TagsToEntities />
+	<Queries />
+</ECS>

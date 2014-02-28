@@ -29,7 +29,10 @@ namespace pgn
 		// create a nice name & add it, omit the struct from "struct blah"
 		std::vector<std::string> result;
 		pystring::split(zTi.name(), result, " ");
-		mComponentTypeNamesToIds[result.back()] = mComponentTypeIds.size() - 1;
+		std::string tmp = result.back();
+		pystring::rsplit(tmp, result, "::c",1);
+		tmp = pystring::strip(result.back(), ">");
+		mComponentTypeNamesToIds[tmp] = mComponentTypeIds.size() - 1;
 		return mComponentTypeIds.size() - 1;
 	}
 

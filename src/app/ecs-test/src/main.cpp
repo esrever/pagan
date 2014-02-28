@@ -3,8 +3,12 @@
 
 #include <ecs/ecs.h>
 
+#include "RegisterComponents.h"
+
 int main(int argc, char ** argv)
 {
+	auto& ecs = pgn::ECS();
+	pgn::RegisterComponents(ecs);
 	pugi::xml_document doc_in2;
 	auto res = doc_in2.load_file("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\ecs\\data\\example_in.xml");
 	if (!res)

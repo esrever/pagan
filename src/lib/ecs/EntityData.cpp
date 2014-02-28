@@ -2,13 +2,15 @@
 #include "componentbase.h"
 #include "ecs.h"
 
+//#include <ecs/serialize_ecs.h>
+
 namespace pgn
 {
 	//---------------------------------------------------------------------------------------------------
 	void cEntityData::AddComponent(cComponentBase_sptr comp)
 	{
 		auto idx = comp->TypeIndex();
-		assert(mSupportMask.at(idx));
+		mSupportMask.set(idx);
 		mSharedMask.reset(idx);
 		if (mComponents.size() <= idx)
 			mComponents.resize(idx + 1);

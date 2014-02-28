@@ -5,12 +5,15 @@
 #include <memory>
 #include <core/serialize/serialize.h>
 
-#define MAX_COMPONENTS 256
+#define MAX_COMPONENTS 32
 
 namespace pgn
 {
 	typedef size_t cEntity;
+	
 	typedef std::bitset<MAX_COMPONENTS> cComponentMask;
+	DECL_SERIALIZE_INTERFACE(cComponentMask);
+
 	typedef std::function<void(std::vector<cEntity>&)> cQueryFunc;
 }
 
@@ -25,8 +28,8 @@ typedef std::unique_ptr< T > T##_uptr;
 	public:\
 	virtual ~ T (){}\
 	protected:\
-	virtual void SerializeOut(node_type& writer, const std::string& key) const { pgn::SerializeOut( writer, key, *this); }\
-	virtual bool SerializeIn(const node_type& reader)  { return pgn::SerializeIn( reader, *this); };\
+	virtual void SerializeOut(node_type& writer, const std::string& key) const {  }\
+	virtual bool SerializeIn(const node_type& reader)  { return false; };\
 	friend void SerializeOut(node_type& writer, const std::string& key, const T & value);\
 	friend bool SerializeIn(const node_type& reader, T & value);\
 	private:

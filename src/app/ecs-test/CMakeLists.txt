@@ -1,8 +1,12 @@
 set(SOURCE_FILES
     src/main.cpp
+    src/cmptest.cpp
+    src/RegisterComponents.cpp
 )
 
 set(HEADER_FILES
+    src/cmptest.h
+    src/RegisterComponents.h
 )
 
 add_definitions(

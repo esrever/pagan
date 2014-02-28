@@ -33,8 +33,8 @@ namespace pgn
 	inline bool SerializeIn(const node_type& reader, T& value) { assert(false); return false; }
 
 #define DECL_SERIALIZE_INTERFACE( T )\
-	void SerializeOut(node_type& writer, const std::string& key, const T & value);\
-	bool SerializeIn(const node_type& reader, T & value);
+	template<> void SerializeOut< T >(node_type& writer, const std::string& key, const T & value);\
+	template<> bool SerializeIn< T >(const node_type& reader, T & value);
 
 	template<class T>
 	inline bool SerializeIn(const node_type& reader, const std::string& key, T& value, const T& defVal = T())

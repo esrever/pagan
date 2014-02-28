@@ -39,13 +39,13 @@ namespace pgn
 	template<class T>
 	void cComponent<T>::SerializeOut(node_type& writer, const std::string& key) const
 	{
-		pgn::SerializeOut(writer, key, mData);
+		mData.SerializeOut(writer, key);
 	}
 
 	//------------------------------------------------------------------------
 	template<class T>
 	bool cComponent<T>::SerializeIn(const node_type& reader)
 	{
-		return pgn::SerializeIn(reader, mData);
+		return mData.SerializeIn(reader);
 	}
 }

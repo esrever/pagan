@@ -48,7 +48,6 @@ namespace pgn
 
 		cEntityWithData InstantiateArchetype(const cEntityData& arch);
 
-	protected:
 		template<class T>
 		void RegisterComponent();
 

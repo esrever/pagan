@@ -11,7 +11,6 @@ set(HEADER_FILES
     Component.h
     ComponentBase.h
     EntityData.h
-    serialize_ecs.h
 )
 
 add_definitions(
