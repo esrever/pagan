@@ -6,10 +6,10 @@
 namespace pgn
 {
 	//---------------------------------------------------------------------------------------------------
-	cECS::cEntityWithData cECS::Create()
+	cECS::cEntityWithData cECS::Create(const cEntityData& ed)
 	{
 		const auto& e = mEntityIdGen.New();
-		auto it = mEntitiesToData.emplace(e, cEntityData());
+		auto it = mEntitiesToData.emplace(e, ed);
 		return it.first;
 	}
 
@@ -60,6 +60,34 @@ namespace pgn
 	}
 
 	//---------------------------------------------------------------------------------------------------
+	void cECS::ParseEntities(const node_type& reader)
+	{
+		// We expect an entity list here
+		for (auto it = reader.begin(); it != reader.end(); ++it)
+		{
+			const auto& ent = *it;
+
+			// parse the entity data
+			cEntityData ed;
+			if (pgn::SerializeIn(ent, ed))
+			{
+				// determine if it's an archetype or not
+				const auto& arch_attrib = ent.attribute("archetype");
+				if (arch_attrib.empty() || (arch_attrib.as_bool() == false))
+				{
+					// is entity
+					Create(ed);
+				}
+				else
+				{
+					// is archetype
+					mArchetypes.emplace(ed.mName,ed);
+				}
+			}
+		}
+	}
+
+	//---------------------------------------------------------------------------------------------------
 	void SerializeOut(node_type& writer, const std::string& key, const cECS& value) 
 	{ 
 		auto& child = writer.append_child(key.c_str());
@@ -73,6 +101,7 @@ namespace pgn
 	//---------------------------------------------------------------------------------------------------
 	bool SerializeIn(const node_type& reader, cECS& value)
 	{
+		value.ParseEntities(reader.child("Entities"));
 		// Read in entities, etc
 		return false;
 	}

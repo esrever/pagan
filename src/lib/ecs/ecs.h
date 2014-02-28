@@ -13,6 +13,7 @@
 
 #include "ecs-config.h"
 #include "component.h"
+#include "EntityData.h"
 
 #define DECL_MAP_MEMBER_R(A,B, N) \
 	public: const std::map< A , B > & N () const { return m##N ; }\
@@ -24,7 +25,6 @@
 namespace pgn
 {
 	typedef std::function< std::shared_ptr<cComponentBase>() > ComponentCreatorFunction;
-	struct cEntityData;
 
 	class cECS
 	{
@@ -42,7 +42,7 @@ namespace pgn
 		typedef std::map<cEntity, cEntityData>::iterator        cEntityWithData;
 
 	public:
-		cEntityWithData Create();
+		cEntityWithData Create(const cEntityData& = cEntityData());
 		void Tag(const std::string&, cEntityWithData);
 		void Untag(const std::string&, cEntityWithData);
 
@@ -54,6 +54,7 @@ namespace pgn
 
 	private:
 		unsigned short AddComponentType(const std::type_index& zTi);
+		void ParseEntities(const node_type& reader);
 
 	private:
 		cIdGen<cEntity>						  mEntityIdGen;

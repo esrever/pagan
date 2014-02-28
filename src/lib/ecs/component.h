@@ -46,6 +46,6 @@ namespace pgn
 	template<class T>
 	bool cComponent<T>::SerializeIn(const node_type& reader)
 	{
-		return pgn::SerializeIn(writer, mData);
+		return pgn::SerializeIn(reader, mData);
 	}
 }

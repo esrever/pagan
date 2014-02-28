@@ -72,7 +72,7 @@ namespace pgn
 
 		// Read archetype name
 		std::string archname;
-		SerializeIn(reader, "Name", archname);
+		SerializeIn(reader, "Archetype", archname);
 		if (archname != "")
 		{ 
 			// get archetype
@@ -89,12 +89,17 @@ namespace pgn
 		{
 			// get current component
 			auto& cmpnode = *it;
-			// TODO: add some checks here. Do I really need to access the XML reader's interface?
-			// generate typed component
-			auto it_cmpindex = ECS().ComponentTypeNamesToIds().find(cmpnode.attribute("value").as_string());
+			// get component type name
+			std::string cmpname; 
+			SerializeIn(cmpnode, cmpname);
+			// get component type index
+			auto it_cmpindex = ECS().ComponentTypeNamesToIds().find(cmpname);
+			// sanity check
+			if (it_cmpindex == ECS().ComponentTypeNamesToIds().end()) return false;
+			// create typed component pointer
 			auto cmp_ptr = ECS().ComponentCreators().at(it_cmpindex->second)();
 			// Serialize in the component data
-			SerializeIn(cmpnode, *cmp_ptr); // TODO: this is dodgy. I expect it to call .SerializeIn() from it's derived function: cComponent<T>. 
+			SerializeIn(cmpnode, *cmp_ptr); 
 			// Add it to the list!
 			value.AddComponent(cmp_ptr);
 		}

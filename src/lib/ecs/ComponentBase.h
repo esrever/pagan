@@ -18,6 +18,7 @@ namespace pgn
 		cComponentBase(){}
 	};
 
-	DECL_PTRTYPE(cComponentBase)
+	DECL_PTRTYPE(cComponentBase);
+	DECL_SERIALIZE_INTERFACE(cComponentBase);
 
 }

@@ -27,4 +27,6 @@ typedef std::unique_ptr< T > T##_uptr;
 	protected:\
 	virtual void SerializeOut(node_type& writer, const std::string& key) const { pgn::SerializeOut( writer, key, *this); }\
 	virtual bool SerializeIn(const node_type& reader)  { return pgn::SerializeIn( reader, *this); };\
+	friend void SerializeOut(node_type& writer, const std::string& key, const T & value);\
+	friend bool SerializeIn(const node_type& reader, T & value);\
 	private:

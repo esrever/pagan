@@ -2,6 +2,7 @@ set (APP_LIBS
      pagan_core
      pagan_io
      pagan_rlut
+     pagan_ecs
      ${Boost_LIBRARIES}
      ${SDL_LIBRARY}
      ${SDL_image_LIBRARY}
@@ -36,3 +37,4 @@ add_subdirectory(io-tests)
 add_subdirectory(dungen-tests)
 add_subdirectory(sdl-tests)
 add_subdirectory(serialize-test)
+add_subdirectory(ecs-test)
