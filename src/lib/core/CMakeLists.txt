@@ -8,7 +8,10 @@ set(SOURCE_FILES
     util/image.cpp
     sdl/font.cpp
     sdl/pointers.cpp
-    img/imglib.cpp
+    texture/texturelib.cpp
+    texture/texture.cpp
+    texture/sprite.cpp
+    texture/textureatlas.cpp
     serialize/serialize.cpp
 #    util/cfgtree.cpp
 #    util/cfgdata.cpp
@@ -41,7 +44,10 @@ set(HEADER_FILES
     util/idgen.h
     util/glm_utils.h
     math/norm.h
-    img/imglib.h
+    texture/texturelib.h
+    texture/texture.h
+    texture/sprite.h
+    texture/textureatlas.h
     serialize/serialize.h
     serialize/serialize_glm.hpp
     serialize/serialize_std.hpp

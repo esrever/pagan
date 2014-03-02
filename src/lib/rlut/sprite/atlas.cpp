@@ -5,13 +5,13 @@
 
 #include <SDL_image.h>
 
-#include <core/img/imglib.h>
+#include <core/texture/texturelib.h>
 
 namespace pgn
 {
 	namespace rlut
 	{
-		void cSpriteAtlas::Init(cImgLib * lib, const std::string& zDescName)
+		void cSpriteAtlas::Init(cTextureLib * lib, const std::string& zDescName)
 		{
 			//mTileRes.loadXML(zResName);
 			//auto tilemap = mTileRes.getResAnim("tilemap");

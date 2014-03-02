@@ -16,6 +16,8 @@ namespace pgn
 		public:
 			typedef std::map<std::string, glm::ivec2> SpritePosMap;
 
+			cSpriteAtlas(const std::string& atlasName = "") :mName(atlasName){}
+
 			// Load xml file with all tiles and descriptors
 			void Init(cImgLib * lib, const std::string& zDescName);
 
@@ -24,7 +26,7 @@ namespace pgn
 			cSprite GetSprite( size_t x, size_t y);
 			const glm::uvec2& Dims() const { return mDims; }
 		private:
-			
+			std::string mName;
 			SDL_Texture * mTexture;
 			SpritePosMap mSpritePositions;
 			size_t mTileSize;
