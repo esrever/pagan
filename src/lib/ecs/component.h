@@ -39,7 +39,10 @@ namespace pgn
 	template<class T>
 	void cComponent<T>::SerializeOut(node_type& writer, const std::string& key) const
 	{
-		mData.SerializeOut(writer, key);
+		auto& ecs = ECS();
+		const std::string& tname = ecs.ComponentTypeNames().at(TypeIndex());
+		auto& child = writer.append_child(key.c_str());
+		mData.SerializeOut(child, tname);
 	}
 
 	//------------------------------------------------------------------------

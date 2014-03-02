@@ -2,11 +2,20 @@ set(SOURCE_FILES
     src/main.cpp
     src/cmptest.cpp
     src/RegisterComponents.cpp
+    src/DoorState.cpp
+    src/MoveCost.cpp
+    src/TextureSet.cpp
+    src/Stats.cpp
 )
 
 set(HEADER_FILES
     src/cmptest.h
     src/RegisterComponents.h
+    src/components.h
+    src/DoorState.h
+    src/MoveCost.h
+    src/TextureSet.h
+    src/Stats.h
 )
 
 add_definitions(

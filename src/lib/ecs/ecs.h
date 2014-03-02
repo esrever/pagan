@@ -34,6 +34,7 @@ namespace pgn
 		DECL_MAP_MEMBER_R(std::string, cQueryFunc, Queries);
 		DECL_MAP_MEMBER_R(std::string, size_t, ComponentTypeNamesToIds);
 		DECL_MEMBER_R(std::vector<ComponentCreatorFunction>, ComponentCreators);
+		DECL_MEMBER_R(std::vector<std::string>, ComponentTypeNames);
 
 		SUPPORT_DERIVED(cECS);
 
@@ -71,7 +72,8 @@ namespace pgn
 	{
 		// set index and store creator function
 		const auto& ti = typeid(T);
-		cComponent<typename T>::msTypeIndex = AddComponentType(ti);
+		auto idx = AddComponentType(ti);
+		cComponent<typename T>::msTypeIndex = idx;
 		mComponentCreators[cComponent<typename T>::msTypeIndex] = &cComponent<typename T>::Create;
 	}
 }

@@ -117,7 +117,7 @@ namespace pgn
 		if (val)
 			SerializeOut(writer, key, *val);
 		else
-			SerializeOut(writer, key, "null");
+			SerializeOut(writer, key, std::string("null"));
 	}
 
 	template<class T> inline bool SerializeIn(const pugi::xml_node& reader, std::shared_ptr < T > & pval)

@@ -32,7 +32,9 @@ namespace pgn
 		std::string tmp = result.back();
 		pystring::rsplit(tmp, result, "::c",1);
 		tmp = pystring::strip(result.back(), ">");
-		mComponentTypeNamesToIds[tmp] = mComponentTypeIds.size() - 1;
+		auto idx = mComponentTypeIds.size() - 1;
+		mComponentTypeNamesToIds[tmp] = idx;
+		mComponentTypeNames.push_back(tmp);
 		return mComponentTypeIds.size() - 1;
 	}
 

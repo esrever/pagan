@@ -47,6 +47,7 @@ source_group("Headers" FILES ${HEADER_FILES})
 include_directories(
     ${PROJECT_SOURCE_DIR}/lib
     ${PYSTRING_INCLUDE_DIR}
+    ${pugixml_INCLUDE_DIR}
     ${Boost_INCLUDE_DIRS}
     ${glm_INCLUDE_DIR}
     ${SDL_INCLUDE_DIR}

@@ -1,9 +1,19 @@
 <?xml version="1.0"?>
 <Entities>
     <Entity archetype = "true">
-        <Name value = "Arch0"/>
+        <Name value = "Door_archetype"/>
         <Components>
-            <array_elem value="CmpTest"/>
+            <array_elem value = "TextureSet">
+                <Sprites>
+                    <array_elem value="::door_open"/>
+                    <array_elem value="::door_closed"/>
+                    <array_elem value="::door_locked"/>
+                </Sprites>
+            </array_elem>
+            <array_elem value = "DoorState">
+                <State value = "1" />
+            </array_elem>
+            
         </Components>
         <Tags>
             <array_elem value="tag0"/>
@@ -12,10 +22,12 @@
         </Tags>
     </Entity>
     <Entity archetype = "false">
-        <Name value = "TestName"/>
-        <Archetype value = "Arch0"/>
+        <Name value = "OpenDoor"/>
+        <Archetype value = "Door_archetype"/>
         <Components>
-            <array_elem value="CmpTest"/>
+            <array_elem value = "DoorState">
+                <State value = "0" />
+            </array_elem>
         </Components>
         <Tags>
             <array_elem value="tag3"/>

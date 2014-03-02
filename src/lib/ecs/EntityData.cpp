@@ -23,6 +23,7 @@ namespace pgn
 		// set the archetype
 		mArchetype = &arch;
 		// archetype's support is the instance's shared
+		mSupportMask |= arch.mSharedMask;
 		mSharedMask = arch.mSupportMask;
 	
 		// allocate enough components to accomodate archetype's components
@@ -40,6 +41,9 @@ namespace pgn
 			else
 				mSharedMask.at(i) = 0;
 		}
+
+		// add tags
+		mTags.insert(arch.mTags.begin(), arch.mTags.end());
 	}
 
 	//---------------------------------------------------------------------------------------------------
@@ -47,28 +51,23 @@ namespace pgn
 	{
 		auto& child = writer.append_child(key.c_str());
 		SerializeOut(child, "Name", value.mName);
-		SerializeOut(child, "Components", value.mComponents);
+		auto& cchild = child.append_child("Components");
+		for (const auto& c : value.mComponents)
+		{
+			if (c)
+			{
+				SerializeOut(cchild, "array_elem", c);
+			}
+		}
 		SerializeOut(child, "SupportMask", value.mSupportMask);
 		SerializeOut(child, "SharedMask", value.mSharedMask);
-		SerializeOut(child, "Archetype", value.mArchetype);
+		SerializeOut(child, "Archetype", value.mArchetype ? value.mArchetype->mName : "none");
 		SerializeOut(child, "Tags", value.mTags);
 	}
 
 	//---------------------------------------------------------------------------------------------------
 	bool SerializeIn(const node_type& reader, cEntityData & value)
 	{
-		/*
-			SerializeIn uses a particular format:
-				Name : string
-				Archetype : string
-				Define: vector<object> : 
-					<elem value="component_type">
-						<param0/>
-						<param1/>
-						...
-				Tags: vector<string>
-		*/
-
 		// Read name
 		if( !SerializeIn(reader, "Name", value.mName)) return false;
 

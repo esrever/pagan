@@ -1,7 +1,11 @@
-#pragma once
+
+    #pragma once
 
 namespace pgn
 {
-	class cECS;
-	void RegisterComponents(cECS&);
+    class cECS;
+    namespace rl
+    {    
+        void RegisterComponents(cECS&);
+    }
 }
