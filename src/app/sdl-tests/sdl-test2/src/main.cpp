@@ -46,7 +46,7 @@ struct cTestApp : public pgn::cSDLApp
 		mLogStart = glm::uvec2(5, mTileDim*mGridDims.y + msTextHeight / 4);
 		mStatusStart = glm::uvec2(5+mTileDim*mGridDims.x, 0);
 
-		MainWindow()->TextureLib()->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml");
+		MainWindow()->TextureLib()->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml","");
 
 		srand(0);
 		mDungeon.Init(mGridDims.x, mGridDims.y);
@@ -82,7 +82,7 @@ struct cTestApp : public pgn::cSDLApp
 	//------------------------------------------------
 	virtual void Render()
 	{
-		auto * atlas = MainWindow()->TextureLib()->Atlas();
+		auto atlas = MainWindow()->TextureLib()->Atlas();
 		for (size_t i = 0; i < mGridDims.y;++i)
 		for (size_t j = 0; j < mGridDims.x; ++j)
 		{
@@ -98,7 +98,7 @@ struct cTestApp : public pgn::cSDLApp
 			int v = ((!mDiFi.Data().InRange(pd)) || (mDiFi.Data()(pd)) == std::numeric_limits<float>::max()) 
 				? 140 
 				: std::max(140, 255 - int(10 * mDiFi.Data()(pd))); 
-			MainWindow()->RenderEx(sprite.first.Texture(), {v,v,v,255}, &sprite.second, &rect);
+			MainWindow()->RenderEx(sprite.first->Texture(), { v, v, v, 255 }, &sprite.second, &rect);
 		}
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), "c:\\Windows\\fonts\\DejaVuSerif.ttf", 32);

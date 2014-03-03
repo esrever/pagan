@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <ecs/ecs-config.h>
 #include <vector>
-#include <rlut/sprite/sprite.h>
+#include <core/texture/texture.h>
 
 namespace pgn{
     namespace rl{
@@ -10,14 +10,14 @@ namespace pgn{
             
             struct cTextureSet
             {
-                cTextureSet(const std::vector< rlut::cSprite >& arg0 = std::vector< rlut::cSprite >()):
+                cTextureSet(const std::vector< cSubTexture >& arg0 = std::vector< cSubTexture >()):
                         mSprites(arg0){}
                 
                 bool SerializeIn(const node_type&);
                 void SerializeOut(node_type&, const std::string&) const;
                 
                 //!Textures of a component
-                std::vector< rlut::cSprite > mSprites;
+                std::vector< cSubTexture > mSprites;
                 
             };
         

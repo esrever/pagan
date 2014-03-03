@@ -2,8 +2,15 @@
 
 namespace pgn
 {
-	cSubTexture cTexture::SubTexture(const SDL_Rect * rect) const 
+	cSubTexture cTexture::SubTexture(const SDL_Rect * rect) 
 	{ 
-		return cSubTexture(*this, rect ? *rect : SDL_Rect()); 
+		SDL_Rect rdef = { 0, 0, 0, 0 };
+		return cSubTexture(this, rect ? *rect : rdef);
+	}
+
+	void cTexture::Load(texture_loadfunc_type func, const std::string& fname, const char * desc)
+	{
+		mTexture = func(fname);
+		mName = desc ? desc : fname;
 	}
 }

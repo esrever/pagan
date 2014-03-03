@@ -7,18 +7,18 @@
 
 namespace pgn
 {
-	std::string cTextureAtlas::ParseDesc(const std::string& zDescName)
+	void cTextureAtlas::Load(texture_loadfunc_type func, const std::string& fname, const char * desc)
 	{
 		//mTileRes.loadXML(zResName);
 		//auto tilemap = mTileRes.getResAnim("tilemap");
 
 		std::string ret;
 		pugi::xml_document doc;
-		if (doc.load_file(zDescName.c_str(), pugi::parse_default | pugi::parse_comments))
+		if (doc.load_file(fname.c_str(), pugi::parse_default | pugi::parse_comments))
 		{
 			auto imgnode = doc.child("image");
-			auto fname = imgnode.attribute("file").as_string();
-			ret = fname;
+			auto texfname = imgnode.attribute("file").as_string();
+			cTexture::Load(func, texfname, desc);
 			mTileSize.x = imgnode.attribute("frame_width").as_uint();
 			mTileSize.y = imgnode.attribute("frame_height").as_uint();
 
@@ -36,18 +36,23 @@ namespace pgn
 			}
 			mDims = mDims + glm::uvec2(1, 1);
 		}
-		return ret;
 	}
 
-	cSubTexture cTextureAtlas::SubTexture(const std::string& name) const
+	cSubTexture cTextureAtlas::SubTexture(const std::string& name) 
 	{
-		//auto it = 
-		//return cSubTexture(Texture(), *SpritePosMap().find(name));
-		return cSubTexture();
+		auto it = SpritePosMap().find(name);
+		return SubTexture(it->second.x, it->second.y);
 	}
 
-	cSubTexture cTextureAtlas::SubTexture(size_t x, size_t y) const
+	cSubTexture cTextureAtlas::SubTexture(size_t x, size_t y) 
 	{
-		return cSubTexture();
+		assert(x < mDims.x);
+		assert(y < mDims.y);
+		SDL_Rect rect;
+		rect.x = x*mTileSize.x;
+		rect.y = y*mTileSize.y;
+		rect.w = mTileSize.x;
+		rect.h = mTileSize.y;
+		return cSubTexture(this, rect);
 	}
 }

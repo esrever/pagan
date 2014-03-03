@@ -13,23 +13,23 @@ namespace pgn
 	class cTextureLib
 	{
 		public:
-			typedef std::set<cTexture> texture_set_type;
+			typedef std::set<cTexture_sptr> texture_set_type;
 			cTextureLib(SDL_Renderer * renderer, const std::string& name = "") :mRenderer(renderer),mName(name){}
 			~cTextureLib();
-			void Store(const cTexture& tex);
-			cTexture Load(const char * fname, const char * desc = nullptr);
+			void Store(cTexture_sptr tex);
+			cTexture_sptr Load(const char * fname, const char * desc = nullptr);
 			void Unload(const std::string& name);
 
-			const cTextureAtlas * Atlas(const std::string& name="") const { auto it = mTextureAtlas.find(name);  return it == mTextureAtlas.end() ? &it->second : nullptr; }
+			const cTextureAtlas_sptr Atlas(const std::string& name = "") const;
 			const texture_set_type Textures() const { return mTextures; }
-			texture_set_type::iterator FindByName(const std::string& s);
-			texture_set_type::iterator FindByTexture(SDL_Texture * tex);
+			
+			cTexture_sptr FindByName(const std::string& s) const;
+			cTexture_sptr FindByTexture(SDL_Texture * tex) const;
 
 			const std::string& Name() const { return mName; }
 		private:
 			std::string mName;
-			std::set<cTexture> mTextures;
-			std::map<std::string, cTextureAtlas> mTextureAtlas;
+			texture_set_type mTextures;
 			SDL_Renderer * mRenderer;
 	};
 }

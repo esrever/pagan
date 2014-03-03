@@ -9,7 +9,15 @@ namespace pgn
 	, mWindow(SDLWindow_uptr())
 	{
 		mRect = rect;
-		mWindow = SDLWindow_uptr(SDL_CreateWindow(caption.c_str(), rect.x, rect.y, rect.w, rect.h, flags));
+		if ((mRect.w == 0) || (mRect.h == 0))
+		{
+			SDL_DisplayMode dmode;
+			SDL_GetCurrentDisplayMode(0, &dmode);
+			mRect.w = dmode.w;
+			mRect.h = dmode.h;
+			mRect.x = mRect.y = 0;
+		}
+		mWindow = SDLWindow_uptr(SDL_CreateWindow(caption.c_str(), mRect.x, mRect.y, mRect.w, mRect.h, flags));
 		if (mWindow == nullptr)
 			throw std::runtime_error("Failed to create window");
 
@@ -24,7 +32,7 @@ namespace pgn
 		SDL_Color pixel = { 255, 255, 255, 255 };
 		SDL_Surface * surf = SDL_CreateRGBSurfaceFrom(&pixel, 1, 1, 32, 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 		mDefaultTexture = SDL_CreateTextureFromSurface(mRenderer.get(), surf);
-		mTextureLib->Store( cTexture(mDefaultTexture, "default"));
+		mTextureLib->Store( std::make_shared<cTexture>(cTexture(mDefaultTexture, "default")));
 		SDL_FreeSurface(surf);
 	}
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <map>
 
 #include <glm/glm.hpp>
@@ -15,10 +16,10 @@ namespace pgn
 		typedef std::map<std::string, glm::ivec2> SpritePosMap;
 
 		// Parse the desc file for the actual texture filename
-		std::string ParseDesc(const std::string& zDescName);
+		virtual void Load(texture_loadfunc_type func, const std::string& fname, const char * desc = nullptr);
 
-		cSubTexture SubTexture(const std::string& name) const;
-		cSubTexture SubTexture(size_t x, size_t y) const;
+		cSubTexture SubTexture(const std::string& name);
+		cSubTexture SubTexture(size_t x, size_t y);
 
 		const SpritePosMap& SpritePositions() const	{ return mSpritePositions; }
 		const glm::uvec2& Dims() const				{ return mDims; }
@@ -30,4 +31,6 @@ namespace pgn
 		glm::uvec2 mDims;
 
 	};
+
+	typedef std::shared_ptr<cTextureAtlas> cTextureAtlas_sptr;
 }

@@ -46,7 +46,7 @@ namespace pgn
 
 		void cRlApp::Render()
 		{
-			auto * atlas = MainWindow()->TextureLib()->Atlas();
+			auto atlas = MainWindow()->TextureLib()->Atlas();
 			for (size_t i = 0; i < mGridDims.y; ++i)
 			for (size_t j = 0; j < mGridDims.x; ++j)
 			{
@@ -57,7 +57,7 @@ namespace pgn
 				auto sprite = atlas->SubTexture(tgtx, tgty);
 				SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
 
-				MainWindow()->RenderEx(sprite.first.Texture(), { 255, 255, 255, 255 }, &sprite.second, &rect);
+				MainWindow()->RenderEx(sprite.first->Texture(), { 255, 255, 255, 255 }, &sprite.second, &rect);
 			}
 
 			pgn::cSDLFont font(MainWindow()->Renderer(), "c:\\Windows\\fonts\\DejaVuSerif.ttf", 32);

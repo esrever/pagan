@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<image file="C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tilemap.png" frame_size ="32" />
+<image file="C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tilemap.png" frame_width ="32" frame_height="32"/>
 <desc>
     <entry name="dungeon:altars:dngn_altar" row="0" col="0"/>
     <entry name="dungeon:altars:dngn_altar_beogh" row="0" col="1"/>

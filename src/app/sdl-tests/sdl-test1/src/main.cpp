@@ -23,7 +23,7 @@ struct cTestApp : public pgn::cSDLApp
 	//------------------------------------------------
 	virtual void Init()
 	{
-		static const glm::uvec2 gridDims(40,20);
+		static const glm::uvec2 gridDims(80,40);
 		static const size_t  numLines = 4;
 
 		mGridDims = gridDims;
@@ -39,13 +39,13 @@ struct cTestApp : public pgn::cSDLApp
 		mLogStart = glm::uvec2(5, mTileDim*mGridDims.y + msTextHeight / 4);
 		mStatusStart = glm::uvec2(5+mTileDim*mGridDims.x, 0);
 
-		MainWindow()->TextureLib()->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml");
+		MainWindow()->TextureLib()->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml","");
 	}
 
 	//------------------------------------------------
 	virtual void Render()
 	{
-		auto * atlas = MainWindow()->TextureLib()->Atlas();
+		auto atlas = MainWindow()->TextureLib()->Atlas();
 		for (size_t i = 0; i < mGridDims.y;++i)
 		for (size_t j = 0; j < mGridDims.x; ++j)
 		{
@@ -60,7 +60,7 @@ struct cTestApp : public pgn::cSDLApp
 			size_t tgty = (o / atlas->Dims().x) % atlas->Dims().y;
 			auto sprite = atlas->SubTexture(tgtx, tgty);
 			SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
-			MainWindow()->RenderEx(sprite.first.Texture(), {255,255,255,255}, &sprite.second, &rect);
+			MainWindow()->RenderEx(sprite.first->Texture(), {255,255,255,255}, &sprite.second, &rect);
 		}
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), "c:\\Windows\\fonts\\DejaVuSerif.ttf", 32);

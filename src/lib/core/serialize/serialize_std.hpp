@@ -90,7 +90,8 @@ namespace pgn
 	template<class T, class U> inline bool SerializeIn(const pugi::xml_node& reader, std::map < T, U > & mval)
 	{
 		size_t i = 0;
-		T key, U val;
+		T key;
+		U val;
 		for (auto it = reader.begin(); it != reader.end(); ++it)
 		{
 			bool ok = true;
@@ -104,6 +105,37 @@ namespace pgn
 				ok = SerializeIn(reader, key);
 			if (!ok)
 				return false;
+			++i;
+
+		}
+		return true;
+	}
+
+	// pair
+	template<class T, class U> inline void SerializeOut(pugi::xml_node& writer, const std::string& key, const std::pair< T, U > & val)
+	{
+		auto& child = writer.append_child(key.c_str());
+		//SerializeOut(child, std::to_string(v.first), v.second);
+		SerializeOut(child, "first", val .first);
+		SerializeOut(child, "second", val.second);
+	}
+
+	template<class T, class U> inline bool SerializeIn(const pugi::xml_node& reader, std::pair < T, U > & mval)
+	{
+		size_t i = 0;
+		
+		
+		for (auto it = reader.begin(); it != reader.end(); ++it)
+		{
+			bool ok = true;
+			if (i & 1)
+			{
+				ok = SerializeIn(reader, mval.second);
+			}
+			else
+			{
+				ok = SerializeIn(reader, mval.first);
+			}
 			++i;
 
 		}

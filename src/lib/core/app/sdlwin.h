@@ -12,7 +12,7 @@ namespace pgn
 	class cSDLWindow
 	{
 	public:
-		cSDLWindow(const SDL_Rect& rect = { 0, 0, 1366, 728 }, const std::string& caption = "Default", Uint32 flags = SDL_WINDOW_BORDERLESS);
+		cSDLWindow(const SDL_Rect& rect = { 0, 0, 0/*1366*/, 0/*728*/ }, const std::string& caption = "Default", Uint32 flags = SDL_WINDOW_BORDERLESS);
 		virtual ~cSDLWindow();
 
 		SDL_Renderer * Renderer() { return mRenderer.get(); }
