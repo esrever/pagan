@@ -7,17 +7,18 @@
 
 namespace pgn
 {
-	void cTextureAtlas::Init(const std::string& zDescName)
+	std::string cTextureAtlas::ParseDesc(const std::string& zDescName)
 	{
 		//mTileRes.loadXML(zResName);
 		//auto tilemap = mTileRes.getResAnim("tilemap");
 
+		std::string ret;
 		pugi::xml_document doc;
 		if (doc.load_file(zDescName.c_str(), pugi::parse_default | pugi::parse_comments))
 		{
 			auto imgnode = doc.child("image");
 			auto fname = imgnode.attribute("file").as_string();
-			mTexture = mTextureLib->Load(fname);
+			ret = fname;
 			mTileSize.x = imgnode.attribute("frame_width").as_uint();
 			mTileSize.y = imgnode.attribute("frame_height").as_uint();
 
@@ -35,5 +36,18 @@ namespace pgn
 			}
 			mDims = mDims + glm::uvec2(1, 1);
 		}
+		return ret;
+	}
+
+	cSubTexture cTextureAtlas::SubTexture(const std::string& name) const
+	{
+		//auto it = 
+		//return cSubTexture(Texture(), *SpritePosMap().find(name));
+		return cSubTexture();
+	}
+
+	cSubTexture cTextureAtlas::SubTexture(size_t x, size_t y) const
+	{
+		return cSubTexture();
 	}
 }

@@ -33,7 +33,6 @@ namespace pgn
 			//------------------------------------------------
 			glm::uvec2 mGridDims;
 			size_t	   mNumLines;
-			pgn::rlut::cSpriteAtlas mSpriteAtlas;
 
 			pgn::rlut::cWorkspace mDungeon;
 

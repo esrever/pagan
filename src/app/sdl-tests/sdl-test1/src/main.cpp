@@ -9,10 +9,9 @@
 #include <core/app/sdlapp.h>
 #include <core/app/sdlwin.h>
 #include <core/sdl/font.h>
+#include <core/texture/texturelib.h>
 
 #include <glm/glm.hpp>
-
-#include <rlut/sprite/atlas.h>
 
 struct cTestApp : public pgn::cSDLApp
 {
@@ -40,13 +39,13 @@ struct cTestApp : public pgn::cSDLApp
 		mLogStart = glm::uvec2(5, mTileDim*mGridDims.y + msTextHeight / 4);
 		mStatusStart = glm::uvec2(5+mTileDim*mGridDims.x, 0);
 
-
-		mSpriteAtlas.Init(MainWindow()->ImgLib(), "C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml");
+		MainWindow()->TextureLib()->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml");
 	}
 
 	//------------------------------------------------
 	virtual void Render()
 	{
+		auto * atlas = MainWindow()->TextureLib()->Atlas();
 		for (size_t i = 0; i < mGridDims.y;++i)
 		for (size_t j = 0; j < mGridDims.x; ++j)
 		{
@@ -57,11 +56,11 @@ struct cTestApp : public pgn::cSDLApp
 			MainWindow()->Render(c,&rect);
 			*/
 			size_t o = i*mGridDims.x + j;
-			size_t tgtx = o % mSpriteAtlas.Dims().x;
-			size_t tgty = (o / mSpriteAtlas.Dims().x) % mSpriteAtlas.Dims().y;
-			auto sprite = mSpriteAtlas.GetSprite(tgtx, tgty);
+			size_t tgtx = o % atlas->Dims().x;
+			size_t tgty = (o / atlas->Dims().x) % atlas->Dims().y;
+			auto sprite = atlas->SubTexture(tgtx, tgty);
 			SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
-			MainWindow()->RenderEx(sprite.first, {255,255,255,255}, &sprite.second, &rect);
+			MainWindow()->RenderEx(sprite.first.Texture(), {255,255,255,255}, &sprite.second, &rect);
 		}
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), "c:\\Windows\\fonts\\DejaVuSerif.ttf", 32);
@@ -90,7 +89,6 @@ struct cTestApp : public pgn::cSDLApp
 	//------------------------------------------------
 	glm::uvec2 mGridDims;
 	size_t	   mNumLines;
-	pgn::rlut::cSpriteAtlas mSpriteAtlas;
 
 	size_t	   mTileDim;
 	glm::uvec2 mGridStart;

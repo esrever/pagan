@@ -9,25 +9,21 @@
 namespace pgn
 {
 	class cTextureLib;
-	class cTextureAtlas
+	class cTextureAtlas : public cTexture
 	{
 	public:
 		typedef std::map<std::string, glm::ivec2> SpritePosMap;
 
-		cTextureAtlas(cTextureLib * lib) :mTextureLib(lib) {}
+		// Parse the desc file for the actual texture filename
+		std::string ParseDesc(const std::string& zDescName);
 
-		// Load xml file with all tiles and descriptors
-		void Init(const std::string& zDescName);
-
-		cSprite GetSprite(const std::string& name);
-		cSprite GetSprite(size_t x, size_t y);
+		cSubTexture SubTexture(const std::string& name) const;
+		cSubTexture SubTexture(size_t x, size_t y) const;
 
 		const SpritePosMap& SpritePositions() const	{ return mSpritePositions; }
 		const glm::uvec2& Dims() const				{ return mDims; }
 		const glm::uvec2& TileSize() const			{ return mTileSize; }
 	private:
-		cTextureLib * mTextureLib;
-		cTexture mTexture;
 
 		SpritePosMap mSpritePositions;
 		glm::uvec2 mTileSize;

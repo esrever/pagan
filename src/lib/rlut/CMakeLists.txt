@@ -12,9 +12,6 @@ set(SOURCE_FILES
     dungen/dungen.cpp
     dungen/constraints.cpp
     dungen/util.cpp
-    
-    sprite/atlas.cpp
-    sprite/sprite.cpp
 )
 
 set(HEADER_FILES
@@ -32,9 +29,6 @@ set(HEADER_FILES
     dungen/dungen.h
     dungen/constraints.h
     dungen/util.h
-    
-    sprite/atlas.h
-    sprite/sprite.h
 )
 
 add_definitions(

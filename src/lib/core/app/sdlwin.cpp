@@ -24,7 +24,7 @@ namespace pgn
 		SDL_Color pixel = { 255, 255, 255, 255 };
 		SDL_Surface * surf = SDL_CreateRGBSurfaceFrom(&pixel, 1, 1, 32, 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 		mDefaultTexture = SDL_CreateTextureFromSurface(mRenderer.get(), surf);
-		mTextureLib->Store( std::make_pair(mDefaultTexture, "default"));
+		mTextureLib->Store( cTexture(mDefaultTexture, "default"));
 		SDL_FreeSurface(surf);
 	}
 
