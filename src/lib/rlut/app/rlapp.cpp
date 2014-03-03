@@ -27,7 +27,8 @@ namespace pgn
 			mStatusStart = glm::uvec2(5 + mTileDim*mGridDims.x, 0);
 
 
-			mSpriteAtlas.Init(MainWindow()->ImgLib(), "C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml");
+			MainWindow()->TextureLib()->
+			mSpriteAtlas.Init(TextureLib(), "C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml");
 
 			srand(0);
 			mDungeon.Init(mGridDims.x, mGridDims.y);

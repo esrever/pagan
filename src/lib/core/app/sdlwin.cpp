@@ -1,6 +1,6 @@
 #include "sdlwin.h"
 
-#include <core/img/imglib.h>
+#include <core/texture/texturelib.h>
 
 namespace pgn
 {
@@ -18,13 +18,13 @@ namespace pgn
 		if (mRenderer == nullptr)
 			throw std::runtime_error("Failed to create renderer");
 		
-		mImgLib = new cImgLib(mRenderer.get());
+		mTextureLib = new cTextureLib(mRenderer.get());
 
 		// Create the default texture
 		SDL_Color pixel = { 255, 255, 255, 255 };
 		SDL_Surface * surf = SDL_CreateRGBSurfaceFrom(&pixel, 1, 1, 32, 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 		mDefaultTexture = SDL_CreateTextureFromSurface(mRenderer.get(), surf);
-		mImgLib->Store(mDefaultTexture, "default");
+		mTextureLib->Store( std::make_pair(mDefaultTexture, "default"));
 		SDL_FreeSurface(surf);
 	}
 

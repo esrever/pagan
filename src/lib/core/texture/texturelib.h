@@ -26,6 +26,7 @@ namespace pgn
 		private:
 			std::string mName;
 			std::set<cTexture> mTextures;
+			std::map<std::string, cTextureAtlas> mTextureAtlas;
 			SDL_Renderer * mRenderer;
 	};
 }

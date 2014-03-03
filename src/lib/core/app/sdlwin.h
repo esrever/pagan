@@ -7,7 +7,7 @@
 
 namespace pgn
 {
-	class cImgLib;
+	class cTextureLib;
 
 	class cSDLWindow
 	{
@@ -22,12 +22,12 @@ namespace pgn
 		void RenderEx(SDL_Texture * tex, const SDL_Color& col, const SDL_Rect * srcrect, const SDL_Rect * dstrect);
 
 		const SDL_Rect& Rect() const { return mRect; }
-		cImgLib * ImgLib() { return mImgLib; }
+		cTextureLib * TextureLib() { return mTextureLib; }
 	private:
 		SDL_Rect mRect;
 		cSDLWindow_uptr mWindow;
 		cSDLRenderer_sptr mRenderer;
 		SDL_Texture * mDefaultTexture;
-		cImgLib * mImgLib;
+		cTextureLib * mTextureLib;
 	};
 }
