@@ -17,14 +17,14 @@ namespace pgn
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	template<> void SerializeOut<cTexture>(node_type& writer, const std::string& key, const cTexture& value)
+	template<> void SerializeOut<cTexture_ptr>(node_type& writer, const std::string& key, const cTexture_ptr& value)
 	{
 		// export a dump of the object
-		SerializeOut(writer, key.c_str(), value.Name());
+		SerializeOut(writer, key.c_str(), value? value->Name() : "nullptr");
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	template<> bool SerializeIn<cTexture>(const node_type& reader, cTexture& value)
+	template<> bool SerializeIn<cTexture_ptr>(const node_type& reader, cTexture_ptr& value)
 	{
 		// TODO: read string, get app and fetch the appropriate texture
 		assert(false);

@@ -1,6 +1,8 @@
 #include <iostream>
 #include <core/serialize/serialize.h>
 
+#include <core/texture/texture.h>
+
 int main(int argc, char ** argv)
 {
 	pugi::xml_document doc_out;
@@ -20,6 +22,13 @@ int main(int argc, char ** argv)
 	pgn::SerializeOut(doc_out, "fvec", fvec);
 	pgn::SerializeOut(doc_out, "vmap", vmap);
 	pgn::SerializeOut(doc_out, "wmap", weirdmap);
+
+	SDL_Rect rect;
+	rect.w = 1;
+	rect.h = 2;
+	rect.x = 5;
+	rect.y = -3;
+	pgn::SerializeOut(doc_out, "rect", rect);
 
 	std::list<std::string> slist = { "John", "Kelly", "Amanda", "Kim" };
 	pgn::SerializeOut(doc_out, "list", slist);

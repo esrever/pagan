@@ -8,16 +8,16 @@
 				<array_elem value="TextureSet">
 					<Sprites>
 						<array_elem>
-							<first value="unserializable: class pgn::cTexture *" />
-							<second value="unserializable: struct SDL_Rect" />
+							<first value="nullptr" />
+							<second x="0" y="0" w="0" h="0" />
 						</array_elem>
 						<array_elem>
-							<first value="unserializable: class pgn::cTexture *" />
-							<second value="unserializable: struct SDL_Rect" />
+							<first value="nullptr" />
+							<second x="0" y="0" w="0" h="0" />
 						</array_elem>
 						<array_elem>
-							<first value="unserializable: class pgn::cTexture *" />
-							<second value="unserializable: struct SDL_Rect" />
+							<first value="nullptr" />
+							<second x="0" y="0" w="0" h="0" />
 						</array_elem>
 					</Sprites>
 				</array_elem>
@@ -44,16 +44,16 @@
 				<array_elem value="TextureSet">
 					<Sprites>
 						<array_elem>
-							<first value="unserializable: class pgn::cTexture *" />
-							<second value="unserializable: struct SDL_Rect" />
+							<first value="nullptr" />
+							<second x="0" y="0" w="0" h="0" />
 						</array_elem>
 						<array_elem>
-							<first value="unserializable: class pgn::cTexture *" />
-							<second value="unserializable: struct SDL_Rect" />
+							<first value="nullptr" />
+							<second x="0" y="0" w="0" h="0" />
 						</array_elem>
 						<array_elem>
-							<first value="unserializable: class pgn::cTexture *" />
-							<second value="unserializable: struct SDL_Rect" />
+							<first value="nullptr" />
+							<second x="0" y="0" w="0" h="0" />
 						</array_elem>
 					</Sprites>
 				</array_elem>

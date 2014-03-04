@@ -6,6 +6,7 @@
 #include <string>
 
 #include <SDL.h>
+#undef main
 
 #include <core/serialize/serialize.h>
 
@@ -13,6 +14,7 @@ namespace pgn
 {
 	class cTexture;
 	typedef std::shared_ptr<cTexture> cTexture_sptr;
+	typedef cTexture* cTexture_ptr;
 	typedef std::pair<cTexture*, const SDL_Rect> cSubTexture;
 	typedef std::function<SDL_Texture *(const std::string&)> texture_loadfunc_type;
 
@@ -38,6 +40,6 @@ namespace pgn
 	};
 
 	DECL_SERIALIZE_INTERFACE(SDL_Rect);
-	DECL_SERIALIZE_INTERFACE(cTexture);
+	DECL_SERIALIZE_INTERFACE(cTexture_ptr);
 
 }

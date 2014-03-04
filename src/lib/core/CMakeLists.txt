@@ -10,7 +10,6 @@ set(SOURCE_FILES
     sdl/pointers.cpp
     texture/texturelib.cpp
     texture/texture.cpp
-    texture/sprite.cpp
     texture/textureatlas.cpp
     serialize/serialize.cpp
 #    util/cfgtree.cpp
@@ -32,21 +31,15 @@ set(HEADER_FILES
     container/dict.h
     sdl/font.h
     sdl/pointers.h
-#    util/cmdopt.h
     util/logstream.h
     util/color.h
     util/image.h
     util/rand.h
-#    util/cfgtree.h
-#    util/conversions.h
-#    util/json_conversions.h
-#    util/xml_conversions.h
     util/idgen.h
     util/glm_utils.h
     math/norm.h
     texture/texturelib.h
     texture/texture.h
-    texture/sprite.h
     texture/textureatlas.h
     serialize/serialize.h
     serialize/serialize_glm.hpp
