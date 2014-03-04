@@ -2,8 +2,6 @@
 #include <algorithm>
 
 #include <pystring.h>
-#include <SDL.h>
-#undef main
 #include <SDL_image.h>
 
 #include <core/app/sdlapp.h>
@@ -82,7 +80,8 @@ struct cTestApp : public pgn::cSDLApp
 	//------------------------------------------------
 	virtual void Render()
 	{
-		auto atlas = MainWindow()->TextureLib()->Atlas();
+		//auto atlas = MainWindow()->TextureLib()->Atlas();
+		auto atlas = pgn::mainapp()->Resources<pgn::cTextureLib>()->Atlas();
 		for (size_t i = 0; i < mGridDims.y;++i)
 		for (size_t j = 0; j < mGridDims.x; ++j)
 		{
@@ -147,6 +146,9 @@ int main(int argc, char ** argv)
 	pystring::rsplit(exepath, chunks, "\\", 1);
 	exepath = chunks[0] + "\\";
 
-	cTestApp app(argc, argv);
-	app.Run();
+
+	pgn::cSDLApp*& app = pgn::mainapp();
+	app = new cTestApp(argc, argv);
+	app->Run();
+	delete app;
 }

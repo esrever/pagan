@@ -9,6 +9,7 @@ set(SOURCE_FILES
     sdl/font.cpp
     sdl/pointers.cpp
     texture/texturelib.cpp
+    texture/subtexturelib.cpp
     texture/texture.cpp
     texture/textureatlas.cpp
     serialize/serialize.cpp
@@ -38,6 +39,7 @@ set(HEADER_FILES
     util/idgen.h
     util/glm_utils.h
     math/norm.h
+    texture/subtexturelib.h
     texture/texturelib.h
     texture/texture.h
     texture/textureatlas.h

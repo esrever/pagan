@@ -1,7 +1,23 @@
 #include "texture.h"
 
+#include <pystring.h>
+
+#include <core/app/sdlapp.h>
+#include <core/texture/texturelib.h>
+
 namespace pgn
 {
+	//---------------------------------------------------------------------------------------------------
+	void cTexture::SplitName(const std::string& name, std::string& lib, std::string& tex, std::string& subtex)
+	{
+		std::vector<std::string> chunks;
+		pystring::split(name, chunks,":", 3);
+
+		lib = (chunks.size() > 0) ? chunks[0] : "";
+		tex = (chunks.size() > 1) ? chunks[1] : "";
+		subtex = (chunks.size() > 2) ? chunks[2] : "";
+	}
+
 	//---------------------------------------------------------------------------------------------------
 	cSubTexture cTexture::SubTexture(const SDL_Rect * rect) 
 	{ 
@@ -26,8 +42,11 @@ namespace pgn
 	//---------------------------------------------------------------------------------------------------
 	template<> bool SerializeIn<cTexture_ptr>(const node_type& reader, cTexture_ptr& value)
 	{
-		// TODO: read string, get app and fetch the appropriate texture
-		assert(false);
+		std::string name;
+		SerializeIn(reader, name);
+		std::string lib, tex, subtex;
+		cTexture::SplitName(name, lib, tex, subtex);
+		//value = mainapp()->Resources<cTextureLib>(lib)->FindByName(tex)->SubTexture(subtex);
 		return false;
 	}
 

@@ -3,11 +3,13 @@
 #include <algorithm>
 #include <pugixml.hpp>
 
-#include "texturelib.h"
+#include <SDL_rect.h>
+
+#include "subtexturelib.h"
 
 namespace pgn
 {
-	void cTextureAtlas::Load(texture_loadfunc_type func, const std::string& fname, const char * desc)
+	std::string cTextureAtlas::Init(const std::string& fname)
 	{
 		//mTileRes.loadXML(zResName);
 		//auto tilemap = mTileRes.getResAnim("tilemap");
@@ -18,11 +20,9 @@ namespace pgn
 		{
 			auto imgnode = doc.child("image");
 			auto texfname = imgnode.attribute("file").as_string();
-			cTexture::Load(func, texfname, desc);
 			mTileSize.x = imgnode.attribute("frame_width").as_uint();
 			mTileSize.y = imgnode.attribute("frame_height").as_uint();
 
-			//[code_modify_base_node
 			mDims.x = mDims.y = 0;
 			for (auto it : doc.child("desc"))
 			{
@@ -32,27 +32,13 @@ namespace pgn
 				mDims.x = std::max(mDims.x, col);
 				mDims.y = std::max(mDims.y, row);
 				glm::ivec2 idx(col, row);
-				mSpritePositions[name] = idx;
+				SDL_Rect r = { col, row, mTileSize.x, mTileSize.y };
+				AddRect(name, r);
 			}
 			mDims = mDims + glm::uvec2(1, 1);
+
+			return texfname;
 		}
-	}
-
-	cSubTexture cTextureAtlas::SubTexture(const std::string& name) 
-	{
-		auto it = SpritePosMap().find(name);
-		return SubTexture(it->second.x, it->second.y);
-	}
-
-	cSubTexture cTextureAtlas::SubTexture(size_t x, size_t y) 
-	{
-		assert(x < mDims.x);
-		assert(y < mDims.y);
-		SDL_Rect rect;
-		rect.x = x*mTileSize.x;
-		rect.y = y*mTileSize.y;
-		rect.w = mTileSize.x;
-		rect.h = mTileSize.y;
-		return cSubTexture(this, rect);
+		return "";
 	}
 }

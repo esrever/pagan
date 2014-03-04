@@ -10,57 +10,44 @@ namespace pgn
 	cTextureLib::~cTextureLib()
 	{
 		for (auto kv : mTextures)
-			SDL_DestroyTexture(kv->Texture());
+			SDL_DestroyTexture(kv.first->Texture());
 	}
 
-	void cTextureLib::Store(cTexture_sptr tex)
+	cTextureLib::textures_type::iterator cTextureLib::Store(cTexture_sptr tex)
 	{
-		mTextures.insert(tex);
+		return mTextures.insert( std::make_pair(tex,nullptr)).first;
 	}
 
-	cTexture_sptr cTextureLib::Load(const char * fname, const char * desc)
+	cTexture_sptr cTextureLib::Load(const char * cfname, const char * desc)
 	{
+		std::string fname = cfname;
 		texture_loadfunc_type func = [&](const std::string& s){return IMG_LoadTexture(mRenderer, s.c_str()); };
-		cTexture_sptr ptex;
+		
+		cTextureAtlas_sptr atex;
 		if (pystring::endswith(fname,".xml"))
 		{
-			ptex = cTextureAtlas_sptr(new cTextureAtlas());
+			atex = cTextureAtlas_sptr(new cTextureAtlas());
+			fname = atex->Init(fname);
 		}
-		else
-		{
-			ptex = cTexture_sptr(new cTexture());
-		}
-		ptex->Load(func, fname, desc);
+		cTexture_sptr ptex( new cTexture(IMG_LoadTexture(mRenderer, fname.c_str()), desc ? desc : fname));
 		if (ptex->Texture())
-			Store(ptex);
+			Store(ptex)->second = atex;
 		return ptex;
 	}
 
-	cTexture_sptr cTextureLib::FindByName(const std::string& s) const
+	cTextureLib::textures_type::const_iterator cTextureLib::FindByName(const std::string& s) const
 	{
-		auto it = std::find_if(mTextures.begin(), mTextures.end(), [&](const cTexture_sptr& t) { return bool(t->Name() == s); });
-		return it == mTextures.end() ? nullptr : *it;
-	}
-
-	cTexture_sptr cTextureLib::FindByTexture(SDL_Texture * tex) const
-	{
-		auto it = std::find_if(mTextures.begin(), mTextures.end(), [&](const cTexture_sptr& t) { return bool(t->Texture() == tex); });
-		return it == mTextures.end() ? nullptr : *it;
+		return std::find_if(mTextures.begin(), mTextures.end(), [&](const textures_type::value_type& t) { return bool(t.first->Name() == s); });
 	}
 
 	void cTextureLib::Unload(const std::string& desc)
 	{
 		auto ptr = FindByName(desc);
-		if (ptr)
+		if (ptr != mTextures.end())
 		{
-			auto tex = ptr->Texture();
+			auto tex = ptr->first->Texture();
 			mTextures.erase(ptr);
 			SDL_DestroyTexture(tex);
 		}
-	}
-
-	const cTextureAtlas_sptr cTextureLib::Atlas(const std::string& name) const
-	{
-		return std::dynamic_pointer_cast<cTextureAtlas>(FindByName(name));
 	}
 }

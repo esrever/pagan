@@ -2,15 +2,16 @@
 
 #include <stdexcept>
 
-#include <SDL.h>
-#undef main
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+
+#include <core/texture/texturelib.h>
 
 #include "sdlwin.h"
 
 namespace pgn
 {
+	//----------------------------------------------------------------------
 	cSDLApp::cSDLApp(int argc, char ** argv)
 	{
 		//initialize all SDL subsystems
@@ -22,11 +23,13 @@ namespace pgn
 		mMainWindow = std::shared_ptr<cSDLWindow>(new cSDLWindow());
 	}
 
+	//----------------------------------------------------------------------
 	cSDLApp::~cSDLApp()
 	{
 		SDL_Quit();
 	}
 
+	//----------------------------------------------------------------------
 	void cSDLApp::Run()
 	{
 		Init();
@@ -46,6 +49,7 @@ namespace pgn
 		Destroy();
 	}
 
+	//----------------------------------------------------------------------
 	bool cSDLApp::HandleEvents()
 	{
 		bool quit = false;
@@ -63,4 +67,13 @@ namespace pgn
 		}
 		return !quit;
 	}
+
+	//----------------------------------------------------------------------
+	
+	template<>
+	cTextureLib * cSDLApp::Resources<cTextureLib>(const std::string& name) 
+	{ 
+		return mMainWindow->TextureLib(); 
+	}
+	
 }

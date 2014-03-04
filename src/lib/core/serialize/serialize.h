@@ -10,14 +10,23 @@
 #include <string>
 
 #include <glm/glm.hpp>
-
 #include <pugixml.hpp>
+
+#include <SDL.h>
+#undef main
 
 namespace std
 {
 	inline const string& to_string(const std::string& v)
 	{	
 		return v;
+	}
+
+	inline const string to_string(const SDL_Rect& v)
+	{
+		std::ostringstream oss;
+		oss << "{" << v.x << "," << v.y << "," << v.w << "," << v.h << "}";
+		return oss.str();
 	}
 }
 

@@ -45,7 +45,9 @@ struct cTestApp : public pgn::cSDLApp
 	//------------------------------------------------
 	virtual void Render()
 	{
-		auto atlas = MainWindow()->TextureLib()->Atlas();
+		auto tex_atlas = MainWindow()->TextureLib()->FindByName("");
+		auto tex = tex_atlas->first;
+		auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
 		for (size_t i = 0; i < mGridDims.y;++i)
 		for (size_t j = 0; j < mGridDims.x; ++j)
 		{
@@ -56,11 +58,9 @@ struct cTestApp : public pgn::cSDLApp
 			MainWindow()->Render(c,&rect);
 			*/
 			size_t o = i*mGridDims.x + j;
-			size_t tgtx = o % atlas->Dims().x;
-			size_t tgty = (o / atlas->Dims().x) % atlas->Dims().y;
-			auto sprite = atlas->SubTexture(tgtx, tgty);
+			SDL_Rect texrect = { }
 			SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
-			MainWindow()->RenderEx(sprite.first->Texture(), {255,255,255,255}, &sprite.second, &rect);
+			MainWindow()->RenderEx(tex->Texture(), {255,255,255,255}, &texrect, &rect);
 		}
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), "c:\\Windows\\fonts\\DejaVuSerif.ttf", 32);
@@ -106,6 +106,8 @@ int main(int argc, char ** argv)
 	pystring::rsplit(exepath, chunks, "\\", 1);
 	exepath = chunks[0] + "\\";
 
-	cTestApp app(argc, argv);
-	app.Run();
+	pgn::cSDLApp*& app = pgn::mainapp();
+	app = new cTestApp(argc, argv);
+	app->Run();
+	delete app;
 }
