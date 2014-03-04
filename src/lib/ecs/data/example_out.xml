@@ -6,7 +6,20 @@
 			<Name value="OpenDoor" />
 			<Components>
 				<array_elem value="TextureSet">
-					<Sprites />
+					<Sprites>
+						<array_elem>
+							<first value="unserializable: class pgn::cTexture *" />
+							<second value="unserializable: struct SDL_Rect" />
+						</array_elem>
+						<array_elem>
+							<first value="unserializable: class pgn::cTexture *" />
+							<second value="unserializable: struct SDL_Rect" />
+						</array_elem>
+						<array_elem>
+							<first value="unserializable: class pgn::cTexture *" />
+							<second value="unserializable: struct SDL_Rect" />
+						</array_elem>
+					</Sprites>
 				</array_elem>
 				<array_elem value="DoorState">
 					<State value="0" />
@@ -29,7 +42,20 @@
 			<Name value="Door_archetype" />
 			<Components>
 				<array_elem value="TextureSet">
-					<Sprites />
+					<Sprites>
+						<array_elem>
+							<first value="unserializable: class pgn::cTexture *" />
+							<second value="unserializable: struct SDL_Rect" />
+						</array_elem>
+						<array_elem>
+							<first value="unserializable: class pgn::cTexture *" />
+							<second value="unserializable: struct SDL_Rect" />
+						</array_elem>
+						<array_elem>
+							<first value="unserializable: class pgn::cTexture *" />
+							<second value="unserializable: struct SDL_Rect" />
+						</array_elem>
+					</Sprites>
 				</array_elem>
 				<array_elem value="DoorState">
 					<State value="1" />

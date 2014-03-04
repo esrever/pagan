@@ -15,12 +15,12 @@ namespace pgn
 	}
 
 	template<class T>
-	static bool read_glm(pugi::xml_node& writer, int components, T * val)
+	static bool read_glm(pugi::xml_node& reader, int components, T * val)
 	{
 		const char * s = "xyzw";
 		for (int i = 0; i < components; ++i)
 		{
-			const char * v = child.attribute(std::string(s[i]).c_str()).value();
+			const char * v = reader.attribute(std::string(1,s[i]).c_str()).value();
 			std::stringstream(v) >> val[i];
 		}
 		return true;

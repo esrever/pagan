@@ -7,6 +7,8 @@
 
 #include <SDL.h>
 
+#include <core/serialize/serialize.h>
+
 namespace pgn
 {
 	class cTexture;
@@ -34,4 +36,8 @@ namespace pgn
 			SDL_Texture * mTexture;
 			std::string mName;
 	};
+
+	DECL_SERIALIZE_INTERFACE(SDL_Rect);
+	DECL_SERIALIZE_INTERFACE(cTexture);
+
 }
