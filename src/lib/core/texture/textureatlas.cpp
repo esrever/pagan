@@ -32,7 +32,7 @@ namespace pgn
 				mDims.x = std::max(mDims.x, col);
 				mDims.y = std::max(mDims.y, row);
 				glm::ivec2 idx(col, row);
-				SDL_Rect r = { col, row, mTileSize.x, mTileSize.y };
+				SDL_Rect r = { col*mTileSize.x, row*mTileSize.y, mTileSize.x, mTileSize.y };
 				AddRect(name, r);
 			}
 			mDims = mDims + glm::uvec2(1, 1);

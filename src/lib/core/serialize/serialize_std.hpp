@@ -157,7 +157,7 @@ namespace pgn
 		T val;
 		if (SerializeIn(reader, val))
 		{
-			pval = std::make_shared(val);
+			pval = std::make_shared<T>(val);
 			return true;
 		}
 		else

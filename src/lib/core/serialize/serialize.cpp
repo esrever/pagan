@@ -18,73 +18,73 @@ namespace pgn
 	}
 	
 	// int
-	template<> void SerializeOut(pugi::xml_node& writer, const std::string& key, const int & val)
+	void SerializeOut(pugi::xml_node& writer, const std::string& key, const int & val)
 	{
 		auto& child = writer.append_child(key.c_str());
 		child.append_attribute("value").set_value(std::to_string(val).c_str());
 	}
 
-	template<> bool SerializeIn(const pugi::xml_node& child, int & val)
+	bool SerializeIn(const pugi::xml_node& child, int & val)
 	{
 		return read_pod(child, val);
 	}
 
 	// unsigned
-	template<> void SerializeOut(pugi::xml_node& writer, const std::string& key, const unsigned & val)
+	void SerializeOut(pugi::xml_node& writer, const std::string& key, const unsigned & val)
 	{
 		auto& child = writer.append_child(key.c_str());
 		child.append_attribute("value").set_value(std::to_string(val).c_str());
 	}
 
-	template<> bool SerializeIn(const pugi::xml_node& child, unsigned & val)
+	bool SerializeIn(const pugi::xml_node& child, unsigned & val)
 	{
 		return read_pod(child, val);
 	}
 
 	// float
-	template<> void SerializeOut(pugi::xml_node& writer, const std::string& key, const float & val)
+	void SerializeOut(pugi::xml_node& writer, const std::string& key, const float & val)
 	{
 		auto& child = writer.append_child(key.c_str());
 		child.append_attribute("value").set_value(std::to_string(val).c_str());
 	}
 
-	template<> bool SerializeIn(const pugi::xml_node& child, float & val)
+	bool SerializeIn(const pugi::xml_node& child, float & val)
 	{
 		return read_pod(child, val);
 	}
 
 	// double
-	template<> void SerializeOut(pugi::xml_node& writer, const std::string& key, const double & val)
+	void SerializeOut(pugi::xml_node& writer, const std::string& key, const double & val)
 	{
 		auto& child = writer.append_child(key.c_str());
 		child.append_attribute("value").set_value(std::to_string(val).c_str());
 	}
 
-	template<> bool SerializeIn(const pugi::xml_node& child, double & val)
+	bool SerializeIn(const pugi::xml_node& child, double & val)
 	{
 		return read_pod(child, val);
 	}
 
 	// bool
-	template<> void SerializeOut(pugi::xml_node& writer, const std::string& key, const bool & val)
+	void SerializeOut(pugi::xml_node& writer, const std::string& key, const bool & val)
 	{
 		auto& child = writer.append_child(key.c_str());
 		child.append_attribute("value").set_value(std::to_string(val).c_str());
 	}
 
-	template<> bool SerializeIn(const pugi::xml_node& child, bool & val)
+	bool SerializeIn(const pugi::xml_node& child, bool & val)
 	{
 		return read_pod(child, val);
 	}
 
 	// std::string
-	template<> void SerializeOut(pugi::xml_node& writer, const std::string& key, const std::string & val)
+	void SerializeOut(pugi::xml_node& writer, const std::string& key, const std::string & val)
 	{
 		auto& child = writer.append_child(key.c_str());
 		child.append_attribute("value").set_value(val.c_str());
 	}
 
-	template<> bool SerializeIn(const pugi::xml_node& reader, std::string & val)
+	bool SerializeIn(const pugi::xml_node& reader, std::string & val)
 	{
 		return read_pod(reader, val);
 	}

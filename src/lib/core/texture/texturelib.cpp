@@ -21,7 +21,6 @@ namespace pgn
 	cTexture_sptr cTextureLib::Load(const char * cfname, const char * desc)
 	{
 		std::string fname = cfname;
-		texture_loadfunc_type func = [&](const std::string& s){return IMG_LoadTexture(mRenderer, s.c_str()); };
 		
 		cTextureAtlas_sptr atex;
 		if (pystring::endswith(fname,".xml"))
@@ -29,7 +28,8 @@ namespace pgn
 			atex = cTextureAtlas_sptr(new cTextureAtlas());
 			fname = atex->Init(fname);
 		}
-		cTexture_sptr ptex( new cTexture(IMG_LoadTexture(mRenderer, fname.c_str()), desc ? desc : fname));
+		std::string texname = mName + ":" + (desc ? desc : fname);
+		cTexture_sptr ptex( new cTexture(IMG_LoadTexture(mRenderer, fname.c_str()), texname));
 		if (ptex->Texture())
 			Store(ptex)->second = atex;
 		return ptex;

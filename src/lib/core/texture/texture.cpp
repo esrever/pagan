@@ -1,5 +1,7 @@
 #include "texture.h"
 
+#include <algorithm>
+
 #include <pystring.h>
 
 #include <core/app/sdlapp.h>
@@ -11,7 +13,7 @@ namespace pgn
 	void cTexture::SplitName(const std::string& name, std::string& lib, std::string& tex, std::string& subtex)
 	{
 		std::vector<std::string> chunks;
-		pystring::split(name, chunks,":", 3);
+		pystring::split(name, chunks,":", 2);
 
 		lib = (chunks.size() > 0) ? chunks[0] : "";
 		tex = (chunks.size() > 1) ? chunks[1] : "";
@@ -19,39 +21,40 @@ namespace pgn
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	cSubTexture cTexture::SubTexture(const SDL_Rect * rect) 
-	{ 
-		SDL_Rect rdef = { 0, 0, 0, 0 };
-		return cSubTexture(this, rect ? *rect : rdef);
+	void SerializeOut(node_type& writer, const std::string& key, const cSubTexture& value)
+	{
+		// split to chunks
+		std::string lib, tex, subtex;
+		cTexture::SplitName(value.first->Name(), lib, tex, subtex);
+		
+		// get tex/subtexlib
+		auto it = mainapp()->Resources<cTextureLib>(lib)->FindByName(value.first->Name());
+
+		// get rect name
+		const auto& rects = it->second->Rects();
+		auto itr = std::find_if(rects.begin(), rects.end(), [&](const std::map<std::string, SDL_Rect>::value_type& v) {return v.second == value.second; });
+		subtex = itr->first;
+		
+		// write out
+		std::string outname = value.first->Name() + ":" + subtex;
+		SerializeOut(writer, key, outname);
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	void cTexture::Load(texture_loadfunc_type func, const std::string& fname, const char * desc)
+	bool SerializeIn(const node_type& reader, cSubTexture& value)
 	{
-		mTexture = func(fname);
-		mName = desc ? desc : fname;
-	}
-
-	//---------------------------------------------------------------------------------------------------
-	template<> void SerializeOut<cTexture_ptr>(node_type& writer, const std::string& key, const cTexture_ptr& value)
-	{
-		// export a dump of the object
-		SerializeOut(writer, key.c_str(), value? value->Name() : "nullptr");
-	}
-
-	//---------------------------------------------------------------------------------------------------
-	template<> bool SerializeIn<cTexture_ptr>(const node_type& reader, cTexture_ptr& value)
-	{
+		auto * app_ptr = &pgn::mainapp();
 		std::string name;
 		SerializeIn(reader, name);
 		std::string lib, tex, subtex;
 		cTexture::SplitName(name, lib, tex, subtex);
-		//value = mainapp()->Resources<cTextureLib>(lib)->FindByName(tex)->SubTexture(subtex);
-		return false;
+		auto tex_atlas = mainapp()->Resources<cTextureLib>(lib)->FindByName(lib + ":" + tex);
+		value = cSubTexture(tex_atlas->first, *tex_atlas->second->Rect(subtex));
+		return true;
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	template<> void SerializeOut<SDL_Rect>(node_type& writer, const std::string& key, const SDL_Rect& value)
+	void SerializeOut(node_type& writer, const std::string& key, const SDL_Rect& value)
 	{
 		// export a dump of the object
 		auto& child = writer.append_child(key.c_str());
@@ -64,7 +67,7 @@ namespace pgn
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	template<> bool SerializeIn<SDL_Rect>(const node_type& reader, SDL_Rect& value)
+	bool SerializeIn(const node_type& reader, SDL_Rect& value)
 	{
 		const char * s = "xywh";
 		int * val = &value.x;

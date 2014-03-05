@@ -5,9 +5,9 @@
         <Components>
             <array_elem value = "TextureSet">
                 <Sprites>
-                    <array_elem value="::door_open"/>
-                    <array_elem value="::door_closed"/>
-                    <array_elem value="::door_locked"/>
+                    <array_elem value="::dungeon:dngn_open_door"/>
+                    <array_elem value="::dungeon:dngn_closed_door"/>
+                    <array_elem value="::dungeon:dngn_detected_secret_door"/>
                 </Sprites>
             </array_elem>
             <array_elem value = "DoorState">

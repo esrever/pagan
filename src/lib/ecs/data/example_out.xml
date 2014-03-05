@@ -7,18 +7,9 @@
 			<Components>
 				<array_elem value="TextureSet">
 					<Sprites>
-						<array_elem>
-							<first value="nullptr" />
-							<second x="0" y="0" w="0" h="0" />
-						</array_elem>
-						<array_elem>
-							<first value="nullptr" />
-							<second x="0" y="0" w="0" h="0" />
-						</array_elem>
-						<array_elem>
-							<first value="nullptr" />
-							<second x="0" y="0" w="0" h="0" />
-						</array_elem>
+						<array_elem value="::dungeon:dngn_open_door" />
+						<array_elem value="::dungeon:dngn_closed_door" />
+						<array_elem value="::dungeon:dngn_detected_secret_door" />
 					</Sprites>
 				</array_elem>
 				<array_elem value="DoorState">
@@ -43,18 +34,9 @@
 			<Components>
 				<array_elem value="TextureSet">
 					<Sprites>
-						<array_elem>
-							<first value="nullptr" />
-							<second x="0" y="0" w="0" h="0" />
-						</array_elem>
-						<array_elem>
-							<first value="nullptr" />
-							<second x="0" y="0" w="0" h="0" />
-						</array_elem>
-						<array_elem>
-							<first value="nullptr" />
-							<second x="0" y="0" w="0" h="0" />
-						</array_elem>
+						<array_elem value="::dungeon:dngn_open_door" />
+						<array_elem value="::dungeon:dngn_closed_door" />
+						<array_elem value="::dungeon:dngn_detected_secret_door" />
 					</Sprites>
 				</array_elem>
 				<array_elem value="DoorState">

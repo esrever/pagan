@@ -41,25 +41,21 @@ namespace pgn
 	template<class T>
 	inline bool SerializeIn(const node_type& reader, T& value) { assert(false); return false; }
 
-#define DECL_SERIALIZE_INTERFACE( T )\
-	template<> void SerializeOut< T >(node_type& writer, const std::string& key, const T & value);\
-	template<> bool SerializeIn< T >(const node_type& reader, T & value);
-
 	template<class T>
 	inline bool SerializeIn(const node_type& reader, const std::string& key, T& value, const T& defVal = T())
 	{
 		const auto& child = reader.child(key.c_str());
-		if (child.empty()) 
+		if (child.empty())
 			return false;
 		bool ok = SerializeIn(child, value);
-		if (!ok) 
+		if (!ok)
 			value = defVal;
 		return ok;
 	}
 
-#define DECL_SERIAL_SPECIAL( T ) \
-	template<> void SerializeOut(pugi::xml_node& writer, const std::string& key, const T & val);\
-	template<> bool SerializeIn(const pugi::xml_node& reader, T & val);
+#define DECL_SERIALIZE_INTERFACE( T )\
+	void SerializeOut(node_type& writer, const std::string& key, const T & value);\
+	bool SerializeIn(const node_type& reader, T & value);
 
 #define DECL_SERIAL_CONT1( N ) \
 	template<class T> void SerializeOut(pugi::xml_node& writer, const std::string& key, const N < T > & val); \
@@ -70,12 +66,12 @@ namespace pgn
 	template<class T0, class T1> bool SerializeIn(const pugi::xml_node& reader, N < T0, T1 > & val);
 
 	// PODs
-	DECL_SERIAL_SPECIAL(int);
-	DECL_SERIAL_SPECIAL(float);
-	DECL_SERIAL_SPECIAL(double);
-	DECL_SERIAL_SPECIAL(unsigned);
-	DECL_SERIAL_SPECIAL(bool);
-	DECL_SERIAL_SPECIAL(std::string);
+	DECL_SERIALIZE_INTERFACE(int);
+	DECL_SERIALIZE_INTERFACE(float);
+	DECL_SERIALIZE_INTERFACE(double);
+	DECL_SERIALIZE_INTERFACE(unsigned);
+	DECL_SERIALIZE_INTERFACE(bool);
+	DECL_SERIALIZE_INTERFACE(std::string);
 
 	// containers
 	DECL_SERIAL_CONT1(std::vector);
@@ -89,7 +85,6 @@ namespace pgn
 	// pointers
 	DECL_SERIAL_CONT1(std::shared_ptr);
 
-#undef DECL_SERIAL_SPECIAL
 #undef DECL_SERIAL_CONT1
 #undef DECL_SERIAL_CONT2
 }

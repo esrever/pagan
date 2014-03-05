@@ -1,12 +1,21 @@
 #include <iostream>
 #include <core/serialize/serialize.h>
-
 #include <ecs/ecs.h>
+
+#include <core/app/sdlapp.h>
+#include <core/texture/texturelib.h>
 
 #include "RegisterComponents.h"
 
+extern pgn::cMain g_app;
+
 int main(int argc, char ** argv)
 {
+	pgn::mainapp() = new pgn::cSDLApp(argc,argv);
+	pgn::mainapp()->Init();
+	//pgn::mainapp()->Resources<pgn::cTextureLib>("")->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tilemap.png","");
+	pgn::mainapp()->Resources<pgn::cTextureLib>("")->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml", "");
+
 	auto& ecs = pgn::ECS();
 	pgn::rl::RegisterComponents(ecs);
 	pugi::xml_document doc_in2;
@@ -22,5 +31,6 @@ int main(int argc, char ** argv)
 		SerializeOut(doc_out, "ECS", pgn::ECS());
 		doc_out.save_file("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\ecs\\data\\example_out.xml");
 	}
-		
+
+	pgn::mainapp()->Destroy();
 }

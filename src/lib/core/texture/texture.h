@@ -14,21 +14,16 @@ namespace pgn
 {
 	class cTexture;
 	typedef std::shared_ptr<cTexture> cTexture_sptr;
-	typedef cTexture* cTexture_ptr;
-	typedef std::pair<cTexture*, const SDL_Rect> cSubTexture;
-	typedef std::function<SDL_Texture *(const std::string&)> texture_loadfunc_type;
+	typedef std::pair<cTexture_sptr, SDL_Rect> cSubTexture;
 
 	class cTexture
 	{
 		public:
 			cTexture(SDL_Texture * tex = nullptr, const std::string& name = "") :mTexture(tex), mName(name){}
-			virtual void Load(texture_loadfunc_type func, const std::string& fname, const char * desc = nullptr);
 			virtual ~cTexture(){}
 
 			const std::string& Name() const { return mName; }
 			SDL_Texture * Texture() const { return mTexture; }
-			cSubTexture SubTexture(const SDL_Rect * rect);
-			virtual cSubTexture SubTexture(const std::string& name = "") { return SubTexture(nullptr);  }
 
 			inline bool operator < (const cTexture& t) const
 			{
@@ -44,6 +39,12 @@ namespace pgn
 	};
 
 	DECL_SERIALIZE_INTERFACE(SDL_Rect);
-	DECL_SERIALIZE_INTERFACE(cTexture_ptr);
+	DECL_SERIALIZE_INTERFACE(cSubTexture);
 
+	//-------------------------------------------------------------
+}
+
+inline bool operator == (const SDL_Rect& lhs, const SDL_Rect& rhs)
+{
+	return memcmp(&lhs, &rhs, sizeof(SDL_Rect)) == 0;
 }

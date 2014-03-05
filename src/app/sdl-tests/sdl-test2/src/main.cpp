@@ -81,15 +81,14 @@ struct cTestApp : public pgn::cSDLApp
 	virtual void Render()
 	{
 		//auto atlas = MainWindow()->TextureLib()->Atlas();
-		auto atlas = pgn::mainapp()->Resources<pgn::cTextureLib>()->Atlas();
+		auto tex_atlas = MainWindow()->TextureLib()->FindByName("");
+		auto tex = tex_atlas->first;
+		auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
 		for (size_t i = 0; i < mGridDims.y;++i)
 		for (size_t j = 0; j < mGridDims.x; ++j)
 		{
-			size_t o = mDungeon.mMapData(j, i) & (pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor | pgn::rlut::eMapData::conn)
-				? 160 : 191;
-			size_t tgtx = o % atlas->Dims().x;
-			size_t tgty = (o / atlas->Dims().x) % atlas->Dims().y;
-			auto sprite = atlas->SubTexture(tgtx, tgty);
+			bool isFloor = mDungeon.mMapData(j, i) & (pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor | pgn::rlut::eMapData::conn) ? true : false;
+			SDL_Rect texrect = isFloor ? *atlas->Rect("dungeon:floor:dirt0") : *atlas->Rect("dungeon:wall:brick_brown0");
 			SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
 
 			glm::ivec2 pd = glm::ivec2(j, i) - mDiFi.CornerWcs();
@@ -97,13 +96,13 @@ struct cTestApp : public pgn::cSDLApp
 			int v = ((!mDiFi.Data().InRange(pd)) || (mDiFi.Data()(pd)) == std::numeric_limits<float>::max()) 
 				? 140 
 				: std::max(140, 255 - int(10 * mDiFi.Data()(pd))); 
-			MainWindow()->RenderEx(sprite.first->Texture(), { v, v, v, 255 }, &sprite.second, &rect);
+			MainWindow()->RenderEx(tex->Texture(), { v, v, v, 255 }, &texrect, &rect);
 		}
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), "c:\\Windows\\fonts\\DejaVuSerif.ttf", 32);
 
 		SDL_Rect textRect;
-		auto tex = font.CreateText("Hello world!",&textRect);
+		auto texf = font.CreateText("Hello world!",&textRect);
 
 		float ar = textRect.w / float(textRect.h);
 
@@ -111,7 +110,7 @@ struct cTestApp : public pgn::cSDLApp
 		{
 			size_t yo = mLogStart.y + i*msTextHeight;
 			SDL_Rect rect = { mLogStart.x, yo, int(ar * msTextHeight), msTextHeight };
-			MainWindow()->Render(tex.get(), &rect);
+			MainWindow()->Render(texf.get(), &rect);
 		}
 	}
 	//------------------------------------------------

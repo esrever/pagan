@@ -42,10 +42,6 @@ namespace pgn
         cSDLApp * mApp;
     };
     
-    static inline cSDLApp *& mainapp()
-    {
-        static cMain mainapp_inst;
-        return mainapp_inst.mApp;
-    }
+	cSDLApp *& mainapp();
 }
 

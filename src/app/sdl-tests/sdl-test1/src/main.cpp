@@ -48,25 +48,25 @@ struct cTestApp : public pgn::cSDLApp
 		auto tex_atlas = MainWindow()->TextureLib()->FindByName("");
 		auto tex = tex_atlas->first;
 		auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
+		auto it_rect = atlas->Rects().cbegin();
 		for (size_t i = 0; i < mGridDims.y;++i)
 		for (size_t j = 0; j < mGridDims.x; ++j)
 		{
-			//SDL_Color c = { j % 256, i % 256, 0, 255 };
-			/*
-			SDL_Color c = { rand() % 256, rand() % 256, rand() % 256, 255 };
-			SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
-			MainWindow()->Render(c,&rect);
-			*/
 			size_t o = i*mGridDims.x + j;
-			SDL_Rect texrect = { }
-			SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
-			MainWindow()->RenderEx(tex->Texture(), {255,255,255,255}, &texrect, &rect);
+			
+			if (it_rect != atlas->Rects().end())
+			{
+				SDL_Rect texrect = it_rect->second;
+				SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
+				MainWindow()->RenderEx(tex->Texture(), { 255, 255, 255, 255 }, &texrect, &rect);
+				++it_rect;
+			}
 		}
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), "c:\\Windows\\fonts\\DejaVuSerif.ttf", 32);
 
 		SDL_Rect textRect;
-		auto tex = font.CreateText("Hello world!",&textRect);
+		auto texf = font.CreateText("Hello world!",&textRect);
 
 		float ar = textRect.w / float(textRect.h);
 
@@ -74,7 +74,7 @@ struct cTestApp : public pgn::cSDLApp
 		{
 			size_t yo = mLogStart.y + i*msTextHeight;
 			SDL_Rect rect = { mLogStart.x, yo, int(ar * msTextHeight), msTextHeight };
-			MainWindow()->Render(tex.get(), &rect);
+			MainWindow()->Render(texf.get(), &rect);
 		}
 	}
 	//------------------------------------------------

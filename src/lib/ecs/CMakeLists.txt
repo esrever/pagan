@@ -3,6 +3,7 @@ set(SOURCE_FILES
     ComponentBase.cpp
     EntityData.cpp
     serialize_ecs.cpp
+    ecs-config.cpp
 )
 
 set(HEADER_FILES
