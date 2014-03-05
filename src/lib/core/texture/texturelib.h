@@ -18,6 +18,7 @@ namespace pgn
 			cTextureLib(SDL_Renderer * renderer, const std::string& name = "") :mRenderer(renderer),mName(name){}
 			~cTextureLib();
 
+			const textures_type& Textures() const { return mTextures; }
 			textures_type::iterator Store(cTexture_sptr tex);
 			cTexture_sptr Load(const char * fname, const char * desc = nullptr);
 			void Unload(const std::string& name);

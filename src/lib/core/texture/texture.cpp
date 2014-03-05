@@ -45,11 +45,21 @@ namespace pgn
 	{
 		auto * app_ptr = &pgn::mainapp();
 		std::string name;
-		SerializeIn(reader, name);
+		bool ok = SerializeIn(reader, name);
+		if (!ok) return false;
+
 		std::string lib, tex, subtex;
 		cTexture::SplitName(name, lib, tex, subtex);
-		auto tex_atlas = mainapp()->Resources<cTextureLib>(lib)->FindByName(lib + ":" + tex);
-		value = cSubTexture(tex_atlas->first, *tex_atlas->second->Rect(subtex));
+		auto * tlib = mainapp()->Resources<cTextureLib>(lib);
+		if (!tlib) return false;
+		
+		auto tex_atlas = tlib->FindByName(lib + ":" + tex);
+		if (tex_atlas == tlib->Textures().end()) return false;
+		
+		auto rect_ptr = tex_atlas->second->Rect(subtex);
+		if (!rect_ptr) return false;
+
+		value = cSubTexture(tex_atlas->first, *rect_ptr);
 		return true;
 	}
 
