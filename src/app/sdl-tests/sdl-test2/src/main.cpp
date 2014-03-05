@@ -12,11 +12,13 @@
 
 #include <glm/glm.hpp>
 
-#include <rlut/sprite/atlas.h>
 #include <rlut/dungen/dungen.h>
 #include <rlut/path/difi.h>
 
 #include <core/serialize/serialize.h>
+#include <core/texture/texture.h>
+#include <core/texture/texturelib.h>
+#include <core/texture/subtexturelib.h>
 
 struct cTestApp : public pgn::cSDLApp
 {
@@ -45,6 +47,8 @@ struct cTestApp : public pgn::cSDLApp
 		mStatusStart = glm::uvec2(5+mTileDim*mGridDims.x, 0);
 
 		MainWindow()->TextureLib()->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml","");
+
+		mTextureWall = Resources<pgn::cTextureLib>()->FindByName()->
 
 		srand(0);
 		mDungeon.Init(mGridDims.x, mGridDims.y);
@@ -133,6 +137,10 @@ struct cTestApp : public pgn::cSDLApp
 	glm::uvec2 mGridStart;
 	glm::uvec2 mLogStart;
 	glm::uvec2 mStatusStart;
+
+	pgn::cSubTexture mTextureFloor;
+	pgn::cSubTexture mTextureWall;
+	pgn::cSubTexture mTextureDoor;
 	
 	static const size_t	msTextHeight = 20;
 };

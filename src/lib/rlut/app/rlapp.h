@@ -3,7 +3,6 @@
 #include <glm/glm.hpp>
 
 #include <core/app/sdlapp.h>
-#include <rlut/sprite/atlas.h>
 #include <rlut/dungen/dungen.h>
 
 namespace pgn
