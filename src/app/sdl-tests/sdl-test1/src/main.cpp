@@ -45,7 +45,7 @@ struct cTestApp : public pgn::cSDLApp
 	//------------------------------------------------
 	virtual void Render()
 	{
-		auto tex_atlas = MainWindow()->TextureLib()->FindByName("");
+		auto tex_atlas = MainWindow()->TextureLib()->FindByName();
 		auto tex = tex_atlas->first;
 		auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
 		auto it_rect = atlas->Rects().cbegin();

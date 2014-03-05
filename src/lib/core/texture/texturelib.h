@@ -23,7 +23,8 @@ namespace pgn
 			cTexture_sptr Load(const char * fname, const char * desc = nullptr);
 			void Unload(const std::string& name);
 			
-			textures_type::const_iterator FindByName(const std::string& s) const;
+			//! defaults is "nothing:nothing" -> ":"
+			textures_type::const_iterator FindByName(const std::string& s = ":") const;
 
 			const std::string& Name() const { return mName; }
 		private:
