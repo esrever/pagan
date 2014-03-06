@@ -48,7 +48,10 @@ struct cTestApp : public pgn::cSDLApp
 
 		MainWindow()->TextureLib()->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml","");
 
-		mTextureWall = Resources<pgn::cTextureLib>()->FindByName()->
+		auto atlas = Resources<pgn::cTextureLib>()->FindByName();
+		mTextureFloor = pgn::cSubTexture(atlas->first, *atlas->second->Rect("dungeon:floor:rect_gray0"));
+		mTextureWall = pgn::cSubTexture(atlas->first, *atlas->second->Rect("dungeon:wall:marble_wall1"));
+		mTextureDoor = pgn::cSubTexture(atlas->first, *atlas->second->Rect("dungeon:dngn_closed_door"));
 
 		srand(0);
 		mDungeon.Init(mGridDims.x, mGridDims.y);
@@ -91,8 +94,16 @@ struct cTestApp : public pgn::cSDLApp
 		for (size_t i = 0; i < mGridDims.y;++i)
 		for (size_t j = 0; j < mGridDims.x; ++j)
 		{
-			bool isFloor = mDungeon.mMapData(j, i) & (pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor | pgn::rlut::eMapData::conn) ? true : false;
-			SDL_Rect texrect = isFloor ? *atlas->Rect("dungeon:floor:dirt0") : *atlas->Rect("dungeon:wall:brick_brown0");
+			pgn::cSubTexture tex;
+			if (mDungeon.mMapData(j, i) & pgn::rlut::eMapData::conn)
+				tex = mTextureDoor;
+			else if (mDungeon.mMapData(j, i) & (pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor))
+				tex = mTextureFloor;
+			else if (mDungeon.mMapData(j, i) & pgn::rlut::eMapData::perimeter)
+				tex = mTextureWall;
+			else
+				continue;
+
 			SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
 
 			glm::ivec2 pd = glm::ivec2(j, i) - mDiFi.CornerWcs();
@@ -100,7 +111,7 @@ struct cTestApp : public pgn::cSDLApp
 			int v = ((!mDiFi.Data().InRange(pd)) || (mDiFi.Data()(pd)) == std::numeric_limits<float>::max()) 
 				? 140 
 				: std::max(140, 255 - int(10 * mDiFi.Data()(pd))); 
-			MainWindow()->RenderEx(tex->Texture(), { v, v, v, 255 }, &texrect, &rect);
+			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 		}
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), "c:\\Windows\\fonts\\DejaVuSerif.ttf", 32);
