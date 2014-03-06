@@ -43,7 +43,7 @@ struct cTestApp : public pgn::cSDLApp
 		mTileDim = std::min(tile_w, tile_h);
 
 		mGridStart = glm::uvec2(0, 0);
-		mLogStart = glm::uvec2(5, mTileDim*mGridDims.y + msTextHeight / 4);
+		mLogStart = glm::uvec2(15, mTileDim*mGridDims.y + msTextHeight / 4);
 		mStatusStart = glm::uvec2(5+mTileDim*mGridDims.x, 0);
 
 		MainWindow()->TextureLib()->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml","");
@@ -114,7 +114,9 @@ struct cTestApp : public pgn::cSDLApp
 			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 		}
 
-		pgn::cSDLFont font(MainWindow()->Renderer(), "c:\\Windows\\fonts\\DejaVuSerif.ttf", 32);
+		pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\SourceSansPro\\SourceSansPro-Regular.otf", 32);
+		//pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\PT-Sans\\PTN57F.ttf", 62);
+		//pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\Nobile\\Nobile-Regular.ttf", 32);
 
 		SDL_Rect textRect;
 		auto texf = font.CreateText("Hello world!",&textRect);
@@ -153,7 +155,7 @@ struct cTestApp : public pgn::cSDLApp
 	pgn::cSubTexture mTextureWall;
 	pgn::cSubTexture mTextureDoor;
 	
-	static const size_t	msTextHeight = 20;
+	static const size_t	msTextHeight = 24;
 };
 
 int main(int argc, char ** argv)
