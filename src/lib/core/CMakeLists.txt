@@ -13,6 +13,7 @@ set(SOURCE_FILES
     texture/texture.cpp
     texture/textureatlas.cpp
     serialize/serialize.cpp
+    event/event.cpp
 #    util/cfgtree.cpp
 #    util/cfgdata.cpp
 #    util/conversions.cpp
@@ -46,6 +47,7 @@ set(HEADER_FILES
     serialize/serialize.h
     serialize/serialize_glm.hpp
     serialize/serialize_std.hpp
+    event/event.h
 #    app/application.h
 #    util/textmod.h
 )
@@ -67,6 +69,7 @@ include_directories(
     ${SDL_INCLUDE_DIR}
     ${SDL_image_INCLUDE_DIR}
     ${SDL_ttf_INCLUDE_DIR}
+    ${Signal_INCLUDE_DIR}
 )
 
 add_library(pagan_core STATIC
