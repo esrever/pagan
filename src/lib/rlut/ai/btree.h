@@ -6,21 +6,24 @@
 
 namespace pgn
 {
-	class cBehaviorTree
+	namespace bt
 	{
-	public:
-		cBehaviorTree() :mRoot(nullptr){}
-		
-		
-		Behavior * Root() { return mRoot; }
-		void SetRoot(Behavior * p);
+		class cBehaviorTree
+		{
+		public:
+			cBehaviorTree() :mRoot(nullptr){}
 
-		//! TODO: Later, instead of passing dict, pass a blackboard object, which is the dict plus actor and world (as we're gonna use both a lot)
-		eBehaviorStatus Tick() { return mRoot->Tick(mDict); }
-		cDict& Dict() { return mDict; }
 
-	private:
-		Behavior * mRoot;
-		cDict mDict;
-	};
+			cBehavior * Root() { return mRoot; }
+			void SetRoot(cBehavior * p);
+
+			//! TODO: Later, instead of passing dict, pass a blackboard object, which is the dict plus actor and world (as we're gonna use both a lot)
+			eStatus Tick() { return mRoot->Tick(mDict); }
+			cDict& Dict() { return mDict; }
+
+		private:
+			cBehavior * mRoot;
+			cDict mDict;
+		};
+	}
 }

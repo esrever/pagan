@@ -5,17 +5,17 @@
 #include <vector>
 #include <functional>
 
-#define CLONE_DECL(T) virtual Behavior * clone() const { return new T (*this);};
+#define CLONE_DECL(T) virtual cBehavior * clone() const { return new T (*this);};
 //#define CLONE_DECL(T)
 
 #define btvar(T,N) private:\
 	T m##N;
 
 #define btget(T,N) public:\
-	const T & get##N##() const { return m##N; }
+	const T & Get##N##() const { return m##N; }
 
 #define btset(T,N) public:\
-	void set##N##(const T & v) { m##N = v; }
+	void Set##N##(const T & v) { m##N = v; }
 
 #define btgetset(T,N) \
 	btvar( T , N )\
@@ -25,7 +25,7 @@
 #define btcdtor(T, U) \
 typedef U super;\
 virtual ~ T (){}\
-virtual Behavior * clone() const { return new T (*this);}\
+virtual cBehavior * Clone() const { return new T (*this);}\
 T (const T &);\
 T ()
 
@@ -34,171 +34,175 @@ namespace pgn
 
 	class cDict;
 
-	// ============================================================================
-	enum class eBehaviorStatus : int8_t
-		/**
-		* Return values of and valid states for behaviors.
-		*/
+	namespace bt
 	{
-		Invalid,
-		Success,
-		Failure,
-		Running,
-		Aborted,
-	};
 
-	// ============================================================================
-	class Behavior
-		/**
-		* Base class for actions, conditions and composites.
-		*/
-	{
-	public:
-		Behavior() : mStatus(eBehaviorStatus::Invalid), mPriority(0.0f){};
-		Behavior(const Behavior&);
-		virtual ~Behavior(){}
-
-		virtual eBehaviorStatus update(cDict& dict) { return eBehaviorStatus::Invalid; };
-		virtual void onInitialize()			{}
-		virtual void onTerminate(eBehaviorStatus)	{}
-		Behavior * addChild(Behavior*) { return this; }
-
-		eBehaviorStatus Tick(cDict& dict);
-		void reset();
-		void abort();
-		bool isTerminated() const;
-		bool isRunning() const;
-		eBehaviorStatus getStatus() const;
-		virtual Behavior * clone() const { return nullptr; };
-
-		btgetset(float, Priority);
-
-	private:
-		eBehaviorStatus mStatus;
-	};
-
-	typedef Behavior* Behavior_ptr;
-	typedef std::shared_ptr<Behavior> Behavior_sptr;
-	typedef std::vector<Behavior_ptr> Behavior_ptrs;
-
-	// ============================================================================
-
-	class Decorator : public Behavior
-	{
-	public:
-		btcdtor(Decorator, Behavior) :mChild(nullptr){}
-		btgetset(Behavior_ptr, Child);
-	};
-
-	// ============================================================================
-	class Repeat : public Decorator
-	{
-	public:
-		btcdtor(Repeat, Decorator) :mCount(-1), mCounter(0){}
-		btgetset(int, Count);
-		btgetset(int, Counter);
-
-		void onInitialize();
-		eBehaviorStatus update(cDict& dict);
-	};
-
-	// ============================================================================
-
-	class Composite : public Behavior
-	{
-	public:
-		btcdtor(Composite, Behavior){}
-		Behavior * addChild(Behavior* child) { mChildren.push_back(child); return this; }
-	protected:
-		Behavior_ptrs mChildren;
-	};
-
-	// ============================================================================
-	class Sequence : public Composite
-	{
-	public:
-		btcdtor(Sequence, Composite){}
-	protected:
-		virtual void onInitialize();
-		virtual eBehaviorStatus update(cDict& dict);
-
-	protected:
-		Behavior_ptrs::iterator mCurrentChild;
-	};
-
-	// ============================================================================
-
-	class Selector : public Composite
-	{
-	public:
-		btcdtor(Selector, Composite){}
-	protected:
-		virtual void onInitialize();
-		virtual eBehaviorStatus update(cDict& dict);
-	protected:
-		Behavior_ptrs::iterator mCurrent;
-	};
-
-	// ============================================================================
-	class PrioritySelector : public Selector
-	{
-	public:
-		btcdtor(PrioritySelector, Selector){}
-	protected:
-		virtual eBehaviorStatus update(cDict& dict);
-	};
-
-	// ============================================================================
-	class Parallel : public Composite
-	{
-	public:
-		enum Policy
+		// ============================================================================
+		enum class eStatus : int8_t
+			/**
+			* Return values of and valid states for behaviors.
+			*/
 		{
-			RequireOne,
-			RequireAll,
+			Invalid,
+			Success,
+			Failure,
+			Running,
+			Aborted,
 		};
 
-		btcdtor(Parallel, Composite) :mSuccessPolicy(RequireOne), mFailurePolicy(RequireAll){}
-		btgetset(Policy, SuccessPolicy);
-		btgetset(Policy, FailurePolicy);
+		// ============================================================================
+		class cBehavior
+			/**
+			* Base class for actions, conditions and composites.
+			*/
+		{
+		public:
+			cBehavior() : mStatus(eStatus::Invalid), mPriority(0.0f){};
+			cBehavior(const cBehavior&);
+			virtual ~cBehavior(){}
 
-	protected:
-		virtual eBehaviorStatus update(cDict& dict);
-		virtual void onTerminate(eBehaviorStatus);
-	};
+			virtual eStatus Update(cDict& dict) { return eStatus::Invalid; };
+			virtual void OnInitialize()			{}
+			virtual void OnTerminate(eStatus)	{}
+			cBehavior * AddChild(cBehavior*) { return this; }
 
-	// ============================================================================
-	class ActiveSelector : public Selector
-	{
-	public:
-		btcdtor(ActiveSelector, Selector){}
+			eStatus Tick(cDict& dict);
+			void Reset();
+			void Abort();
+			bool IsTerminated() const;
+			bool IsRunning() const;
+			eStatus GetStatus() const;
+			virtual cBehavior * Clone() const { return nullptr; };
 
-	protected:
-		virtual void onInitialize();
-		virtual eBehaviorStatus update(cDict& dict);
-	};
+			btgetset(float, Priority);
+
+		private:
+			eStatus mStatus;
+		};
+
+		typedef cBehavior* cBehavior_ptr;
+		typedef std::shared_ptr<cBehavior> cBehavior_sptr;
+		typedef std::vector<cBehavior_ptr> cBehavior_ptrs;
+
+		// ============================================================================
+
+		class cDecorator : public cBehavior
+		{
+		public:
+			btcdtor(cDecorator, cBehavior) :mChild(nullptr){}
+			btgetset(cBehavior_ptr, Child);
+		};
+
+		// ============================================================================
+		class cRepeat : public cDecorator
+		{
+		public:
+			btcdtor(cRepeat, cDecorator) :mCount(-1), mCounter(0){}
+			btgetset(int, Count);
+			btgetset(int, Counter);
+
+			void OnInitialize();
+			eStatus Update(cDict& dict);
+		};
+
+		// ============================================================================
+
+		class cComposite : public cBehavior
+		{
+		public:
+			btcdtor(cComposite, cBehavior){}
+			cBehavior * AddChild(cBehavior* child) { mChildren.push_back(child); return this; }
+		protected:
+			cBehavior_ptrs mChildren;
+		};
+
+		// ============================================================================
+		class cSequence : public cComposite
+		{
+		public:
+			btcdtor(cSequence, cComposite){}
+		protected:
+			virtual void OnInitialize();
+			virtual eStatus Update(cDict& dict);
+
+		protected:
+			cBehavior_ptrs::iterator mCurrentChild;
+		};
+
+		// ============================================================================
+
+		class cSelector : public cComposite
+		{
+		public:
+			btcdtor(cSelector, cComposite){}
+		protected:
+			virtual void OnInitialize();
+			virtual eStatus Update(cDict& dict);
+		protected:
+			cBehavior_ptrs::iterator mCurrent;
+		};
+
+		// ============================================================================
+		class cPrioritySelector : public cSelector
+		{
+		public:
+			btcdtor(cPrioritySelector, cSelector){}
+		protected:
+			virtual eStatus Update(cDict& dict);
+		};
+
+		// ============================================================================
+		class cParallel : public cComposite
+		{
+		public:
+			enum ePolicy
+			{
+				RequireOne,
+				RequireAll,
+			};
+
+			btcdtor(cParallel, cComposite) :mSuccessPolicy(RequireOne), mFailurePolicy(RequireAll){}
+			btgetset(ePolicy, SuccessPolicy);
+			btgetset(ePolicy, FailurePolicy);
+
+		protected:
+			virtual eStatus Update(cDict& dict);
+			virtual void OnTerminate(eStatus);
+		};
+
+		// ============================================================================
+		class cActiveSelector : public cSelector
+		{
+		public:
+			btcdtor(cActiveSelector, cSelector){}
+
+		protected:
+			virtual void OnInitialize();
+			virtual eStatus Update(cDict& dict);
+		};
 
 
 
-	// ============================================================================
-	class Action : public Behavior
-	{
-	public:
-		typedef std::function<eBehaviorStatus(cDict&)> func_type;
-		btcdtor(Action, Behavior){}
-		btgetset(func_type, Action)
-	protected:
-		virtual eBehaviorStatus update(cDict& dict) { return mAction(dict); }
-	};
+		// ============================================================================
+		class cAction : public cBehavior
+		{
+		public:
+			typedef std::function<eStatus(cDict&)> func_type;
+			btcdtor(cAction, cBehavior){}
+			btgetset(func_type, Action)
+		protected:
+			virtual eStatus Update(cDict& dict) { return mAction(dict); }
+		};
 
-	class Condition : public Behavior
-	{
-	public:
-		typedef std::function<bool(cDict&)> func_type;
-		btcdtor(Condition, Behavior){}
-		btgetset(func_type, Condition)
-	protected:
-		virtual eBehaviorStatus update(cDict& dict) { return mCondition(dict) ? eBehaviorStatus::Success : eBehaviorStatus::Failure; }
+		class cCondition : public cBehavior
+		{
+		public:
+			typedef std::function<bool(cDict&)> func_type;
+			btcdtor(cCondition, cBehavior){}
+			btgetset(func_type, Condition)
+		protected:
+			virtual eStatus Update(cDict& dict) { return mCondition(dict) ? eStatus::Success : eStatus::Failure; }
 
-	};
+		};
+	}
 }
