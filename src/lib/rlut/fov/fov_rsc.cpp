@@ -9,7 +9,7 @@ namespace pgn
 {
 	namespace rlut
 	{
-
+		/*
 		static void bresenham_line(const glm::ivec2& start, const glm::ivec2& end, std::vector<glm::ivec2>& pts)
 		{
 			auto dxy = glm::abs(end - start);
@@ -71,6 +71,7 @@ namespace pgn
 				}
 			}
 		}
+		*/
 
 		//-----------------------------------------------------------------------------------
 		void cFovRsc::Init(size_t los)
