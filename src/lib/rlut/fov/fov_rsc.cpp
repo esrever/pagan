@@ -1,4 +1,4 @@
-#include "fov1.h"
+#include "fov_rsc.h"
 
 #include <core/math/norm.h>
 #include <rlut/utils/shape/ShapeCalc.h>
@@ -73,7 +73,7 @@ namespace pgn
 		}
 
 		//-----------------------------------------------------------------------------------
-		void cFov1::Init(size_t los)
+		void cFovRsc::Init(size_t los)
 		{
 			mLoS = los;
 		}
@@ -131,7 +131,7 @@ namespace pgn
 			}
 		}
 
-		void cFov1::Calc(const glm::ivec2& p, const cArray2D<bool>& vismap, std::vector<glm::ivec2>& lospts, cArray2D<float>& vis)
+		void cFovRsc::Calc(const glm::ivec2& p, const cArray2D<bool>& vismap, std::vector<glm::ivec2>& lospts, cArray2D<float>& vis)
 		{
 			vis(p) = 1.0f;
 			lospts.clear();

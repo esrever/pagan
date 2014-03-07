@@ -8,8 +8,7 @@
 
 #include <core/container/Array2D.h>
 #include <rlut/fov/FovLookup.h>
-#include <rlut/fov/Fov0.h>
-#include <rlut/fov/Fov1.h>
+#include <rlut/fov/Fov_rsc.h>
 #include <rlut/dungen/dungen.h>
 
 struct cTestCase
@@ -113,7 +112,7 @@ int main(int argc, char ** argv)
 
 	for (size_t los = 10; los < 11; ++los)
 	{
-		pgn::rlut::cFovLookup<pgn::rlut::cFov1> flut;
+		pgn::rlut::cFovLookup<pgn::rlut::cFovRsc> flut;
 		auto& fov = flut.Get(los);
 
 		for (const auto& test : fovtests)
