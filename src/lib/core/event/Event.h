@@ -8,8 +8,10 @@
 
 	Receivers of T events:
 		Add member  : cEventHandler<evt::cBlah> mHandleOnBlah;
+			DECL_EVT_MEMBER(Blah)
 		Add function: void cFoo::OnBlah(Args...)
 		initialize  : :mEvtHandleOnBlah(Simple::slot(this, &Foo::OnBlah))
+			INIT_EVT_MEMBER(Foo, Blah)
 
 	Events:
 		
