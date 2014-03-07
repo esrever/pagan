@@ -134,6 +134,7 @@ namespace pgn
 
 		void cFovRsc::Calc(const glm::ivec2& p, const cArray2D<bool>& vismap, std::vector<glm::ivec2>& lospts, cArray2D<float>& vis)
 		{
+			vis.Resize(vismap.Width(), vismap.Height(), 0.0f);
 			vis(p) = 1.0f;
 			lospts.clear();
 			lospts.push_back(p);

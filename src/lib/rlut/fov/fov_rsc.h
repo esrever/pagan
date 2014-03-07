@@ -17,6 +17,7 @@ namespace pgn
 
 			/**
 			 * Calculates the points in LoS and their visibility [0: invisible, 1: fully visible]
+			 * All parameters are in the same coordinate space: no views are used.
 			 * @param p		 Eye coordinates
 			 * @param vismap Visibility map
 			 * @param lospts Points in LoS

@@ -72,15 +72,29 @@ struct cTestApp : public pgn::cSDLApp
 		};
 		mDiFi.Generate(mfunc, glm::ivec2(35,30));
 #else
-		// DiFi 9,9 is centered at 35,30:
-		mDiFi.Init(glm::ivec2(17, 17));
+		// DiFi 20,20 is centered at 35,30:
+		mDiFi.Init(glm::ivec2(41, 41));
 		auto mfunc = [&](const glm::ivec2& p0, const glm::ivec2& p1){
 			if (mDungeon.mMapData.InRange(p1))
 				return mDungeon.mMapData(p1) & (pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor | pgn::rlut::eMapData::conn) ? pgn::norm_2(p0 - p1) : std::numeric_limits<float>::max();
 			else
 				return std::numeric_limits<float>::max();
 		};
-		mDiFi.Generate(mfunc, glm::ivec2(26,21), glm::ivec2(35, 30));
+		mDiFi.Generate(mfunc, glm::ivec2(15,10), glm::ivec2(35, 30));
+		
+		auto& rawdata = mDiFi.Data().View().Storage().Raw();
+		float minv = std::numeric_limits<float>::max();
+		float maxv = std::numeric_limits<float>::min();
+		for (const auto& v : rawdata)
+		{
+			if (v != std::numeric_limits<float>::max())
+			{
+				minv = std::min(minv, v);
+				maxv = std::max(maxv, v);
+			}
+		}
+		mDiFi.Data().View().VisitW([minv, maxv](float& v){ v = (v - minv) / (maxv - minv); });
+		std::cout << minv << " - " << maxv << std::endl;
 #endif
 	}
 
@@ -109,8 +123,8 @@ struct cTestApp : public pgn::cSDLApp
 			glm::ivec2 pd = glm::ivec2(j, i) - mDiFi.CornerWcs();
 
 			int v = ((!mDiFi.Data().InRange(pd)) || (mDiFi.Data()(pd)) == std::numeric_limits<float>::max()) 
-				? 140 
-				: std::max(140, 255 - int(10 * mDiFi.Data()(pd))); 
+				? 55 
+				: std::max(55, 255 - int(200 * mDiFi.Data()(pd))); 
 			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 		}
 
