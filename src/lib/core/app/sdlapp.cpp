@@ -55,18 +55,40 @@ namespace pgn
 	//----------------------------------------------------------------------
 	bool cSDLApp::HandleEvents()
 	{
+		// TODO: init values for focus/active? what happens? I need a logger
+		bool focus;
+		bool active;
 		bool quit = false;
-		SDL_Event e;
-		while (SDL_PollEvent(&e)){
-			//If user closes the window
-			if (e.type == SDL_QUIT)
+		SDL_Event event;
+		while (SDL_PollEvent(&event))
+		{
+			switch (event.type)
+			{
+			case SDL_KEYDOWN:
+			case SDL_KEYUP:
+				event.key;
+				break;
+			case SDL_QUIT:
 				quit = true;
-			//If user presses any key
-			if (e.type == SDL_KEYDOWN)
-				quit = true;
-			//If user clicks the mouse
-			if (e.type == SDL_MOUSEBUTTONDOWN)
-				quit = true;
+				break;
+			case SDL_WINDOWEVENT:
+				event.window;
+				break;
+			case SDL_MOUSEWHEEL:
+				event.wheel;
+				break;
+			case SDL_MOUSEMOTION:
+				event.motion;
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+			case SDL_MOUSEBUTTONUP:
+				event.button;
+				break;
+			case SDL_FINGERMOTION:
+			case SDL_FINGERDOWN:
+			case SDL_FINGERUP:
+				break;
+			}
 		}
 		return !quit;
 	}
