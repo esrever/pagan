@@ -27,7 +27,9 @@ struct cTestApp : public pgn::cSDLApp
 {
 	cTestApp(int argc, char ** argv) : pgn::cSDLApp(argc, argv),
 	INIT_EVT_MEMBER(cTestApp, MouseMotion),
-	mMouseOverCell(0,0)
+	INIT_EVT_MEMBER(cTestApp, Keyboard),
+	mMouseOverCell(0,0),
+	mLoS(10)
 	{
 	}
 
@@ -131,6 +133,7 @@ struct cTestApp : public pgn::cSDLApp
 				: std::max(55, 255 - int(200 * mDiFi.Data()(pd))); 
 			// FOV:
 			v = 50 + int(visf(j,i) * 205);
+			v = visf(j, i) > 0.0f ? 255 : 50;
 			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 		}
 
@@ -178,23 +181,18 @@ struct cTestApp : public pgn::cSDLApp
 	// FOV
 	pgn::cArray2D<bool> vismap;
 	pgn::cArray2D<float> visf;
+	size_t mLoS;
 
 	pgn::cSubTexture mTextureFloor;
 	pgn::cSubTexture mTextureWall;
 	pgn::cSubTexture mTextureDoor;
 
-	//DECL_EVT_MEMBER(MouseMotion);
-	void OnMouseMotion(const SDL_MouseMotionEvent& e)
+	void CalcFoV()
 	{
-		mMouseOverCell.x = std::min( e.x / mTileDim, mGridDims.x-1);
-		mMouseOverCell.y = std::min(e.y / mTileDim, mGridDims.y - 1);
-		//mMouseOverCell.y = mGridDims.y - 1 - mMouseOverCell.y;
-
 		// FOV
 		int visBits = pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor | pgn::rlut::eMapData::conn;
-		const int los = 10;
 		pgn::rlut::cFovLookup<pgn::rlut::cFovRsc> flut;
-		auto& fov = flut.Get( los );
+		auto& fov = flut.Get(mLoS);
 		auto& dmap = mDungeon.mMapData;
 		vismap.Resize(dmap.Width(), dmap.Height());
 		visf.Resize(dmap.Width(), dmap.Height(), 0.0f);
@@ -204,7 +202,35 @@ struct cTestApp : public pgn::cSDLApp
 		fov.Calc(mMouseOverCell, vismap, lospts, visf);
 	}
 
+	//DECL_EVT_MEMBER(MouseMotion);
+	void OnMouseMotion(const SDL_MouseMotionEvent& e)
+	{
+		mMouseOverCell.x = std::min( e.x / mTileDim, mGridDims.x-1);
+		mMouseOverCell.y = std::min(e.y / mTileDim, mGridDims.y - 1);
+		//mMouseOverCell.y = mGridDims.y - 1 - mMouseOverCell.y;
+
+		CalcFoV();
+	}
+
+	void OnKeyboard(const SDL_KeyboardEvent& e)
+	{
+		if (e.state == 1)
+		{
+			if (e.keysym.scancode == SDL_SCANCODE_KP_PLUS)
+			{
+				mLoS++;
+				CalcFoV();
+			}
+			else if (e.keysym.scancode == SDL_SCANCODE_KP_MINUS)
+			{
+				mLoS = std::max(size_t(1), size_t(mLoS - 1));
+				CalcFoV();
+			}
+		}
+	}
+
 	DECL_EVT_MEMBER(MouseMotion);
+	DECL_EVT_MEMBER(Keyboard);
 	
 	static const size_t	msTextHeight = 24;
 };
