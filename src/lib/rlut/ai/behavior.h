@@ -26,8 +26,16 @@
 typedef U super;\
 virtual ~ T (){}\
 virtual cBehavior * Clone() const { return new T (*this);}\
+virtual bool SerializeIn(const pugi::xml_node& node);\
+virtual void SerializeOut(pugi::xml_node& node); \
+virtual const char * Type() const { return #T; }\
 T (const T &);\
 T ()
+
+namespace pugi
+{
+	class xml_node;
+}
 
 namespace pgn
 {
@@ -60,6 +68,9 @@ namespace pgn
 			cBehavior() : mStatus(eStatus::Invalid), mPriority(0.0f){};
 			cBehavior(const cBehavior&);
 			virtual ~cBehavior(){}
+			virtual bool SerializeIn(const pugi::xml_node& node);
+			virtual void SerializeOut(pugi::xml_node& node);
+			virtual const char * Type() const { return "Behavior"; };
 
 			virtual eStatus Update(cDict& dict) { return eStatus::Invalid; };
 			virtual void OnInitialize()			{}
@@ -75,6 +86,10 @@ namespace pgn
 			virtual cBehavior * Clone() const { return nullptr; };
 
 			btgetset(float, Priority);
+			btgetset(std::string, Name);
+
+
+			static bool SerializeIn(const pugi::xml_node& node, cBehavior*& ptr);
 
 		private:
 			eStatus mStatus;

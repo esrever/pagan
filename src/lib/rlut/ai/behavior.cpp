@@ -2,10 +2,37 @@
 
 #include <algorithm>
 
+#include <pugixml.hpp>
+
 namespace pgn
 {
 	namespace bt
 	{
+		bool cBehavior::SerializeIn(const pugi::xml_node& node, cBehavior*& ptr)
+		{
+			const std::string name = node.name();
+			if (name == "Repeat")
+				ptr = new cRepeat();
+			else if (name == "Sequence")
+				ptr = new cSequence();
+			else if (name == "Selector")
+				ptr = new cSelector();
+			else if (name == "PrioritySelector")
+				ptr = new cPrioritySelector();
+			else if (name == "Parallel")
+				ptr = new cParallel();
+			else if (name == "ActiveSelector")
+				ptr = new cActiveSelector();
+			else if (name == "Action")
+				ptr = new cAction();
+			else if (name == "Condition")
+				ptr = new cCondition();
+			if (ptr)
+				return ptr->SerializeIn(node);
+			else
+				return false;
+		}
+
 		// ============================================================================
 		cBehavior::cBehavior(const cBehavior& v)
 			:mStatus(v.mStatus)
@@ -55,6 +82,17 @@ namespace pgn
 			return mStatus;
 		}
 
+		bool cBehavior::SerializeIn(const pugi::xml_node& node)
+		{ 
+			mName = node.attribute("name").as_string();
+			return true;
+		}
+
+		void cBehavior::SerializeOut(pugi::xml_node& node)
+		{
+			node.append_attribute("name").set_value(mName.c_str());
+		}
+
 		// ============================================================================
 		cDecorator::cDecorator(const cDecorator& v)
 			:cBehavior(v)
@@ -62,6 +100,18 @@ namespace pgn
 		{
 		}
 
+		bool cDecorator::SerializeIn(const pugi::xml_node& node)
+		{
+			if (!cBehavior::SerializeIn(*node.begin(), mChild))
+				return false;
+			return cBehavior::SerializeIn(node);
+		}
+		void cDecorator::SerializeOut(pugi::xml_node& node)
+		{
+			cBehavior::SerializeOut(node);
+			mChild->SerializeOut(node.append_child(mChild->Type()));
+		}
+		// ============================================================================
 		cRepeat::cRepeat(const cRepeat& v)
 			: cDecorator(v)
 			, mCounter(v.mCounter)
@@ -87,12 +137,46 @@ namespace pgn
 			return eStatus::Invalid;
 		}
 
+		bool cRepeat::SerializeIn(const pugi::xml_node& node)
+		{
+			if (!cDecorator::SerializeIn(node))
+				return false;
+			mCount = node.attribute("count").as_int();
+			return true;
+		}
+		void cRepeat::SerializeOut(pugi::xml_node& node)
+		{
+			cDecorator::SerializeOut(node);
+			node.append_attribute("count").set_value(mCount);
+		}
+
 		// ============================================================================
 		cComposite::cComposite(const cComposite& v)
 			:cBehavior(v)
 			, mChildren(v.mChildren)
 		{
 		}
+
+		bool cComposite::SerializeIn(const pugi::xml_node& node)
+		{
+			if (!cBehavior::SerializeIn(node))
+				return false;
+			for (pugi::xml_node::iterator it = node.children().begin(); it != node.children().end(); ++ it)
+			{
+				mChildren.push_back(nullptr);
+				if (!cBehavior::SerializeIn(*it, mChildren.back()))
+					return false;
+			}
+			return true;
+		}
+		void cComposite::SerializeOut(pugi::xml_node& node)
+		{
+			cBehavior::SerializeOut(node);
+			for (const auto& c : mChildren)
+				c->SerializeOut(node.append_child(c->Type()));
+		}
+
+		// ============================================================================
 
 		cSequence::cSequence(const cSequence& v)
 			: cComposite(v)
@@ -237,6 +321,21 @@ namespace pgn
 			}
 		}
 
+		bool cParallel::SerializeIn(const pugi::xml_node& node)
+		{
+			if (!cComposite::SerializeIn(node))
+				return false;
+			mSuccessPolicy = strcmp( node.attribute("success").as_string(), "any") == 0 ? ePolicy::RequireOne : ePolicy::RequireAll;
+			mFailurePolicy = strcmp(node.attribute("fail").as_string(), "any") == 0 ? ePolicy::RequireOne : ePolicy::RequireAll;
+			return true;
+		}
+		void cParallel::SerializeOut(pugi::xml_node& node)
+		{
+			cComposite::SerializeOut(node);
+			node.append_attribute("success").set_value(mSuccessPolicy == ePolicy::RequireOne ? "any" : "all");
+			node.append_attribute("fail").set_value(mFailurePolicy == ePolicy::RequireOne ? "any" : "all");
+		}
+
 
 		// ============================================================================
 		cActiveSelector::cActiveSelector(const cActiveSelector& v)
@@ -270,11 +369,37 @@ namespace pgn
 		{
 		}
 
+		bool cAction::SerializeIn(const pugi::xml_node& node)
+		{
+			if (!cBehavior::SerializeIn(node))
+				return false;
+			//! TODO: function type retrieval
+			return true;
+		}
+		void cAction::SerializeOut(pugi::xml_node& node)
+		{
+			cBehavior::SerializeOut(node);
+			//! TODO: function type export
+		}
+
 		// ============================================================================
 		cCondition::cCondition(const cCondition& v)
 			: cBehavior(v)
 			, mCondition(v.mCondition)
 		{
+		}
+
+		bool cCondition::SerializeIn(const pugi::xml_node& node)
+		{
+			if (!cBehavior::SerializeIn(node))
+				return false;
+			//! TODO: function type retrieval
+			return true;
+		}
+		void cCondition::SerializeOut(pugi::xml_node& node)
+		{
+			cBehavior::SerializeOut(node);
+			//! TODO: function type export
 		}
 	}
 }
