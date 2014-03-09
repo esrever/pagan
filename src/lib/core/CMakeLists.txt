@@ -14,9 +14,6 @@ set(SOURCE_FILES
     texture/textureatlas.cpp
     serialize/serialize.cpp
     event/event.cpp
-    input/input.cpp
-    input/keyboard.cpp
-    input/mouse.cpp
 #    util/cfgtree.cpp
 #    util/cfgdata.cpp
 #    util/conversions.cpp
@@ -51,9 +48,6 @@ set(HEADER_FILES
     serialize/serialize_glm.hpp
     serialize/serialize_std.hpp
     event/event.h
-    input/input.h
-    input/keyboard.h
-    input/mouse.h
 #    app/application.h
 #    util/textmod.h
 )

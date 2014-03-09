@@ -29,7 +29,9 @@ namespace pgn
 			//! only provide dimensions for the distance field
 			void Init(const index2d_type& dims);
 
-			//! goals and move function are given in RELATIVE coordinates to difi!
+			//! Move function works in world coordinates
+			//! Corner is given in world coordinates
+			//! Goals are given in world coordinates
 			void Generate(movecost_func_type f, const glm::ivec2& corner, const glm::ivec2& goal);
 			void Generate(movecost_func_type f, const glm::ivec2& corner, const std::vector<glm::ivec2>& goals);
 

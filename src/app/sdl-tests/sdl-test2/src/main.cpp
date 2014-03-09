@@ -36,7 +36,7 @@ struct cTestApp : public pgn::cSDLApp
 	//------------------------------------------------
 	virtual void Init()
 	{
-		static const glm::uvec2 gridDims(80,40);
+		static const glm::uvec2 gridDims(40,20);
 		static const size_t  numLines = 4;
 
 		mGridDims = gridDims;
@@ -78,29 +78,6 @@ struct cTestApp : public pgn::cSDLApp
 		};
 		mDiFi.Generate(mfunc, glm::ivec2(35,30));
 #else
-		// DiFi 20,20 is centered at 35,30:
-		mDiFi.Init(glm::ivec2(41, 41));
-		auto mfunc = [&](const glm::ivec2& p0, const glm::ivec2& p1){
-			if (mDungeon.mMapData.InRange(p1))
-				return mDungeon.mMapData(p1) & (pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor | pgn::rlut::eMapData::conn) ? pgn::norm_2(p0 - p1) : std::numeric_limits<float>::max();
-			else
-				return std::numeric_limits<float>::max();
-		};
-		mDiFi.Generate(mfunc, glm::ivec2(15,10), glm::ivec2(35, 30));
-		
-		auto& rawdata = mDiFi.Data().View().Storage().Raw();
-		float minv = std::numeric_limits<float>::max();
-		float maxv = std::numeric_limits<float>::min();
-		for (const auto& v : rawdata)
-		{
-			if (v != std::numeric_limits<float>::max())
-			{
-				minv = std::min(minv, v);
-				maxv = std::max(maxv, v);
-			}
-		}
-		mDiFi.Data().View().VisitW([minv, maxv](float& v){ v = (v - minv) / (maxv - minv); });
-		std::cout << minv << " - " << maxv << std::endl;
 #endif
 	}
 
@@ -132,8 +109,8 @@ struct cTestApp : public pgn::cSDLApp
 				? 55 
 				: std::max(55, 255 - int(200 * mDiFi.Data()(pd))); 
 			// FOV:
-			v = 50 + int(visf(j,i) * 205);
-			v = visf(j, i) > 0.0f ? 255 : 50;
+			//v = 50 + int(visf(j,i) * 205);
+			//v = visf(j, i) > 0.0f ? 255 : 50;
 			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 		}
 
@@ -202,6 +179,37 @@ struct cTestApp : public pgn::cSDLApp
 		fov.Calc(mMouseOverCell, vismap, lospts, visf);
 	}
 
+	void CalcDiFi()
+	{
+		int r = mLoS;
+		// DiFi of 10,10 radius
+		mDiFi.Init(glm::ivec2(r * 2 + 1, r * 2 + 1));
+
+		auto mfunc = [&](const glm::ivec2& p0, const glm::ivec2& p1){
+			if (mDungeon.mMapData.InRange(p1))
+				return mDungeon.mMapData(p1) & (pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor | pgn::rlut::eMapData::conn) ? pgn::norm_2(p0 - p1) : std::numeric_limits<float>::max();
+			else
+				return std::numeric_limits<float>::max();
+		};
+
+		// We feed the corner and the goal in world coordinate
+		mDiFi.Generate(mfunc, mMouseOverCell - glm::ivec2(r, r), mMouseOverCell);
+
+		auto& rawdata = mDiFi.Data().View().Storage().Raw();
+		float minv = std::numeric_limits<float>::max();
+		float maxv = std::numeric_limits<float>::min();
+		for (const auto& v : rawdata)
+		{
+			if (v != std::numeric_limits<float>::max())
+			{
+				minv = std::min(minv, v);
+				maxv = std::max(maxv, v);
+			}
+		}
+		mDiFi.Data().View().VisitW([minv, maxv](float& v){ v = (v - minv) / (maxv - minv); });
+		//std::cout << minv << " - " << maxv << std::endl;
+	}
+
 	//DECL_EVT_MEMBER(MouseMotion);
 	void OnMouseMotion(const SDL_MouseMotionEvent& e)
 	{
@@ -210,6 +218,7 @@ struct cTestApp : public pgn::cSDLApp
 		//mMouseOverCell.y = mGridDims.y - 1 - mMouseOverCell.y;
 
 		CalcFoV();
+		CalcDiFi();
 	}
 
 	void OnKeyboard(const SDL_KeyboardEvent& e)
@@ -220,11 +229,13 @@ struct cTestApp : public pgn::cSDLApp
 			{
 				mLoS++;
 				CalcFoV();
+				CalcDiFi();
 			}
 			else if (e.keysym.scancode == SDL_SCANCODE_KP_MINUS)
 			{
 				mLoS = std::max(size_t(1), size_t(mLoS - 1));
 				CalcFoV();
+				CalcDiFi();
 			}
 		}
 	}
