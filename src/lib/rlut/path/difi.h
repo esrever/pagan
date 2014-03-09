@@ -29,14 +29,20 @@ namespace pgn
 			//! only provide dimensions for the distance field
 			void Init(const index2d_type& dims);
 
-			//! Move function works in world coordinates
-			//! Corner is given in world coordinates
-			//! Goals are given in world coordinates
+			/**
+			* Calculates the distance field in a given area
+			* All parameters are in world coordinate space
+			* @param f		 move cost function, in wcs
+			* @param corner	 The first element of the difi in wcs
+			* @param goal(s) The goal points in wcs
+			*/
 			void Generate(movecost_func_type f, const glm::ivec2& corner, const glm::ivec2& goal);
 			void Generate(movecost_func_type f, const glm::ivec2& corner, const std::vector<glm::ivec2>& goals);
 
 		public:
 			array2d_type& Data() { return mMap; }
+
+			//! Storing this might be a bit redundant
 			const glm::ivec2& CornerWcs() const { return mCornerWcs; }
 
 		private:

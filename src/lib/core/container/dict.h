@@ -69,6 +69,10 @@ namespace pgn
             typedef std::map< key_type, value_type> map_type;
             typedef std::pair<map_type, cObjectMemoryMan> map_and_man_type;
 
+			/**
+			* Gets a value of the given type, if not found return nullptr
+			* @name key key name
+			*/
             template<class T>
             T * Get(const std::string& name)
             {
@@ -80,6 +84,12 @@ namespace pgn
                     return iter->second.Get<T>(name);
             }
 
+
+			/**
+			* Inserts a new value at the given key
+			* @name key key name
+			* @name value value
+			*/
             template<class T>
             void Insert(const std::string& name, const T& value)
             {
@@ -102,6 +112,10 @@ namespace pgn
                 val.first.insert(std::make_pair(name, newobj));
             }
 
+			/**
+			* Erases a value in a given key
+			* @name key key name
+			*/
             template<class T>
             void Erase(const std::string& name)
             {
@@ -120,6 +134,10 @@ namespace pgn
                 }
             }
 
+			/**
+			* Applies a function to the key-value pairs of a given type
+			* @name func a function with the signature void(const string&, const T&)
+			*/
             template<class T>
             void Visit(std::function<void(const std::string& key, const T& val)> func)
             {
