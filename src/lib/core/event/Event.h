@@ -3,6 +3,8 @@
 #include <ssignal.h>
 #include <map>
 
+#include <SDL_events.h>
+
 /**	
 	Usage: 
 
@@ -40,8 +42,8 @@
 	
 */
 
-#define DECL_EVT_MEMBER( N) cEventHandler<evt::c##N##> m##EvtHandleOn##N##;
-#define INIT_EVT_MEMBER(T, N) mEvtHandleOn##N##( Simple::slot(this, &##T##::On##N ));
+#define DECL_EVT_MEMBER( N) pgn::cEventHandler<pgn::evt::c##N##::evt_type> m##EvtHandleOn##N##;
+#define INIT_EVT_MEMBER(T, N) mEvtHandleOn##N##( Simple::slot(this, &##T##::On##N ))
 
 namespace pgn
 {
@@ -157,4 +159,24 @@ namespace pgn
 	};
 	template< size_t N>
 	cActionBindings& cAction<N>::mActionBinding = cActionBindings::Instance().AddFrom<cAction<N> >();
+
+	//! Event-specific stuff
+	namespace evt
+	{
+		enum class eCoreEventId : size_t {
+			Keyboard = 1,
+			MouseMotion,
+			MouseWheel,
+			MouseButton,
+			ApplicationExit,
+			Window
+		};
+
+		typedef cAction<size_t(eCoreEventId::Keyboard), SDL_KeyboardEvent> cKeyboard;
+		typedef cAction<size_t(eCoreEventId::MouseMotion), SDL_MouseMotionEvent> cMouseMotion;
+		typedef cAction<size_t(eCoreEventId::MouseWheel), SDL_MouseWheelEvent> cMouseWheel;
+		typedef cAction<size_t(eCoreEventId::MouseButton), SDL_MouseButtonEvent> cMouseButton;
+		typedef cAction<size_t(eCoreEventId::ApplicationExit)> cApplicationExit;
+		typedef cAction<size_t(eCoreEventId::Window), SDL_WindowEvent> cWindow;
+	}
 }

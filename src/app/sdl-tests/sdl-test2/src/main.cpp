@@ -6,6 +6,7 @@
 
 #include <core/app/sdlapp.h>
 #include <core/app/sdlwin.h>
+#include <core/event/Event.h>
 #include <core/sdl/font.h>
 #include <core/math/norm.h>
 #include <core/texture/texturelib.h>
@@ -14,6 +15,8 @@
 
 #include <rlut/dungen/dungen.h>
 #include <rlut/path/difi.h>
+#include <rlut/fov/FovLookup.h>
+#include <rlut/fov/fov_rsc.h>
 
 #include <core/serialize/serialize.h>
 #include <core/texture/texture.h>
@@ -22,9 +25,10 @@
 
 struct cTestApp : public pgn::cSDLApp
 {
-	cTestApp(int argc, char ** argv) : pgn::cSDLApp(argc, argv)
+	cTestApp(int argc, char ** argv) : pgn::cSDLApp(argc, argv),
+	INIT_EVT_MEMBER(cTestApp, MouseMotion),
+	mMouseOverCell(0,0)
 	{
-
 	}
 
 	//------------------------------------------------
@@ -125,6 +129,8 @@ struct cTestApp : public pgn::cSDLApp
 			int v = ((!mDiFi.Data().InRange(pd)) || (mDiFi.Data()(pd)) == std::numeric_limits<float>::max()) 
 				? 55 
 				: std::max(55, 255 - int(200 * mDiFi.Data()(pd))); 
+			// FOV:
+			v = 50 + int(visf(j,i) * 205);
 			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 		}
 
@@ -133,7 +139,9 @@ struct cTestApp : public pgn::cSDLApp
 		//pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\Nobile\\Nobile-Regular.ttf", 32);
 
 		SDL_Rect textRect;
-		auto texf = font.CreateText("Hello world!",&textRect);
+		char buf[256];
+		sprintf(buf, "%d %d", mMouseOverCell.x, mMouseOverCell.y);
+		auto texf = font.CreateText(buf,&textRect);
 
 		float ar = textRect.w / float(textRect.h);
 
@@ -165,9 +173,38 @@ struct cTestApp : public pgn::cSDLApp
 	glm::uvec2 mLogStart;
 	glm::uvec2 mStatusStart;
 
+	glm::ivec2 mMouseOverCell;
+
+	// FOV
+	pgn::cArray2D<bool> vismap;
+	pgn::cArray2D<float> visf;
+
 	pgn::cSubTexture mTextureFloor;
 	pgn::cSubTexture mTextureWall;
 	pgn::cSubTexture mTextureDoor;
+
+	//DECL_EVT_MEMBER(MouseMotion);
+	void OnMouseMotion(const SDL_MouseMotionEvent& e)
+	{
+		mMouseOverCell.x = std::min( e.x / mTileDim, mGridDims.x-1);
+		mMouseOverCell.y = std::min(e.y / mTileDim, mGridDims.y - 1);
+		//mMouseOverCell.y = mGridDims.y - 1 - mMouseOverCell.y;
+
+		// FOV
+		int visBits = pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor | pgn::rlut::eMapData::conn;
+		const int los = 10;
+		pgn::rlut::cFovLookup<pgn::rlut::cFovRsc> flut;
+		auto& fov = flut.Get( los );
+		auto& dmap = mDungeon.mMapData;
+		vismap.Resize(dmap.Width(), dmap.Height());
+		visf.Resize(dmap.Width(), dmap.Height(), 0.0f);
+		visf.Fill(0.0f);
+		std::vector<glm::ivec2> lospts;
+		vismap.View().VisitWext([&](size_t x, size_t y, std::vector<bool>::reference v) {v = (dmap(x, y) & visBits) ? true : false; });
+		fov.Calc(mMouseOverCell, vismap, lospts, visf);
+	}
+
+	DECL_EVT_MEMBER(MouseMotion);
 	
 	static const size_t	msTextHeight = 24;
 };

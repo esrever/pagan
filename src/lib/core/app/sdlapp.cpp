@@ -6,6 +6,7 @@
 #include <SDL_ttf.h>
 
 #include <core/texture/texturelib.h>
+#include <core/event/Event.h>
 
 #include "sdlwin.h"
 
@@ -55,9 +56,6 @@ namespace pgn
 	//----------------------------------------------------------------------
 	bool cSDLApp::HandleEvents()
 	{
-		// TODO: init values for focus/active? what happens? I need a logger
-		bool focus;
-		bool active;
 		bool quit = false;
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
@@ -66,23 +64,27 @@ namespace pgn
 			{
 			case SDL_KEYDOWN:
 			case SDL_KEYUP:
-				event.key;
+				evt::cKeyboard::Emit(event.key);
+				// TODO: hacky check
+				if (event.key.keysym.sym == 27)
+					quit = true;
 				break;
 			case SDL_QUIT:
+				evt::cApplicationExit::Emit();
 				quit = true;
 				break;
 			case SDL_WINDOWEVENT:
-				event.window;
+				evt::cWindow::Emit(event.window);
 				break;
 			case SDL_MOUSEWHEEL:
-				event.wheel;
+				evt::cMouseWheel::Emit(event.wheel);
 				break;
 			case SDL_MOUSEMOTION:
-				event.motion;
+				evt::cMouseMotion::Emit(event.motion);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
 			case SDL_MOUSEBUTTONUP:
-				event.button;
+				evt::cMouseButton::Emit(event.button);
 				break;
 			case SDL_FINGERMOTION:
 			case SDL_FINGERDOWN:

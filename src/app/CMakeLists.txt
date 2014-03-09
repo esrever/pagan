@@ -24,7 +24,8 @@ set (APP_INCLUDES
     ${pugixml_INCLUDE_DIR}
     ${SDL_INCLUDE_DIR}
     ${SDL_image_INCLUDE_DIR}
-    ${SDL_ttf_INCLUDE_DIR})
+    ${SDL_ttf_INCLUDE_DIR}
+    ${Signal_INCLUDE_DIR})
     
 
 #add_subdirectory(CMakeTest)
