@@ -38,6 +38,8 @@ set(HEADER_FILES
     dungen/constraints.h
     dungen/util.h
     
+    tile/tileinfo.h
+    
     ai/btree.h
     ai/behavior.h
     ai/blackboard.h

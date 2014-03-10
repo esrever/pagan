@@ -15,7 +15,9 @@ namespace pgn {
             ecs.RegisterComponent<cmp::cStats>();
             ecs.RegisterComponent<cmp::cMoveCost>();
             ecs.RegisterComponent<cmp::cTextureSet>();
+            ecs.RegisterComponent<cmp::cLevelData>();
             ecs.RegisterComponent<cmp::cDoorState>();
+            ecs.RegisterComponent<cmp::cWorldData>();
             ecs.RegisterComponent<cmp::cControllerAI>();
             ecs.RegisterComponent<cmp::cControllerPlayer>();
         }

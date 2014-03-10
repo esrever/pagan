@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 
+#include <core/serialize/serialize.h>
 #include <core/container/Array2D.h>
 #include <rlut/path/Astar.h>
 #include "Constraints.h"
@@ -91,4 +92,6 @@ namespace pgn
 			void add_feature_entry_exit();
 		};
 	}
+
+	DECL_SERIALIZE_INTERFACE(rlut::cWorkspace);
 }

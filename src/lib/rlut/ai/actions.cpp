@@ -1,6 +1,7 @@
 #include "actions.h"
 #include "blackboard.h"
 #include <rlut/components/components.h>
+#include <rlut/utils/shape/ShapeCalc.h>
 
 namespace pgn
 {
@@ -26,7 +27,42 @@ namespace pgn
 			pgn::rl::cmp::cLocation * me_loc = me->second.Component<pgn::rl::cmp::cLocation>();
 			pgn::rl::cmp::cLocation * tgt_loc = tgt->second.Component<pgn::rl::cmp::cLocation>();
 
-			return eStatus::Failure;
+
+			// make the distance function
+			auto dfunc = [&](const glm::ivec2& off)->float{
+				auto p = me_loc->mPos + off;
+				// TODO: in range & walkable check
+				bool in_range = true;
+				if (in_range)
+				{
+					return pgn::norm_2(p - tgt_loc->mPos);
+				}
+				else
+					return std::numeric_limits<float>::max();
+			};
+
+			// find the closest point to target
+			auto iters = rlut::cShapeCalc< rlut::cBoxDistance>::Get(0, 1);
+			auto best_it = iters.first;
+			auto best_d = std::numeric_limits<float>::max();
+			for (auto it = iters.first; it != iters.second; ++it)
+			{
+				auto d = dfunc(*it);
+				if (d < best_d)
+				{
+					best_d = d;
+					best_it = it;
+				}
+			}
+
+			if (best_d == std::numeric_limits<float>::max())
+				return eStatus::Failure;
+			else
+			{
+
+				// TODO: MoveAdj action! use the iterator for the direction and the consumed MovePoints
+				return eStatus::Success;
+			}
 		}
 
 		//------------------------------------------------------------------------------------------------------

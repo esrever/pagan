@@ -5,7 +5,6 @@
 
 namespace pgn
 {
-	//! TODO: add/init with actor and world, as they are frequently used entities
 	struct cBlackBoard
 	{
 		//! Persistent general-purpose data
@@ -13,5 +12,12 @@ namespace pgn
 
 		//! Single-round general-purpose data
 		cDict mDictTemp;
+
+		//! TODO: add/init frequently used entities
+		/*
+			entity ThisActor
+			entity World
+			entity ActorLevel
+		*/
 	};
 }

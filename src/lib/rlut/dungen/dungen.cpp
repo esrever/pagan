@@ -679,4 +679,22 @@ namespace pgn
 		}
 
 	}
+
+	//---------------------------------------------------------------------------------------------------
+	void SerializeOut(node_type& writer, const std::string& key, const rlut::cWorkspace & value)
+	{
+		assert(false);
+		//auto& child = writer.append_child(key.c_str());
+		//SerializeOut(child, "Name", value.mName);
+	}
+
+	//---------------------------------------------------------------------------------------------------
+	bool SerializeIn(const node_type& reader, rlut::cWorkspace & value)
+	{
+		
+		//value.mConstraints.
+		// Read tags
+		//SerializeIn(reader, "Tags", value.mTags);
+		return false;
+	}
 }

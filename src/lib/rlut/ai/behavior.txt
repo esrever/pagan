@@ -1,0 +1,10 @@
+Implementing if-then-else nodes:
+
+    <Selector>              // if-then OR elseif-then OR else
+        <Sequence>          //     if AND then
+            <Condition>     //         If
+            <Behavior>      //         then
+        <Sequence>          //     elseif AND then
+            <Condition>     //         If
+            <Behavior>      //         then
+        <Behavior>          //     else
