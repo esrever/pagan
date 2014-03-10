@@ -15,7 +15,7 @@ namespace pgn
 			cBehaviorTree() :mRoot(nullptr){}
 
 			cBehavior * Root() { return mRoot; }
-			void SetRoot(cBehavior * p);
+			void SetRoot(cBehavior * p) { mRoot = p; }
 
 			//! Run a single update on the tree
 			eStatus Tick();

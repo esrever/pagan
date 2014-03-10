@@ -27,11 +27,13 @@
 typedef U super;\
 virtual ~ T (){}\
 virtual cBehavior * Clone() const { return new T (*this);}\
-virtual bool SerializeIn(const pugi::xml_node& node);\
-virtual void SerializeOut(pugi::xml_node& node); \
 virtual const char * Type() const { return #T; }\
 T (const T &);\
 T ()
+
+#define btser \
+virtual bool SerializeIn(const pugi::xml_node& node); \
+virtual void SerializeOut(pugi::xml_node& node); 
 
 namespace pugi
 {
@@ -69,9 +71,8 @@ namespace pgn
 			cBehavior() : mStatus(eStatus::Invalid), mPriority(0.0f){};
 			cBehavior(const cBehavior&);
 			virtual ~cBehavior(){}
-			virtual bool SerializeIn(const pugi::xml_node& node);
-			virtual void SerializeOut(pugi::xml_node& node);
 			virtual const char * Type() const { return "Behavior"; };
+			btser
 
 			virtual eStatus Update(cBlackBoard& bb) { return eStatus::Invalid; };
 			virtual void OnInitialize()			{}
@@ -106,6 +107,7 @@ namespace pgn
 		{
 		public:
 			btcdtor(cDecorator, cBehavior) :mChild(nullptr){}
+			btser
 			btgetset(cBehavior_ptr, Child);
 		};
 
@@ -114,6 +116,7 @@ namespace pgn
 		{
 		public:
 			btcdtor(cRepeat, cDecorator) :mCount(-1), mCounter(0){}
+			btser
 			btgetset(int, Count);
 			btgetset(int, Counter);
 
@@ -127,6 +130,7 @@ namespace pgn
 		{
 		public:
 			btcdtor(cComposite, cBehavior){}
+			btser
 			cBehavior * AddChild(cBehavior* child) { mChildren.push_back(child); return this; }
 		protected:
 			cBehavior_ptrs mChildren;
@@ -178,6 +182,7 @@ namespace pgn
 			};
 
 			btcdtor(cParallel, cComposite) :mSuccessPolicy(RequireOne), mFailurePolicy(RequireAll){}
+			btser
 			btgetset(ePolicy, SuccessPolicy);
 			btgetset(ePolicy, FailurePolicy);
 
@@ -205,6 +210,7 @@ namespace pgn
 		public:
 			typedef std::function<eStatus(cBlackBoard&)> func_type;
 			btcdtor(cAction, cBehavior){}
+			btser
 			btgetset(func_type, Action);
 
 			static void Register(const std::string& s, func_type f) { msFuncs[s] = f; }
@@ -221,6 +227,7 @@ namespace pgn
 		public:
 			typedef std::function<bool(cBlackBoard&)> func_type;
 			btcdtor(cCondition, cBehavior){}
+			btser
 			btgetset(func_type, Condition);
 
 			static void Register(const std::string& s, func_type f) { msFuncs[s] = f; }

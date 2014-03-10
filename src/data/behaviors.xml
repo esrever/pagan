@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='us-ascii'?>
+<?xml version="1.0" encoding="us-ascii"?>
 <Sequence name="basic-ai">
     <Action name="SenseHostiles"/>
     <Selector name="detect-hostiles-ITE">
@@ -14,6 +14,6 @@
                 <Action name="ApproachTarget"/>
             </Selector>
         </Sequence>
-        <Action name = "Wander">
+        <Action name = "Wander"/>
     </Selector>
 </Sequence>

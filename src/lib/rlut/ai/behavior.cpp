@@ -375,13 +375,13 @@ namespace pgn
 		{
 			if (!cBehavior::SerializeIn(node))
 				return false;
-			//! TODO: function type retrieval
+			mAction = msFuncs[GetName()];
 			return true;
 		}
 		void cAction::SerializeOut(pugi::xml_node& node)
 		{
 			cBehavior::SerializeOut(node);
-			//! TODO: function type export
+			// TODO: export
 		}
 
 		// ============================================================================
@@ -396,13 +396,13 @@ namespace pgn
 		{
 			if (!cBehavior::SerializeIn(node))
 				return false;
-			//! TODO: function type retrieval
+			mCondition = msFuncs[GetName()];
 			return true;
 		}
 		void cCondition::SerializeOut(pugi::xml_node& node)
 		{
 			cBehavior::SerializeOut(node);
-			//! TODO: function type export
+			// TODO: export
 		}
 	}
 }
