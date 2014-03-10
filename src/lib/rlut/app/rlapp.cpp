@@ -6,12 +6,19 @@
 
 #include <core/texture/texturelib.h>
 
+#include <rlut/ai/actions.h>
+#include <rlut/ai/conditions.h>
+
 namespace pgn
 {
 	namespace rlut
 	{
 		void cRlApp::Init()
 		{
+			// Initialize AI-related
+			pgn::bt::RegisterActions();
+			pgn::bt::RegisterConditions();
+
 			static const glm::uvec2 gridDims(80, 40);
 			static const size_t  numLines = 4;
 

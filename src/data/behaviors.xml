@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='us-ascii'?>
+<Sequence name="basic-ai">
+    <Action name="SenseHostiles"/>
+    <Selector name="detect-hostiles-ITE">
+        <Sequence name="detect-hostiles-IT">
+            <Condition name="HostilesDetected"/>
+            <Action name="SelectTarget"/>
+            <Action name="DistanceToTarget"/>
+            <Selector name="melee-distance-ITE">
+                <Sequence name="melee-distance-IT">
+                    <Condition name="TargetInMeleeDistance"/>
+                    <Action name="MeleeAttackTarget"/>
+                </Sequence>
+                <Action name="ApproachTarget"/>
+            </Selector>
+        </Sequence>
+        <Action name = "Wander">
+    </Selector>
+</Sequence>

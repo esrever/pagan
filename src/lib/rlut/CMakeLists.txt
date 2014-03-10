@@ -1,3 +1,8 @@
+file(GLOB_RECURSE COMPONENT_SRCS
+         RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+         ${CMAKE_CURRENT_SOURCE_DIR}/components/*.cpp
+         ${CMAKE_CURRENT_SOURCE_DIR}/components/*.h)
+
 set(SOURCE_FILES
     app/rlapp.cpp
     path/Astar.cpp
@@ -38,6 +43,7 @@ set(HEADER_FILES
     ai/blackboard.h
     ai/actions.h
     ai/conditions.h
+    ${COMPONENT_SRCS}
 )
 
 add_definitions(

@@ -15,7 +15,7 @@ namespace pgn
 	}
 
 	template<class T>
-	static bool read_glm(pugi::xml_node& reader, int components, T * val)
+	static bool read_glm(const pugi::xml_node& reader, int components, T * val)
 	{
 		const char * s = "xyzw";
 		for (int i = 0; i < components; ++i)
@@ -34,7 +34,7 @@ namespace pgn
 
 	template<class T> inline bool SerializeIn(const pugi::xml_node& reader, glm::detail::tvec2<T>& val)
 	{
-		read_glm(reader, 2, &val.x);
+		return read_glm(reader, 2, &val.x);
 	}
 
 	// vec3
