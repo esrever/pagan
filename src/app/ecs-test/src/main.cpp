@@ -12,6 +12,7 @@ extern pgn::cMain g_app;
 int main(int argc, char ** argv)
 {
 	pgn::mainapp() = new pgn::cSDLApp(argc,argv);
+	pgn::mainecs() = new pgn::cECS();
 	pgn::mainapp()->Init();
 	//pgn::mainapp()->Resources<pgn::cTextureLib>("")->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tilemap.png","");
 	pgn::mainapp()->Resources<pgn::cTextureLib>("")->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml", "");
@@ -33,4 +34,6 @@ int main(int argc, char ** argv)
 	}
 
 	pgn::mainapp()->Destroy();
+	delete pgn::mainapp();
+	delete pgn::mainecs();
 }

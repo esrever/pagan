@@ -5,6 +5,11 @@
 
 namespace pgn
 {
+	cECS& ECS()
+	{
+		return *mainecs();
+	}
+
 	//---------------------------------------------------------------------------------------------------
 	cECS::cEntityWithData cECS::Create(const cEntityData& ed)
 	{

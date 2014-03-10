@@ -36,7 +36,7 @@ struct cTestApp : public pgn::cSDLApp
 	//------------------------------------------------
 	virtual void Init()
 	{
-		static const glm::uvec2 gridDims(40,20);
+		static const glm::uvec2 gridDims(80,40);
 		static const size_t  numLines = 4;
 
 		mGridDims = gridDims;

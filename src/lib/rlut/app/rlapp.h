@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 
 #include <core/app/sdlapp.h>
+#include <ecs/ecs.h>
 #include <rlut/dungen/dungen.h>
 
 namespace pgn
@@ -39,6 +40,8 @@ namespace pgn
 			glm::uvec2 mGridStart;
 			glm::uvec2 mLogStart;
 			glm::uvec2 mStatusStart;
+
+			cECS	   mECS;
 
 			static const size_t	msTextHeight = 20;
 		};

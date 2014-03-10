@@ -10,6 +10,7 @@
 namespace pgn
 {
 	class cSDLWindow;
+	class cECS;
 
 	class cSDLApp
 	{
@@ -40,8 +41,10 @@ namespace pgn
     struct cMain
     {
         cSDLApp * mApp;
+		cECS * mECS;
     };
     
 	cSDLApp *& mainapp();
+	cECS *& mainecs();
 }
 

@@ -35,6 +35,7 @@ namespace pgn
 			* @param f		 move cost function, in wcs
 			* @param corner	 The first element of the difi in wcs
 			* @param goal(s) The goal points in wcs
+			* TODO: instead of just goals, set weights for goals as well!
 			*/
 			void Generate(movecost_func_type f, const glm::ivec2& corner, const glm::ivec2& goal);
 			void Generate(movecost_func_type f, const glm::ivec2& corner, const std::vector<glm::ivec2>& goals);

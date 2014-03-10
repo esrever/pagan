@@ -14,6 +14,7 @@ namespace pgn
 {
 	static cMain g_app = cMain();
 	cSDLApp *& mainapp() { return g_app.mApp; }
+	cECS *& mainecs() { return g_app.mECS; }
 
 	//----------------------------------------------------------------------
 	cSDLApp::cSDLApp(int argc, char ** argv)

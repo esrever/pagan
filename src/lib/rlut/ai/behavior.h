@@ -40,7 +40,7 @@ namespace pugi
 namespace pgn
 {
 
-	class cDict;
+	struct cBlackBoard;
 
 	namespace bt
 	{
@@ -72,12 +72,12 @@ namespace pgn
 			virtual void SerializeOut(pugi::xml_node& node);
 			virtual const char * Type() const { return "Behavior"; };
 
-			virtual eStatus Update(cDict& dict) { return eStatus::Invalid; };
+			virtual eStatus Update(cBlackBoard& bb) { return eStatus::Invalid; };
 			virtual void OnInitialize()			{}
 			virtual void OnTerminate(eStatus)	{}
 			cBehavior * AddChild(cBehavior*) { return this; }
 
-			eStatus Tick(cDict& dict);
+			eStatus Tick(cBlackBoard& bb);
 			void Reset();
 			void Abort();
 			bool IsTerminated() const;
@@ -117,7 +117,7 @@ namespace pgn
 			btgetset(int, Counter);
 
 			void OnInitialize();
-			eStatus Update(cDict& dict);
+			eStatus Update(cBlackBoard& bb);
 		};
 
 		// ============================================================================
@@ -138,7 +138,7 @@ namespace pgn
 			btcdtor(cSequence, cComposite){}
 		protected:
 			virtual void OnInitialize();
-			virtual eStatus Update(cDict& dict);
+			virtual eStatus Update(cBlackBoard& bb);
 
 		protected:
 			cBehavior_ptrs::iterator mCurrentChild;
@@ -152,7 +152,7 @@ namespace pgn
 			btcdtor(cSelector, cComposite){}
 		protected:
 			virtual void OnInitialize();
-			virtual eStatus Update(cDict& dict);
+			virtual eStatus Update(cBlackBoard& bb);
 		protected:
 			cBehavior_ptrs::iterator mCurrent;
 		};
@@ -163,7 +163,7 @@ namespace pgn
 		public:
 			btcdtor(cPrioritySelector, cSelector){}
 		protected:
-			virtual eStatus Update(cDict& dict);
+			virtual eStatus Update(cBlackBoard& bb);
 		};
 
 		// ============================================================================
@@ -181,7 +181,7 @@ namespace pgn
 			btgetset(ePolicy, FailurePolicy);
 
 		protected:
-			virtual eStatus Update(cDict& dict);
+			virtual eStatus Update(cBlackBoard& bb);
 			virtual void OnTerminate(eStatus);
 		};
 
@@ -193,7 +193,7 @@ namespace pgn
 
 		protected:
 			virtual void OnInitialize();
-			virtual eStatus Update(cDict& dict);
+			virtual eStatus Update(cBlackBoard& bb);
 		};
 
 
@@ -202,21 +202,21 @@ namespace pgn
 		class cAction : public cBehavior
 		{
 		public:
-			typedef std::function<eStatus(cDict&)> func_type;
+			typedef std::function<eStatus(cBlackBoard&)> func_type;
 			btcdtor(cAction, cBehavior){}
 			btgetset(func_type, Action)
 		protected:
-			virtual eStatus Update(cDict& dict) { return mAction(dict); }
+			virtual eStatus Update(cBlackBoard& bb) { return mAction(bb); }
 		};
 
 		class cCondition : public cBehavior
 		{
 		public:
-			typedef std::function<bool(cDict&)> func_type;
+			typedef std::function<bool(cBlackBoard&)> func_type;
 			btcdtor(cCondition, cBehavior){}
 			btgetset(func_type, Condition)
 		protected:
-			virtual eStatus Update(cDict& dict) { return mCondition(dict) ? eStatus::Success : eStatus::Failure; }
+			virtual eStatus Update(cBlackBoard& bb) { return mCondition(bb) ? eStatus::Success : eStatus::Failure; }
 
 		};
 	}

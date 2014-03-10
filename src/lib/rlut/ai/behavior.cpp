@@ -40,14 +40,14 @@ namespace pgn
 		{
 		}
 
-		eStatus cBehavior::Tick(cDict& dict)
+		eStatus cBehavior::Tick(cBlackBoard& bb)
 		{
 			if (mStatus != eStatus::Running)
 			{
 				OnInitialize();
 			}
 
-			mStatus = Update(dict);
+			mStatus = Update(bb);
 
 			if (mStatus != eStatus::Running)
 			{
@@ -124,11 +124,11 @@ namespace pgn
 			mCounter = 0;
 		}
 
-		eStatus cRepeat::Update(cDict& dict)
+		eStatus cRepeat::Update(cBlackBoard& bb)
 		{
 			for (;;)
 			{
-				GetChild()->Tick(dict);
+				GetChild()->Tick(bb);
 				if (GetChild()->GetStatus() == eStatus::Running) break;
 				if (GetChild()->GetStatus() == eStatus::Failure) return eStatus::Failure;
 				if (++mCounter == mCount) return eStatus::Success;
@@ -189,12 +189,12 @@ namespace pgn
 			mCurrentChild = mChildren.begin();
 		}
 
-		eStatus cSequence::Update(cDict& dict)
+		eStatus cSequence::Update(cBlackBoard& bb)
 		{
 			// Keep going until a child behavior says it's running.
 			for (;;)
 			{
-				eStatus s = (*mCurrentChild)->Tick(dict);
+				eStatus s = (*mCurrentChild)->Tick(bb);
 
 				// If the child fails, or keeps running, do the same.
 				if (s != eStatus::Success)
@@ -223,12 +223,12 @@ namespace pgn
 		}
 
 
-		eStatus cSelector::Update(cDict& dict)
+		eStatus cSelector::Update(cBlackBoard& bb)
 		{
 			// Keep going until a child behavior says its running.
 			for (;;)
 			{
-				eStatus s = (*mCurrent)->Tick(dict);
+				eStatus s = (*mCurrent)->Tick(bb);
 
 				// If the child succeeds, or keeps running, do the same.
 				if (s != eStatus::Failure)
@@ -250,11 +250,11 @@ namespace pgn
 		{
 		}
 
-		eStatus cPrioritySelector::Update(cDict& dict)
+		eStatus cPrioritySelector::Update(cBlackBoard& bb)
 		{
 			// TODO: no need to do it if priorities not changed
 			std::sort(mChildren.begin(), mChildren.end(), [](const cBehavior * lhs, const cBehavior * rhs){ return lhs->GetPriority() > rhs->GetPriority();  });
-			return cSelector::Update(dict);
+			return cSelector::Update(bb);
 		}
 
 		// ============================================================================
@@ -265,7 +265,7 @@ namespace pgn
 		{
 		}
 
-		eStatus cParallel::Update(cDict& dict)
+		eStatus cParallel::Update(cBlackBoard& bb)
 		{
 			size_t iSuccessCount = 0, iFailureCount = 0;
 
@@ -274,7 +274,7 @@ namespace pgn
 				cBehavior& b = **it;
 				if (!b.IsTerminated())
 				{
-					b.Tick(dict);
+					b.Tick(bb);
 				}
 
 				if (b.GetStatus() == eStatus::Success)
@@ -348,12 +348,12 @@ namespace pgn
 			mCurrent = mChildren.end();
 		}
 
-		eStatus cActiveSelector::Update(cDict& dict)
+		eStatus cActiveSelector::Update(cBlackBoard& bb)
 		{
 			auto previous = mCurrent;
 
 			cSelector::OnInitialize();
-			eStatus result = cSelector::Update(dict);
+			eStatus result = cSelector::Update(bb);
 
 			if (previous != mChildren.end() && mCurrent != previous)
 			{

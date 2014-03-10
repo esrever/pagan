@@ -8,6 +8,7 @@
 #include <typeinfo>
 #include <typeindex>
 
+#include <core/app/sdlapp.h>
 #include <core/util/singleton.h>
 #include <core/util/idgen.h>
 
@@ -61,7 +62,7 @@ namespace pgn
 		std::vector< std::type_index>		  mComponentTypeIds;
 	};
 
-	static inline cECS& ECS() { return pgn::cSingleton<pgn::cECS>::Instance(); }
+	cECS& ECS();
 
 	DECL_SERIALIZE_INTERFACE(cECS);
 

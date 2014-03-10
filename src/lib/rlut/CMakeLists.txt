@@ -14,6 +14,8 @@ set(SOURCE_FILES
     
     ai/btree.cpp
     ai/behavior.cpp
+    ai/actions.cpp
+    ai/conditions.cpp
 )
 
 set(HEADER_FILES
@@ -33,6 +35,9 @@ set(HEADER_FILES
     
     ai/btree.h
     ai/behavior.h
+    ai/blackboard.h
+    ai/actions.h
+    ai/conditions.h
 )
 
 add_definitions(
