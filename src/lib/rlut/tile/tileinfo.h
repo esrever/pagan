@@ -4,31 +4,36 @@
 
 namespace pgn
 {
-	struct cTileInfo
+	namespace rl
 	{
-		//! LightLevel: obtain from nearby torches, etc
-		struct cGeneralInfo;
+		struct cTileInfo
+		{
+			cTileInfo();
 
-		//! required
-		// floor, wall, etc
-		// has default, overridable movecost
-		cECS::cEntityWithData mBg;
+			//! LightLevel: obtain from nearby torches, etc
+			struct cGeneralInfo;
 
-		//! optional
-		// door,stairs,bridge, statue, chest, etc
-		// has default, overridable movecost
-		cECS::cEntityWithData mFg;
+			//! required
+			// floor, wall, etc
+			// has default, overridable movecost
+			cECS::cEntityWithDataConst mBg;
 
-		//! optional
-		// mist, poison cloud, web, firewall, etc
-		// has default, overridable movecost
-		std::vector<cECS::cEntityWithData> mAtmo;
+			//! optional
+			// door,stairs,bridge, statue, chest, etc
+			// has default, overridable movecost
+			cECS::cEntityWithDataConst mFg;
 
-		//! optional
-		std::vector<cECS::cEntityWithData> mItems;
+			//! optional
+			// mist, poison cloud, web, firewall, etc
+			// has default, overridable movecost
+			std::vector<cECS::cEntityWithDataConst> mAtmo;
 
-		//! optional
-		// has default, overridable movecost
-		cECS::cEntityWithData mActor;
-	};
+			//! optional
+			std::vector<cECS::cEntityWithDataConst> mItems;
+
+			//! optional
+			// has default, overridable movecost
+			cECS::cEntityWithDataConst mActor;
+		};
+	}
 }

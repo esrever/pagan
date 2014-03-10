@@ -691,10 +691,30 @@ namespace pgn
 	//---------------------------------------------------------------------------------------------------
 	bool SerializeIn(const node_type& reader, rlut::cWorkspace & value)
 	{
+		size_t roomNum;
+		glm::ivec2 dims;
+		SerializeIn(reader, "ConnectIslands", value.mConstraints.mConnectIslands, true);
+		SerializeIn(reader, "DoorsPerRoom", value.mConstraints.mDoorsPerRoom, glm::ivec2(1, 4));
+		SerializeIn(reader, "DoorToDoorMinDistance", value.mConstraints.mDoorToDoorMinDistance, glm::ivec2(2, 2));
+		SerializeIn(reader, "OverrideMaxConns", value.mConstraints.mOverrideMaxConns, true);
+		SerializeIn(reader, "RandomEntryExit", value.mConstraints.mRandomEntryExit, false);
+		SerializeIn(reader, "RoomRectH", value.mConstraints.mRoomRectH, glm::ivec2(3, 12));
+		SerializeIn(reader, "RoomRectW", value.mConstraints.mRoomRectW, glm::ivec2(3, 12));
+		SerializeIn(reader, "StoreRoomConnectivity", value.mConstraints.mStoreRoomConnectivity, true);
+		SerializeIn(reader, "Rooms", roomNum, size_t(1000000));
+		SerializeIn(reader, "Dims", dims, glm::ivec2(80,40));
 		
-		//value.mConstraints.
-		// Read tags
-		//SerializeIn(reader, "Tags", value.mTags);
-		return false;
+
+		value.Init(dims.x, dims.y);
+		//ws.Init(150, 50);
+		//ws.Init(10, 20);
+		//initscr();ws.Init(COLS-1, LINES-1);
+		//timeBeginPeriod(1);
+		//auto t0 = timeGetTime();
+		value.generate_dungeon(roomNum);
+
+		value.add_feature_entry_exit();
+
+		return true;
 	}
 }

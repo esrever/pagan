@@ -16,6 +16,9 @@ namespace pgn
 	{
 		void cRlApp::Init()
 		{
+			// TODO: somewhere else? configurable?
+			srand(0);
+
 			// Initialize AI-related
 			pgn::bt::RegisterActions();
 			pgn::bt::RegisterConditions();

@@ -10,6 +10,8 @@ set(SOURCE_FILES
     path/difi.cpp
     fov/fov_rsc.cpp
     
+    tile/tileinfo.cpp
+    
     dungen/room.cpp
     dungen/area.cpp
     dungen/corr.cpp
