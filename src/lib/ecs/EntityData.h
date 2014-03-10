@@ -5,6 +5,7 @@
 
 #include "ecs-config.h"
 #include "ComponentBase.h"
+#include "Component.h"
 
 namespace pgn
 {
@@ -14,6 +15,9 @@ namespace pgn
 		cEntityData() :mArchetype(nullptr){};
 		void AddComponent(cComponentBase_sptr comp);
 		void SetArchetype(const cEntityData& arch);
+
+		template<class T>
+		T * Component();
 
 	public:
 		std::string							mName;
@@ -30,4 +34,11 @@ namespace pgn
 	};
 
 	DECL_SERIALIZE_INTERFACE(cEntityData);
+
+	//--------------------------------------------------------
+	template<class T>
+	T * cEntityData::Component()
+	{
+		return std::dynamic_pointer_cast<T>(mComponents[cComponent<T>::StaticTypeIndex()]).get();
+	}
 }
