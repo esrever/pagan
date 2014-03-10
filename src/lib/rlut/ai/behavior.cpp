@@ -363,6 +363,8 @@ namespace pgn
 		}
 
 		// ============================================================================
+		std::map<std::string, cAction::func_type> cAction::msFuncs;
+
 		cAction::cAction(const cAction& v)
 			: cBehavior(v)
 			, mAction(v.mAction)
@@ -383,6 +385,7 @@ namespace pgn
 		}
 
 		// ============================================================================
+		std::map<std::string, cCondition::func_type> cCondition::msFuncs;
 		cCondition::cCondition(const cCondition& v)
 			: cBehavior(v)
 			, mCondition(v.mCondition)

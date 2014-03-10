@@ -1,10 +1,15 @@
 #pragma once
 
+#include "behavior.h"
+
 namespace pgn
 {
 	namespace bt
 	{
 		void RegisterConditions();
+
+		bool HostilesDetected(cBlackBoard&);
+		bool TargetInMeleeDistance(cBlackBoard&);
 
 		//! Later on, some complex conditions might write their result to the blackboard
 

@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <memory>
 #include <vector>
+#include <map>
 #include <functional>
 
 #define CLONE_DECL(T) virtual cBehavior * clone() const { return new T (*this);};
@@ -204,9 +205,15 @@ namespace pgn
 		public:
 			typedef std::function<eStatus(cBlackBoard&)> func_type;
 			btcdtor(cAction, cBehavior){}
-			btgetset(func_type, Action)
+			btgetset(func_type, Action);
+
+			static void Register(const std::string& s, func_type f) { msFuncs[s] = f; }
+			const std::map<std::string, func_type>& Funcs() const { return msFuncs; }
+
 		protected:
 			virtual eStatus Update(cBlackBoard& bb) { return mAction(bb); }
+		private:
+			static std::map<std::string,func_type> msFuncs;
 		};
 
 		class cCondition : public cBehavior
@@ -214,10 +221,15 @@ namespace pgn
 		public:
 			typedef std::function<bool(cBlackBoard&)> func_type;
 			btcdtor(cCondition, cBehavior){}
-			btgetset(func_type, Condition)
+			btgetset(func_type, Condition);
+
+			static void Register(const std::string& s, func_type f) { msFuncs[s] = f; }
+			const std::map<std::string, func_type>& Funcs() const { return msFuncs; }
+
 		protected:
 			virtual eStatus Update(cBlackBoard& bb) { return mCondition(bb) ? eStatus::Success : eStatus::Failure; }
-
+		private:
+			static std::map<std::string, func_type> msFuncs;
 		};
 	}
 }
