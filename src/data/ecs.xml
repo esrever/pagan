@@ -64,11 +64,16 @@
                 <DoorsPerRoom x="1" y="4">
             </DunGen>
             <Tiles>
-                <Floor value="FloorTile_def"/>
-                <Wall value="WallTile_def"/>
-                <Door value = "Door_def"/>
-                <GateEnter value="GateEnter_def"/>
-                <GateExit value="GateExit_def"/>
+                <key value="Floor"/>
+                <value value="FloorTile_def"/>
+                <key value="Wall"/>
+                <value value="WallTile_def"/>
+                <key value="Door"/>
+                <value value = "Door_def"/>
+                <key value="GateEnter"/>
+                <value value="GateEnter_def"/>
+                <key value="GateExit"/>
+                <value value="GateExit_def"/>
             </Tiles>
         </TileMap>
       </LevelData>
