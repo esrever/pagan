@@ -1,0 +1,74 @@
+New approach:
+    Simple serialize types      : serialize as attribute
+        PODs
+        std::string
+        
+        <node key0="val0" key1="val1"> ...
+        
+    Complex serialize types     : serialize as node
+        structs
+            <key member0="v0" member1="v1">
+                <member2 x="3" y="4">
+                <member3>
+                    <array_elem value="val0">
+                <member4 mm2="v0" mm2b="v1">
+                ...
+                
+        glm vectors
+            <key x="3" y="5">
+        std containers
+            vector:
+                <key>
+                    <array_elem value="val0">
+                    <array_elem value="val1">
+            map:
+                <key>
+                    <map_elem key="key0" value="val0">
+                    <map_elem key="key1" value="val1">
+            map complex
+                <key_glm>
+                    <key x="2" y="3" z="4">
+                
+                <key_vector>
+                    <key>
+                        <array_elem value="val0">
+                        
+                <key_vector_of_structs>
+                    <key>
+                        <array_elem m0="val0" m1="val1">
+                            <m2 x="3">
+                            ...
+            set: like array
+                    
+    Other
+        Pointers (raw, shared, weak, unique)
+        
+        
+    
+
+
+
+//////////////////////////////////
+How to serialize out:
+    SerializeOut(node, key, value)
+    
+    If we want to serialize a struct:
+        child = node.append_child(key)
+            SerializeOut(child, "member", mMember)
+            ...
+
+How to serialize in:
+    SerializeIn(node, value)
+    
+    If we want to serialize a struct:
+        SerializeIn( node.child("member") , mMember)
+        ...
+        
+Supported types:
+    PODs
+    glm
+    std
+
+How to add types to serialize:
+
+Notes:

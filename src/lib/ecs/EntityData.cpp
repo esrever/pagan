@@ -47,6 +47,28 @@ namespace pgn
 	}
 
 	//---------------------------------------------------------------------------------------------------
+	void SerializeOut(node_type& writer, const std::string& key, const std::vector<cComponentBase_sptr> & value)
+	{
+		auto& cchild = writer.append_child(key.c_str());
+		for (const auto& c : value)
+		{
+			if (c)
+			{
+				SerializeOut(cchild, ECS().ComponentTypeNames[c->TypeIndex()], c);
+			}
+		}
+	}
+
+	//---------------------------------------------------------------------------------------------------
+	bool SerializeIn(const node_type& reader, const std::string& key, std::vector<cComponentBase_sptr> & value)
+	{
+		for (auto it = reader.begin(); it != reader.end(); ++it)
+		{
+
+		}
+	}
+
+	//---------------------------------------------------------------------------------------------------
 	void SerializeOut(node_type& writer, const std::string& key, const cEntityData & value)
 	{
 		auto& child = writer.append_child(key.c_str());

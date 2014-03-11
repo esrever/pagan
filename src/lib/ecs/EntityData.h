@@ -34,6 +34,7 @@ namespace pgn
 	};
 
 	DECL_SERIALIZE_INTERFACE(cEntityData);
+	DECL_SERIALIZE_INTERFACE(std::vector<cComponentBase_sptr>);
 
 	//--------------------------------------------------------
 	template<class T>
