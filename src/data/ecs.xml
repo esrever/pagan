@@ -1,37 +1,80 @@
 <?xml version="1.0"?>
-<Entities>
-    <Entity archetype = "true">
-        <Name value = "Door_archetype"/>
-        <Components>
-            <TextureSet>
-                <Sprites>
-                    <array_elem value="::dungeon:dngn_open_door"/>
-                    <array_elem value="::dungeon:dngn_closed_door"/>
-                    <array_elem value="::dungeon:dngn_detected_secret_door"/>
-                </Sprites>
-            </TextureSet>
-            <DoorState>
-                <State value = "1" />
-            </DoorState>
-        </Components>
-        <Tags>
-            <array_elem value="tag0"/>
-            <array_elem value="tag1"/>
-            <array_elem value="tag2"/>
-        </Tags>
-    </Entity>
-    <Entity archetype = "false">
-        <Name value = "OpenDoor"/>
-        <Archetype value = "Door_archetype"/>
-        <Components>
-            <DoorState>
-                <State value = "0" />
-            </DoorState>
-        </Components>
-        <Tags>
-            <array_elem value="tag3"/>
-            <array_elem value="tag1"/>
-            <array_elem value="tag2"/>
-        </Tags>
-    </Entity>
+<Entities>  
+  <Entity name ="FloorTile_def">
+    <Components>
+      <TextureSet>
+        <Sprites>
+          <array_elem value="::dungeon:floor:rect_gray0"/>
+        </Sprites>
+      </TextureSet>
+      <MoveCost MoveCost="1">
+    </Components>
+  </Entity>
+  
+  <Entity name ="WallTile_def">
+    <Components>
+      <TextureSet>
+        <Sprites>
+          <array_elem value="::dungeon:wall:marble_wall1"/>
+        </Sprites>
+      </TextureSet>
+      <MoveCost MoveCost="1e1000">
+    </Components>
+  </Entity>
+  
+  <Entity name ="Door_def">
+    <Components>
+      <TextureSet>
+        <Sprites>
+          <array_elem value="::dungeon:dngn_open_door"/>
+          <array_elem value="::dungeon:dngn_closed_door"/>
+          <array_elem value="::dungeon:dngn_detected_secret_door"/>
+        </Sprites>
+      </TextureSet>
+      <DoorState State="0">
+    </Components>
+  </Entity>
+  
+  <Entity name ="GateEnter_def">
+    <Components>
+      <TextureSet>
+        <Sprites>
+          <array_elem value="::dungeon:gateways:stone_stairs_down"/>
+        </Sprites>
+      </TextureSet>
+    </Components>
+  </Entity>
+  
+  <Entity name ="GateExit_def">
+    <Components>
+      <TextureSet>
+        <Sprites>
+          <array_elem value="::dungeon:gateways:stone_stairs_up"/>
+        </Sprites>
+      </TextureSet>
+    </Components>
+  </Entity>
+  
+  <Entity name ="Level">
+    <Components>
+      <LevelData Id = "1">
+        <TileMap>
+            <DunGen>
+                <Dims x="80" y="40">
+                <DoorsPerRoom x="1" y="4">
+            </DunGen>
+            <Tiles>
+                <Floor value="FloorTile_def"/>
+                <Wall value="WallTile_def"/>
+                <Door value = "Door_def"/>
+                <GateEnter value="GateEnter_def"/>
+                <GateExit value="GateExit_def"/>
+            </Tiles>
+        </TileMap>
+      </LevelData>
+    </Components>
+    <Tags>
+      <array_elem value="CurrentLevel"/>
+    </Tags>
+  </Entity>
 </Entities>

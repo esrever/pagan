@@ -47,6 +47,7 @@ set(HEADER_FILES
     ai/blackboard.h
     ai/actions.h
     ai/conditions.h
+    
     ${COMPONENT_SRCS}
 )
 
@@ -56,6 +57,8 @@ add_definitions(
 
 source_group("Sources" FILES ${SOURCE_FILES})
 source_group("Headers" FILES ${HEADER_FILES})
+source_group("_Components" FILES ${COMPONENT_SRCS})
+
 
 include_directories(
     ${PROJECT_SOURCE_DIR}/lib
