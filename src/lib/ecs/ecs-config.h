@@ -28,8 +28,8 @@ typedef std::unique_ptr< T > T##_uptr;
 	public:\
 	virtual ~ T (){}\
 	protected:\
-	virtual void SerializeOut(node_type& writer, const std::string& key) const {  }\
-	virtual bool SerializeIn(const node_type& reader)  { return false; };\
-	friend void SerializeOut(node_type& writer, const std::string& key, const T & value);\
-	friend bool SerializeIn(const node_type& reader, T & value);\
+	virtual void SerializeOut(node_type& writer) const {  }\
+	virtual size_t SerializeIn(const node_type& reader)  { return 0; };\
+	friend void SerializeOut(node_type& writer, const T & value);\
+	friend size_t SerializeIn(const node_type& reader, T & value);\
 	private:

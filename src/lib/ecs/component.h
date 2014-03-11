@@ -17,8 +17,8 @@ namespace pgn
 			//! Get type index(for masks), virtually
 			virtual unsigned short TypeIndex() const {return StaticTypeIndex();}
 
-			virtual void SerializeOut(node_type& writer, const std::string& key) const;
-			virtual bool SerializeIn(const node_type& reader);
+			virtual void SerializeOut(node_type& writer) const;
+			virtual size_t SerializeIn(const node_type& reader);
 
 			//! Object creator function
 			static std::shared_ptr<cComponentBase> Create() { return std::shared_ptr<cComponentBase>(new cComponent<T>());}
@@ -37,17 +37,14 @@ namespace pgn
 
 	//------------------------------------------------------------------------
 	template<class T>
-	void cComponent<T>::SerializeOut(node_type& writer, const std::string& key) const
+	void cComponent<T>::SerializeOut(node_type& writer) const
 	{
-		auto& ecs = ECS();
-		const std::string& tname = ecs.ComponentTypeNames().at(TypeIndex());
-		auto& child = writer.append_child(key.c_str());
-		mData.SerializeOut(child, tname);
+		mData.SerializeOut(writer);
 	}
 
 	//------------------------------------------------------------------------
 	template<class T>
-	bool cComponent<T>::SerializeIn(const node_type& reader)
+	size_t cComponent<T>::SerializeIn(const node_type& reader)
 	{
 		return mData.SerializeIn(reader);
 	}

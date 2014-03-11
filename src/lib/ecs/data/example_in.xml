@@ -1,19 +1,15 @@
 <?xml version="1.0"?>
 <Entities>
-    <Entity archetype = "true">
-        <Name value = "Door_archetype"/>
+    <Entity name ="Door_archetype" is_archetype = "true">
         <Components>
-            <array_elem value = "TextureSet">
+            <TextureSet>
                 <Sprites>
                     <array_elem value="::dungeon:dngn_open_door"/>
                     <array_elem value="::dungeon:dngn_closed_door"/>
                     <array_elem value="::dungeon:dngn_detected_secret_door"/>
                 </Sprites>
-            </array_elem>
-            <array_elem value = "DoorState">
-                <State value = "1" />
-            </array_elem>
-            
+            </TextureSet>
+            <DoorState State = "1"/>
         </Components>
         <Tags>
             <array_elem value="tag0"/>
@@ -21,13 +17,9 @@
             <array_elem value="tag2"/>
         </Tags>
     </Entity>
-    <Entity archetype = "false">
-        <Name value = "OpenDoor"/>
-        <Archetype value = "Door_archetype"/>
+    <Entity name ="OpenDoor" is_archetype = "false" archetype="Door_archetype">
         <Components>
-            <array_elem value = "DoorState">
-                <State value = "0" />
-            </array_elem>
+            <DoorState State = "0"/>
         </Components>
         <Tags>
             <array_elem value="tag3"/>

@@ -12,8 +12,8 @@ namespace pgn{
                 cMoveCost(const float& arg0 = float(1)):
                         mMoveCost(arg0){}
                 
-                bool SerializeIn(const node_type&);
-                void SerializeOut(node_type&, const std::string&) const;
+                size_t SerializeIn(const node_type&);
+                void SerializeOut(node_type&) const;
                 
                 //!Cost of moving horizontally or vertically to a tile
                 float mMoveCost;
@@ -22,5 +22,4 @@ namespace pgn{
         
         }
     }
-    
 }

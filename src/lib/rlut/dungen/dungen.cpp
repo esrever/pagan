@@ -681,7 +681,7 @@ namespace pgn
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	void SerializeOut(node_type& writer, const std::string& key, const rlut::cWorkspace & value)
+	void SerializeOut(node_type& writer, const char* key, const rlut::cWorkspace & value)
 	{
 		assert(false);
 		//auto& child = writer.append_child(key.c_str());
@@ -689,20 +689,21 @@ namespace pgn
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	bool SerializeIn(const node_type& reader, rlut::cWorkspace & value)
+	size_t SerializeIn(const node_type& reader, rlut::cWorkspace & value)
 	{
 		size_t roomNum;
 		glm::ivec2 dims;
-		SerializeIn(reader, "ConnectIslands", value.mConstraints.mConnectIslands, true);
-		SerializeIn(reader, "DoorsPerRoom", value.mConstraints.mDoorsPerRoom, glm::ivec2(1, 4));
-		SerializeIn(reader, "DoorToDoorMinDistance", value.mConstraints.mDoorToDoorMinDistance, glm::ivec2(2, 2));
-		SerializeIn(reader, "OverrideMaxConns", value.mConstraints.mOverrideMaxConns, true);
-		SerializeIn(reader, "RandomEntryExit", value.mConstraints.mRandomEntryExit, false);
-		SerializeIn(reader, "RoomRectH", value.mConstraints.mRoomRectH, glm::ivec2(3, 12));
-		SerializeIn(reader, "RoomRectW", value.mConstraints.mRoomRectW, glm::ivec2(3, 12));
-		SerializeIn(reader, "StoreRoomConnectivity", value.mConstraints.mStoreRoomConnectivity, true);
-		SerializeIn(reader, "Rooms", roomNum, size_t(1000000));
-		SerializeIn(reader, "Dims", dims, glm::ivec2(80,40));
+		size_t ret = 0;
+		ret += SerializeIn(reader, "ConnectIslands", value.mConstraints.mConnectIslands, true);
+		ret += SerializeIn(reader, "DoorsPerRoom", value.mConstraints.mDoorsPerRoom, glm::ivec2(1, 4));
+		ret += SerializeIn(reader, "DoorToDoorMinDistance", value.mConstraints.mDoorToDoorMinDistance, glm::ivec2(2, 2));
+		ret += SerializeIn(reader, "OverrideMaxConns", value.mConstraints.mOverrideMaxConns, true);
+		ret += SerializeIn(reader, "RandomEntryExit", value.mConstraints.mRandomEntryExit, false);
+		ret += SerializeIn(reader, "RoomRectH", value.mConstraints.mRoomRectH, glm::ivec2(3, 12));
+		ret += SerializeIn(reader, "RoomRectW", value.mConstraints.mRoomRectW, glm::ivec2(3, 12));
+		ret += SerializeIn(reader, "StoreRoomConnectivity", value.mConstraints.mStoreRoomConnectivity, true);
+		ret += SerializeIn(reader, "Rooms", roomNum, size_t(1000000));
+		ret += SerializeIn(reader, "Dims", dims, glm::ivec2(80, 40));
 		
 
 		value.Init(dims.x, dims.y);
@@ -715,6 +716,6 @@ namespace pgn
 
 		value.add_feature_entry_exit();
 
-		return true;
+		return ret;
 	}
 }

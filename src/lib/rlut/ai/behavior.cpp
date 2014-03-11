@@ -2,13 +2,13 @@
 
 #include <algorithm>
 
-#include <pugixml.hpp>
+#include <core/serialize/serialize.h>
 
 namespace pgn
 {
 	namespace bt
 	{
-		bool cBehavior::SerializeIn(const pugi::xml_node& node, cBehavior*& ptr)
+		size_t cBehavior::SerializeIn(const pugi::xml_node& node, cBehavior*& ptr)
 		{
 			const std::string name = node.name();
 			if (name == "Repeat")
@@ -30,7 +30,7 @@ namespace pgn
 			if (ptr)
 				return ptr->SerializeIn(node);
 			else
-				return false;
+				return 0;
 		}
 
 		// ============================================================================
@@ -82,15 +82,14 @@ namespace pgn
 			return mStatus;
 		}
 
-		bool cBehavior::SerializeIn(const pugi::xml_node& node)
+		size_t cBehavior::SerializeIn(const pugi::xml_node& node)
 		{ 
-			mName = node.attribute("name").as_string();
-			return true;
+			return pgn::SerializeIn( node, "name", mName);
 		}
 
 		void cBehavior::SerializeOut(pugi::xml_node& node)
 		{
-			node.append_attribute("name").set_value(mName.c_str());
+			pgn::SerializeOut(node, "name", mName);
 		}
 
 		// ============================================================================
@@ -100,16 +99,17 @@ namespace pgn
 		{
 		}
 
-		bool cDecorator::SerializeIn(const pugi::xml_node& node)
+		size_t cDecorator::SerializeIn(const pugi::xml_node& node)
 		{
-			if (!cBehavior::SerializeIn(*node.begin(), mChild))
-				return false;
-			return cBehavior::SerializeIn(node);
+			size_t ret = 0;
+			ret += cBehavior::SerializeIn(*node.begin(), mChild);
+			if (!ret) return 0;
+			return ret + cBehavior::SerializeIn(node);
 		}
 		void cDecorator::SerializeOut(pugi::xml_node& node)
 		{
 			cBehavior::SerializeOut(node);
-			mChild->SerializeOut(node.append_child(mChild->Type()));
+			mChild->SerializeOut(node);
 		}
 		// ============================================================================
 		cRepeat::cRepeat(const cRepeat& v)
@@ -137,17 +137,17 @@ namespace pgn
 			return eStatus::Invalid;
 		}
 
-		bool cRepeat::SerializeIn(const pugi::xml_node& node)
+		size_t cRepeat::SerializeIn(const pugi::xml_node& node)
 		{
-			if (!cDecorator::SerializeIn(node))
-				return false;
-			mCount = node.attribute("count").as_int();
-			return true;
+			size_t ret = 0;
+			ret += cDecorator::SerializeIn(node);
+			if (!ret) return false;
+			return ret + pgn::SerializeIn(node, "count", mCount);
 		}
 		void cRepeat::SerializeOut(pugi::xml_node& node)
 		{
 			cDecorator::SerializeOut(node);
-			node.append_attribute("count").set_value(mCount);
+			pgn::SerializeOut(node, "count", mCount);
 		}
 
 		// ============================================================================
@@ -157,17 +157,18 @@ namespace pgn
 		{
 		}
 
-		bool cComposite::SerializeIn(const pugi::xml_node& node)
+		size_t cComposite::SerializeIn(const pugi::xml_node& node)
 		{
-			if (!cBehavior::SerializeIn(node))
-				return false;
+			size_t ret = 0;
+			ret += cBehavior::SerializeIn(node);
+			if (!ret) return 0;
 			for (pugi::xml_node::iterator it = node.children().begin(); it != node.children().end(); ++ it)
 			{
 				mChildren.push_back(nullptr);
 				if (!cBehavior::SerializeIn(*it, mChildren.back()))
-					return false;
+					return 0;
 			}
-			return true;
+			return 1;
 		}
 		void cComposite::SerializeOut(pugi::xml_node& node)
 		{
@@ -321,13 +322,13 @@ namespace pgn
 			}
 		}
 
-		bool cParallel::SerializeIn(const pugi::xml_node& node)
+		size_t cParallel::SerializeIn(const pugi::xml_node& node)
 		{
 			if (!cComposite::SerializeIn(node))
 				return false;
 			mSuccessPolicy = strcmp( node.attribute("success").as_string(), "any") == 0 ? ePolicy::RequireOne : ePolicy::RequireAll;
 			mFailurePolicy = strcmp(node.attribute("fail").as_string(), "any") == 0 ? ePolicy::RequireOne : ePolicy::RequireAll;
-			return true;
+			return 1;
 		}
 		void cParallel::SerializeOut(pugi::xml_node& node)
 		{
@@ -371,17 +372,16 @@ namespace pgn
 		{
 		}
 
-		bool cAction::SerializeIn(const pugi::xml_node& node)
+		size_t cAction::SerializeIn(const pugi::xml_node& node)
 		{
 			if (!cBehavior::SerializeIn(node))
-				return false;
+				return 0;
 			mAction = msFuncs[GetName()];
-			return true;
+			return 1;
 		}
 		void cAction::SerializeOut(pugi::xml_node& node)
 		{
 			cBehavior::SerializeOut(node);
-			// TODO: export
 		}
 
 		// ============================================================================
@@ -392,17 +392,16 @@ namespace pgn
 		{
 		}
 
-		bool cCondition::SerializeIn(const pugi::xml_node& node)
+		size_t cCondition::SerializeIn(const pugi::xml_node& node)
 		{
 			if (!cBehavior::SerializeIn(node))
-				return false;
+				return 0;
 			mCondition = msFuncs[GetName()];
-			return true;
+			return 1;
 		}
 		void cCondition::SerializeOut(pugi::xml_node& node)
 		{
 			cBehavior::SerializeOut(node);
-			// TODO: export
 		}
 	}
 }

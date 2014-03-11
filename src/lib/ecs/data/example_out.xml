@@ -1,57 +1,49 @@
 <?xml version="1.0"?>
 <ECS>
 	<EntitiesToData>
-		<map_key value="0" />
-		<map_value>
-			<Name value="OpenDoor" />
+		<key value="0" />
+		<value name="OpenDoor" archetype="Door_archetype">
 			<Components>
-				<array_elem value="TextureSet">
+				<TextureSet>
 					<Sprites>
-						<array_elem value="::dungeon:dngn_open_door" />
-						<array_elem value="::dungeon:dngn_closed_door" />
-						<array_elem value="::dungeon:dngn_detected_secret_door" />
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
 					</Sprites>
-				</array_elem>
-				<array_elem value="DoorState">
-					<State value="0" />
-				</array_elem>
+				</TextureSet>
+				<DoorState State="0" />
 			</Components>
 			<SupportMask value="00000000000000000000000000001000" />
 			<SharedMask value="00000000000000000000000000000010" />
-			<Archetype value="Door_archetype" />
 			<Tags>
 				<set_elem value="tag0" />
 				<set_elem value="tag1" />
 				<set_elem value="tag2" />
 				<set_elem value="tag3" />
 			</Tags>
-		</map_value>
+		</value>
 	</EntitiesToData>
 	<Archetypes>
-		<map_key value="Door_archetype" />
-		<map_value>
-			<Name value="Door_archetype" />
+		<key value="Door_archetype" />
+		<value name="Door_archetype">
 			<Components>
-				<array_elem value="TextureSet">
+				<TextureSet>
 					<Sprites>
-						<array_elem value="::dungeon:dngn_open_door" />
-						<array_elem value="::dungeon:dngn_closed_door" />
-						<array_elem value="::dungeon:dngn_detected_secret_door" />
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
 					</Sprites>
-				</array_elem>
-				<array_elem value="DoorState">
-					<State value="1" />
-				</array_elem>
+				</TextureSet>
+				<DoorState State="1" />
 			</Components>
 			<SupportMask value="00000000000000000000000000001010" />
 			<SharedMask value="00000000000000000000000000000000" />
-			<Archetype value="none" />
 			<Tags>
 				<set_elem value="tag0" />
 				<set_elem value="tag1" />
 				<set_elem value="tag2" />
 			</Tags>
-		</map_value>
+		</value>
 	</Archetypes>
 	<TagsToEntities />
 	<Queries />

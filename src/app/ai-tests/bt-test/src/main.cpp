@@ -10,7 +10,7 @@ int main(int argc, char ** argv)
 
 	pgn::bt::cBehaviorTree btree;
 	std::string ret;
-	pugi::xml_document doc;
+	pugi::xml_document doc, doc_out;
 	auto result = doc.load_file("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\behaviors.xml", pugi::parse_default | pugi::parse_comments);
 	if (result)
 	{
@@ -19,6 +19,9 @@ int main(int argc, char ** argv)
 		btree.SetRoot(ptr);
 
 		btree.Tick();
+
+		ptr->SerializeOut(doc_out.append_child(ptr->Type()));
+		doc_out.print(std::cout);
 	}
 	else
 	{

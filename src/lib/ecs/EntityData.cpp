@@ -47,84 +47,72 @@ namespace pgn
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	void SerializeOut(node_type& writer, const std::string& key, const std::vector<cComponentBase_sptr> & value)
+	void SerializeOut(node_type& node, const std::vector<cComponentBase_sptr> & value)
 	{
-		auto& cchild = writer.append_child(key.c_str());
 		for (const auto& c : value)
 		{
 			if (c)
-			{
-				SerializeOut(cchild, ECS().ComponentTypeNames[c->TypeIndex()], c);
-			}
+				SerializeOut(node.append_child(ECS().ComponentTypeNames()[c->TypeIndex()].c_str()), c);
 		}
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	bool SerializeIn(const node_type& reader, const std::string& key, std::vector<cComponentBase_sptr> & value)
+	size_t SerializeIn(const node_type& reader, std::vector<cComponentBase_sptr> & value)
 	{
+		size_t ret=0;
 		for (auto it = reader.begin(); it != reader.end(); ++it)
 		{
-
-		}
-	}
-
-	//---------------------------------------------------------------------------------------------------
-	void SerializeOut(node_type& writer, const std::string& key, const cEntityData & value)
-	{
-		auto& child = writer.append_child(key.c_str());
-		SerializeOut(child, "Name", value.mName);
-		auto& cchild = child.append_child("Components");
-		for (const auto& c : value.mComponents)
-		{
-			if (c)
+			auto itid = ECS().ComponentTypeNamesToIds().find(it->name());
+			if (itid != ECS().ComponentTypeNamesToIds().end())
 			{
-				SerializeOut(cchild, "array_elem", c);
+				auto ptr = ECS().ComponentCreators().at(itid->second)();
+				//ret += ptr.get()->SerializeIn(*it);
+				ret += SerializeIn(*it, *ptr);
+				value.push_back(ptr);
 			}
+			else
+				return 0; 
 		}
-		SerializeOut(child, "SupportMask", value.mSupportMask);
-		SerializeOut(child, "SharedMask", value.mSharedMask);
-		SerializeOut(child, "Archetype", value.mArchetype ? value.mArchetype->mName : "none");
-		SerializeOut(child, "Tags", value.mTags);
+		return ret;
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	bool SerializeIn(const node_type& reader, cEntityData & value)
+	void SerializeOut(node_type& node,const cEntityData & value)
+	{
+		SerializeOut(node, "name", value.mName);
+		if (value.mArchetype)
+			SerializeOut(node, "archetype", value.mArchetype->mName);
+		SerializeOut(node, "Components", value.mComponents);
+		SerializeOut(node, "SupportMask", value.mSupportMask);
+		SerializeOut(node, "SharedMask", value.mSharedMask);
+		SerializeOut(node, "Tags", value.mTags);
+	}
+
+	//---------------------------------------------------------------------------------------------------
+	size_t SerializeIn(const node_type& reader, cEntityData & value)
 	{
 		// Read name
-		if( !SerializeIn(reader, "Name", value.mName)) return false;
+		if( SerializeIn(reader, "name", value.mName)==0) return false;
 
 		// Read archetype name
 		std::string archname;
-		SerializeIn(reader, "Archetype", archname);
-		if (archname != "")
+		if(SerializeIn(reader, "archetype", archname))
 		{ 
 			// get archetype
 			auto it_arch = ECS().Archetypes().find(archname);
-			if (it_arch == ECS().Archetypes().end()) return false; // Archetype not found
+			if (it_arch == ECS().Archetypes().end()) return 0; // Archetype not found
 			auto& arch = it_arch->second;
 
 			value.SetArchetype(arch);
 		}
 
 		// Read components
-		auto& child = reader.child("Components");
-		for (auto it = child.begin(); it != child.end(); ++it)
+		std::vector<cComponentBase_sptr> cmps;
+		SerializeIn(reader, "Components", cmps);
+		for (auto& cmp : cmps)
 		{
-			// get current component
-			auto& cmpnode = *it;
-			// get component type name
-			std::string cmpname; 
-			SerializeIn(cmpnode, cmpname);
-			// get component type index
-			auto it_cmpindex = ECS().ComponentTypeNamesToIds().find(cmpname);
-			// sanity check
-			if (it_cmpindex == ECS().ComponentTypeNamesToIds().end()) return false;
-			// create typed component pointer
-			auto cmp_ptr = ECS().ComponentCreators().at(it_cmpindex->second)();
-			// Serialize in the component data
-			SerializeIn(cmpnode, *cmp_ptr); 
 			// Add it to the list!
-			value.AddComponent(cmp_ptr);
+			value.AddComponent(cmp);
 		}
 
 		// Read tags

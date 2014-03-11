@@ -13,8 +13,8 @@ namespace pgn{
                 cTextureSet(const std::vector< cSubTexture >& arg0 = std::vector< cSubTexture >()):
                         mSprites(arg0){}
                 
-                bool SerializeIn(const node_type&);
-                void SerializeOut(node_type&, const std::string&) const;
+				size_t SerializeIn(const node_type&);
+				void SerializeOut(node_type&) const;
                 
                 //!Textures of a component
                 std::vector< cSubTexture > mSprites;

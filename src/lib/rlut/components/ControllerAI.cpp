@@ -5,21 +5,19 @@ namespace pgn{
     namespace rl{
         namespace cmp{
             //----------------------------------------------------------------------------------------------
-            bool cControllerAI::SerializeIn(const node_type& reader)
+            size_t cControllerAI::SerializeIn(const node_type& reader)
             {
-                pgn::SerializeIn(reader.child("Btree"), mBtree);
-                return true;
+                size_t ret = 0;
+                ret += pgn::SerializeIn(reader,  "Btree", mBtree);
+                return ret;
             }
             
             //----------------------------------------------------------------------------------------------
-            void cControllerAI::SerializeOut(node_type& writer, const std::string& key) const
+            void cControllerAI::SerializeOut(node_type& writer) const
             {
-                writer.append_attribute("value").set_value(key.c_str());
                 pgn::SerializeOut(writer,"Btree", mBtree);
             }
         }
     }
-    
-    
 }
 

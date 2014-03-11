@@ -82,37 +82,30 @@ namespace pgn
 			if (pgn::SerializeIn(ent, ed))
 			{
 				// determine if it's an archetype or not
-				const auto& arch_attrib = ent.attribute("archetype");
-				if (arch_attrib.empty() || (arch_attrib.as_bool() == false))
-				{
-					// is entity
+				bool is_archetype=false;
+				pgn::SerializeIn(ent, "is_archetype", is_archetype);
+				if (!is_archetype)
 					Create(ed);
-				}
 				else
-				{
-					// is archetype
 					mArchetypes.emplace(ed.mName,ed);
-				}
 			}
 		}
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	void SerializeOut(node_type& writer, const std::string& key, const cECS& value) 
+	void SerializeOut(node_type& node, const cECS& value) 
 	{ 
-		auto& child = writer.append_child(key.c_str());
 		// export a dump of the object
-		SerializeOut(child, "EntitiesToData", value.EntitiesToData());
-		SerializeOut(child, "Archetypes", value.Archetypes());
-		SerializeOut(child, "TagsToEntities", value.TagsToEntities());
-		SerializeOut(child, "Queries", value.Queries());
+		SerializeOut(node.append_child("EntitiesToData"), value.EntitiesToData());
+		SerializeOut(node.append_child("Archetypes"), value.Archetypes());
+		SerializeOut(node.append_child("TagsToEntities"), value.TagsToEntities());
+		SerializeOut(node.append_child("Queries"), value.Queries());
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	bool SerializeIn(const node_type& reader, cECS& value)
+	size_t SerializeIn(const node_type& reader, cECS& value)
 	{
 		value.ParseEntities(reader.child("Entities"));
-		// Read in entities, etc
-		return false;
+		return 1;
 	}
 }

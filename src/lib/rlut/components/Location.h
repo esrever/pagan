@@ -14,8 +14,8 @@ namespace pgn{
                         mPos(arg0),
                         mLevelId(arg1){}
                 
-                bool SerializeIn(const node_type&);
-                void SerializeOut(node_type&, const std::string&) const;
+                size_t SerializeIn(const node_type&);
+                void SerializeOut(node_type&) const;
                 
                 //!Position
                 glm::ivec2 mPos;
@@ -27,5 +27,4 @@ namespace pgn{
         
         }
     }
-    
 }

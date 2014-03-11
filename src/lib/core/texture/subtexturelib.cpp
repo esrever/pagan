@@ -1,6 +1,7 @@
 #include "subtexturelib.h"
 
 #include <core/serialize/serialize.h>
+#include <core/sdl/util.h>
 
 #include "SDL_rect.h"
 

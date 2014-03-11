@@ -6,13 +6,14 @@ set(SOURCE_FILES
     util/color.cpp
     util/rand.cpp
     util/image.cpp
+    sdl/util.cpp
     sdl/font.cpp
     sdl/pointers.cpp
     texture/texturelib.cpp
     texture/subtexturelib.cpp
     texture/texture.cpp
     texture/textureatlas.cpp
-    serialize/serialize.cpp
+    #serialize/serialize.cpp
     event/event.cpp
 #    util/cfgtree.cpp
 #    util/cfgdata.cpp
@@ -34,6 +35,7 @@ set(HEADER_FILES
     #container/dict2.h
     sdl/font.h
     sdl/pointers.h
+    sdl/util.h
     util/logstream.h
     util/color.h
     util/image.h
@@ -46,8 +48,8 @@ set(HEADER_FILES
     texture/texture.h
     texture/textureatlas.h
     serialize/serialize.h
-    serialize/serialize_glm.hpp
-    serialize/serialize_std.hpp
+    #serialize/serialize_glm.hpp
+    #serialize/serialize_std.hpp
     event/event.h
 #    app/application.h
 #    util/textmod.h

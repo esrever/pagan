@@ -12,8 +12,8 @@ namespace pgn{
                 cControllerAI(const bt::cBehaviorTree& arg0 = bt::cBehaviorTree()):
                         mBtree(arg0){}
                 
-                bool SerializeIn(const node_type&);
-                void SerializeOut(node_type&, const std::string&) const;
+                size_t SerializeIn(const node_type&);
+                void SerializeOut(node_type&) const;
                 
                 //!Behavior Tree for AI-controlled actors
                 bt::cBehaviorTree mBtree;
@@ -22,5 +22,4 @@ namespace pgn{
         
         }
     }
-    
 }

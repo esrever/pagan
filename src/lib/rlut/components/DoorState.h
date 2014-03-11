@@ -17,8 +17,8 @@ namespace pgn{
                 cDoorState(const eDoorState& arg0 = eDoorState(eDoorState::Closed)):
                         mState(arg0){}
                 
-                bool SerializeIn(const node_type&);
-                void SerializeOut(node_type&, const std::string&) const;
+                size_t SerializeIn(const node_type&);
+                void SerializeOut(node_type&) const;
                 
                 //!Door Status
                 eDoorState mState;
@@ -27,5 +27,4 @@ namespace pgn{
         
         }
     }
-    DECL_SERIALIZE_INTERFACE( rl::cmp::eDoorState )
 }

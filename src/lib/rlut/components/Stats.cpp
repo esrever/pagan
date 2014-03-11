@@ -5,25 +5,23 @@ namespace pgn{
     namespace rl{
         namespace cmp{
             //----------------------------------------------------------------------------------------------
-            bool cStats::SerializeIn(const node_type& reader)
+            size_t cStats::SerializeIn(const node_type& reader)
             {
-                pgn::SerializeIn(reader.child("Damage"), mDamage);
-                pgn::SerializeIn(reader.child("HitPoints"), mHitPoints);
-                pgn::SerializeIn(reader.child("Speed"), mSpeed);
-                return true;
+                size_t ret = 0;
+                ret += pgn::SerializeIn(reader,  "Damage", mDamage);
+                ret += pgn::SerializeIn(reader,  "HitPoints", mHitPoints);
+                ret += pgn::SerializeIn(reader,  "Speed", mSpeed);
+                return ret;
             }
             
             //----------------------------------------------------------------------------------------------
-            void cStats::SerializeOut(node_type& writer, const std::string& key) const
+            void cStats::SerializeOut(node_type& writer) const
             {
-                writer.append_attribute("value").set_value(key.c_str());
                 pgn::SerializeOut(writer,"Damage", mDamage);
                 pgn::SerializeOut(writer,"HitPoints", mHitPoints);
                 pgn::SerializeOut(writer,"Speed", mSpeed);
             }
         }
     }
-    
-    
 }
 

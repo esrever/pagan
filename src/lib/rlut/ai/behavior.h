@@ -32,7 +32,7 @@ T (const T &);\
 T ()
 
 #define btser \
-virtual bool SerializeIn(const pugi::xml_node& node); \
+virtual size_t SerializeIn(const pugi::xml_node& node); \
 virtual void SerializeOut(pugi::xml_node& node); 
 
 namespace pugi
@@ -91,7 +91,7 @@ namespace pgn
 			btgetset(std::string, Name);
 
 
-			static bool SerializeIn(const pugi::xml_node& node, cBehavior*& ptr);
+			static size_t SerializeIn(const pugi::xml_node& node, cBehavior*& ptr);
 
 		private:
 			eStatus mStatus;
