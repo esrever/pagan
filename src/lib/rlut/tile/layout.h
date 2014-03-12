@@ -9,7 +9,7 @@ namespace pgn
 {
 	namespace rl
 	{
-		class cLevel
+		class cLayout
 		{
 			public:
 				typedef cArray2D<cECS::cEntityWithData> dense_entities_type;
@@ -20,7 +20,7 @@ namespace pgn
 				dense_entities_type		mBgEntities;
 				sparse_entities_type	mFgEntities;
 		};
-
-		DECL_SERIALIZE_INTERFACE(rl::cLevel);
 	}
+
+	DECL_SERIALIZE_INTERFACE(rl::cLevel);
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Entities>  
-  <Entity name ="FloorTile_def">
+  <Entity name ="FloorTile_def" is_archetype="true">
     <Components>
       <TextureSet>
         <Sprites>
@@ -10,7 +10,7 @@
       <MoveCost MoveCost="1"/>
     </Components>
   </Entity>
-  <Entity name ="WallTile_def">
+  <Entity name ="WallTile_def" is_archetype="true">
     <Components>
       <TextureSet>
         <Sprites>
@@ -21,7 +21,7 @@
     </Components>
   </Entity>
   
-  <Entity name ="Door_def">
+  <Entity name ="Door_def" is_archetype="true">
     <Components>
       <TextureSet>
         <Sprites>
@@ -34,7 +34,7 @@
     </Components>
   </Entity>
   
-  <Entity name ="GateEnter_def">
+  <Entity name ="GateEnter_def" is_archetype="true">
     <Components>
       <TextureSet>
         <Sprites>
@@ -44,7 +44,7 @@
     </Components>
   </Entity>
   
-  <Entity name ="GateExit_def">
+  <Entity name ="GateExit_def" is_archetype="true">
     <Components>
       <TextureSet>
         <Sprites>

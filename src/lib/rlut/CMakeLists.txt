@@ -11,7 +11,7 @@ set(SOURCE_FILES
     fov/fov_rsc.cpp
     
     #tile/tileinfo.cpp
-    tile/level.cpp
+    tile/layout.cpp
     
     dungen/room.cpp
     dungen/area.cpp
@@ -42,7 +42,7 @@ set(HEADER_FILES
     dungen/util.h
     
     #tile/tileinfo.h
-    tile/level.h
+    tile/layout.h
     
     ai/btree.h
     ai/behavior.h

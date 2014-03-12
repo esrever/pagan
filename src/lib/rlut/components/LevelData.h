@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <ecs/ecs-config.h>
-#include <rlut/tile/level.h>
+#include <rlut/tile/layout.h>
 
 namespace pgn{
     namespace rl{
@@ -10,7 +10,7 @@ namespace pgn{
             struct cLevelData
             {
                 cLevelData(const int& arg0 = int(-1),
-                    const cLevel& arg1 = cLevel()):
+                    const cLayout& arg1 = cLayout()):
                         mId(arg0),
                         mLayout(arg1){}
                 
@@ -21,7 +21,7 @@ namespace pgn{
                 int mId;
                 
                 //!Level layout
-                cLevel mLayout;
+                cLayout mLayout;
                 
             };
         
