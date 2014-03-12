@@ -1,9 +1,6 @@
 
 #include "LevelData.h"
 
-// cmpextra
-#include <rlut/dungen/dungen.h>
-
 namespace pgn{
     namespace rl{
         namespace cmp{
@@ -12,13 +9,6 @@ namespace pgn{
             {
                 size_t ret = 0;
                 ret += pgn::SerializeIn(reader,  "Id", mId);
-
-				//cmpextra
-				pgn::rlut::cWorkspace ws;
-				pgn::SerializeIn(reader, "DunGen", ws);
-				std::map<std::string, std::string> tiles;
-				pgn::SerializeIn(reader, "Tiles", tiles);
-
                 return ret;
             }
             

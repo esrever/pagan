@@ -1,8 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <ecs/ecs-config.h>
-#include <core/container/Array2D.h>
-#include <rlut/tile/tileinfo.h>
+#include <rlut/tile/level.h>
 
 namespace pgn{
     namespace rl{
@@ -11,9 +10,9 @@ namespace pgn{
             struct cLevelData
             {
                 cLevelData(const int& arg0 = int(-1),
-                    const cArray2D<rl::cTileInfo>& arg1 = cArray2D<rl::cTileInfo>()):
+                    const cLevel& arg1 = cLevel()):
                         mId(arg0),
-                        mMapData(arg1){}
+                        mLayout(arg1){}
                 
                 size_t SerializeIn(const node_type&);
                 void SerializeOut(node_type&) const;
@@ -21,8 +20,8 @@ namespace pgn{
                 //!Level ID
                 int mId;
                 
-                //!MapData
-                cArray2D<rl::cTileInfo> mMapData;
+                //!Level layout
+                cLevel mLayout;
                 
             };
         

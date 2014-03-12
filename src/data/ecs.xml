@@ -57,6 +57,7 @@
   <Entity name ="Level">
     <Components>
       <LevelData Id = "1">
+        <Layout>
             <DunGen>
                 <Dims x="80" y="40"/>
                 <DoorsPerRoom x="1" y="4"/>
@@ -73,6 +74,7 @@
                 <key value="GateExit"/>
                 <value value="GateExit_def"/>
             </Tiles>
+          </Layout>
       </LevelData>
     </Components>
     <Tags>

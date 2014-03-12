@@ -10,7 +10,8 @@ set(SOURCE_FILES
     path/difi.cpp
     fov/fov_rsc.cpp
     
-    tile/tileinfo.cpp
+    #tile/tileinfo.cpp
+    tile/level.cpp
     
     dungen/room.cpp
     dungen/area.cpp
@@ -40,7 +41,8 @@ set(HEADER_FILES
     dungen/constraints.h
     dungen/util.h
     
-    tile/tileinfo.h
+    #tile/tileinfo.h
+    tile/level.h
     
     ai/btree.h
     ai/behavior.h
