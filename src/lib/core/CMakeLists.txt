@@ -13,7 +13,7 @@ set(SOURCE_FILES
     texture/subtexturelib.cpp
     texture/texture.cpp
     texture/textureatlas.cpp
-    #serialize/serialize.cpp
+    serialize/util.cpp
     event/event.cpp
 #    util/cfgtree.cpp
 #    util/cfgdata.cpp
@@ -48,6 +48,7 @@ set(HEADER_FILES
     texture/texture.h
     texture/textureatlas.h
     serialize/serialize.h
+    serialize/util.h
     #serialize/serialize_glm.hpp
     #serialize/serialize_std.hpp
     event/event.h

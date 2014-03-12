@@ -29,19 +29,20 @@ namespace pgn
 
 	class cECS
 	{
+	public:
+		typedef std::map<cEntity, cEntityData>::const_iterator  cEntityWithDataConst;
+		typedef std::map<cEntity, cEntityData>::iterator        cEntityWithData;
+
+	public:
 		DECL_MAP_MEMBER_R(cEntity, cEntityData, EntitiesToData);
 		DECL_MAP_MEMBER_R(std::string, cEntityData, Archetypes);
-		DECL_MAP_MEMBER_R(std::string, std::set<cEntity>, TagsToEntities);
+		DECL_MAP_MEMBER_R(std::string, std::set<cEntityWithData>, TagsToEntities);
 		DECL_MAP_MEMBER_R(std::string, cQueryFunc, Queries);
 		DECL_MAP_MEMBER_R(std::string, size_t, ComponentTypeNamesToIds);
 		DECL_MEMBER_R(std::vector<ComponentCreatorFunction>, ComponentCreators);
 		DECL_MEMBER_R(std::vector<std::string>, ComponentTypeNames);
 
 		SUPPORT_DERIVED(cECS);
-
-	public:
-		typedef std::map<cEntity, cEntityData>::const_iterator  cEntityWithDataConst;
-		typedef std::map<cEntity, cEntityData>::iterator        cEntityWithData;
 
 	public:
 		cEntityWithData Create(const cEntityData& = cEntityData());
@@ -79,4 +80,13 @@ namespace pgn
 	}
 }
 
+namespace std
+{
+	inline bool operator < (const pgn::cECS::cEntityWithData& lhs, const pgn::cECS::cEntityWithData& rhs)
+	{
+		return &lhs < &rhs;
+	}
+}
+
 #undef DECL_MAP_MEMBER_R
+#undef DECL_MEMBER_R

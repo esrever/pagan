@@ -275,14 +275,14 @@ namespace pgn
 		{
 			if (is_val & 1)
 			{
-				ret += SerializeIn(n, key);
+				ret += SerializeIn(n, val);
+				value.emplace(key, val);
 			}
 			else
 			{
-				ret += SerializeIn(n, val);
-				value.emplace(key, val);
-				++is_val;
+				ret += SerializeIn(n, key);
 			}
+			++is_val;
 		}
 		return ret;
 	}

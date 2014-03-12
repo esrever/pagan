@@ -15,6 +15,8 @@ namespace pgn
 	{
 		const auto& e = mEntityIdGen.New();
 		auto it = mEntitiesToData.emplace(e, ed);
+		for (const auto& tag : ed.mTags)
+			mTagsToEntities[tag].insert(it.first);
 		return it.first;
 	}
 
@@ -46,14 +48,14 @@ namespace pgn
 	//---------------------------------------------------------------------------------------------------
 	void cECS::Tag(const std::string& tag, cEntityWithData ed)
 	{
-		mTagsToEntities[tag].insert(ed->first);
+		mTagsToEntities[tag].insert(ed);
 		ed->second.mTags.insert(tag);
 	}
 
 	//---------------------------------------------------------------------------------------------------
 	void cECS::Untag(const std::string& tag, cEntityWithData ed)
 	{
-		mTagsToEntities[tag].erase(ed->first);
+		mTagsToEntities[tag].erase(ed);
 		ed->second.mTags.erase(tag);
 	}
 

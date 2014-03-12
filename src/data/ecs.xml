@@ -7,10 +7,9 @@
           <array_elem value="::dungeon:floor:rect_gray0"/>
         </Sprites>
       </TextureSet>
-      <MoveCost MoveCost="1">
+      <MoveCost MoveCost="1"/>
     </Components>
   </Entity>
-  
   <Entity name ="WallTile_def">
     <Components>
       <TextureSet>
@@ -18,7 +17,7 @@
           <array_elem value="::dungeon:wall:marble_wall1"/>
         </Sprites>
       </TextureSet>
-      <MoveCost MoveCost="1e1000">
+      <MoveCost MoveCost="E+38"/>
     </Components>
   </Entity>
   
@@ -31,7 +30,7 @@
           <array_elem value="::dungeon:dngn_detected_secret_door"/>
         </Sprites>
       </TextureSet>
-      <DoorState State="0">
+      <DoorState State="0"/>
     </Components>
   </Entity>
   
@@ -58,10 +57,9 @@
   <Entity name ="Level">
     <Components>
       <LevelData Id = "1">
-        <TileMap>
             <DunGen>
-                <Dims x="80" y="40">
-                <DoorsPerRoom x="1" y="4">
+                <Dims x="80" y="40"/>
+                <DoorsPerRoom x="1" y="4"/>
             </DunGen>
             <Tiles>
                 <key value="Floor"/>
@@ -75,7 +73,6 @@
                 <key value="GateExit"/>
                 <value value="GateExit_def"/>
             </Tiles>
-        </TileMap>
       </LevelData>
     </Components>
     <Tags>
