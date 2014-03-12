@@ -11,7 +11,7 @@ namespace pgn
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	size_t SerializeIn(const node_type& node, const rl::cLayout& value)
+	size_t SerializeIn(const node_type& node, rl::cLayout& value)
 	{
 		size_t ret = 0;
 		pgn::rlut::cWorkspace ws;

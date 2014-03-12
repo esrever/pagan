@@ -22,5 +22,5 @@ namespace pgn
 		};
 	}
 
-	DECL_SERIALIZE_INTERFACE(rl::cLevel);
+	DECL_SERIALIZE_INTERFACE(rl::cLayout);
 }
