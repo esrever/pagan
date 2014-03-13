@@ -45,8 +45,8 @@ namespace pgn
 		void Fill(const T& val)        { mData.clear(); mDefault = val; }
 
 		// access
-		const_reference Get(size_t idx) const { auto it = mData.find(idx); return it == mData.end() ? mDefault : *it; }
-		reference Get(size_t idx) { auto it = mData.find(idx); return it == mData.end() ? mDefault : *it; }
+		const_reference Get(size_t idx) const { auto it = mData.find(idx); return it == mData.end() ? mDefault : it->second; }
+		reference Get(size_t idx)			  { auto it = mData.find(idx); return it == mData.end() ? mDefault : it->second; }
 
 		//! type-specific
 		const container_type& Raw() const { return mData; }

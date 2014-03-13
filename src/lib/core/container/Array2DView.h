@@ -18,8 +18,8 @@ namespace pgn
 		typedef std::function<void(typename T::reference)> visit_write_func;
 
 		// ctor
-		cArrayView(T& ar, const cArrayShape2D& orgShape, size_t w=0, size_t h=0, size_t x = 0, size_t y = 0) : mStorageRef(ar), mOrgShape(orgShape),mShape(w, h, x, y) {};
-		cArrayView(T& ar, size_t w = 0, size_t h = 0, size_t x = 0, size_t y = 0) : mStorageRef(ar), mShape(w, h, x, y), mOrgShape(mShape) {};
+		cArrayView(T& ar, const cArrayShape2D& orgShape, size_t w=0, size_t h=0, size_t x = 0, size_t y = 0) : mStorageRef(&ar), mOrgShape(orgShape),mShape(w, h, x, y) {};
+		cArrayView(T& ar, size_t w = 0, size_t h = 0, size_t x = 0, size_t y = 0) : mStorageRef(&ar), mShape(w, h, x, y), mOrgShape(mShape) {};
 		cArrayView& operator = (const cArrayView& v) {
 			mStorageRef = v.mStorageRef;  mShape = v.mShape; mOrgShape = v.mOrgShape;
 		    return *this; }
@@ -28,8 +28,8 @@ namespace pgn
 		size_t LinearIdx(size_t x, size_t y) const { return mShape.RealX(x) + mOrgShape.Width()*mShape.RealY(y); }
 
 		// op-access
-		typename T::reference       operator()(size_t x, size_t y)       { return mStorageRef.Get(LinearIdx(x, y)); }
-		typename T::const_reference operator()(size_t x, size_t y) const  { return mStorageRef.Get(LinearIdx(x, y)); }
+		typename T::reference       operator()(size_t x, size_t y)       { return mStorageRef->Get(LinearIdx(x, y)); }
+		typename T::const_reference operator()(size_t x, size_t y) const  { return mStorageRef->Get(LinearIdx(x, y)); }
 
 		// visitor
 		void VisitR(visit_read_func f) const;
@@ -42,12 +42,12 @@ namespace pgn
 		// data-access
 		const cArrayShape2D& Shape() const { return mShape; }
 		const cArrayShape2D& OrgShape() const { return *mOrgShape; }
-		const T& Storage() const { return mStorageRef; }
+		const T& Storage() const { return *mStorageRef; }
 
 	private:
 		cArrayShape2D     mShape;
 	    cArrayShape2D	  mOrgShape;
-		T& mStorageRef;
+		T * mStorageRef;
 	};
 
 	template<class T>

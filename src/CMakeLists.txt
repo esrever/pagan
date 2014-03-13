@@ -209,6 +209,8 @@ macro(using_lib INC LIB)
          ${APP_INCLUDES} INC)
 endmacro(using_lib)
 
+add_definitions(-DPROJECT_ROOT="${CMAKE_SOURCE_DIR}/")
+
 #################################################################
 # Packages
 SET(CMAKE_PREFIX_PATH $ENV{QTDIR})

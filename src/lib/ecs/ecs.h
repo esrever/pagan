@@ -32,6 +32,8 @@ namespace pgn
 	public:
 		typedef std::map<cEntity, cEntityData>::const_iterator  cEntityWithDataConst;
 		typedef std::map<cEntity, cEntityData>::iterator        cEntityWithData;
+		typedef std::map<std::string, cEntityData>::const_iterator        cArchetypeWithDataConst;
+		typedef std::map<std::string, cEntityData>::iterator        cArchetypeWithData;
 
 	public:
 		DECL_MAP_MEMBER_R(cEntity, cEntityData, EntitiesToData);
