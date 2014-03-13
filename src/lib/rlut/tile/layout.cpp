@@ -3,6 +3,7 @@
 #include <rlut/dungen/dungen.h>
 
 #include <rlut/components/AsciiSet.h>
+#include <rlut/components/Location.h>
 
 namespace pgn
 {
@@ -52,6 +53,7 @@ namespace pgn
 
 	namespace rl
 	{
+		//-------------------------------------------------------------------------------
 		void cLayout::Init(const rlut::cWorkspace& ws, const std::map<std::string, std::string>& tiles)
 		{
 			auto& ecs = mainecs();
@@ -65,6 +67,8 @@ namespace pgn
 			// default to wall
 			mBgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height(), it_wall);
 			mFgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height(), ecs->EntitiesToData().end());
+			cECS::cEntityWithData it_entry_inst;
+			glm::ivec2 entry_coords2;
 			for (size_t i = 0; i < ws.mMapData.Height();++i)
 			for (size_t j = 0; j < ws.mMapData.Width(); ++j)
 			{
@@ -75,10 +79,83 @@ namespace pgn
 				if (v & rlut::eMapData::conn)
 					mFgEntities(j, i) = ecs->Create( it_door->second );
 				if (v & rlut::eMapData::entry)
-					mFgEntities(j, i) = ecs->Create(it_enter->second);
+				{
+					it_entry_inst = ecs->Create(it_enter->second);
+					mFgEntities(j, i) = it_entry_inst;
+					entry_coords2 = glm::ivec2(j, i); // alternate, both kinda hacky though.
+				}
 				if (v & rlut::eMapData::exit)
 					mFgEntities(j, i) = ecs->Create(it_exit->second);
 			}
+
+
+
+			//---- HERO STUFF
+
+			// find entry coordinates, or use entry_coords2
+			glm::ivec2 entry_coords(-1, -1);
+			const auto& fg_storage = mFgEntities.View().Storage();
+			for (const auto& kv : fg_storage.Raw())
+				if (kv.second == it_entry_inst)
+					entry_coords = glm::ivec2(kv.first % mFgEntities.Width(), kv.first / mFgEntities.Width());
+			assert((entry_coords.x >= 0) && (entry_coords.y >= 0));
+
+			// assign loc to hero
+			auto it_hero = ecs->Archetypes().find(tiles.find("Hero")->second);
+			auto new_hero = ecs->Create(it_hero->second);
+			
+			auto hero_loc = it_hero->second.Component<cmp::cLocation>();
+			
+			// Create the component if it doesnt exist. TODO: do I need helper, to do this en masse?
+			if (!hero_loc)
+			{
+				new_hero->second.AddComponent(cComponent<cmp::cLocation>::Create());
+				hero_loc = it_hero->second.Component<cmp::cLocation>();
+			}
+			// TODO: hero needs to get the level ID from the Level, not the layout. So the whole thing here is temporary
+			hero_loc->mPos = entry_coords2;
+			AddActor(new_hero);
+		}
+
+		//-------------------------------------------------------------------------------
+		void cLayout::AddActor(cECS::cEntityWithDataConst ed)
+		{
+			auto loc = ed->second.Component<cmp::cLocation>();
+			mActors(loc->mPos) = ed;
+		}
+
+		//-------------------------------------------------------------------------------
+		void cLayout::RemoveActor(cECS::cEntityWithDataConst ed)
+		{
+			auto loc = ed->second.Component<cmp::cLocation>();
+			mActors(loc->mPos) = mActors.View().Storage().GetDefault();
+		}
+
+		//-------------------------------------------------------------------------------
+		glm::ivec2 GetCenteredView(const glm::ivec2& orgDims,
+					  			   const glm::ivec2& center,
+								   const glm::ivec2& tgtSize)
+		{
+			glm::ivec2 pmin = center - (tgtSize / 2);
+			glm::ivec2 pmax = pmin + tgtSize;
+
+			for (int i = 0; i < 2;++i)
+			{
+				if (pmin[i] < 0)
+				{
+					//pmax[i] -= pmin[i];
+					pmin[i] = 0;
+				}
+				
+				if (pmax[i] > orgDims[i])
+				{
+					int vd = pmax[i] - orgDims[i];
+					pmin[i] -= vd;
+					//pmax[i] -= vd;
+				}
+			}
+			return pmax;
+
 		}
 	}
 }

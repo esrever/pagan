@@ -24,6 +24,8 @@ namespace pgn
 			mStorageRef = v.mStorageRef;  mShape = v.mShape; mOrgShape = v.mOrgShape;
 		    return *this; }
 
+		void SetStorage(T& ar) { mStorageRef = &ar; }
+
 		// Linear index
 		size_t LinearIdx(size_t x, size_t y) const { return mShape.RealX(x) + mOrgShape.Width()*mShape.RealY(y); }
 
