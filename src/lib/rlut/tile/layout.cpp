@@ -21,7 +21,10 @@ namespace pgn
 					if (vf->second.mName == "GateEnter_def")
 						s.push_back('>');
 					else if (vf->second.mName == "GateExit_def")
-						s.push_back('<');
+						//s.push_back('\<');
+						s.append("\\<");
+					else if (vf->second.mName == "Door_def")
+						s.push_back('/');
 					else
 						s.push_back(';');
 				}
@@ -67,7 +70,7 @@ namespace pgn
 
 			// default to wall
 			mBgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height(), it_wall);
-			mFgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height());
+			mFgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height(), ecs->EntitiesToData().end());
 			for (size_t i = 0; i < ws.mMapData.Height();++i)
 			for (size_t j = 0; j < ws.mMapData.Width(); ++j)
 			{
