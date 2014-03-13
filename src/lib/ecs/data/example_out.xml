@@ -45,6 +45,23 @@
 			</Tags>
 		</value>
 	</Archetypes>
-	<TagsToEntities />
+	<TagsToEntities>
+		<key value="tag0" />
+		<value>
+			<set_elem value="unserializable: class std::_Tree_iterator&lt;class std::_Tree_val&lt;struct std::_Tree_simple_types&lt;struct std::pair&lt;unsigned int const ,struct pgn::cEntityData&gt; &gt; &gt; &gt;" />
+		</value>
+		<key value="tag1" />
+		<value>
+			<set_elem value="unserializable: class std::_Tree_iterator&lt;class std::_Tree_val&lt;struct std::_Tree_simple_types&lt;struct std::pair&lt;unsigned int const ,struct pgn::cEntityData&gt; &gt; &gt; &gt;" />
+		</value>
+		<key value="tag2" />
+		<value>
+			<set_elem value="unserializable: class std::_Tree_iterator&lt;class std::_Tree_val&lt;struct std::_Tree_simple_types&lt;struct std::pair&lt;unsigned int const ,struct pgn::cEntityData&gt; &gt; &gt; &gt;" />
+		</value>
+		<key value="tag3" />
+		<value>
+			<set_elem value="unserializable: class std::_Tree_iterator&lt;class std::_Tree_val&lt;struct std::_Tree_simple_types&lt;struct std::pair&lt;unsigned int const ,struct pgn::cEntityData&gt; &gt; &gt; &gt;" />
+		</value>
+	</TagsToEntities>
 	<Queries />
 </ECS>

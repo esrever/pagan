@@ -12,8 +12,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -28,8 +35,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -44,8 +58,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -60,8 +81,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -76,8 +104,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -92,8 +127,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -108,8 +150,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -124,8 +173,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -140,8 +196,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -156,8 +219,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -172,8 +242,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -188,8 +265,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -204,8 +288,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -220,8 +311,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -236,8 +334,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -252,8 +357,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -268,8 +380,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -284,8 +403,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -300,8 +426,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -316,8 +449,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -332,8 +472,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -348,8 +495,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -364,8 +518,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -380,8 +541,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -396,8 +564,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -412,8 +587,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -428,8 +610,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -444,8 +633,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -460,8 +656,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -476,8 +679,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -492,8 +702,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -508,8 +725,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -524,8 +748,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -540,8 +771,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -556,8 +794,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -572,8 +817,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -588,8 +840,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -604,8 +863,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -620,8 +886,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -636,8 +909,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -652,8 +932,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -668,8 +955,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -684,8 +978,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -700,8 +1001,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -716,8 +1024,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -732,8 +1047,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -748,8 +1070,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -764,8 +1093,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -780,8 +1116,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -796,8 +1139,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -812,8 +1162,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -828,8 +1185,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -844,8 +1208,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -860,8 +1231,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -876,8 +1254,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -892,8 +1277,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -908,8 +1300,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -924,8 +1323,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -940,8 +1346,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -956,8 +1369,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -972,8 +1392,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -988,8 +1415,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1004,8 +1438,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1020,8 +1461,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1036,8 +1484,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1052,8 +1507,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1068,8 +1530,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1084,8 +1553,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1100,8 +1576,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1116,8 +1599,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1132,8 +1622,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1148,8 +1645,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1164,8 +1668,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1180,8 +1691,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1196,8 +1714,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1212,8 +1737,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1228,8 +1760,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1244,8 +1783,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1260,8 +1806,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1276,8 +1829,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1292,8 +1852,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1308,8 +1875,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1324,8 +1898,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1340,8 +1921,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1353,8 +1941,13 @@
 						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
 					</Sprites>
 				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="V" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000001000" />
+			<SupportMask value="00000000000000000000000001001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1366,8 +1959,13 @@
 						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
 					</Sprites>
 				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="^" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000001000" />
+			<SupportMask value="00000000000000000000000001001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1382,8 +1980,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1398,8 +2003,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1414,8 +2026,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1430,8 +2049,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1446,8 +2072,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1462,8 +2095,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1478,8 +2118,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1494,8 +2141,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1510,8 +2164,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1526,8 +2187,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1538,44 +2206,44 @@
 					<Layout>
 						<DunGen>
 							<vector_elem value="################################################################################" />
-							<vector_elem value="#########################################.../.........##########################" />
-							<vector_elem value="###.....###############...###############/###.........#############.....########" />
-							<vector_elem value="###.###/###############...############......#.........#############/###/########" />
-							<vector_elem value="###/#...#####.........#...############......#.........###....../....../.########" />
-							<vector_elem value="###./...#####.........#...############......#/#####/#####/######......#.########" />
-							<vector_elem value="###.#...#####.........#.../.##########....../.##...........#####......#/##...###" />
-							<vector_elem value="###.######../.........#...#/##########......####...........#####....../../...###" />
-							<vector_elem value="###/######/####/####/##...#.........##......####...........#####......##/#...###" />
+							<vector_elem value="#########################################...+.........##########################" />
+							<vector_elem value="###.....###############...###############+###.........#############.....########" />
+							<vector_elem value="###.###+###############...############......#.........#############+###+########" />
+							<vector_elem value="###+#...#####.........#...############......#.........###......+......+.########" />
+							<vector_elem value="###.+...#####.........#...############......#+#####+#####+######......#.########" />
+							<vector_elem value="###.#...#####.........#...+.##########......+.##...........#####......#+##...###" />
+							<vector_elem value="###.######..+.........#...#+##########......####...........#####......+..+...###" />
+							<vector_elem value="###+######+####+####+##...#.........##......####...........#####......##+#...###" />
 							<vector_elem value="#..........####.####.##...#.........##......####...........#############.#...###" />
-							<vector_elem value="#..........####/####/##...#.........##......####...........####....#####./...###" />
+							<vector_elem value="#..........####+####+##...#.........##......####...........####....#####.+...###" />
 							<vector_elem value="#..........####.......#...#.........##......####...........####....#############" />
-							<vector_elem value="#..........####......./...#.........##....../../...........####....#############" />
-							<vector_elem value="#..........####.......##/###/##/######......####...........#####/#####.....#####" />
-							<vector_elem value="#........../..#.......##.###.##.######/#########...........#####.#####.....#####" />
-							<vector_elem value="##/##########.#.......##/###/##/######..########.........../.###/#####.....#####" />
-							<vector_elem value="##...########./.......#.........#######.#########/#####/####.#....####...../.###" />
-							<vector_elem value="####.##########.......#.........#######/#########.#####.####./..../../.....#.###" />
-							<vector_elem value="####/##########.......#.........#######.........#.#####.######....##########.###" />
-							<vector_elem value="####.......####.......#........./...../.........#.#####.######....##########/###" />
-							<vector_elem value="####.......##########/#.........#######........./.#####.#######/###..........###" />
-							<vector_elem value="####.......#....#####./.........#######.........#######./...../.###..........###" />
+							<vector_elem value="#..........####.......+...#.........##......+..+...........####....#############" />
+							<vector_elem value="#..........####.......##+###+##+######......####...........#####+#####.....#####" />
+							<vector_elem value="#..........+..#.......##.###.##.######+#########...........#####.#####.....#####" />
+							<vector_elem value="##+##########.#.......##+###+##+######..########...........+.###+#####.....#####" />
+							<vector_elem value="##...########.+.......#.........#######.#########+#####+####.#....####.....+.###" />
+							<vector_elem value="####.##########.......#.........#######+#########.#####.####.+....+..+.....#.###" />
+							<vector_elem value="####+##########.......#.........#######.........#.#####.######....##########.###" />
+							<vector_elem value="####.......####.......#.........+.....+.........#.#####.######....##########+###" />
+							<vector_elem value="####.......##########+#.........#######.........+.#####.#######+###..........###" />
+							<vector_elem value="####.......#....#####.+.........#######.........#######.+.....+.###..........###" />
 							<vector_elem value="####.......#....#######.........#########################.....#####..........###" />
-							<vector_elem value="####......./....#######.........#########################.....###./..........###" />
-							<vector_elem value="#########/##....#######################........##########.....###/#########/####" />
-							<vector_elem value="#########.########################..../........##########.....##.....###....####" />
-							<vector_elem value="#########.########################/####........###....###.....##.....###....####" />
-							<vector_elem value="#########/###..........#####.......####........###....###.....##.....#./....####" />
-							<vector_elem value="####.......##........../.../.......####........###....##########.....#.###/#####" />
-							<vector_elem value="####.......##..........#####.......####........###....##########...../.###.#####" />
-							<vector_elem value="####.......##..........#####.......####......../.#....##########.....#####.#####" />
-							<vector_elem value="####.......##..........#####.......####/##/#####.###/###########.....#####/#####" />
-							<vector_elem value="####.......##........../..##......./.......#####.../.#####################....##" />
-							<vector_elem value="####.......#########/####.##########################/#####........########....##" />
-							<vector_elem value="####.......#########.####/######################.......###........#...####....##" />
-							<vector_elem value="####...&gt;...#########.#....\&lt;..###################......././........#...####....##" />
-							<vector_elem value="####.......#########.#.......###################.......#/#......../.../../....##" />
-							<vector_elem value="####################./.......#########################/#.#####/#################" />
-							<vector_elem value="######################################################.../.....#################" />
+							<vector_elem value="####.......+....#######.........#########################.....###.+..........###" />
+							<vector_elem value="#########+##....#######################........##########.....###+#########+####" />
+							<vector_elem value="#########.########################....+........##########.....##.....###....####" />
+							<vector_elem value="#########.########################+####........###....###.....##.....###....####" />
+							<vector_elem value="#########+###..........#####.......####........###....###.....##.....#.+....####" />
+							<vector_elem value="####.......##..........+...+.......####........###....##########.....#.###+#####" />
+							<vector_elem value="####.......##..........#####.......####........###....##########.....+.###.#####" />
+							<vector_elem value="####.......##..........#####.......####........+.#....##########.....#####.#####" />
+							<vector_elem value="####.......##..........#####.......####+##+#####.###+###########.....#####+#####" />
+							<vector_elem value="####.......##..........+..##.......+.......#####...+.#####################....##" />
+							<vector_elem value="####.......#########+####.##########################+#####........########....##" />
+							<vector_elem value="####.......#########.####+######################.......###........#...####....##" />
+							<vector_elem value="####...V...#########.#....^..###################.......+.+........#...####....##" />
+							<vector_elem value="####.......#########.#.......###################.......#+#........+...+..+....##" />
+							<vector_elem value="####################.+.......#########################+#.#####+#################" />
+							<vector_elem value="######################################################...+.....#################" />
 							<vector_elem value="################################################################################" />
 						</DunGen>
 					</Layout>
@@ -1600,8 +2268,15 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000101000" />
+			<SupportMask value="00000000000000000000000001101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1614,8 +2289,13 @@
 						<vector_elem value="::dungeon:floor:rect_gray0" />
 					</Sprites>
 				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="." />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000001100" />
+			<SupportMask value="00000000000000000000000001001100" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1627,8 +2307,13 @@
 						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
 					</Sprites>
 				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="V" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000001000" />
+			<SupportMask value="00000000000000000000000001001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -1640,22 +2325,32 @@
 						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
 					</Sprites>
 				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="^" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000001000" />
+			<SupportMask value="00000000000000000000000001001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
 		<key value="WallTile_def" />
 		<value name="WallTile_def">
 			<Components>
-				<MoveCost MoveCost="-1.07374e+008" />
+				<MoveCost MoveCost="3.40282e+038" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:wall:marble_wall1" />
 					</Sprites>
 				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="#" />
+					</Symbols>
+				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000000001100" />
+			<SupportMask value="00000000000000000000000001001100" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>

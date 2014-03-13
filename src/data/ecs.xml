@@ -7,6 +7,11 @@
           <array_elem value="::dungeon:floor:rect_gray0"/>
         </Sprites>
       </TextureSet>
+        <AsciiSet>
+        <Symbols>
+          <array_elem value="."/>
+        </Symbols>
+        </AsciiSet>
       <MoveCost MoveCost="1"/>
     </Components>
   </Entity>
@@ -17,7 +22,12 @@
           <array_elem value="::dungeon:wall:marble_wall1"/>
         </Sprites>
       </TextureSet>
-      <MoveCost MoveCost="E+38"/>
+      <AsciiSet>
+        <Symbols>
+          <array_elem value="#"/>
+        </Symbols>
+        </AsciiSet>
+      <MoveCost MoveCost="inf"/>
     </Components>
   </Entity>
   
@@ -30,6 +40,13 @@
           <array_elem value="::dungeon:dngn_detected_secret_door"/>
         </Sprites>
       </TextureSet>
+      <AsciiSet>
+        <Symbols>
+          <array_elem value="/"/>
+          <array_elem value="+"/>
+          <array_elem value="+"/>
+        </Symbols>
+        </AsciiSet>
       <DoorState State="0"/>
     </Components>
   </Entity>
@@ -41,6 +58,11 @@
           <array_elem value="::dungeon:gateways:stone_stairs_down"/>
         </Sprites>
       </TextureSet>
+      <AsciiSet>
+        <Symbols>
+          <array_elem value="V"/>
+        </Symbols>
+        </AsciiSet>
     </Components>
   </Entity>
   
@@ -51,6 +73,11 @@
           <array_elem value="::dungeon:gateways:stone_stairs_up"/>
         </Sprites>
       </TextureSet>
+      <AsciiSet>
+        <Symbols>
+          <array_elem value="^"/>
+        </Symbols>
+        </AsciiSet>
     </Components>
   </Entity>
   

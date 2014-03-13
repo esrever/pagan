@@ -34,6 +34,17 @@ namespace std
 		iss >> ret;
 		return ret;
 	}
+
+	template<>
+	inline const float from_string<float>(const std::string& v)
+	{
+		if (v == "inf")
+			return std::numeric_limits<float>::max();
+		float ret;
+		std::istringstream iss(v);
+		iss >> ret;
+		return ret;
+	}
 }
 
 namespace pgn

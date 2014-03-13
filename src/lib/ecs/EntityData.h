@@ -17,7 +17,7 @@ namespace pgn
 		void SetArchetype(const cEntityData& arch);
 
 		template<class T>
-		T * Component();
+		T * Component() const;
 
 	public:
 		std::string							mName;
@@ -38,8 +38,12 @@ namespace pgn
 
 	//--------------------------------------------------------
 	template<class T>
-	T * cEntityData::Component()
+	T * cEntityData::Component() const
 	{
-		return std::dynamic_pointer_cast<T>(mComponents[cComponent<T>::StaticTypeIndex()]).get();
+		auto ptr = std::dynamic_pointer_cast<cComponent<T>>(mComponents[cComponent<T>::StaticTypeIndex()]);
+		if (ptr)
+			return &ptr->mData;
+		else
+			return nullptr;
 	}
 }

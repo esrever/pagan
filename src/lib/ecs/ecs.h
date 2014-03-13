@@ -18,7 +18,6 @@
 
 #define DECL_MAP_MEMBER_R(A,B, N) \
 	public: const std::map< A , B > & N () const { return m##N ; }\
-	public: std::map< A, B > & N() { return m##N; }\
 	private: std::map< A , B > m##N ; 
 #define DECL_MEMBER_R(T, N) \
 	public: const T & N () const { return m##N ; }\

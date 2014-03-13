@@ -2,6 +2,8 @@
 
 #include <rlut/dungen/dungen.h>
 
+#include <rlut/components/AsciiSet.h>
+
 namespace pgn
 {
 	//---------------------------------------------------------------------------------------------------
@@ -18,22 +20,14 @@ namespace pgn
 				const auto& vf = value.FgEntities()(j, i);
 				if (&vf != &value.FgEntities().View().Storage().GetDefault())
 				{
-					if (vf->second.mName == "GateEnter_def")
-						s.push_back('>');
-					else if (vf->second.mName == "GateExit_def")
-						//s.push_back('\<');
-						s.append("\\<");
-					else if (vf->second.mName == "Door_def")
-						s.push_back('/');
-					else
-						s.push_back(';');
+					const auto& syms = vf->second.Component<rl::cmp::cAsciiSet>()->mSymbols;
+					s.append(syms.empty() ? "?" : syms.front());
 				}
-				else if (v->first == "WallTile_def")
-					s.push_back('#');
-				else if (v->first == "FloorTile_def")
-					s.push_back('.');
 				else
-					s.push_back('?');
+				{
+					const auto& syms = v->second.Component<rl::cmp::cAsciiSet>()->mSymbols;
+					s.append(syms.empty() ? "?" : syms.front());
+				}
 			}
 		}
 		SerializeOut(node, "DunGen", ss);
