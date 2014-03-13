@@ -15,6 +15,7 @@ set(SOURCE_FILES
     texture/textureatlas.cpp
     serialize/util.cpp
     event/event.cpp
+    noise/perlin.cpp
 #    util/cfgtree.cpp
 #    util/cfgdata.cpp
 #    util/conversions.cpp
@@ -54,6 +55,7 @@ set(HEADER_FILES
     event/event.h
 #    app/application.h
 #    util/textmod.h
+    noise/perlin.h
 )
 
 add_definitions(

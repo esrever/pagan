@@ -58,8 +58,8 @@ namespace pgn
 			auto it_floor = ecs->Archetypes().find(tiles.find("Floor")->second);
 			auto it_wall = ecs->Archetypes().find(tiles.find("Wall")->second);
 			auto it_door = ecs->Archetypes().find(tiles.find("Door")->second);
-			auto it_enter = ecs->Archetypes().find(tiles.find("GateEnter")->second);
-			auto it_exit = ecs->Archetypes().find(tiles.find("GateExit")->second);
+			auto it_enter = ecs->Archetypes().find(tiles.find("Entry")->second);
+			auto it_exit = ecs->Archetypes().find(tiles.find("Exit")->second);
 
 
 			// default to wall
