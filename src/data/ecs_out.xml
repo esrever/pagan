@@ -2,10 +2,1583 @@
 <ECS>
 	<EntitiesToData>
 		<key value="0" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="1" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="2" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="3" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="4" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="5" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="6" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="7" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="8" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="9" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="10" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="11" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="12" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="13" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="14" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="15" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="16" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="17" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="18" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="19" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="20" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="21" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="22" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="23" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="24" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="25" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="26" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="27" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="28" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="29" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="30" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="31" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="32" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="33" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="34" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="35" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="36" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="37" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="38" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="39" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="40" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="41" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="42" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="43" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="44" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="45" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="46" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="47" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="48" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="49" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="50" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="51" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="52" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="53" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="54" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="55" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="56" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="57" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="58" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="59" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="60" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="61" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="62" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="63" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="64" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="65" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="66" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="67" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="68" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="69" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="70" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="71" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="72" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="73" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="74" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="75" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="76" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="77" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="78" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="79" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="80" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="81" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="82" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="83" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="84" />
+		<value name="GateEnter_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
+					</Sprites>
+				</TextureSet>
+			</Components>
+			<SupportMask value="00000000000000000000000000001000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="85" />
+		<value name="GateExit_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
+					</Sprites>
+				</TextureSet>
+			</Components>
+			<SupportMask value="00000000000000000000000000001000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="86" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="87" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="88" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="89" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="90" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="91" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="92" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="93" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="94" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="95" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+			</Components>
+			<SupportMask value="00000000000000000000000000101000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+		</value>
+		<key value="96" />
 		<value name="Level">
 			<Components>
 				<LevelData Id="1">
-					<Layout />
+					<Layout>
+						<DunGen>
+							<vector_elem value="################################################################################" />
+							<vector_elem value="#########################################...;.........##########################" />
+							<vector_elem value="###.....###############...###############;###.........#############.....########" />
+							<vector_elem value="###.###;###############...############......#.........#############;###;########" />
+							<vector_elem value="###;#...#####.........#...############......#.........###......;......;.########" />
+							<vector_elem value="###.;...#####.........#...############......#;#####;#####;######......#.########" />
+							<vector_elem value="###.#...#####.........#...;.##########......;.##...........#####......#;##...###" />
+							<vector_elem value="###.######..;.........#...#;##########......####...........#####......;..;...###" />
+							<vector_elem value="###;######;####;####;##...#.........##......####...........#####......##;#...###" />
+							<vector_elem value="#..........####.####.##...#.........##......####...........#############.#...###" />
+							<vector_elem value="#..........####;####;##...#.........##......####...........####....#####.;...###" />
+							<vector_elem value="#..........####.......#...#.........##......####...........####....#############" />
+							<vector_elem value="#..........####.......;...#.........##......;..;...........####....#############" />
+							<vector_elem value="#..........####.......##;###;##;######......####...........#####;#####.....#####" />
+							<vector_elem value="#..........;..#.......##.###.##.######;#########...........#####.#####.....#####" />
+							<vector_elem value="##;##########.#.......##;###;##;######..########...........;.###;#####.....#####" />
+							<vector_elem value="##...########.;.......#.........#######.#########;#####;####.#....####.....;.###" />
+							<vector_elem value="####.##########.......#.........#######;#########.#####.####.;....;..;.....#.###" />
+							<vector_elem value="####;##########.......#.........#######.........#.#####.######....##########.###" />
+							<vector_elem value="####.......####.......#.........;.....;.........#.#####.######....##########;###" />
+							<vector_elem value="####.......##########;#.........#######.........;.#####.#######;###..........###" />
+							<vector_elem value="####.......#....#####.;.........#######.........#######.;.....;.###..........###" />
+							<vector_elem value="####.......#....#######.........#########################.....#####..........###" />
+							<vector_elem value="####.......;....#######.........#########################.....###.;..........###" />
+							<vector_elem value="#########;##....#######################........##########.....###;#########;####" />
+							<vector_elem value="#########.########################....;........##########.....##.....###....####" />
+							<vector_elem value="#########.########################;####........###....###.....##.....###....####" />
+							<vector_elem value="#########;###..........#####.......####........###....###.....##.....#.;....####" />
+							<vector_elem value="####.......##..........;...;.......####........###....##########.....#.###;#####" />
+							<vector_elem value="####.......##..........#####.......####........###....##########.....;.###.#####" />
+							<vector_elem value="####.......##..........#####.......####........;.#....##########.....#####.#####" />
+							<vector_elem value="####.......##..........#####.......####;##;#####.###;###########.....#####;#####" />
+							<vector_elem value="####.......##..........;..##.......;.......#####...;.#####################....##" />
+							<vector_elem value="####.......#########;####.##########################;#####........########....##" />
+							<vector_elem value="####.......#########.####;######################.......###........#...####....##" />
+							<vector_elem value="####...&gt;...#########.#....&lt;..###################.......;.;........#...####....##" />
+							<vector_elem value="####.......#########.#.......###################.......#;#........;...;..;....##" />
+							<vector_elem value="####################.;.......#########################;#.#####;#################" />
+							<vector_elem value="######################################################...;.....#################" />
+							<vector_elem value="################################################################################" />
+						</DunGen>
+					</Layout>
 				</LevelData>
 			</Components>
 			<SupportMask value="00000000000000000000000000010000" />
@@ -20,7 +1593,11 @@
 		<value name="Door_def">
 			<Components>
 				<TextureSet>
-					<Sprites />
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
 			</Components>
@@ -33,7 +1610,9 @@
 			<Components>
 				<MoveCost MoveCost="1" />
 				<TextureSet>
-					<Sprites />
+					<Sprites>
+						<vector_elem value="::dungeon:floor:rect_gray0" />
+					</Sprites>
 				</TextureSet>
 			</Components>
 			<SupportMask value="00000000000000000000000000001100" />
@@ -42,15 +1621,27 @@
 		</value>
 		<key value="GateEnter_def" />
 		<value name="GateEnter_def">
-			<Components />
-			<SupportMask value="00000000000000000000000000000000" />
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
+					</Sprites>
+				</TextureSet>
+			</Components>
+			<SupportMask value="00000000000000000000000000001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
 		<key value="GateExit_def" />
 		<value name="GateExit_def">
-			<Components />
-			<SupportMask value="00000000000000000000000000000000" />
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
+					</Sprites>
+				</TextureSet>
+			</Components>
+			<SupportMask value="00000000000000000000000000001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 		</value>
@@ -59,7 +1650,9 @@
 			<Components>
 				<MoveCost MoveCost="-1.07374e+008" />
 				<TextureSet>
-					<Sprites />
+					<Sprites>
+						<vector_elem value="::dungeon:wall:marble_wall1" />
+					</Sprites>
 				</TextureSet>
 			</Components>
 			<SupportMask value="00000000000000000000000000001100" />

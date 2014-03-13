@@ -23,6 +23,9 @@ namespace pgn
 
 				void Init(const rlut::cWorkspace& ws, const std::map<std::string, std::string>& tiles);
 
+				const dense_archetypes_type& BgEntities() const { return mBgEntities; }
+				const sparse_entities_type& FgEntities() const { return mFgEntities; }
+
 			private:
 				
 				dense_archetypes_type	mBgEntities;

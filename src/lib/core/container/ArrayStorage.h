@@ -46,7 +46,14 @@ namespace pgn
 
 		// access
 		const_reference Get(size_t idx) const { auto it = mData.find(idx); return it == mData.end() ? mDefault : it->second; }
-		reference Get(size_t idx)			  { auto it = mData.find(idx); return it == mData.end() ? mDefault : it->second; }
+		
+		reference Get(size_t idx)
+		{
+			auto it = mData.find(idx);
+			if (it == mData.end())
+				it = mData.emplace(idx, mDefault).first;
+			return it->second;
+		}
 
 		//! type-specific
 		const container_type& Raw() const { return mData; }

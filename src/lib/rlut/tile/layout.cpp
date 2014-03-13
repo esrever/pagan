@@ -7,7 +7,33 @@ namespace pgn
 	//---------------------------------------------------------------------------------------------------
 	void SerializeOut(node_type& node, const rl::cLayout& value)
 	{
-		
+		std::vector<std::string> ss;
+		for (size_t i = 0; i < value.BgEntities().Height(); ++i)
+		{
+			ss.push_back("");
+			std::string& s = ss.back();
+			for (size_t j = 0; j < value.BgEntities().Width(); ++j)
+			{
+				const auto& v = value.BgEntities()(j, i);
+				const auto& vf = value.FgEntities()(j, i);
+				if (&vf != &value.FgEntities().View().Storage().GetDefault())
+				{
+					if (vf->second.mName == "GateEnter_def")
+						s.push_back('>');
+					else if (vf->second.mName == "GateExit_def")
+						s.push_back('<');
+					else
+						s.push_back(';');
+				}
+				else if (v->first == "WallTile_def")
+					s.push_back('#');
+				else if (v->first == "FloorTile_def")
+					s.push_back('.');
+				else
+					s.push_back('?');
+			}
+		}
+		SerializeOut(node, "DunGen", ss);
 	}
 
 	//---------------------------------------------------------------------------------------------------
@@ -17,10 +43,10 @@ namespace pgn
 
 		// Read dungeon spec and tiles
 		pgn::rlut::cWorkspace ws;
-		pgn::SerializeIn(node, "DunGen", ws);
+		ret += pgn::SerializeIn(node, "DunGen", ws);
 
 		std::map<std::string, std::string> tiles;
-		pgn::SerializeIn(node, "Tiles", tiles);
+		ret += pgn::SerializeIn(node, "Tiles", tiles);
 		
 		value.Init(ws, tiles);
 
