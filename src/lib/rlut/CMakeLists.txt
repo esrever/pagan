@@ -14,6 +14,7 @@ set(SOURCE_FILES
     tile/layout.cpp
     
     event/events.cpp
+    input/actionmap.cpp
     
     dungen/room.cpp
     dungen/area.cpp
@@ -45,6 +46,7 @@ set(HEADER_FILES
     
     #tile/tileinfo.h
     tile/layout.h
+    input/actionmap.h
     
     event/events.h
     
