@@ -81,6 +81,41 @@
     </Components>
   </Entity>
   
+  <Entity name ="Hero" is_archetype="true">
+    <Components>
+      <TextureSet>
+        <Sprites>
+          <array_elem value="::dungeon:gateways:stone_stairs_up"/>
+        </Sprites>
+      </TextureSet>
+      <AsciiSet>
+        <Symbols>
+          <array_elem value="@"/>
+        </Symbols>
+      </AsciiSet>
+      <ActionMap>
+        <key value=""/>
+        <value value="PlayerMoveNW"/>
+        <key value=""/>
+        <value value="PlayerMoveN"/>
+        <key value=""/>
+        <value value="PlayerMoveNE"/>
+        <key value=""/>
+        <value value="PlayerMoveSW"/>
+        <key value=""/>
+        <value value="PlayerMoveS"/>
+        <key value=""/>
+        <value value="PlayerMoveSE"/>
+        <key value=""/>
+        <value value="PlayerMoveW"/>
+        <key value=""/>
+        <value value="PlayerMove"/>
+        <key value=""/>
+        <value value="PlayerMoveE"/>
+      </ActionMap>
+    </Components>
+  </Entity>
+  
   <Entity name ="Level">
     <Components>
       <LevelData Id = "1">
