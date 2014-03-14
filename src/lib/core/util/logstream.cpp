@@ -46,7 +46,19 @@ namespace pgn
 	void cLogString::Log(const eLogLevel zLevel, const std::string& zMsg)
 	{
 		if (int(zLevel) <= int(mDisplayLevel))
-			mLogLines.push_back(  boost::str(mFormat % mName % mLevelNames[int(zLevel)] % zMsg) );
+		{
+			if (mLogLines.size() == mMaxLines)
+				mLogLines.pop_back();
+			mLogLines.push_front(boost::str(mFormat % mName % mLevelNames[int(zLevel)] % zMsg));
+		}
+	}
+
+	//----------------------------------------------------------------------------
+	void cLogString::SetMaxLines(size_t zMaxLines)
+	{
+		mMaxLines = zMaxLines;
+		if (mLogLines.size() > zMaxLines)
+			mLogLines.resize(zMaxLines);
 	}
 
 	//----------------------------------------------------------------------------

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <deque>
 #include <string>
 #include <iostream>
 #include <cstdint>
@@ -57,12 +58,15 @@ namespace pgn
 	class cLogString : public cLogBase
 	{
 	public:
+		cLogString(size_t zMaxLines = 0xFFFFFFFF) :cLogBase(){ SetMaxLines(zMaxLines); }
+		void SetMaxLines(size_t zMaxLines);
 		void Log(const eLogLevel zLevel, const std::string& zMsg);
 		static cLogString& Default() { return mDefault; }
 
 	private:
 		static cLogString mDefault;
-		std::vector<std::string> mLogLines;
+		std::deque<std::string> mLogLines;
+		size_t mMaxLines;
 	};
 
 	class cCfgTree;
