@@ -9,6 +9,7 @@
 #include <rlut/ai/actions.h>
 #include <rlut/ai/conditions.h>
 #include <rlut/components/RegisterComponents.h>
+#include <rlut/event/events.h>
 
 namespace pgn
 {
@@ -23,6 +24,7 @@ namespace pgn
 			pgn::bt::RegisterActions();
 			pgn::bt::RegisterConditions();
 			pgn::rl::RegisterComponents(*mainecs());
+			pgn::rl::RegisterActions(*mainecs());
 
 			static const glm::uvec2 gridDims(80, 40);
 			static const size_t  numLines = 4;

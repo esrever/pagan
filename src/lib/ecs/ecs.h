@@ -30,6 +30,7 @@ namespace pgn
 	class cECS
 	{
 	public:
+		typedef std::function<void(void)> cActionFunc;
 		typedef std::map<cEntity, cEntityData>::const_iterator  cEntityWithDataConst;
 		typedef std::map<cEntity, cEntityData>::iterator        cEntityWithData;
 		typedef std::map<std::string, cEntityData>::const_iterator        cArchetypeWithDataConst;
@@ -43,6 +44,7 @@ namespace pgn
 		DECL_MAP_MEMBER_R(std::string, size_t, ComponentTypeNamesToIds);
 		DECL_MEMBER_R(std::vector<ComponentCreatorFunction>, ComponentCreators);
 		DECL_MEMBER_R(std::vector<std::string>, ComponentTypeNames);
+		DECL_MAP_MEMBER_R(std::string, cActionFunc, ActionFuncs);
 
 		SUPPORT_DERIVED(cECS);
 
@@ -55,6 +57,9 @@ namespace pgn
 
 		template<class T>
 		void RegisterComponent();
+
+		//! register an action
+		void RegisterAction(const std::string& s, cActionFunc func);
 
 	private:
 		unsigned short AddComponentType(const std::type_index& zTi);

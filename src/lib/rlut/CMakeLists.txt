@@ -13,6 +13,8 @@ set(SOURCE_FILES
     #tile/tileinfo.cpp
     tile/layout.cpp
     
+    event/events.cpp
+    
     dungen/room.cpp
     dungen/area.cpp
     dungen/corr.cpp
@@ -44,6 +46,8 @@ set(HEADER_FILES
     #tile/tileinfo.h
     tile/layout.h
     
+    event/events.h
+    
     ai/btree.h
     ai/behavior.h
     ai/blackboard.h
@@ -71,6 +75,7 @@ include_directories(
     ${SDL_INCLUDE_DIR}
     ${SDL_image_INCLUDE_DIR}
     ${SDL_ttf_INCLUDE_DIR}
+    ${Signal_INCLUDE_DIR}
 )
 
 add_library(pagan_rlut STATIC

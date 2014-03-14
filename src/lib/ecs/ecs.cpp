@@ -95,6 +95,12 @@ namespace pgn
 	}
 
 	//---------------------------------------------------------------------------------------------------
+	void cECS::RegisterAction(const std::string& s, cActionFunc func)
+	{
+		mActionFuncs[s] = func;
+	}
+
+	//---------------------------------------------------------------------------------------------------
 	void SerializeOut(node_type& node, const cECS& value) 
 	{ 
 		// export a dump of the object
