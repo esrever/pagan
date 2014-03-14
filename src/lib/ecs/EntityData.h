@@ -29,8 +29,9 @@ namespace pgn
 		cComponentMask						mSharedMask;
 		//! Archetype
 		const cEntityData *					mArchetype;
-		//! List of tags
+		//! List of tags, unique or not
 		std::set<std::string>				mTags;
+		std::set<std::string>				mTagus;
 	};
 
 	DECL_SERIALIZE_INTERFACE(cEntityData);

@@ -104,8 +104,8 @@
           </Layout>
       </LevelData>
     </Components>
-    <Tags>
+    <Tagus>
       <array_elem value="CurrentLevel"/>
-    </Tags>
+    </Tagus>
   </Entity>
 </Entities>

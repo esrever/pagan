@@ -17,6 +17,8 @@ namespace pgn
 		auto it = mEntitiesToData.emplace(e, ed);
 		for (const auto& tag : ed.mTags)
 			mTagsToEntities[tag].insert(it.first);
+		for (const auto& tag : ed.mTagus)
+			mTagusToEntities[tag] = it.first;
 		return it.first;
 	}
 
@@ -55,8 +57,26 @@ namespace pgn
 	//---------------------------------------------------------------------------------------------------
 	void cECS::Untag(const std::string& tag, cEntityWithData ed)
 	{
-		mTagsToEntities[tag].erase(ed);
-		ed->second.mTags.erase(tag);
+		auto it = mTagsToEntities.find(tag);
+		if (it != mTagsToEntities.end())
+		{
+			it->second.erase(ed);
+			ed->second.mTags.erase(tag);
+		}
+	}
+
+	//---------------------------------------------------------------------------------------------------
+	void cECS::Tagu(const std::string& tag, cEntityWithData ed)
+	{
+		mTagusToEntities[tag] = ed;
+		ed->second.mTagus.insert(tag);
+	}
+
+	//---------------------------------------------------------------------------------------------------
+	void cECS::Untagu(const std::string& tag, cEntityWithData ed)
+	{
+		mTagusToEntities.erase(tag);
+		ed->second.mTagus.erase(tag);
 	}
 
 	//---------------------------------------------------------------------------------------------------

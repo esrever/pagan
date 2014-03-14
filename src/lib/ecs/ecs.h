@@ -41,6 +41,7 @@ namespace pgn
 		DECL_MAP_MEMBER_R(cEntity, cEntityData, EntitiesToData);
 		DECL_MAP_MEMBER_R(std::string, cEntityData, Archetypes);
 		DECL_MAP_MEMBER_R(std::string, std::set<cEntityWithData>, TagsToEntities);
+		DECL_MAP_MEMBER_R(std::string, cEntityWithData, TagusToEntities);
 		DECL_MAP_MEMBER_R(std::string, cQueryFunc, Queries);
 		DECL_MAP_MEMBER_R(std::string, size_t, ComponentTypeNamesToIds);
 		DECL_MEMBER_R(std::vector<ComponentCreatorFunction>, ComponentCreators);
@@ -53,6 +54,8 @@ namespace pgn
 		cEntityWithData Create(const cEntityData& = cEntityData());
 		void Tag(const std::string&, cEntityWithData);
 		void Untag(const std::string&, cEntityWithData);
+		void Tagu(const std::string&, cEntityWithData);
+		void Untagu(const std::string&, cEntityWithData);
 
 		cEntityWithData InstantiateArchetype(const cEntityData& arch);
 

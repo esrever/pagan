@@ -44,6 +44,7 @@ namespace pgn
 
 		// add tags
 		mTags.insert(arch.mTags.begin(), arch.mTags.end());
+		mTagus.insert(arch.mTagus.begin(), arch.mTagus.end());
 	}
 
 	//---------------------------------------------------------------------------------------------------
@@ -86,6 +87,7 @@ namespace pgn
 		SerializeOut(node, "SupportMask", value.mSupportMask);
 		SerializeOut(node, "SharedMask", value.mSharedMask);
 		SerializeOut(node, "Tags", value.mTags);
+		SerializeOut(node, "Tagus", value.mTagus);
 	}
 
 	//---------------------------------------------------------------------------------------------------
@@ -117,6 +119,7 @@ namespace pgn
 
 		// Read tags
 		SerializeIn(reader, "Tags", value.mTags);
+		SerializeIn(reader, "Tagus", value.mTagus);
 		return true;
 	}
 }
