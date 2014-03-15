@@ -67,17 +67,25 @@ struct cTestApp : public pgn::rlut::cRlApp
 		auto tex_atlas = MainWindow()->TextureLib()->FindByName();
 		auto tex = tex_atlas->first;
 		auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
-		for (size_t i = 0; i < mGridDims.y;++i)
-		for (size_t j = 0; j < mGridDims.x; ++j)
-		{
-			// TODO: request differently, as we might need a different sprite than the first. use textureset's index instead!
-			// TODO: wrap in a function, do checks for existence of entity and textures, render individual, alpha aware!
-			auto sprite_bg = lvl_bg(j, i)->second.Component<pgn::rl::cmp::cTextureSet>()->mSprites[0];
-			pgn::cSubTexture tex;
-			int v = (i+j)%256;
-			SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
-			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
-		}
+
+		auto render_tex_func = [](size_t x, size_t y, pgn::cECS::cEntityWithData) {};
+
+		auto bg_view = lvl_bg.CreateView(view_start.x, view_start.y, view_size.x, view_size.y);
+		bg_view.VisitRext(render_tex_func);
+
+		auto fg_view = lvl_fg.CreateView(view_start.x, view_start.y, view_size.x, view_size.y);
+		fg_view.VisitRext(render_tex_func);
+
+		auto actor_view = lvl_act.CreateView(view_start.x, view_start.y, view_size.x, view_size.y);
+		actor_view.VisitRext(render_tex_func);
+
+		/*
+		const auto& bg_tex_set = lvl_bg(j, i)->second.Component<pgn::rl::cmp::cTextureSet>();
+		pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
+		int v = 255;
+		SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
+		MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
+		*/
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\SourceSansPro\\SourceSansPro-Regular.otf", 32);
 		//pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\PT-Sans\\PTN57F.ttf", 62);
