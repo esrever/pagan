@@ -70,7 +70,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 		for (size_t i = 0; i < mGridDims.y;++i)
 		for (size_t j = 0; j < mGridDims.x; ++j)
 		{
-			// TODO: request differently, as we might need a different sprite than the first. I need an index in TextureSet: mActiveSpriteIndex, def to 0;
+			// TODO: request differently, as we might need a different sprite than the first. use textureset's index instead!
 			// TODO: wrap in a function, do checks for existence of entity and textures, render individual, alpha aware!
 			auto sprite_bg = lvl_bg(j, i)->second.Component<pgn::rl::cmp::cTextureSet>()->mSprites[0];
 			pgn::cSubTexture tex;
