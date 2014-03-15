@@ -26,7 +26,7 @@ namespace pgn
 			pgn::rl::RegisterComponents(*mainecs());
 			pgn::rl::RegisterActions(*mainecs());
 
-			static const glm::uvec2 gridDims(80, 40);
+			static const glm::uvec2 gridDims(40, 20);
 			static const size_t  numLines = 4;
 
 			mGridDims = gridDims;
@@ -42,20 +42,7 @@ namespace pgn
 			mLogStart = glm::uvec2(5, mTileDim*mGridDims.y + msTextHeight / 4);
 			mStatusStart = glm::uvec2(5 + mTileDim*mGridDims.x, 0);
 
-			//mSpriteAtlas.Init(TextureLib(), "C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml");
 			MainWindow()->TextureLib()->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml","");
-
-			srand(0);
-			mDungeon.Init(mGridDims.x, mGridDims.y);
-			mDungeon.mConstraints.RoomRectW(glm::ivec2(3, 12))
-				.RoomRectH(glm::ivec2(3, 12))
-				.DoorToDoorMinDistance(glm::ivec2(2, 2))
-				.DoorsPerRoom(glm::ivec2(1, 4))
-				.ConnectIslands(false)
-				.StoreRoomConnectivity(true)
-				.OverrideMaxConns(false)
-				.RandomEntryExit(true);
-			mDungeon.generate_dungeon(100);
 		}
 
 		void cRlApp::Render()

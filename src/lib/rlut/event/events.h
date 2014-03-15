@@ -12,9 +12,11 @@ namespace pgn
 		enum class eRlEventId : size_t {
 			MoveAdj = 256,
 			Appear,
-			Disappear
+			Disappear,
+			PlayerMoveAdj
 		};
 
+		typedef cAction<size_t(eRlEventId::PlayerMoveAdj), const glm::ivec2& /*dir*/> cPlayerMoveAdj;
 		typedef cAction<size_t(eRlEventId::MoveAdj), cECS::cEntityWithData /*who*/, const glm::ivec2& /*dir*/> cMoveAdj;
 		typedef cAction<size_t(eRlEventId::Appear), cECS::cEntityWithData/*who*/, const glm::ivec2& /*pos*/> cAppear;
 		typedef cAction<size_t(eRlEventId::Disappear), cECS::cEntityWithData/*who*/, const glm::ivec2&/*last_pos*/> cDisappear;

@@ -88,8 +88,6 @@ namespace pgn
 					mFgEntities(j, i) = ecs->Create(it_exit->second);
 			}
 
-
-
 			//---- HERO STUFF
 
 			// find entry coordinates, or use entry_coords2
@@ -101,7 +99,7 @@ namespace pgn
 			assert((entry_coords.x >= 0) && (entry_coords.y >= 0));
 
 			// assign loc to hero
-			auto it_hero = ecs->Archetypes().find(tiles.find("Hero")->second);
+			auto it_hero = ecs->Archetypes().find("Hero");
 			auto new_hero = ecs->Create(it_hero->second);
 			
 			auto hero_loc = it_hero->second.Component<cmp::cLocation>();
@@ -110,7 +108,7 @@ namespace pgn
 			if (!hero_loc)
 			{
 				new_hero->second.AddComponent(cComponent<cmp::cLocation>::Create());
-				hero_loc = it_hero->second.Component<cmp::cLocation>();
+				hero_loc = new_hero->second.Component<cmp::cLocation>();
 			}
 			// TODO: hero needs to get the level ID from the Level, not the layout. So the whole thing here is temporary
 			hero_loc->mPos = entry_coords2;

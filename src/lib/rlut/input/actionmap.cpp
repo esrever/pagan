@@ -21,6 +21,9 @@ namespace pgn
 
 	namespace rl
 	{
+		cActionMap::cActionMap() :
+			INIT_EVT_MEMBER(cActionMap, Keyboard)
+		{}
         void cActionMap::OnKeyboard(SDL_KeyboardEvent evt)
         {       
             if( Active() && (evt.state == 1))

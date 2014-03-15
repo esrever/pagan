@@ -43,7 +43,7 @@ namespace pgn
 
 			cECS	   mECS;
 
-			static const size_t	msTextHeight = 20;
+			static const size_t	msTextHeight = 24;
 		};
 	}
 }

@@ -85,7 +85,7 @@
     <Components>
       <TextureSet>
         <Sprites>
-          <array_elem value="::dungeon:gateways:stone_stairs_up"/>
+          <array_elem value="::monsters:unique:norbert"/>
         </Sprites>
       </TextureSet>
       <AsciiSet>
@@ -114,6 +114,9 @@
         <value value="PlayerMoveE"/>
       </ActionMap>
     </Components>
+    <Tagus>
+      <array_elem value="Player"/>
+    </Tagus>
   </Entity>
   
   <Entity name ="Level">
