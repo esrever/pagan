@@ -24,6 +24,7 @@ namespace pgn
 		cActionMap::cActionMap() :
 			INIT_EVT_MEMBER(cActionMap, Keyboard)
 		{}
+
         void cActionMap::OnKeyboard(const SDL_KeyboardEvent& evt)
         { 
 			assert(false);
