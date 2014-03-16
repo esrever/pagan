@@ -42,6 +42,20 @@ struct cTestApp : public pgn::rlut::cRlApp
 	virtual void Init()
 	{
 		pgn::rlut::cRlApp::Init();
+
+		const char * fname_in = PROJECT_ROOT "data\\ecs.xml";
+		const char * fname_out = PROJECT_ROOT "data\\ecs_out.xml";
+
+		pugi::xml_document doc_in2;
+		if (pgn::LoadXML(doc_in2, fname_in, std::cout))
+		{
+			doc_in2.print(std::cout);
+			SerializeIn(doc_in2, pgn::ECS());
+
+			pugi::xml_document doc_out;
+			SerializeOut(doc_out, "ECS", pgn::ECS());
+			doc_out.save_file(fname_out);
+		}
 	}
 
 	//------------------------------------------------
@@ -61,6 +75,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 		auto view_start = pgn::rl::GetCenteredView(glm::ivec2(lvl_layout.BgEntities().Width(), lvl_layout.BgEntities().Height()),
 							hero_pos,
 							view_size);
+		auto view_end = view_start + view_size;
 
 		auto& lvl_bg = lvl_layout.BgEntities();
 		auto& lvl_fg = lvl_layout.FgEntities();
@@ -70,7 +85,28 @@ struct cTestApp : public pgn::rlut::cRlApp
 		auto tex = tex_atlas->first;
 		auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
 
-		auto render_impl_func = [&](size_t x, size_t y,const pgn::cEntityData& ed) 
+		auto render_func_sparse = [&](const pgn::rl::cLayout::sparse_entities_type& map)
+		{
+			for (const auto& kv : map.View().Storage().Raw())
+			{
+				auto ed = kv.second->second;
+				auto idx1 = kv.first;
+				glm::ivec2 idx(idx1 % map.Width(), idx1 / map.Width());
+
+				if ((idx.x < view_start.x) || (idx.y < view_start.y) || (idx.x >= view_end.x) || (idx.y >= view_end.y))
+					continue;
+					
+				auto x = idx.x - view_start.x;
+				auto y = idx.y - view_start.y;
+				const auto& bg_tex_set = ed.Component<pgn::rl::cmp::cTextureSet>();
+				pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
+				int v = 255;
+				SDL_Rect rect = { x * mTileDim, y * mTileDim, mTileDim, mTileDim };
+				MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
+			}
+		};
+
+		auto render_impl_func = [&](size_t x, size_t y, const pgn::cEntityData& ed)
 		{
 			const auto& bg_tex_set = ed.Component<pgn::rl::cmp::cTextureSet>();
 			pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
@@ -79,19 +115,16 @@ struct cTestApp : public pgn::rlut::cRlApp
 			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 		};
 
-		auto render_tex_func = [&](size_t x, size_t y, const pgn::cECS::cEntityWithDataConst& ed) { render_impl_func(x, y, ed->second); };
-		auto render_tex_func_arch = [&](size_t x, size_t y, const pgn::cECS::cArchetypeWithDataConst& ed) { render_impl_func(x, y, ed->second); };
+		auto render_func_dense = [&](size_t x, size_t y, const pgn::cECS::cArchetypeWithDataConst& ed) { render_impl_func(x, y, ed->second); };
 
-		auto bg_view = lvl_bg.CreateView(view_start.x, view_start.y, view_size.x, view_size.y);
-		bg_view.VisitRext(render_tex_func_arch);
+		auto bg_view = lvl_bg.CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
+		bg_view.VisitRext(render_func_dense);
 
-		auto fg_view = lvl_fg.CreateView(view_start.x, view_start.y, view_size.x, view_size.y);
-		fg_view.VisitRext(render_tex_func);
+		// TODO: use views! sparse views
+		render_func_sparse(lvl_fg);
+		render_func_sparse(lvl_act);
 
-		auto actor_view = lvl_act.CreateView(view_start.x, view_start.y, view_size.x, view_size.y);
-		actor_view.VisitRext(render_tex_func);
-
-		pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\SourceSansPro\\SourceSansPro-Regular.otf", 32);
+		pgn::cSDLFont font(MainWindow()->Renderer(), PROJECT_ROOT "data\\fonts\\SourceSansPro\\SourceSansPro-Regular.otf", 32);
 		//pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\PT-Sans\\PTN57F.ttf", 62);
 		//pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\Nobile\\Nobile-Regular.ttf", 32);
 
@@ -130,6 +163,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 
 	void OnKeyboard(const SDL_KeyboardEvent& e)
 	{
+		std::cout << e.keysym.scancode << " - " << e.keysym.sym << std::endl;
 		if (e.state == 1)
 		{
 			if (e.keysym.scancode == SDL_SCANCODE_KP_PLUS)
@@ -152,21 +186,6 @@ int main(int argc, char ** argv)
 	std::cout << PROJECT_ROOT << std::endl;
 	pgn::mainapp() = new cTestApp(argc, argv);
 	pgn::mainecs() = new pgn::cECS();
-	pgn::mainapp()->Init();
-
-	const char * fname_in = PROJECT_ROOT "data\\ecs.xml";
-	const char * fname_out = PROJECT_ROOT "data\\ecs_out.xml";
-
-	pugi::xml_document doc_in2;
-	if (pgn::LoadXML(doc_in2, fname_in, std::cout))
-	{
-		doc_in2.print(std::cout);
-		SerializeIn(doc_in2, pgn::ECS());
-
-		pugi::xml_document doc_out;
-		SerializeOut(doc_out, "ECS", pgn::ECS());
-		doc_out.save_file(fname_out);
-	}
 
 	pgn::mainapp()->Run();
 

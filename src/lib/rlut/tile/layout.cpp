@@ -2,8 +2,7 @@
 
 #include <rlut/dungen/dungen.h>
 
-#include <rlut/components/AsciiSet.h>
-#include <rlut/components/Location.h>
+#include <rlut/components/components.h>
 
 namespace pgn
 {
@@ -67,6 +66,7 @@ namespace pgn
 			// default to wall
 			mBgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height(), it_wall);
 			mFgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height(), ecs->EntitiesToData().end());
+			mActors.Resize(ws.mMapData.Width(), ws.mMapData.Height(), ecs->EntitiesToData().end());
 			cECS::cEntityWithData it_entry_inst;
 			glm::ivec2 entry_coords2;
 			for (size_t i = 0; i < ws.mMapData.Height();++i)
@@ -74,7 +74,7 @@ namespace pgn
 			{
 				// Instantiate archetypes!
 				auto& v = ws.mMapData(j, i);
-				if (v & (rlut::eMapData::corridor | rlut::eMapData::room))
+				if (v & (rlut::eMapData::corridor | rlut::eMapData::room | rlut::eMapData::conn))
 					mBgEntities(j, i) = it_floor;
 				if (v & rlut::eMapData::conn)
 					mFgEntities(j, i) = ecs->Create( it_door->second );
@@ -113,6 +113,9 @@ namespace pgn
 			// TODO: hero needs to get the level ID from the Level, not the layout. So the whole thing here is temporary
 			hero_loc->mPos = entry_coords2;
 			AddActor(new_hero);
+
+			// TODO: turn system needs to activate hero's keyboard
+			new_hero->second.Component<cmp::cActionMap>()->mActionMap.SetActive(true);
 		}
 
 		//-------------------------------------------------------------------------------

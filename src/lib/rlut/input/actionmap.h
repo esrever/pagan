@@ -16,7 +16,7 @@ namespace pgn
                 bool Active() const     {   return mActive; }
                 
 				void AddBindings(const std::map<std::string, std::string>& b);
-                void OnKeyboard(SDL_KeyboardEvent evt);
+                void OnKeyboard(const SDL_KeyboardEvent& evt);
                 
             private:
                 std::map<int, cECS::cActionFunc> mBindings;

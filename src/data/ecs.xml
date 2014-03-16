@@ -94,24 +94,26 @@
         </Symbols>
       </AsciiSet>
       <ActionMap>
-        <key value=""/>
+        <ActionMap>
+        <key value="95"/>
         <value value="PlayerMoveNW"/>
-        <key value=""/>
+        <key value="96"/>
         <value value="PlayerMoveN"/>
-        <key value=""/>
+        <key value="97"/>
         <value value="PlayerMoveNE"/>
-        <key value=""/>
+        <key value="89"/>
         <value value="PlayerMoveSW"/>
-        <key value=""/>
+        <key value="90"/>
         <value value="PlayerMoveS"/>
-        <key value=""/>
+        <key value="91"/>
         <value value="PlayerMoveSE"/>
-        <key value=""/>
+        <key value="92"/>
         <value value="PlayerMoveW"/>
-        <key value=""/>
+        <key value="93"/>
         <value value="PlayerMove"/>
-        <key value=""/>
+        <key value="94"/>
         <value value="PlayerMoveE"/>
+        </ActionMap>
       </ActionMap>
     </Components>
     <Tagus>

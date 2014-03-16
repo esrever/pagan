@@ -9,7 +9,7 @@ namespace pgn{
             {
                 size_t ret = 0;
                 ret += pgn::SerializeIn(reader,  "ActionMap", mActionMap);
-                return ret;
+                return ret+1;
             }
             
             //----------------------------------------------------------------------------------------------

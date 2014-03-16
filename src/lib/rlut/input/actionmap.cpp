@@ -24,13 +24,14 @@ namespace pgn
 		cActionMap::cActionMap() :
 			INIT_EVT_MEMBER(cActionMap, Keyboard)
 		{}
-        void cActionMap::OnKeyboard(SDL_KeyboardEvent evt)
-        {       
+        void cActionMap::OnKeyboard(const SDL_KeyboardEvent& evt)
+        { 
+			assert(false);
             if( Active() && (evt.state == 1))
             {
                 for(const auto& binding : mBindings)
                 {
-                    if(binding.first == evt.keysym.sym)
+                    if(binding.first == evt.keysym.scancode)
                     {
                         binding.second();
                         SetActive(false);
@@ -42,18 +43,10 @@ namespace pgn
 
 		void cActionMap::AddBindings(const std::map<std::string, std::string>& bindings)
 		{
-			// TODO: from the strings, read the appr stuff
+			// TODO: allow vectors of keys and special ones!
 			for (const auto& kv : bindings)
 			{
-				// Single key
-				if (kv.first.size() == 1)
-				{
-
-				}
-				else // special key shortcuts! endsswith arrow, Ecs, space, enter, F1, etc
-				{
-					
-				}
+				mBindings[std::from_string<int>(kv.first)] = mainecs()->ActionFuncs(kv.second)->second;
 			}
 		}
 	}

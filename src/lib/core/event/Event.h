@@ -83,6 +83,7 @@ namespace pgn
 		~cEventHandler()
 		{
 			E::mSig -= mId;
+			mId = 0;
 		}
 
 	private:
