@@ -42,12 +42,13 @@ namespace pgn
 			mLogStart = glm::uvec2(5, mTileDim*mGridDims.y + msTextHeight / 4);
 			mStatusStart = glm::uvec2(5 + mTileDim*mGridDims.x, 0);
 
-			MainWindow()->TextureLib()->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml","");
+			const char * fname_atlas = PROJECT_ROOT "data\\tiledesc.xml";
+			MainWindow()->TextureLib()->Load(fname_atlas, "");
 		}
 
 		void cRlApp::Render()
 		{
-			auto tex_atlas = MainWindow()->TextureLib()->FindByName("");
+			auto tex_atlas = MainWindow()->TextureLib()->FindByName(":");
 			auto tex = tex_atlas->first;
 			auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
 			auto it_rect = atlas->Rects().cbegin();

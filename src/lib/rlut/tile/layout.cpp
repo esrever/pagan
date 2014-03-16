@@ -152,7 +152,7 @@ namespace pgn
 					//pmax[i] -= vd;
 				}
 			}
-			return pmax;
+			return pmin;
 
 		}
 	}

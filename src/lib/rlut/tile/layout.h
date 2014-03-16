@@ -28,6 +28,10 @@ namespace pgn
 				const sparse_entities_type& FgEntities() const { return mFgEntities; }
 				const sparse_entities_type& Actors() const { return mActors; }
 
+				dense_archetypes_type& BgEntities() { return mBgEntities; }
+				sparse_entities_type& FgEntities() { return mFgEntities; }
+				sparse_entities_type& Actors() { return mActors; }
+
 				void AddActor(cECS::cEntityWithDataConst ed);
 				void RemoveActor(cECS::cEntityWithDataConst ed);
 				

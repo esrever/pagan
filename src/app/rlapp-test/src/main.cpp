@@ -26,6 +26,7 @@
 #include <rlut/app/rlapp.h>
 #include <rlut/components/components.h>
 #include <ecs/ecs.h>
+#include <ecs/EntityData.h>
 #include <core/serialize/util.h>
 
 struct cTestApp : public pgn::rlut::cRlApp
@@ -46,13 +47,14 @@ struct cTestApp : public pgn::rlut::cRlApp
 	//------------------------------------------------
 	virtual void Render()
 	{		
+		auto& ecs = pgn::mainecs();
 		// get hero and level entities
-		auto hero = pgn::mainecs()->TagusToEntities("Hero");
+		auto hero = pgn::mainecs()->TagusToEntities("Player");
 		auto lvl = pgn::mainecs()->TagusToEntities("CurrentLevel");
 
 		// get hero loc and level data
-		const auto& hero_pos = hero->second->second.Component<pgn::rl::cmp::cLocation>()->mPos;
-		const auto& lvl_layout = lvl->second->second.Component<pgn::rl::cmp::cLevelData>()->mLayout;
+		auto& hero_pos = hero->second->second.Component<pgn::rl::cmp::cLocation>()->mPos;
+		auto& lvl_layout = lvl->second->second.Component<pgn::rl::cmp::cLevelData>()->mLayout;
 
 		// get the renderrect
 		auto view_size = glm::ivec2(mGridDims.x, mGridDims.y);
@@ -60,32 +62,34 @@ struct cTestApp : public pgn::rlut::cRlApp
 							hero_pos,
 							view_size);
 
-		const auto& lvl_bg = lvl_layout.BgEntities();
-		const auto& lvl_fg = lvl_layout.FgEntities();
-		const auto& lvl_act = lvl_layout.Actors();
+		auto& lvl_bg = lvl_layout.BgEntities();
+		auto& lvl_fg = lvl_layout.FgEntities();
+		auto& lvl_act = lvl_layout.Actors();
 
 		auto tex_atlas = MainWindow()->TextureLib()->FindByName();
 		auto tex = tex_atlas->first;
 		auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
 
-		auto render_tex_func = [](size_t x, size_t y, pgn::cECS::cEntityWithData) {};
+		auto render_impl_func = [&](size_t x, size_t y,const pgn::cEntityData& ed) 
+		{
+			const auto& bg_tex_set = ed.Component<pgn::rl::cmp::cTextureSet>();
+			pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
+			int v = 255;
+			SDL_Rect rect = { x * mTileDim, y * mTileDim, mTileDim, mTileDim };
+			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
+		};
+
+		auto render_tex_func = [&](size_t x, size_t y, const pgn::cECS::cEntityWithDataConst& ed) { render_impl_func(x, y, ed->second); };
+		auto render_tex_func_arch = [&](size_t x, size_t y, const pgn::cECS::cArchetypeWithDataConst& ed) { render_impl_func(x, y, ed->second); };
 
 		auto bg_view = lvl_bg.CreateView(view_start.x, view_start.y, view_size.x, view_size.y);
-		bg_view.VisitRext(render_tex_func);
+		bg_view.VisitRext(render_tex_func_arch);
 
 		auto fg_view = lvl_fg.CreateView(view_start.x, view_start.y, view_size.x, view_size.y);
 		fg_view.VisitRext(render_tex_func);
 
 		auto actor_view = lvl_act.CreateView(view_start.x, view_start.y, view_size.x, view_size.y);
 		actor_view.VisitRext(render_tex_func);
-
-		/*
-		const auto& bg_tex_set = lvl_bg(j, i)->second.Component<pgn::rl::cmp::cTextureSet>();
-		pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
-		int v = 255;
-		SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
-		MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
-		*/
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\SourceSansPro\\SourceSansPro-Regular.otf", 32);
 		//pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\PT-Sans\\PTN57F.ttf", 62);
@@ -146,7 +150,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 int main(int argc, char ** argv)
 {
 	std::cout << PROJECT_ROOT << std::endl;
-	pgn::mainapp() = new pgn::rlut::cRlApp(argc, argv);
+	pgn::mainapp() = new cTestApp(argc, argv);
 	pgn::mainecs() = new pgn::cECS();
 	pgn::mainapp()->Init();
 

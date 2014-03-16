@@ -842,25 +842,20 @@
 			<Tagus />
 		</value>
 		<key value="35" />
-		<value name="Door_def">
+		<value name="Entry_def">
 			<Components>
 				<TextureSet>
 					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
 					</Sprites>
 				</TextureSet>
-				<DoorState State="0" />
 				<AsciiSet>
 					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
+						<vector_elem value="V" />
 					</Symbols>
 				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
+			<SupportMask value="00000000000000000000000010001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 			<Tagus />
@@ -2786,20 +2781,25 @@
 			<Tagus />
 		</value>
 		<key value="116" />
-		<value name="Entry_def">
+		<value name="Door_def">
 			<Components>
 				<TextureSet>
 					<Sprites>
-						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
 					</Sprites>
 				</TextureSet>
+				<DoorState State="0" />
 				<AsciiSet>
 					<Symbols>
-						<vector_elem value="V" />
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
 					</Symbols>
 				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000010001000" />
+			<SupportMask value="00000000000000000000000011001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 			<Tagus />
@@ -2925,25 +2925,20 @@
 			<Tagus />
 		</value>
 		<key value="122" />
-		<value name="Door_def">
+		<value name="Exit_def">
 			<Components>
 				<TextureSet>
 					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
 					</Sprites>
 				</TextureSet>
-				<DoorState State="0" />
 				<AsciiSet>
 					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
+						<vector_elem value="^" />
 					</Symbols>
 				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
+			<SupportMask value="00000000000000000000000010001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 			<Tagus />
@@ -3861,437 +3856,10 @@
 			<Tagus />
 		</value>
 		<key value="161" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="162" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="163" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="164" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="165" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="166" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="167" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="168" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="169" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="170" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="171" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="172" />
-		<value name="Exit_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
-					</Sprites>
-				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="^" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000010001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="173" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="174" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="175" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="176" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="177" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="178" />
-		<value name="Door_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000011001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="179" />
 		<value name="Hero">
 			<Components>
 				<Location LevelId="-1">
-					<Pos x="17" y="25" />
+					<Pos x="87" y="11" />
 				</Location>
 				<TextureSet>
 					<Sprites>
@@ -4314,51 +3882,51 @@
 				<set_elem value="Player" />
 			</Tagus>
 		</value>
-		<key value="180" />
+		<key value="162" />
 		<value name="Level">
 			<Components>
 				<LevelData Id="1">
 					<Layout>
 						<DunGen>
 							<vector_elem value="################################################################################################################################################################" />
-							<vector_elem value="##...###############################################./....##########.........###################################################################################" />
-							<vector_elem value="##...##.........####################################.#..../..##..../........./../...........#####......####################.../..../..../..#######..../.../...##" />
-							<vector_elem value="##...##.........######################......########.#....##/##/####.........####...........#####....../..#################.###/####/##/##/#######/####...###/##" />
-							<vector_elem value="##...##........./../.......###########......########/##/###.....####.........####...........#####......##/#################/##...#...#.......###......#...#...##" />
-							<vector_elem value="##...##.........##.#######/###########......####........###.....####.........####.........../.../......##...#####...........##.../...#.......###......#...#...##" />
-							<vector_elem value="##/####/##########.####....#####...../....../../........###.....####.........####...........#####......##...#####...........##...#...#......././......#...#...##" />
-							<vector_elem value="##......##########.####....#####.#####......####........#######/####.........####...........#####......##.../...#...........##...#...#.......###......#.../...##" />
-							<vector_elem value="##################.####....#####.#####......###################.####.........####...........#####......########./...........####/#...###/#######......#...#...##" />
-							<vector_elem value="##################/####/##/#####/#####......###################.#################...........#####......##########...........####.#######.##########/#####/###/##" />
-							<vector_elem value="##################....#./..##....#####......##########.......##.##....###########...........##############################/#####.#######.##########.#####.##..##" />
-							<vector_elem value="##################....#/#####....#####......###.....##.......##/##....####################################################.#####/#######.##########/#####/##/###" />
-							<vector_elem value="########.....#####..../..####....#####......###.....##......./.../....#....#####################...........########.....##./...........#./....####...........###" />
-							<vector_elem value="########.....#####....##/####....#####......###.....##.......##/##....#....#####################...........########.....####.........../.####/####...........###" />
-							<vector_elem value="########.....#######/##.....#....#####/########.....##.......##.##....#....#####################.........../..#####.....####...........######....#...........###" />
-							<vector_elem value="#....../.....#######../.....#..../.....########.....##.......##.#######..../....################...........##.#####.....####...........######....#...........###" />
-							<vector_elem value="#/#######/#############.....########/##########.....##.......##/#######....####/################...........##.#####.....####...........####./....#...........###" />
-							<vector_elem value="#...##......###########/###/######...##########.....##.......##.......###/#####.........########...........##.#####...../../...........####.######...........###" />
-							<vector_elem value="#...##......##########..##...#####.############.....########/##.......###.#####.........########...........##/#####.....####...........####/######...........###" />
-							<vector_elem value="#...##......##########.###...#####.############.....########.##......././.#####.........########...........##.....#.....####...........####......#...........###" />
-							<vector_elem value="#...##......##########/###...#####.############/###/########/############.#######/############./...........##.....#.....#############/#####......#...........###" />
-							<vector_elem value="#...##....../....####....#...#####/###########../...#####.....###########/####....############.##############.....#.....#########...#.#####......#...........###" />
-							<vector_elem value="#...##......#/##/####....#...##....###########.##########.....#...#........###....############...############.....#.....#########...#.#####......#...........###" />
-							<vector_elem value="#...##......#./...###....#...##....###########/##########.....#...#.......././....##############./.......#######/################.../.#####......####/#####/####" />
-							<vector_elem value="#...###########...###..../...##....####........##########...../...#........###....################.......#######.################...#####./......####./.../.####" />
-							<vector_elem value="#...###########..V###....#...##....####........##########.....#.../........###....################.......#######/################...#####.#......####/#...######" />
-							<vector_elem value="#...###.......#...###....###/##....####........##########.....##/##........#######################.......######........##########...#####/#......####.#...######" />
-							<vector_elem value="#..././.......#/#####....###../..../../........##########.....##.##........####..........#########.......######........###.....##...#####./......####./...######" />
-							<vector_elem value="##/##/#......./.#####....######....####........#############/###.######/#######..........#########/############........###.....##...#####.#############...######" />
-							<vector_elem value="##....#.......#######....######....####........###########...###.######.#######..........#########.############........###.....##...#####../....################" />
-							<vector_elem value="##/##/#############./..../..###....##./........###########.#####.######.#######..........#########/############........###.....##.../.######....################" />
-							<vector_elem value="#..##..############.#######/###....##/####/###############/#####.######.#######..........######.......#########........###.....##...#.######....#...........####" />
-							<vector_elem value="#.####/############.#######...#/##/#.........#####.........#####/######/#######..........######.......####...#######/#####.....######/###../....#...........####" />
-							<vector_elem value="#.#.........#######.#######...#.##.#.........#####.........##...........#######........../....#.......####...#######...../.....###......#.#####/#...........####" />
-							<vector_elem value="#.#.........#######/#######.../.##.#.........#####.........##...........#.....#/#############.#.......####...#############....././......#.#####.#...........####" />
-							<vector_elem value="#.#........././.........###/######.#.........#####.........##...........#.....#.#############./.......#../...#############.....###......#.#####.#...........####" />
-							<vector_elem value="#.#/###########........./...######.#.........#####.........##...........#^....#.####################/##.##################.....###....../.#####.######/#########" />
-							<vector_elem value="#...###########.........##########.#/#############.........##...........#/###/#.####################....#######################################........#########" />
-							<vector_elem value="##################################...####################################.......################################################################################" />
+							<vector_elem value="##############################################......###########....../.###############################..........################################################" />
+							<vector_elem value="###########.../...############################......###########......#.#########....############...../..........###########....#################################" />
+							<vector_elem value="###########...###.############################......#########./......#.#########....########.../.###/#..........###########....#################################" />
+							<vector_elem value="###########...###.############################......#########.########.#########....########/#.#####.#..........###########....#######.........../.#############" />
+							<vector_elem value="###########...###/############################......#########/######...#########....######...#.#####./..........###########....#######...........#/#############" />
+							<vector_elem value="#########./.../.#........######...........####......#####........../.###########....##...#...#/############/###############....#######...........#.......#######" />
+							<vector_elem value="#....####.#...#./........######...........####/##########..........########..../....##...#.../.....########.############../....################/##.......#######" />
+							<vector_elem value="#....####.#######........######...........####.##########..........########.##########...#########.########./...########.##....################.##......./.#####" />
+							<vector_elem value="#....####/#######........###########/#########.##########..........########.##########...#########.##########...########/##....##......########.#####/####.#####" />
+							<vector_elem value="#....####....####........###########.#########.########./..........########/##########...#########/##########...##.......##....##......########.#####..../.#####" />
+							<vector_elem value="#....####....####........###########.#########/########/#..........#.........#########.V.#########......#####...##.......##....##....../.######/##########.#####" />
+							<vector_elem value="#....####....###########/#.........#.#######...../......#........../.........#########/###########......#####...##.......##....#########./......##########/#####" />
+							<vector_elem value="#....####....#.......###./........./.#######.....#......########/###.........#...#####.###########......#####...##.......##/##############......#######.....####" />
+							<vector_elem value="#..../../..../.......#####.........#####.../.....#......########...#.........#.../.###/###########......#####...##.......#..######...#####......#######.....####" />
+							<vector_elem value="#....####....#.......#####/#############/#########......########...###########...#./........../../......#####...##......./.#######...#####......#######.....####" />
+							<vector_elem value="#....####....###/##/######.###########.......#####......####.../...###########...###..........####......#####/####.......#/#######...#####......#######.....####" />
+							<vector_elem value="#....####....###.##.######.###########.......###############/#################...###..........####......#####.####/#####/#.#######...#####......#######.....####" />
+							<vector_elem value="###/#####....###/##/######/###########.......###############./........############################......#####.####.#####.../.....#.../.../......#######.....####" />
+							<vector_elem value="##...././....#........##....##########.......###############.#......../../.........##################/#######/####/#############.#...#####......#######...../..#" />
+							<vector_elem value="##....########........##....##########.......###############.#........####.........##################..../.........#############.#...#####......##############.#" />
+							<vector_elem value="##....#.....##........##....###...././.......###############.#........####.........#######################.........#############.#...#####....../.############.#" />
+							<vector_elem value="##..../.....##........##....###....###.......#######...#####/#####/##/####.........#######################.........#############.################.############.#" />
+							<vector_elem value="##....#.....##........##....###....###......./...###...###.........#..././.........#####.........#########.........#############..................########...#.#" />
+							<vector_elem value="##....#.....####/#######....##########.......###/###..././.........#...###.........#####.........#########.........#######################################.../.#" />
+							<vector_elem value="##..../.....#.....#########/################/##....#...###.........#...###.........#####.........############################....##############......#####...###" />
+							<vector_elem value="##....#######.....#...#..........#########./..#..../...###.........#..././.........#####.........############################/##.##############....../.../...###" />
+							<vector_elem value="##....#######.....#.../..........#####.../.##.#....#...###.........#######.........#####.........##############....####........#.##....########......######/####" />
+							<vector_elem value="##....#.....#.....#...#..........#.../...####./....#...######/############........./.../.........###..........#..../../........#/##..../..#################.####" />
+							<vector_elem value="##....#...^./.....#...#..........#/###...###########...#####......######./.........#####.........###..........#....####........#../....##/#################.####" />
+							<vector_elem value="#####/#.....#.....#...#........../.###...###########.../.../......######.###############.........###..........#....####........#.###/####......############.####" />
+							<vector_elem value="#####.#.....#.....#...######/#####.###/#####################......######.###############.........###..........#....####........#./...####......############/####" />
+							<vector_elem value="#####.#.....#/#####...######.#####.###.#####################......##...#.###############.........#./..........#/#######......../.########......###########...###" />
+							<vector_elem value="#####.#.....#.##############.#####/###/##./...##############......##...#.###############........./.############.#######........##########......####.../../...###" />
+							<vector_elem value="#####.#.....#.##############/####.......#.#...##############......##...#.####################/####.#............#######........##########....../../...####...###" />
+							<vector_elem value="#####.#...../.########..........#.......#/#...##############......##...#.####################......#.####################################......####...####...###" />
+							<vector_elem value="#####./.....##########........../......././...##############......##...#.######################/####.################################################/#../...###" />
+							<vector_elem value="#######.....##########..........#.......###...##############......###/##.######################......################################################...########" />
+							<vector_elem value="#####################################################################....#######################################################################################" />
 							<vector_elem value="################################################################################################################################################################" />
 						</DunGen>
 					</Layout>
