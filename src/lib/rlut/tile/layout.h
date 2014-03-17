@@ -54,10 +54,12 @@ namespace pgn
 				movecost_map_type		mStaticMoveCosts;
 
 				//! move costs after actors, these change frequently
-				//
 				movecost_map_type		mMoveCosts;
 
-				//! Explored and visible masks
+				//! Obstacle mask, for visibility
+				bool_map_type			mObstacle;
+
+				//! Explored and visible masks, by entity
 				std::map< size_t, bool_map_type> mExplored;
 				std::map< size_t, bool_map_type> mVisible;
 		};
