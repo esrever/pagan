@@ -65,14 +65,16 @@ namespace pgn
 	template<>
 	bool evt::cAppear::Run(cECS::cEntityWithData ed, const rl::cmp::cLocation& pos)
 	{
-		// TODO: implement
+		auto ptr = ed->second.Component<rl::cmp::cLocation>();
+		*ptr = pos;
 		return true;
 	}
 
 	template<>
 	bool evt::cCalculateVisibility::Run(cECS::cEntityWithData ed)
 	{
-		// TODO: implement
+		auto vis = ed->second.Component<rl::cmp::cVisibility>();
+		// tODO: implement
 		return true;
 	}
 }
