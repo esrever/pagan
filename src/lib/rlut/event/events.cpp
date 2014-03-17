@@ -30,6 +30,16 @@ namespace pgn
 	}
 
 	template<>
+	bool evt::cPlayerAppear::Run(const rl::cmp::cLocation& pos)
+	{
+		auto ped = mainecs()->TagusToEntities("Player")->second;
+		if (evt::cAppear::Run(ped, pos))
+			return evt::cCalculateVisibility::Run(ped);
+		else
+			return false;
+	}
+
+	template<>
 	bool evt::cMoveAdj::Run(cECS::cEntityWithData ed, const glm::ivec2& dir)
 	{
 		auto ptr = ed->second.Component<rl::cmp::cLocation>();
@@ -45,11 +55,24 @@ namespace pgn
 		auto movecost = lvl->mLayout.BgEntities()(newpos.x, newpos.y)->second.Component<rl::cmp::cMoveCost>();
 		if (movecost->mMoveCost < std::numeric_limits<float>::max())
 		{
-			lvl->mLayout.RemoveActor(ed);
 			ptr->mPos = newpos;
-			lvl->mLayout.AddActor(ed);
+			lvl->mLayout.SetActor(ed);
 			return true;
 		}
 		return false;
+	}
+
+	template<>
+	bool evt::cAppear::Run(cECS::cEntityWithData ed, const rl::cmp::cLocation& pos)
+	{
+		// TODO: implement
+		return true;
+	}
+
+	template<>
+	bool evt::cCalculateVisibility::Run(cECS::cEntityWithData ed)
+	{
+		// TODO: implement
+		return true;
 	}
 }

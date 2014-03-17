@@ -115,6 +115,7 @@
         <value value="PlayerMoveE"/>
         </ActionMap>
       </ActionMap>
+      <Visibility/>
     </Components>
     <Tagus>
       <array_elem value="Player"/>

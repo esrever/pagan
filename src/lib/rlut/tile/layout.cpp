@@ -111,15 +111,16 @@ namespace pgn
 				hero_loc = new_hero->second.Component<cmp::cLocation>();
 			}
 			// TODO: hero needs to get the level ID from the Level, not the layout. So the whole thing here is temporary
+			// Use the Appear event, at the application start after init
 			hero_loc->mPos = entry_coords2;
-			AddActor(new_hero);
+			SetActor(new_hero);
 
 			// TODO: turn system needs to activate hero's keyboard
 			new_hero->second.Component<cmp::cActionMap>()->mActionMap.SetActive(true);
 		}
 
 		//-------------------------------------------------------------------------------
-		void cLayout::AddActor(cECS::cEntityWithDataConst ed)
+		void cLayout::SetActor(cECS::cEntityWithDataConst ed)
 		{
 			auto loc = ed->second.Component<cmp::cLocation>();
 			mActors[ed] = loc->mPos;
@@ -130,13 +131,6 @@ namespace pgn
 		{
 			auto loc = ed->second.Component<cmp::cLocation>();
 			mActors.erase(ed);
-		}
-
-		//-------------------------------------------------------------------------------
-		void cLayout::MoveActor(cECS::cEntityWithDataConst ed)
-		{
-			auto loc = ed->second.Component<cmp::cLocation>();
-			mActors[ed] = loc->mPos;
 		}
 
 		//-------------------------------------------------------------------------------

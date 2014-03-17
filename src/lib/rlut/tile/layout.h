@@ -33,9 +33,8 @@ namespace pgn
 				sparse_entities_type& FgEntities() { return mFgEntities; }
 				sparse_map_type& Actors() { return mActors; }
 
-				void AddActor(cECS::cEntityWithDataConst ed);
+				void SetActor(cECS::cEntityWithDataConst ed);
 				void RemoveActor(cECS::cEntityWithDataConst ed);
-				void MoveActor(cECS::cEntityWithDataConst ed);
 				
 				const movecost_map_type StaticMoveCosts() const { return mStaticMoveCosts; }
 				const movecost_map_type MoveCosts() const { return mMoveCosts; }
