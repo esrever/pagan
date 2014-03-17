@@ -17,6 +17,7 @@ namespace pgn
 		class cLayout
 		{
 			public:
+				typedef cArray2D<bool> bool_map_type;
 				typedef cArray2D<float> movecost_map_type;
 				typedef cArray2D<cECS::cArchetypeWithDataConst> dense_archetypes_type;
 				typedef cArray2D<cECS::cEntityWithDataConst> dense_entities_type;
@@ -32,6 +33,9 @@ namespace pgn
 				dense_archetypes_type& BgEntities() { return mBgEntities; }
 				sparse_entities_type& FgEntities() { return mFgEntities; }
 				sparse_map_type& Actors() { return mActors; }
+
+				bool_map_type& Explored(size_t id) { return mExplored[id]; }
+				bool_map_type& Visible(size_t id)  { return mVisible[id]; }
 
 				void SetActor(cECS::cEntityWithDataConst ed);
 				void RemoveActor(cECS::cEntityWithDataConst ed);
@@ -52,6 +56,10 @@ namespace pgn
 				//! move costs after actors, these change frequently
 				//
 				movecost_map_type		mMoveCosts;
+
+				//! Explored and visible masks
+				std::map< size_t, bool_map_type> mExplored;
+				std::map< size_t, bool_map_type> mVisible;
 		};
 
 		// Related utilities
