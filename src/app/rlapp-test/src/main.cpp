@@ -179,6 +179,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 	DECL_EVT_MEMBER(Keyboard);
 	
 	static const size_t	msTextHeight = 24;
+	pgn::rl::cActionMap am;
 };
 
 int main(int argc, char ** argv)
