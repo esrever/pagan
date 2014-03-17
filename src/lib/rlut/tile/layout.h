@@ -34,9 +34,6 @@ namespace pgn
 				sparse_entities_type& FgEntities() { return mFgEntities; }
 				sparse_map_type& Actors() { return mActors; }
 
-				bool_map_type& Explored(size_t id) { return mExplored[id]; }
-				bool_map_type& Visible(size_t id)  { return mVisible[id]; }
-
 				void SetActor(cECS::cEntityWithDataConst ed);
 				void RemoveActor(cECS::cEntityWithDataConst ed);
 				
@@ -58,10 +55,6 @@ namespace pgn
 
 				//! Obstacle mask, for visibility
 				bool_map_type			mObstacle;
-
-				//! Explored and visible masks, by entity
-				std::map< size_t, bool_map_type> mExplored;
-				std::map< size_t, bool_map_type> mVisible;
 		};
 
 		// Related utilities

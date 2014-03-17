@@ -26,7 +26,7 @@ namespace pgn
 		if (pystring::endswith(fname,".xml"))
 		{
 			atex = cTextureAtlas_sptr(new cTextureAtlas());
-			fname = atex->Init(fname);
+			fname = PROJECT_ROOT + atex->Init(fname);
 		}
 		std::string texname = mName + ":" + (desc ? desc : fname);
 		cTexture_sptr ptex( new cTexture(IMG_LoadTexture(mRenderer, fname.c_str()), texname));

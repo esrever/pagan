@@ -25,6 +25,7 @@
 
 #include <rlut/app/rlapp.h>
 #include <rlut/components/components.h>
+#include <rlut/event/events.h>
 #include <ecs/ecs.h>
 #include <ecs/EntityData.h>
 #include <core/serialize/util.h>
@@ -58,6 +59,11 @@ struct cTestApp : public pgn::rlut::cRlApp
 			SerializeOut(doc_out, "ECS", pgn::ECS());
 			doc_out.save_file(fname_out);
 		}
+
+		// TODO: do this better: fetch the entry position more formally
+		auto hero = pgn::mainecs()->TagusToEntities("Player");
+		auto& hero_pos = hero->second->second.Component<pgn::rl::cmp::cLocation>()->mPos;
+		pgn::evt::cPlayerAppear::Run(hero_pos);
 	}
 
 	//------------------------------------------------
@@ -70,6 +76,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 
 		// get hero loc and level data
 		auto& hero_pos = hero->second->second.Component<pgn::rl::cmp::cLocation>()->mPos;
+		auto hero_vis = hero->second->second.Component<pgn::rl::cmp::cVisibility>();
 		auto& lvl_layout = lvl->second->second.Component<pgn::rl::cmp::cLevelData>()->mLayout;
 
 		// get the renderrect
@@ -89,6 +96,11 @@ struct cTestApp : public pgn::rlut::cRlApp
 		auto tex = tex_atlas->first;
 		auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
 
+		// TODO: get appr. level id
+		auto& visview = hero_vis->mVisible[-1].CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
+		auto& expview = hero_vis->mExplored[-1].CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
+		std::function<int(int x, int y)> get_fow = [&](int x, int y){return visview(x, y) ? 255 : (expview(x, y) ? 150 : 0); };
+
 		auto render_func_sparse = [&](const pgn::rl::cLayout::sparse_entities_type& map)
 		{
 			if (map.View().Storage().Raw().empty())
@@ -106,7 +118,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 				auto y = idx.y - view_start.y;
 				const auto& bg_tex_set = ed.Component<pgn::rl::cmp::cTextureSet>();
 				pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
-				int v = 255;
+				int v = get_fow(x,y);
 				SDL_Rect rect = { x * mTileDim, (mGridDims.y-1-y) * mTileDim, mTileDim, mTileDim };
 				MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 			}
@@ -116,7 +128,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 		{
 			const auto& bg_tex_set = ed.Component<pgn::rl::cmp::cTextureSet>();
 			pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
-			int v = 255;
+			int v = get_fow(x, y);
 			SDL_Rect rect = { x * mTileDim, (mGridDims.y - 1 - y) * mTileDim, mTileDim, mTileDim };
 			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 		};
@@ -137,7 +149,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 				auto y = kv.second.y - view_start.y;
 				const auto& bg_tex_set = kv.first->second.Component<pgn::rl::cmp::cTextureSet>();
 				pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
-				int v = 255;
+				int v = get_fow(x, y);
 				SDL_Rect rect = { x * mTileDim, (mGridDims.y - 1 - y) * mTileDim, mTileDim, mTileDim };
 				MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 			}

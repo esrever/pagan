@@ -3,6 +3,7 @@
 #include <rlut/dungen/dungen.h>
 
 #include <rlut/components/components.h>
+#include <rlut/event/events.h>
 
 namespace pgn
 {

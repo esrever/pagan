@@ -27,7 +27,8 @@ namespace pgn
 	bool evt::cPlayerMoveAdj::Run(const glm::ivec2& dir)
 	{
 		auto ped = mainecs()->TagusToEntities("Player")->second;
-		return evt::cMoveAdj::Run(ped, dir);
+		if(evt::cMoveAdj::Run(ped, dir))
+			return evt::cCalculateVisibility::Run(ped);
 	}
 
 	template<>
@@ -77,7 +78,8 @@ namespace pgn
 		auto vis = ed->second.Component<rl::cmp::cVisibility>();
 		auto loc = ed->second.Component<rl::cmp::cLocation>();
 		vis->mVisible.clear();
-		auto curexpl = vis->mExplored[loc->mLevelId];
+		auto& curexpl = vis->mExplored[loc->mLevelId];
+		auto& curvis = vis->mVisible[loc->mLevelId];
 
 		static rlut::cFovLookup<rlut::cFovRsc> fovlut = rlut::cFovLookup<rlut::cFovRsc>();
 
@@ -87,7 +89,8 @@ namespace pgn
 
 		// TODO: resize only if necessary
 		curexpl.Resize(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height(), false);
-		auto onvis = [&](const glm::ivec2& pt, float b) {curexpl(pt) = true; vis->mVisible.insert(pt); };
+		curvis.Resize(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height(), false);
+		auto onvis = [&](const glm::ivec2& pt, float b) {curexpl(pt) = true; curvis(pt) = true; vis->mVisibleSet.insert(pt); };
 
 		// TODO: visibility map easily obtainable by layout
 		cArray2D<bool> vismap(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height());
