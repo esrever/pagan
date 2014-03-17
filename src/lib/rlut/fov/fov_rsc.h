@@ -22,11 +22,7 @@ namespace pgn
 			 * All parameters are in the same coordinate space: no views are used.
 			 * @param p		 Eye coordinates
 			 * @param vismap Visibility map
-			 * @param lospts Points in LoS
-			 * @param vis	 Visibility value
-			 * TODO: vis should be a vector, like lospts?
-			 * TODO: vis should be optional?
-			 * TODO: lospts should be optional?
+			 * @param onvis  void( ivec2, float) : what to do when a point is visible. The same point might be set multiple times.
 			 */
 			void Calc(const glm::ivec2& p, const cArray2D<bool>& vismap, on_visible_func onvis);
 			void Init(size_t los);

@@ -126,7 +126,7 @@
       <LevelData Id = "1">
         <Layout>
             <DunGen>
-                <Dims x="160" y="40"/>
+                <Dims x="80" y="25"/>
                 <DoorsPerRoom x="1" y="4"/>
             </DunGen>
             <Tiles>
