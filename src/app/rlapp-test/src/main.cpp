@@ -29,6 +29,8 @@
 #include <ecs/EntityData.h>
 #include <core/serialize/util.h>
 
+#include <core/util/string.h>
+
 struct cTestApp : public pgn::rlut::cRlApp
 {
 	cTestApp(int argc, char ** argv) : pgn::rlut::cRlApp(argc, argv),
@@ -75,6 +77,8 @@ struct cTestApp : public pgn::rlut::cRlApp
 		auto view_start = pgn::rl::GetCenteredView(glm::ivec2(lvl_layout.BgEntities().Width(), lvl_layout.BgEntities().Height()),
 							hero_pos,
 							view_size);
+		view_size.x = std::min(view_size.x, int(lvl_layout.BgEntities().Width() - view_start.x));
+		view_size.y = std::min(view_size.y, int(lvl_layout.BgEntities().Height() - view_start.y));
 		auto view_end = view_start + view_size;
 
 		auto& lvl_bg = lvl_layout.BgEntities();

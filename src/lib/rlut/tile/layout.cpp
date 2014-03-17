@@ -151,7 +151,7 @@ namespace pgn
 			{
 				if (pmin[i] < 0)
 				{
-					//pmax[i] -= pmin[i];
+					pmax[i] -= pmin[i];
 					pmin[i] = 0;
 				}
 				
@@ -160,6 +160,7 @@ namespace pgn
 					int vd = pmax[i] - orgDims[i];
 					pmin[i] -= vd;
 					//pmax[i] -= vd;
+					pmin[i] = std::max(pmin[i], 0);
 				}
 			}
 			return pmin;

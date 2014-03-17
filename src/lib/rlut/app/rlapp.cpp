@@ -26,7 +26,7 @@ namespace pgn
 			pgn::rl::RegisterComponents(*mainecs());
 			pgn::rl::RegisterActions(*mainecs());
 
-			static const glm::uvec2 gridDims(40, 20);
+			static const glm::uvec2 gridDims(60, 30);
 			static const size_t  numLines = 4;
 
 			mGridDims = gridDims;
