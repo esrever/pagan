@@ -24,18 +24,19 @@ namespace pgn
 		cActionMap::cActionMap() :
 			INIT_EVT_MEMBER(cActionMap, Keyboard)
 		{}
+		cActionMap::cActionMap(const cActionMap& v) : mActive(v.mActive), mBindings(v.mBindings), INIT_EVT_MEMBER(cActionMap, Keyboard){}
 
         void cActionMap::OnKeyboard(const SDL_KeyboardEvent& evt)
         { 
-			assert(false);
             if( Active() && (evt.state == 1))
-            {
+            { 
                 for(const auto& binding : mBindings)
                 {
                     if(binding.first == evt.keysym.scancode)
                     {
                         binding.second();
-                        SetActive(false);
+						// tODO: uncomment after implementation of TurnSystem
+                        //SetActive(false);
                         break;
                     }
                 }

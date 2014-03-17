@@ -87,6 +87,8 @@ struct cTestApp : public pgn::rlut::cRlApp
 
 		auto render_func_sparse = [&](const pgn::rl::cLayout::sparse_entities_type& map)
 		{
+			if (map.View().Storage().Raw().empty())
+				return;
 			for (const auto& kv : map.View().Storage().Raw())
 			{
 				auto ed = kv.second->second;
@@ -101,7 +103,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 				const auto& bg_tex_set = ed.Component<pgn::rl::cmp::cTextureSet>();
 				pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
 				int v = 255;
-				SDL_Rect rect = { x * mTileDim, y * mTileDim, mTileDim, mTileDim };
+				SDL_Rect rect = { x * mTileDim, (mGridDims.y-1-y) * mTileDim, mTileDim, mTileDim };
 				MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 			}
 		};
@@ -111,7 +113,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 			const auto& bg_tex_set = ed.Component<pgn::rl::cmp::cTextureSet>();
 			pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
 			int v = 255;
-			SDL_Rect rect = { x * mTileDim, y * mTileDim, mTileDim, mTileDim };
+			SDL_Rect rect = { x * mTileDim, (mGridDims.y - 1 - y) * mTileDim, mTileDim, mTileDim };
 			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 		};
 
@@ -120,9 +122,22 @@ struct cTestApp : public pgn::rlut::cRlApp
 		auto bg_view = lvl_bg.CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
 		bg_view.VisitRext(render_func_dense);
 
-		// TODO: use views! sparse views
+		// TODO: sparse array views?
 		render_func_sparse(lvl_fg);
-		render_func_sparse(lvl_act);
+
+		if (!lvl_act.empty())
+		{
+			for (const auto& kv : lvl_act)
+			{
+				auto x = kv.second.x - view_start.x;
+				auto y = kv.second.y - view_start.y;
+				const auto& bg_tex_set = kv.first->second.Component<pgn::rl::cmp::cTextureSet>();
+				pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
+				int v = 255;
+				SDL_Rect rect = { x * mTileDim, (mGridDims.y - 1 - y) * mTileDim, mTileDim, mTileDim };
+				MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
+			}
+		}
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), PROJECT_ROOT "data\\fonts\\SourceSansPro\\SourceSansPro-Regular.otf", 32);
 		//pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\PT-Sans\\PTN57F.ttf", 62);
@@ -179,7 +194,6 @@ struct cTestApp : public pgn::rlut::cRlApp
 	DECL_EVT_MEMBER(Keyboard);
 	
 	static const size_t	msTextHeight = 24;
-	pgn::rl::cActionMap am;
 };
 
 int main(int argc, char ** argv)

@@ -32,9 +32,24 @@ namespace pgn
 	template<>
 	bool evt::cMoveAdj::Run(cECS::cEntityWithData ed, const glm::ivec2& dir)
 	{
-		// TODO: implement map checks
 		auto ptr = ed->second.Component<rl::cmp::cLocation>();
-		ptr->mPos += dir;
-		return true;
+
+		// TODO: level updates position properly via events
+		auto lvl = mainecs()->TagusToEntities("CurrentLevel")->second->second.Component<rl::cmp::cLevelData>();
+
+
+		auto newpos = ptr->mPos + dir;
+		// TODO: implement map checks with movecost map!
+		if (!lvl->mLayout.BgEntities().InRange(newpos))
+			return false;
+		auto movecost = lvl->mLayout.BgEntities()(newpos.x, newpos.y)->second.Component<rl::cmp::cMoveCost>();
+		if (movecost->mMoveCost < std::numeric_limits<float>::max())
+		{
+			lvl->mLayout.RemoveActor(ed);
+			ptr->mPos = newpos;
+			lvl->mLayout.AddActor(ed);
+			return true;
+		}
+		return false;
 	}
 }

@@ -66,7 +66,7 @@ namespace pgn
 			// default to wall
 			mBgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height(), it_wall);
 			mFgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height(), ecs->EntitiesToData().end());
-			mActors.Resize(ws.mMapData.Width(), ws.mMapData.Height(), ecs->EntitiesToData().end());
+			mActors.clear();
 			cECS::cEntityWithData it_entry_inst;
 			glm::ivec2 entry_coords2;
 			for (size_t i = 0; i < ws.mMapData.Height();++i)
@@ -122,14 +122,21 @@ namespace pgn
 		void cLayout::AddActor(cECS::cEntityWithDataConst ed)
 		{
 			auto loc = ed->second.Component<cmp::cLocation>();
-			mActors(loc->mPos) = ed;
+			mActors[ed] = loc->mPos;
 		}
 
 		//-------------------------------------------------------------------------------
 		void cLayout::RemoveActor(cECS::cEntityWithDataConst ed)
 		{
 			auto loc = ed->second.Component<cmp::cLocation>();
-			mActors(loc->mPos) = mActors.View().Storage().GetDefault();
+			mActors.erase(ed);
+		}
+
+		//-------------------------------------------------------------------------------
+		void cLayout::MoveActor(cECS::cEntityWithDataConst ed)
+		{
+			auto loc = ed->second.Component<cmp::cLocation>();
+			mActors[ed] = loc->mPos;
 		}
 
 		//-------------------------------------------------------------------------------

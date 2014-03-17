@@ -21,19 +21,21 @@ namespace pgn
 				typedef cArray2D<cECS::cArchetypeWithDataConst> dense_archetypes_type;
 				typedef cArray2D<cECS::cEntityWithDataConst> dense_entities_type;
 				typedef cArray2D<cECS::cEntityWithDataConst, cSparseStorage<cECS::cEntityWithDataConst> > sparse_entities_type;
+				typedef std::map<cECS::cEntityWithDataConst, glm::ivec2> sparse_map_type;
 
 				void Init(const rlut::cWorkspace& ws, const std::map<std::string, std::string>& tiles);
 
 				const dense_archetypes_type& BgEntities() const { return mBgEntities; }
 				const sparse_entities_type& FgEntities() const { return mFgEntities; }
-				const sparse_entities_type& Actors() const { return mActors; }
+				const sparse_map_type& Actors() const { return mActors; }
 
 				dense_archetypes_type& BgEntities() { return mBgEntities; }
 				sparse_entities_type& FgEntities() { return mFgEntities; }
-				sparse_entities_type& Actors() { return mActors; }
+				sparse_map_type& Actors() { return mActors; }
 
 				void AddActor(cECS::cEntityWithDataConst ed);
 				void RemoveActor(cECS::cEntityWithDataConst ed);
+				void MoveActor(cECS::cEntityWithDataConst ed);
 				
 				const movecost_map_type StaticMoveCosts() const { return mStaticMoveCosts; }
 				const movecost_map_type MoveCosts() const { return mMoveCosts; }
@@ -42,7 +44,7 @@ namespace pgn
 				
 				dense_archetypes_type	mBgEntities;
 				sparse_entities_type	mFgEntities;
-				sparse_entities_type	mActors;
+				sparse_map_type			mActors;
 
 				//! move costs of bg/fg entities that don't change frequently. Useful for longer path planning, without having to care about monsters blocking the way
 				//! A* update is triggers if the static move cost map changes
@@ -62,3 +64,4 @@ namespace pgn
 	DECL_SERIALIZE_INTERFACE(rl::cLayout);
 
 }
+

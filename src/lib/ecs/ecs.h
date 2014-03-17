@@ -95,7 +95,12 @@ namespace std
 {
 	inline bool operator < (const pgn::cECS::cEntityWithData& lhs, const pgn::cECS::cEntityWithData& rhs)
 	{
-		return &lhs < &rhs;
+		return lhs->first < rhs->first;
+	}
+
+	inline bool operator < (const pgn::cECS::cEntityWithDataConst lhs, const pgn::cECS::cEntityWithDataConst rhs)
+	{
+		return lhs->first < rhs->first;
 	}
 }
 

@@ -22,6 +22,7 @@ namespace pgn
 
 			//! Object creator function
 			static std::shared_ptr<cComponentBase> Create() { return std::shared_ptr<cComponentBase>(new cComponent<T>());}
+			//static std::shared_ptr<cComponentBase> Create() { return std::dynamic_pointer_cast<cComponentBase>( std::make_shared<cComponent<T>>()); }
 			
 		public:
 			T mData;

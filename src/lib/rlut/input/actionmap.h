@@ -12,6 +12,7 @@ namespace pgn
         {
             public:
                 cActionMap();
+				cActionMap(const cActionMap& v);
                 void SetActive(bool v)  {   mActive = v;    }
                 bool Active() const     {   return mActive; }
                 
