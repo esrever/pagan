@@ -1,6 +1,7 @@
 #include "events.h"
 
 #include <rlut/components/components.h>
+#include <rlut/fov/fov_rsc.h>
 
 
 static const char * dirstrings_short[] = { "SW", "S", "SE", "W", "", "E", "NW", "N", "NE" };
@@ -74,7 +75,26 @@ namespace pgn
 	bool evt::cCalculateVisibility::Run(cECS::cEntityWithData ed)
 	{
 		auto vis = ed->second.Component<rl::cmp::cVisibility>();
-		// tODO: implement
+		auto loc = ed->second.Component<rl::cmp::cLocation>();
+		vis->mVisible.clear();
+		auto curexpl = vis->mExplored[loc->mLevelId];
+
+		static rlut::cFovLookup<rlut::cFovRsc> fovlut = rlut::cFovLookup<rlut::cFovRsc>();
+
+
+		// TODO: get the level properly
+		auto lvl = mainecs()->TagusToEntities("CurrentLevel")->second->second.Component<rl::cmp::cLevelData>();
+
+		// TODO: resize only if necessary
+		curexpl.Resize(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height(), false);
+		auto onvis = [&](const glm::ivec2& pt, float b) {curexpl(pt) = true; vis->mVisible.insert(pt); };
+
+		// TODO: visibility map easily obtainable by layout
+		cArray2D<bool> vismap(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height());
+		lvl->mLayout.BgEntities().View().VisitRext([&](size_t x, size_t y, const cECS::cArchetypeWithDataConst& ed){ vismap(x, y) = ed->second.Component<rl::cmp::cMoveCost>()->mMoveCost != std::numeric_limits<float>::max(); });
+
+		fovlut.Get(10).Calc(loc->mPos,vismap,onvis);
+
 		return true;
 	}
 }
