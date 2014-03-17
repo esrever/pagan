@@ -3,8 +3,6 @@
 #include <core/math/norm.h>
 #include <rlut/utils/shape/ShapeCalc.h>
 
-#include <iostream>
-
 namespace pgn
 {
 	namespace rlut
@@ -80,7 +78,7 @@ namespace pgn
 		}
 
 		static void CastLight( int row, float start, float end, int xx, int xy, int yx, int yy,
-							   const glm::ivec2& p, const cArray2D<bool>& vismap, std::vector<glm::ivec2>& lospts, cArray2D<float>& vis, size_t los)
+			const glm::ivec2& p, const cArray2D<bool>& vismap, on_visible_func onvis, size_t los)
 		{
 			float newStart = 0.0f;
 			if (start < end)
@@ -106,9 +104,7 @@ namespace pgn
 					auto d = pgn::norm_2(glm::ivec2(deltaX, deltaY));
 					if (d <= los) {
 						float bright = (float)(1 - (d / los));
-						vis( glm::ivec2(currentX,currentY)) = bright;
-						if (std::find(lospts.begin(), lospts.end(), glm::ivec2(currentX, currentY)) == lospts.end())
-							lospts.push_back(glm::ivec2(currentX, currentY));
+						onvis(glm::ivec2(currentX, currentY), bright);
 					}
 
 					if (blocked) { //previous cell was a blocking one
@@ -124,7 +120,7 @@ namespace pgn
 					else {
 						if (vismap(currentX, currentY) == 0.0f && distance < int(los)) {//hit a wall within sight line
 							blocked = true;
-							CastLight(distance + 1, start, leftSlope, xx, xy, yx, yy, p, vismap, lospts, vis, los);
+							CastLight(distance + 1, start, leftSlope, xx, xy, yx, yy, p, vismap, onvis, los);
 							newStart = rightSlope;
 						}
 					}
@@ -132,18 +128,15 @@ namespace pgn
 			}
 		}
 
-		void cFovRsc::Calc(const glm::ivec2& p, const cArray2D<bool>& vismap, std::vector<glm::ivec2>& lospts, cArray2D<float>& vis)
+		void cFovRsc::Calc(const glm::ivec2& p, const cArray2D<bool>& vismap, on_visible_func onvis)
 		{
-			vis.Resize(vismap.Width(), vismap.Height(), 0.0f);
-			vis(p) = 1.0f;
-			lospts.clear();
-			lospts.push_back(p);
+			onvis(p, 1.0f);
 
 			glm::ivec2 dirs[4] = { glm::ivec2(1, 1), glm::ivec2(1, -1), glm::ivec2(-1, 1), glm::ivec2(-1, -1) };
 			for (size_t i = 0; i < 4; ++i)
 			{
-				CastLight(1, 1.0f, 0.0f, 0, dirs[i].x, dirs[i].y, 0, p, vismap, lospts, vis,mLoS);
-				CastLight(1, 1.0f, 0.0f, dirs[i].x, 0, 0, dirs[i].y, p, vismap, lospts, vis, mLoS);
+				CastLight(1, 1.0f, 0.0f, 0, dirs[i].x, dirs[i].y, 0, p, vismap, onvis,mLoS);
+				CastLight(1, 1.0f, 0.0f, dirs[i].x, 0, 0, dirs[i].y, p, vismap, onvis, mLoS);
 			}
 		}
 

@@ -7,6 +7,8 @@
 
 #include <core/container/Array2D.h>
 
+#include "FovLookup.h"
+
 namespace pgn
 {
 	namespace rlut
@@ -26,7 +28,7 @@ namespace pgn
 			 * TODO: vis should be optional?
 			 * TODO: lospts should be optional?
 			 */
-			void Calc(const glm::ivec2& p, const cArray2D<bool>& vismap, std::vector<glm::ivec2>& lospts, cArray2D<float>& vis);
+			void Calc(const glm::ivec2& p, const cArray2D<bool>& vismap, on_visible_func onvis);
 			void Init(size_t los);
 			bool HasInit() const { return mLoS != 0; }
 			

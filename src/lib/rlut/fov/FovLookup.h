@@ -7,7 +7,7 @@ namespace pgn
 {
     namespace rlut
     {
-    
+		typedef std::function< void(const glm::ivec2&, float)> on_visible_func;
         template<class F>
 		class cFovLookup
         {

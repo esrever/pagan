@@ -109,7 +109,7 @@ struct cTestApp : public pgn::cSDLApp
 				? 55 
 				: std::max(55, 255 - int(200 * mDiFi.Data()(pd))); 
 			// FOV:
-			//v = 50 + int(visf(j,i) * 205);
+			v = 50 + int(visf(j,i) * 205);
 			//v = visf(j, i) > 0.0f ? 255 : 50;
 			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 		}
@@ -176,7 +176,9 @@ struct cTestApp : public pgn::cSDLApp
 		visf.Fill(0.0f);
 		std::vector<glm::ivec2> lospts;
 		vismap.View().VisitWext([&](size_t x, size_t y, std::vector<bool>::reference v) {v = (dmap(x, y) & visBits) ? true : false; });
-		fov.Calc(mMouseOverCell, vismap, lospts, visf);
+
+		auto onvis = [&](const glm::ivec2& pos, float vis) {lospts.push_back(pos); visf(pos) = vis; };
+		fov.Calc(mMouseOverCell, vismap, onvis);
 	}
 
 	void CalcDiFi()

@@ -120,9 +120,11 @@ int main(int argc, char ** argv)
 			pgn::cArray2D<bool> vismap(test.dmap.Width(), test.dmap.Height());
 			pgn::cArray2D<float> visf(test.dmap.Width(), test.dmap.Height(), 0.0f);
 			std::vector<glm::ivec2> lospts;
+
+			auto onvis = [&](const glm::ivec2& pos, float vis) {lospts.push_back(pos); visf(pos) = vis; };
 			
 			vismap.View().VisitWext([&](size_t x, size_t y, std::vector<bool>::reference v) {v = (test.dmap(x, y) & visBits) ? true : false; });
-			fov.Calc(test.pos, vismap, lospts, visf);
+			fov.Calc(test.pos, vismap, onvis);
 
 			const auto& dmap = test.dmap;
 
