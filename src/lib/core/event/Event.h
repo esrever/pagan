@@ -42,7 +42,7 @@
 	
 */
 
-#define DECL_EVT_MEMBER( N) pgn::cEventHandler<pgn::evt::c##N##::evt_type> m##EvtHandleOn##N##;
+#define DECL_EVT_MEMBER( N) public: pgn::cEventHandler<pgn::evt::c##N##::evt_type> m##EvtHandleOn##N##; private:
 #define INIT_EVT_MEMBER(T, N) mEvtHandleOn##N##( Simple::slot(this, &##T##::On##N ))
 
 namespace pgn
@@ -67,11 +67,15 @@ namespace pgn
 		{
 			E::mSig -= mId;
 			mId = eh.mId;
+			mActivate = eh.mActivate;
+			mCallback = eh.mCallback;
 			return *this;
 		}
 
 		cEventHandler(typename E::functype zCallback)
+		:mCallback(zCallback)
 		{
+			mActivate = true;
 			mId = E::mSig += zCallback;
 		}
 
@@ -80,6 +84,24 @@ namespace pgn
 			E::mSig -= mId;
 			mId = 0;
 		}
+
+		void Activate(bool zOk) 
+		{
+			if (mActivate && zOk)
+				return;
+			else if (!(mActivate || zOk))
+				return;
+			else if (mActivate)
+			{
+				mActivate = false;
+				E::mSig -= mId;
+			}
+			else // ( zOk)
+			{
+				mId = E::mSig += mCallback;
+			}
+		}
+
 	private:
 		cEventHandler(const cEventHandler& eh)
 		{
@@ -88,6 +110,8 @@ namespace pgn
 
 	private:
 		unsigned mId;
+		bool mActivate;
+		typename E::functype mCallback;
 	};
 
 	/**

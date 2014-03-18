@@ -80,9 +80,6 @@ struct cTestApp : public pgn::rlut::cRlApp
 		hero_loc->mLevelId = lvl->mId;
 		auto& hero_pos = hero_loc->mPos;
 		pgn::evt::cPlayerAppear::Run(*hero_loc);
-
-		// TODO: turn system needs to activate hero's keyboard
-		hero->second->second.Component<pgn::rl::cmp::cActionMap>()->mActionMap.SetActive(true);
 	}
 
 	//------------------------------------------------

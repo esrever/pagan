@@ -23,20 +23,23 @@ namespace pgn
 	{
 		cActionMap::cActionMap() :
 			INIT_EVT_MEMBER(cActionMap, Keyboard)
-		{}
-		cActionMap::cActionMap(const cActionMap& v) : mActive(v.mActive), mBindings(v.mBindings), INIT_EVT_MEMBER(cActionMap, Keyboard){}
+		{
+			// TODO: after turn system, set this to false
+			mEvtHandleOnKeyboard.Activate(true);
+		}
+
+		cActionMap::cActionMap(const cActionMap& v) : mBindings(v.mBindings), INIT_EVT_MEMBER(cActionMap, Keyboard){}
 
         void cActionMap::OnKeyboard(const SDL_KeyboardEvent& evt)
         { 
-            if( Active() && (evt.state == 1))
+            if(evt.state == 1)
             { 
                 for(const auto& binding : mBindings)
                 {
                     if(binding.first == evt.keysym.scancode)
                     {
                         binding.second();
-						// tODO: uncomment after implementation of TurnSystem
-                        //SetActive(false);
+						// tODO: after turn system, mEvtHandleOnKeyboard.Accept(false);
                         break;
                     }
                 }
