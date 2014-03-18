@@ -49,7 +49,7 @@ namespace pgn
 		{
 			if (mLogLines.size() == mMaxLines)
 				mLogLines.pop_back();
-			mLogLines.push_front(boost::str(mFormat % mName % mLevelNames[int(zLevel)] % zMsg));
+			mLogLines.push_front(boost::str(mFormat % zMsg));
 		}
 	}
 

@@ -28,7 +28,7 @@ namespace pgn
 		mMainWindow = std::shared_ptr<cSDLWindow>(new cSDLWindow());
 
 		// TODO: fix this! I want ot provide only one arg, or ignore the other two!
-		mGameLog.SetFormat(boost::format("%s\n"));
+		mGameLog.SetFormat(boost::format("%s"));
 	}
 
 	//----------------------------------------------------------------------
