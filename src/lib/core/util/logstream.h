@@ -61,6 +61,7 @@ namespace pgn
 		cLogString(size_t zMaxLines = 0xFFFFFFFF) :cLogBase(){ SetMaxLines(zMaxLines); }
 		void SetMaxLines(size_t zMaxLines);
 		void Log(const eLogLevel zLevel, const std::string& zMsg);
+		const std::deque<std::string>& Data() const { return mLogLines; }
 		static cLogString& Default() { return mDefault; }
 
 	private:
@@ -68,7 +69,4 @@ namespace pgn
 		std::deque<std::string> mLogLines;
 		size_t mMaxLines;
 	};
-
-	class cCfgTree;
-	void InitFromConfig(cLogStream& zLog, const cCfgTree& cfg, const std::string& zBase);
 }

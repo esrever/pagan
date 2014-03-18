@@ -26,6 +26,9 @@ namespace pgn
 			throw std::runtime_error("TTF Init Failed");
 
 		mMainWindow = std::shared_ptr<cSDLWindow>(new cSDLWindow());
+
+		// TODO: fix this! I want ot provide only one arg, or ignore the other two!
+		mGameLog.SetFormat(boost::format("%s\n"));
 	}
 
 	//----------------------------------------------------------------------

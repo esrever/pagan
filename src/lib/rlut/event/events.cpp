@@ -1,11 +1,12 @@
 #include "events.h"
 
+#include <core/util/string.h>
 #include <rlut/components/components.h>
 #include <rlut/fov/fov_rsc.h>
 
 
 static const char * dirstrings_short[] = { "SW", "S", "SE", "W", "", "E", "NW", "N", "NE" };
-static const char * dirstrings_long[] = { "southwest", "south", "southeast", "west", "", "east", "northwest", "north", "northeast" };
+static const char * dirstrings_long[] = { "southwest", "south", "southeast", "west", "nowhere", "east", "northwest", "north", "northeast" };
 
 namespace pgn
 {
@@ -28,7 +29,10 @@ namespace pgn
 	{
 		auto ped = mainecs()->TagusToEntities("Player")->second;
 		if (evt::cMoveAdj::Run(ped, dir))
+		{
+			mainapp()->GameLog().Inf(pgn::format("%s moves %s", ped->second.mName.c_str(), dirstrings_long[dir.x+1+3*(dir.y+1)]));
 			return evt::cCalculateVisibility::Run(ped);
+		}
 		else
 			return false;
 	}

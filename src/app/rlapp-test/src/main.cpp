@@ -180,17 +180,19 @@ struct cTestApp : public pgn::rlut::cRlApp
 		//pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\Nobile\\Nobile-Regular.ttf", 32);
 
 		SDL_Rect textRect;
-		char buf[256];
-		sprintf(buf, "%d %d", mMouseOverCell.x, mMouseOverCell.y);
-		auto texf = font.CreateText(buf,&textRect);
-
-		float ar = textRect.w / float(textRect.h);
-
-		for (size_t i = 0; i < mNumLines; ++i)
+		auto& gamelog = pgn::mainapp()->GameLog();
+		size_t i = 0;
+		for (const auto& line : gamelog.Data())
 		{
+			auto texf = font.CreateText(line, &textRect);
+			float ar = textRect.w / float(textRect.h);
+
 			size_t yo = mLogStart.y + i*msTextHeight;
 			SDL_Rect rect = { mLogStart.x, yo, int(ar * msTextHeight), msTextHeight };
 			MainWindow()->Render(texf.get(), &rect);
+			++i;
+			if (i == mNumLines)
+				break;
 		}
 	}
 	//------------------------------------------------

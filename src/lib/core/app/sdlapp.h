@@ -7,6 +7,8 @@
 #include <SDL.h>
 #undef main
 
+#include <core/util/logstream.h>
+
 namespace pgn
 {
 	class cSDLWindow;
@@ -26,12 +28,17 @@ namespace pgn
 		
 		bool HandleEvents();
 
+		cLogStream& SysLog() { return mSysLog; }
+		cLogString& GameLog() { return mGameLog; }
+
 		template<class T>
 		T * Resources(const std::string& name = "");
 
 		const std::shared_ptr<cSDLWindow>& MainWindow() const { return mMainWindow; }
 	private:
 		std::shared_ptr<cSDLWindow> mMainWindow;
+		cLogStream mSysLog;
+		cLogString mGameLog;
 	};
     
     //----------------------------------------------------------------------
