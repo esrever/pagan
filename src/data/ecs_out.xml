@@ -2,30 +2,43 @@
 <ECS>
 	<EntitiesToData>
 		<key value="0" />
-		<value name="Door_def">
+		<value name="Hero">
 			<Components>
 				<TextureSet>
 					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+						<vector_elem value="::monsters:unique:norbert" />
 					</Sprites>
 				</TextureSet>
-				<DoorState State="0" />
+				<ActionMap>
+					<ActionMap />
+				</ActionMap>
+				<Visibility />
 				<AsciiSet>
 					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
+						<vector_elem value="@" />
 					</Symbols>
 				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000110001000" />
+			<SupportMask value="00000000000000000000000101101000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
-			<Tagus />
+			<Tagus>
+				<set_elem value="Player" />
+			</Tagus>
 		</value>
 		<key value="1" />
+		<value name="World">
+			<Components>
+				<WorldData />
+			</Components>
+			<SupportMask value="00000000000000000000001000000000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+			<Tagus>
+				<set_elem value="World" />
+			</Tagus>
+		</value>
+		<key value="2" />
 		<value name="Door_def">
 			<Components>
 				<TextureSet>
@@ -45,25 +58,6 @@
 				</AsciiSet>
 			</Components>
 			<SupportMask value="00000000000000000000000110001000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="2" />
-		<value name="Entry_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
-					</Sprites>
-				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="V" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000100001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 			<Tagus />
@@ -93,25 +87,20 @@
 			<Tagus />
 		</value>
 		<key value="4" />
-		<value name="Door_def">
+		<value name="Entry_def">
 			<Components>
 				<TextureSet>
 					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
 					</Sprites>
 				</TextureSet>
-				<DoorState State="0" />
 				<AsciiSet>
 					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
+						<vector_elem value="V" />
 					</Symbols>
 				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000110001000" />
+			<SupportMask value="00000000000000000000000100001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 			<Tagus />
@@ -1509,20 +1498,25 @@
 			<Tagus />
 		</value>
 		<key value="63" />
-		<value name="Exit_def">
+		<value name="Door_def">
 			<Components>
 				<TextureSet>
 					<Sprites>
-						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
 					</Sprites>
 				</TextureSet>
+				<DoorState State="0" />
 				<AsciiSet>
 					<Symbols>
-						<vector_elem value="^" />
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
 					</Symbols>
 				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000100001000" />
+			<SupportMask value="00000000000000000000000110001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 			<Tagus />
@@ -1552,25 +1546,20 @@
 			<Tagus />
 		</value>
 		<key value="65" />
-		<value name="Door_def">
+		<value name="Exit_def">
 			<Components>
 				<TextureSet>
 					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
 					</Sprites>
 				</TextureSet>
-				<DoorState State="0" />
 				<AsciiSet>
 					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
+						<vector_elem value="^" />
 					</Symbols>
 				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000110001000" />
+			<SupportMask value="00000000000000000000000100001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
 			<Tagus />
@@ -1600,34 +1589,54 @@
 			<Tagus />
 		</value>
 		<key value="67" />
-		<value name="Hero">
+		<value name="Door_def">
 			<Components>
-				<Location LevelId="-1">
-					<Pos x="16" y="3" />
-				</Location>
 				<TextureSet>
 					<Sprites>
-						<vector_elem value="::monsters:unique:norbert" />
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
 					</Sprites>
 				</TextureSet>
-				<ActionMap>
-					<ActionMap />
-				</ActionMap>
-				<Visibility />
+				<DoorState State="0" />
 				<AsciiSet>
 					<Symbols>
-						<vector_elem value="@" />
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
 					</Symbols>
 				</AsciiSet>
 			</Components>
-			<SupportMask value="00000000000000000000000101101001" />
+			<SupportMask value="00000000000000000000000110001000" />
 			<SharedMask value="00000000000000000000000000000000" />
 			<Tags />
-			<Tagus>
-				<set_elem value="Player" />
-			</Tagus>
+			<Tagus />
 		</value>
 		<key value="68" />
+		<value name="Door_def">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SupportMask value="00000000000000000000000110001000" />
+			<SharedMask value="00000000000000000000000000000000" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="69" />
 		<value name="Level">
 			<Components>
 				<LevelData Id="1">
@@ -1664,10 +1673,10 @@
 			</Components>
 			<SupportMask value="00000000000000000000000000010000" />
 			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus>
-				<set_elem value="CurrentLevel" />
-			</Tagus>
+			<Tags>
+				<set_elem value="TestLevel" />
+			</Tags>
+			<Tagus />
 		</value>
 	</EntitiesToData>
 	<Archetypes>
@@ -1753,31 +1762,6 @@
 			<Tags />
 			<Tagus />
 		</value>
-		<key value="Hero" />
-		<value name="Hero">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::monsters:unique:norbert" />
-					</Sprites>
-				</TextureSet>
-				<ActionMap>
-					<ActionMap />
-				</ActionMap>
-				<Visibility />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="@" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="00000000000000000000000101101000" />
-			<SharedMask value="00000000000000000000000000000000" />
-			<Tags />
-			<Tagus>
-				<set_elem value="Player" />
-			</Tagus>
-		</value>
 		<key value="WallTile_def" />
 		<value name="WallTile_def">
 			<Components>
@@ -1799,6 +1783,11 @@
 			<Tagus />
 		</value>
 	</Archetypes>
-	<TagsToEntities />
+	<TagsToEntities>
+		<key value="TestLevel" />
+		<value>
+			<set_elem value="unserializable: class std::_Tree_iterator&lt;class std::_Tree_val&lt;struct std::_Tree_simple_types&lt;struct std::pair&lt;unsigned int const ,struct pgn::cEntityData&gt; &gt; &gt; &gt;" />
+		</value>
+	</TagsToEntities>
 	<Queries />
 </ECS>

@@ -81,7 +81,7 @@
     </Components>
   </Entity>
   
-  <Entity name ="Hero" is_archetype="true">
+  <Entity name ="Hero" is_archetype="false">
     <Components>
       <TextureSet>
         <Sprites>
@@ -122,6 +122,15 @@
     </Tagus>
   </Entity>
   
+  <Entity name ="World">
+    <Components>
+    <WorldData/>
+    </Components>
+    <Tagus>
+      <array_elem value="World"/>
+    </Tagus>
+  </Entity>
+  
   <Entity name ="Level">
     <Components>
       <LevelData Id = "1">
@@ -145,8 +154,8 @@
           </Layout>
       </LevelData>
     </Components>
-    <Tagus>
-      <array_elem value="CurrentLevel"/>
-    </Tagus>
+    <Tags>
+      <array_elem value="TestLevel"/>
+    </Tags>
   </Entity>
 </Entities>

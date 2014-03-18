@@ -60,10 +60,29 @@ struct cTestApp : public pgn::rlut::cRlApp
 			doc_out.save_file(fname_out);
 		}
 
-		// TODO: do this better: fetch the entry position more formally
+		auto lvl0 = *pgn::mainecs()->TagsToEntities("TestLevel")->second.begin();
+		pgn::evt::cCreateLevel::Run(lvl0);
+
+		// ---- HERO STUFF 
 		auto hero = pgn::mainecs()->TagusToEntities("Player");
-		auto& hero_pos = hero->second->second.Component<pgn::rl::cmp::cLocation>()->mPos;
-		pgn::evt::cPlayerAppear::Run(hero_pos);
+		auto hero_loc = hero->second->second.Component<pgn::rl::cmp::cLocation>();
+		// Create the component if it doesnt exist. 
+		if (!hero_loc)
+		{
+			hero->second->second.AddComponent(pgn::cComponent<pgn::rl::cmp::cLocation>::Create());
+			hero_loc = hero->second->second.Component<pgn::rl::cmp::cLocation>();
+		}
+
+		// make hero appear in first level in world
+		auto world = pgn::mainecs()->TagusToEntities("World")->second->second.Component<pgn::rl::cmp::cWorldData>();
+		auto lvl = world->mLevelMap.begin()->second->second.Component<pgn::rl::cmp::cLevelData>();
+		hero_loc->mPos = lvl->mLayout.Entry();
+		hero_loc->mLevelId = lvl->mId;
+		auto& hero_pos = hero_loc->mPos;
+		pgn::evt::cPlayerAppear::Run(*hero_loc);
+
+		// TODO: turn system needs to activate hero's keyboard
+		hero->second->second.Component<pgn::rl::cmp::cActionMap>()->mActionMap.SetActive(true);
 	}
 
 	//------------------------------------------------
@@ -78,6 +97,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 		auto& hero_pos = hero->second->second.Component<pgn::rl::cmp::cLocation>()->mPos;
 		auto hero_vis = hero->second->second.Component<pgn::rl::cmp::cVisibility>();
 		auto& lvl_layout = lvl->second->second.Component<pgn::rl::cmp::cLevelData>()->mLayout;
+		auto lvl_id = lvl->second->second.Component<pgn::rl::cmp::cLevelData>()->mId;
 
 		// get the renderrect
 		auto view_size = glm::ivec2(mGridDims.x, mGridDims.y);
@@ -97,9 +117,9 @@ struct cTestApp : public pgn::rlut::cRlApp
 		auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
 
 		// TODO: get appr. level id
-		auto& visview = hero_vis->mVisible[-1].CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
-		auto& expview = hero_vis->mExplored[-1].CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
-		std::function<int(int x, int y)> get_fow = [&](int x, int y){return visview(x, y) ? 255 : (expview(x, y) ? 150 : 0); };
+		auto& visview = hero_vis->mVisible[lvl_id].CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
+		auto& expview = hero_vis->mExplored[lvl_id].CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
+		std::function<int(int x, int y)> get_fow = [&](int x, int y){return visview(x, y) ? 255 : (expview(x, y) ? 100 : 0); };
 
 		auto render_func_sparse = [&](const pgn::rl::cLayout::sparse_entities_type& map)
 		{

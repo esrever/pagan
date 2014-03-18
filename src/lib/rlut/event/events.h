@@ -16,7 +16,8 @@ namespace pgn
 			Disappear,
 			PlayerMoveAdj,
 			PlayerAppear,
-			CalculateVisibility
+			CalculateVisibility,
+			CreateLevel
 		};
 		
 		typedef cAction<size_t(eRlEventId::MoveAdj), cECS::cEntityWithData /*who*/, const glm::ivec2& /*dir*/> cMoveAdj;
@@ -27,6 +28,8 @@ namespace pgn
 		typedef cAction<size_t(eRlEventId::PlayerAppear), const rl::cmp::cLocation& /*pos*/> cPlayerAppear;
 
 		typedef cAction<size_t(eRlEventId::CalculateVisibility), cECS::cEntityWithData/*who*/> cCalculateVisibility;
+
+		typedef cAction<size_t(eRlEventId::CreateLevel), cECS::cEntityWithData/*who*/> cCreateLevel;
 	}
 
 	namespace rl

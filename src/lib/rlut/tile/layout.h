@@ -40,7 +40,12 @@ namespace pgn
 				const movecost_map_type StaticMoveCosts() const { return mStaticMoveCosts; }
 				const movecost_map_type MoveCosts() const { return mMoveCosts; }
 
+				const glm::ivec2& Entry() const { return mEntry; }
+				const glm::ivec2& Exit() const { return mExit; }
+
 			private:
+
+				glm::ivec2				mEntry, mExit;
 				
 				dense_archetypes_type	mBgEntities;
 				sparse_entities_type	mFgEntities;

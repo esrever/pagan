@@ -27,16 +27,24 @@ namespace pgn
 	bool evt::cPlayerMoveAdj::Run(const glm::ivec2& dir)
 	{
 		auto ped = mainecs()->TagusToEntities("Player")->second;
-		if(evt::cMoveAdj::Run(ped, dir))
+		if (evt::cMoveAdj::Run(ped, dir))
 			return evt::cCalculateVisibility::Run(ped);
+		else
+			return false;
 	}
 
 	template<>
 	bool evt::cPlayerAppear::Run(const rl::cmp::cLocation& pos)
 	{
+		auto world = mainecs()->TagusToEntities("World")->second->second.Component<rl::cmp::cWorldData>();
 		auto ped = mainecs()->TagusToEntities("Player")->second;
 		if (evt::cAppear::Run(ped, pos))
+		{
+			auto loc = ped->second.Component<rl::cmp::cLocation>();
+			// Set new current level
+			mainecs()->Tagu("CurrentLevel", world->mLevelMap[loc->mLevelId]);
 			return evt::cCalculateVisibility::Run(ped);
+		}
 		else
 			return false;
 	}
@@ -44,20 +52,22 @@ namespace pgn
 	template<>
 	bool evt::cMoveAdj::Run(cECS::cEntityWithData ed, const glm::ivec2& dir)
 	{
-		auto ptr = ed->second.Component<rl::cmp::cLocation>();
+		// get some components
+		auto loc = ed->second.Component<rl::cmp::cLocation>();
+		auto world = mainecs()->TagusToEntities("World")->second->second.Component<rl::cmp::cWorldData>();
+		auto lvl = world->mLevelMap[loc->mLevelId]->second.Component<rl::cmp::cLevelData>();
+		
+		// calc new position
+		auto newpos = loc->mPos + dir;
 
-		// TODO: level updates position properly via events
-		auto lvl = mainecs()->TagusToEntities("CurrentLevel")->second->second.Component<rl::cmp::cLevelData>();
-
-
-		auto newpos = ptr->mPos + dir;
 		// TODO: implement map checks with movecost map!
 		if (!lvl->mLayout.BgEntities().InRange(newpos))
 			return false;
 		auto movecost = lvl->mLayout.BgEntities()(newpos.x, newpos.y)->second.Component<rl::cmp::cMoveCost>();
 		if (movecost->mMoveCost < std::numeric_limits<float>::max())
 		{
-			ptr->mPos = newpos;
+			// no collisions; set new position and update map
+			loc->mPos = newpos;
 			lvl->mLayout.SetActor(ed);
 			return true;
 		}
@@ -67,8 +77,14 @@ namespace pgn
 	template<>
 	bool evt::cAppear::Run(cECS::cEntityWithData ed, const rl::cmp::cLocation& pos)
 	{
-		auto ptr = ed->second.Component<rl::cmp::cLocation>();
-		*ptr = pos;
+		// set location
+		auto loc = ed->second.Component<rl::cmp::cLocation>();
+		*loc = pos;
+
+		// set the actor in the level
+		auto world = mainecs()->TagusToEntities("World")->second->second.Component<rl::cmp::cWorldData>();
+		auto lvl = world->mLevelMap[loc->mLevelId]->second.Component<rl::cmp::cLevelData>();
+		lvl->mLayout.SetActor(ed);
 		return true;
 	}
 
@@ -84,8 +100,8 @@ namespace pgn
 		static rlut::cFovLookup<rlut::cFovRsc> fovlut = rlut::cFovLookup<rlut::cFovRsc>();
 
 
-		// TODO: get the level properly
-		auto lvl = mainecs()->TagusToEntities("CurrentLevel")->second->second.Component<rl::cmp::cLevelData>();
+		auto world = mainecs()->TagusToEntities("World")->second->second.Component<rl::cmp::cWorldData>();
+		auto lvl = world->mLevelMap[loc->mLevelId]->second.Component<rl::cmp::cLevelData>();
 
 		// TODO: resize only if necessary
 		curexpl.Resize(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height(), false);
@@ -96,8 +112,19 @@ namespace pgn
 		cArray2D<bool> vismap(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height());
 		lvl->mLayout.BgEntities().View().VisitRext([&](size_t x, size_t y, const cECS::cArchetypeWithDataConst& ed){ vismap(x, y) = ed->second.Component<rl::cmp::cMoveCost>()->mMoveCost != std::numeric_limits<float>::max(); });
 
-		fovlut.Get(10).Calc(loc->mPos,vismap,onvis);
+		fovlut.Get(4).Calc(loc->mPos,vismap,onvis);
 
 		return true;
 	}
+
+	template<>
+	bool evt::cCreateLevel::Run(cECS::cEntityWithData ed)
+	{
+		// TODO: flesh out. Currently store the id -> level association
+		auto level = ed->second.Component<rl::cmp::cLevelData>();
+		auto world = mainecs()->TagusToEntities("World");
+		world->second->second.Component<rl::cmp::cWorldData>()->mLevelMap[level->mId] = ed;
+		return true;
+	}
+
 }

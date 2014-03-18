@@ -69,7 +69,6 @@ namespace pgn
 			mFgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height(), ecs->EntitiesToData().end());
 			mActors.clear();
 			cECS::cEntityWithData it_entry_inst;
-			glm::ivec2 entry_coords2;
 			for (size_t i = 0; i < ws.mMapData.Height();++i)
 			for (size_t j = 0; j < ws.mMapData.Width(); ++j)
 			{
@@ -83,41 +82,14 @@ namespace pgn
 				{
 					it_entry_inst = ecs->Create(it_enter->second);
 					mFgEntities(j, i) = it_entry_inst;
-					entry_coords2 = glm::ivec2(j, i); // alternate, both kinda hacky though.
+					mEntry = glm::ivec2(j, i);
 				}
 				if (v & rlut::eMapData::exit)
+				{
 					mFgEntities(j, i) = ecs->Create(it_exit->second);
+					mExit = glm::ivec2(j, i);
+				}		
 			}
-
-			//---- HERO STUFF
-
-			// find entry coordinates, or use entry_coords2
-			glm::ivec2 entry_coords(-1, -1);
-			const auto& fg_storage = mFgEntities.View().Storage();
-			for (const auto& kv : fg_storage.Raw())
-				if (kv.second == it_entry_inst)
-					entry_coords = glm::ivec2(kv.first % mFgEntities.Width(), kv.first / mFgEntities.Width());
-			assert((entry_coords.x >= 0) && (entry_coords.y >= 0));
-
-			// assign loc to hero
-			auto it_hero = ecs->Archetypes().find("Hero");
-			auto new_hero = ecs->Create(it_hero->second);
-			
-			auto hero_loc = it_hero->second.Component<cmp::cLocation>();
-			
-			// Create the component if it doesnt exist. TODO: do I need helper, to do this en masse?
-			if (!hero_loc)
-			{
-				new_hero->second.AddComponent(cComponent<cmp::cLocation>::Create());
-				hero_loc = new_hero->second.Component<cmp::cLocation>();
-			}
-			// TODO: hero needs to get the level ID from the Level, not the layout. So the whole thing here is temporary
-			// Use the Appear event, at the application start after init
-			hero_loc->mPos = entry_coords2;
-			SetActor(new_hero);
-
-			// TODO: turn system needs to activate hero's keyboard
-			new_hero->second.Component<cmp::cActionMap>()->mActionMap.SetActive(true);
 		}
 
 		//-------------------------------------------------------------------------------

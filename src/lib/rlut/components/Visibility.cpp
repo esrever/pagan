@@ -8,7 +8,7 @@ namespace pgn{
             size_t cVisibility::SerializeIn(const node_type& reader)
             {
                 size_t ret = 0;
-                
+                ret = 1;
                 return ret;
             }
             
