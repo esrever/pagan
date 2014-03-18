@@ -60,11 +60,10 @@ namespace pgn
 		// calc new position
 		auto newpos = loc->mPos + dir;
 
-		// TODO: implement map checks with movecost map!
+		// Map checks with obstacle map!
 		if (!lvl->mLayout.BgEntities().InRange(newpos))
 			return false;
-		auto movecost = lvl->mLayout.BgEntities()(newpos.x, newpos.y)->second.Component<rl::cmp::cMoveCost>();
-		if (movecost->mMoveCost < std::numeric_limits<float>::max())
+		if (!lvl->mLayout.Obstacles()(newpos))
 		{
 			// no collisions; set new position and update map
 			loc->mPos = newpos;
@@ -103,16 +102,13 @@ namespace pgn
 		auto world = mainecs()->TagusToEntities("World")->second->second.Component<rl::cmp::cWorldData>();
 		auto lvl = world->mLevelMap[loc->mLevelId]->second.Component<rl::cmp::cLevelData>();
 
-		// TODO: resize only if necessary
+		// prepare the fov output data
 		curexpl.Resize(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height(), false);
 		curvis.Resize(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height(), false);
 		auto onvis = [&](const glm::ivec2& pt, float b) {curexpl(pt) = true; curvis(pt) = true; vis->mVisibleSet.insert(pt); };
 
-		// TODO: visibility map easily obtainable by layout
-		cArray2D<bool> vismap(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height());
-		lvl->mLayout.BgEntities().View().VisitRext([&](size_t x, size_t y, const cECS::cArchetypeWithDataConst& ed){ vismap(x, y) = ed->second.Component<rl::cmp::cMoveCost>()->mMoveCost != std::numeric_limits<float>::max(); });
-
-		fovlut.Get(4).Calc(loc->mPos,vismap,onvis);
+		// TODO: this is a parameter of... ? probably here in visibility
+		fovlut.Get(4).Calc(loc->mPos,lvl->mLayout.Obstacles(),onvis);
 
 		return true;
 	}

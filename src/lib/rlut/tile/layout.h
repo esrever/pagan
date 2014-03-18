@@ -37,8 +37,9 @@ namespace pgn
 				void SetActor(cECS::cEntityWithDataConst ed);
 				void RemoveActor(cECS::cEntityWithDataConst ed);
 				
-				const movecost_map_type StaticMoveCosts() const { return mStaticMoveCosts; }
-				const movecost_map_type MoveCosts() const { return mMoveCosts; }
+				const movecost_map_type& StaticMoveCosts() const { return mStaticMoveCosts; }
+				const movecost_map_type& MoveCosts() const { return mMoveCosts; }
+				const bool_map_type& Obstacles() const { return mObstacles; }
 
 				const glm::ivec2& Entry() const { return mEntry; }
 				const glm::ivec2& Exit() const { return mExit; }
@@ -59,7 +60,7 @@ namespace pgn
 				movecost_map_type		mMoveCosts;
 
 				//! Obstacle mask, for visibility
-				bool_map_type			mObstacle;
+				bool_map_type			mObstacles;
 		};
 
 		// Related utilities

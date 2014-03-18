@@ -2,6 +2,34 @@
 
 #include <string>
 
+namespace std
+{
+	inline const string& to_string(const std::string& v)
+	{
+		return v;
+	}
+
+	template<class T>
+	inline const T from_string(const std::string& v)
+	{
+		T ret;
+		std::istringstream iss(v);
+		iss >> ret;
+		return ret;
+	}
+
+	template<>
+	inline const float from_string<float>(const std::string& v)
+	{
+		if (v == "inf")
+			return std::numeric_limits<float>::max();
+		float ret;
+		std::istringstream iss(v);
+		iss >> ret;
+		return ret;
+	}
+}
+
 namespace pgn
 {
 	inline std::string format(const std::string fmt_str, ...) {
@@ -22,4 +50,5 @@ namespace pgn
 		}
 		return std::string(formatted.get());
 	}
+
 }

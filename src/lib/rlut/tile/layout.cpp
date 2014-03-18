@@ -90,6 +90,10 @@ namespace pgn
 					mExit = glm::ivec2(j, i);
 				}		
 			}
+
+			// Init obstacles
+			mObstacles.Resize(BgEntities().Width(), BgEntities().Height());
+			BgEntities().View().VisitRext([&](size_t x, size_t y, const cECS::cArchetypeWithDataConst& ed){ mObstacles(x, y) = ed->second.Component<rl::cmp::cMoveCost>()->mMoveCost == std::numeric_limits<float>::max(); });
 		}
 
 		//-------------------------------------------------------------------------------

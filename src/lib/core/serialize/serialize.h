@@ -13,39 +13,13 @@
 
 #include <glm/glm.hpp>
 
+#include <core/util/string.h>
+
 #define DECL_SERIALIZE_INTERFACE(T) void   SerializeOut(	  pugi::xml_node& node, const T & value);\
 									size_t SerializeIn (const pugi::xml_node& node,		  T & value);
 
 typedef pugi::xml_node node_type;
 
-//! String conversions - TODO: might move them out of here later
-namespace std
-{
-	inline const string& to_string(const std::string& v)
-	{
-		return v;
-	}
-
-	template<class T>
-	inline const T from_string(const std::string& v)
-	{
-		T ret;
-		std::istringstream iss(v);
-		iss >> ret;
-		return ret;
-	}
-
-	template<>
-	inline const float from_string<float>(const std::string& v)
-	{
-		if (v == "inf")
-			return std::numeric_limits<float>::max();
-		float ret;
-		std::istringstream iss(v);
-		iss >> ret;
-		return ret;
-	}
-}
 
 namespace pgn
 {

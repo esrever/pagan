@@ -27,7 +27,7 @@ namespace pgn
 		bool HandleEvents();
 
 		template<class T>
-		T * Resources(const std::string& name = "");// { assert(false); return nullptr; } // TODO: why does this work?
+		T * Resources(const std::string& name = "");
 
 		const std::shared_ptr<cSDLWindow>& MainWindow() const { return mMainWindow; }
 	private:

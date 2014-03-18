@@ -78,7 +78,7 @@ namespace pgn
 		}
 
 		static void CastLight( int row, float start, float end, int xx, int xy, int yx, int yy,
-			const glm::ivec2& p, const cArray2D<bool>& vismap, on_visible_func onvis, size_t los)
+			const glm::ivec2& p, const cArray2D<bool>& obstacles, on_visible_func onvis, size_t los)
 		{
 			float newStart = 0.0f;
 			if (start < end)
@@ -93,7 +93,7 @@ namespace pgn
 					float leftSlope = (deltaX - 0.5f) / (deltaY + 0.5f);
 					float rightSlope = (deltaX + 0.5f) / (deltaY - 0.5f);
 
-					if (!(currentX >= 0 && currentY >= 0 && currentX < int(vismap.Width()) && currentY < int(vismap.Height())) || start < rightSlope) {
+					if (!(currentX >= 0 && currentY >= 0 && currentX < int(obstacles.Width()) && currentY < int(obstacles.Height())) || start < rightSlope) {
 						continue;
 					}
 					else if (end > leftSlope) {
@@ -108,7 +108,7 @@ namespace pgn
 					}
 
 					if (blocked) { //previous cell was a blocking one
-						if (vismap(currentX,currentY) == 0.0f ) {//hit a wall
+						if (obstacles(currentX, currentY)) {//hit a wall
 							newStart = rightSlope;
 							continue;
 						}
@@ -118,9 +118,9 @@ namespace pgn
 						}
 					}
 					else {
-						if (vismap(currentX, currentY) == 0.0f && distance < int(los)) {//hit a wall within sight line
+						if (obstacles(currentX, currentY) && distance < int(los)) {//hit a wall within sight line
 							blocked = true;
-							CastLight(distance + 1, start, leftSlope, xx, xy, yx, yy, p, vismap, onvis, los);
+							CastLight(distance + 1, start, leftSlope, xx, xy, yx, yy, p, obstacles, onvis, los);
 							newStart = rightSlope;
 						}
 					}
@@ -128,15 +128,15 @@ namespace pgn
 			}
 		}
 
-		void cFovRsc::Calc(const glm::ivec2& p, const cArray2D<bool>& vismap, on_visible_func onvis)
+		void cFovRsc::Calc(const glm::ivec2& p, const cArray2D<bool>& obstacles, on_visible_func onvis)
 		{
 			onvis(p, 1.0f);
 
 			glm::ivec2 dirs[4] = { glm::ivec2(1, 1), glm::ivec2(1, -1), glm::ivec2(-1, 1), glm::ivec2(-1, -1) };
 			for (size_t i = 0; i < 4; ++i)
 			{
-				CastLight(1, 1.0f, 0.0f, 0, dirs[i].x, dirs[i].y, 0, p, vismap, onvis,mLoS);
-				CastLight(1, 1.0f, 0.0f, dirs[i].x, 0, 0, dirs[i].y, p, vismap, onvis, mLoS);
+				CastLight(1, 1.0f, 0.0f, 0, dirs[i].x, dirs[i].y, 0, p, obstacles, onvis, mLoS);
+				CastLight(1, 1.0f, 0.0f, dirs[i].x, 0, 0, dirs[i].y, p, obstacles, onvis, mLoS);
 			}
 		}
 
