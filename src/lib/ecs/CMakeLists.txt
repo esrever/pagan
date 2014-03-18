@@ -1,9 +1,16 @@
+file(GLOB_RECURSE SYSTEM_SRCS
+         RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+         ${CMAKE_CURRENT_SOURCE_DIR}/systems/*.cpp
+         ${CMAKE_CURRENT_SOURCE_DIR}/systems/*.h)
+
 set(SOURCE_FILES
     ecs.cpp
     ComponentBase.cpp
     EntityData.cpp
     serialize_ecs.cpp
     ecs-config.cpp
+    system.cpp
+    systems/InputKey.cpp
 )
 
 set(HEADER_FILES
@@ -12,6 +19,10 @@ set(HEADER_FILES
     Component.h
     ComponentBase.h
     EntityData.h
+    system.h
+    systems/InputKey.h
+    
+    ${SYSTEM_SRCS}
 )
 
 add_definitions(
@@ -20,6 +31,7 @@ add_definitions(
 
 source_group("Sources" FILES ${SOURCE_FILES})
 source_group("Headers" FILES ${HEADER_FILES})
+source_group("_Systems" FILES ${SYSTEM_SRCS})
 
 include_directories(
     ${PROJECT_SOURCE_DIR}/lib
@@ -30,6 +42,7 @@ include_directories(
     ${SDL_INCLUDE_DIR}
     ${SDL_image_INCLUDE_DIR}
     ${SDL_ttf_INCLUDE_DIR}
+    ${Signal_INCLUDE_DIR}
 )
 
 add_library(pagan_ecs STATIC

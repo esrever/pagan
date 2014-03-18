@@ -85,6 +85,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 	//------------------------------------------------
 	virtual void Render()
 	{		
+		return;
 		auto& ecs = pgn::mainecs();
 		// get hero and level entities
 		auto hero = pgn::mainecs()->TagusToEntities("Player");

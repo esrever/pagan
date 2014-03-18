@@ -8,6 +8,8 @@
 #include <typeinfo>
 #include <typeindex>
 
+#include <pystring.h>
+
 #include <core/app/sdlapp.h>
 #include <core/util/singleton.h>
 #include <core/util/idgen.h>
@@ -15,6 +17,7 @@
 #include "ecs-config.h"
 #include "component.h"
 #include "EntityData.h"
+#include "system.h"
 
 #define DECL_MAP_MEMBER_R(A,B, N) \
 	public: const std::map< A , B > & N () const { return m##N ; }\
@@ -65,11 +68,18 @@ namespace pgn
 		//! register an action
 		void RegisterAction(const std::string& s, cActionFunc func);
 
+		//! gets a typed system - creates if none exists.
+		template<class T>
+		ecs::sys::cBase_sptr System();
+
 	private:
 		unsigned short AddComponentType(const std::type_index& zTi);
 		void ParseEntities(const node_type& reader);
+		ecs::sys::cBase_sptr& SystemBase(const std::string& s) { return mSystems[s]; }
 
 	private:
+		std::map<std::string, ecs::sys::cBase_sptr>	mSystems;
+
 		cIdGen<cEntity>						  mEntityIdGen;
 		std::vector< std::type_index>		  mComponentTypeIds;
 	};
@@ -78,6 +88,21 @@ namespace pgn
 
 	DECL_SERIALIZE_INTERFACE(cECS);
 
+	//------------------------------------------------------------------------
+	template<class T>
+	ecs::sys::cBase_sptr cECS::System()
+	{
+		auto name = typeid(T).name();
+		// create a nice name & add it, omit the struct from "struct blah"
+		std::vector<std::string> result;
+		pystring::rsplit(name, result, "::c", 1);
+		auto s = pystring::strip(result.back(), ">");
+
+		auto& base = SystemBase(s);
+		if (!base)
+			base = ecs::sys::cBase_sptr(new T());
+		return base;
+	}
 
 	//------------------------------------------------------------------------
 	template<class T>

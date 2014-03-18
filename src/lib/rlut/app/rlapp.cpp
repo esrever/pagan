@@ -11,6 +11,8 @@
 #include <rlut/components/RegisterComponents.h>
 #include <rlut/event/events.h>
 
+#include <ecs/systems/InputKey.h>
+
 namespace pgn
 {
 	namespace rlut
@@ -25,6 +27,9 @@ namespace pgn
 			pgn::bt::RegisterConditions();
 			pgn::rl::RegisterComponents(*mainecs());
 			pgn::rl::RegisterActions(*mainecs());
+
+			// TODO: move system init elsewhere
+			pgn::mainecs()->System<ecs::sys::cInputKey>();
 
 			static const glm::uvec2 gridDims(40, 20);
 			static const size_t  numLines = 4;
