@@ -27,6 +27,7 @@
 #include <rlut/components/components.h>
 #include <rlut/event/events.h>
 #include <ecs/ecs.h>
+#include <ecs/events.h>
 #include <ecs/EntityData.h>
 #include <core/serialize/util.h>
 

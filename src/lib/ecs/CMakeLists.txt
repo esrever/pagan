@@ -10,6 +10,7 @@ set(SOURCE_FILES
     serialize_ecs.cpp
     ecs-config.cpp
     system.cpp
+    componentquery.cpp
     systems/InputKey.cpp
 )
 
@@ -20,6 +21,8 @@ set(HEADER_FILES
     ComponentBase.h
     EntityData.h
     system.h
+    componentquery.h
+    events.h
     systems/InputKey.h
     
     ${SYSTEM_SRCS}
