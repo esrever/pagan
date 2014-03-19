@@ -1,18 +1,18 @@
-#include <rlut/path/Astar.h>
+#include <rl/path/Astar.h>
 
 int main()
 {
-	pgn::rlut::cAstar astar;
+	pgn::rl::cAstar astar;
 
 	auto normfunc = [](const glm::ivec2& lhs, const glm::ivec2& rhs){ return float(pgn::norm_2(lhs - rhs)); };
 	auto gfunc = [](const glm::ivec2& lhs, const glm::ivec2& rhs){ return float(pgn::norm_2(lhs - rhs)); };
 
-	auto nbs8 = pgn::rlut::cShapeCalc<pgn::rlut::cBoxDistance>::Get(1, 1);
-	auto nbs4 = pgn::rlut::cShapeCalc<pgn::rlut::cDiamondDistance>::Get(1, 1);
+	auto nbs8 = pgn::rl::cShapeCalc<pgn::rl::cBoxDistance>::Get(1, 1);
+	auto nbs4 = pgn::rl::cShapeCalc<pgn::rl::cDiamondDistance>::Get(1, 1);
 
 
 	// Try a single goal
-	pgn::rlut::cSingleGoal sgoal(glm::ivec2(5, 6), normfunc);
+	pgn::rl::cSingleGoal sgoal(glm::ivec2(5, 6), normfunc);
 	std::deque<glm::ivec2> path;
 	astar.Search(glm::ivec2(2, 2),
 				 sgoal,
@@ -22,7 +22,7 @@ int main()
 				 nbs4);
 
 	// Try a single goal, one obstacle
-	pgn::rlut::cSingleGoal sgoal2(glm::ivec2(5, 5), normfunc);
+	pgn::rl::cSingleGoal sgoal2(glm::ivec2(5, 5), normfunc);
 	auto gfunc2 = [](const glm::ivec2& lhs, const glm::ivec2& rhs){ return rhs == glm::ivec2(4, 4)
 		? std::numeric_limits<float>::max()
 		: float(pgn::norm_2(lhs - rhs)); };
@@ -37,7 +37,7 @@ int main()
 	std::vector<glm::ivec2> mgoal_pts;
 	mgoal_pts.push_back(glm::ivec2(5, 6));
 	mgoal_pts.push_back(glm::ivec2(0, 0));
-	pgn::rlut::cMultiGoal mgoal(mgoal_pts, normfunc);
+	pgn::rl::cMultiGoal mgoal(mgoal_pts, normfunc);
 
 	astar.Search(glm::ivec2(2, 2),
 		mgoal,

@@ -13,10 +13,10 @@
 
 #include <glm/glm.hpp>
 
-#include <rlut/dungen/dungen.h>
-#include <rlut/path/difi.h>
-#include <rlut/fov/FovLookup.h>
-#include <rlut/fov/fov_rsc.h>
+#include <rl/dungen/dungen.h>
+#include <rl/path/difi.h>
+#include <rl/fov/FovLookup.h>
+#include <rl/fov/fov_rsc.h>
 
 #include <core/serialize/serialize.h>
 #include <core/texture/texture.h>
@@ -74,7 +74,7 @@ struct cTestApp : public pgn::cSDLApp
 #if 0
 		mDiFi.Init(glm::ivec2(mGridDims.x, mGridDims.y));
 		auto mfunc = [&](const glm::ivec2& p0, const glm::ivec2& p1){ 
-			return mDungeon.mMapData(p1) & (pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor | pgn::rlut::eMapData::conn) ? pgn::norm_2(p0-p1) : std::numeric_limits<float>::max();
+			return mDungeon.mMapData(p1) & (pgn::rl::eMapData::room | pgn::rl::eMapData::corridor | pgn::rl::eMapData::conn) ? pgn::norm_2(p0-p1) : std::numeric_limits<float>::max();
 		};
 		mDiFi.Generate(mfunc, glm::ivec2(35,30));
 #else
@@ -92,11 +92,11 @@ struct cTestApp : public pgn::cSDLApp
 		for (size_t j = 0; j < mGridDims.x; ++j)
 		{
 			pgn::cSubTexture tex;
-			if (mDungeon.mMapData(j, i) & pgn::rlut::eMapData::conn)
+			if (mDungeon.mMapData(j, i) & pgn::rl::eMapData::conn)
 				tex = mTextureDoor;
-			else if (mDungeon.mMapData(j, i) & (pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor))
+			else if (mDungeon.mMapData(j, i) & (pgn::rl::eMapData::room | pgn::rl::eMapData::corridor))
 				tex = mTextureFloor;
-			else if (mDungeon.mMapData(j, i) & pgn::rlut::eMapData::perimeter)
+			else if (mDungeon.mMapData(j, i) & pgn::rl::eMapData::perimeter)
 				tex = mTextureWall;
 			else
 				continue;
@@ -145,8 +145,8 @@ struct cTestApp : public pgn::cSDLApp
 	glm::uvec2 mGridDims;
 	size_t	   mNumLines;
 	
-	pgn::rlut::cWorkspace mDungeon;
-	pgn::rlut::cDiFi	  mDiFi;
+	pgn::rl::cWorkspace mDungeon;
+	pgn::rl::cDiFi	  mDiFi;
 
 	size_t	   mTileDim;
 	glm::uvec2 mGridStart;
@@ -167,8 +167,8 @@ struct cTestApp : public pgn::cSDLApp
 	void CalcFoV()
 	{
 		// FOV
-		int visBits = pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor | pgn::rlut::eMapData::conn;
-		pgn::rlut::cFovLookup<pgn::rlut::cFovRsc> flut;
+		int visBits = pgn::rl::eMapData::room | pgn::rl::eMapData::corridor | pgn::rl::eMapData::conn;
+		pgn::rl::cFovLookup<pgn::rl::cFovRsc> flut;
 		auto& fov = flut.Get(mLoS);
 		auto& dmap = mDungeon.mMapData;
 		vismap.Resize(dmap.Width(), dmap.Height());
@@ -189,7 +189,7 @@ struct cTestApp : public pgn::cSDLApp
 
 		auto mfunc = [&](const glm::ivec2& p0, const glm::ivec2& p1){
 			if (mDungeon.mMapData.InRange(p1))
-				return mDungeon.mMapData(p1) & (pgn::rlut::eMapData::room | pgn::rlut::eMapData::corridor | pgn::rlut::eMapData::conn) ? pgn::norm_2(p0 - p1) : std::numeric_limits<float>::max();
+				return mDungeon.mMapData(p1) & (pgn::rl::eMapData::room | pgn::rl::eMapData::corridor | pgn::rl::eMapData::conn) ? pgn::norm_2(p0 - p1) : std::numeric_limits<float>::max();
 			else
 				return std::numeric_limits<float>::max();
 		};

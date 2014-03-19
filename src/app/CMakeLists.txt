@@ -1,7 +1,7 @@
 set (APP_LIBS 
      pagan_core
      pagan_io
-     pagan_rlut
+     pagan_rl
      pagan_ecs
      ${Boost_LIBRARIES}
      ${SDL_LIBRARY}

@@ -5,7 +5,7 @@
 
 #include <core/util/color.h>
 #include <io/image/utils.h>
-#include <rlut/dungen/dungen.h>
+#include <rl/dungen/dungen.h>
 
 int main(int argc, char ** argv)
 {
@@ -17,7 +17,7 @@ int main(int argc, char ** argv)
 
 	std::srand(0);
 
-	pgn::rlut::cWorkspace ws;
+	pgn::rl::cWorkspace ws;
 	ws.mConstraints.RoomRectW(glm::ivec2(3, 12))
 		.RoomRectH(glm::ivec2(3, 12))
 		.DoorToDoorMinDistance(glm::ivec2(2, 2))
@@ -58,19 +58,19 @@ int main(int argc, char ** argv)
 	pgn::cArray2D<SDL_Color> imgData(ws.mMapData.Width(), ws.mMapData.Height());
 	auto cmapfunc = [&](size_t x, size_t y, const int& elem) { 
 		glm::ivec3 col(0, 0, 0);
-		if (elem & pgn::rlut::eMapData::corridor)
+		if (elem & pgn::rl::eMapData::corridor)
 			col += glm::ivec3(255, 255, 0);
-		if (elem & pgn::rlut::eMapData::room)
+		if (elem & pgn::rl::eMapData::room)
 			col += glm::ivec3(0, 255, 255);
-		if (elem & pgn::rlut::eMapData::blocked)
+		if (elem & pgn::rl::eMapData::blocked)
 			col -= glm::ivec3(16, 16, 16);
-		if (elem & pgn::rlut::eMapData::perimeter)
+		if (elem & pgn::rl::eMapData::perimeter)
 			col += glm::ivec3(64, 64, 64);
 		// conn -> green
-		if (elem & pgn::rlut::eMapData::conn)
+		if (elem & pgn::rl::eMapData::conn)
 			col += glm::ivec3(255, -255, -255);
 
-		if (elem & (pgn::rlut::eMapData::entry | pgn::rlut::eMapData::exit))
+		if (elem & (pgn::rl::eMapData::entry | pgn::rl::eMapData::exit))
 			col = glm::ivec3(0, 0, 255);
 		imgData(x, y).r = std::min(std::max(col.x, 0),255);
 		imgData(x, y).g = std::min(std::max(col.y, 0), 255);

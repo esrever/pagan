@@ -4,14 +4,14 @@
 #include <core/serialize/util.h>
 #include <ecs/ecs.h>
 
-#include <rlut/app/rlapp.h>
+#include <rl/app/rlapp.h>
 
 extern pgn::cMain g_app;
 
 int main(int argc, char ** argv)
 {
 	std::cout << PROJECT_ROOT << std::endl;
-	pgn::mainapp() = new pgn::rlut::cRlApp(argc,argv);
+	pgn::mainapp() = new pgn::rl::cRlApp(argc,argv);
 	auto& ecs = pgn::mainecs() = new pgn::ecs::cECS();
 	pgn::mainapp()->Init();
 

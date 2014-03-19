@@ -1,10 +1,10 @@
-#include <rlut/ai/btree.h>
-#include <rlut/app/rlapp.h>
+#include <rl/ai/btree.h>
+#include <rl/app/rlapp.h>
 
 int main(int argc, char ** argv)
 {
 	pgn::cSDLApp*& app = pgn::mainapp();
-	app = new pgn::rlut::cRlApp(argc, argv);
+	app = new pgn::rl::cRlApp(argc, argv);
 	pgn::mainecs() = new pgn::ecs::cECS();
 	app->Init();
 

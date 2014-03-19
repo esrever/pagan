@@ -13,19 +13,19 @@
 
 #include <glm/glm.hpp>
 
-#include <rlut/dungen/dungen.h>
-#include <rlut/path/difi.h>
-#include <rlut/fov/FovLookup.h>
-#include <rlut/fov/fov_rsc.h>
+#include <rl/dungen/dungen.h>
+#include <rl/path/difi.h>
+#include <rl/fov/FovLookup.h>
+#include <rl/fov/fov_rsc.h>
 
 #include <core/serialize/serialize.h>
 #include <core/texture/texture.h>
 #include <core/texture/texturelib.h>
 #include <core/texture/subtexturelib.h>
 
-#include <rlut/app/rlapp.h>
-#include <rlut/components/components.h>
-#include <rlut/event/events.h>
+#include <rl/app/rlapp.h>
+#include <rl/components/components.h>
+#include <rl/event/events.h>
 #include <ecs/ecs.h>
 #include <ecs/events.h>
 #include <ecs/EntityData.h>
@@ -33,11 +33,11 @@
 
 #include <core/util/string.h>
 
-#include <rlut/systems/Teleport.h>
+#include <rl/systems/Teleport.h>
 
-struct cTestApp : public pgn::rlut::cRlApp
+struct cTestApp : public pgn::rl::cRlApp
 {
-	cTestApp(int argc, char ** argv) : pgn::rlut::cRlApp(argc, argv),
+	cTestApp(int argc, char ** argv) : pgn::rl::cRlApp(argc, argv),
 	INIT_EVT_MEMBER(cTestApp, MouseMotion),
 	INIT_EVT_MEMBER(cTestApp, Keyboard),
 	mMouseOverCell(0,0)
@@ -47,7 +47,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 	//------------------------------------------------
 	virtual void Init()
 	{
-		pgn::rlut::cRlApp::Init();
+		pgn::rl::cRlApp::Init();
 
 		const char * fname_in = PROJECT_ROOT "data\\ecs.xml";
 		const char * fname_out = PROJECT_ROOT "data\\ecs_out.xml";

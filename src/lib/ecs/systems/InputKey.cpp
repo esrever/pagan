@@ -2,7 +2,7 @@
 
 #include <core/app/sdlapp.h>
 #include <ecs/ecs.h>
-#include <rlut/components/components.h>
+#include <rl/components/components.h>
 
 namespace pgn
 {
