@@ -41,7 +41,7 @@ namespace pgn
 			glm::uvec2 mLogStart;
 			glm::uvec2 mStatusStart;
 
-			cECS	   mECS;
+			ecs::cECS   mECS;
 
 			static const size_t	msTextHeight = 24;
 		};

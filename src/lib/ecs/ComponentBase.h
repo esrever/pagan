@@ -6,19 +6,23 @@
 
 namespace pgn
 {
-	//! Class used for common storage.
-	class cComponentBase
+	namespace ecs
 	{
-		SUPPORT_DERIVED(cComponentBase)
-	public:
-		//! Get type index(for masks), virtually
-		virtual unsigned short TypeIndex() const =0;
+		//! Class used for common storage.
+		class cComponentBase
+		{
+			SUPPORT_DERIVED(cComponentBase)
+		public:
+			//! Get type index(for masks), virtually
+			virtual unsigned short TypeIndex() const = 0;
 
-	protected:
-		cComponentBase(){}
-	};
+		protected:
+			cComponentBase(){}
+		};
 
-	DECL_PTRTYPE(cComponentBase);
-	DECL_SERIALIZE_INTERFACE(cComponentBase);
+		DECL_PTRTYPE(cComponentBase);
+	}
+
+	DECL_SERIALIZE_INTERFACE(ecs::cComponentBase);
 
 }

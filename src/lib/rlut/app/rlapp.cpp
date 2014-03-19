@@ -26,7 +26,7 @@ namespace pgn
 			pgn::bt::RegisterActions();
 			pgn::bt::RegisterConditions();
 			pgn::rl::RegisterComponents(*mainecs());
-			pgn::rl::RegisterActions(*mainecs());
+			//pgn::rl::RegisterActions(*mainecs());
 
 			// TODO: move system init elsewhere
 			pgn::mainecs()->System<ecs::sys::cInputKey>();

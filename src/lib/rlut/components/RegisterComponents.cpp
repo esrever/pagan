@@ -9,7 +9,7 @@
 
 namespace pgn {
     namespace rl {
-        void RegisterComponents(cECS& ecs)
+        void RegisterComponents(ecs::cECS& ecs)
         {
             ecs.RegisterComponent<cmp::cLocation>();
             ecs.RegisterComponent<cmp::cStats>();

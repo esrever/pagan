@@ -10,14 +10,14 @@ namespace pgn{
             
             struct cWorldData
             {
-                cWorldData(const std::map<int, cECS::cEntityWithData>& arg0 = std::map<int, cECS::cEntityWithData>()):
+                cWorldData(const std::map<int, ecs::cEntityWithData>& arg0 = std::map<int, ecs::cEntityWithData>()):
                         mLevelMap(arg0){}
                 
                 size_t SerializeIn(const node_type&);
                 void SerializeOut(node_type&) const;
                 
                 //!LevelEntities
-                std::map<int, cECS::cEntityWithData> mLevelMap;
+                std::map<int, ecs::cEntityWithData> mLevelMap;
                 
             };
         

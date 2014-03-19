@@ -12,12 +12,12 @@ extern pgn::cMain g_app;
 int main(int argc, char ** argv)
 {
 	pgn::mainapp() = new pgn::cSDLApp(argc,argv);
-	pgn::mainecs() = new pgn::cECS();
+	pgn::mainecs() = new pgn::ecs::cECS();
 	pgn::mainapp()->Init();
 	//pgn::mainapp()->Resources<pgn::cTextureLib>("")->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tilemap.png","");
 	pgn::mainapp()->Resources<pgn::cTextureLib>("")->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml", "");
 
-	auto& ecs = pgn::ECS();
+	auto& ecs = *mainecs();
 	pgn::rl::RegisterComponents(ecs);
 	pugi::xml_document doc_in2;
 	auto res = doc_in2.load_file("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\ecs\\data\\example_in.xml");
@@ -26,10 +26,10 @@ int main(int argc, char ** argv)
 	else
 	{
 		doc_in2.print(std::cout);
-		SerializeIn(doc_in2, pgn::ECS());
+		pgn::SerializeIn(doc_in2, *mainecs());
 
 		pugi::xml_document doc_out;
-		SerializeOut(doc_out, "ECS", pgn::ECS());
+		pgn::SerializeOut(doc_out, "ECS", *mainecs());
 		doc_out.save_file("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\ecs\\data\\example_out.xml");
 	}
 

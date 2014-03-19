@@ -12,14 +12,14 @@ namespace pgn
 {
 	namespace rl
 	{
-		void RegisterActions(cECS& ecs)
+		void RegisterActions(ecs::cECS& ecs)
 		{
 			for (int i = -1; i <= 1;++i)
 				for (int j = -1; j <= 1; ++j)
 				{
 					int o = (i + 1) * 3 + j + 1;
-					cECS::cActionFunc func = std::bind(&evt::cPlayerMoveAdj::RunEvent, glm::ivec2(j, i));
-					ecs.RegisterAction(std::string("PlayerMove") + dirstrings_short[o], func);
+					//cECS::cActionFunc func = std::bind(&evt::cPlayerMoveAdj::RunEvent, glm::ivec2(j, i));
+					//ecs.RegisterAction(std::string("PlayerMove") + dirstrings_short[o], func);
 				}
 		}
 	}
@@ -54,7 +54,7 @@ namespace pgn
 	}
 
 	template<>
-	bool evt::cMoveAdj::Run(cECS::cEntityWithData ed, const glm::ivec2& dir)
+	bool evt::cMoveAdj::Run(ecs::cEntityWithData ed, const glm::ivec2& dir)
 	{
 		// get some components
 		auto loc = ed->second.Component<rl::cmp::cLocation>();
@@ -78,7 +78,7 @@ namespace pgn
 	}
 
 	template<>
-	bool evt::cAppear::Run(cECS::cEntityWithData ed, const rl::cmp::cLocation& pos)
+	bool evt::cAppear::Run(ecs::cEntityWithData ed, const rl::cmp::cLocation& pos)
 	{
 		// set location
 		auto loc = ed->second.Component<rl::cmp::cLocation>();
@@ -92,7 +92,7 @@ namespace pgn
 	}
 
 	template<>
-	bool evt::cCalculateVisibility::Run(cECS::cEntityWithData ed)
+	bool evt::cCalculateVisibility::Run(ecs::cEntityWithData ed)
 	{
 		auto vis = ed->second.Component<rl::cmp::cVisibility>();
 		auto loc = ed->second.Component<rl::cmp::cLocation>();
@@ -118,7 +118,7 @@ namespace pgn
 	}
 
 	template<>
-	bool evt::cCreateLevel::Run(cECS::cEntityWithData ed)
+	bool evt::cCreateLevel::Run(ecs::cEntityWithData ed)
 	{
 		// TODO: flesh out. Currently store the id -> level association
 		auto level = ed->second.Component<rl::cmp::cLevelData>();

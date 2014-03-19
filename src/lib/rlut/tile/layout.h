@@ -19,10 +19,10 @@ namespace pgn
 			public:
 				typedef cArray2D<bool> bool_map_type;
 				typedef cArray2D<float> movecost_map_type;
-				typedef cArray2D<cECS::cArchetypeWithDataConst> dense_archetypes_type;
-				typedef cArray2D<cECS::cEntityWithDataConst> dense_entities_type;
-				typedef cArray2D<cECS::cEntityWithDataConst, cSparseStorage<cECS::cEntityWithDataConst> > sparse_entities_type;
-				typedef std::map<cECS::cEntityWithDataConst, glm::ivec2> sparse_map_type;
+				typedef cArray2D<ecs::cArchetypeWithDataConst> dense_archetypes_type;
+				typedef cArray2D<ecs::cEntityWithDataConst> dense_entities_type;
+				typedef cArray2D<ecs::cEntityWithDataConst, cSparseStorage<ecs::cEntityWithDataConst> > sparse_entities_type;
+				typedef std::map<ecs::cEntityWithDataConst, glm::ivec2> sparse_map_type;
 
 				void Init(const rlut::cWorkspace& ws, const std::map<std::string, std::string>& tiles);
 
@@ -34,8 +34,8 @@ namespace pgn
 				sparse_entities_type& FgEntities() { return mFgEntities; }
 				sparse_map_type& Actors() { return mActors; }
 
-				void SetActor(cECS::cEntityWithDataConst ed);
-				void RemoveActor(cECS::cEntityWithDataConst ed);
+				void SetActor(ecs::cEntityWithDataConst ed);
+				void RemoveActor(ecs::cEntityWithDataConst ed);
 				
 				const movecost_map_type& StaticMoveCosts() const { return mStaticMoveCosts; }
 				const movecost_map_type& MoveCosts() const { return mMoveCosts; }

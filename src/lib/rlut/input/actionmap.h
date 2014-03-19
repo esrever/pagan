@@ -18,7 +18,7 @@ namespace pgn
                 void OnKeyboard(const SDL_KeyboardEvent& evt);
                 
             private:
-                std::map<int, cECS::cActionFunc> mBindings;
+                std::map<int, ecs::cActionFunc> mBindings;
                 
 				DECL_EVT_MEMBER(Keyboard);
         };

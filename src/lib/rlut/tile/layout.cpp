@@ -68,7 +68,7 @@ namespace pgn
 			mBgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height(), it_wall);
 			mFgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height(), ecs->EntitiesToData().end());
 			mActors.clear();
-			cECS::cEntityWithData it_entry_inst;
+			ecs::cEntityWithData it_entry_inst;
 			for (size_t i = 0; i < ws.mMapData.Height();++i)
 			for (size_t j = 0; j < ws.mMapData.Width(); ++j)
 			{
@@ -93,18 +93,18 @@ namespace pgn
 
 			// Init obstacles
 			mObstacles.Resize(BgEntities().Width(), BgEntities().Height());
-			BgEntities().View().VisitRext([&](size_t x, size_t y, const cECS::cArchetypeWithDataConst& ed){ mObstacles(x, y) = ed->second.Component<rl::cmp::cMoveCost>()->mMoveCost == std::numeric_limits<float>::max(); });
+			BgEntities().View().VisitRext([&](size_t x, size_t y, const ecs::cArchetypeWithDataConst& ed){ mObstacles(x, y) = ed->second.Component<rl::cmp::cMoveCost>()->mMoveCost == std::numeric_limits<float>::max(); });
 		}
 
 		//-------------------------------------------------------------------------------
-		void cLayout::SetActor(cECS::cEntityWithDataConst ed)
+		void cLayout::SetActor(ecs::cEntityWithDataConst ed)
 		{
 			auto loc = ed->second.Component<cmp::cLocation>();
 			mActors[ed] = loc->mPos;
 		}
 
 		//-------------------------------------------------------------------------------
-		void cLayout::RemoveActor(cECS::cEntityWithDataConst ed)
+		void cLayout::RemoveActor(ecs::cEntityWithDataConst ed)
 		{
 			auto loc = ed->second.Component<cmp::cLocation>();
 			mActors.erase(ed);

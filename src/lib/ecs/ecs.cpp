@@ -5,124 +5,150 @@
 
 namespace pgn
 {
-	cECS& ECS()
+	namespace ecs
 	{
-		return *mainecs();
-	}
-
-	//---------------------------------------------------------------------------------------------------
-	cECS::cEntityWithData cECS::Create(const cEntityData& ed)
-	{
-		const auto& e = mEntityIdGen.New();
-		auto it = mEntitiesToData.emplace(e, ed);
-		for (const auto& tag : ed.mTags)
-			mTagsToEntities[tag].insert(it.first);
-		for (const auto& tag : ed.mTagus)
-			mTagusToEntities[tag] = it.first;
-		return it.first;
-	}
-
-	//---------------------------------------------------------------------------------------------------
-	unsigned short cECS::AddComponentType(const std::type_index& zTi)
-	{
-		// if it's already in our list, do nothing and return the index
-		for (size_t i = 0; i<mComponentTypeIds.size(); ++i)
+		cECS& ECS()
 		{
-			if (zTi == mComponentTypeIds[i])
-				return i;
+			return *mainecs();
 		}
-		// add the type & the creator
-		mComponentTypeIds.push_back(zTi);
-		mComponentCreators.push_back(ComponentCreatorFunction());
 
-		// create a nice name & add it, omit the struct from "struct blah"
-		std::vector<std::string> result;
-		pystring::split(zTi.name(), result, " ");
-		std::string tmp = result.back();
-		pystring::rsplit(tmp, result, "::c",1);
-		tmp = pystring::strip(result.back(), ">");
-		auto idx = mComponentTypeIds.size() - 1;
-		mComponentTypeNamesToIds[tmp] = idx;
-		mComponentTypeNames.push_back(tmp);
-		return mComponentTypeIds.size() - 1;
-	}
-
-	//---------------------------------------------------------------------------------------------------
-	void cECS::Tag(const std::string& tag, cEntityWithData ed)
-	{
-		mTagsToEntities[tag].insert(ed);
-		ed->second.mTags.insert(tag);
-	}
-
-	//---------------------------------------------------------------------------------------------------
-	void cECS::Untag(const std::string& tag, cEntityWithData ed)
-	{
-		auto it = mTagsToEntities.find(tag);
-		if (it != mTagsToEntities.end())
+		//---------------------------------------------------------------------------------------------------
+		cEntityWithData cECS::Create(const cEntityData& ed)
 		{
-			it->second.erase(ed);
-			ed->second.mTags.erase(tag);
+			const auto& e = mEntityIdGen.New();
+			auto it = mEntitiesToData.emplace(e, ed);
+			for (const auto& tag : ed.mTags)
+				mTagsToEntities[tag].insert(it.first);
+			for (const auto& tag : ed.mTagus)
+				mTagusToEntities[tag] = it.first;
+			// TODO: emit event
+			return it.first;
 		}
-	}
 
-	//---------------------------------------------------------------------------------------------------
-	void cECS::Tagu(const std::string& tag, cEntityWithData ed)
-	{
-		mTagusToEntities[tag] = ed;
-		ed->second.mTagus.insert(tag);
-	}
-
-	//---------------------------------------------------------------------------------------------------
-	void cECS::Untagu(const std::string& tag, cEntityWithData ed)
-	{
-		mTagusToEntities.erase(tag);
-		ed->second.mTagus.erase(tag);
-	}
-
-	//---------------------------------------------------------------------------------------------------
-	cECS::cEntityWithData cECS::InstantiateArchetype(const cEntityData& arch)
-	{
-		// generate entity
-		cEntityWithData ewd = Create();
-		
-		// copy the data
-		cEntityData& ed = ewd->second;
-		ed.SetArchetype(arch);
-		return ewd;
-	}
-
-	//---------------------------------------------------------------------------------------------------
-	void cECS::ParseEntities(const node_type& reader)
-	{
-		// We expect an entity list here
-		for (auto it = reader.begin(); it != reader.end(); ++it)
+		//---------------------------------------------------------------------------------------------------
+		void cECS::Destroy(cEntityWithData ed)
 		{
-			const auto& ent = *it;
+			// TODO: emit event
+			// erase from unique tags
+			auto itu = std::find_if(mTagusToEntities.begin(), mTagusToEntities.end(), [&](const std::pair<std::string, cEntityWithData>& e){return e.second->first == ed->first; });
+			if (itu != mTagusToEntities.end())
+				mTagusToEntities.erase(itu);
 
-			// parse the entity data
-			cEntityData ed;
-			if (pgn::SerializeIn(ent, ed))
+			// erase from tags
+			auto it = mTagsToEntities.begin();
+			while (it != mTagsToEntities.end())
 			{
-				// determine if it's an archetype or not
-				bool is_archetype=false;
-				pgn::SerializeIn(ent, "is_archetype", is_archetype);
-				if (!is_archetype)
-					Create(ed);
-				else
-					mArchetypes.emplace(ed.mName,ed);
+				auto itc = it++;
+				auto& kv = *itc;
+				kv.second.erase(ed);
+				if (kv.second.empty())
+					mTagsToEntities.erase(itc);
+			}
+			mEntitiesToData.erase(ed->first);
+		}
+
+		//---------------------------------------------------------------------------------------------------
+		unsigned short cECS::AddComponentType(const std::type_index& zTi)
+		{
+			// if it's already in our list, do nothing and return the index
+			for (size_t i = 0; i < mComponentTypeIds.size(); ++i)
+			{
+				if (zTi == mComponentTypeIds[i])
+					return i;
+			}
+			// add the type & the creator
+			mComponentTypeIds.push_back(zTi);
+			mComponentCreators.push_back(ComponentCreatorFunction());
+
+			// create a nice name & add it, omit the struct from "struct blah"
+			std::vector<std::string> result;
+			pystring::split(zTi.name(), result, " ");
+			std::string tmp = result.back();
+			pystring::rsplit(tmp, result, "::c", 1);
+			tmp = pystring::strip(result.back(), ">");
+			auto idx = mComponentTypeIds.size() - 1;
+			mComponentTypeNamesToIds[tmp] = idx;
+			mComponentTypeNames.push_back(tmp);
+			return mComponentTypeIds.size() - 1;
+		}
+
+		//---------------------------------------------------------------------------------------------------
+		void cECS::Tag(const std::string& tag, cEntityWithData ed)
+		{
+			mTagsToEntities[tag].insert(ed);
+			ed->second.mTags.insert(tag);
+		}
+
+		//---------------------------------------------------------------------------------------------------
+		void cECS::Untag(const std::string& tag, cEntityWithData ed)
+		{
+			auto it = mTagsToEntities.find(tag);
+			if (it != mTagsToEntities.end())
+			{
+				it->second.erase(ed);
+				ed->second.mTags.erase(tag);
 			}
 		}
+
+		//---------------------------------------------------------------------------------------------------
+		void cECS::Tagu(const std::string& tag, cEntityWithData ed)
+		{
+			mTagusToEntities[tag] = ed;
+			ed->second.mTagus.insert(tag);
+		}
+
+		//---------------------------------------------------------------------------------------------------
+		void cECS::Untagu(const std::string& tag, cEntityWithData ed)
+		{
+			mTagusToEntities.erase(tag);
+			ed->second.mTagus.erase(tag);
+		}
+
+		//---------------------------------------------------------------------------------------------------
+		cEntityWithData cECS::InstantiateArchetype(const cEntityData& arch)
+		{
+			// generate entity
+			cEntityWithData ewd = Create();
+
+			// copy the data
+			cEntityData& ed = ewd->second;
+			ed.SetArchetype(arch);
+			return ewd;
+		}
+
+		//---------------------------------------------------------------------------------------------------
+		void cECS::ParseEntities(const node_type& reader)
+		{
+			// We expect an entity list here
+			for (auto it = reader.begin(); it != reader.end(); ++it)
+			{
+				const auto& ent = *it;
+
+				// parse the entity data
+				cEntityData ed;
+				if (pgn::SerializeIn(ent, ed))
+				{
+					// determine if it's an archetype or not
+					bool is_archetype = false;
+					pgn::SerializeIn(ent, "is_archetype", is_archetype);
+					if (!is_archetype)
+						Create(ed);
+					else
+						mArchetypes.emplace(ed.mName, ed);
+				}
+			}
+		}
+
+		//---------------------------------------------------------------------------------------------------
+		void cECS::RegisterAction(const std::string& s, cActionFunc func)
+		{
+			mActionFuncs[s] = func;
+		}
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	void cECS::RegisterAction(const std::string& s, cActionFunc func)
+	void SerializeOut(node_type& node, const ecs::cECS& value)
 	{
-		mActionFuncs[s] = func;
-	}
-
-	//---------------------------------------------------------------------------------------------------
-	void SerializeOut(node_type& node, const cECS& value) 
-	{ 
 		// export a dump of the object
 		SerializeOut(node.append_child("EntitiesToData"), value.EntitiesToData());
 		SerializeOut(node.append_child("Archetypes"), value.Archetypes());
@@ -131,7 +157,7 @@ namespace pgn
 	}
 
 	//---------------------------------------------------------------------------------------------------
-	size_t SerializeIn(const node_type& reader, cECS& value)
+	size_t SerializeIn(const node_type& reader, ecs::cECS& value)
 	{
 		value.ParseEntities(reader.child("Entities"));
 		return 1;

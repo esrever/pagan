@@ -29,101 +29,105 @@
 
 namespace pgn
 {
-	typedef std::function< std::shared_ptr<cComponentBase>() > ComponentCreatorFunction;
-
-	class cECS
+	namespace ecs
 	{
-	public:
-		typedef std::function<void(void)> cActionFunc;
-		typedef std::map<cEntity, cEntityData>::const_iterator  cEntityWithDataConst;
-		typedef std::map<cEntity, cEntityData>::iterator        cEntityWithData;
-		typedef std::map<std::string, cEntityData>::const_iterator        cArchetypeWithDataConst;
+		typedef std::function< std::shared_ptr<cComponentBase>() >	ComponentCreatorFunction;
+		typedef std::map<cEntity, cEntityData>::const_iterator		cEntityWithDataConst;
+		typedef std::map<cEntity, cEntityData>::iterator			cEntityWithData;
+		typedef std::function<void(void)>							cActionFunc;
+		typedef std::map<std::string, cEntityData>::const_iterator  cArchetypeWithDataConst;
 		typedef std::map<std::string, cEntityData>::iterator        cArchetypeWithData;
 
-	public:
-		DECL_MAP_MEMBER_R(cEntity, cEntityData, EntitiesToData);
-		DECL_MAP_MEMBER_R(std::string, cEntityData, Archetypes);
-		DECL_MAP_MEMBER_R(std::string, std::set<cEntityWithData>, TagsToEntities);
-		DECL_MAP_MEMBER_R(std::string, cEntityWithData, TagusToEntities);
-		DECL_MAP_MEMBER_R(std::string, cQueryFunc, Queries);
-		DECL_MAP_MEMBER_R(std::string, size_t, ComponentTypeNamesToIds);
-		DECL_MEMBER_R(std::vector<ComponentCreatorFunction>, ComponentCreators);
-		DECL_MEMBER_R(std::vector<std::string>, ComponentTypeNames);
-		DECL_MAP_MEMBER_R(std::string, cActionFunc, ActionFuncs);
+		class cECS
+		{
 
-		SUPPORT_DERIVED(cECS);
+		public:
+			DECL_MAP_MEMBER_R(cEntity, cEntityData, EntitiesToData);
+			DECL_MAP_MEMBER_R(std::string, cEntityData, Archetypes);
+			DECL_MAP_MEMBER_R(std::string, std::set<cEntityWithData>, TagsToEntities);
+			DECL_MAP_MEMBER_R(std::string, cEntityWithData, TagusToEntities);
+			DECL_MAP_MEMBER_R(std::string, cQueryFunc, Queries);
+			DECL_MAP_MEMBER_R(std::string, size_t, ComponentTypeNamesToIds);
+			DECL_MEMBER_R(std::vector<ComponentCreatorFunction>, ComponentCreators);
+			DECL_MEMBER_R(std::vector<std::string>, ComponentTypeNames);
+			DECL_MAP_MEMBER_R(std::string, cActionFunc, ActionFuncs);
 
-	public:
-		cEntityWithData Create(const cEntityData& = cEntityData());
-		void Tag(const std::string&, cEntityWithData);
-		void Untag(const std::string&, cEntityWithData);
-		void Tagu(const std::string&, cEntityWithData);
-		void Untagu(const std::string&, cEntityWithData);
+			SUPPORT_DERIVED(cECS);
 
-		cEntityWithData InstantiateArchetype(const cEntityData& arch);
+		public:
+			cEntityWithData Create(const cEntityData& = cEntityData());
+			void Destroy(cEntityWithData);
+			void Tag(const std::string&, cEntityWithData);
+			void Untag(const std::string&, cEntityWithData);
+			void Tagu(const std::string&, cEntityWithData);
+			void Untagu(const std::string&, cEntityWithData);
 
+			cEntityWithData InstantiateArchetype(const cEntityData& arch);
+
+			template<class T>
+			void RegisterComponent();
+
+			//! register an action
+			void RegisterAction(const std::string& s, cActionFunc func);
+
+			//! gets a typed system - creates if none exists.
+			template<class T>
+			ecs::sys::cBase_sptr System();
+
+			void ParseEntities(const node_type& reader);
+
+		private:
+			unsigned short AddComponentType(const std::type_index& zTi);
+			ecs::sys::cBase_sptr& SystemBase(const std::string& s) { return mSystems[s]; }
+
+		private:
+			std::map<std::string, ecs::sys::cBase_sptr>	mSystems;
+
+			cIdGen<cEntity>						  mEntityIdGen;
+			std::vector< std::type_index>		  mComponentTypeIds;
+		};
+
+		cECS& ECS();
+
+		//------------------------------------------------------------------------
 		template<class T>
-		void RegisterComponent();
+		sys::cBase_sptr cECS::System()
+		{
+			auto name = typeid(T).name();
+			// create a nice name & add it, omit the struct from "struct blah"
+			std::vector<std::string> result;
+			pystring::rsplit(name, result, "::c", 1);
+			auto s = pystring::strip(result.back(), ">");
 
-		//! register an action
-		void RegisterAction(const std::string& s, cActionFunc func);
+			auto& base = SystemBase(s);
+			if (!base)
+				base = ecs::sys::cBase_sptr(new T());
+			return base;
+		}
 
-		//! gets a typed system - creates if none exists.
+		//------------------------------------------------------------------------
 		template<class T>
-		ecs::sys::cBase_sptr System();
-
-	private:
-		unsigned short AddComponentType(const std::type_index& zTi);
-		void ParseEntities(const node_type& reader);
-		ecs::sys::cBase_sptr& SystemBase(const std::string& s) { return mSystems[s]; }
-
-	private:
-		std::map<std::string, ecs::sys::cBase_sptr>	mSystems;
-
-		cIdGen<cEntity>						  mEntityIdGen;
-		std::vector< std::type_index>		  mComponentTypeIds;
-	};
-
-	cECS& ECS();
-
-	DECL_SERIALIZE_INTERFACE(cECS);
-
-	//------------------------------------------------------------------------
-	template<class T>
-	ecs::sys::cBase_sptr cECS::System()
-	{
-		auto name = typeid(T).name();
-		// create a nice name & add it, omit the struct from "struct blah"
-		std::vector<std::string> result;
-		pystring::rsplit(name, result, "::c", 1);
-		auto s = pystring::strip(result.back(), ">");
-
-		auto& base = SystemBase(s);
-		if (!base)
-			base = ecs::sys::cBase_sptr(new T());
-		return base;
+		void cECS::RegisterComponent()
+		{
+			// set index and store creator function
+			const auto& ti = typeid(T);
+			auto idx = AddComponentType(ti);
+			cComponent<typename T>::msTypeIndex = idx;
+			mComponentCreators[cComponent<typename T>::msTypeIndex] = &cComponent<typename T>::Create;
+		}
 	}
 
-	//------------------------------------------------------------------------
-	template<class T>
-	void cECS::RegisterComponent()
-	{
-		// set index and store creator function
-		const auto& ti = typeid(T);
-		auto idx = AddComponentType(ti);
-		cComponent<typename T>::msTypeIndex = idx;
-		mComponentCreators[cComponent<typename T>::msTypeIndex] = &cComponent<typename T>::Create;
-	}
+	DECL_SERIALIZE_INTERFACE(ecs::cECS);
 }
 
 namespace std
 {
-	inline bool operator < (const pgn::cECS::cEntityWithData& lhs, const pgn::cECS::cEntityWithData& rhs)
+	inline bool operator < (const pgn::ecs::cEntityWithData& lhs, const pgn::ecs::cEntityWithData& rhs)
 	{
 		return lhs->first < rhs->first;
 	}
 
-	inline bool operator < (const pgn::cECS::cEntityWithDataConst lhs, const pgn::cECS::cEntityWithDataConst rhs)
+	inline bool operator < (const pgn::ecs::cEntityWithDataConst lhs, const pgn::ecs::cEntityWithDataConst rhs)
 	{
 		return lhs->first < rhs->first;
 	}

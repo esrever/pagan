@@ -21,8 +21,8 @@ namespace pgn
 		//------------------------------------------------------------------------------------------------------
 		eStatus ApproachTarget(cBlackBoard& bb)
 		{
-			auto me = *bb.mDictTemp.Get<cECS::cEntityWithData>("me");
-			auto tgt = *bb.mDictTemp.Get<cECS::cEntityWithData>("target");
+			auto me = *bb.mDictTemp.Get<ecs::cEntityWithData>("me");
+			auto tgt = *bb.mDictTemp.Get<ecs::cEntityWithData>("target");
 			// TODO: request difi of target later.
 			pgn::rl::cmp::cLocation * me_loc = me->second.Component<pgn::rl::cmp::cLocation>();
 			pgn::rl::cmp::cLocation * tgt_loc = tgt->second.Component<pgn::rl::cmp::cLocation>();

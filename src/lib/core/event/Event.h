@@ -42,22 +42,31 @@
 	
 */
 
-#define DECL_EVT_MEMBER( N) public: pgn::cEventHandler<pgn::evt::c##N##::evt_type> m##EvtHandleOn##N##; private:
+#define DECL_EVT_MEMBER( N) public: pgn::cEventHandler<pgn::evt::c##N##> m##EvtHandleOn##N##; private:
 #define INIT_EVT_MEMBER(T, N) mEvtHandleOn##N##( Simple::slot(this, &##T##::On##N ))
+
+#define DECL_EVT0( T ) struct c##T{\
+	typedef std::function<void()> cb_type; \
+	typedef Simple::Signal<void()> sig_type; \
+	static sig_type& Sig() { static sig_type mSig; return mSig; }}
+
+#define DECL_EVT1( T, A0) struct c##T{\
+	typedef std::function<void(const A0 &)> cb_type; \
+	typedef Simple::Signal<void(const A0 &)> sig_type; \
+	static sig_type& Sig() { static sig_type mSig; return mSig; }}
+
+#define DECL_EVT2( T, A0, A1) struct c##T{\
+	typedef std::function<void(const A0 &, const A1 &)> cb_type; \
+	typedef Simple::Signal<void(const A0 &, const A1 &)> sig_type; \
+	static sig_type& Sig() { static sig_type mSig; return mSig; }}
+
+#define DECL_EVT3( T, A0, A1, A2) struct c##T{\
+	typedef std::function<void(const A0 &, const A1 &, const A2 &)> cb_type; \
+	typedef Simple::Signal<void(const A0 &, const A1 &, const A2 &)> sig_type; \
+	static sig_type& Sig() { static sig_type mSig; return mSig; }}
 
 namespace pgn
 {
-	template< size_t E, class... Args >
-	struct cEvent
-	{
-		typedef Simple::Signal<void(Args...)> sigtype;
-		typedef std::function<void(Args...)> functype;
-		static sigtype mSig;
-	};
-	template< size_t E, class... Args >
-	typename cEvent<E, Args...>::sigtype cEvent<E, Args...>::mSig;
-
-
 	template<class E>
 	class cEventHandler
 	{
@@ -65,23 +74,23 @@ namespace pgn
 
 		cEventHandler&  operator=   (const cEventHandler& eh)
 		{
-			E::mSig -= mId;
+			E::Sig() -= mId;
 			mId = eh.mId;
 			mActivate = eh.mActivate;
 			mCallback = eh.mCallback;
 			return *this;
 		}
 
-		cEventHandler(typename E::functype zCallback)
+		cEventHandler(typename E::cb_type zCallback)
 		:mCallback(zCallback)
 		{
 			mActivate = true;
-			mId = E::mSig += zCallback;
+			mId = E::Sig() += zCallback;
 		}
 
 		~cEventHandler()
 		{
-			E::mSig -= mId;
+			E::Sig() -= mId;
 			mId = 0;
 		}
 
@@ -98,7 +107,7 @@ namespace pgn
 			}
 			else // ( zOk)
 			{
-				mId = E::mSig += mCallback;
+				mId = E::Sig() += mCallback;
 			}
 		}
 
@@ -111,8 +120,19 @@ namespace pgn
 	private:
 		unsigned mId;
 		bool mActivate;
-		typename E::functype mCallback;
+		typename E::cb_type mCallback;
 	};
+
+	//! Event-specific stuff
+	namespace evt
+	{
+		DECL_EVT1(Keyboard, SDL_KeyboardEvent);
+		DECL_EVT1(MouseMotion, SDL_MouseMotionEvent);
+		DECL_EVT1(MouseButton, SDL_MouseButtonEvent);
+		DECL_EVT1(MouseWheel, SDL_MouseWheelEvent);
+		DECL_EVT0(ApplicationExit);
+		DECL_EVT1(Window, SDL_WindowEvent);
+	}
 
 	/**
 	Action registering: hardcoded list plus automatic from events
@@ -121,6 +141,7 @@ namespace pgn
 	for (auto x : cActionBindings::Instance().Get())
 	zMgr.AddAction(x.first, x.second);
 	*/
+	/*
 	struct cActionBindings
 	{
 		typedef std::function<void(void)> action_type;
@@ -204,4 +225,5 @@ namespace pgn
 		typedef cAction<size_t(eCoreEventId::ApplicationExit)> cApplicationExit;
 		typedef cAction<size_t(eCoreEventId::Window), SDL_WindowEvent> cWindow;
 	}
+	*/
 }

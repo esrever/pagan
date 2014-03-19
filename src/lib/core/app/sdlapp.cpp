@@ -14,7 +14,7 @@ namespace pgn
 {
 	static cMain g_app = cMain();
 	cSDLApp *& mainapp() { return g_app.mApp; }
-	cECS *& mainecs() { return g_app.mECS; }
+	ecs::cECS *& mainecs() { return g_app.mECS; }
 
 	//----------------------------------------------------------------------
 	cSDLApp::cSDLApp(int argc, char ** argv)
@@ -68,27 +68,27 @@ namespace pgn
 			{
 			case SDL_KEYDOWN:
 			case SDL_KEYUP:
-				evt::cKeyboard::Emit(event.key);
+				evt::cKeyboard::Sig().emit(event.key);
 				// TODO: hacky check
 				if (event.key.keysym.sym == 27)
 					quit = true;
 				break;
 			case SDL_QUIT:
-				evt::cApplicationExit::Emit();
+				evt::cApplicationExit::Sig().emit();
 				quit = true;
 				break;
 			case SDL_WINDOWEVENT:
-				evt::cWindow::Emit(event.window);
+				evt::cWindow::Sig().emit(event.window);
 				break;
 			case SDL_MOUSEWHEEL:
-				evt::cMouseWheel::Emit(event.wheel);
+				evt::cMouseWheel::Sig().emit(event.wheel);
 				break;
 			case SDL_MOUSEMOTION:
-				evt::cMouseMotion::Emit(event.motion);
+				evt::cMouseMotion::Sig().emit(event.motion);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
 			case SDL_MOUSEBUTTONUP:
-				evt::cMouseButton::Emit(event.button);
+				evt::cMouseButton::Sig().emit(event.button);
 				break;
 			case SDL_FINGERMOTION:
 			case SDL_FINGERDOWN:

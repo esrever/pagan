@@ -9,12 +9,15 @@
 
 namespace pgn
 {
-	typedef size_t cEntity;
-	
-	typedef std::bitset<MAX_COMPONENTS> cComponentMask;
-	DECL_SERIALIZE_INTERFACE(cComponentMask);
+	namespace ecs
+	{
+		typedef size_t cEntity;
 
-	typedef std::function<void(std::vector<cEntity>&)> cQueryFunc;
+		typedef std::bitset<MAX_COMPONENTS> cComponentMask;
+		DECL_SERIALIZE_INTERFACE(cComponentMask);
+
+		typedef std::function<void(std::vector<cEntity>&)> cQueryFunc;
+	}
 }
 
 // Some defines
@@ -27,9 +30,6 @@ typedef std::unique_ptr< T > T##_uptr;
 #define SUPPORT_DERIVED(T)\
 	public:\
 	virtual ~ T (){}\
-	protected:\
 	virtual void SerializeOut(node_type& writer) const {  }\
 	virtual size_t SerializeIn(const node_type& reader)  { return 0; };\
-	friend void SerializeOut(node_type& writer, const T & value);\
-	friend size_t SerializeIn(const node_type& reader, T & value);\
 	private:

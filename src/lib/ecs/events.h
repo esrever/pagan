@@ -6,7 +6,7 @@ namespace pgn
 {
 	namespace evt
 	{
-		typedef std::tuple< cECS::cEntityWithData > cEntityCreated;
-		typedef std::tuple< cECS::cEntityWithData > cEntityDestroy;
+		DECL_EVT1(EntityCreated, ecs::cEntityWithData);
+		DECL_EVT1(EntityDestroy, ecs::cEntityWithData);
 	}
 }

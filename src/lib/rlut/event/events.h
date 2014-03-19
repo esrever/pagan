@@ -4,36 +4,28 @@
 #include <ecs/ecs.h>
 #include <rlut/components/components.h>
 
+#define DECL_PEVT0(T) DECL_EVT1( Player##T, ecs::cEntityWithData );
+#define DECL_PEVT1(T, A0) DECL_EVT2( Player##T , ecs::cEntityWithData, A0 );
+#define DECL_PEVT2(T, A0, A1) DECL_EVT3( Player##T , ecs::cEntityWithData, A0 , A1 );
+
 namespace pgn
 {
-
 	//! Event-specific stuff
+
 	namespace evt
 	{
-		enum class eRlEventId : size_t {
-			MoveAdj = 256,
-			Appear,
-			Disappear,
-			PlayerMoveAdj,
-			PlayerAppear,
-			CalculateVisibility,
-			CreateLevel
-		};
-		
-		typedef cAction<size_t(eRlEventId::MoveAdj), cECS::cEntityWithData /*who*/, const glm::ivec2& /*dir*/> cMoveAdj;
-		typedef cAction<size_t(eRlEventId::Appear), cECS::cEntityWithData/*who*/, const rl::cmp::cLocation& /*pos*/> cAppear;
-		typedef cAction<size_t(eRlEventId::Disappear), cECS::cEntityWithData/*who*/, const rl::cmp::cLocation&/*last_pos*/> cDisappear;
-
-		typedef cAction<size_t(eRlEventId::PlayerMoveAdj), const glm::ivec2& /*dir*/> cPlayerMoveAdj;
-		typedef cAction<size_t(eRlEventId::PlayerAppear), const rl::cmp::cLocation& /*pos*/> cPlayerAppear;
-
-		typedef cAction<size_t(eRlEventId::CalculateVisibility), cECS::cEntityWithData/*who*/> cCalculateVisibility;
-
-		typedef cAction<size_t(eRlEventId::CreateLevel), cECS::cEntityWithData/*who*/> cCreateLevel;
+		DECL_EVT1(MoveAdj, ecs::cEntityWithData);
+		/*
+		DECL_EVT1(Appear, ecs::cEntityWithData)
+		DECL_EVT1(Disappear, ecs::cEntityWithData)
+		PlayerMoveAdj,
+		PlayerAppear,
+		CalculateVisibility,
+		CreateLevel*/
 	}
 
 	namespace rl
 	{
-		void RegisterActions(cECS& ecs);
+		void RegisterActions(ecs::cECS& ecs);
 	}
 }
