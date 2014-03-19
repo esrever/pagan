@@ -35,6 +35,7 @@ namespace pgn
 		typedef std::map<cEntity, cEntityData>::const_iterator		cEntityWithDataConst;
 		typedef std::map<cEntity, cEntityData>::iterator			cEntityWithData;
 		typedef std::function<void(void)>							cActionFunc;
+		typedef std::map<int, cActionFunc> 							cActionBindings;
 		typedef std::map<std::string, cEntityData>::const_iterator  cArchetypeWithDataConst;
 		typedef std::map<std::string, cEntityData>::iterator        cArchetypeWithData;
 
@@ -118,6 +119,7 @@ namespace pgn
 	}
 
 	DECL_SERIALIZE_INTERFACE(ecs::cECS);
+	DECL_SERIALIZE_INTERFACE( ecs::cActionBindings );
 }
 
 namespace std

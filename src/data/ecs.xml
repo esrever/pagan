@@ -93,8 +93,8 @@
           <array_elem value="@"/>
         </Symbols>
       </AsciiSet>
-      <ActionMap>
-        <ActionMap>
+      <ControllerPlayer>
+        <Bindings>
         <key value="95"/>
         <value value="PlayerMoveNW"/>
         <key value="96"/>
@@ -113,8 +113,8 @@
         <value value="PlayerMove"/>
         <key value="94"/>
         <value value="PlayerMoveE"/>
-        </ActionMap>
-      </ActionMap>
+        </Bindings>
+      </ControllerPlayer>
       <Visibility/>
     </Components>
     <Tagus>

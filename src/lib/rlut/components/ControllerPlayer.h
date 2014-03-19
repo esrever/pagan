@@ -10,14 +10,14 @@ namespace pgn{
             
             struct cControllerPlayer
             {
-                cControllerPlayer(const std::map<std::string, ecs::cActionFunc>& arg0 = std::map<std::string, ecs::cActionFunc>()):
+                cControllerPlayer(const ecs::cActionBindings& arg0 = ecs::cActionBindings()):
                         mBindings(arg0){}
                 
                 size_t SerializeIn(const node_type&);
                 void SerializeOut(node_type&) const;
                 
                 //!Action key-bindings for player-controlled actors
-                std::map<std::string, ecs::cActionFunc> mBindings;
+                ecs::cActionBindings mBindings;
                 
             };
         

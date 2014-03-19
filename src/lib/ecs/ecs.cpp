@@ -162,4 +162,20 @@ namespace pgn
 		value.ParseEntities(reader.child("Entities"));
 		return 1;
 	}
+
+	//---------------------------------------------------------------------------------------------------
+	void SerializeOut(node_type& node, const ecs::cActionBindings& value)
+	{
+		
+	}
+
+	//---------------------------------------------------------------------------------------------------
+	size_t SerializeIn(const node_type& reader, ecs::cActionBindings& value)
+	{
+		std::map<std::string, std::string> bindings;
+		size_t ret = SerializeIn(reader, bindings);
+		for (const auto& kv : bindings)
+			value[std::from_string<int>(kv.first)] = mainecs()->ActionFuncs(kv.second)->second;
+		return 1;
+	}
 }
