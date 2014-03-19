@@ -73,7 +73,10 @@ namespace pgn
 
 			//! gets a typed system - creates if none exists.
 			template<class T>
-			ecs::sys::cBase_sptr System();
+			ecs::sys::cBase_sptr SystemBase();
+
+			template<class T>
+			T& System();
 
 			void ParseEntities(const node_type& reader);
 
@@ -92,7 +95,7 @@ namespace pgn
 
 		//------------------------------------------------------------------------
 		template<class T>
-		sys::cBase_sptr cECS::System()
+		sys::cBase_sptr cECS::SystemBase()
 		{
 			auto name = typeid(T).name();
 			// create a nice name & add it, omit the struct from "struct blah"
@@ -104,6 +107,13 @@ namespace pgn
 			if (!base)
 				base = ecs::sys::cBase_sptr(new T());
 			return base;
+		}
+
+		//------------------------------------------------------------------------
+		template<class T>
+		T& cECS::System()
+		{
+			return *std::dynamic_pointer_cast<T>(SystemBase<T>());
 		}
 
 		//------------------------------------------------------------------------

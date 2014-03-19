@@ -2,6 +2,11 @@ file(GLOB_RECURSE COMPONENT_SRCS
          RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
          ${CMAKE_CURRENT_SOURCE_DIR}/components/*.cpp
          ${CMAKE_CURRENT_SOURCE_DIR}/components/*.h)
+         
+file(GLOB_RECURSE SYSTEM_SRCS
+         RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+         ${CMAKE_CURRENT_SOURCE_DIR}/systems/*.cpp
+         ${CMAKE_CURRENT_SOURCE_DIR}/systems/*.h)
 
 set(SOURCE_FILES
     app/rlapp.cpp
@@ -59,6 +64,7 @@ set(HEADER_FILES
     ai/conditions.h
     
     ${COMPONENT_SRCS}
+    ${SYSTEM_SRCS}
 )
 
 add_definitions(
@@ -68,6 +74,7 @@ add_definitions(
 source_group("Sources" FILES ${SOURCE_FILES})
 source_group("Headers" FILES ${HEADER_FILES})
 source_group("_Components" FILES ${COMPONENT_SRCS})
+source_group("_Systems" FILES ${SYSTEM_SRCS})
 
 
 include_directories(

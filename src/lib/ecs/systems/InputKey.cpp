@@ -1,5 +1,9 @@
 #include "InputKey.h"
 
+#include <core/app/sdlapp.h>
+#include <ecs/ecs.h>
+#include <rlut/components/components.h>
+
 namespace pgn
 {
 	namespace ecs
@@ -13,8 +17,21 @@ namespace pgn
 			void cInputKey::OnKeyboard(const SDL_KeyboardEvent& evt)
 			{
 				if (!Active()) return;
-				// TODO: implement
-				assert(false);
+				
+				// TODO: make it more generic
+				auto& bindings = mainecs()->TagusToEntities("Player")->second->second.Component< cmp::cControllerPlayer>()->mBindings;
+				if (evt.state == 1)
+				{
+					for (const auto& binding : bindings)
+					{
+						if (binding.first == evt.keysym.scancode)
+						{
+							binding.second();
+							// tODO: after turn system, mEvtHandleOnKeyboard.Accept(false);
+							break;
+						}
+					}
+				}
 			}
 		}
 	}

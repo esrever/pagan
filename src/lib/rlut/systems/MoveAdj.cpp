@@ -1,7 +1,9 @@
 #include "MoveAdj.h"
 
-#include <rlut/events.h>
+#include <rlut/event/events.h>
 #include <rlut/components/components.h>
+
+static const char * dirstrings_long[] = { "southwest", "south", "southeast", "west", "nowhere", "east", "northwest", "north", "northeast" };
 
 namespace pgn
 {
@@ -12,9 +14,9 @@ namespace pgn
 			bool cMoveAdj::operator()(ecs::cEntityWithData& ed, const glm::ivec2& dir)
 			{
 				// get some components
-				auto loc = ed->second.Component<rl::cmp::cLocation>();
-				auto world = mainecs()->TagusToEntities("World")->second->second.Component<rl::cmp::cWorldData>();
-				auto lvl = world->mLevelMap[loc->mLevelId]->second.Component<rl::cmp::cLevelData>();
+				auto loc = ed->second.Component<cmp::cLocation>();
+				auto world = mainecs()->TagusToEntities("World")->second->second.Component<cmp::cWorldData>();
+				auto lvl = world->mLevelMap[loc->mLevelId]->second.Component<cmp::cLevelData>();
 
 				// calc new position
 				auto newpos = loc->mPos + dir;
@@ -32,7 +34,7 @@ namespace pgn
 					
 					// Player-specific log!
 					if (ed == mainecs()->TagusToEntities("Player")->second)
-						mainapp()->GameLog().Inf(pgn::format("%s moves %s", ped->second.mName.c_str(), dirstrings_long[dir.x + 1 + 3 * (dir.y + 1)]));
+						mainapp()->GameLog().Inf(pgn::format("%s moves %s", ed->second.mName.c_str(), dirstrings_long[dir.x + 1 + 3 * (dir.y + 1)]));
 					return true;
 				}
 				return false;

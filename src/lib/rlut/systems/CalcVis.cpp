@@ -1,6 +1,8 @@
 #include "CalcVis.h"
 
 #include <rlut/components/components.h>
+#include <rlut/fov/FovLookup.h>
+#include <rlut/fov/fov_rsc.h>
 
 namespace pgn
 {
@@ -21,8 +23,8 @@ namespace pgn
 			//-------------------------------------------------------------------------
 			bool cCalcVis::operator()(ecs::cEntityWithData& ed)
 			{
-				auto vis = ed->second.Component<rl::cmp::cVisibility>();
-				auto loc = ed->second.Component<rl::cmp::cLocation>();
+				auto vis = ed->second.Component<cmp::cVisibility>();
+				auto loc = ed->second.Component<cmp::cLocation>();
 				vis->mVisible.clear();
 				auto& curexpl = vis->mExplored[loc->mLevelId];
 				auto& curvis = vis->mVisible[loc->mLevelId];
@@ -30,8 +32,8 @@ namespace pgn
 				static rlut::cFovLookup<rlut::cFovRsc> fovlut = rlut::cFovLookup<rlut::cFovRsc>();
 
 
-				auto world = mainecs()->TagusToEntities("World")->second->second.Component<rl::cmp::cWorldData>();
-				auto lvl = world->mLevelMap[loc->mLevelId]->second.Component<rl::cmp::cLevelData>();
+				auto world = mainecs()->TagusToEntities("World")->second->second.Component<cmp::cWorldData>();
+				auto lvl = world->mLevelMap[loc->mLevelId]->second.Component<cmp::cLevelData>();
 
 				// prepare the fov output data
 				curexpl.Resize(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height(), false);

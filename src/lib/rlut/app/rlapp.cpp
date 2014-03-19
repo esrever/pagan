@@ -10,8 +10,11 @@
 #include <rlut/ai/conditions.h>
 #include <rlut/components/RegisterComponents.h>
 #include <rlut/event/events.h>
+#include <rlut/event/actions.h>
 
 #include <ecs/systems/InputKey.h>
+#include <rlut/systems/CalcVis.h>
+#include <rlut/systems/CreateLevel.h>
 
 namespace pgn
 {
@@ -26,10 +29,12 @@ namespace pgn
 			pgn::bt::RegisterActions();
 			pgn::bt::RegisterConditions();
 			pgn::ecs::RegisterComponents(*mainecs());
-			//pgn::rl::RegisterActions(*mainecs());
+			pgn::rl::RegisterActions(*mainecs());
 
 			// TODO: move system init elsewhere
 			pgn::mainecs()->System<ecs::sys::cInputKey>();
+			pgn::mainecs()->System<ecs::sys::cCalcVis>();
+			pgn::mainecs()->System<ecs::sys::cCreateLevel>();
 
 			static const glm::uvec2 gridDims(40, 20);
 			static const size_t  numLines = 4;

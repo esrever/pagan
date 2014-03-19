@@ -33,6 +33,8 @@
 
 #include <core/util/string.h>
 
+#include <rlut/systems/Teleport.h>
+
 struct cTestApp : public pgn::rlut::cRlApp
 {
 	cTestApp(int argc, char ** argv) : pgn::rlut::cRlApp(argc, argv),
@@ -64,9 +66,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 		}
 
 		auto lvl0 = *pgn::mainecs()->TagsToEntities("TestLevel")->second.begin();
-		//pgn::evt::cCreateLevel::Run(lvl0);
-		// TODO: 
-		//ecs.System<pgn::sys::cCreateLevel>()->Execute(lvl0);
+		pgn::evt::cLevelCreated::Sig().emit(lvl0);
 
 		// ---- HERO STUFF 
 		auto hero = pgn::mainecs()->TagusToEntities("Player");
@@ -81,17 +81,13 @@ struct cTestApp : public pgn::rlut::cRlApp
 		// make hero appear in first level in world
 		auto world = pgn::mainecs()->TagusToEntities("World")->second->second.Component<pgn::ecs::cmp::cWorldData>();
 		auto lvl = world->mLevelMap.begin()->second->second.Component<pgn::ecs::cmp::cLevelData>();
-		hero_loc->mPos = lvl->mLayout.Entry();
-		hero_loc->mLevelId = world->mLevelMap.begin()->second->first;
-		auto& hero_pos = hero_loc->mPos;
-		// pgn::evt::cPlayerAppear::Run(*hero_loc);
-		// TODO: emit LocationChanged!
+		pgn::ecs::cmp::cLocation newloc(lvl->mLayout.Entry(), world->mLevelMap.begin()->second->first);
+		ecs.System<pgn::ecs::sys::cTeleport>()(hero->second, newloc);
 	}
 
 	//------------------------------------------------
 	virtual void Render()
 	{		
-		return;
 		auto& ecs = pgn::mainecs();
 		// get hero and level entities
 		auto hero = pgn::mainecs()->TagusToEntities("Player");

@@ -10,15 +10,15 @@ namespace pgn
 	{
 		namespace sys
 		{
-			class cCalcVis : public cBase
+			class cCreateLevel : public cBase
 			{
 				public:
-					cCalcVis();
-					void OnLocationChanged(const ecs::cEntityWithData& evt);
+					cCreateLevel();
+					void OnLevelCreated(const ecs::cEntityWithData& evt);
 					bool operator()(ecs::cEntityWithData&);
 
 				private:
-					DECL_EVT_MEMBER(LocationChanged);
+					DECL_EVT_MEMBER(LevelCreated);
 			};
 		}
 	}

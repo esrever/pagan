@@ -4,16 +4,18 @@
 #include <ecs/system.h>
 #include <ecs/ecs.h>
 
+#include <rlut/components/components.h>
+
 namespace pgn
 {
 	namespace ecs
 	{
 		namespace sys
 		{
-			class cMoveAdj : public cBase
+			class cTeleport : public cBase
 			{
 				public:
-					bool operator()(ecs::cEntityWithData&, const glm::ivec2& dir);
+					bool operator()(ecs::cEntityWithData&, const ecs::cmp::cLocation& loc);
 			};
 		}
 	}

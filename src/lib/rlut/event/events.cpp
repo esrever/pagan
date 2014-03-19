@@ -4,25 +4,9 @@
 #include <rlut/components/components.h>
 #include <rlut/fov/fov_rsc.h>
 
-
-static const char * dirstrings_short[] = { "SW", "S", "SE", "W", "", "E", "NW", "N", "NE" };
-static const char * dirstrings_long[] = { "southwest", "south", "southeast", "west", "nowhere", "east", "northwest", "north", "northeast" };
-
 namespace pgn
 {
-	namespace rl
-	{
-		void RegisterActions(ecs::cECS& ecs)
-		{
-			for (int i = -1; i <= 1;++i)
-				for (int j = -1; j <= 1; ++j)
-				{
-					int o = (i + 1) * 3 + j + 1;
-					//cECS::cActionFunc func = std::bind(&evt::cPlayerMoveAdj::RunEvent, glm::ivec2(j, i));
-					//ecs.RegisterAction(std::string("PlayerMove") + dirstrings_short[o], func);
-				}
-		}
-	}
+	
 
 	/*
 	template<>
