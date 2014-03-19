@@ -1,6 +1,7 @@
 #include "MoveAdj.h"
 
 #include <rlut/events.h>
+#include <rlut/components/components.h>
 
 namespace pgn
 {

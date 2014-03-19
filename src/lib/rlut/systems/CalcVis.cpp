@@ -1,13 +1,24 @@
 #include "CalcVis.h"
 
+#include <rlut/components/components.h>
+
 namespace pgn
 {
 	namespace ecs
 	{
 		namespace sys
 		{
-			// TODO: also execute by listening for entities that successfully update their location and have a visibility component!
-			// So, grab entities that have BOTH location AND visibility. 2nd should suffice, as it implies the first
+			//-------------------------------------------------------------------------
+			cCalcVis::cCalcVis() :INIT_EVT_MEMBER(cCalcVis, LocationChanged){}
+
+			//-------------------------------------------------------------------------
+			void cCalcVis::OnLocationChanged(const ecs::cEntityWithData& evt)
+			{
+				if (!Active()) return;
+				(*this)(const_cast<ecs::cEntityWithData&>(evt));
+			}
+
+			//-------------------------------------------------------------------------
 			bool cCalcVis::operator()(ecs::cEntityWithData& ed)
 			{
 				auto vis = ed->second.Component<rl::cmp::cVisibility>();
