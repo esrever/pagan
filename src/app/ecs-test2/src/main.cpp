@@ -12,7 +12,7 @@ int main(int argc, char ** argv)
 {
 	std::cout << PROJECT_ROOT << std::endl;
 	pgn::mainapp() = new pgn::rlut::cRlApp(argc,argv);
-	pgn::mainecs() = new pgn::cECS();
+	auto& ecs = pgn::mainecs() = new pgn::ecs::cECS();
 	pgn::mainapp()->Init();
 
 	const char * fname_in = PROJECT_ROOT "data\\ecs.xml";
@@ -22,10 +22,10 @@ int main(int argc, char ** argv)
 	if(pgn::LoadXML(doc_in2, fname_in, std::cout))
 	{
 		doc_in2.print(std::cout);
-		SerializeIn(doc_in2, pgn::ECS());
+		pgn::SerializeIn(doc_in2, ecs);
 
 		pugi::xml_document doc_out;
-		SerializeOut(doc_out, "ECS", pgn::ECS());
+		pgn::SerializeOut(doc_out, "ECS", ecs);
 		doc_out.save_file(fname_out);
 	}
 

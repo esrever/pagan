@@ -17,7 +17,7 @@ int main(int argc, char ** argv)
 	//pgn::mainapp()->Resources<pgn::cTextureLib>("")->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tilemap.png","");
 	pgn::mainapp()->Resources<pgn::cTextureLib>("")->Load("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\data\\tiledesc.xml", "");
 
-	auto& ecs = *mainecs();
+	auto& ecs = *pgn::mainecs();
 	pgn::rl::RegisterComponents(ecs);
 	pugi::xml_document doc_in2;
 	auto res = doc_in2.load_file("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\ecs\\data\\example_in.xml");
@@ -26,10 +26,10 @@ int main(int argc, char ** argv)
 	else
 	{
 		doc_in2.print(std::cout);
-		pgn::SerializeIn(doc_in2, *mainecs());
+		pgn::SerializeIn(doc_in2, *pgn::mainecs());
 
 		pugi::xml_document doc_out;
-		pgn::SerializeOut(doc_out, "ECS", *mainecs());
+		pgn::SerializeOut(doc_out, "ECS", *pgn::mainecs());
 		doc_out.save_file("C:\\Users\\Babis\\Documents\\GitHub\\pagan\\src\\lib\\ecs\\data\\example_out.xml");
 	}
 

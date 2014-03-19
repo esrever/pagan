@@ -24,8 +24,8 @@ namespace pgn
 			auto me = *bb.mDictTemp.Get<ecs::cEntityWithData>("me");
 			auto tgt = *bb.mDictTemp.Get<ecs::cEntityWithData>("target");
 			// TODO: request difi of target later.
-			pgn::rl::cmp::cLocation * me_loc = me->second.Component<pgn::rl::cmp::cLocation>();
-			pgn::rl::cmp::cLocation * tgt_loc = tgt->second.Component<pgn::rl::cmp::cLocation>();
+			pgn::ecs::cmp::cLocation * me_loc = me->second.Component<pgn::ecs::cmp::cLocation>();
+			pgn::ecs::cmp::cLocation * tgt_loc = tgt->second.Component<pgn::ecs::cmp::cLocation>();
 
 
 			// make the distance function

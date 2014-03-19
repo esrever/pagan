@@ -2,7 +2,7 @@
 #include "AsciiSet.h"
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             //----------------------------------------------------------------------------------------------
             size_t cAsciiSet::SerializeIn(const node_type& reader)

@@ -8,8 +8,8 @@
 #include "components.h"
 
 namespace pgn {
-    namespace rl {
-        void RegisterComponents(cECS& ecs)
+    namespace ecs {
+        void RegisterComponents(ecs::cECS& ecs)
         {
             ecs.RegisterComponent<cmp::cMoveCost>();
             ecs.RegisterComponent<cmp::cTextureSet>();

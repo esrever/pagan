@@ -103,7 +103,7 @@ namespace pgn
 			else if (mActivate)
 			{
 				mActivate = false;
-				E::mSig -= mId;
+				E::Sig() -= mId;
 			}
 			else // ( zOk)
 			{

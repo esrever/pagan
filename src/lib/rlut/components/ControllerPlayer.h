@@ -1,22 +1,23 @@
 #pragma once
 #include <cstdint>
 #include <ecs/ecs-config.h>
-
+#include <map>
+#include <ecs/ecs.h>
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             
             struct cControllerPlayer
             {
-                cControllerPlayer(const int& arg0 = int()):
+                cControllerPlayer(const std::map<std::string, ecs::cActionFunc>& arg0 = std::map<std::string, ecs::cActionFunc>()):
                         mBindings(arg0){}
                 
                 size_t SerializeIn(const node_type&);
                 void SerializeOut(node_type&) const;
                 
                 //!Action key-bindings for player-controlled actors
-                int mBindings;
+                std::map<std::string, ecs::cActionFunc> mBindings;
                 
             };
         

@@ -5,7 +5,7 @@
 #include <string>
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             
             struct cAsciiSet

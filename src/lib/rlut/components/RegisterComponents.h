@@ -3,9 +3,9 @@
 
 namespace pgn
 {
-	namespace ecs { class cECS; }
-    namespace rl
+    class cECS;
+    namespace ecs
     {    
-        void RegisterComponents(ecs::cECS&);
+        void RegisterComponents(cECS&);
     }
 }

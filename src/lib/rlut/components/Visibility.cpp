@@ -2,7 +2,7 @@
 #include "Visibility.h"
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             //----------------------------------------------------------------------------------------------
             size_t cVisibility::SerializeIn(const node_type& reader)

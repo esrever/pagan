@@ -2,7 +2,7 @@
 #include "Stats.h"
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             //----------------------------------------------------------------------------------------------
             size_t cStats::SerializeIn(const node_type& reader)

@@ -4,7 +4,7 @@
 
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             enum class eDoorState : std::int8_t {
                 Open = 0,

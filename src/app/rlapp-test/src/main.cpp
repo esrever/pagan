@@ -50,37 +50,42 @@ struct cTestApp : public pgn::rlut::cRlApp
 		const char * fname_in = PROJECT_ROOT "data\\ecs.xml";
 		const char * fname_out = PROJECT_ROOT "data\\ecs_out.xml";
 
+		auto& ecs = *pgn::mainecs();
+
 		pugi::xml_document doc_in2;
 		if (pgn::LoadXML(doc_in2, fname_in, std::cout))
 		{
 			doc_in2.print(std::cout);
-			SerializeIn(doc_in2, pgn::ECS());
+			pgn::SerializeIn(doc_in2, ecs);
 
 			pugi::xml_document doc_out;
-			SerializeOut(doc_out, "ECS", pgn::ECS());
+			pgn::SerializeOut(doc_out, "ECS", ecs);
 			doc_out.save_file(fname_out);
 		}
 
 		auto lvl0 = *pgn::mainecs()->TagsToEntities("TestLevel")->second.begin();
-		pgn::evt::cCreateLevel::Run(lvl0);
+		//pgn::evt::cCreateLevel::Run(lvl0);
+		// TODO: 
+		//ecs.System<pgn::sys::cCreateLevel>()->Execute(lvl0);
 
 		// ---- HERO STUFF 
 		auto hero = pgn::mainecs()->TagusToEntities("Player");
-		auto hero_loc = hero->second->second.Component<pgn::rl::cmp::cLocation>();
+		auto hero_loc = hero->second->second.Component<pgn::ecs::cmp::cLocation>();
 		// Create the component if it doesnt exist. 
 		if (!hero_loc)
 		{
-			hero->second->second.AddComponent(pgn::cComponent<pgn::rl::cmp::cLocation>::Create());
-			hero_loc = hero->second->second.Component<pgn::rl::cmp::cLocation>();
+			hero->second->second.AddComponent(pgn::ecs::cComponent<pgn::ecs::cmp::cLocation>::Create());
+			hero_loc = hero->second->second.Component<pgn::ecs::cmp::cLocation>();
 		}
 
 		// make hero appear in first level in world
-		auto world = pgn::mainecs()->TagusToEntities("World")->second->second.Component<pgn::rl::cmp::cWorldData>();
-		auto lvl = world->mLevelMap.begin()->second->second.Component<pgn::rl::cmp::cLevelData>();
+		auto world = pgn::mainecs()->TagusToEntities("World")->second->second.Component<pgn::ecs::cmp::cWorldData>();
+		auto lvl = world->mLevelMap.begin()->second->second.Component<pgn::ecs::cmp::cLevelData>();
 		hero_loc->mPos = lvl->mLayout.Entry();
-		hero_loc->mLevelId = lvl->mId;
+		hero_loc->mLevelId = world->mLevelMap.begin()->second->first;
 		auto& hero_pos = hero_loc->mPos;
-		pgn::evt::cPlayerAppear::Run(*hero_loc);
+		// pgn::evt::cPlayerAppear::Run(*hero_loc);
+		// TODO: emit LocationChanged!
 	}
 
 	//------------------------------------------------
@@ -93,10 +98,10 @@ struct cTestApp : public pgn::rlut::cRlApp
 		auto lvl = pgn::mainecs()->TagusToEntities("CurrentLevel");
 
 		// get hero loc and level data
-		auto& hero_pos = hero->second->second.Component<pgn::rl::cmp::cLocation>()->mPos;
-		auto hero_vis = hero->second->second.Component<pgn::rl::cmp::cVisibility>();
-		auto& lvl_layout = lvl->second->second.Component<pgn::rl::cmp::cLevelData>()->mLayout;
-		auto lvl_id = lvl->second->second.Component<pgn::rl::cmp::cLevelData>()->mId;
+		auto& hero_pos = hero->second->second.Component<pgn::ecs::cmp::cLocation>()->mPos;
+		auto hero_vis = hero->second->second.Component<pgn::ecs::cmp::cVisibility>();
+		auto& lvl_layout = lvl->second->second.Component<pgn::ecs::cmp::cLevelData>()->mLayout;
+		auto lvl_id = lvl->second->first;
 
 		// get the renderrect
 		auto view_size = glm::ivec2(mGridDims.x, mGridDims.y);
@@ -135,7 +140,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 					
 				auto x = idx.x - view_start.x;
 				auto y = idx.y - view_start.y;
-				const auto& bg_tex_set = ed.Component<pgn::rl::cmp::cTextureSet>();
+				const auto& bg_tex_set = ed.Component<pgn::ecs::cmp::cTextureSet>();
 				pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
 				int v = get_fow(x,y);
 				SDL_Rect rect = { x * mTileDim, (mGridDims.y-1-y) * mTileDim, mTileDim, mTileDim };
@@ -143,16 +148,16 @@ struct cTestApp : public pgn::rlut::cRlApp
 			}
 		};
 
-		auto render_impl_func = [&](size_t x, size_t y, const pgn::cEntityData& ed)
+		auto render_impl_func = [&](size_t x, size_t y, const pgn::ecs::cEntityData& ed)
 		{
-			const auto& bg_tex_set = ed.Component<pgn::rl::cmp::cTextureSet>();
+			const auto& bg_tex_set = ed.Component<pgn::ecs::cmp::cTextureSet>();
 			pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
 			int v = get_fow(x, y);
 			SDL_Rect rect = { x * mTileDim, (mGridDims.y - 1 - y) * mTileDim, mTileDim, mTileDim };
 			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 		};
 
-		auto render_func_dense = [&](size_t x, size_t y, const pgn::cECS::cArchetypeWithDataConst& ed) { render_impl_func(x, y, ed->second); };
+		auto render_func_dense = [&](size_t x, size_t y, const pgn::ecs::cArchetypeWithDataConst& ed) { render_impl_func(x, y, ed->second); };
 
 		auto bg_view = lvl_bg.CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
 		bg_view.VisitRext(render_func_dense);
@@ -166,7 +171,7 @@ struct cTestApp : public pgn::rlut::cRlApp
 			{
 				auto x = kv.second.x - view_start.x;
 				auto y = kv.second.y - view_start.y;
-				const auto& bg_tex_set = kv.first->second.Component<pgn::rl::cmp::cTextureSet>();
+				const auto& bg_tex_set = kv.first->second.Component<pgn::ecs::cmp::cTextureSet>();
 				pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
 				int v = get_fow(x, y);
 				SDL_Rect rect = { x * mTileDim, (mGridDims.y - 1 - y) * mTileDim, mTileDim, mTileDim };
@@ -237,7 +242,7 @@ int main(int argc, char ** argv)
 {
 	std::cout << PROJECT_ROOT << std::endl;
 	pgn::mainapp() = new cTestApp(argc, argv);
-	pgn::mainecs() = new pgn::cECS();
+	pgn::mainecs() = new pgn::ecs::cECS();
 
 	pgn::mainapp()->Run();
 

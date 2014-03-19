@@ -5,7 +5,7 @@ int main(int argc, char ** argv)
 {
 	pgn::cSDLApp*& app = pgn::mainapp();
 	app = new pgn::rlut::cRlApp(argc, argv);
-	pgn::mainecs() = new pgn::cECS();
+	pgn::mainecs() = new pgn::ecs::cECS();
 	app->Init();
 
 	pgn::bt::cBehaviorTree btree;

@@ -7,7 +7,7 @@
 #include <core/container/Array2D.h>
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             
             struct cVisibility

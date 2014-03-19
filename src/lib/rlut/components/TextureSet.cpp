@@ -2,7 +2,7 @@
 #include "TextureSet.h"
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             //----------------------------------------------------------------------------------------------
             size_t cTextureSet::SerializeIn(const node_type& reader)

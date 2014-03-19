@@ -21,12 +21,12 @@ namespace pgn
 				const auto& vf = value.FgEntities()(j, i);
 				if (&vf != &value.FgEntities().View().Storage().GetDefault())
 				{
-					const auto& syms = vf->second.Component<rl::cmp::cAsciiSet>()->mSymbols;
+					const auto& syms = vf->second.Component<ecs::cmp::cAsciiSet>()->mSymbols;
 					s.append(syms.empty() ? "?" : syms.front());
 				}
 				else
 				{
-					const auto& syms = v->second.Component<rl::cmp::cAsciiSet>()->mSymbols;
+					const auto& syms = v->second.Component<ecs::cmp::cAsciiSet>()->mSymbols;
 					s.append(syms.empty() ? "?" : syms.front());
 				}
 			}
@@ -93,20 +93,20 @@ namespace pgn
 
 			// Init obstacles
 			mObstacles.Resize(BgEntities().Width(), BgEntities().Height());
-			BgEntities().View().VisitRext([&](size_t x, size_t y, const ecs::cArchetypeWithDataConst& ed){ mObstacles(x, y) = ed->second.Component<rl::cmp::cMoveCost>()->mMoveCost == std::numeric_limits<float>::max(); });
+			BgEntities().View().VisitRext([&](size_t x, size_t y, const ecs::cArchetypeWithDataConst& ed){ mObstacles(x, y) = ed->second.Component<ecs::cmp::cMoveCost>()->mMoveCost == std::numeric_limits<float>::max(); });
 		}
 
 		//-------------------------------------------------------------------------------
 		void cLayout::SetActor(ecs::cEntityWithDataConst ed)
 		{
-			auto loc = ed->second.Component<cmp::cLocation>();
+			auto loc = ed->second.Component<ecs::cmp::cLocation>();
 			mActors[ed] = loc->mPos;
 		}
 
 		//-------------------------------------------------------------------------------
 		void cLayout::RemoveActor(ecs::cEntityWithDataConst ed)
 		{
-			auto loc = ed->second.Component<cmp::cLocation>();
+			auto loc = ed->second.Component<ecs::cmp::cLocation>();
 			mActors.erase(ed);
 		}
 

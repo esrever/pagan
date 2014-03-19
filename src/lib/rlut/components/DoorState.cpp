@@ -2,7 +2,7 @@
 #include "DoorState.h"
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             //----------------------------------------------------------------------------------------------
             size_t cDoorState::SerializeIn(const node_type& reader)

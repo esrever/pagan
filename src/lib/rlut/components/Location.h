@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             
             struct cLocation

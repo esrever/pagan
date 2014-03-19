@@ -4,7 +4,7 @@
 
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             enum class eDoorState : std::int8_t {
                 Open = 0,
@@ -27,5 +27,5 @@ namespace pgn{
         
         }
     }
-    DECL_SERIALIZE_INTERFACE( rl::cmp::eDoorState )
+    DECL_SERIALIZE_INTERFACE( ecs::cmp::eDoorState )
 }

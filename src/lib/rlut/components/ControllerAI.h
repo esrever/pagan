@@ -4,7 +4,7 @@
 #include <rlut/ai/btree.h>
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             
             struct cControllerAI

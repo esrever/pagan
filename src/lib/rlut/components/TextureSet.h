@@ -5,7 +5,7 @@
 #include <core/texture/texture.h>
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             
             struct cTextureSet

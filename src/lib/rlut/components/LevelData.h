@@ -4,24 +4,19 @@
 #include <rlut/tile/layout.h>
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             
             struct cLevelData
             {
-                cLevelData(const int& arg0 = int(-1),
-                    const cLayout& arg1 = cLayout()):
-                        mId(arg0),
-                        mLayout(arg1){}
+                cLevelData(const rl::cLayout& arg0 = rl::cLayout()):
+                        mLayout(arg0){}
                 
                 size_t SerializeIn(const node_type&);
                 void SerializeOut(node_type&) const;
                 
-                //!Level ID
-                int mId;
-                
                 //!Level layout
-                cLayout mLayout;
+                rl::cLayout mLayout;
                 
             };
         

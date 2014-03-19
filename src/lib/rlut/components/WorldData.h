@@ -5,7 +5,7 @@
 #include <ecs/ecs.h>
 
 namespace pgn{
-    namespace rl{
+    namespace ecs{
         namespace cmp{
             
             struct cWorldData

@@ -8,15 +8,14 @@
 #include "components.h"
 
 namespace pgn {
-    namespace rl {
-        void RegisterComponents(ecs::cECS& ecs)
+    namespace ecs {
+        void RegisterComponents(cECS& ecs)
         {
             ecs.RegisterComponent<cmp::cLocation>();
             ecs.RegisterComponent<cmp::cStats>();
             ecs.RegisterComponent<cmp::cMoveCost>();
             ecs.RegisterComponent<cmp::cTextureSet>();
             ecs.RegisterComponent<cmp::cLevelData>();
-            ecs.RegisterComponent<cmp::cActionMap>();
             ecs.RegisterComponent<cmp::cVisibility>();
             ecs.RegisterComponent<cmp::cDoorState>();
             ecs.RegisterComponent<cmp::cAsciiSet>();
