@@ -25,19 +25,6 @@ namespace pgn
 	}
 
 	template<>
-	bool evt::cPlayerMoveAdj::Run(const glm::ivec2& dir)
-	{
-		auto ped = mainecs()->TagusToEntities("Player")->second;
-		if (evt::cMoveAdj::Run(ped, dir))
-		{
-			mainapp()->GameLog().Inf(pgn::format("%s moves %s", ped->second.mName.c_str(), dirstrings_long[dir.x+1+3*(dir.y+1)]));
-			return evt::cCalculateVisibility::Run(ped);
-		}
-		else
-			return false;
-	}
-
-	template<>
 	bool evt::cPlayerAppear::Run(const rl::cmp::cLocation& pos)
 	{
 		auto world = mainecs()->TagusToEntities("World")->second->second.Component<rl::cmp::cWorldData>();
@@ -54,30 +41,6 @@ namespace pgn
 	}
 
 	template<>
-	bool evt::cMoveAdj::Run(ecs::cEntityWithData ed, const glm::ivec2& dir)
-	{
-		// get some components
-		auto loc = ed->second.Component<rl::cmp::cLocation>();
-		auto world = mainecs()->TagusToEntities("World")->second->second.Component<rl::cmp::cWorldData>();
-		auto lvl = world->mLevelMap[loc->mLevelId]->second.Component<rl::cmp::cLevelData>();
-		
-		// calc new position
-		auto newpos = loc->mPos + dir;
-
-		// Map checks with obstacle map!
-		if (!lvl->mLayout.BgEntities().InRange(newpos))
-			return false;
-		if (!lvl->mLayout.Obstacles()(newpos))
-		{
-			// no collisions; set new position and update map
-			loc->mPos = newpos;
-			lvl->mLayout.SetActor(ed);
-			return true;
-		}
-		return false;
-	}
-
-	template<>
 	bool evt::cAppear::Run(ecs::cEntityWithData ed, const rl::cmp::cLocation& pos)
 	{
 		// set location
@@ -88,32 +51,6 @@ namespace pgn
 		auto world = mainecs()->TagusToEntities("World")->second->second.Component<rl::cmp::cWorldData>();
 		auto lvl = world->mLevelMap[loc->mLevelId]->second.Component<rl::cmp::cLevelData>();
 		lvl->mLayout.SetActor(ed);
-		return true;
-	}
-
-	template<>
-	bool evt::cCalculateVisibility::Run(ecs::cEntityWithData ed)
-	{
-		auto vis = ed->second.Component<rl::cmp::cVisibility>();
-		auto loc = ed->second.Component<rl::cmp::cLocation>();
-		vis->mVisible.clear();
-		auto& curexpl = vis->mExplored[loc->mLevelId];
-		auto& curvis = vis->mVisible[loc->mLevelId];
-
-		static rlut::cFovLookup<rlut::cFovRsc> fovlut = rlut::cFovLookup<rlut::cFovRsc>();
-
-
-		auto world = mainecs()->TagusToEntities("World")->second->second.Component<rl::cmp::cWorldData>();
-		auto lvl = world->mLevelMap[loc->mLevelId]->second.Component<rl::cmp::cLevelData>();
-
-		// prepare the fov output data
-		curexpl.Resize(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height(), false);
-		curvis.Resize(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height(), false);
-		auto onvis = [&](const glm::ivec2& pt, float b) {curexpl(pt) = true; curvis(pt) = true; vis->mVisibleSet.insert(pt); };
-
-		// TODO: this is a parameter of... ? probably here in visibility
-		fovlut.Get(4).Calc(loc->mPos,lvl->mLayout.Obstacles(),onvis);
-
 		return true;
 	}
 

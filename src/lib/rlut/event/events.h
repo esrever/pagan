@@ -14,7 +14,7 @@ namespace pgn
 
 	namespace evt
 	{
-		DECL_EVT1(MoveAdj, ecs::cEntityWithData);
+		DECL_EVT1(LocationChanged, ecs::cEntityWithData);
 		/*
 		DECL_EVT1(Appear, ecs::cEntityWithData)
 		DECL_EVT1(Disappear, ecs::cEntityWithData)
