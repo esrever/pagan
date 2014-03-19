@@ -20,20 +20,33 @@ namespace pgn
 					return false;
 				if (tgtlvl->mLayout.Obstacles()(loc.mPos))
 					return false;
+				
+				// Success!
+				
+				// remove from old level
+				auto it_srclvl = world->mLevelMap.find(edloc->mLevelId);
+				if (it_srclvl != world->mLevelMap.end())
+				{
+					auto srclvl = it_srclvl->second->second.Component<cmp::cLevelData>();
+					srclvl->mLayout.RemoveActor(ed);
+				}
 
-				// success!
-				// TODO: remove from old level
-				//auto srclvl = world->mLevelMap[edloc->mLevelId]->second.Component<cmp::cLevelData>();
-				//srclvl->mLayout.RemoveActor(ed);
-
+				// Set current level if applicable
 				if (ed == mainecs()->TagusToEntities("Player")->second)
 				{
 					if (edloc->mLevelId != loc.mLevelId)
 						mainecs()->Tagu("CurrentLevel", world->mLevelMap[loc.mLevelId]);
 				}
+
+				// set the location
 				*edloc = loc;
+				
+				// update layout
 				tgtlvl->mLayout.SetActor(ed);
+
+				// emit event
 				evt::cLocationChanged::Sig().emit(ed);
+
 				return true;
 			}
 		}
