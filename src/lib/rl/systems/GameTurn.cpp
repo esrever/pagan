@@ -41,7 +41,7 @@ namespace pgn
 			}
 
 			//-------------------------------------------------------------------------
-			void cGameTurn::OnComponentAdded(ecs::cEntityWithData ed, int id)
+			void cGameTurn::OnComponentAdded(ecs::cEntityWithData ed, unsigned short id)
 			{
 				if ( (id == cComponent<cmp::cControllerAI>::StaticTypeIndex()) ||
 					(id == cComponent<cmp::cControllerPlayer>::StaticTypeIndex()))

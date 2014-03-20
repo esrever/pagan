@@ -19,7 +19,7 @@ namespace pgn
 					cGameTurn();
 					void OnEntityCreated(ecs::cEntityWithData ed);
 					void OnEntityDestroy(ecs::cEntityWithData ed);
-					void OnComponentAdded(ecs::cEntityWithData ed, int);
+					void OnComponentAdded(ecs::cEntityWithData ed, unsigned short);
 					void OnPlayerAction();
 
 					bool operator()();
