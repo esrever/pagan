@@ -64,6 +64,8 @@ namespace pgn
 			void Untagu(const std::string&, cEntityWithData);
 
 			cEntityWithData InstantiateArchetype(const cEntityData& arch);
+			template<class T>
+			T * InstantiateComponent(cEntityWithData& ed);
 
 			template<class T>
 			void RegisterComponent();
@@ -125,6 +127,15 @@ namespace pgn
 			auto idx = AddComponentType(ti);
 			cComponent<typename T>::msTypeIndex = idx;
 			mComponentCreators[cComponent<typename T>::msTypeIndex] = &cComponent<typename T>::Create;
+		}
+
+		template<class T>
+		T * cECS::InstantiateComponent(cEntityWithData& ed)
+		{
+			auto ptr = cComponent<T>::Create();
+			ed->second.AddComponent(ptr);
+			evt::cComponentAdded::Sig().emit(ed, cComponent<T>::StaticTypeIndex());
+			return std::dynamic_pointer_cast<T>(ptr).get();
 		}
 	}
 

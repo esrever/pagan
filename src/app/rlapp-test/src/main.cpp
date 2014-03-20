@@ -75,13 +75,8 @@ struct cTestApp : public pgn::rl::cRlApp
 		// set hero as the current player
 		pgn::mainecs()->System<pgn::ecs::sys::cGameTurn>().SetCurrent(hero->second);
 
-		// Create the component if it doesnt exist. 
-		auto hero_loc = hero->second->second.Component<pgn::ecs::cmp::cLocation>();
-		if (!hero_loc)
-		{
-			hero->second->second.AddComponent(pgn::ecs::cComponent<pgn::ecs::cmp::cLocation>::Create());
-			hero_loc = hero->second->second.Component<pgn::ecs::cmp::cLocation>();
-		}
+		// Create the component -- overwrite it if necessary
+		auto hero_loc = ecs.InstantiateComponent<pgn::ecs::cmp::cLocation>(hero->second);
 
 		// make hero appear in first level in world
 		auto world = pgn::mainecs()->TagusToEntities("World")->second->second.Component<pgn::ecs::cmp::cWorldData>();
@@ -110,17 +105,14 @@ struct cTestApp : public pgn::rl::cRlApp
 		while (ratCreated < ratNum)
 		{
 			ratloc.mPos = free_pos[ratCreated];
+			// Instantiate archetype
 			auto ed = pgn::mainecs()->InstantiateArchetype(rat_arch->second);
 			// InstantiateComponent ControllerAI and cLocation
-			ed->second.AddComponent(pgn::ecs::cComponent<pgn::ecs::cmp::cControllerAI>::Create());
-			pgn::evt::cComponentAdded::Sig().emit(ed, pgn::ecs::cComponent<pgn::ecs::cmp::cControllerAI>::StaticTypeIndex());
-			ed->second.AddComponent( pgn::ecs::cComponent<pgn::ecs::cmp::cLocation>::Create());
-			pgn::evt::cComponentAdded::Sig().emit(ed, pgn::ecs::cComponent<pgn::ecs::cmp::cLocation>::StaticTypeIndex());
+			ecs.InstantiateComponent<pgn::ecs::cmp::cControllerAI>(ed);
+			ecs.InstantiateComponent<pgn::ecs::cmp::cLocation>(ed);
 			ecs.System<pgn::ecs::sys::cTeleport>()(ed, ratloc);
 			++ratCreated;
 		}
-
-		
 	}
 
 	//------------------------------------------------
