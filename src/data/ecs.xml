@@ -81,6 +81,21 @@
     </Components>
   </Entity>
   
+  <Entity name ="Rat" is_archetype="true">
+    <Components>
+      <TextureSet>
+        <Sprites>
+          <array_elem value="::monsters:animals:grey_rat"/>
+        </Sprites>
+      </TextureSet>
+      <AsciiSet>
+        <Symbols>
+          <array_elem value="r"/>
+        </Symbols>
+      </AsciiSet>
+    </Components>
+  </Entity>
+  
   <Entity name ="Hero" is_archetype="false">
     <Components>
       <TextureSet>

@@ -21,6 +21,7 @@ namespace pgn
 				// calc new position
 				auto newpos = loc->mPos + dir;
 
+				// TODO: use movecosts!
 				// Map checks with obstacle map!
 				if (!lvl->mLayout.BgEntities().InRange(newpos))
 					return false;

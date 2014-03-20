@@ -15,6 +15,7 @@ namespace pgn
 				auto edloc = ed->second.Component<cmp::cLocation>();
 				auto tgtlvl = world->mLevelMap[loc.mLevelId]->second.Component<cmp::cLevelData>();
 
+				// TODO: use movecosts!
 				// Map checks with obstacle map!
 				if (!tgtlvl->mLayout.BgEntities().InRange(loc.mPos))
 					return false;

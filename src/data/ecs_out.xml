@@ -1762,6 +1762,25 @@
 			<Tags />
 			<Tagus />
 		</value>
+		<key value="Rat" />
+		<value name="Rat">
+			<Components>
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::monsters:animals:grey_rat" />
+					</Sprites>
+				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="r" />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
 		<key value="WallTile_def" />
 		<value name="WallTile_def">
 			<Components>

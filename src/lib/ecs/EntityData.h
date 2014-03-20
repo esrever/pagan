@@ -40,6 +40,8 @@ namespace pgn
 		template<class T>
 		T * cEntityData::Component() const
 		{
+			if (cComponent<T>::StaticTypeIndex() >= mComponents.size())
+				return nullptr;
 			auto ptr = std::dynamic_pointer_cast<cComponent<T>>(mComponents[cComponent<T>::StaticTypeIndex()]);
 			if (ptr)
 				return &ptr->mData;

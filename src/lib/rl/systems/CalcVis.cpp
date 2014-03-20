@@ -14,10 +14,12 @@ namespace pgn
 			cCalcVis::cCalcVis() :INIT_EVT_MEMBER(cCalcVis, LocationChanged){}
 
 			//-------------------------------------------------------------------------
-			void cCalcVis::OnLocationChanged(const ecs::cEntityWithData& evt)
+			void cCalcVis::OnLocationChanged(const ecs::cEntityWithData& ed)
 			{
 				if (!Active()) return;
-				(*this)(const_cast<ecs::cEntityWithData&>(evt));
+				// TODO: more formal
+				if (!ed->second.Component<cmp::cVisibility>()) return;
+				(*this)(const_cast<ecs::cEntityWithData&>(ed));
 			}
 
 			//-------------------------------------------------------------------------

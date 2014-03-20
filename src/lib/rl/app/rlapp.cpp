@@ -15,6 +15,7 @@
 #include <ecs/systems/InputKey.h>
 #include <rl/systems/CalcVis.h>
 #include <rl/systems/CreateLevel.h>
+#include <rl/systems/GameTurn.h>
 
 namespace pgn
 {
@@ -35,6 +36,7 @@ namespace pgn
 			pgn::mainecs()->System<ecs::sys::cInputKey>();
 			pgn::mainecs()->System<ecs::sys::cCalcVis>();
 			pgn::mainecs()->System<ecs::sys::cCreateLevel>();
+			pgn::mainecs()->System<pgn::ecs::sys::cGameTurn>();
 
 			static const glm::uvec2 gridDims(40, 20);
 			static const size_t  numLines = 4;

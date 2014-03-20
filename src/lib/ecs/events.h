@@ -1,5 +1,6 @@
 #pragma once
 
+#include <core/event/Event.h>
 #include <ecs/ecs.h>
 
 namespace pgn

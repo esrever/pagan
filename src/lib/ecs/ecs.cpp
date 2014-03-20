@@ -1,5 +1,6 @@
 #include "ecs.h"
 #include "EntityData.h"
+#include "events.h"
 
 #include <pystring.h>
 
@@ -21,14 +22,15 @@ namespace pgn
 				mTagsToEntities[tag].insert(it.first);
 			for (const auto& tag : ed.mTagus)
 				mTagusToEntities[tag] = it.first;
-			// TODO: emit event
+			evt::cEntityCreated::Sig().emit(it.first);
 			return it.first;
 		}
 
 		//---------------------------------------------------------------------------------------------------
 		void cECS::Destroy(cEntityWithData ed)
 		{
-			// TODO: emit event
+			evt::cEntityDestroy::Sig().emit(ed);
+
 			// erase from unique tags
 			auto itu = std::find_if(mTagusToEntities.begin(), mTagusToEntities.end(), [&](const std::pair<std::string, cEntityWithData>& e){return e.second->first == ed->first; });
 			if (itu != mTagusToEntities.end())

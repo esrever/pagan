@@ -34,6 +34,7 @@
 #include <core/util/string.h>
 
 #include <rl/systems/Teleport.h>
+#include <rl/systems/GameTurn.h>
 
 struct cTestApp : public pgn::rl::cRlApp
 {
@@ -83,6 +84,31 @@ struct cTestApp : public pgn::rl::cRlApp
 		auto lvl = world->mLevelMap.begin()->second->second.Component<pgn::ecs::cmp::cLevelData>();
 		pgn::ecs::cmp::cLocation newloc(lvl->mLayout.Entry(), world->mLevelMap.begin()->second->first);
 		ecs.System<pgn::ecs::sys::cTeleport>()(hero->second, newloc);
+
+		// ---- MONSTER STUFF 
+
+		// Find free positions
+		// TODO: use movecosts!
+		std::vector<glm::ivec2> free_pos;
+		lvl->mLayout.Obstacles().View().VisitRext([&](size_t x, size_t y, bool v){ 
+			glm::ivec2 p(x, y);
+			if ((!v) && (p != lvl->mLayout.Entry()))
+				free_pos.push_back(p);
+		;});
+		std::random_shuffle(free_pos.begin(), free_pos.end());
+
+		auto rat_arch = pgn::mainecs()->Archetypes("Rat");
+		int ratNum = std::min(100, int(free_pos.size()));
+		int ratCreated = 0;
+		pgn::ecs::cmp::cLocation ratloc(glm::ivec2(0,0), world->mLevelMap.begin()->second->first);
+		while (ratCreated < ratNum)
+		{
+			ratloc.mPos = free_pos[ratCreated];
+			auto ed = pgn::mainecs()->InstantiateArchetype(rat_arch->second);
+			ed->second.AddComponent( pgn::ecs::cComponent<pgn::ecs::cmp::cLocation>::Create());
+			ecs.System<pgn::ecs::sys::cTeleport>()(ed, ratloc);
+			++ratCreated;
+		}
 	}
 
 	//------------------------------------------------
@@ -198,7 +224,7 @@ struct cTestApp : public pgn::rl::cRlApp
 	//------------------------------------------------
 	virtual bool Update()
 	{
-
+		pgn::mainecs()->System<pgn::ecs::sys::cGameTurn>()();
 		return true;
 	}
 	//------------------------------------------------
