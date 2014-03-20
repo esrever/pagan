@@ -323,6 +323,51 @@ namespace pgn
 			*/
 		}
 
+		void cWorkspace::generate_dungeon_from_mask(size_t numRooms, const cArray2D<bool>& mask)
+		{
+			Init(mask.Width(), mask.Height());
+
+
+			mMapData.View().VisitWext([&](size_t x, size_t y, int& v){ v |= (mask(x, y) ? eMapData::blocked : 0); });
+
+			// Create the rooms first
+			static const int max_consecutive_failures = 100;
+			int failed = 0;
+			size_t created_rooms = 0;
+			while ((created_rooms < numRooms) && (failed < max_consecutive_failures))
+			{
+				auto room_ptr = cRoom::create(*this);
+				if (room_ptr)
+				{
+					room_ptr->Init();
+					room_ptr->mMaxConns = randu(mConstraints.mDoorsPerRoom);
+					++created_rooms;
+					failed = 0;
+				}
+				else
+					failed++;
+			}
+
+			//mMapData.View().VisitWext([&](size_t x, size_t y, int& v){ v -= (mask(x, y) ? eMapData::blocked : 0); });
+
+			//---------------------------------------------
+			// main loop
+			for (size_t i = 0; i < mAreas.size(); ++i)
+			{
+				auto area_ptr = mAreas[i];
+				if (!area_ptr->mIsRoom) continue; //! # TODO: control if we want subcorridors!
+				size_t iConnSlot = 0;
+				for (iConnSlot = 0; iConnSlot < area_ptr->mAvailConnectionSlots.size(); ++iConnSlot)
+				{
+					if (area_ptr->mConnections.size() >= area_ptr->mMaxConns)
+						break;
+					if (cArea::add_connection(area_ptr, iConnSlot))
+						iConnSlot = 0;
+				}
+			}
+			connect_islands2();
+		}
+
 
 		typedef std::tuple<cAreaPtr, cAreaPtr, size_t> aad_t;
 

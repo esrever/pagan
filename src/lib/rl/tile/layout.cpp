@@ -92,8 +92,8 @@ namespace pgn
 			}
 
 			// Init obstacles
-			mObstacles.Resize(BgEntities().Width(), BgEntities().Height());
-			BgEntities().View().VisitRext([&](size_t x, size_t y, const ecs::cArchetypeWithDataConst& ed){ mObstacles(x, y) = ed->second.Component<ecs::cmp::cMoveCost>()->mMoveCost == std::numeric_limits<float>::max(); });
+			UpdateStaticMoveCosts();
+			UpdateObstacles();
 		}
 
 		//-------------------------------------------------------------------------------
@@ -109,6 +109,55 @@ namespace pgn
 			auto loc = ed->second.Component<ecs::cmp::cLocation>();
 			mActors.erase(ed);
 		}
+
+		//-------------------------------------------------------------------------------
+		void cLayout::UpdateStaticMoveCosts()
+		{
+			// TODO: too expensive for opening doors!
+			mStaticMoveCosts.Resize(BgEntities().Width(), BgEntities().Height());
+			BgEntities().View().VisitRext([&](size_t x, size_t y, const ecs::cArchetypeWithDataConst& ed){ mMoveCosts(x, y) = ed->second.Component<ecs::cmp::cMoveCost>()->mMoveCost; });
+			mStaticMoveCosts.View().VisitWext([&](size_t x, size_t y, float& v){ v = std::max(BgEntities()(x, y)->second.Component<ecs::cmp::cMoveCost>()->mMoveCost,
+																					  	      FgEntities()(x, y)->second.Component<ecs::cmp::cMoveCost>()->mMoveCost); });
+		}
+		//-------------------------------------------------------------------------------
+		void cLayout::UpdateMoveCosts()
+		{
+			// TODO: Static + actors! update smartly
+		}
+		//-------------------------------------------------------------------------------
+		void cLayout::UpdateObstacles()
+		{
+			mObstacles.Resize(BgEntities().Width(), BgEntities().Height());
+			BgEntities().View().VisitRext([&](size_t x, size_t y, const ecs::cArchetypeWithDataConst& ed){ mObstacles(x, y) = ed->second.Component<ecs::cmp::cMoveCost>()->mMoveCost == std::numeric_limits<float>::max(); });
+		}
+
+		//-------------------------------------------------------------------------------
+		void cLayout::UpdateLayout(ecs::cEntityWithDataConst ed, ecs::cmp::cLocation * zLocOld, ecs::cmp::cLocation * zLocNew)
+		{
+			// TODO: this looks like a nice event handle, but I don't want all levels to be listening to that stuff.
+			if (!zLocOld)
+				AddTile(ed, *zLocNew);
+			else if (!zLocNew)
+				RemoveTile(ed, *zLocOld);
+			else
+				UpdateTile(ed, *zLocOld, *zLocNew);
+		}
+
+		void cLayout::AddTile(ecs::cEntityWithDataConst ed, const ecs::cmp::cLocation& zLocNew)
+		{
+			// Add an enum for TileType: bg/fg/atmo/actor/ atmofg?
+		}
+
+		void cLayout::RemoveTile(ecs::cEntityWithDataConst ed, const ecs::cmp::cLocation& zLocOld)
+		{
+
+		}
+
+		void cLayout::UpdateTile(ecs::cEntityWithDataConst ed, const ecs::cmp::cLocation& zLocOld, const ecs::cmp::cLocation& zLocNew)
+		{
+			
+		}
+
 
 		//-------------------------------------------------------------------------------
 		glm::ivec2 GetCenteredView(const glm::ivec2& orgDims,

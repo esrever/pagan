@@ -8,6 +8,7 @@
 #include "Visibility.h"
 #include "DoorState.h"
 #include "AsciiSet.h"
+#include "TileType.h"
 #include "WorldData.h"
 #include "ControllerAI.h"
 #include "ControllerPlayer.h"

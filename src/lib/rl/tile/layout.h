@@ -7,6 +7,13 @@
 
 namespace pgn
 {
+	namespace ecs
+	{
+		namespace cmp
+		{
+			struct cLocation;
+		}
+	}
 	namespace rl
 	{
 		struct cWorkspace;
@@ -43,6 +50,19 @@ namespace pgn
 
 				const glm::ivec2& Entry() const { return mEntry; }
 				const glm::ivec2& Exit() const { return mExit; }
+
+				
+				void UpdateLayout(ecs::cEntityWithDataConst ed, ecs::cmp::cLocation * zLocOld, ecs::cmp::cLocation * zLocNew);
+
+			private:
+				void AddTile(ecs::cEntityWithDataConst ed, const ecs::cmp::cLocation& zLocNew);
+				void RemoveTile(ecs::cEntityWithDataConst ed, const ecs::cmp::cLocation& zLocOld);
+				void UpdateTile(ecs::cEntityWithDataConst ed, const ecs::cmp::cLocation& zLocOld, const ecs::cmp::cLocation& zLocNew);
+
+
+				void UpdateStaticMoveCosts();
+				void UpdateMoveCosts();
+				void UpdateObstacles();
 
 			private:
 

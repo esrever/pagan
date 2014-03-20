@@ -44,7 +44,7 @@ namespace pgn
 				*edloc = loc;
 				
 				// update layout
-				tgtlvl->mLayout.SetActor(ed);
+				// tgtlvl->mLayout.SetActor(ed);  TODO: do it via the system
 
 				// emit event
 				evt::cLocationChanged::Sig().emit(ed);

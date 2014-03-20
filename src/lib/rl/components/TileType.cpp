@@ -1,23 +1,21 @@
 
-#include "ControllerAI.h"
+#include "TileType.h"
 
 namespace pgn{
     namespace ecs{
         namespace cmp{
             //----------------------------------------------------------------------------------------------
-            size_t cControllerAI::SerializeIn(const node_type& reader)
+            size_t cTileType::SerializeIn(const node_type& reader)
             {
                 size_t ret = 0;
-				// TODO:
-                //ret += pgn::SerializeIn(reader,  "Btree", mBtree);
-				ret = 1;
+                ret += pgn::SerializeIn(reader,  "Type", (int&)(mType));
                 return ret;
             }
             
             //----------------------------------------------------------------------------------------------
-            void cControllerAI::SerializeOut(node_type& writer) const
+            void cTileType::SerializeOut(node_type& writer) const
             {
-                pgn::SerializeOut(writer,"Btree", mBtree);
+                pgn::SerializeOut(writer,"Type", int(mType));
             }
         }
     }

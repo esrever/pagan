@@ -79,6 +79,7 @@ namespace pgn
 			void clear_perimeter(const cArea& area);
 			bool is_perimeter_corner(const glm::ivec2& v) const;
 			void generate_dungeon(size_t numRooms);
+			void generate_dungeon_from_mask(size_t numRooms, const cArray2D<bool>& mask);
 
 			void calc_area_to_area_distances();
 			void calc_islands();

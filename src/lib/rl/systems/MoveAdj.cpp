@@ -29,7 +29,7 @@ namespace pgn
 				{
 					// no collisions; set new position and update map
 					loc->mPos = newpos;
-					lvl->mLayout.SetActor(ed);
+					// lvl->mLayout.SetActor(ed); TODO: do it via the system
 
 					evt::cLocationChanged::Sig().emit(ed);
 					

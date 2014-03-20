@@ -19,6 +19,7 @@ namespace pgn {
             ecs.RegisterComponent<cmp::cVisibility>();
             ecs.RegisterComponent<cmp::cDoorState>();
             ecs.RegisterComponent<cmp::cAsciiSet>();
+            ecs.RegisterComponent<cmp::cTileType>();
             ecs.RegisterComponent<cmp::cWorldData>();
             ecs.RegisterComponent<cmp::cControllerAI>();
             ecs.RegisterComponent<cmp::cControllerPlayer>();
