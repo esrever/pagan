@@ -32,8 +32,9 @@ namespace pgn
 					srclvl->mLayout.RemoveActor(ed);
 				}
 
+				auto ped = mainecs()->TagusToEntities("Player")->second;
 				// Set current level if applicable
-				if (ed == mainecs()->TagusToEntities("Player")->second)
+				if (ed == ped)
 				{
 					if (edloc->mLevelId != loc.mLevelId)
 						mainecs()->Tagu("CurrentLevel", world->mLevelMap[loc.mLevelId]);
@@ -47,6 +48,10 @@ namespace pgn
 
 				// emit event
 				evt::cLocationChanged::Sig().emit(ed);
+
+				// ... and turn hint
+				if (ed == ped)
+					evt::cPlayerAction::Sig().emit();
 
 				return true;
 			}

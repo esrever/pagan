@@ -35,7 +35,11 @@ namespace pgn
 					
 					// Player-specific log!
 					if (ed == mainecs()->TagusToEntities("Player")->second)
+					{
 						mainapp()->GameLog().Inf(pgn::format("%s moves %s", ed->second.mName.c_str(), dirstrings_long[dir.x + 1 + 3 * (dir.y + 1)]));
+						// ... and turn hint
+						evt::cPlayerAction::Sig().emit();
+					}
 					return true;
 				}
 				return false;

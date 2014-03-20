@@ -71,8 +71,12 @@ struct cTestApp : public pgn::rl::cRlApp
 
 		// ---- HERO STUFF 
 		auto hero = pgn::mainecs()->TagusToEntities("Player");
-		auto hero_loc = hero->second->second.Component<pgn::ecs::cmp::cLocation>();
+		
+		// set hero as the current player
+		pgn::mainecs()->System<pgn::ecs::sys::cGameTurn>().SetCurrent(hero->second);
+
 		// Create the component if it doesnt exist. 
+		auto hero_loc = hero->second->second.Component<pgn::ecs::cmp::cLocation>();
 		if (!hero_loc)
 		{
 			hero->second->second.AddComponent(pgn::ecs::cComponent<pgn::ecs::cmp::cLocation>::Create());
@@ -115,6 +119,8 @@ struct cTestApp : public pgn::rl::cRlApp
 			ecs.System<pgn::ecs::sys::cTeleport>()(ed, ratloc);
 			++ratCreated;
 		}
+
+		
 	}
 
 	//------------------------------------------------
