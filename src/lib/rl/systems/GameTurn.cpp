@@ -13,7 +13,8 @@ namespace pgn
 			//-------------------------------------------------------------------------
 			cGameTurn::cGameTurn() :
 				INIT_EVT_MEMBER(cGameTurn, EntityCreated),
-				INIT_EVT_MEMBER(cGameTurn, EntityDestroy)
+				INIT_EVT_MEMBER(cGameTurn, EntityDestroy),
+				INIT_EVT_MEMBER(cGameTurn, ComponentAdded)
 				{}
 
 			//-------------------------------------------------------------------------
@@ -34,6 +35,14 @@ namespace pgn
 					assert(itf != mActors.end());
 					mActors.erase(itf);
 				}
+			}
+
+			//-------------------------------------------------------------------------
+			void cGameTurn::OnComponentAdded(ecs::cEntityWithData ed, int id)
+			{
+				if ( (id == cComponent<cmp::cControllerAI>::StaticTypeIndex()) ||
+					(id == cComponent<cmp::cControllerPlayer>::StaticTypeIndex()))
+					mActors.push_back(ed);
 			}
 
 			//-------------------------------------------------------------------------

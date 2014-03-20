@@ -19,11 +19,13 @@ namespace pgn
 					cGameTurn();
 					void OnEntityCreated(ecs::cEntityWithData ed);
 					void OnEntityDestroy(ecs::cEntityWithData ed);
+					void OnComponentAdded(ecs::cEntityWithData ed, int);
 
 					bool operator()();
 				private:
 					DECL_EVT_MEMBER(EntityCreated);
 					DECL_EVT_MEMBER(EntityDestroy);
+					DECL_EVT_MEMBER(ComponentAdded);
 
 					std::list<ecs::cEntityWithData> mActors;
 			};

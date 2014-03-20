@@ -93,6 +93,7 @@
           <array_elem value="r"/>
         </Symbols>
       </AsciiSet>
+      <ControllerAI/>
     </Components>
   </Entity>
   

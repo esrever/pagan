@@ -1775,6 +1775,9 @@
 						<vector_elem value="r" />
 					</Symbols>
 				</AsciiSet>
+				<ControllerAI>
+					<Btree value="unserializable: class pgn::bt::cBehaviorTree" />
+				</ControllerAI>
 			</Components>
 			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />

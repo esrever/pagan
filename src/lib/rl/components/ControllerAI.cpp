@@ -8,7 +8,9 @@ namespace pgn{
             size_t cControllerAI::SerializeIn(const node_type& reader)
             {
                 size_t ret = 0;
-                ret += pgn::SerializeIn(reader,  "Btree", mBtree);
+				ret = 1;
+				// TODO: allow
+                //ret += pgn::SerializeIn(reader,  "Btree", mBtree);
                 return ret;
             }
             

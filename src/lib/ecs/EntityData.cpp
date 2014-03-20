@@ -1,6 +1,7 @@
 #include "EntityData.h"
 #include "componentbase.h"
 #include "ecs.h"
+#include "events.h"
 
 #include <core/app/sdlapp.h>
 

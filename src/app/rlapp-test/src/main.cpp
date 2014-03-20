@@ -97,15 +97,21 @@ struct cTestApp : public pgn::rl::cRlApp
 		;});
 		std::random_shuffle(free_pos.begin(), free_pos.end());
 
+		// Get archetype
 		auto rat_arch = pgn::mainecs()->Archetypes("Rat");
 		int ratNum = std::min(100, int(free_pos.size()));
 		int ratCreated = 0;
 		pgn::ecs::cmp::cLocation ratloc(glm::ivec2(0,0), world->mLevelMap.begin()->second->first);
+		// start adding rats
 		while (ratCreated < ratNum)
 		{
 			ratloc.mPos = free_pos[ratCreated];
 			auto ed = pgn::mainecs()->InstantiateArchetype(rat_arch->second);
+			// InstantiateComponent ControllerAI and cLocation
+			ed->second.AddComponent(pgn::ecs::cComponent<pgn::ecs::cmp::cControllerAI>::Create());
+			pgn::evt::cComponentAdded::Sig().emit(ed, pgn::ecs::cComponent<pgn::ecs::cmp::cControllerAI>::StaticTypeIndex());
 			ed->second.AddComponent( pgn::ecs::cComponent<pgn::ecs::cmp::cLocation>::Create());
+			pgn::evt::cComponentAdded::Sig().emit(ed, pgn::ecs::cComponent<pgn::ecs::cmp::cLocation>::StaticTypeIndex());
 			ecs.System<pgn::ecs::sys::cTeleport>()(ed, ratloc);
 			++ratCreated;
 		}

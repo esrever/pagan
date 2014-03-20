@@ -9,5 +9,6 @@ namespace pgn
 	{
 		DECL_EVT1(EntityCreated, ecs::cEntityWithData);
 		DECL_EVT1(EntityDestroy, ecs::cEntityWithData);
+		DECL_EVT2(ComponentAdded, ecs::cEntityWithData, int);
 	}
 }
