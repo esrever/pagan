@@ -5,6 +5,7 @@
 #include <core/event/Event.h>
 #include <ecs/system.h>
 #include <ecs/events.h>
+#include <ecs/componentquery.h>
 #include <rl/event/events.h>
 
 namespace pgn
@@ -17,9 +18,6 @@ namespace pgn
 			{
 				public:
 					cGameTurn();
-					void OnEntityCreated(ecs::cEntityWithData ed);
-					void OnEntityDestroy(ecs::cEntityWithData ed);
-					void OnComponentAdded(ecs::cEntityWithData ed, unsigned short);
 					void OnPlayerAction();
 
 					bool operator()();
@@ -27,11 +25,9 @@ namespace pgn
 				private:
 					void Advance();
 				private:
-					DECL_EVT_MEMBER(EntityCreated);
-					DECL_EVT_MEMBER(EntityDestroy);
-					DECL_EVT_MEMBER(ComponentAdded);
 					DECL_EVT_MEMBER(PlayerAction);
 
+					cComponentQuery mActorQuery;
 					std::list<ecs::cEntityWithData> mActors;
 					std::list<ecs::cEntityWithData>::iterator mCurrent;
 			};

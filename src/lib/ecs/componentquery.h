@@ -11,7 +11,12 @@ namespace pgn
 		class cComponentQuery
 		{
 			public:
-				cComponentQuery();
+				enum class ePolicy
+				{
+					All,
+					Any
+				};
+				cComponentQuery(ePolicy p = ePolicy::All);
 				void OnEntityCreated(ecs::cEntityWithData ed);
 				void OnEntityDestroy(ecs::cEntityWithData ed);
 				void OnComponentAdded(ecs::cEntityWithData ed, unsigned short);
@@ -20,13 +25,21 @@ namespace pgn
 
 				template<class T> 
 				cComponentQuery& Require();
+
+				void SetOnEntityAdded(std::function<void(ecs::cEntityWithData)> f) { mOnEntityAdded = f; }
+				void SetOnEntityRemoved(std::function<void(ecs::cEntityWithData)> f) { mOnEntityRemoved = f; }
+			private:
+				bool Test(ecs::cEntityWithData) const;
 			private:
 				DECL_EVT_MEMBER(EntityCreated);
 				DECL_EVT_MEMBER(EntityDestroy);
 				DECL_EVT_MEMBER(ComponentAdded);
 
+				ePolicy						   mPolicy;
 				std::set<unsigned short>	   mRequiredComponentTypes;
 				std::set<ecs::cEntityWithData> mData;
+				std::function<void(ecs::cEntityWithData)>	mOnEntityAdded;
+				std::function<void(ecs::cEntityWithData)>	mOnEntityRemoved;
 		};
 
 		//--------------------------------------------

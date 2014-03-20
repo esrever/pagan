@@ -14,38 +14,18 @@ namespace pgn
 		{
 			//-------------------------------------------------------------------------
 			cGameTurn::cGameTurn() :
-				INIT_EVT_MEMBER(cGameTurn, EntityCreated),
-				INIT_EVT_MEMBER(cGameTurn, EntityDestroy),
-				INIT_EVT_MEMBER(cGameTurn, ComponentAdded),
+				mActorQuery(cComponentQuery::ePolicy::Any),
 				INIT_EVT_MEMBER(cGameTurn, PlayerAction)
-				{}
-
-			//-------------------------------------------------------------------------
-			void cGameTurn::OnEntityCreated(ecs::cEntityWithData ed)
 			{
-				if ( ed->second.Component<cmp::cControllerAI>() || 
-					 ed->second.Component<cmp::cControllerPlayer>())
-				mActors.push_back(ed);
-			}
-
-			//-------------------------------------------------------------------------
-			void cGameTurn::OnEntityDestroy(ecs::cEntityWithData ed)
-			{
-				if (ed->second.Component<cmp::cControllerAI>() ||
-					ed->second.Component<cmp::cControllerPlayer>())
+				mActorQuery.Require<cmp::cControllerAI>()
+						   .Require<cmp::cControllerPlayer>();
+				mActorQuery.SetOnEntityAdded([&](ecs::cEntityWithData ed){mActors.push_back(ed); });
+				mActorQuery.SetOnEntityRemoved([&](ecs::cEntityWithData ed)
 				{
 					auto itf = std::find(mActors.begin(), mActors.end(), ed);
 					assert(itf != mActors.end());
-					mActors.erase(itf);
-				}
-			}
-
-			//-------------------------------------------------------------------------
-			void cGameTurn::OnComponentAdded(ecs::cEntityWithData ed, unsigned short id)
-			{
-				if ( (id == cComponent<cmp::cControllerAI>::StaticTypeIndex()) ||
-					(id == cComponent<cmp::cControllerPlayer>::StaticTypeIndex()))
-					mActors.push_back(ed);
+					mActors.erase(itf); 
+				});
 			}
 
 			//-------------------------------------------------------------------------
