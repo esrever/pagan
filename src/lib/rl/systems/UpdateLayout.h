@@ -12,10 +12,15 @@ namespace pgn
 	{
 		namespace sys
 		{
+			// Updates layout data when entities move
 			class cUpdateLayout : public cBase
 			{
 				public:
 					bool operator()(ecs::cEntityWithData& ed, cmp::cLocation * zOldLoc);
+				private:
+					void AddToLayout(ecs::cEntityWithData& ed, rl::cLayout * lay);
+					void RemoveFromLayout(ecs::cEntityWithData& ed, rl::cLayout * lay);
+					void UpdateLayout(ecs::cEntityWithData& ed, rl::cLayout * lay);
 			};
 		}
 	}

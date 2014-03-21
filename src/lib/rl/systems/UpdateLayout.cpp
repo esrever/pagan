@@ -13,23 +13,48 @@ namespace pgn
 			{
 				auto world = mainecs()->TagusToEntities("World")->second->second.Component<ecs::cmp::cWorldData>();
 				auto newloc = ed->second.Component<cmp::cLocation>();
-				auto oldlay = world->mLevelMap[zOldLoc->mLevelId]->second.Component<cmp::cLevelData>()->mLayout;
-				auto newlay = world->mLevelMap[newloc->mLevelId]->second.Component<cmp::cLevelData>()->mLayout;
 
-				// TODO: layout or null if lvl does not exist!
+				auto oldlvl_it = world->mLevelMap.find(zOldLoc->mLevelId);
+				auto newlvl_it = world->mLevelMap.find(newloc->mLevelId);
+				rl::cLayout * oldlay = (oldlvl_it != world->mLevelMap.end()) ? &oldlvl_it->second->second.Component<cmp::cLevelData>()->mLayout : nullptr;
+				rl::cLayout * newlay = (newlvl_it != world->mLevelMap.end()) ? &oldlvl_it->second->second.Component<cmp::cLevelData>()->mLayout : nullptr;
 
 				// level didn't change
 				if (zOldLoc->mLevelId == newloc->mLevelId)
 				{
-					// update position (if exists)
+					if (newlay)
+					{
+						// TODO: update position
+					}
 				}
 				else
 				{
-					// delete from old layout (if exists)
-					// add to new layout (if exists)
+					if (oldlay)
+					{
+						// TODO: delete from layout
+					}
+					if (newlay)
+					{
+						// TODO: add to layout
+					}
 				}
 
 				return true;
+			}
+
+			void cUpdateLayout::AddToLayout(ecs::cEntityWithData& ed, rl::cLayout * lay)
+			{
+
+			}
+
+			void cUpdateLayout::RemoveFromLayout(ecs::cEntityWithData& ed, rl::cLayout * lay)
+			{
+
+			}
+
+			void cUpdateLayout::UpdateLayout(ecs::cEntityWithData& ed, rl::cLayout * lay)
+			{
+
 			}
 		}
 	}
