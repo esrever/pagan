@@ -22,39 +22,60 @@ namespace pgn
 				// level didn't change
 				if (zOldLoc->mLevelId == newloc->mLevelId)
 				{
-					if (newlay)
-					{
-						// TODO: update position
-					}
+					if (newlay) 
+						UpdateLayout(ed, newlay);
 				}
-				else
+				else // level changed
 				{
 					if (oldlay)
-					{
-						// TODO: delete from layout
-					}
+						RemoveFromLayout(ed, oldlay);
 					if (newlay)
-					{
-						// TODO: add to layout
-					}
+						AddToLayout(ed, newlay);
 				}
-
 				return true;
 			}
 
 			void cUpdateLayout::AddToLayout(ecs::cEntityWithData& ed, rl::cLayout * lay)
 			{
+				auto tileType = ed->second.Component<cmp::cTileInfo>()->mType;
+				switch (tileType)
+				{
+					case cmp::eTileGroup::Bg:
+					case cmp::eTileGroup::Fg:
+					case cmp::eTileGroup::Atmo:
+					case cmp::eTileGroup::Actor:
+				default:
+					break;
+				}
 
 			}
 
 			void cUpdateLayout::RemoveFromLayout(ecs::cEntityWithData& ed, rl::cLayout * lay)
 			{
-
+				auto tileType = ed->second.Component<cmp::cTileInfo>()->mType;
+				switch (tileType)
+				{
+				case cmp::eTileGroup::Bg:
+				case cmp::eTileGroup::Fg:
+				case cmp::eTileGroup::Atmo:
+				case cmp::eTileGroup::Actor:
+				default:
+					break;
+				}
 			}
 
 			void cUpdateLayout::UpdateLayout(ecs::cEntityWithData& ed, rl::cLayout * lay)
 			{
-
+				auto tileType = ed->second.Component<cmp::cTileInfo>()->mType;
+				switch (tileType)
+				{
+				case cmp::eTileGroup::Bg:
+				case cmp::eTileGroup::Fg:
+				case cmp::eTileGroup::Atmo:
+				case cmp::eTileGroup::Actor:
+				default:
+					break;
+				}
 			}
 		}
 	}

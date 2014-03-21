@@ -1,11 +1,11 @@
 
-#include "TileType.h"
+#include "TileInfo.h"
 
 namespace pgn{
     namespace ecs{
         namespace cmp{
             //----------------------------------------------------------------------------------------------
-            size_t cTileType::SerializeIn(const node_type& reader)
+            size_t cTileInfo::SerializeIn(const node_type& reader)
             {
                 size_t ret = 0;
                 ret += pgn::SerializeIn(reader,  "Type", (int&)(mType));
@@ -13,7 +13,7 @@ namespace pgn{
             }
             
             //----------------------------------------------------------------------------------------------
-            void cTileType::SerializeOut(node_type& writer) const
+            void cTileInfo::SerializeOut(node_type& writer) const
             {
                 pgn::SerializeOut(writer,"Type", int(mType));
             }

@@ -12,6 +12,7 @@ namespace pgn {
         void RegisterComponents(cECS& ecs)
         {
             ecs.RegisterComponent<cmp::cLocation>();
+            ecs.RegisterComponent<cmp::cTileInfo>();
             ecs.RegisterComponent<cmp::cStats>();
             ecs.RegisterComponent<cmp::cMoveCost>();
             ecs.RegisterComponent<cmp::cTextureSet>();
@@ -19,7 +20,6 @@ namespace pgn {
             ecs.RegisterComponent<cmp::cVisibility>();
             ecs.RegisterComponent<cmp::cDoorState>();
             ecs.RegisterComponent<cmp::cAsciiSet>();
-            ecs.RegisterComponent<cmp::cTileType>();
             ecs.RegisterComponent<cmp::cWorldData>();
             ecs.RegisterComponent<cmp::cControllerAI>();
             ecs.RegisterComponent<cmp::cControllerPlayer>();
