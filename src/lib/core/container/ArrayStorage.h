@@ -23,12 +23,17 @@ namespace pgn
 		// access
 		reference Get(size_t idx)             { return mData.at(idx); }
 		const_reference Get(size_t idx) const { return mData.at(idx); }
+		void Clear(size_t idx)				  { mData.at(idx) = mDefault; }
+		bool IsClear(size_t idx) const		  { return mData.at(idx) == mDefault; }
 
 		//! type-specific
 		const container_type& Raw() const { return mData; }
+		const T& GetDefault() const { return mDefault; }
+		void SetDefault(const T& v) { mDefault = v; }
 
 	private:
 		container_type mData;
+		data_type mDefault;
 	};
 
 	template<class T>
@@ -58,6 +63,7 @@ namespace pgn
 		//! type-specific
 		const container_type& Raw() const { return mData; }
 		const T& GetDefault() const { return mDefault; }
+		void SetDefault(const T& v) { mDefault = v; }
 
 	private:
 		container_type mData;

@@ -32,6 +32,8 @@ namespace pgn
 		// op-access
 		typename T::reference       operator()(size_t x, size_t y)       { return mStorageRef->Get(LinearIdx(x, y)); }
 		typename T::const_reference operator()(size_t x, size_t y) const  { return mStorageRef->Get(LinearIdx(x, y)); }
+		void Clear(size_t x, size_t y)				  { mStorageRef->Get(LinearIdx(x, y)) = mStorageRef->GetDefault(); }
+		bool IsClear(size_t x, size_t y) const		  { return mStorageRef->IsClear(LinearIdx(x, y)); }
 
 		// visitor
 		void VisitR(visit_read_func f) const;
