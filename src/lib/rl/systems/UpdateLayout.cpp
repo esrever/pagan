@@ -16,8 +16,18 @@ namespace pgn
 				auto oldlay = world->mLevelMap[zOldLoc->mLevelId]->second.Component<cmp::cLevelData>()->mLayout;
 				auto newlay = world->mLevelMap[newloc->mLevelId]->second.Component<cmp::cLevelData>()->mLayout;
 
-				// is entity on this level? if not, remove, else move there
-				// is entity on its level? if not, add, else move there
+				// TODO: layout or null if lvl does not exist!
+
+				// level didn't change
+				if (zOldLoc->mLevelId == newloc->mLevelId)
+				{
+					// update position (if exists)
+				}
+				else
+				{
+					// delete from old layout (if exists)
+					// add to new layout (if exists)
+				}
 
 				return true;
 			}
