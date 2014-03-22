@@ -11,24 +11,15 @@ namespace pgn
 	void SerializeOut(node_type& node, const rl::cLayout& value)
 	{
 		std::vector<std::string> ss;
-		for (size_t i = 0; i < value.BgEntities().Height(); ++i)
+		for (size_t i = 0; i < value.Dims().y; ++i)
 		{
 			ss.push_back("");
 			std::string& s = ss.back();
-			for (size_t j = 0; j < value.BgEntities().Width(); ++j)
+			for (size_t j = 0; j < value.Dims().x; ++j)
 			{
-				const auto& v = value.BgEntities()(j, i);
-				const auto& vf = value.FgEntities()(j, i);
-				if (&vf != &value.FgEntities().View().Storage().GetDefault())
-				{
-					const auto& syms = vf->second.Component<ecs::cmp::cAsciiSet>()->mSymbols;
-					s.append(syms.empty() ? "?" : syms.front());
-				}
-				else
-				{
-					const auto& syms = v->second.Component<ecs::cmp::cAsciiSet>()->mSymbols;
-					s.append(syms.empty() ? "?" : syms.front());
-				}
+				const auto& v = value.Bg().Cells()(j, i);
+				const auto& syms = v->second.Component<ecs::cmp::cAsciiSet>()->mSymbols;
+				s.append(syms.empty() ? "?" : syms.front());
 			}
 		}
 		SerializeOut(node, "DunGen", ss);
@@ -57,84 +48,93 @@ namespace pgn
 		void cLayout::Init(const rl::cWorkspace& ws, const std::map<std::string, std::string>& tiles)
 		{
 			auto& ecs = mainecs();
-			auto it_floor = ecs->Archetypes().find(tiles.find("Floor")->second);
-			auto it_wall = ecs->Archetypes().find(tiles.find("Wall")->second);
+			auto it_floor = mainecs()->InstantiateArchetype( ecs->Archetypes().find(tiles.find("Floor")->second)->second);
+			auto it_wall = mainecs()->InstantiateArchetype(ecs->Archetypes().find(tiles.find("Wall")->second)->second);
 			auto it_door = ecs->Archetypes().find(tiles.find("Door")->second);
 			auto it_enter = ecs->Archetypes().find(tiles.find("Entry")->second);
 			auto it_exit = ecs->Archetypes().find(tiles.find("Exit")->second);
 
+			mDims.x = ws.mMapData.Width();
+			mDims.y = ws.mMapData.Height();
 
 			// default to wall
-			mBgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height(), it_wall);
-			mFgEntities.Resize(ws.mMapData.Width(), ws.mMapData.Height(), ecs->EntitiesToData().end());
-			mActors.clear();
-			ecs::cEntityWithData it_entry_inst;
+			mBg.Resize(ws.mMapData.Width(), ws.mMapData.Height(), it_wall);
+			mFg.Resize(ws.mMapData.Width(), ws.mMapData.Height(), it_wall);
+			mActors.Resize(ws.mMapData.Width(), ws.mMapData.Height(), it_wall);
 			for (size_t i = 0; i < ws.mMapData.Height();++i)
 			for (size_t j = 0; j < ws.mMapData.Width(); ++j)
 			{
+				glm::ivec2 pos(j, i);
 				// Instantiate archetypes!
 				auto& v = ws.mMapData(j, i);
 				if (v & (rl::eMapData::corridor | rl::eMapData::room | rl::eMapData::conn))
-					mBgEntities(j, i) = it_floor;
+					mBg.Add(it_floor, pos);
 				if (v & rl::eMapData::conn)
-					mFgEntities(j, i) = ecs->Create( it_door->second );
+				{
+					auto ed = mainecs()->InstantiateArchetype(it_door->second);
+					// TODO: prime for being a helper
+					ed->second.AddComponent(ecs::cComponent<ecs::cmp::cLocation>::Create());
+					ed->second.Component<ecs::cmp::cLocation>()->mPos = pos;
+					mFg.Add(ed, pos);
+				}
 				if (v & rl::eMapData::entry)
 				{
-					it_entry_inst = ecs->Create(it_enter->second);
-					mFgEntities(j, i) = it_entry_inst;
-					mEntry = glm::ivec2(j, i);
+					auto ed = mainecs()->InstantiateArchetype(it_enter->second);
+					// TODO: prime for being a helper
+					ed->second.AddComponent(ecs::cComponent<ecs::cmp::cLocation>::Create());
+					ed->second.Component<ecs::cmp::cLocation>()->mPos = pos;
+					mFg.Add(ed, pos);
+					mEntry = pos;
 				}
 				if (v & rl::eMapData::exit)
 				{
-					mFgEntities(j, i) = ecs->Create(it_exit->second);
-					mExit = glm::ivec2(j, i);
+					auto ed = mainecs()->InstantiateArchetype(it_exit->second);
+					// TODO: prime for being a helper
+					ed->second.AddComponent(ecs::cComponent<ecs::cmp::cLocation>::Create());
+					ed->second.Component<ecs::cmp::cLocation>()->mPos = pos;
+					mFg.Add(ed, pos);
+					mExit = pos;
 				}		
 			}
 
 			// Init obstacles
 			UpdateStaticMoveCosts();
-			UpdateObstacles();
-		}
-
-		//-------------------------------------------------------------------------------
-		void cLayout::SetActor(ecs::cEntityWithDataConst ed)
-		{
-			auto loc = ed->second.Component<ecs::cmp::cLocation>();
-			mActors[ed] = loc->mPos;
-		}
-
-		//-------------------------------------------------------------------------------
-		void cLayout::RemoveActor(ecs::cEntityWithDataConst ed)
-		{
-			auto loc = ed->second.Component<ecs::cmp::cLocation>();
-			mActors.erase(ed);
 		}
 
 		//-------------------------------------------------------------------------------
 		void cLayout::UpdateStaticMoveCosts()
 		{
-			// TODO: too expensive for opening doors!
-			mStaticMoveCosts.Resize(BgEntities().Width(), BgEntities().Height());
-			BgEntities().View().VisitRext([&](size_t x, size_t y, const ecs::cArchetypeWithDataConst& ed){ mMoveCosts(x, y) = ed->second.Component<ecs::cmp::cMoveCost>()->mMoveCost; });
-			mStaticMoveCosts.View().VisitWext([&](size_t x, size_t y, float& v){ v = std::max(BgEntities()(x, y)->second.Component<ecs::cmp::cMoveCost>()->mMoveCost,
-																					  	      FgEntities()(x, y)->second.Component<ecs::cmp::cMoveCost>()->mMoveCost); });
+			mStaticMoveCosts.Resize(mDims.x, mDims.y);
+			Bg().Cells().View().VisitRext([&](size_t x, size_t y, const ecs::cEntityWithDataConst& ed){ mStaticMoveCosts(x, y) = ed->second.Component<ecs::cmp::cMoveCost>()->mMoveCost; });
+			if (!Fg().Entities().empty())
+				for (const auto& v : Fg().Entities())
+					mStaticMoveCosts(v->second.Component<ecs::cmp::cLocation>()->mPos) = v->second.Component<ecs::cmp::cMoveCost>()->mMoveCost;
+			UpdateMoveCosts();
+			// TODO: emit event. btu where's the levle entiti?
 		}
 		//-------------------------------------------------------------------------------
 		void cLayout::UpdateMoveCosts()
 		{
-			// TODO: Static + actors! update smartly
+			mMoveCosts = mStaticMoveCosts;
+			if (!Actors().Entities().empty())
+			for (const auto& v : Actors().Entities())
+			{
+				const auto& pos = v->second.Component<ecs::cmp::cLocation>()->mPos;
+				mMoveCosts(pos) = std::max(v->second.Component<ecs::cmp::cMoveCost>()->mMoveCost, mStaticMoveCosts(pos));
+			}
+			UpdateObstacles();
+			// TODO: emit event. btu where's the levle entiti?
 		}
 		//-------------------------------------------------------------------------------
 		void cLayout::UpdateObstacles()
 		{
-			mObstacles.Resize(BgEntities().Width(), BgEntities().Height());
-			BgEntities().View().VisitRext([&](size_t x, size_t y, const ecs::cArchetypeWithDataConst& ed){ mObstacles(x, y) = ed->second.Component<ecs::cmp::cMoveCost>()->mMoveCost == std::numeric_limits<float>::max(); });
+			mObstacles.Resize(mDims.x, mDims.y);
+			mMoveCosts.View().VisitRext([&](size_t x, size_t y, float v){ mObstacles(x, y) = (v == std::numeric_limits<float>::max()); });
 		}
 
 		//-------------------------------------------------------------------------------
 		void cLayout::UpdateLayout(ecs::cEntityWithDataConst ed, ecs::cmp::cLocation * zLocOld, ecs::cmp::cLocation * zLocNew)
 		{
-			// TODO: this looks like a nice event handle, but I don't want all levels to be listening to that stuff.
 			if (!zLocOld)
 				AddTile(ed, *zLocNew);
 			else if (!zLocNew)
@@ -145,17 +145,70 @@ namespace pgn
 
 		void cLayout::AddTile(ecs::cEntityWithDataConst ed, const ecs::cmp::cLocation& zLocNew)
 		{
-			// Add an enum for TileType: bg/fg/atmo/actor/ atmofg?
+			auto tileType = ed->second.Component<ecs::cmp::cTileInfo>()->mType;
+			switch (tileType)
+			{
+			case ecs::cmp::eTileGroup::Bg:
+				Bg().Add(ed, zLocNew.mPos);
+				break;
+			case ecs::cmp::eTileGroup::Fg:
+				Fg().Add(ed, zLocNew.mPos);
+				UpdateStaticMoveCosts();
+				break;
+			case ecs::cmp::eTileGroup::Atmo:
+			case ecs::cmp::eTileGroup::Actor:
+				Actors().Add(ed, zLocNew.mPos);
+				UpdateMoveCosts();
+				break;
+			default:
+				break;
+			}
 		}
 
 		void cLayout::RemoveTile(ecs::cEntityWithDataConst ed, const ecs::cmp::cLocation& zLocOld)
 		{
-
+			auto tileType = ed->second.Component<ecs::cmp::cTileInfo>()->mType;
+			switch (tileType)
+			{
+			case ecs::cmp::eTileGroup::Bg:
+				Bg().Remove(ed, zLocOld.mPos);
+				break;
+			case ecs::cmp::eTileGroup::Fg:
+				Fg().Remove(ed, zLocOld.mPos);
+				UpdateStaticMoveCosts();
+				break;
+			case ecs::cmp::eTileGroup::Atmo:
+			case ecs::cmp::eTileGroup::Actor:
+				Actors().Remove(ed, zLocOld.mPos);
+				UpdateMoveCosts();
+				break;
+			default:
+				break;
+			}
 		}
 
 		void cLayout::UpdateTile(ecs::cEntityWithDataConst ed, const ecs::cmp::cLocation& zLocOld, const ecs::cmp::cLocation& zLocNew)
 		{
-			
+			auto tileType = ed->second.Component<ecs::cmp::cTileInfo>()->mType;
+			switch (tileType)
+			{
+			case ecs::cmp::eTileGroup::Bg:
+				// TODO: this is kinda weird. should not really happen
+				assert(false);
+				Bg().Move(ed, zLocOld.mPos, zLocNew.mPos);
+				break;
+			case ecs::cmp::eTileGroup::Fg:
+				Fg().Move(ed, zLocOld.mPos, zLocNew.mPos);
+				UpdateStaticMoveCosts();
+				break;
+			case ecs::cmp::eTileGroup::Atmo:
+			case ecs::cmp::eTileGroup::Actor:
+				Actors().Move(ed, zLocOld.mPos, zLocNew.mPos);
+				UpdateMoveCosts();
+				break;
+			default:
+				break;
+			}
 		}
 
 

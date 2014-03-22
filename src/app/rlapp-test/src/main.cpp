@@ -131,15 +131,15 @@ struct cTestApp : public pgn::rl::cRlApp
 
 		// get the renderrect
 		auto view_size = glm::ivec2(mGridDims.x, mGridDims.y);
-		auto view_start = pgn::rl::GetCenteredView(glm::ivec2(lvl_layout.BgEntities().Width(), lvl_layout.BgEntities().Height()),
+		auto view_start = pgn::rl::GetCenteredView(glm::ivec2(lvl_layout.Dims().x, lvl_layout.Dims().y),
 							hero_pos,
 							view_size);
-		view_size.x = std::min(view_size.x, int(lvl_layout.BgEntities().Width() - view_start.x));
-		view_size.y = std::min(view_size.y, int(lvl_layout.BgEntities().Height() - view_start.y));
+		view_size.x = std::min(view_size.x, int(lvl_layout.Dims().x - view_start.x));
+		view_size.y = std::min(view_size.y, int(lvl_layout.Dims().y - view_start.y));
 		auto view_end = view_start + view_size;
 
-		auto& lvl_bg = lvl_layout.BgEntities();
-		auto& lvl_fg = lvl_layout.FgEntities();
+		auto& lvl_bg = lvl_layout.Bg().Cells();
+		auto& lvl_fg = lvl_layout.Fg().Cells();
 		auto& lvl_act = lvl_layout.Actors();
 
 		auto tex_atlas = MainWindow()->TextureLib()->FindByName();
@@ -151,22 +151,37 @@ struct cTestApp : public pgn::rl::cRlApp
 		auto& expview = hero_vis->mExplored[lvl_id].CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
 		std::function<int(int x, int y)> get_fow = [&](int x, int y){return visview(x, y) ? 255 : (expview(x, y) ? 100 : 0); };
 
-		auto render_func_sparse = [&](const pgn::rl::cLayout::sparse_entities_type& map)
-		{
-			if (map.View().Storage().Raw().empty())
-				return;
-			for (const auto& kv : map.View().Storage().Raw())
+		// TODO: this is crap. rethink views
+		auto render_func_dense = [&](const pgn::cArray2D<pgn::ecs::cEntityWithDataConst>& cells){
+			for (int i = view_start.y; i < (view_start.y + view_size.y); ++i)
+			for (int j = view_start.x; j < (view_start.x + view_size.x); ++j)
 			{
-				auto ed = kv.second->second;
-				auto idx1 = kv.first;
-				glm::ivec2 idx(idx1 % map.Width(), idx1 / map.Width());
+				auto x = j - view_start.x;
+				auto y = i - view_start.y;
 
-				if ((idx.x < view_start.x) || (idx.y < view_start.y) || (idx.x >= view_end.x) || (idx.y >= view_end.y))
+				auto& ed = cells(j, i);
+				const auto& bg_tex_set = ed->second.Component<pgn::ecs::cmp::cTextureSet>();
+				pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
+				int v = get_fow(x, y);
+				SDL_Rect rect = { x * mTileDim, (mGridDims.y - 1 - y) * mTileDim, mTileDim, mTileDim };
+				MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
+			}
+		};
+
+		auto render_func_sparse = [&](const std::set<pgn::ecs::cEntityWithDataConst>& ents)
+		{
+			if (ents.empty())
+				return;
+			for (const auto& ed : ents)
+			{
+				const auto& pos = ed->second.Component<pgn::ecs::cmp::cLocation>()->mPos;
+
+				if ((pos.x < view_start.x) || (pos.y < view_start.y) || (pos.x >= view_end.x) || (pos.y >= view_end.y))
 					continue;
 					
-				auto x = idx.x - view_start.x;
-				auto y = idx.y - view_start.y;
-				const auto& bg_tex_set = ed.Component<pgn::ecs::cmp::cTextureSet>();
+				auto x = pos.x - view_start.x;
+				auto y = pos.y - view_start.y;
+				const auto& bg_tex_set = ed->second.Component<pgn::ecs::cmp::cTextureSet>();
 				pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
 				int v = get_fow(x,y);
 				SDL_Rect rect = { x * mTileDim, (mGridDims.y-1-y) * mTileDim, mTileDim, mTileDim };
@@ -174,20 +189,14 @@ struct cTestApp : public pgn::rl::cRlApp
 			}
 		};
 
-		auto render_impl_func = [&](size_t x, size_t y, const pgn::ecs::cEntityData& ed)
-		{
-			const auto& bg_tex_set = ed.Component<pgn::ecs::cmp::cTextureSet>();
-			pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
-			int v = get_fow(x, y);
-			SDL_Rect rect = { x * mTileDim, (mGridDims.y - 1 - y) * mTileDim, mTileDim, mTileDim };
-			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
-		};
+		render_func_dense(lvl_layout.Bg().Cells());
+		render_func_sparse(lvl_layout.Fg().Entities());
+		render_func_sparse(lvl_layout.Actors().Entities());
 
-		auto render_func_dense = [&](size_t x, size_t y, const pgn::ecs::cArchetypeWithDataConst& ed) { render_impl_func(x, y, ed->second); };
+		//auto bg_view = lvl_bg.CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
+		//bg_view.VisitRext(render_func_dense);
 
-		auto bg_view = lvl_bg.CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
-		bg_view.VisitRext(render_func_dense);
-
+		/*
 		// TODO: sparse array views?
 		render_func_sparse(lvl_fg);
 
@@ -204,6 +213,7 @@ struct cTestApp : public pgn::rl::cRlApp
 				MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 			}
 		}
+		*/
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), PROJECT_ROOT "data\\fonts\\SourceSansPro\\SourceSansPro-Regular.otf", 32);
 		//pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\PT-Sans\\PTN57F.ttf", 62);

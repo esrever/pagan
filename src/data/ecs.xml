@@ -13,7 +13,7 @@
         </Symbols>
         </AsciiSet>
       <MoveCost MoveCost="1"/>
-      <TileType Type="0"/>
+      <TileInfo Type="0"/>
     </Components>
   </Entity>
   <Entity name ="WallTile_def" is_archetype="true">
@@ -29,7 +29,7 @@
         </Symbols>
         </AsciiSet>
       <MoveCost MoveCost="inf"/>
-      <TileType Type="0"/>
+      <TileInfo Type="0"/>
     </Components>
   </Entity>
   
@@ -50,7 +50,8 @@
         </Symbols>
         </AsciiSet>
       <DoorState State="0"/>
-      <TileType Type="1"/>
+      <TileInfo Type="1"/>
+      <MoveCost MoveCost="1"/>
     </Components>
   </Entity>
   
@@ -66,7 +67,8 @@
           <array_elem value="V"/>
         </Symbols>
         </AsciiSet>
-        <TileType Type="1"/>
+        <TileInfo Type="1"/>
+        <MoveCost MoveCost="1"/>
     </Components>
   </Entity>
   
@@ -82,7 +84,8 @@
           <array_elem value="^"/>
         </Symbols>
         </AsciiSet>
-        <TileType Type="1"/>
+        <TileInfo Type="1"/>
+        <MoveCost MoveCost="1"/>
     </Components>
   </Entity>
   
@@ -99,7 +102,8 @@
         </Symbols>
       </AsciiSet>
       <ControllerAI/>
-      <TileType Type="3"/>
+      <TileInfo Type="3"/>
+      <MoveCost MoveCost="inf"/>
     </Components>
   </Entity>
   
@@ -138,7 +142,8 @@
         </Bindings>
       </ControllerPlayer>
       <Visibility/>
-      <TileType Type="3"/>
+      <TileInfo Type="3"/>
+      <MoveCost MoveCost="inf"/>
     </Components>
     <Tagus>
       <array_elem value="Player"/>

@@ -38,8 +38,8 @@ namespace pgn
 				auto lvl = world->mLevelMap[loc->mLevelId]->second.Component<cmp::cLevelData>();
 
 				// prepare the fov output data
-				curexpl.Resize(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height(), false);
-				curvis.Resize(lvl->mLayout.BgEntities().Width(), lvl->mLayout.BgEntities().Height(), false);
+				curexpl.Resize(lvl->mLayout.Dims().x, lvl->mLayout.Dims().y, false);
+				curvis.Resize(lvl->mLayout.Dims().x, lvl->mLayout.Dims().y, false);
 				auto onvis = [&](const glm::ivec2& pt, float b) {curexpl(pt) = true; curvis(pt) = true; vis->mVisibleSet.insert(pt); };
 
 				// TODO: this is a parameter of... ? probably here in visibility

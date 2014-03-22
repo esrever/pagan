@@ -17,6 +17,7 @@ set(SOURCE_FILES
     
     #tile/tileinfo.cpp
     tile/layout.cpp
+    tile/tilestore.cpp
     
     event/events.cpp
     event/actions.cpp
@@ -51,6 +52,7 @@ set(HEADER_FILES
     
     #tile/tileinfo.h
     tile/layout.h
+    tile/tilestore.h
     
     event/events.h
     event/actions.h

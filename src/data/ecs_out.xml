@@ -4,6 +4,8 @@
 		<key value="0" />
 		<value name="Hero">
 			<Components>
+				<TileInfo Type="3" />
+				<MoveCost MoveCost="3.40282e+038" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::monsters:unique:norbert" />
@@ -39,21 +41,18 @@
 			</Tagus>
 		</value>
 		<key value="2" />
-		<value name="Door_def">
+		<value name="" archetype="FloorTile_def">
 			<Components>
+				<TileInfo Type="0" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+						<vector_elem value="::dungeon:floor:rect_gray0" />
 					</Sprites>
 				</TextureSet>
-				<DoorState State="0" />
 				<AsciiSet>
 					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
+						<vector_elem value="." />
 					</Symbols>
 				</AsciiSet>
 			</Components>
@@ -63,8 +62,34 @@
 			<Tagus />
 		</value>
 		<key value="3" />
-		<value name="Door_def">
+		<value name="" archetype="WallTile_def">
 			<Components>
+				<TileInfo Type="0" />
+				<MoveCost MoveCost="3.40282e+038" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:wall:marble_wall1" />
+					</Sprites>
+				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="#" />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="4" />
+		<value name="" archetype="Door_def">
+			<Components>
+				<Location LevelId="-1">
+					<Pos x="13" y="2" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -86,28 +111,14 @@
 			<Tags />
 			<Tagus />
 		</value>
-		<key value="4" />
-		<value name="Entry_def">
-			<Components>
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
-					</Sprites>
-				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="V" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<Tags />
-			<Tagus />
-		</value>
 		<key value="5" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="16" y="2" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -130,21 +141,21 @@
 			<Tagus />
 		</value>
 		<key value="6" />
-		<value name="Door_def">
+		<value name="" archetype="Entry_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="16" y="3" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
 					</Sprites>
 				</TextureSet>
-				<DoorState State="0" />
 				<AsciiSet>
 					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
+						<vector_elem value="V" />
 					</Symbols>
 				</AsciiSet>
 			</Components>
@@ -154,8 +165,13 @@
 			<Tagus />
 		</value>
 		<key value="7" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="20" y="3" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -178,8 +194,13 @@
 			<Tagus />
 		</value>
 		<key value="8" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="26" y="3" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -202,8 +223,13 @@
 			<Tagus />
 		</value>
 		<key value="9" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="64" y="4" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -226,8 +252,13 @@
 			<Tagus />
 		</value>
 		<key value="10" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="10" y="5" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -250,8 +281,13 @@
 			<Tagus />
 		</value>
 		<key value="11" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="46" y="5" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -274,8 +310,13 @@
 			<Tagus />
 		</value>
 		<key value="12" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="48" y="5" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -298,8 +339,13 @@
 			<Tagus />
 		</value>
 		<key value="13" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="68" y="5" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -322,8 +368,13 @@
 			<Tagus />
 		</value>
 		<key value="14" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="63" y="6" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -346,8 +397,13 @@
 			<Tagus />
 		</value>
 		<key value="15" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="5" y="7" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -370,8 +426,13 @@
 			<Tagus />
 		</value>
 		<key value="16" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="20" y="7" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -394,8 +455,13 @@
 			<Tagus />
 		</value>
 		<key value="17" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="37" y="8" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -418,8 +484,13 @@
 			<Tagus />
 		</value>
 		<key value="18" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="21" y="9" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -442,8 +513,13 @@
 			<Tagus />
 		</value>
 		<key value="19" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="27" y="9" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -466,8 +542,13 @@
 			<Tagus />
 		</value>
 		<key value="20" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="59" y="9" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -490,8 +571,13 @@
 			<Tagus />
 		</value>
 		<key value="21" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="63" y="9" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -514,8 +600,13 @@
 			<Tagus />
 		</value>
 		<key value="22" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="69" y="9" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -538,8 +629,13 @@
 			<Tagus />
 		</value>
 		<key value="23" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="26" y="10" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -562,8 +658,13 @@
 			<Tagus />
 		</value>
 		<key value="24" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="37" y="10" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -586,8 +687,13 @@
 			<Tagus />
 		</value>
 		<key value="25" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="46" y="10" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -610,8 +716,13 @@
 			<Tagus />
 		</value>
 		<key value="26" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="55" y="10" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -634,8 +745,13 @@
 			<Tagus />
 		</value>
 		<key value="27" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="10" y="11" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -658,8 +774,13 @@
 			<Tagus />
 		</value>
 		<key value="28" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="54" y="11" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -682,8 +803,13 @@
 			<Tagus />
 		</value>
 		<key value="29" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="58" y="11" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -706,8 +832,13 @@
 			<Tagus />
 		</value>
 		<key value="30" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="12" y="12" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -730,8 +861,13 @@
 			<Tagus />
 		</value>
 		<key value="31" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="14" y="12" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -754,8 +890,13 @@
 			<Tagus />
 		</value>
 		<key value="32" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="49" y="12" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -778,8 +919,13 @@
 			<Tagus />
 		</value>
 		<key value="33" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="56" y="12" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -802,8 +948,13 @@
 			<Tagus />
 		</value>
 		<key value="34" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="4" y="13" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -826,8 +977,13 @@
 			<Tagus />
 		</value>
 		<key value="35" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="11" y="13" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -850,8 +1006,13 @@
 			<Tagus />
 		</value>
 		<key value="36" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="33" y="13" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -874,8 +1035,13 @@
 			<Tagus />
 		</value>
 		<key value="37" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="69" y="13" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -898,8 +1064,13 @@
 			<Tagus />
 		</value>
 		<key value="38" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="73" y="13" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -922,8 +1093,13 @@
 			<Tagus />
 		</value>
 		<key value="39" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="75" y="13" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -946,8 +1122,13 @@
 			<Tagus />
 		</value>
 		<key value="40" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="6" y="14" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -970,8 +1151,13 @@
 			<Tagus />
 		</value>
 		<key value="41" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="31" y="14" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -994,8 +1180,13 @@
 			<Tagus />
 		</value>
 		<key value="42" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="74" y="14" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1018,8 +1209,13 @@
 			<Tagus />
 		</value>
 		<key value="43" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="77" y="14" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1042,8 +1238,13 @@
 			<Tagus />
 		</value>
 		<key value="44" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="5" y="15" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1066,8 +1267,13 @@
 			<Tagus />
 		</value>
 		<key value="45" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="33" y="16" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1090,8 +1296,13 @@
 			<Tagus />
 		</value>
 		<key value="46" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="46" y="16" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1114,8 +1325,13 @@
 			<Tagus />
 		</value>
 		<key value="47" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="49" y="16" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1138,8 +1354,13 @@
 			<Tagus />
 		</value>
 		<key value="48" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="61" y="16" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1162,8 +1383,13 @@
 			<Tagus />
 		</value>
 		<key value="49" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="10" y="17" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1186,8 +1412,13 @@
 			<Tagus />
 		</value>
 		<key value="50" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="32" y="17" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1210,8 +1441,13 @@
 			<Tagus />
 		</value>
 		<key value="51" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="47" y="17" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1234,8 +1470,13 @@
 			<Tagus />
 		</value>
 		<key value="52" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="51" y="17" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1258,8 +1499,13 @@
 			<Tagus />
 		</value>
 		<key value="53" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="67" y="17" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1282,8 +1528,13 @@
 			<Tagus />
 		</value>
 		<key value="54" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="4" y="18" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1306,8 +1557,13 @@
 			<Tagus />
 		</value>
 		<key value="55" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="38" y="18" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1330,8 +1586,13 @@
 			<Tagus />
 		</value>
 		<key value="56" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="69" y="18" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1354,8 +1615,13 @@
 			<Tagus />
 		</value>
 		<key value="57" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="3" y="19" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1378,8 +1644,13 @@
 			<Tagus />
 		</value>
 		<key value="58" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="12" y="19" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1402,8 +1673,13 @@
 			<Tagus />
 		</value>
 		<key value="59" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="32" y="19" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1426,8 +1702,13 @@
 			<Tagus />
 		</value>
 		<key value="60" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="46" y="19" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1450,8 +1731,13 @@
 			<Tagus />
 		</value>
 		<key value="61" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="60" y="19" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1474,8 +1760,13 @@
 			<Tagus />
 		</value>
 		<key value="62" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="24" y="20" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1498,8 +1789,13 @@
 			<Tagus />
 		</value>
 		<key value="63" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="30" y="20" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1522,8 +1818,13 @@
 			<Tagus />
 		</value>
 		<key value="64" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="52" y="20" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1546,16 +1847,26 @@
 			<Tagus />
 		</value>
 		<key value="65" />
-		<value name="Exit_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="4" y="21" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
-						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
 					</Sprites>
 				</TextureSet>
+				<DoorState State="0" />
 				<AsciiSet>
 					<Symbols>
-						<vector_elem value="^" />
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
 					</Symbols>
 				</AsciiSet>
 			</Components>
@@ -1565,8 +1876,13 @@
 			<Tagus />
 		</value>
 		<key value="66" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="43" y="21" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1589,21 +1905,21 @@
 			<Tagus />
 		</value>
 		<key value="67" />
-		<value name="Door_def">
+		<value name="" archetype="Exit_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="60" y="21" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
 					</Sprites>
 				</TextureSet>
-				<DoorState State="0" />
 				<AsciiSet>
 					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
+						<vector_elem value="^" />
 					</Symbols>
 				</AsciiSet>
 			</Components>
@@ -1613,8 +1929,13 @@
 			<Tagus />
 		</value>
 		<key value="68" />
-		<value name="Door_def">
+		<value name="" archetype="Door_def">
 			<Components>
+				<Location LevelId="-1">
+					<Pos x="15" y="22" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1637,6 +1958,64 @@
 			<Tagus />
 		</value>
 		<key value="69" />
+		<value name="" archetype="Door_def">
+			<Components>
+				<Location LevelId="-1">
+					<Pos x="18" y="22" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="70" />
+		<value name="" archetype="Door_def">
+			<Components>
+				<Location LevelId="-1">
+					<Pos x="39" y="22" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="71" />
 		<value name="Level">
 			<Components>
 				<LevelData>
@@ -1644,27 +2023,27 @@
 						<DunGen>
 							<vector_elem value="################################################################################" />
 							<vector_elem value="#############....#########################....##################################" />
-							<vector_elem value="#....#....###/##/##########...############....###################.........######" />
-							<vector_elem value="#....#....#...##V.../...../...#........###....###################.........######" />
-							<vector_elem value="#....#....#...##....#######...#........###....###......#######../.........######" />
-							<vector_elem value="#....#..../...##....#######...#........###...././......#######.#####/###########" />
-							<vector_elem value="#....#....#...##....#######...#........###....###......#######./.....#...#######" />
-							<vector_elem value="#..../....#...##..../.#####...#........###....##########...#####.....#...#######" />
-							<vector_elem value="#....#....#...#######.#####...#######/####....##########...#####.....#...#######" />
-							<vector_elem value="#....#....###########/#####/#########.####....##########.../.../...../...#######" />
-							<vector_elem value="#....#....#####.........../.#########/####..../..#####./...###########...#######" />
-							<vector_elem value="#....#..../.###...........####...#....##########.#####/###/####......#...#######" />
-							<vector_elem value="#....######././...........####...#....##########./....../..####......#...#######" />
-							<vector_elem value="####/######/##################.../....#...########......#######....../..././..##" />
-							<vector_elem value="####../........################/##....#...########......##################/##/##" />
-							<vector_elem value="#####/#........################..#....#...#...####......######.....###........##" />
-							<vector_elem value="#####.#........###......########./....#...#.../../......####./.....###........##" />
-							<vector_elem value="#####.####/#######......########/#....#...#...#/###/########.#...../.#........##" />
-							<vector_elem value="###./.####...#####......########.#..../...#...#.###.########.#######./........##" />
-							<vector_elem value="###/#.######/#####......########/######...#.../.###.#...####/#########........##" />
-							<vector_elem value="#...#.######...###....../...../......##...#...#####./...##....########........##" />
-							<vector_elem value="#.../.######...###......#######......##...#/#########...##..^.########........##" />
-							<vector_elem value="#...########.../.#/############......##/###.#########...##....##################" />
+							<vector_elem value="#....#....###.##.##########...############....###################.........######" />
+							<vector_elem value="#....#....#...##..............#........###....###################.........######" />
+							<vector_elem value="#....#....#...##....#######...#........###....###......#######............######" />
+							<vector_elem value="#....#........##....#######...#........###.............#######.#####.###########" />
+							<vector_elem value="#....#....#...##....#######...#........###....###......#######.......#...#######" />
+							<vector_elem value="#.........#...##......#####...#........###....##########...#####.....#...#######" />
+							<vector_elem value="#....#....#...#######.#####...#######.####....##########...#####.....#...#######" />
+							<vector_elem value="#....#....###########.#####.#########.####....##########.................#######" />
+							<vector_elem value="#....#....#####.............#########.####.......#####.....###########...#######" />
+							<vector_elem value="#....#......###...........####...#....##########.#####.###.####......#...#######" />
+							<vector_elem value="#....######...............####...#....##########...........####......#...#######" />
+							<vector_elem value="####.######.##################........#...########......#######...............##" />
+							<vector_elem value="####...........################.##....#...########......##################.##.##" />
+							<vector_elem value="#####.#........################..#....#...#...####......######.....###........##" />
+							<vector_elem value="#####.#........###......########......#...#.............####.......###........##" />
+							<vector_elem value="#####.####.#######......########.#....#...#...#.###.########.#.......#........##" />
+							<vector_elem value="###...####...#####......########.#........#...#.###.########.#######..........##" />
+							<vector_elem value="###.#.######.#####......########.######...#.....###.#...####.#########........##" />
+							<vector_elem value="#...#.######...###...................##...#...#####.....##....########........##" />
+							<vector_elem value="#.....######...###......#######......##...#.#########...##....########........##" />
+							<vector_elem value="#...########.....#.############......##.###.#########...##....##################" />
 							<vector_elem value="################...####################.....####################################" />
 							<vector_elem value="################################################################################" />
 						</DunGen>
@@ -1683,6 +2062,8 @@
 		<key value="Door_def" />
 		<value name="Door_def">
 			<Components>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:dngn_open_door" />
@@ -1707,6 +2088,8 @@
 		<key value="Entry_def" />
 		<value name="Entry_def">
 			<Components>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
@@ -1726,6 +2109,8 @@
 		<key value="Exit_def" />
 		<value name="Exit_def">
 			<Components>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
@@ -1745,6 +2130,7 @@
 		<key value="FloorTile_def" />
 		<value name="FloorTile_def">
 			<Components>
+				<TileInfo Type="0" />
 				<MoveCost MoveCost="1" />
 				<TextureSet>
 					<Sprites>
@@ -1765,6 +2151,8 @@
 		<key value="Rat" />
 		<value name="Rat">
 			<Components>
+				<TileInfo Type="3" />
+				<MoveCost MoveCost="3.40282e+038" />
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::monsters:animals:grey_rat" />
@@ -1787,6 +2175,7 @@
 		<key value="WallTile_def" />
 		<value name="WallTile_def">
 			<Components>
+				<TileInfo Type="0" />
 				<MoveCost MoveCost="3.40282e+038" />
 				<TextureSet>
 					<Sprites>

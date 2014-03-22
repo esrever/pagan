@@ -2,6 +2,7 @@
 
 #include <rl/event/events.h>
 #include <rl/components/components.h>
+#include <rl/systems/UpdateLayout.h>
 
 static const char * dirstrings_long[] = { "southwest", "south", "southeast", "west", "nowhere", "east", "northwest", "north", "northeast" };
 
@@ -15,6 +16,7 @@ namespace pgn
 			{
 				// get some components
 				auto loc = ed->second.Component<cmp::cLocation>();
+
 				auto world = mainecs()->TagusToEntities("World")->second->second.Component<cmp::cWorldData>();
 				auto lvl = world->mLevelMap[loc->mLevelId]->second.Component<cmp::cLevelData>();
 
@@ -23,13 +25,14 @@ namespace pgn
 
 				// TODO: use movecosts!
 				// Map checks with obstacle map!
-				if (!lvl->mLayout.BgEntities().InRange(newpos))
+				if (!lvl->mLayout.Bg().Cells().InRange(newpos))
 					return false;
 				if (!lvl->mLayout.Obstacles()(newpos))
 				{
 					// no collisions; set new position and update map
+					auto oldloc = *loc;
 					loc->mPos = newpos;
-					// lvl->mLayout.SetActor(ed); TODO: do it via the system
+					mainecs()->System<cUpdateLayout>()(ed, &oldloc);
 
 					evt::cLocationChanged::Sig().emit(ed);
 					

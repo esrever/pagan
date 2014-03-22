@@ -23,6 +23,7 @@ namespace pgn
 		const view_type& View() const { return mView; }
 		view_type& View() { return mView; }
 		view_type CreateView(size_t w, size_t h, size_t x, size_t y) { return view_type(mStorage, mView.Shape(), w, h, x, y); }
+		const view_type CreateView(size_t w, size_t h, size_t x, size_t y) const { return view_type(mStorage, mView.Shape(), w, h, x, y); }
 		void Resize(size_t w, size_t h, const T& v = T()) { mStorage.Resize(w* h, v); mView = view_type(mStorage, w, h); }
 
 		// helpers - access shape

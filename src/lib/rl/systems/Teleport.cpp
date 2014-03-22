@@ -2,6 +2,7 @@
 
 #include <rl/event/events.h>
 #include <rl/components/components.h>
+#include <rl/systems/UpdateLayout.h>
 
 namespace pgn
 {
@@ -17,7 +18,7 @@ namespace pgn
 
 				// TODO: use movecosts!
 				// Map checks with obstacle map!
-				if (!tgtlvl->mLayout.BgEntities().InRange(loc.mPos))
+				if (!tgtlvl->mLayout.Bg().Cells().InRange(loc.mPos))
 					return false;
 				if (tgtlvl->mLayout.Obstacles()(loc.mPos))
 					return false;
@@ -29,7 +30,7 @@ namespace pgn
 				if (it_srclvl != world->mLevelMap.end())
 				{
 					auto srclvl = it_srclvl->second->second.Component<cmp::cLevelData>();
-					srclvl->mLayout.RemoveActor(ed);
+					srclvl->mLayout.RemoveTile(ed, *edloc);
 				}
 
 				auto ped = mainecs()->TagusToEntities("Player")->second;
@@ -40,11 +41,10 @@ namespace pgn
 						mainecs()->Tagu("CurrentLevel", world->mLevelMap[loc.mLevelId]);
 				}
 
-				// set the location
+				// set the location & update layout
+				auto oldloc = *edloc;
 				*edloc = loc;
-				
-				// update layout
-				// tgtlvl->mLayout.SetActor(ed);  TODO: do it via the system
+				mainecs()->System<cUpdateLayout>()(ed, &oldloc);
 
 				// emit event
 				evt::cLocationChanged::Sig().emit(ed);

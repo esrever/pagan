@@ -17,20 +17,23 @@ namespace pgn
 				auto oldlvl_it = world->mLevelMap.find(zOldLoc->mLevelId);
 				auto newlvl_it = world->mLevelMap.find(newloc->mLevelId);
 				rl::cLayout * oldlay = (oldlvl_it != world->mLevelMap.end()) ? &oldlvl_it->second->second.Component<cmp::cLevelData>()->mLayout : nullptr;
-				rl::cLayout * newlay = (newlvl_it != world->mLevelMap.end()) ? &oldlvl_it->second->second.Component<cmp::cLevelData>()->mLayout : nullptr;
+				rl::cLayout * newlay = (newlvl_it != world->mLevelMap.end()) ? &newlvl_it->second->second.Component<cmp::cLevelData>()->mLayout : nullptr;
 
 				// level didn't change
 				if (zOldLoc->mLevelId == newloc->mLevelId)
 				{
-					if (newlay) 
-						UpdateLayout(ed, newlay);
+					if (newlay)
+					{
+						if (zOldLoc->mPos != newloc->mPos)
+							newlay->UpdateLayout(ed, zOldLoc, newloc);
+					}
 				}
 				else // level changed
 				{
 					if (oldlay)
-						RemoveFromLayout(ed, oldlay);
+						oldlay->RemoveTile(ed, *zOldLoc);
 					if (newlay)
-						AddToLayout(ed, newlay);
+						newlay->AddTile(ed, *newloc);
 				}
 				return true;
 			}

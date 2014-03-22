@@ -17,6 +17,8 @@ namespace pgn
 		DECL_EVT1(LocationChanged, ecs::cEntityWithData);
 		DECL_EVT1(LevelCreated, ecs::cEntityWithData);
 		DECL_EVT1(LevelDestroy, ecs::cEntityWithData);
+		DECL_EVT1(StaticMoveCostUpdated, ecs::cEntityWithData /*lvl*/);
+		DECL_EVT1(MoveCostUpdated, ecs::cEntityWithData /*lvl*/);
 		DECL_EVT0(PlayerAction);
 		/*
 		DECL_EVT1(Appear, ecs::cEntityWithData)
