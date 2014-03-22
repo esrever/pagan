@@ -72,26 +72,20 @@ namespace pgn
 				if (v & rl::eMapData::conn)
 				{
 					auto ed = mainecs()->InstantiateArchetype(it_door->second);
-					// TODO: prime for being a helper
-					ed->second.AddComponent(ecs::cComponent<ecs::cmp::cLocation>::Create());
-					ed->second.Component<ecs::cmp::cLocation>()->mPos = pos;
+					ed->second.AddComponent<ecs::cmp::cLocation>()->mPos = pos;
 					mFg.Add(ed, pos);
 				}
 				if (v & rl::eMapData::entry)
 				{
 					auto ed = mainecs()->InstantiateArchetype(it_enter->second);
-					// TODO: prime for being a helper
-					ed->second.AddComponent(ecs::cComponent<ecs::cmp::cLocation>::Create());
-					ed->second.Component<ecs::cmp::cLocation>()->mPos = pos;
+					ed->second.AddComponent<ecs::cmp::cLocation>()->mPos = pos;
 					mFg.Add(ed, pos);
 					mEntry = pos;
 				}
 				if (v & rl::eMapData::exit)
 				{
 					auto ed = mainecs()->InstantiateArchetype(it_exit->second);
-					// TODO: prime for being a helper
-					ed->second.AddComponent(ecs::cComponent<ecs::cmp::cLocation>::Create());
-					ed->second.Component<ecs::cmp::cLocation>()->mPos = pos;
+					ed->second.AddComponent<ecs::cmp::cLocation>()->mPos = pos;
 					mFg.Add(ed, pos);
 					mExit = pos;
 				}		

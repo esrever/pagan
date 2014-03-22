@@ -21,6 +21,9 @@ namespace pgn
 			template<class T>
 			T * Component() const;
 
+			template<class T>
+			T * AddComponent();
+
 		public:
 			std::string							mName;
 			//! List of component pointers
@@ -47,6 +50,14 @@ namespace pgn
 				return &ptr->mData;
 			else
 				return nullptr;
+		}
+
+		template<class T>
+		T * cEntityData::AddComponent()
+		{
+			auto ptr = cComponent<T>::Create();
+			AddComponent(ptr);
+			return &(dynamic_cast<cComponent<T> *>(ptr.get())->mData);
 		}
 
 	}
