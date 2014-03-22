@@ -48,6 +48,8 @@ namespace pgn
 		// funcs
 		void Resize(size_t n, const T& val = T()) { mData.clear(); mDefault = val; }
 		void Fill(const T& val)        { mData.clear(); mDefault = val; }
+		void Clear(size_t idx)				  { mData.erase(idx); }
+		bool IsClear(size_t idx) const		  { return mData.find(idx) == mData.end(); }
 
 		// access
 		const_reference Get(size_t idx) const { auto it = mData.find(idx); return it == mData.end() ? mDefault : it->second; }

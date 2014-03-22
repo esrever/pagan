@@ -56,6 +56,10 @@ namespace pgn
 				void UpdateMoveCosts();
 				void UpdateObstacles();
 
+				void UpdateStaticMoveCost(const glm::ivec2& pos);
+				void UpdateMoveCost(const glm::ivec2& pos);
+				void UpdateObstacle(const glm::ivec2& pos);
+
 			private:
 				glm::uvec2				mDims;
 				glm::ivec2				mEntry, mExit;

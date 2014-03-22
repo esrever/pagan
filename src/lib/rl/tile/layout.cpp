@@ -133,6 +133,38 @@ namespace pgn
 		}
 
 		//-------------------------------------------------------------------------------
+		void cLayout::UpdateStaticMoveCost(const glm::ivec2& pos)
+		{
+			// TODO: better fg handle
+			auto cost_bg = Bg().Cells()(pos)->second.Component<ecs::cmp::cMoveCost>()->mMoveCost;
+			auto cost_fg = Fg().Cells().View().IsClear(pos.x, pos.y) ? 0.0f : Fg().Cells()(pos)->second.Component<ecs::cmp::cMoveCost>()->mMoveCost;
+			auto cost = std::max(cost_bg, cost_fg);
+			if (mStaticMoveCosts(pos) != cost)
+			{
+				mStaticMoveCosts(pos) = cost;
+				UpdateMoveCost(pos);
+			}
+		}
+
+		//-------------------------------------------------------------------------------
+		void cLayout::UpdateMoveCost(const glm::ivec2& pos)
+		{
+			auto cost_act = Actors().Cells().View().IsClear(pos.x, pos.y) ? 0.0f : Actors().Cells()(pos)->second.Component<ecs::cmp::cMoveCost>()->mMoveCost;
+			if (mMoveCosts(pos) != cost_act)
+			{
+				mMoveCosts(pos) = cost_act;
+				UpdateObstacle(pos);
+			}
+		}
+
+		//-------------------------------------------------------------------------------
+		void cLayout::UpdateObstacle(const glm::ivec2& pos)
+		{
+			mObstacles(pos) = mMoveCosts(pos) == std::numeric_limits<float>::max();
+		}
+
+
+		//-------------------------------------------------------------------------------
 		void cLayout::UpdateLayout(ecs::cEntityWithDataConst ed, ecs::cmp::cLocation * zLocOld, ecs::cmp::cLocation * zLocNew)
 		{
 			if (!zLocOld)
@@ -153,12 +185,12 @@ namespace pgn
 				break;
 			case ecs::cmp::eTileGroup::Fg:
 				Fg().Add(ed, zLocNew.mPos);
-				UpdateStaticMoveCosts();
+				UpdateStaticMoveCost(zLocNew.mPos);
 				break;
 			case ecs::cmp::eTileGroup::Atmo:
 			case ecs::cmp::eTileGroup::Actor:
 				Actors().Add(ed, zLocNew.mPos);
-				UpdateMoveCosts();
+				UpdateMoveCost(zLocNew.mPos);
 				break;
 			default:
 				break;
@@ -175,12 +207,12 @@ namespace pgn
 				break;
 			case ecs::cmp::eTileGroup::Fg:
 				Fg().Remove(ed, zLocOld.mPos);
-				UpdateStaticMoveCosts();
+				UpdateStaticMoveCost(zLocOld.mPos);
 				break;
 			case ecs::cmp::eTileGroup::Atmo:
 			case ecs::cmp::eTileGroup::Actor:
 				Actors().Remove(ed, zLocOld.mPos);
-				UpdateMoveCosts();
+				UpdateMoveCost(zLocOld.mPos);
 				break;
 			default:
 				break;
@@ -199,12 +231,14 @@ namespace pgn
 				break;
 			case ecs::cmp::eTileGroup::Fg:
 				Fg().Move(ed, zLocOld.mPos, zLocNew.mPos);
-				UpdateStaticMoveCosts();
+				UpdateStaticMoveCost(zLocOld.mPos);
+				UpdateStaticMoveCost(zLocNew.mPos);
 				break;
 			case ecs::cmp::eTileGroup::Atmo:
 			case ecs::cmp::eTileGroup::Actor:
 				Actors().Move(ed, zLocOld.mPos, zLocNew.mPos);
-				UpdateMoveCosts();
+				UpdateMoveCost(zLocOld.mPos);
+				UpdateMoveCost(zLocNew.mPos);
 				break;
 			default:
 				break;
