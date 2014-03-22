@@ -18,9 +18,17 @@ namespace pgn
 				public:
 					bool operator()(ecs::cEntityWithData& ed, cmp::cLocation * zOldLoc);
 				private:
-					void AddToLayout(ecs::cEntityWithData& ed, rl::cLayout * lay);
-					void RemoveFromLayout(ecs::cEntityWithData& ed, rl::cLayout * lay);
-					void UpdateLayout(ecs::cEntityWithData& ed, rl::cLayout * lay);
+					void AddToLayout(ecs::cEntityWithData& ed, ecs::cEntityWithData lvl);
+					void RemoveFromLayout(ecs::cEntityWithData& ed, ecs::cEntityWithData lvl);
+					void UpdateLayout(ecs::cEntityWithData& ed, ecs::cEntityWithData lvl);
+
+					void GenerateStaticMoveCosts(ecs::cEntityWithData lvl);
+					void GenerateMoveCosts(ecs::cEntityWithData lvl);
+					void GenerateObstacles(ecs::cEntityWithData lvl);
+
+					void UpdateStaticMoveCosts(ecs::cEntityWithData lvl, const glm::ivec2& pos);
+					void UpdateMoveCosts(ecs::cEntityWithData lvl, const glm::ivec2& pos);
+					void UpdateObstacles(ecs::cEntityWithData lvl, const glm::ivec2& pos);
 			};
 		}
 	}
