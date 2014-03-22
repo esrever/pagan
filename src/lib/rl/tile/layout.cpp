@@ -225,7 +225,7 @@ namespace pgn
 			switch (tileType)
 			{
 			case ecs::cmp::eTileGroup::Bg:
-				// TODO: this is kinda weird. should not really happen
+				// should not really happen
 				assert(false);
 				Bg().Move(ed, zLocOld.mPos, zLocNew.mPos);
 				break;

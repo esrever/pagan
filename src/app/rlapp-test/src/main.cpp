@@ -87,7 +87,6 @@ struct cTestApp : public pgn::rl::cRlApp
 		// ---- MONSTER STUFF 
 
 		// Find free positions
-		// TODO: use movecosts!
 		std::vector<glm::ivec2> free_pos;
 		lvl->mLayout.Obstacles().View().VisitRext([&](size_t x, size_t y, bool v){ 
 			glm::ivec2 p(x, y);
@@ -146,7 +145,6 @@ struct cTestApp : public pgn::rl::cRlApp
 		auto tex = tex_atlas->first;
 		auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
 
-		// TODO: get appr. level id
 		auto& visview = hero_vis->mVisible[lvl_id].CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
 		auto& expview = hero_vis->mExplored[lvl_id].CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
 		std::function<int(int x, int y)> get_fow = [&](int x, int y){return visview(x, y) ? 255 : (expview(x, y) ? 100 : 0); };
@@ -192,28 +190,6 @@ struct cTestApp : public pgn::rl::cRlApp
 		render_func_dense(lvl_layout.Bg().Cells());
 		render_func_sparse(lvl_layout.Fg().Entities());
 		render_func_sparse(lvl_layout.Actors().Entities());
-
-		//auto bg_view = lvl_bg.CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
-		//bg_view.VisitRext(render_func_dense);
-
-		/*
-		// TODO: sparse array views?
-		render_func_sparse(lvl_fg);
-
-		if (!lvl_act.empty())
-		{
-			for (const auto& kv : lvl_act)
-			{
-				auto x = kv.second.x - view_start.x;
-				auto y = kv.second.y - view_start.y;
-				const auto& bg_tex_set = kv.first->second.Component<pgn::ecs::cmp::cTextureSet>();
-				pgn::cSubTexture tex = bg_tex_set->mSprites[bg_tex_set->mIndex];
-				int v = get_fow(x, y);
-				SDL_Rect rect = { x * mTileDim, (mGridDims.y - 1 - y) * mTileDim, mTileDim, mTileDim };
-				MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
-			}
-		}
-		*/
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), PROJECT_ROOT "data\\fonts\\SourceSansPro\\SourceSansPro-Regular.otf", 32);
 		//pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\PT-Sans\\PTN57F.ttf", 62);
