@@ -23,12 +23,12 @@ namespace pgn
 				if (zOldLoc->mLevelId == newloc->mLevelId)
 				{
 					if (newlvl_it != world->mLevelMap.end())
-						UpdateLayout(ed, newlvl_it->second);
+						UpdateLayout(ed, newlvl_it->second, zOldLoc->mPos);
 				}
 				else // level changed
 				{
 					if (oldlvl_it != world->mLevelMap.end())
-						RemoveFromLayout(ed, oldlvl_it->second);
+						RemoveFromLayout(ed, oldlvl_it->second, zOldLoc->mPos);
 					if (newlvl_it != world->mLevelMap.end())
 						AddToLayout(ed, newlvl_it->second);
 				}
@@ -61,24 +61,23 @@ namespace pgn
 			}
 
 			//------------------------------------------------------------------------------------------
-			void cUpdateLayout::RemoveFromLayout(ecs::cEntityWithData& ed, ecs::cEntityWithData lvl)
+			void cUpdateLayout::RemoveFromLayout(ecs::cEntityWithData& ed, ecs::cEntityWithData lvl, const glm::ivec2& oldPos)
 			{
 				rl::cLayout& lay = lvl->second.Component<cmp::cLevelData>()->mLayout;
-				const auto& pos = ed->second.Component<cmp::cLocation>()->mPos;
 				auto tileType = ed->second.Component<ecs::cmp::cTileInfo>()->mType;
 				switch (tileType)
 				{
 				case ecs::cmp::eTileGroup::Bg:
-					lay.mBg.Remove(ed, zLocOld.mPos);
+					lay.mBg.Remove(ed, oldPos);
 					break;
 				case ecs::cmp::eTileGroup::Fg:
-					lay.mFg.Remove(ed, zLocOld.mPos);
-					UpdateStaticMoveCosts(zLocOld.mPos);
+					lay.mFg.Remove(ed, oldPos);
+					UpdateStaticMoveCosts(lvl,oldPos);
 					break;
 				case ecs::cmp::eTileGroup::Atmo:
 				case ecs::cmp::eTileGroup::Actor:
-					lay.mActors.Remove(ed, zLocOld.mPos);
-					UpdateMoveCosts(zLocOld.mPos);
+					lay.mActors.Remove(ed, oldPos);
+					UpdateMoveCosts(lvl,oldPos);
 					break;
 				default:
 					break;
@@ -86,27 +85,28 @@ namespace pgn
 			}
 
 			//------------------------------------------------------------------------------------------
-			void cUpdateLayout::UpdateLayout(ecs::cEntityWithData& ed, ecs::cEntityWithData lvl)
+			void cUpdateLayout::UpdateLayout(ecs::cEntityWithData& ed, ecs::cEntityWithData lvl, const glm::ivec2& oldPos)
 			{
 				rl::cLayout& lay = lvl->second.Component<cmp::cLevelData>()->mLayout;
+				const auto& pos = ed->second.Component<cmp::cLocation>()->mPos;
 				auto tileType = ed->second.Component<ecs::cmp::cTileInfo>()->mType;
 				switch (tileType)
 				{
 				case ecs::cmp::eTileGroup::Bg:
 					// should not really happen
 					assert(false);
-					lay.mBg.Move(ed, zLocOld.mPos, zLocNew.mPos);
+					lay.mBg.Move(ed, oldPos, pos);
 					break;
 				case ecs::cmp::eTileGroup::Fg:
-					lay.mFg.Move(ed, zLocOld.mPos, zLocNew.mPos);
-					UpdateStaticMoveCosts(zLocOld.mPos);
-					UpdateStaticMoveCosts(zLocNew.mPos);
+					lay.mFg.Move(ed, oldPos, pos);
+					UpdateStaticMoveCosts(lvl,oldPos);
+					UpdateStaticMoveCosts(lvl, pos);
 					break;
 				case ecs::cmp::eTileGroup::Atmo:
 				case ecs::cmp::eTileGroup::Actor:
-					lay.mActors.Move(ed, zLocOld.mPos, zLocNew.mPos);
-					UpdateMoveCosts(zLocOld.mPos);
-					UpdateMoveCosts(zLocNew.mPos);
+					lay.mActors.Move(ed, oldPos, pos);
+					UpdateMoveCosts(lvl,oldPos);
+					UpdateMoveCosts(lvl, pos);
 					break;
 				default:
 					break;
@@ -167,7 +167,7 @@ namespace pgn
 			}
 
 			//------------------------------------------------------------------------------------------
-			void cUpdateLayout::cUpdateLayout::UpdateMoveCosts(ecs::cEntityWithData lvl, const glm::ivec2& pos)
+			void cUpdateLayout::UpdateMoveCosts(ecs::cEntityWithData lvl, const glm::ivec2& pos)
 			{
 				rl::cLayout& lay = lvl->second.Component<cmp::cLevelData>()->mLayout;
 				auto cost_act = lay.mActors.Cells().View().IsClear(pos.x, pos.y) ? 0.0f : lay.mActors.Cells()(pos)->second.Component<ecs::cmp::cMoveCost>()->mMoveCost;
