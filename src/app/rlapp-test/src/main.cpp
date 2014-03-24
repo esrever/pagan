@@ -167,6 +167,18 @@ struct cTestApp : public pgn::rl::cRlApp
 			}
 		};
 
+		/*
+			For each point in the view square
+				entity = Cells( point)
+				
+				texture = entity.Component<Texture>();
+				tile_color = get_fow(point)
+				ss_coord = transform_to_screen(point)
+				tgt_rect = { ss_coord, ssTileDims}
+				src_rect = { texture.rect, ssTileDims}
+				Render( texture.atlas, tile_color, src_rect, tgt_rect)
+		*/
+
 		auto render_func_sparse = [&](const std::set<pgn::ecs::cEntityWithDataConst>& ents)
 		{
 			if (ents.empty())
@@ -187,6 +199,18 @@ struct cTestApp : public pgn::rl::cRlApp
 				MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
 			}
 		};
+
+		/*
+			For each entity in set
+				point = get_pos(entity)
+
+				texture = entity.Component<Texture>();
+				tile_color = get_fow(point)
+				ss_coord = transform_to_screen(point)
+				tgt_rect = { ss_coord, ssTileDims}
+				src_rect = { texture.rect, ssTileDims}
+				Render( texture.atlas, tile_color, src_rect, tgt_rect)
+		*/
 
 		render_func_dense(lvl_layout.Bg().Cells());
 		render_func_sparse(lvl_layout.Fg().Entities());
