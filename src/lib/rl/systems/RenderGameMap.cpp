@@ -1,5 +1,8 @@
 #include "RenderGameMap.h"
 
+#include <core/texture/texturelib.h>
+#include <core/texture/subtexturelib.h>
+
 #include <rl/event/events.h>
 #include <rl/components/components.h>
 
@@ -39,21 +42,54 @@ namespace pgn
 				auto tex = tex_atlas->first;
 				auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
 
-				auto& visview = hero_vis->mVisible[lvl_id].CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
-				auto& expview = hero_vis->mExplored[lvl_id].CreateView(view_size.x, view_size.y, view_start.x, view_start.y);
+				auto& visview = hero_vis->mVisible[lvl_id].View();
+				auto& expview = hero_vis->mExplored[lvl_id].View();
 				std::function<int(int x, int y)> get_fow = [&](int x, int y){return visview(x, y) ? 255 : (expview(x, y) ? 100 : 0); };
+
+				RenderDense1(lvl_layout.Bg(), view_start, view_size, get_fow);
+				RenderSparse1(lvl_layout.Fg(), view_start, view_size, get_fow);
+				RenderSparse1(lvl_layout.Actors(), view_start, view_size, get_fow);
 
 				return false;
 			}
 
-			void cRenderGameMap::RenderTile(ecs::cEntityWithData ed, const glm::ivec2& pos, float vis)
+			void cRenderGameMap::RenderDense1(const rl::cTileStoreDense1& ts, const glm::ivec2& start, const glm::ivec2 size, std::function<int(int x, int y)> visfunc)
 			{
+				auto end = start + size;
+				for (int y = start.y; y < end.y;++y)
+					for (int x = start.x; x < end.x; ++x)
+					{
+						const auto pos = glm::ivec2(x, y);
+						auto ed = ts.Cells()(pos);
+						RenderTile(ed, pos+start, pos, visfunc(x, y));
+					}
+			}
+
+			void cRenderGameMap::RenderSparse1(const rl::cTileStoreSparse1& ts, const glm::ivec2& start, const glm::ivec2 size, std::function<int(int x, int y)> visfunc)
+			{
+				cArrayShape2D shape(size.x, size.y, start.x, start.y);
+				if (ts.Entities().empty())
+					return;
+				for (const auto& ed : ts.Entities())
+				{
+					auto pos = ed->second.Component<cmp::cLocation>()->mPos;
+					// TODO: static inrange func! or inrect or sth
+					if ( shape.InRange(pos.x, pos.y))
+						RenderTile(ed, pos+start, pos, visfunc(pos.x, pos.y));
+				}
+			}
+
+			void cRenderGameMap::RenderTile(ecs::cEntityWithDataConst ed, const glm::ivec2& pos, const glm::ivec2& offpos, int ivis)
+			{
+				auto sspos = offpos;
+				sspos.y = mGridSize.y - 1 - sspos.y;
+				sspos += mGridStart;
 				auto texset = ed->second.Component<cmp::cTextureSet>();
 				pgn::cSubTexture tex = texset->mSprites[texset->mIndex];
-				auto ss_coord = ScreenPos(pos);
-				auto tgt_rect = { ss_coord.x, ss_coord.y, mTileSize, mTileSize };
+				SDL_Rect tgt_rect = { sspos.x*mTileSize, sspos.y*mTileSize, mTileSize, mTileSize };
 				auto src_rect = tex.second;
-				Render(tex.first, tile_color, &src_rect, &tgt_rect)
+				SDL_Color col = { ivis, ivis, ivis , 255 };
+				mWindow->RenderEx(tex.first->Texture(), col, &src_rect, &tgt_rect);
 			}
 
 			void cRenderGameMap::SetArea(const glm::uvec2& start, const glm::uvec2& dims, size_t tileDim)

@@ -36,6 +36,7 @@
 #include <rl/systems/Teleport.h>
 #include <rl/systems/GameTurn.h>
 #include <rl/systems/CreateLevel.h>
+#include <rl/systems/RenderGameMap.h>
 
 struct cTestApp : public pgn::rl::cRlApp
 {
@@ -118,6 +119,11 @@ struct cTestApp : public pgn::rl::cRlApp
 	//------------------------------------------------
 	virtual void Render()
 	{		
+		if (true)
+		{
+			pgn::mainecs()->System<pgn::ecs::sys::cRenderGameMap>().operator()();
+			return;
+		}
 		auto& ecs = pgn::mainecs();
 		// get hero and level entities
 		auto hero = pgn::mainecs()->TagusToEntities("Player");

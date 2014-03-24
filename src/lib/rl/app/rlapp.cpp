@@ -59,6 +59,7 @@ namespace pgn
 			pgn::mainecs()->System<pgn::ecs::sys::cCreateLevel>();
 			pgn::mainecs()->System<pgn::ecs::sys::cUpdateLayout>();
 			pgn::mainecs()->System<pgn::ecs::sys::cRenderGameMap>().SetArea(mGridStart, mGridDims, mTileDim);
+			pgn::mainecs()->System<pgn::ecs::sys::cRenderGameMap>().SetWindow(MainWindow().get());
 
 			const char * fname_atlas = PROJECT_ROOT "data\\tiledesc.xml";
 			MainWindow()->TextureLib()->Load(fname_atlas, "");
