@@ -9,6 +9,7 @@ namespace pgn
 	{
 		namespace sys
 		{
+			cUpdateLayout::cUpdateLayout() :INIT_EVT_MEMBER(cUpdateLayout, LevelCreated){}
 			bool cUpdateLayout::operator()(ecs::cEntityWithData& ed, cmp::cLocation * zOldLoc)
 			{
 				auto world = mainecs()->TagusToEntities("World")->second->second.Component<ecs::cmp::cWorldData>();
@@ -33,6 +34,12 @@ namespace pgn
 						AddToLayout(ed, newlvl_it->second);
 				}
 				return true;
+			}
+
+			//------------------------------------------------------------------------------------------
+			void cUpdateLayout::OnLevelCreated(ecs::cEntityWithData ed)
+			{
+				GenerateStaticMoveCosts(ed);
 			}
 
 			//------------------------------------------------------------------------------------------
@@ -123,7 +130,7 @@ namespace pgn
 				if (!lay.mFg.Entities().empty())
 				for (const auto& v : lay.mFg.Entities())
 					lay.mStaticMoveCosts(v->second.Component<ecs::cmp::cLocation>()->mPos) = v->second.Component<ecs::cmp::cMoveCost>()->mMoveCost;
-				// TODO: emit event
+				evt::cStaticMoveCostUpdated::Sig().emit(lvl);
 				GenerateMoveCosts(lvl);
 			}
 
@@ -138,8 +145,8 @@ namespace pgn
 					const auto& pos = v->second.Component<ecs::cmp::cLocation>()->mPos;
 					lay.mMoveCosts(pos) = std::max(v->second.Component<ecs::cmp::cMoveCost>()->mMoveCost, lay.mStaticMoveCosts(pos));
 				}
-				// TODO: emit event
 				GenerateObstacles(lvl);
+				evt::cMoveCostUpdated::Sig().emit(lvl);
 			}
 
 			//------------------------------------------------------------------------------------------
@@ -148,7 +155,6 @@ namespace pgn
 				rl::cLayout& lay = lvl->second.Component<cmp::cLevelData>()->mLayout;
 				lay.mObstacles.Resize(lay.mDims.x, lay.mDims.y);
 				lay.mMoveCosts.View().VisitRext([&](size_t x, size_t y, float v){ lay.mObstacles(x, y) = (v == std::numeric_limits<float>::max()); });
-				// TODO: emit event
 			}
 
 			//------------------------------------------------------------------------------------------
@@ -161,7 +167,7 @@ namespace pgn
 				if (lay.mStaticMoveCosts(pos) != cost)
 				{
 					lay.mStaticMoveCosts(pos) = cost;
-					// TODO: emit event
+					evt::cStaticMoveCostUpdated::Sig().emit(lvl);
 					UpdateMoveCosts(lvl, pos);
 				}
 			}
@@ -174,8 +180,8 @@ namespace pgn
 				if (lay.mMoveCosts(pos) != cost_act)
 				{
 					lay.mMoveCosts(pos) = cost_act;
-					// TODO: emit event
 					UpdateObstacles(lvl, pos);
+					evt::cStaticMoveCostUpdated::Sig().emit(lvl);
 				}
 			}
 
@@ -184,7 +190,6 @@ namespace pgn
 			{
 				rl::cLayout& lay = lvl->second.Component<cmp::cLevelData>()->mLayout;
 				lay.mObstacles(pos) = lay.mMoveCosts(pos) == std::numeric_limits<float>::max();
-				// TODO: emit event
 			}
 		}
 	}

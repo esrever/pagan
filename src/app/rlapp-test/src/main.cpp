@@ -35,6 +35,7 @@
 
 #include <rl/systems/Teleport.h>
 #include <rl/systems/GameTurn.h>
+#include <rl/systems/CreateLevel.h>
 
 struct cTestApp : public pgn::rl::cRlApp
 {
@@ -66,8 +67,8 @@ struct cTestApp : public pgn::rl::cRlApp
 			doc_out.save_file(fname_out);
 		}
 
-		auto lvl0 = *pgn::mainecs()->TagsToEntities("TestLevel")->second.begin();
-		pgn::evt::cLevelCreated::Sig().emit(lvl0);
+		// Initialize level
+		ecs.System<pgn::ecs::sys::cCreateLevel>()(ecs.Archetypes("TestLevel"));
 
 		// ---- HERO STUFF 
 		auto hero = pgn::mainecs()->TagusToEntities("Player");

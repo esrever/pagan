@@ -4,6 +4,7 @@
 #include <ecs/system.h>
 #include <ecs/ecs.h>
 
+#include <rl/event/events.h>
 #include <rl/components/components.h>
 
 namespace pgn
@@ -16,6 +17,8 @@ namespace pgn
 			class cUpdateLayout : public cBase
 			{
 				public:
+					cUpdateLayout();
+					void OnLevelCreated(ecs::cEntityWithData ed);
 					bool operator()(ecs::cEntityWithData& ed, cmp::cLocation * zOldLoc);
 				private:
 					void AddToLayout(ecs::cEntityWithData& ed, ecs::cEntityWithData lvl);
@@ -29,6 +32,8 @@ namespace pgn
 					void UpdateStaticMoveCosts(ecs::cEntityWithData lvl, const glm::ivec2& pos);
 					void UpdateMoveCosts(ecs::cEntityWithData lvl, const glm::ivec2& pos);
 					void UpdateObstacles(ecs::cEntityWithData lvl, const glm::ivec2& pos);
+				private:
+					DECL_EVT_MEMBER(LevelCreated);
 			};
 		}
 	}

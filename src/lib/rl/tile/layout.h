@@ -45,21 +45,6 @@ namespace pgn
 				const glm::ivec2& Entry() const { return mEntry; }
 				const glm::ivec2& Exit() const { return mExit; }
 
-				void UpdateLayout(ecs::cEntityWithDataConst ed, ecs::cmp::cLocation * zLocOld, ecs::cmp::cLocation * zLocNew);
-				void AddTile(ecs::cEntityWithDataConst ed, const ecs::cmp::cLocation& zLocNew);
-				void RemoveTile(ecs::cEntityWithDataConst ed, const ecs::cmp::cLocation& zLocOld);
-				void UpdateTile(ecs::cEntityWithDataConst ed, const ecs::cmp::cLocation& zLocOld, const ecs::cmp::cLocation& zLocNew);
-
-			private:
-
-				void UpdateStaticMoveCosts();
-				void UpdateMoveCosts();
-				void UpdateObstacles();
-
-				void UpdateStaticMoveCost(const glm::ivec2& pos);
-				void UpdateMoveCost(const glm::ivec2& pos);
-				void UpdateObstacle(const glm::ivec2& pos);
-
 			public:
 				glm::uvec2				mDims;
 				glm::ivec2				mEntry, mExit;

@@ -12,23 +12,17 @@ namespace pgn
 		namespace sys
 		{
 			//-------------------------------------------------------------------------
-			cCreateLevel::cCreateLevel() :INIT_EVT_MEMBER(cCreateLevel, LevelCreated){}
+			cCreateLevel::cCreateLevel(){}
 
 			//-------------------------------------------------------------------------
-			void cCreateLevel::OnLevelCreated(const ecs::cEntityWithData& ed)
+			bool cCreateLevel::operator()(ecs::cArchetypeWithData& arch)
 			{
-				if (!Active()) return;
-				//(*this)(const_cast<ecs::cEntityWithData&>(evt));
-				// TODO: flesh out. Currently store the id -> level association
+				auto ed = mainecs()->InstantiateArchetype(arch->second);
 				auto level = ed->second.Component<ecs::cmp::cLevelData>();
 				auto world = mainecs()->TagusToEntities("World");
 				world->second->second.Component<ecs::cmp::cWorldData>()->mLevelMap[ed->first] = ed;
-			}
-
-			//-------------------------------------------------------------------------
-			bool cCreateLevel::operator()(ecs::cEntityWithData& ed)
-			{
-				return false;
+				evt::cLevelCreated::Sig().emit(ed);
+				return true;
 			}
 		}
 	}

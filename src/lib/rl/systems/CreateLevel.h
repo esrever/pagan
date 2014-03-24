@@ -14,11 +14,9 @@ namespace pgn
 			{
 				public:
 					cCreateLevel();
-					void OnLevelCreated(const ecs::cEntityWithData& evt);
-					bool operator()(ecs::cEntityWithData&);
+					bool operator()(ecs::cArchetypeWithData&);
 
 				private:
-					DECL_EVT_MEMBER(LevelCreated);
 			};
 		}
 	}

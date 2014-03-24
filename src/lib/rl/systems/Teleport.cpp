@@ -24,14 +24,6 @@ namespace pgn
 					return false;
 				
 				// Success!
-				
-				// remove from old level
-				auto it_srclvl = world->mLevelMap.find(edloc->mLevelId);
-				if (it_srclvl != world->mLevelMap.end())
-				{
-					auto srclvl = it_srclvl->second->second.Component<cmp::cLevelData>();
-					srclvl->mLayout.RemoveTile(ed, *edloc);
-				}
 
 				auto ped = mainecs()->TagusToEntities("Player")->second;
 				// Set current level if applicable
