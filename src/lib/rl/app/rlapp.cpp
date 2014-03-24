@@ -18,6 +18,7 @@
 #include <rl/systems/GameTurn.h>
 #include <rl/systems/CreateLevel.h>
 #include <rl/systems/UpdateLayout.h>
+#include <rl/systems/RenderGameMap.h>
 
 namespace pgn
 {
@@ -34,14 +35,6 @@ namespace pgn
 			pgn::ecs::RegisterComponents(*mainecs());
 			pgn::rl::RegisterActions(*mainecs());
 
-			// TODO: move system init elsewhere
-			pgn::mainecs()->System<ecs::sys::cInputKey>();
-			pgn::mainecs()->System<ecs::sys::cCalcVis>();
-			pgn::mainecs()->System<ecs::sys::cCreateLevel>();
-			pgn::mainecs()->System<pgn::ecs::sys::cGameTurn>();
-			pgn::mainecs()->System<pgn::ecs::sys::cCreateLevel>();
-			pgn::mainecs()->System<pgn::ecs::sys::cUpdateLayout>();
-
 			static const glm::uvec2 gridDims(40, 20);
 			static const size_t  numLines = 4;
 
@@ -57,6 +50,15 @@ namespace pgn
 			mGridStart = glm::uvec2(0, 0);
 			mLogStart = glm::uvec2(5, mTileDim*mGridDims.y + msTextHeight / 4);
 			mStatusStart = glm::uvec2(5 + mTileDim*mGridDims.x, 0);
+
+			// TODO: move system init elsewhere
+			pgn::mainecs()->System<ecs::sys::cInputKey>();
+			pgn::mainecs()->System<ecs::sys::cCalcVis>();
+			pgn::mainecs()->System<ecs::sys::cCreateLevel>();
+			pgn::mainecs()->System<pgn::ecs::sys::cGameTurn>();
+			pgn::mainecs()->System<pgn::ecs::sys::cCreateLevel>();
+			pgn::mainecs()->System<pgn::ecs::sys::cUpdateLayout>();
+			pgn::mainecs()->System<pgn::ecs::sys::cRenderGameMap>().SetArea(mGridStart, mGridDims, mTileDim);
 
 			const char * fname_atlas = PROJECT_ROOT "data\\tiledesc.xml";
 			MainWindow()->TextureLib()->Load(fname_atlas, "");
