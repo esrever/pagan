@@ -104,6 +104,9 @@
       <ControllerAI/>
       <TileInfo Type="3"/>
       <MoveCost MoveCost="inf"/>
+      <ControllerAI>
+        <Action name = "Wander"/>
+      </ControllerAI>
     </Components>
   </Entity>
   

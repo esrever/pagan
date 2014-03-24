@@ -1,5 +1,7 @@
 #include "GameTurn.h"
 
+#include <ecs/systems/InputKey.h>
+
 #include <rl/components/components.h>
 #include <rl/fov/FovLookup.h>
 #include <rl/fov/fov_rsc.h>
@@ -40,7 +42,8 @@ namespace pgn
 			void cGameTurn::OnPlayerAction()
 			{
 				Advance();
-				// TODO: just disable keyboard
+				// Disable keyboard till it's player's turn again
+				mainecs()->System<cInputKey>().SetActive(false);
 			}
 
 			//-------------------------------------------------------------------------
@@ -65,7 +68,8 @@ namespace pgn
 					auto cmp_pc = (*mCurrent)->second.Component<cmp::cControllerPlayer>();
 					if (cmp_pc)
 					{
-						// TODO: just enable keyboard
+						// Enable keyboard
+						mainecs()->System<cInputKey>().SetActive(true);
 						break;
 					}
 					else if (cmp_ai)

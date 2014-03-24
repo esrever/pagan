@@ -14,6 +14,14 @@ namespace pgn
 		{
 			bool cMoveAdj::operator()(ecs::cEntityWithData& ed, const glm::ivec2& dir)
 			{
+				// if entity didn't move anywhere & it's the player, still emit a player action event
+				if ((dir == glm::ivec2(0, 0)) && (ed == mainecs()->TagusToEntities("Player")->second))
+				{
+					mainapp()->GameLog().Inf(pgn::format("%s moves %s", ed->second.mName.c_str(), dirstrings_long[dir.x + 1 + 3 * (dir.y + 1)]));
+					evt::cPlayerAction::Sig().emit();
+					return false;
+				}
+
 				// get some components
 				auto loc = ed->second.Component<cmp::cLocation>();
 

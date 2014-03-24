@@ -28,4 +28,6 @@ namespace pgn
 			cBlackBoard mBlackBoard;
 		};
 	}
+
+	DECL_SERIALIZE_INTERFACE(bt::cBehaviorTree);
 }
