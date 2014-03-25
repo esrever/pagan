@@ -51,7 +51,13 @@ namespace pgn
 			}
 			else
 			{
-				dfunc = [&](const glm::ivec2& off)->float{ return tgt_difi->mValue.Data()(off); };
+				dfunc = [&](const glm::ivec2& off)->float{ 
+					auto pos = me_loc->mPos + off - tgt_difi->mValue.CornerWcs();
+					if (tgt_difi->mValue.Data().InRange(pos))
+						return tgt_difi->mValue.Data()(pos); 
+					else
+						return std::numeric_limits<float>::max();
+				};
 			}
 
 			// find the closest point to target

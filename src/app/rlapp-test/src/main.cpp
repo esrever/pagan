@@ -124,6 +124,7 @@ struct cTestApp : public pgn::rl::cRlApp
 	//------------------------------------------------
 	virtual void Render()
 	{	
+		return;
 		pgn::mainecs()->System<pgn::ecs::sys::cRenderMainWin>().operator()();
 		return;
 	}

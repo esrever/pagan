@@ -23,7 +23,7 @@ namespace pgn
 			//-------------------------------------------------------------------------
 			bool cUpdateDiFi::operator()(ecs::cEntityWithData& ed)
 			{
-				auto difi = ed->second.Component<cmp::cMapDiFi>()->mValue;
+				auto& difi = ed->second.Component<cmp::cMapDiFi>()->mValue;
 				auto loc = ed->second.Component<cmp::cLocation>();
 
 				auto world = mainecs()->TagusToEntities("World")->second->second.Component<ecs::cmp::cWorldData>();
