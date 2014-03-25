@@ -4,6 +4,7 @@
 #include <ecs/ecs.h>
 #include <rl/components/components.h>
 #include <rl/systems/MoveAdj.h>
+#include <rl/tile/layout.h>
 #include <rl/utils/shape/ShapeCalc.h>
 
 namespace pgn
@@ -30,13 +31,17 @@ namespace pgn
 			pgn::ecs::cmp::cLocation * me_loc = me->second.Component<pgn::ecs::cmp::cLocation>();
 			pgn::ecs::cmp::cLocation * tgt_loc = tgt->second.Component<pgn::ecs::cmp::cLocation>();
 
+			const auto& world = mainecs()->TagusToEntities("World")->second->second.Component<ecs::cmp::cWorldData>();
+			const auto& lvl = world->mLevelMap.find(me_loc->mLevelId)->second;
+			const auto& layout = lvl->second.Component<ecs::cmp::cLevelData>()->mLayout;
+
 
 			// make the distance function
 			auto dfunc = [&](const glm::ivec2& off)->float{
 				auto p = me_loc->mPos + off;
 				// TODO: in range & walkable check
 				bool in_range = true;
-				if (in_range)
+				if (in_range && (!layout.Obstacles()(p)))
 				{
 					return pgn::norm_2(p - tgt_loc->mPos);
 				}
@@ -102,7 +107,7 @@ namespace pgn
 			const auto& hero_pos = hero->second->second.Component<ecs::cmp::cLocation>()->mPos;
 
 			// TODO: read LoS from settings
-			const float los = 4.0f;
+			const float los = 114.0f;
 			if (pgn::norm_2(me_pos- hero_pos) < los)
 			{
 				std::vector<ecs::cEntityWithData> hostiles;
