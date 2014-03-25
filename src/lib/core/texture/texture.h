@@ -8,13 +8,14 @@
 #include <SDL.h>
 #undef main
 
+#include <core/container/box2.h>
 #include <core/serialize/serialize.h>
 
 namespace pgn
 {
 	class cTexture;
 	typedef std::shared_ptr<cTexture> cTexture_sptr;
-	typedef std::pair<cTexture_sptr, SDL_Rect> cSubTexture;
+	typedef std::pair<cTexture_sptr, cBox2i> cSubTexture;
 
 	class cTexture
 	{
@@ -38,7 +39,6 @@ namespace pgn
 			std::string mName;
 	};
 
-	DECL_SERIALIZE_INTERFACE(SDL_Rect);
 	DECL_SERIALIZE_INTERFACE(cSubTexture);
 
 	//-------------------------------------------------------------

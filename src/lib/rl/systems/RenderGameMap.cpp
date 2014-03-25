@@ -2,6 +2,7 @@
 
 #include <core/texture/texturelib.h>
 #include <core/texture/subtexturelib.h>
+#include <core/sdl/util.h>
 
 #include <rl/event/events.h>
 #include <rl/components/components.h>
@@ -92,7 +93,7 @@ namespace pgn
 				auto texset = ed->second.Component<cmp::cTextureSet>();
 				pgn::cSubTexture tex = texset->mSprites[texset->mIndex];
 				SDL_Rect tgt_rect = { sspos.x*mTileSize, sspos.y*mTileSize, mTileSize, mTileSize };
-				auto src_rect = tex.second;
+				auto src_rect = as_sdlrect(tex.second);
 				SDL_Color col = { ivis, ivis, ivis , 255 };
 				mWindow->RenderEx(tex.first->Texture(), col, &src_rect, &tgt_rect);
 			}

@@ -32,7 +32,7 @@ namespace pgn
 
 		// get rect name
 		const auto& rects = it->second->Rects();
-		auto itr = std::find_if(rects.begin(), rects.end(), [&](const std::map<std::string, SDL_Rect>::value_type& v) {return v.second == value.second; });
+		auto itr = std::find_if(rects.begin(), rects.end(), [&](const std::map<std::string, cBox2i>::value_type& v) {return v.second == value.second; });
 		subtex = itr->first;
 		
 		// write out
@@ -61,25 +61,5 @@ namespace pgn
 
 		value = cSubTexture(tex_atlas->first, *rect_ptr);
 		return ok;
-	}
-
-	//---------------------------------------------------------------------------------------------------
-	void SerializeOut(node_type& node, const SDL_Rect& value)
-	{
-		detail::WriteAttribute(node, "x", value.x);
-		detail::WriteAttribute(node, "y", value.y);
-		detail::WriteAttribute(node, "w", value.w);
-		detail::WriteAttribute(node, "h", value.h);
-	}
-
-	//---------------------------------------------------------------------------------------------------
-	size_t SerializeIn(const node_type& node, SDL_Rect& value)
-	{
-		size_t ret = 0;
-		ret += detail::ReadAttribute(node, "x", value.x);
-		ret += detail::ReadAttribute(node, "y", value.y);
-		ret += detail::ReadAttribute(node, "w", value.w);
-		ret += detail::ReadAttribute(node, "h", value.h);
-		return ret;
 	}
 }

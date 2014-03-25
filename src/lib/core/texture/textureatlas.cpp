@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <pugixml.hpp>
 
-#include <SDL_rect.h>
+#include <core/sdl/util.h>
 
 #include "subtexturelib.h"
 
@@ -33,7 +33,7 @@ namespace pgn
 				mDims.y = std::max(mDims.y, row);
 				glm::ivec2 idx(col, row);
 				SDL_Rect r = { col*mTileSize.x, row*mTileSize.y, mTileSize.x, mTileSize.y };
-				AddRect(name, r);
+				AddRect(name, as_rect(r));
 			}
 			mDims = mDims + glm::uvec2(1, 1);
 

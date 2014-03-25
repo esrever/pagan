@@ -9,6 +9,7 @@
 #include <core/app/sdlapp.h>
 #include <core/app/sdlwin.h>
 #include <core/sdl/font.h>
+#include <core/sdl/util.h>
 #include <core/texture/texturelib.h>
 
 #include <glm/glm.hpp>
@@ -56,9 +57,9 @@ struct cTestApp : public pgn::cSDLApp
 			
 			if (it_rect != atlas->Rects().end())
 			{
-				SDL_Rect texrect = it_rect->second;
+				const auto& texrect = it_rect->second;
 				SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
-				MainWindow()->RenderEx(tex->Texture(), { 255, 255, 255, 255 }, &texrect, &rect);
+				MainWindow()->RenderEx(tex->Texture(), { 255, 255, 255, 255 }, &pgn::as_sdlrect(texrect), &rect);
 				++it_rect;
 			}
 		}

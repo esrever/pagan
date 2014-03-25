@@ -1,21 +1,10 @@
 #pragma once
 
 #include <SDL_rect.h>
-#include <core/serialize/serialize.h>
+#include <core/container/box2.h>
 
-namespace std
+namespace pgn
 {
-	inline const string to_string(const SDL_Rect& v)
-	{
-		std::ostringstream oss;
-		oss << "{" << v.x << "," << v.y << "," << v.w << "," << v.h << "}";
-		return oss.str();
-	}
-
-	inline const SDL_Rect from_string(const std::string& v)
-	{
-		SDL_Rect rect;
-		sscanf(v.c_str(), "{%d,%d,%d,%d}", rect.x, rect.y, rect.w, rect.h);
-		return rect;
-	}
+	inline const cBox2i& as_rect(const SDL_Rect& r) { return *reinterpret_cast<const cBox2i*>(&r); }
+	inline const SDL_Rect& as_sdlrect(const cBox2i& b) { return *reinterpret_cast<const SDL_Rect*>(&b); }
 }

@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 
-struct SDL_Rect;
+#include <core/container/box2.h>
 
 namespace pgn
 {
@@ -12,15 +12,15 @@ namespace pgn
 	{
 		public:
 			virtual ~cSubTextureLib(){}
-			void AddRect(const std::string& s, const SDL_Rect & r);
-			void AddRect(const SDL_Rect & r);
+			void AddRect(const std::string& s, const cBox2i & r);
+			void AddRect(const cBox2i & r);
 
-			const SDL_Rect * Rect() const { return nullptr; }
-			const SDL_Rect * Rect(const std::string& s) const;
-			const std::map<std::string, SDL_Rect>& Rects() const { return mRects; }
+			const cBox2i * Rect() const { return nullptr; }
+			const cBox2i * Rect(const std::string& s) const;
+			const std::map<std::string, cBox2i>& Rects() const { return mRects; }
 			
 		private:
-			std::map<std::string, SDL_Rect> mRects;
+			std::map<std::string, cBox2i> mRects;
 	};
 
 	typedef std::shared_ptr<cSubTextureLib> cSubTextureLib_sptr;

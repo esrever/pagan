@@ -18,6 +18,7 @@
 #include <rl/fov/FovLookup.h>
 #include <rl/fov/fov_rsc.h>
 
+#include <core/sdl/util.h>
 #include <core/serialize/serialize.h>
 #include <core/texture/texture.h>
 #include <core/texture/texturelib.h>
@@ -111,7 +112,7 @@ struct cTestApp : public pgn::cSDLApp
 			// FOV:
 			v = 50 + int(visf(j,i) * 205);
 			//v = visf(j, i) > 0.0f ? 255 : 50;
-			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &tex.second, &rect);
+			MainWindow()->RenderEx(tex.first->Texture(), { v, v, v, 255 }, &pgn::as_sdlrect(tex.second), &rect);
 		}
 
 		pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\SourceSansPro\\SourceSansPro-Regular.otf", 32);
