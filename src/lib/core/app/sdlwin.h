@@ -3,7 +3,7 @@
 #include <string>
 
 #include <SDL.h>
-#include <core/sdl/pointers.h>
+#include <core/sdl/util.h>
 
 namespace pgn
 {

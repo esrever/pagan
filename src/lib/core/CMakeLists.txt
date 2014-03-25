@@ -8,7 +8,6 @@ set(SOURCE_FILES
     util/image.cpp
     sdl/util.cpp
     sdl/font.cpp
-    sdl/pointers.cpp
     texture/texturelib.cpp
     texture/subtexturelib.cpp
     texture/texture.cpp
@@ -36,7 +35,6 @@ set(HEADER_FILES
     container/box2.h
     #container/dict2.h
     sdl/font.h
-    sdl/pointers.h
     sdl/util.h
     util/logstream.h
     util/color.h
