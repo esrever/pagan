@@ -38,6 +38,9 @@ namespace pgn
 			void cRenderMainWin::SetLayout(const glm::ivec2& grid, size_t tileDim)
 			{
 				auto& ecs = mainecs();
+
+				assert((grid.x * int(tileDim)-10) < mWindow->Rect().w);
+				assert((grid.y * int(tileDim) - 10) < mWindow->Rect().h);
 				
 				ecs->System<cRenderGameMap>().SetArea(cBox2i(glm::ivec2(0, 0), grid), tileDim);
 
