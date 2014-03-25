@@ -33,6 +33,7 @@ set(HEADER_FILES
     container/Array2D_utils.h
     container/ArrayShape2D.h
     container/dict.h
+    container/box2.h
     #container/dict2.h
     sdl/font.h
     sdl/pointers.h
