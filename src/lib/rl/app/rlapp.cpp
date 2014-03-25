@@ -41,18 +41,18 @@ namespace pgn
 			static const glm::uvec2 gridDims(40, 20);
 			static const size_t  numLines = 4;
 
-			mGridDims = gridDims;
+			mGridArea.mDims = gridDims;
 			mNumLines = numLines;
 			glm::ivec2 windims(MainWindow()->Rect().w, MainWindow()->Rect().h);
 
 			const size_t logsize = mNumLines * msTextHeight + msTextHeight / 4;
-			int tile_h = (windims.y - logsize) / mGridDims.y;
-			int tile_w = windims.x / mGridDims.x;
+			int tile_h = (windims.y - logsize) / mGridArea.mDims.y;
+			int tile_w = windims.x / mGridArea.mDims.x;
 			mTileDim = std::min(tile_w, tile_h);
 
-			mGridStart = glm::uvec2(0, 0);
-			mLogStart = glm::uvec2(5, mTileDim*mGridDims.y + msTextHeight / 4);
-			mStatusStart = glm::uvec2(5 + mTileDim*mGridDims.x, 0);
+			mGridArea.mStart= glm::uvec2(0, 0);
+			mLogStart = glm::uvec2(5, mTileDim*mGridArea.mDims.y + msTextHeight / 4);
+			mStatusStart = glm::uvec2(5 + mTileDim*mGridArea.mDims.x, 0);
 
 			// TODO: move system init elsewhere
 			pgn::mainecs()->System<ecs::sys::cInputKey>();
@@ -62,7 +62,7 @@ namespace pgn
 			pgn::mainecs()->System<pgn::ecs::sys::cCreateLevel>();
 			pgn::mainecs()->System<pgn::ecs::sys::cUpdateLayout>();
 			pgn::mainecs()->System<pgn::ecs::sys::cUpdateAI>();
-			pgn::mainecs()->System<pgn::ecs::sys::cRenderGameMap>().SetArea(mGridStart, mGridDims, mTileDim);
+			pgn::mainecs()->System<pgn::ecs::sys::cRenderGameMap>().SetArea( mGridArea, mTileDim);
 			pgn::mainecs()->System<pgn::ecs::sys::cRenderGameMap>().SetWindow(MainWindow().get());
 
 			const char * fname_atlas = PROJECT_ROOT "data\\tiledesc.xml";

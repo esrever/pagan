@@ -27,7 +27,7 @@ namespace pgn
 				auto lvl_id = lvl->second->first;
 
 				// get the renderrect
-				auto view_size = glm::ivec2(mGridSize.x, mGridSize.y);
+				auto view_size = glm::ivec2(mArea.mDims.x, mArea.mDims.y);
 				auto view_start = pgn::rl::GetCenteredView(glm::ivec2(lvl_layout.Dims().x, lvl_layout.Dims().y),
 					hero_pos,
 					view_size);
@@ -88,8 +88,8 @@ namespace pgn
 			void cRenderGameMap::RenderTile(ecs::cEntityWithDataConst ed, const glm::ivec2& pos, const glm::ivec2& offpos, int ivis)
 			{
 				auto sspos = offpos;
-				sspos.y = mGridSize.y - 1 - sspos.y;
-				sspos += mGridStart;
+				sspos.y = mArea.mDims.y - 1 - sspos.y;
+				sspos += mArea.mStart;
 				auto texset = ed->second.Component<cmp::cTextureSet>();
 				pgn::cSubTexture tex = texset->mSprites[texset->mIndex];
 				SDL_Rect tgt_rect = { sspos.x*mTileSize, sspos.y*mTileSize, mTileSize, mTileSize };
@@ -98,12 +98,6 @@ namespace pgn
 				mWindow->RenderEx(tex.first->Texture(), col, &src_rect, &tgt_rect);
 			}
 
-			void cRenderGameMap::SetArea(const glm::uvec2& start, const glm::uvec2& dims, size_t tileDim)
-			{
-				mGridStart = start;
-				mGridSize = dims;
-				mTileSize = tileDim;
-			}
 		}
 	}
 }

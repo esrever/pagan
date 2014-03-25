@@ -2,9 +2,11 @@
 
 #include <glm/glm.hpp>
 
+#include <core/container/box2.h>
 #include <core/app/sdlapp.h>
 #include <ecs/ecs.h>
 #include <rl/dungen/dungen.h>
+
 
 namespace pgn
 {
@@ -33,13 +35,12 @@ namespace pgn
 			void LoadBehaviorDb(const char * fname);
 
 			//------------------------------------------------
-			glm::uvec2 mGridDims;
 			size_t	   mNumLines;
 
 			size_t	   mTileDim;
-			glm::uvec2 mGridStart;
-			glm::uvec2 mLogStart;
-			glm::uvec2 mStatusStart;
+			cBox2i	   mGridArea;
+			glm::ivec2 mLogStart;
+			glm::ivec2 mStatusStart;
 
 			ecs::cECS   mECS;
 

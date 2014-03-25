@@ -155,8 +155,8 @@ struct cTestApp : public pgn::rl::cRlApp
 	//DECL_EVT_MEMBER(MouseMotion);
 	void OnMouseMotion(const SDL_MouseMotionEvent& e)
 	{
-		mMouseOverCell.x = std::min( e.x / mTileDim, mGridDims.x-1);
-		mMouseOverCell.y = std::min(e.y / mTileDim, mGridDims.y - 1);
+		mMouseOverCell.x = std::min( int(e.x / mTileDim), mGridArea.mDims.x-1);
+		mMouseOverCell.y = std::min(int(e.y / mTileDim), mGridArea.mDims.y - 1);
 		//mMouseOverCell.y = mGridDims.y - 1 - mMouseOverCell.y;
 	}
 
