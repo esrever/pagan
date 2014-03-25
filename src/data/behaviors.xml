@@ -17,3 +17,4 @@
         <Action name = "Wander"/>
     </Selector>
 </Sequence>
+<Action name = "Wander"/>

@@ -95,7 +95,7 @@ namespace pgn
 		// ============================================================================
 		cDecorator::cDecorator(const cDecorator& v)
 			:cBehavior(v)
-			, mChild(v.mChild)
+			, mChild(v.mChild ? v.mChild->Clone() : nullptr)
 		{
 		}
 
@@ -153,8 +153,9 @@ namespace pgn
 		// ============================================================================
 		cComposite::cComposite(const cComposite& v)
 			:cBehavior(v)
-			, mChildren(v.mChildren)
 		{
+			for (const auto c : v.mChildren)
+				mChildren.push_back(c ? c->Clone() : nullptr);
 		}
 
 		size_t cComposite::SerializeIn(const pugi::xml_node& node)

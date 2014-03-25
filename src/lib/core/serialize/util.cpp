@@ -6,6 +6,8 @@
 
 #include <pugixml.hpp>
 
+#include <core/util/string.h>
+
 namespace pgn
 {
 	bool LoadXML(pugi::xml_document& doc, const char * fname, std::ostream& os)
@@ -23,5 +25,15 @@ namespace pgn
 			os << "//------------------------------------------------------------------\n";
 		}
 		return res;
+	}
+
+	std::string DisplayNodeAndChildren(const pugi::xml_node& node)
+	{
+		std::string str_children;
+		for (auto c : node.children())
+		{
+			str_children += format("%s ,", c.name());
+		}
+		return node.name() + std::string(": ") + str_children;
 	}
 }

@@ -7,6 +7,7 @@
 #include <rl/fov/fov_rsc.h>
 
 #include "MoveAdj.h"
+#include "UpdateAI.h"
 
 namespace pgn
 {
@@ -74,8 +75,7 @@ namespace pgn
 					}
 					else if (cmp_ai)
 					{
-						// TODO: simulate normally, all of them till we reach the player
-						mainecs()->System<cMoveAdj>()(*mCurrent, glm::ivec2((rand() % 3) - 1, (rand() % 3) - 1));
+						mainecs()->System<cUpdateAI>()(*mCurrent);
 						Advance();
 					}
 					else

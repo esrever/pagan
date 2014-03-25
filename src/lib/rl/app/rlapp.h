@@ -30,11 +30,11 @@ namespace pgn
 			//------------------------------------------------
 			virtual void Destroy(){}
 
+			void LoadBehaviorDb(const char * fname);
+
 			//------------------------------------------------
 			glm::uvec2 mGridDims;
 			size_t	   mNumLines;
-
-			pgn::rl::cWorkspace mDungeon;
 
 			size_t	   mTileDim;
 			glm::uvec2 mGridStart;

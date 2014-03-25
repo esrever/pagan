@@ -1,6 +1,8 @@
 
 #include "ControllerAI.h"
 
+#include <core/serialize/util.h>
+
 namespace pgn{
     namespace ecs{
         namespace cmp{

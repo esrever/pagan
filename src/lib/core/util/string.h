@@ -1,6 +1,9 @@
 #pragma once
 
 #include <cstdarg>
+#include <istream>
+#include <sstream>
+#include <memory>
 #include <string>
 
 namespace std

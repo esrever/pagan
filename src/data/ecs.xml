@@ -101,11 +101,10 @@
           <array_elem value="r"/>
         </Symbols>
       </AsciiSet>
-      <ControllerAI/>
       <TileInfo Type="3"/>
       <MoveCost MoveCost="inf"/>
       <ControllerAI>
-        <Action name = "Wander"/>
+        <Btree preset="basic-ai"/>
       </ControllerAI>
     </Components>
   </Entity>

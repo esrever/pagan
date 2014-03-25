@@ -1,6 +1,8 @@
 #include "conditions.h"
 #include "blackboard.h"
+
 #include <rl/components/components.h>
+#include <core/math/norm.h>
 
 namespace pgn
 {
@@ -15,13 +17,14 @@ namespace pgn
 		//------------------------------------------------------------------------------------------------------
 		bool HostilesDetected(cBlackBoard& bb)
 		{
-			return false;
+			auto ptr = bb.mDictTemp.Get<std::vector<ecs::cEntityWithData>>("hostiles");
+			return ptr ? !ptr->empty() : false;
 		}
 
 		//------------------------------------------------------------------------------------------------------
 		bool TargetInMeleeDistance(cBlackBoard& bb)
 		{
-			return false;
+			return (*bb.mDictTemp.Get<float>("d2target")) < 2.0f;
 		}
 	}
 }

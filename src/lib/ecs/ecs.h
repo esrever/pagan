@@ -63,7 +63,10 @@ namespace pgn
 			void Tagu(const std::string&, cEntityWithData);
 			void Untagu(const std::string&, cEntityWithData);
 
+			//! Instantiates an archetype, copying all its data.
 			cEntityWithData InstantiateArchetype(const cEntityData& arch);
+
+			//! Instantiates a component, either non-existent or shared. If shared, copies the value.
 			template<class T>
 			T * InstantiateComponent(cEntityWithData& ed);
 
@@ -132,10 +135,12 @@ namespace pgn
 		template<class T>
 		T * cECS::InstantiateComponent(cEntityWithData& ed)
 		{
-			auto ptr = cComponent<T>::Create();
-			ed->second.AddComponent(ptr);
+			auto ptr = ed->second.Component<T>();
+			auto ptrnew = ed->second.AddComponent<T>();
+			if (ptr)
+				*ptrnew = *ptr;
 			evt::cComponentAdded::Sig().emit(ed, cComponent<T>::StaticTypeIndex());
-			return std::dynamic_pointer_cast<T>(ptr).get();
+			return ptrnew;
 		}
 	}
 

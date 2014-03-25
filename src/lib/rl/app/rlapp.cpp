@@ -5,8 +5,10 @@
 #include <core/sdl/font.h>
 
 #include <core/texture/texturelib.h>
+#include <core/serialize/util.h>
 
 #include <rl/ai/actions.h>
+#include <rl/ai/behavior.h>
 #include <rl/ai/conditions.h>
 #include <rl/components/RegisterComponents.h>
 #include <rl/event/events.h>
@@ -19,6 +21,7 @@
 #include <rl/systems/CreateLevel.h>
 #include <rl/systems/UpdateLayout.h>
 #include <rl/systems/RenderGameMap.h>
+#include <rl/systems/UpdateAI.h>
 
 namespace pgn
 {
@@ -58,46 +61,20 @@ namespace pgn
 			pgn::mainecs()->System<pgn::ecs::sys::cGameTurn>();
 			pgn::mainecs()->System<pgn::ecs::sys::cCreateLevel>();
 			pgn::mainecs()->System<pgn::ecs::sys::cUpdateLayout>();
+			pgn::mainecs()->System<pgn::ecs::sys::cUpdateAI>();
 			pgn::mainecs()->System<pgn::ecs::sys::cRenderGameMap>().SetArea(mGridStart, mGridDims, mTileDim);
 			pgn::mainecs()->System<pgn::ecs::sys::cRenderGameMap>().SetWindow(MainWindow().get());
 
 			const char * fname_atlas = PROJECT_ROOT "data\\tiledesc.xml";
 			MainWindow()->TextureLib()->Load(fname_atlas, "");
+
+			const char * fname_bt = PROJECT_ROOT "data\\behaviors.xml";
+			pgn::mainecs()->System<pgn::ecs::sys::cUpdateAI>().LoadBehaviorDb(fname_bt);
 		}
 
 		void cRlApp::Render()
 		{
-			auto tex_atlas = MainWindow()->TextureLib()->FindByName(":");
-			auto tex = tex_atlas->first;
-			auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
-			auto it_rect = atlas->Rects().cbegin();
-			for (size_t i = 0; i < mGridDims.y; ++i)
-			for (size_t j = 0; j < mGridDims.x; ++j)
-			{
-				size_t o = mDungeon.mMapData(j, i) & (pgn::rl::eMapData::room | pgn::rl::eMapData::corridor | pgn::rl::eMapData::conn)
-					? 160 : 191;
-				size_t tgtx = o % atlas->Dims().x;
-				size_t tgty = (o / atlas->Dims().x) % atlas->Dims().y;
-				SDL_Rect texrect = it_rect->second;
-				++it_rect;
-				SDL_Rect rect = { j * mTileDim, i * mTileDim, mTileDim, mTileDim };
-
-				MainWindow()->RenderEx(tex->Texture(), { 255, 255, 255, 255 }, &texrect, &rect);
-			}
-
-			pgn::cSDLFont font(MainWindow()->Renderer(), "c:\\Windows\\fonts\\DejaVuSerif.ttf", 32);
-
-			SDL_Rect textRect;
-			auto texf = font.CreateText("Hello world!", &textRect);
-
-			float ar = textRect.w / float(textRect.h);
-
-			for (size_t i = 0; i < mNumLines; ++i)
-			{
-				size_t yo = mLogStart.y + i*msTextHeight;
-				SDL_Rect rect = { mLogStart.x, yo, int(ar * msTextHeight), msTextHeight };
-				MainWindow()->Render(texf.get(), &rect);
-			}
+			
 		}
 	}
 }

@@ -1,6 +1,9 @@
 #include "actions.h"
 #include "blackboard.h"
+
+#include <ecs/ecs.h>
 #include <rl/components/components.h>
+#include <rl/systems/MoveAdj.h>
 #include <rl/utils/shape/ShapeCalc.h>
 
 namespace pgn
@@ -21,7 +24,7 @@ namespace pgn
 		//------------------------------------------------------------------------------------------------------
 		eStatus ApproachTarget(cBlackBoard& bb)
 		{
-			auto me = *bb.mDictTemp.Get<ecs::cEntityWithData>("me");
+			auto me = *bb.mDictPerm.Get<ecs::cEntityWithData>("me");
 			auto tgt = *bb.mDictTemp.Get<ecs::cEntityWithData>("target");
 			// TODO: request difi of target later.
 			pgn::ecs::cmp::cLocation * me_loc = me->second.Component<pgn::ecs::cmp::cLocation>();
@@ -59,40 +62,65 @@ namespace pgn
 				return eStatus::Failure;
 			else
 			{
-
 				// TODO: MoveAdj action! use the iterator for the direction and the consumed MovePoints
+				mainecs()->System<ecs::sys::cMoveAdj>()(me, *best_it);
 				return eStatus::Success;
 			}
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		eStatus Wander(cBlackBoard&)
+		eStatus Wander(cBlackBoard& bb)
 		{
-			return eStatus::Failure;
+			auto me = *bb.mDictPerm.Get<ecs::cEntityWithData>("me");
+			bool ok = mainecs()->System<ecs::sys::cMoveAdj>()(me, glm::ivec2((rand() % 3) - 1, (rand() % 3) - 1));
+			return eStatus::Success;
 		}
 
 		//------------------------------------------------------------------------------------------------------
 		eStatus MeleeAttackTarget(cBlackBoard&)
 		{
-			return eStatus::Failure;
+			// TODO: replace wuth something more appropriate
+			std::cout << "Squeeeeaaaak!!!!" << std::endl; 
+			return eStatus::Success;
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		eStatus SelectTarget(cBlackBoard&)
+		eStatus SelectTarget(cBlackBoard& bb)
 		{
-			return eStatus::Failure;
+			// TODO: add logic on who's the target
+			const auto& hostiles = bb.mDictTemp.Get<std::vector<ecs::cEntityWithData>>("hostiles");
+			bb.mDictTemp.Insert("target",hostiles->front());
+			return eStatus::Success;
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		eStatus SenseHostiles(cBlackBoard&)
+		eStatus SenseHostiles(cBlackBoard& bb)
 		{
-			return eStatus::Failure;
+			auto me = *bb.mDictPerm.Get<ecs::cEntityWithData>("me");
+			const auto& me_pos = me->second.Component<ecs::cmp::cLocation>()->mPos;
+			auto hero = pgn::mainecs()->TagusToEntities("Player");
+			const auto& hero_pos = hero->second->second.Component<ecs::cmp::cLocation>()->mPos;
+
+			// TODO: read LoS from settings
+			const float los = 4.0f;
+			if (pgn::norm_2(me_pos- hero_pos) < los)
+			{
+				std::vector<ecs::cEntityWithData> hostiles;
+				hostiles.push_back(hero->second);
+				bb.mDictTemp.Insert("hostiles", hostiles);
+			}
+			return eStatus::Success;
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		eStatus DistanceToTarget(cBlackBoard&)
+		eStatus DistanceToTarget(cBlackBoard& bb)
 		{
-			return eStatus::Failure;
+			auto me = *bb.mDictPerm.Get<ecs::cEntityWithData>("me");
+			auto tgt = *bb.mDictTemp.Get<ecs::cEntityWithData>("target");
+			const auto& me_pos = me->second.Component<pgn::ecs::cmp::cLocation>()->mPos;
+			const auto& tgt_pos = tgt->second.Component<pgn::ecs::cmp::cLocation>()->mPos;
+			bb.mDictTemp.Insert<float>("d2target", float(pgn::norm_inf(me_pos - tgt_pos)));
+			return eStatus::Success;
 		}
 
 		//------------------------------------------------------------------------------------------------------

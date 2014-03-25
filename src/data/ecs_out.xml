@@ -2122,7 +2122,7 @@
 					</Symbols>
 				</AsciiSet>
 				<ControllerAI>
-					<Btree value="unserializable: class pgn::bt::cBehaviorTree" />
+					<Btree />
 				</ControllerAI>
 			</Components>
 			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
