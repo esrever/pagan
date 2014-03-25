@@ -28,14 +28,17 @@ namespace pgn
 			}
 
 			//-------------------------------------------------------------
-			int cStatsProc::PhysDmg(ecs::cEntityWithData)
+			int cStatsProc::PhysDmg(ecs::cEntityWithData ed)
 			{
+				auto stats = ed->second.Component<cmp::cStats>();
 				return 0;
 			}
 
 			//-------------------------------------------------------------
-			float cStatsProc::CritDmgMult(ecs::cEntityWithData)
+			float cStatsProc::CritDmgMult(ecs::cEntityWithData ed)
 			{
+				auto stats = ed->second.Component<cmp::cStats>();
+				stats->mDexterity - 10;
 				return 0.0f;
 			}
 
