@@ -7,6 +7,7 @@
 #include "TextureSet.h"
 #include "LevelData.h"
 #include "Visibility.h"
+#include "MapDiFi.h"
 #include "DoorState.h"
 #include "AsciiSet.h"
 #include "WorldData.h"

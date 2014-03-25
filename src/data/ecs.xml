@@ -146,6 +146,7 @@
       <Visibility/>
       <TileInfo Type="3"/>
       <MoveCost MoveCost="inf"/>
+      <MapDiFi/>
     </Components>
     <Tagus>
       <array_elem value="Player"/>

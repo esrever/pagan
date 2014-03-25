@@ -1,21 +1,21 @@
 
-#include "ControllerAI.h"
+#include "MapDiFi.h"
 
 namespace pgn{
     namespace ecs{
         namespace cmp{
             //----------------------------------------------------------------------------------------------
-            size_t cControllerAI::SerializeIn(const node_type& reader)
+            size_t cMapDiFi::SerializeIn(const node_type& reader)
             {
                 size_t ret = 0;
-                ret += pgn::SerializeIn(reader,  "Btree", mBtree);
+                ret = 1;
                 return ret;
             }
             
             //----------------------------------------------------------------------------------------------
-            void cControllerAI::SerializeOut(node_type& writer) const
+            void cMapDiFi::SerializeOut(node_type& writer) const
             {
-                pgn::SerializeOut(writer,"Btree", mBtree);
+                
             }
         }
     }

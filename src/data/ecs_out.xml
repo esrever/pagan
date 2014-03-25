@@ -12,6 +12,7 @@
 					</Sprites>
 				</TextureSet>
 				<Visibility />
+				<MapDiFi />
 				<AsciiSet>
 					<Symbols>
 						<vector_elem value="@" />

@@ -76,6 +76,12 @@ struct cTestApp : public pgn::rl::cRlApp
 		// set hero as the current player
 		pgn::mainecs()->System<pgn::ecs::sys::cGameTurn>().SetCurrent(hero->second);
 
+
+		// init hero's difi map
+		auto& hero_difi = hero->second->second.Component<pgn::ecs::cmp::cMapDiFi>()->mValue;
+		// TODO: read the radius from config!
+		hero_difi.Init(glm::ivec2(11, 11)); 
+
 		// Create the component -- overwrite it if necessary
 		auto hero_loc = ecs.InstantiateComponent<pgn::ecs::cmp::cLocation>(hero->second);
 

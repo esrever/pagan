@@ -27,7 +27,7 @@ namespace pgn
 		{
 			auto me = *bb.mDictPerm.Get<ecs::cEntityWithData>("me");
 			auto tgt = *bb.mDictTemp.Get<ecs::cEntityWithData>("target");
-			// TODO: request difi of target later.
+			
 			pgn::ecs::cmp::cLocation * me_loc = me->second.Component<pgn::ecs::cmp::cLocation>();
 			pgn::ecs::cmp::cLocation * tgt_loc = tgt->second.Component<pgn::ecs::cmp::cLocation>();
 
@@ -35,19 +35,24 @@ namespace pgn
 			const auto& lvl = world->mLevelMap.find(me_loc->mLevelId)->second;
 			const auto& layout = lvl->second.Component<ecs::cmp::cLevelData>()->mLayout;
 
-
-			// make the distance function
-			auto dfunc = [&](const glm::ivec2& off)->float{
-				auto p = me_loc->mPos + off;
-				// TODO: in range & walkable check
-				bool in_range = true;
-				if (in_range && (!layout.Obstacles()(p)))
-				{
-					return pgn::norm_2(p - tgt_loc->mPos);
-				}
-				else
-					return std::numeric_limits<float>::max();
-			};
+			std::function< float(const glm::ivec2&)> dfunc;
+			// request difi
+			pgn::ecs::cmp::cMapDiFi * tgt_difi = tgt->second.Component<pgn::ecs::cmp::cMapDiFi>();
+			if (!tgt_difi)
+			{
+				// make the distance function
+				dfunc = [&](const glm::ivec2& off)->float{
+					auto p = me_loc->mPos + off;
+					if (layout.Obstacles().InRange(p) && (!layout.Obstacles()(p)))
+						return pgn::norm_2(p - tgt_loc->mPos);
+					else
+						return std::numeric_limits<float>::max();
+				};
+			}
+			else
+			{
+				dfunc = [&](const glm::ivec2& off)->float{ return tgt_difi->mValue.Data()(off); };
+			}
 
 			// find the closest point to target
 			auto iters = rl::cShapeCalc< rl::cBoxDistance>::Get(0, 1);
