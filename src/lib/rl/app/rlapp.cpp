@@ -26,6 +26,7 @@
 #include <rl/systems/RenderLog.h>
 #include <rl/systems/UpdateAI.h>
 #include <rl/systems/UpdateDiFi.h>
+#include <rl/systems/StatsProc.h>
 
 
 namespace pgn
@@ -55,6 +56,7 @@ namespace pgn
 			pgn::mainecs()->System<pgn::ecs::sys::cUpdateLayout>();
 			pgn::mainecs()->System<pgn::ecs::sys::cUpdateAI>();
 			pgn::mainecs()->System<pgn::ecs::sys::cUpdateDiFi>();
+			pgn::mainecs()->System<pgn::ecs::sys::cStatsProc>();
 
 			pgn::mainecs()->System<pgn::ecs::sys::cRenderMainWin>().SetWindow(MainWindow().get());
 			pgn::mainecs()->System<pgn::ecs::sys::cRenderMainWin>().SetLayout(mGridDims, mTileDim);

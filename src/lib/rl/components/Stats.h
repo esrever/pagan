@@ -9,24 +9,24 @@ namespace pgn{
             
             struct cStats
             {
-                cStats(const float& arg0 = float(1),
-                    const float& arg1 = float(1),
-                    const float& arg2 = float(1)):
-                        mDamage(arg0),
-                        mHitPoints(arg1),
-                        mSpeed(arg2){}
+                cStats(const int& arg0 = int(10),
+                    const int& arg1 = int(10),
+                    const int& arg2 = int(10)):
+                        mStrength(arg0),
+                        mDexterity(arg1),
+                        mConstitution(arg2){}
                 
                 size_t SerializeIn(const node_type&);
                 void SerializeOut(node_type&) const;
                 
-                //!Damage
-                float mDamage;
+                //!Strength
+                int mStrength;
                 
-                //!Max health
-                float mHitPoints;
+                //!Dexterity
+                int mDexterity;
                 
-                //!Speed
-                float mSpeed;
+                //!Constitution
+                int mConstitution;
                 
             };
         
