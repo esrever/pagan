@@ -10,7 +10,7 @@ namespace pgn
 		cArrayShape2D(size_t w = 0, size_t h = 0, size_t x = 0, size_t y = 0) :mW(w), mH(h), mX(x), mY(y){} // all zeros
 
 		// funcs
-		bool InRange(size_t x, size_t y) const { return InRange(x, 0, Width()) && InRange(y, 0, Height()); }
+		bool InRange(size_t x, size_t y) const { return InRange(x-mX, 0, Width()) && InRange(y-mY, 0, Height()); }
 
 		// access
 		size_t Width() const { return mW; }

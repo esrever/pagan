@@ -61,7 +61,7 @@ namespace pgn
 					{
 						const auto pos = glm::ivec2(x, y);
 						auto ed = ts.Cells()(pos);
-						RenderTile(ed, pos+start, pos, visfunc(x, y));
+						RenderTile(ed, pos, pos-start, visfunc(x, y));
 					}
 			}
 
@@ -72,10 +72,15 @@ namespace pgn
 					return;
 				for (const auto& ed : ts.Entities())
 				{
+					// make the FoW non-renders a bit clearer
 					auto pos = ed->second.Component<cmp::cLocation>()->mPos;
+					auto ivis = visfunc(pos.x, pos.y);
+					if (ed->second.Component<cmp::cControllerAI>() && (ivis < 255))
+						continue;
+					
 					// TODO: static inrange func! or inrect or sth
 					if ( shape.InRange(pos.x, pos.y))
-						RenderTile(ed, pos+start, pos, visfunc(pos.x, pos.y));
+						RenderTile(ed, pos, pos-start, ivis);
 				}
 			}
 
