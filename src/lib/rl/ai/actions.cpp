@@ -116,10 +116,10 @@ namespace pgn
 			const auto& me_pos = me->second.Component<ecs::cmp::cLocation>()->mPos;
 			auto hero = pgn::mainecs()->TagusToEntities("Player");
 			const auto& hero_pos = hero->second->second.Component<ecs::cmp::cLocation>()->mPos;
+			const auto& hero_vis = hero->second->second.Component<ecs::cmp::cVisibility>()->mVisible;
 
-			// TODO: read LoS from settings
-			const float los = 114.0f;
-			if (pgn::norm_2(me_pos- hero_pos) < los)
+			// NOTE: cheating here. If hero sees us, we see him.
+			if (hero_vis(me_pos))
 			{
 				std::vector<ecs::cEntityWithData> hostiles;
 				hostiles.push_back(hero->second);

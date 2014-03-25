@@ -43,7 +43,7 @@ namespace pgn
 				auto tex = tex_atlas->first;
 				auto atlas = std::dynamic_pointer_cast<pgn::cTextureAtlas>(tex_atlas->second);
 
-				auto& visview = hero_vis->mVisible[lvl_id].View();
+				auto& visview = hero_vis->mVisible.View();
 				auto& expview = hero_vis->mExplored[lvl_id].View();
 				std::function<int(int x, int y)> get_fow = [&](int x, int y){return visview(x, y) ? 255 : (expview(x, y) ? 100 : 0); };
 

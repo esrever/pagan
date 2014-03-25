@@ -27,9 +27,8 @@ namespace pgn
 			{
 				auto vis = ed->second.Component<cmp::cVisibility>();
 				auto loc = ed->second.Component<cmp::cLocation>();
-				vis->mVisible.clear();
 				auto& curexpl = vis->mExplored[loc->mLevelId];
-				auto& curvis = vis->mVisible[loc->mLevelId];
+				auto& curvis = vis->mVisible;
 
 				static rl::cFovLookup<rl::cFovRsc> fovlut = rl::cFovLookup<rl::cFovRsc>();
 

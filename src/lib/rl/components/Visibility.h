@@ -13,7 +13,7 @@ namespace pgn{
             struct cVisibility
             {
                 cVisibility(const std::map< int, cArray2D<bool> >& arg0 = std::map< int, cArray2D<bool> >(),
-                    const std::map< int, cArray2D<bool> >& arg1 = std::map< int, cArray2D<bool> >(),
+                    const cArray2D<bool>& arg1 = cArray2D<bool>(),
                     const std::set<glm::ivec2>& arg2 = std::set<glm::ivec2>()):
                         mExplored(arg0),
                         mVisible(arg1),
@@ -25,8 +25,8 @@ namespace pgn{
                 //!Explored flag for levels
                 std::map< int, cArray2D<bool> > mExplored;
                 
-                //!Visible flag for levels
-                std::map< int, cArray2D<bool> > mVisible;
+                //!Visible flag for the current level
+                cArray2D<bool> mVisible;
                 
                 //!Visible tiles
                 std::set<glm::ivec2> mVisibleSet;
