@@ -17,10 +17,9 @@ namespace pgn
 			{
 			public:
 				bool operator()();
-				void SetWindow(cSDLWindow * win) { mWindow = win; }
+				void SetWindow(cSDLWindow * win);
+				void SetLayout(const glm::ivec2& grid, size_t tileDim);
 			private:
-			private:
-
 				cSDLWindow * mWindow;
 			};
 		}

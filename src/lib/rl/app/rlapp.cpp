@@ -21,7 +21,11 @@
 #include <rl/systems/CreateLevel.h>
 #include <rl/systems/UpdateLayout.h>
 #include <rl/systems/RenderGameMap.h>
+#include <rl/systems/RenderMainWin.h>
+#include <rl/systems/RenderStatus.h>
+#include <rl/systems/RenderLog.h>
 #include <rl/systems/UpdateAI.h>
+
 
 namespace pgn
 {
@@ -38,21 +42,8 @@ namespace pgn
 			pgn::ecs::RegisterComponents(*mainecs());
 			pgn::rl::RegisterActions(*mainecs());
 
-			static const glm::uvec2 gridDims(40, 20);
-			static const size_t  numLines = 4;
-
-			mGridArea.mDims = gridDims;
-			mNumLines = numLines;
-			glm::ivec2 windims(MainWindow()->Rect().w, MainWindow()->Rect().h);
-
-			const size_t logsize = mNumLines * msTextHeight + msTextHeight / 4;
-			int tile_h = (windims.y - logsize) / mGridArea.mDims.y;
-			int tile_w = windims.x / mGridArea.mDims.x;
-			mTileDim = std::min(tile_w, tile_h);
-
-			mGridArea.mStart= glm::uvec2(0, 0);
-			mLogStart = glm::uvec2(5, mTileDim*mGridArea.mDims.y + msTextHeight / 4);
-			mStatusStart = glm::uvec2(5 + mTileDim*mGridArea.mDims.x, 0);
+			mGridDims= glm::ivec2(40, 20);
+			mTileDim = 32;
 
 			// TODO: move system init elsewhere
 			pgn::mainecs()->System<ecs::sys::cInputKey>();
@@ -62,8 +53,10 @@ namespace pgn
 			pgn::mainecs()->System<pgn::ecs::sys::cCreateLevel>();
 			pgn::mainecs()->System<pgn::ecs::sys::cUpdateLayout>();
 			pgn::mainecs()->System<pgn::ecs::sys::cUpdateAI>();
-			pgn::mainecs()->System<pgn::ecs::sys::cRenderGameMap>().SetArea( mGridArea, mTileDim);
-			pgn::mainecs()->System<pgn::ecs::sys::cRenderGameMap>().SetWindow(MainWindow().get());
+
+			pgn::mainecs()->System<pgn::ecs::sys::cRenderMainWin>().SetWindow(MainWindow().get());
+			pgn::mainecs()->System<pgn::ecs::sys::cRenderMainWin>().SetLayout(mGridDims, mTileDim);
+
 
 			const char * fname_atlas = PROJECT_ROOT "data\\tiledesc.xml";
 			MainWindow()->TextureLib()->Load(fname_atlas, "");

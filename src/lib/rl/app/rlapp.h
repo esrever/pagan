@@ -38,9 +38,7 @@ namespace pgn
 			size_t	   mNumLines;
 
 			size_t	   mTileDim;
-			cBox2i	   mGridArea;
-			glm::ivec2 mLogStart;
-			glm::ivec2 mStatusStart;
+			glm::ivec2 mGridDims;
 
 			ecs::cECS   mECS;
 

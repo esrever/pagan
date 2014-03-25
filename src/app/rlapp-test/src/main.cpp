@@ -7,7 +7,6 @@
 #include <core/app/sdlapp.h>
 #include <core/app/sdlwin.h>
 #include <core/event/Event.h>
-#include <core/sdl/font.h>
 #include <core/math/norm.h>
 #include <core/texture/texturelib.h>
 
@@ -36,7 +35,7 @@
 #include <rl/systems/Teleport.h>
 #include <rl/systems/GameTurn.h>
 #include <rl/systems/CreateLevel.h>
-#include <rl/systems/RenderGameMap.h>
+#include <rl/systems/RenderMainWin.h>
 
 struct cTestApp : public pgn::rl::cRlApp
 {
@@ -118,28 +117,9 @@ struct cTestApp : public pgn::rl::cRlApp
 
 	//------------------------------------------------
 	virtual void Render()
-	{		
-		pgn::mainecs()->System<pgn::ecs::sys::cRenderGameMap>().operator()();
-
-		pgn::cSDLFont font(MainWindow()->Renderer(), PROJECT_ROOT "data\\fonts\\SourceSansPro\\SourceSansPro-Regular.otf", 32);
-		//pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\PT-Sans\\PTN57F.ttf", 62);
-		//pgn::cSDLFont font(MainWindow()->Renderer(), "C:\\Users\\babis\\Documents\\GitHub\\pagan\\src\\data\\fonts\\Nobile\\Nobile-Regular.ttf", 32);
-
-		SDL_Rect textRect;
-		auto& gamelog = pgn::mainapp()->GameLog();
-		size_t i = 0;
-		for (const auto& line : gamelog.Data())
-		{
-			auto texf = font.CreateText(line, &textRect);
-			float ar = textRect.w / float(textRect.h);
-
-			size_t yo = mLogStart.y + i*msTextHeight;
-			SDL_Rect rect = { mLogStart.x, yo, int(ar * msTextHeight), msTextHeight };
-			MainWindow()->Render(texf.get(), &rect);
-			++i;
-			if (i == mNumLines)
-				break;
-		}
+	{	
+		pgn::mainecs()->System<pgn::ecs::sys::cRenderMainWin>().operator()();
+		return;
 	}
 	//------------------------------------------------
 	virtual bool Update()
@@ -155,8 +135,8 @@ struct cTestApp : public pgn::rl::cRlApp
 	//DECL_EVT_MEMBER(MouseMotion);
 	void OnMouseMotion(const SDL_MouseMotionEvent& e)
 	{
-		mMouseOverCell.x = std::min( int(e.x / mTileDim), mGridArea.mDims.x-1);
-		mMouseOverCell.y = std::min(int(e.y / mTileDim), mGridArea.mDims.y - 1);
+		mMouseOverCell.x = std::min( int(e.x / mTileDim), mGridDims.x-1);
+		mMouseOverCell.y = std::min(int(e.y / mTileDim), mGridDims.y - 1);
 		//mMouseOverCell.y = mGridDims.y - 1 - mMouseOverCell.y;
 	}
 
