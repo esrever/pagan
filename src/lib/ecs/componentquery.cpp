@@ -31,9 +31,9 @@ namespace pgn
 		{
 			if (Test(ed))
 			{
-				mData.erase(ed);
 				if (mOnEntityRemoved)
 					mOnEntityRemoved(ed);
+				mData.erase(ed);
 			}
 		}
 

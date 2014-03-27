@@ -1,7 +1,10 @@
 #include "StatsProc.h"
 
+#include <ecs/events.h>
 #include <rl/event/events.h>
 #include <rl/components/components.h>
+#include <rl/systems/Teleport.h>
+#include <rl/systems/UpdateLayout.h>
 
 namespace pgn
 {
@@ -24,56 +27,111 @@ namespace pgn
 					refill current health
 			*/
 
-			//-------------------------------------------------------------
-			bool cStatsProc::operator()()
+			void cStatsProc::MeleeAttack(ecs::cEntityWithData eatt, ecs::cEntityWithData edef)
 			{
-				return true;
+				auto att = RollAttack(eatt);
+				auto ev = RollEvade(edef);
+
+				if (att > ev)
+				{
+					// TODO: hit message
+					auto dmg = RollDamage(eatt);
+					auto& tgt_creature = edef->second.Component<ecs::cmp::cCreature>()->mCreatureData;
+					tgt_creature.mCurHealth -= dmg;
+					mainapp()->GameLog().Inf(pgn::format("%s hits %s for %d damage", eatt->second.mName.c_str(), edef->second.mName.c_str(), dmg));
+					if (tgt_creature.mCurHealth <= 0)
+					{
+						// TODO: eatt gains exp points
+						auto& att_creature = eatt->second.Component<ecs::cmp::cCreature>()->mCreatureData;
+						att_creature.mXP += tgt_creature.mMaxHealth * 10;
+
+						// TODO: edef dies
+						mainapp()->GameLog().Inf(pgn::format("%s dies!", edef->second.mName.c_str()));
+						evt::cCreatureDied::Sig().emit(edef);
+						auto& loc = *edef->second.Component<ecs::cmp::cLocation>();
+						auto oldloc = loc;
+						loc.mLevelId = -1;
+						mainecs()->System<ecs::sys::cUpdateLayout>()(edef, &oldloc);
+						mainecs()->Destroy(edef);
+						// TODO: later on, move the TakeDamage data elsewehere
+					}
+				}
+				else
+				{
+					mainapp()->GameLog().Inf(pgn::format("%s misses %s", eatt->second.mName.c_str(), edef->second.mName.c_str()));
+				}
+			}
+
+			int cStatsProc::StatMod(const int stat)
+			{
+				return (stat >> 1) - 5;
+			}
+
+			void cStatsProc::InitCreature(ecs::cEntityWithData ed)
+			{
+				auto& creature = ed->second.Component<cmp::cCreature>()->mCreatureData;
+				creature.mCurHealth = creature.mMaxHealth = RollHP(ed);
+				creature.mLevel = 1;
+				creature.mXP = 0;
+				creature.mCurStats = creature.mBaseStats;
+				return;
+			}
+
+			int cStatsProc::RollHP(ecs::cEntityWithData ed)
+			{
+				auto& creature = ed->second.Component<cmp::cCreature>()->mCreatureData;
+				return creature.mHitDie.Roll() + StatMod(creature.mBaseStats[ Enum2Int(rl::eStats::Con)]);
 			}
 
 			//-------------------------------------------------------------
-			int cStatsProc::CalcNewLevelHP(ecs::cEntityWithData)
+			int cStatsProc::RollAttack(ecs::cEntityWithData ed)
 			{
-				// roll HD and add StatModifier( stats[con] )
-				return 1;
+				auto& creature = ed->second.Component<cmp::cCreature>()->mCreatureData;
+				return rl::cDice(1,20).Roll() + StatMod(creature.mBaseStats[Enum2Int(rl::eStats::Dex)]);
 			}
 
 			//-------------------------------------------------------------
-			float cStatsProc::ExpGainMult(ecs::cEntityWithData)
+			int cStatsProc::RollDamage(ecs::cEntityWithData ed)
 			{
-				return 1.0f;
+				auto& creature = ed->second.Component<cmp::cCreature>()->mCreatureData;
+				return std::max(uint32_t(1),creature.mDamage.Roll() + StatMod(creature.mBaseStats[Enum2Int(rl::eStats::Str)]));
 			}
 
 			//-------------------------------------------------------------
-			int cStatsProc::PhysDmg(ecs::cEntityWithData ed)
+			int cStatsProc::RollEvade(ecs::cEntityWithData ed)
 			{
-				// roll 1d8 and add StatModifier( stats[str])
-				auto stats = ed->second.Component<cmp::cStats>();
+				auto& creature = ed->second.Component<cmp::cCreature>()->mCreatureData;
+				return rl::cDice(1, 20).Roll() + StatMod(creature.mBaseStats[Enum2Int(rl::eStats::Dex)]);
 				return 0;
 			}
 
 			//-------------------------------------------------------------
-			float cStatsProc::CritDmgMult(ecs::cEntityWithData ed)
+			int cStatsProc::RollCritChance(ecs::cEntityWithData ed)
 			{
-				auto stats = ed->second.Component<cmp::cStats>();
-				stats->mDexterity - 10;
-				return 0.0f;
+				//auto& creature = ed->second.Component<cmp::cCreature>()->mCreatureData;
+				//return rl::cDice(1, 100).Roll() + StatMod(creature.mBaseStats[Enum2Int(rl::eStats::Dex)]);
+				return 0;
 			}
 
 			//-------------------------------------------------------------
-			float cStatsProc::CritChance(ecs::cEntityWithData)
+			int cStatsProc::RollCritDmg(ecs::cEntityWithData ed)
 			{
-				// roll 1d20 and add StatModifier( stats[dex])
-				return 0.0f;
+				//auto& creature = ed->second.Component<cmp::cCreature>()->mCreatureData;
+				return 0;
 			}
 
 			//-------------------------------------------------------------
-			float cStatsProc::HitChance(ecs::cEntityWithData)
+			void cStatsProc::AdvanceLevel(ecs::cEntityWithData ed)
 			{
-				// everyone starts with 10 evade value
-				// 
-				// roll 1d20 and add StatModifier( stats[dex])
-				return 0.0f;
+				auto& creature = ed->second.Component<cmp::cCreature>()->mCreatureData;
+				creature.mCurHealth = creature.mMaxHealth += RollHP(ed);
+				creature.mLevel ++;
+				creature.mXP = 0;
+				creature.mCurStats = creature.mBaseStats;
+				return;
 			}
+
+			//-------------------------------------------------------------
 
 			
 		}

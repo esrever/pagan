@@ -106,6 +106,13 @@
       <ControllerAI>
         <Btree preset="basic-ai"/>
       </ControllerAI>
+      <Creature>
+        <CreatureData>
+            <Stats value="4,10,6"/>
+            <HitDie value="1d4"/>
+            <Damage value="1d2"/>
+        </CreatureData>
+      </Creature>
     </Components>
   </Entity>
   
@@ -147,6 +154,13 @@
       <TileInfo Type="3"/>
       <MoveCost MoveCost="inf"/>
       <MapDiFi/>
+      <Creature>
+        <CreatureData>
+            <Stats value="10,10,10"/>
+            <HitDie value="1d8"/>
+            <Damage value="1d8"/>
+        </CreatureData>
+      </Creature>
     </Components>
     <Tagus>
       <array_elem value="Player"/>

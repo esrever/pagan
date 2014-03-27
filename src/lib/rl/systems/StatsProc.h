@@ -16,12 +16,17 @@ namespace pgn
 			{
 				public:
 					bool operator()();
-					int CalcNewLevelHP(ecs::cEntityWithData);
-					float ExpGainMult(ecs::cEntityWithData);
-					int PhysDmg(ecs::cEntityWithData);
-					float CritDmgMult(ecs::cEntityWithData);
-					float CritChance(ecs::cEntityWithData);
-					float HitChance(ecs::cEntityWithData);
+
+					void MeleeAttack(ecs::cEntityWithData att, ecs::cEntityWithData def);
+					int StatMod(const int stat);
+					void InitCreature(ecs::cEntityWithData);
+					int RollHP(ecs::cEntityWithData);
+					int RollAttack(ecs::cEntityWithData);
+					int RollDamage(ecs::cEntityWithData);
+					int RollEvade(ecs::cEntityWithData);
+					int RollCritChance(ecs::cEntityWithData);
+					int RollCritDmg(ecs::cEntityWithData);
+					void AdvanceLevel(ecs::cEntityWithData);
 			};
 		}
 	}

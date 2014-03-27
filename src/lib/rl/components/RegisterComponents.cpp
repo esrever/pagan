@@ -13,13 +13,12 @@ namespace pgn {
         {
             ecs.RegisterComponent<cmp::cLocation>();
             ecs.RegisterComponent<cmp::cTileInfo>();
-            ecs.RegisterComponent<cmp::cStats>();
+            ecs.RegisterComponent<cmp::cCreature>();
             ecs.RegisterComponent<cmp::cMoveCost>();
             ecs.RegisterComponent<cmp::cTextureSet>();
             ecs.RegisterComponent<cmp::cLevelData>();
             ecs.RegisterComponent<cmp::cVisibility>();
             ecs.RegisterComponent<cmp::cMapDiFi>();
-            ecs.RegisterComponent<cmp::cHealth>();
             ecs.RegisterComponent<cmp::cDoorState>();
             ecs.RegisterComponent<cmp::cAsciiSet>();
             ecs.RegisterComponent<cmp::cWorldData>();

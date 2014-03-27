@@ -3,6 +3,7 @@
 #include <rl/event/events.h>
 #include <rl/components/components.h>
 #include <rl/systems/UpdateLayout.h>
+#include <rl/systems/StatsProc.h>
 
 static const char * dirstrings_long[] = { "southwest", "south", "southeast", "west", "nowhere", "east", "northwest", "north", "northeast" };
 
@@ -31,6 +32,8 @@ namespace pgn
 				// calc new position
 				auto newpos = loc->mPos + dir;
 
+				bool is_player = ed == mainecs()->TagusToEntities("Player")->second;
+
 				// TODO: use movecosts!
 				// Map checks with obstacle map!
 				if (!lvl->mLayout.Bg().Cells().InRange(newpos))
@@ -45,13 +48,22 @@ namespace pgn
 					evt::cLocationChanged::Sig().emit(ed);
 					
 					// Player-specific log!
-					if (ed == mainecs()->TagusToEntities("Player")->second)
+					if (is_player)
 					{
 						mainapp()->GameLog().Inf(pgn::format("%s moves %s", ed->second.mName.c_str(), dirstrings_long[dir.x + 1 + 3 * (dir.y + 1)]));
 						// ... and turn hint
 						evt::cPlayerAction::Sig().emit();
 					}
 					return true;
+				}
+				else
+				{
+					// bump-attack
+					if (is_player && (!lvl->mLayout.Actors().Cells().View().IsClear(newpos.x, newpos.y)))
+					{
+						auto nb = lvl->mLayout.Actors().Cells()(newpos);
+						mainecs()->System<cStatsProc>().MeleeAttack(ed, nb);
+					}
 				}
 				return false;
 			}

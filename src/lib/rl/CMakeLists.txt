@@ -34,6 +34,7 @@ set(SOURCE_FILES
     ai/actions.cpp
     ai/conditions.cpp
     
+    game/creature.cpp
     utils/dice.cpp
 )
 
@@ -66,6 +67,7 @@ set(HEADER_FILES
     ai/conditions.h
     
     utils/shape/ShapeCalc.h
+    game/creature.h
     utils/dice.h
     
     ${COMPONENT_SRCS}

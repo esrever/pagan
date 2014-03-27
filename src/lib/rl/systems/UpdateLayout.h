@@ -1,6 +1,7 @@
 #pragma once
 
 #include <core/event/Event.h>
+#include <ecs/events.h>
 #include <ecs/system.h>
 #include <ecs/ecs.h>
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <cstdarg>
 #include <istream>
 #include <sstream>
@@ -11,6 +12,13 @@ namespace std
 	inline const string& to_string(const std::string& v)
 	{
 		return v;
+	}
+
+	template<class T>
+	inline const string to_string(const T& v)
+	{
+		assert(false);
+		return "";
 	}
 
 	template<class T>

@@ -4,6 +4,7 @@
 #include <ecs/ecs.h>
 #include <rl/components/components.h>
 #include <rl/systems/MoveAdj.h>
+#include <rl/systems/StatsProc.h>
 #include <rl/tile/layout.h>
 #include <rl/utils/shape/ShapeCalc.h>
 
@@ -93,10 +94,11 @@ namespace pgn
 		}
 
 		//------------------------------------------------------------------------------------------------------
-		eStatus MeleeAttackTarget(cBlackBoard&)
+		eStatus MeleeAttackTarget(cBlackBoard& bb)
 		{
-			// TODO: replace wuth something more appropriate
-			std::cout << "Squeeeeaaaak!!!!" << std::endl; 
+			auto me = *bb.mDictPerm.Get<ecs::cEntityWithData>("me");
+			auto target = *bb.mDictTemp.Get<ecs::cEntityWithData>("target");	
+			mainecs()->System<ecs::sys::cStatsProc>().MeleeAttack(me, target);
 			return eStatus::Success;
 		}
 

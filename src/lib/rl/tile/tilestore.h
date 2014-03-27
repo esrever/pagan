@@ -21,46 +21,46 @@ namespace pgn
 
 				void Resize(size_t w, size_t h, const DataType& v = DataType()) { mCellEntities.Resize(w, h,v); }
 				//! Move an entity to a new location pointed by its component
-				void Move(const ecs::cEntityWithDataConst& ed, const glm::ivec2& oldPos, const glm::ivec2& newPos);
+				void Move(const ecs::cEntityWithData& ed, const glm::ivec2& oldPos, const glm::ivec2& newPos);
 				//! Add an entity
-				void Add(const ecs::cEntityWithDataConst& ed, const glm::ivec2& newPos);
+				void Add(const ecs::cEntityWithData& ed, const glm::ivec2& newPos);
 				//! Remove an entity
-				void Remove(const ecs::cEntityWithDataConst& ed, const glm::ivec2& oldPos);
+				void Remove(const ecs::cEntityWithData& ed, const glm::ivec2& oldPos);
 				//! Access the entities
-				const std::set<ecs::cEntityWithDataConst>& Entities() const { return mEntities; }
+				const std::set<ecs::cEntityWithData>& Entities() const { return mEntities; }
 				//! Access the cells
 				const cArray2D< DataType, SparseType>& Cells() const { return mCellEntities; }
 			private:
-				void TypedAdd(const ecs::cEntityWithDataConst& ed, const glm::ivec2& newPos);
-				void TypedRemove(const ecs::cEntityWithDataConst& ed, const glm::ivec2& oldPos);
+				void TypedAdd(const ecs::cEntityWithData& ed, const glm::ivec2& newPos);
+				void TypedRemove(const ecs::cEntityWithData& ed, const glm::ivec2& oldPos);
 			private:
 				cArray2D< DataType, SparseType> mCellEntities;
-				std::set<ecs::cEntityWithDataConst>  mEntities;
+				std::set<ecs::cEntityWithData>  mEntities;
 		};
 
 		//---------------------------------------------------------------------------------
-		typedef cTileStore< cDenseStorage< ecs::cEntityWithDataConst>, ecs::cEntityWithDataConst > cTileStoreDense1;
-		typedef cTileStore< cDenseStorage< std::vector<ecs::cEntityWithDataConst>>, std::vector<ecs::cEntityWithDataConst> > cTileStoreDenseN;
-		typedef cTileStore< cSparseStorage< ecs::cEntityWithDataConst>, ecs::cEntityWithDataConst > cTileStoreSparse1;
-		typedef cTileStore< cSparseStorage< std::vector<ecs::cEntityWithDataConst>>, std::vector<ecs::cEntityWithDataConst> > cTileStoreSparseN;
+		typedef cTileStore< cDenseStorage< ecs::cEntityWithData>, ecs::cEntityWithData > cTileStoreDense1;
+		typedef cTileStore< cDenseStorage< std::vector<ecs::cEntityWithData>>, std::vector<ecs::cEntityWithData> > cTileStoreDenseN;
+		typedef cTileStore< cSparseStorage< ecs::cEntityWithData>, ecs::cEntityWithData > cTileStoreSparse1;
+		typedef cTileStore< cSparseStorage< std::vector<ecs::cEntityWithData>>, std::vector<ecs::cEntityWithData> > cTileStoreSparseN;
 
 		//---------------------------------------------------------------------------
 		template<class SparseType, class DataType>
-		void cTileStore<SparseType, DataType>::Move(const ecs::cEntityWithDataConst& ed, const glm::ivec2& oldPos, const glm::ivec2& newPos)
+		void cTileStore<SparseType, DataType>::Move(const ecs::cEntityWithData& ed, const glm::ivec2& oldPos, const glm::ivec2& newPos)
 		{
 			TypedAdd(ed, newPos);
 			TypedRemove(ed, oldPos);
 		}
 		//---------------------------------------------------------------------------
 		template<class SparseType, class DataType>
-		void cTileStore<SparseType, DataType>::Add(const ecs::cEntityWithDataConst& ed, const glm::ivec2& newPos)
+		void cTileStore<SparseType, DataType>::Add(const ecs::cEntityWithData& ed, const glm::ivec2& newPos)
 		{
 			mEntities.insert(ed);
 			TypedAdd(ed, newPos);
 		}
 		//---------------------------------------------------------------------------
 		template<class SparseType, class DataType>
-		void cTileStore<SparseType, DataType>::Remove(const ecs::cEntityWithDataConst& ed, const glm::ivec2& oldPos)
+		void cTileStore<SparseType, DataType>::Remove(const ecs::cEntityWithData& ed, const glm::ivec2& oldPos)
 		{
 			mEntities.erase(ed);
 			TypedRemove(ed,oldPos);
@@ -68,14 +68,14 @@ namespace pgn
 
 		//---------------------------------------------------------------------------
 		template<>
-		inline void cTileStoreDense1::TypedRemove(const ecs::cEntityWithDataConst& ed, const glm::ivec2& oldPos)
+		inline void cTileStoreDense1::TypedRemove(const ecs::cEntityWithData& ed, const glm::ivec2& oldPos)
 		{
 			mCellEntities.View().Clear(oldPos.x, oldPos.y);
 		}
 
 		//---------------------------------------------------------------------------
 		template<>
-		inline void cTileStoreDenseN::TypedRemove(const ecs::cEntityWithDataConst& ed, const glm::ivec2& oldPos)
+		inline void cTileStoreDenseN::TypedRemove(const ecs::cEntityWithData& ed, const glm::ivec2& oldPos)
 		{
 			auto& v = mCellEntities(oldPos);
 			std::remove(v.begin(), v.end(), ed);
@@ -83,14 +83,14 @@ namespace pgn
 
 		//---------------------------------------------------------------------------
 		template<>
-		inline void cTileStoreSparse1::TypedRemove(const ecs::cEntityWithDataConst& ed, const glm::ivec2& oldPos)
+		inline void cTileStoreSparse1::TypedRemove(const ecs::cEntityWithData& ed, const glm::ivec2& oldPos)
 		{
 			mCellEntities.View().Clear(oldPos.x, oldPos.y);
 		}
 
 		//---------------------------------------------------------------------------
 		template<>
-		inline void cTileStoreSparseN::TypedRemove(const ecs::cEntityWithDataConst& ed, const glm::ivec2& oldPos)
+		inline void cTileStoreSparseN::TypedRemove(const ecs::cEntityWithData& ed, const glm::ivec2& oldPos)
 		{
 			auto& v = mCellEntities(oldPos);
 			std::remove(v.begin(), v.end(), ed);
@@ -98,28 +98,28 @@ namespace pgn
 
 		//---------------------------------------------------------------------------
 		template<>
-		inline void cTileStoreDense1::TypedAdd(const ecs::cEntityWithDataConst& ed, const glm::ivec2& newPos)
+		inline void cTileStoreDense1::TypedAdd(const ecs::cEntityWithData& ed, const glm::ivec2& newPos)
 		{
 			mCellEntities(newPos) = ed;
 		}
 
 		//---------------------------------------------------------------------------
 		template<>
-		inline void cTileStoreDenseN::TypedAdd(const ecs::cEntityWithDataConst& ed, const glm::ivec2& newPos)
+		inline void cTileStoreDenseN::TypedAdd(const ecs::cEntityWithData& ed, const glm::ivec2& newPos)
 		{
 			mCellEntities(newPos).push_back(ed);
 		}
 
 		//---------------------------------------------------------------------------
 		template<>
-		inline void cTileStoreSparse1::TypedAdd(const ecs::cEntityWithDataConst& ed, const glm::ivec2& newPos)
+		inline void cTileStoreSparse1::TypedAdd(const ecs::cEntityWithData& ed, const glm::ivec2& newPos)
 		{
 			mCellEntities(newPos) = ed;
 		}
 
 		//---------------------------------------------------------------------------
 		template<>
-		inline void cTileStoreSparseN::TypedAdd(const ecs::cEntityWithDataConst& ed, const glm::ivec2& newPos)
+		inline void cTileStoreSparseN::TypedAdd(const ecs::cEntityWithData& ed, const glm::ivec2& newPos)
 		{
 			mCellEntities(newPos).push_back(ed);
 		}

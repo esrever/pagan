@@ -36,6 +36,7 @@
 #include <rl/systems/GameTurn.h>
 #include <rl/systems/CreateLevel.h>
 #include <rl/systems/RenderMainWin.h>
+#include <rl/systems/StatsProc.h>
 
 struct cTestApp : public pgn::rl::cRlApp
 {
@@ -85,6 +86,8 @@ struct cTestApp : public pgn::rl::cRlApp
 		// Create the component -- overwrite it if necessary
 		auto hero_loc = ecs.InstantiateComponent<pgn::ecs::cmp::cLocation>(hero->second);
 
+		pgn::mainecs()->System<pgn::ecs::sys::cStatsProc>().InitCreature(hero->second);
+
 		// make hero appear in first level in world
 		auto world = pgn::mainecs()->TagusToEntities("World")->second->second.Component<pgn::ecs::cmp::cWorldData>();
 		auto lvl = world->mLevelMap.begin()->second->second.Component<pgn::ecs::cmp::cLevelData>();
@@ -104,7 +107,7 @@ struct cTestApp : public pgn::rl::cRlApp
 
 		// Get archetype
 		auto rat_arch = pgn::mainecs()->Archetypes("Rat");
-		int ratNum = std::min(10, int(free_pos.size()));
+		int ratNum = std::min(100, int(free_pos.size()));
 		int ratCreated = 0;
 		pgn::ecs::cmp::cLocation ratloc(glm::ivec2(0,0), world->mLevelMap.begin()->second->first);
 		// start adding rats
@@ -117,6 +120,7 @@ struct cTestApp : public pgn::rl::cRlApp
 			ecs.InstantiateComponent<pgn::ecs::cmp::cControllerAI>(ed);
 			ecs.InstantiateComponent<pgn::ecs::cmp::cLocation>(ed);
 			ecs.System<pgn::ecs::sys::cTeleport>()(ed, ratloc);
+			ecs.System<pgn::ecs::sys::cStatsProc>().InitCreature(ed);
 			++ratCreated;
 		}
 	}
@@ -124,7 +128,6 @@ struct cTestApp : public pgn::rl::cRlApp
 	//------------------------------------------------
 	virtual void Render()
 	{	
-		return;
 		pgn::mainecs()->System<pgn::ecs::sys::cRenderMainWin>().operator()();
 		return;
 	}
