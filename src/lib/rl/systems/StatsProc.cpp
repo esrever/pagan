@@ -94,7 +94,7 @@ namespace pgn
 			int cStatsProc::RollDamage(ecs::cEntityWithData ed)
 			{
 				auto& creature = ed->second.Component<cmp::cCreature>()->mCreatureData;
-				return std::max(uint32_t(1),creature.mDamage.Roll() + StatMod(creature.mBaseStats[Enum2Int(rl::eStats::Str)]));
+				return std::max(int(1),int(creature.mDamage.Roll() + StatMod(creature.mBaseStats[Enum2Int(rl::eStats::Str)])));
 			}
 
 			//-------------------------------------------------------------
