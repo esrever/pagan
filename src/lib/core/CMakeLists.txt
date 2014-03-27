@@ -43,6 +43,7 @@ set(HEADER_FILES
     util/idgen.h
     util/glm_utils.h
     util/string.h
+    util/enum.h
     math/norm.h
     texture/subtexturelib.h
     texture/texturelib.h

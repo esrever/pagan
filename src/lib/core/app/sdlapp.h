@@ -3,6 +3,7 @@
 #include <cassert>
 #include <memory>
 #include <string>
+#include <random>
 
 #include <SDL.h>
 #undef main
@@ -30,6 +31,7 @@ namespace pgn
 
 		cLogStream& SysLog() { return mSysLog; }
 		cLogString& GameLog() { return mGameLog; }
+		std::mt19937& Rand() { return mRandomEngine; }
 
 		template<class T>
 		T * Resources(const std::string& name = "");
@@ -39,6 +41,7 @@ namespace pgn
 		std::shared_ptr<cSDLWindow> mMainWindow;
 		cLogStream mSysLog;
 		cLogString mGameLog;
+		std::mt19937 mRandomEngine;
 	};
     
     //----------------------------------------------------------------------

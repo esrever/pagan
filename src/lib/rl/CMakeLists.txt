@@ -33,13 +33,15 @@ set(SOURCE_FILES
     ai/behavior.cpp
     ai/actions.cpp
     ai/conditions.cpp
+    
+    utils/dice.cpp
 )
 
 set(HEADER_FILES
     app/rlapp.h
     path/Astar.h
     path/difi.h
-    utils/shape/ShapeCalc.h
+    
     fov/FovLookup.h
     fov/fov_rsc.h
     
@@ -62,6 +64,9 @@ set(HEADER_FILES
     ai/blackboard.h
     ai/actions.h
     ai/conditions.h
+    
+    utils/shape/ShapeCalc.h
+    utils/dice.h
     
     ${COMPONENT_SRCS}
     ${SYSTEM_SRCS}
