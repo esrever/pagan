@@ -28,7 +28,7 @@ namespace pgn
 				typedef cArray2D<bool> bool_map_type;
 				typedef cArray2D<float> movecost_map_type;
 
-				void Init(const rl::cWorkspace& ws, const std::map<std::string, std::string>& tiles);
+				void Init(const cArray2D<int>& ws, const std::map<std::string, std::string>& tiles);
 
 				const glm::uvec2& Dims() const { return mDims; }
 				cTileStoreSparse1& Actors() { return mActors; }

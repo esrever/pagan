@@ -180,6 +180,21 @@
     <Components>
       <LevelData Id = "1">
         <Layout>
+            <Preset>
+                <File value="data/prefab_map.png"/>
+                <Legend>
+                    <key value="Floor"/>
+                    <value x="255" y="255" z="0" w="255"/>
+                    <key value="Wall"/>
+                    <value x="0" y="255" z="255" w="255"/>
+                    <key value="Door"/>
+                    <value x="255" y="0" z="0" w="255"/>
+                    <key value="Entry"/>
+                    <value x="0" y="255" z="0" w="255"/>
+                    <key value="Exit"/>
+                    <value x="0" y="0" z="255" w="255"/>
+                </Legend>
+            </Preset>
             <DunGen>
                 <Dims x="80" y="25"/>
                 <DoorsPerRoom x="1" y="4"/>
