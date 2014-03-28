@@ -20,8 +20,8 @@ namespace pgn
 		{
 			if (Test(ed))
 			{
-				mData.insert(ed);
-				if (mOnEntityAdded)
+				auto ret = mData.insert(ed);
+				if (mOnEntityAdded && ret.second)
 					mOnEntityAdded(ed);
 			}
 		}
@@ -42,8 +42,8 @@ namespace pgn
 		{
 			if (Test(ed))
 			{
-				mData.insert(ed);
-				if (mOnEntityAdded)
+				auto ret = mData.insert(ed);
+				if (mOnEntityAdded && ret.second)
 					mOnEntityAdded(ed);
 			}
 		}

@@ -27,7 +27,7 @@ namespace pgn
 				//! Remove an entity
 				void Remove(const ecs::cEntityWithData& ed, const glm::ivec2& oldPos);
 				//! Access the entities
-				const std::set<ecs::cEntityWithData>& Entities() const { return mEntities; }
+				const ecs::cEntityWithDataSet& Entities() const { return mEntities; }
 				//! Access the cells
 				const cArray2D< DataType, SparseType>& Cells() const { return mCellEntities; }
 			private:
@@ -35,7 +35,7 @@ namespace pgn
 				void TypedRemove(const ecs::cEntityWithData& ed, const glm::ivec2& oldPos);
 			private:
 				cArray2D< DataType, SparseType> mCellEntities;
-				std::set<ecs::cEntityWithData>  mEntities;
+				ecs::cEntityWithDataSet  mEntities;
 		};
 
 		//---------------------------------------------------------------------------------

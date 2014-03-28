@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <map>
+#include <unordered_set>
 #include <memory>
 #include <functional>
 #include <string>
@@ -39,13 +40,23 @@ namespace pgn
 		typedef std::map<std::string, cEntityData>::const_iterator  cArchetypeWithDataConst;
 		typedef std::map<std::string, cEntityData>::iterator        cArchetypeWithData;
 
+		struct cEntityWithDataHash
+		{
+			size_t operator()(const pgn::ecs::cEntityWithData& it) const { return it->first; }
+		};
+		struct cEntityWithDataEq
+		{
+			bool operator()(const pgn::ecs::cEntityWithData& lhs, const pgn::ecs::cEntityWithData& rhs) const		{	return lhs->first == rhs->first;	}
+		};
+		typedef std::unordered_set<cEntityWithData, cEntityWithDataHash, cEntityWithDataEq>					cEntityWithDataSet;
+
 		class cECS
 		{
 
 		public:
 			DECL_MAP_MEMBER_R(cEntity, cEntityData, EntitiesToData);
 			DECL_MAP_MEMBER_R(std::string, cEntityData, Archetypes);
-			DECL_MAP_MEMBER_R(std::string, std::set<cEntityWithData>, TagsToEntities);
+			DECL_MAP_MEMBER_R(std::string, cEntityWithDataSet, TagsToEntities);
 			DECL_MAP_MEMBER_R(std::string, cEntityWithData, TagusToEntities);
 			DECL_MAP_MEMBER_R(std::string, cQueryFunc, Queries);
 			DECL_MAP_MEMBER_R(std::string, size_t, ComponentTypeNamesToIds);
@@ -155,16 +166,10 @@ namespace std
 		return lhs->first < rhs->first;
 	}
 
-	// TODO: problem with invalidated iterators
-	inline bool operator == (const pgn::ecs::cEntityWithData& lhs, const pgn::ecs::cEntityWithData& rhs)
-	{
-		return lhs->first == rhs->first;
-	}
-
 	inline bool operator < (const pgn::ecs::cEntityWithDataConst lhs, const pgn::ecs::cEntityWithDataConst rhs)
 	{
 		return lhs->first < rhs->first;
-	}
+	}	
 }
 
 #undef DECL_MAP_MEMBER_R

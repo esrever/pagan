@@ -21,7 +21,7 @@ namespace pgn
 				void OnEntityDestroy(ecs::cEntityWithData ed);
 				void OnComponentAdded(ecs::cEntityWithData ed, unsigned short);
 
-				const std::set<ecs::cEntityWithData>& Data() const { return mData; }
+				const cEntityWithDataSet& Data() const { return mData; }
 
 				template<class T> 
 				cComponentQuery& Require();
@@ -37,7 +37,7 @@ namespace pgn
 
 				ePolicy						   mPolicy;
 				std::set<unsigned short>	   mRequiredComponentTypes;
-				std::set<ecs::cEntityWithData> mData;
+				cEntityWithDataSet			   mData;
 				std::function<void(ecs::cEntityWithData)>	mOnEntityAdded;
 				std::function<void(ecs::cEntityWithData)>	mOnEntityRemoved;
 		};

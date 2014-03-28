@@ -80,7 +80,7 @@ namespace pgn
 			int cStatsProc::RollHP(ecs::cEntityWithData ed)
 			{
 				auto& creature = ed->second.Component<cmp::cCreature>()->mCreatureData;
-				return creature.mHitDie.Roll() + StatMod(creature.mBaseStats[ Enum2Int(rl::eStats::Con)]);
+				return std::max(1, int(creature.mHitDie.Roll() + StatMod(creature.mBaseStats[ Enum2Int(rl::eStats::Con)])));
 			}
 
 			//-------------------------------------------------------------
