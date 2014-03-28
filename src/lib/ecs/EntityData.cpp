@@ -24,6 +24,7 @@ namespace pgn
 		void cEntityData::SetArchetype(const cEntityData& arch)
 		{
 			// set the archetype
+			mName = arch.mName;
 			mArchetype = &arch;
 			// archetype's support is the instance's shared
 			mSupportMask |= arch.mSharedMask;
