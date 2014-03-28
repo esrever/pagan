@@ -183,16 +183,11 @@
             <Preset>
                 <File value="data/prefab_map.png"/>
                 <Legend>
-                    <key value="Floor"/>
-                    <value x="255" y="255" z="0" w="255"/>
-                    <key value="Wall"/>
-                    <value x="0" y="255" z="255" w="255"/>
-                    <key value="Door"/>
-                    <value x="255" y="0" z="0" w="255"/>
-                    <key value="Entry"/>
-                    <value x="0" y="255" z="0" w="255"/>
-                    <key value="Exit"/>
-                    <value x="0" y="0" z="255" w="255"/>
+                    <array_elem arch="WallTile_def" tile_type="bg" default="true" color="cyan"/>
+                    <array_elem arch="FloorTile_def" tile_type="bg" color="yellow"/>
+                    <array_elem arch="Door_def" tile_type="fg" bg="FloorTile_def" color="red"/>
+                    <array_elem arch="Entry_def" tile_type="fg" tag= "entry" bg="FloorTile_def" color="green"/>
+                    <array_elem arch="Exit_def" tile_type="fg" tag= "exit" bg="FloorTile_def" color="blue"/>
                 </Legend>
             </Preset>
             <DunGen>

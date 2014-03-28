@@ -13,4 +13,40 @@ namespace pgn
 			c.a = 255;
 		}
 	}
+
+	//---------------------------------------------------------------------------------------------------
+	void SerializeOut(node_type& node, const SDL_Color& value)
+	{
+		unsigned x = *(const unsigned *)(&value);
+		std::stringstream stream;
+		stream << std::hex << x;
+		std::string col_hex(stream.str());
+		SerializeOut(node, col_hex);
+	}
+
+	//---------------------------------------------------------------------------------------------------
+	size_t SerializeIn(const node_type& node, SDL_Color& value)
+	{
+		static const std::map<std::string, SDL_Color> colours{  { "red", { 255, 0, 0, 255 } },
+																{ "green", { 0, 255, 0, 255 } },
+																{ "blue", { 0, 0, 255, 255 } },
+																{ "white", { 255, 255, 255, 255 } },
+																{ "black", { 0, 0, 0, 255 } },
+																{ "magenta", { 255, 0, 255, 255 } },
+																{ "cyan", { 0, 255, 255, 255 } },
+																{ "yellow", { 255, 255, 0, 255 } } };
+		std::string s;
+		size_t ret = SerializeIn(node, s);
+		auto it = colours.find(s);
+		if (it == colours.end())
+		{
+			unsigned x = std::stoul(s, nullptr, 16);
+			value = *(SDL_Color *)(&x);
+		}
+		else
+		{
+			value = it->second;
+		}
+		return ret;
+	}
 }
