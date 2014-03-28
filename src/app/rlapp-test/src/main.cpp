@@ -57,6 +57,8 @@ struct cTestApp : public pgn::rl::cRlApp
 
 		auto& ecs = *pgn::mainecs();
 
+		auto& gameturn_sys = ecs.System<pgn::ecs::sys::cGameTurn>();
+
 		pugi::xml_document doc_in2;
 		if (pgn::LoadXML(doc_in2, fname_in, std::cout))
 		{

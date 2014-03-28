@@ -45,7 +45,7 @@ namespace pgn
 			pgn::rl::RegisterActions(*mainecs());
 
 			mGridDims= glm::ivec2(40, 20);
-			mTileDim = 4;
+			mTileDim = 32;
 
 			// TODO: move system init elsewhere
 			pgn::mainecs()->System<ecs::sys::cInputKey>();

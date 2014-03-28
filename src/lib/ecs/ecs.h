@@ -155,6 +155,12 @@ namespace std
 		return lhs->first < rhs->first;
 	}
 
+	// TODO: problem with invalidated iterators
+	inline bool operator == (const pgn::ecs::cEntityWithData& lhs, const pgn::ecs::cEntityWithData& rhs)
+	{
+		return lhs->first == rhs->first;
+	}
+
 	inline bool operator < (const pgn::ecs::cEntityWithDataConst lhs, const pgn::ecs::cEntityWithDataConst rhs)
 	{
 		return lhs->first < rhs->first;
