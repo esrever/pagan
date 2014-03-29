@@ -80,16 +80,18 @@ namespace pgn
 
 				auto arch = mainecs()->Archetypes(arch_str);
 
+				ecs::cEntityWithData ent;
+
 				// Instantiate bg entity here
 				if (tile_type_str == "bg")
 				{
-					auto ent = mainecs()->InstantiateArchetype(arch->second);
+					ent = mainecs()->InstantiateArchetype(arch->second);
 					// set the default if necessary
 					if (is_default)
 						def_color = color;
 				}
 
-				legend_entries.emplace( color, std::make_tuple(arch, tile_type_str, is_default, tag));
+				legend_entries.emplace( color, std::make_tuple(arch, ent, tile_type_str, is_default, tag));
 			}
 
 			// load image
@@ -119,9 +121,18 @@ namespace pgn
 		{
 			auto& ecs = mainecs();
 
+			mDims.x = cmap.Width();
+			mDims.y = cmap.Height();
+
+			// default to wall
+			mBg.Resize(cmap.Width(), cmap.Height());
+			mFg.Resize(cmap.Width(), cmap.Height());
+			mActors.Resize(cmap.Width(), cmap.Height());
+
 			for (size_t y = 0; y < cmap.Height(); ++y)
 			for (size_t x = 0; x < cmap.Width(); ++x)
 			{
+				glm::ivec2 pos(x, y);
 				// fetch color and then tuple 
 				const SDL_Color& c = cmap(x, y);
 				auto legit = legend.find(c);
@@ -129,18 +140,27 @@ namespace pgn
 
 				// get tuple data
 				auto arch = std::get<0>(legit->second);
-				const auto& tile_type_str = std::get<1>(legit->second);
-				auto is_default = std::get<2>(legit->second);
-				const auto& tag = std::get<3>(legit->second);
+				auto ent = std::get<1>(legit->second);
+				const auto& tile_type_str = std::get<2>(legit->second);
+				auto is_default = std::get<3>(legit->second);
+				const auto& tag = std::get<4>(legit->second);
 
 				if (tile_type_str == "bg")
 				{
 					// fetch instance & set it to bg store
-					mainecs()->
+					mBg.Add(ent, pos);
 				}
 				else
 				{
 					// create instance
+					ent = mainecs()->InstantiateArchetype(arch->second);
+					ent->second.AddComponent<ecs::cmp::cLocation>()->mPos = pos;
+					if (tile_type_str == "fg")
+						mFg.Add(ent, pos);
+					else if (tile_type_str == "actor")
+						mActors.Add(ent, pos);
+					else
+						;//
 				}
 			}
 

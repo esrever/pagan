@@ -25,7 +25,7 @@ namespace pgn
 		class cLayout
 		{
 			public:
-				typedef std::tuple< ecs::cArchetypeWithData, std::string, bool, std::string> legend_entry_t;
+				typedef std::tuple< ecs::cArchetypeWithData, ecs::cEntityWithData, std::string, bool, std::string> legend_entry_t;
 				typedef cArray2D<bool> bool_map_type;
 				typedef cArray2D<float> movecost_map_type;
 
