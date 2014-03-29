@@ -25,10 +25,11 @@ namespace pgn
 		class cLayout
 		{
 			public:
+				typedef std::tuple< ecs::cArchetypeWithData, std::string, bool, std::string> legend_entry_t;
 				typedef cArray2D<bool> bool_map_type;
 				typedef cArray2D<float> movecost_map_type;
 
-				void Init(const cArray2D<int>& ws, const std::map<std::string, std::string>& tiles);
+				void Init(const cArray2D<SDL_Color>& ws, const std::map<SDL_Color, legend_entry_t>& legend);
 
 				const glm::uvec2& Dims() const { return mDims; }
 				cTileStoreSparse1& Actors() { return mActors; }

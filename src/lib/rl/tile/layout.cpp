@@ -38,12 +38,20 @@ namespace pgn
 		ret += pgn::SerializeIn(node, "Tiles", tiles);
 
 		// Read dungeon spec and tiles
+		cArray2D<SDL_Color> dmap_col;
 		auto presetnode = node.child("Preset");
 		if (presetnode.empty())
 		{
 			pgn::rl::cWorkspace ws;
 			ret += pgn::SerializeIn(node, "DunGen", ws);
-			value.Init(ws.mMapData, tiles);
+			//value.Init(ws.mMapData, tiles);
+			// TODO: read colourmap
+			/*
+			std::map<int, SDL_Color> cmap;
+			ret += pgn::SerializeIn(node.child("ColorMap"), cmap);
+			dmap_col.Resize(ws.mMapData.Width(), ws.mMapData.Height());
+			*/
+
 		}
 		else
 		{
@@ -52,36 +60,53 @@ namespace pgn
 			pgn::SerializeIn(presetnode.child("File"), fname);
 			fname = PROJECT_ROOT + fname;
 
-			std::map<std::string, glm::ivec4> legend;
-			pgn::SerializeIn(presetnode.child("Legend"), legend);
-
-			auto surface = IMG_Load(fname.c_str());
-			cArray2D<int> dmap(surface->w, surface->h,0);
-			unsigned char * pixels = (unsigned char *)(surface->pixels);
-			for (const auto& kv : legend)
+			// Parse the legend data
+			SDL_Color def_color;
+			std::map< SDL_Color, rl::cLayout::legend_entry_t> legend_entries;
+			for (const auto& c : presetnode.children())
 			{
-				for (int i = 0; i < surface->h; ++i)
-					for (int j = 0; j < surface->w; ++j)
-					{
-						auto o = (surface->h-1-i)*surface->pitch + 4 * j;
-						glm::ivec4 c(pixels[o], pixels[o + 1], pixels[o + 2], pixels[o + 3]);
-						if (kv.second == c)
-						{
-							if (kv.first == "Floor")
-								dmap(j, i) = pgn::rl::eMapData::room;
-							else if (kv.first == "Wall")
-								dmap(j, i) = pgn::rl::eMapData::perimeter;
-							else if (kv.first == "Door")
-								dmap(j, i) = pgn::rl::eMapData::conn | pgn::rl::eMapData::room;
-							else if (kv.first == "Entry")
-								dmap(j, i) = pgn::rl::eMapData::entry | pgn::rl::eMapData::room;
-							else if (kv.first == "Exit")
-								dmap(j, i) = pgn::rl::eMapData::exit | pgn::rl::eMapData::room;
-						}
-					}
+				std::string arch_str;
+				std::string tile_type_str;
+				SDL_Color color;
+				std::string tag;
+				bool is_default = false;
+
+				SerializeIn(c, "color", color);
+				SerializeIn(c, "arch", arch_str);
+				SerializeIn(c, "tile_type", tile_type_str);
+				SerializeIn(c, "default", is_default);
+				SerializeIn(c, "tag", tag);
+
+
+				auto arch = mainecs()->Archetypes(arch_str);
+
+				// Instantiate bg entity here
+				if (tile_type_str == "bg")
+				{
+					auto ent = mainecs()->InstantiateArchetype(arch->second);
+					// set the default if necessary
+					if (is_default)
+						def_color = color;
+				}
+
+				legend_entries.emplace( color, std::make_tuple(arch, tile_type_str, is_default, tag));
 			}
 
-			value.Init(dmap, tiles);
+			// load image
+			auto surface = IMG_Load(fname.c_str());
+			unsigned char * pixels = (unsigned char *)(surface->pixels);
+
+			// write data to color array
+			cArray2D<SDL_Color> cmap(surface->w, surface->h, def_color);
+			cmap.View().VisitWext([&](size_t x, size_t y, SDL_Color& c){ 
+				auto o = (surface->h - 1 - y)*surface->pitch + 4 * x;
+				c.r = pixels[o];
+				c.g = pixels[o+1];
+				c.b = pixels[o+2];
+				c.a = pixels[o+3];
+			});
+		
+			value.Init(cmap, legend_entries);
 		}
 
 		return ret;
@@ -90,9 +115,37 @@ namespace pgn
 	namespace rl
 	{
 		//-------------------------------------------------------------------------------
-		void cLayout::Init(const cArray2D<int>& dmap, const std::map<std::string, std::string>& tiles)
+		void cLayout::Init(const cArray2D<SDL_Color>& cmap, const std::map<SDL_Color, legend_entry_t>& legend)
 		{
 			auto& ecs = mainecs();
+
+			for (size_t y = 0; y < cmap.Height(); ++y)
+			for (size_t x = 0; x < cmap.Width(); ++x)
+			{
+				// fetch color and then tuple 
+				const SDL_Color& c = cmap(x, y);
+				auto legit = legend.find(c);
+				assert(legit != legend.end());
+
+				// get tuple data
+				auto arch = std::get<0>(legit->second);
+				const auto& tile_type_str = std::get<1>(legit->second);
+				auto is_default = std::get<2>(legit->second);
+				const auto& tag = std::get<3>(legit->second);
+
+				if (tile_type_str == "bg")
+				{
+					// fetch instance & set it to bg store
+					mainecs()->
+				}
+				else
+				{
+					// create instance
+				}
+			}
+
+
+
 			auto it_floor = mainecs()->InstantiateArchetype( ecs->Archetypes().find(tiles.find("Floor")->second)->second);
 			auto it_wall = mainecs()->InstantiateArchetype(ecs->Archetypes().find(tiles.find("Wall")->second)->second);
 			auto it_door = ecs->Archetypes().find(tiles.find("Door")->second);

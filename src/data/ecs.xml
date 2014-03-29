@@ -194,18 +194,6 @@
                 <Dims x="80" y="25"/>
                 <DoorsPerRoom x="1" y="4"/>
             </DunGen>
-            <Tiles>
-                <key value="Floor"/>
-                <value value="FloorTile_def"/>
-                <key value="Wall"/>
-                <value value="WallTile_def"/>
-                <key value="Door"/>
-                <value value = "Door_def"/>
-                <key value="Entry"/>
-                <value value="Entry_def"/>
-                <key value="Exit"/>
-                <value value="Exit_def"/>
-            </Tiles>
           </Layout>
       </LevelData>
     </Components>
