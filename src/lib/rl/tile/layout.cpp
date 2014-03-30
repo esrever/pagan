@@ -161,52 +161,11 @@ namespace pgn
 						mActors.Add(ent, pos);
 					else
 						;//
+					if (tag == "entry")
+						mEntry = pos;
+					else if (tag == "exit")
+						mExit = pos;
 				}
-			}
-
-
-
-			auto it_floor = mainecs()->InstantiateArchetype( ecs->Archetypes().find(tiles.find("Floor")->second)->second);
-			auto it_wall = mainecs()->InstantiateArchetype(ecs->Archetypes().find(tiles.find("Wall")->second)->second);
-			auto it_door = ecs->Archetypes().find(tiles.find("Door")->second);
-			auto it_enter = ecs->Archetypes().find(tiles.find("Entry")->second);
-			auto it_exit = ecs->Archetypes().find(tiles.find("Exit")->second);
-
-			mDims.x = dmap.Width();
-			mDims.y = dmap.Height();
-
-			// default to wall
-			mBg.Resize(dmap.Width(), dmap.Height(), it_wall);
-			mFg.Resize(dmap.Width(), dmap.Height(), it_wall);
-			mActors.Resize(dmap.Width(), dmap.Height(), it_wall);
-			for (size_t i = 0; i < dmap.Height();++i)
-			for (size_t j = 0; j < dmap.Width(); ++j)
-			{
-				glm::ivec2 pos(j, i);
-				// Instantiate archetypes!
-				auto& v = dmap(j, i);
-				if (v & (rl::eMapData::corridor | rl::eMapData::room | rl::eMapData::conn))
-					mBg.Add(it_floor, pos);
-				if (v & rl::eMapData::conn)
-				{
-					auto ed = mainecs()->InstantiateArchetype(it_door->second);
-					ed->second.AddComponent<ecs::cmp::cLocation>()->mPos = pos;
-					mFg.Add(ed, pos);
-				}
-				if (v & rl::eMapData::entry)
-				{
-					auto ed = mainecs()->InstantiateArchetype(it_enter->second);
-					ed->second.AddComponent<ecs::cmp::cLocation>()->mPos = pos;
-					mFg.Add(ed, pos);
-					mEntry = pos;
-				}
-				if (v & rl::eMapData::exit)
-				{
-					auto ed = mainecs()->InstantiateArchetype(it_exit->second);
-					ed->second.AddComponent<ecs::cmp::cLocation>()->mPos = pos;
-					mFg.Add(ed, pos);
-					mExit = pos;
-				}		
 			}
 		}
 
