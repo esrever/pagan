@@ -124,9 +124,6 @@ struct cTestApp : public pgn::rl::cRlApp
 			ecs.InstantiateComponent<pgn::ecs::cmp::cCreature>(ed); 
 			ecs.System<pgn::ecs::sys::cTeleport>()(ed, ratloc);
 			ecs.System<pgn::ecs::sys::cStatsProc>().InitCreature(ed);
-
-			// TODO: temp, testing flee
-			ed->second.Component<pgn::ecs::cmp::cCreature>()->mCreatureData.mCurHealth = 1;
 			++ratCreated;
 		}
 	}

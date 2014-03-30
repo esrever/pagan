@@ -42,7 +42,7 @@ namespace pgn
 				assert((grid.x * int(tileDim)-10) < mWindow->Rect().w);
 				assert((grid.y * int(tileDim) - 10) < mWindow->Rect().h);
 				
-				ecs->System<cRenderGameMap>().SetArea(cBox2i(glm::ivec2(0, 0), grid), tileDim);
+				ecs->System<cRenderGameMap>().SetArea(glm::ivec2(0,0), grid, tileDim);
 
 				const auto windims = glm::ivec2(mWindow->Rect().w, mWindow->Rect().h);
 				

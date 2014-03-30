@@ -13,6 +13,7 @@ namespace pgn
 	{
 		namespace sys
 		{
+			cRenderGameMap::cRenderGameMap() :INIT_EVT_MEMBER(cRenderGameMap, MouseMotion){}
 			bool cRenderGameMap::operator()()
 			{
 				auto& ecs = pgn::mainecs();
@@ -27,7 +28,7 @@ namespace pgn
 				auto lvl_id = lvl->second->first;
 
 				// get the renderrect
-				auto view_size = glm::ivec2(mArea.mDims.x, mArea.mDims.y);
+				auto view_size = mCells;
 				auto view_start = pgn::rl::GetCenteredView(glm::ivec2(lvl_layout.Dims().x, lvl_layout.Dims().y),
 					hero_pos,
 					view_size);
@@ -88,14 +89,28 @@ namespace pgn
 			void cRenderGameMap::RenderTile(ecs::cEntityWithDataConst ed, const glm::ivec2& pos, const glm::ivec2& offpos, int ivis)
 			{
 				auto sspos = offpos;
-				sspos.y = mArea.mDims.y - 1 - sspos.y;
-				sspos += mArea.mStart;
+				sspos.y = mCells.y - 1 - sspos.y;
+				sspos = sspos * glm::ivec2(mTileSize, mTileSize) + mStart;
 				auto texset = ed->second.Component<cmp::cTextureSet>();
 				pgn::cSubTexture tex = texset->mSprites[texset->mIndex];
-				SDL_Rect tgt_rect = { sspos.x*mTileSize, sspos.y*mTileSize, mTileSize, mTileSize };
+				SDL_Rect tgt_rect = { sspos.x, sspos.y, mTileSize, mTileSize };
 				auto src_rect = as_sdlrect(tex.second);
 				SDL_Color col = { ivis, ivis, ivis , 255 };
 				mWindow->RenderEx(tex.first->Texture(), col, &src_rect, &tgt_rect);
+			}
+
+			void cRenderGameMap::OnMouseMotion(const SDL_MouseMotionEvent& e)
+			{
+				auto pos = glm::ivec2(e.x, e.y) - mStart;
+				mMouseOverCell.x = pos.x / mTileSize;
+				mMouseOverCell.y = pos.y / mTileSize;
+				mMouseOverCell.y = mCells.y - 1 - mMouseOverCell.y;
+
+				if (((mMouseOverCell.x >= 0) && (mMouseOverCell.x < mCells.x)) &&
+					((mMouseOverCell.y >= 0) && (mMouseOverCell.y < mCells.y)))
+				{
+					evt::cMouseOverCell::Sig().emit(mMouseOverCell);
+				}
 			}
 
 		}

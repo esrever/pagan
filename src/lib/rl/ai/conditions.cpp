@@ -34,7 +34,7 @@ namespace pgn
 			auto me = *bb.mDictPerm.Get<ecs::cEntityWithData>("me");
 			const auto& stats = me->second.Component<ecs::cmp::cCreature>()->mCreatureData;
 			// TODO: critical health should be a parameter
-			const float critical_health = 0.1f;
+			const float critical_health = 0.991f;
 			return (stats.mCurHealth / float(stats.mMaxHealth)) < critical_health;
 		}
 	}

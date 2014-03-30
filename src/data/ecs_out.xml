@@ -18,7 +18,7 @@
 						<vector_elem value="::monsters:unique:norbert" />
 					</Sprites>
 				</TextureSet>
-				<Visibility LoS="70" />
+				<Visibility LoS="7" />
 				<MapDiFi />
 				<AsciiSet>
 					<Symbols>
@@ -269,7 +269,7 @@
 						<Damage value="1d2" />
 					</CreatureData>
 				</Creature>
-				<SimpleVisibility LoS="30" />
+				<SimpleVisibility LoS="3" />
 				<MoveCost MoveCost="3.40282e+038" />
 				<TextureSet>
 					<Sprites>

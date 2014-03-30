@@ -1,5 +1,6 @@
 #include "UpdateDiFi.h"
 
+#include <core/math/norm.h>
 #include <rl/components/components.h>
 
 namespace pgn
@@ -34,7 +35,7 @@ namespace pgn
 				// Using static move costs!
 				auto mfunc = [&](const glm::ivec2& p0, const glm::ivec2& p1){
 					if (lay.StaticMoveCosts().InRange(p1))
-						return lay.StaticMoveCosts()(p1);
+						return lay.StaticMoveCosts()(p1) * norm_2(p1-p0);
 					else
 						return std::numeric_limits<float>::max();
 				};
