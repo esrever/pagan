@@ -42,7 +42,11 @@ namespace pgn
 				curvis.Resize(lvl->mLayout.Dims().x, lvl->mLayout.Dims().y, false);
 				auto onvis = [&](const glm::ivec2& pt, float b) {curexpl(pt) = true; curvis(pt) = true; vis->mVisibleSet.insert(pt); };
 
-				// TODO: this is a parameter of... ? probably here in visibility
+				// unset visible points
+				for (auto& vispt : vis->mVisibleSet)
+					curvis(vispt) = false;
+
+				// calculate visibility
 				fovlut.Get(vis->mLoS).Calc(loc->mPos, lvl->mLayout.StaticObstacles(), onvis);
 
 				return true;

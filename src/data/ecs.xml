@@ -113,7 +113,7 @@
             <Damage value="1d2"/>
         </CreatureData>
       </Creature>
-      <SimpleVisibility LoS="10"/>
+      <SimpleVisibility LoS="3"/>
     </Components>
   </Entity>
   
@@ -151,7 +151,7 @@
         <value value="PlayerMoveE"/>
         </Bindings>
       </ControllerPlayer>
-      <Visibility LoS="100"/>
+      <Visibility LoS="70"/>
       <TileInfo Type="3"/>
       <MoveCost MoveCost="inf"/>
       <MapDiFi/>

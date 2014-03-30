@@ -109,7 +109,7 @@ struct cTestApp : public pgn::rl::cRlApp
 
 		// Get archetype
 		auto rat_arch = pgn::mainecs()->Archetypes("Rat");
-		int ratNum = std::min(100, int(free_pos.size()));
+		int ratNum = std::min(10, int(free_pos.size()));
 		int ratCreated = 0;
 		pgn::ecs::cmp::cLocation ratloc(glm::ivec2(0,0), world->mLevelMap.begin()->second->first);
 		// start adding rats

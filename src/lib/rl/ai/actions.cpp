@@ -122,12 +122,30 @@ namespace pgn
 		{
 			auto me = *bb.mDictPerm.Get<ecs::cEntityWithData>("me");
 			const auto& me_pos = me->second.Component<ecs::cmp::cLocation>()->mPos;
+			// TODO: I assume that the only hostile for the AI is the player
 			auto hero = pgn::mainecs()->TagusToEntities("Player");
 			const auto& hero_pos = hero->second->second.Component<ecs::cmp::cLocation>()->mPos;
 			const auto& hero_vis = hero->second->second.Component<ecs::cmp::cVisibility>()->mVisible;
+			pgn::ecs::cmp::cMapDiFi * hero_difi = hero->second->second.Component<pgn::ecs::cmp::cMapDiFi>();
+			
+			// TODO: I assume that the sensor has SimpleVisibility
+			auto los = me->second.Component<ecs::cmp::cSimpleVisibility>()->mLoS;
 
-			// NOTE: cheating here. If hero sees us, we see him.
-			if (hero_vis(me_pos))
+			// NOTE: Cheating here. If hero sees us, we see him.
+			bool seen = hero_vis(me_pos);
+			
+			// NOTE: Alternatively, if we have a difi, sample the difi map and calc range and compare values!
+			// if same, no wall, else wall
+			if (hero_difi)
+			{
+				auto dist = norm_2(hero_pos - me_pos);
+				auto pos_difi = me_pos - hero_difi->mValue.CornerWcs();
+				if (hero_difi->mValue.Data().InRange(pos_difi))
+					seen = (hero_difi->mValue.Data()(pos_difi) < (dist + 1.0f)) && (dist <= float(los));
+			}
+
+
+			if (seen)
 			{
 				std::vector<ecs::cEntityWithData> hostiles;
 				hostiles.push_back(hero->second);
