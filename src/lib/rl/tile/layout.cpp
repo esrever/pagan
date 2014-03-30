@@ -44,18 +44,14 @@ namespace pgn
 		{
 			pgn::rl::cWorkspace ws;
 			ret += pgn::SerializeIn(node, "DunGen", ws);
-			//value.Init(ws.mMapData, tiles);
-			// TODO: read colourmap
-			/*
-			std::map<int, SDL_Color> cmap;
-			ret += pgn::SerializeIn(node.child("ColorMap"), cmap);
-			dmap_col.Resize(ws.mMapData.Width(), ws.mMapData.Height());
-			*/
 
+			assert(false);
+			/*
+				I need a similar legend for DunGen, so it would be best if I genenrated colours.
+			*/
 		}
 		else
 		{
-			// TODO: this is a mess!
 			std::string fname;
 			pgn::SerializeIn(presetnode.child("File"), fname);
 			fname = PROJECT_ROOT + fname;
@@ -158,17 +154,22 @@ namespace pgn
 				}
 				else
 				{
+					// add the background tile
 					mBg.Add( bgtiles.find(bg)->second, pos);
 
 					// create instance
 					ent = mainecs()->InstantiateArchetype(arch->second);
+					// init location
 					ent->second.AddComponent<ecs::cmp::cLocation>()->mPos = pos;
+					
+					// add to appropriate store
 					if (tile_type_str == "fg")
 						mFg.Add(ent, pos);
 					else if (tile_type_str == "actor")
 						mActors.Add(ent, pos);
 					else
 						;//
+					// depending on tag, perform action
 					if (tag == "entry")
 						mEntry = pos;
 					else if (tag == "exit")

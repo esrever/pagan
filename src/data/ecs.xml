@@ -156,8 +156,8 @@
       <MapDiFi/>
       <Creature>
         <CreatureData>
-            <Stats value="10,10,10"/>
-            <HitDie value="1d8"/>
+            <Stats value="100,100,100"/>
+            <HitDie value="10d8"/>
             <Damage value="1d8"/>
         </CreatureData>
       </Creature>
