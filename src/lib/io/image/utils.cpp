@@ -34,5 +34,23 @@ namespace pgn
 			IMG_SavePNG(surface, fname.c_str());
 			SDL_FreeSurface(surface);
 		}
+
+		void LoadImage(const std::string& fname, cArray2D<SDL_Color>& cmap)
+		{
+			auto surface = IMG_Load(fname.c_str());
+			unsigned char * pixels = (unsigned char *)(surface->pixels);
+
+			// write data to color array
+			cmap.Resize(surface->w, surface->h);
+			cmap.View().VisitWext([&](size_t x, size_t y, SDL_Color& c){
+				auto o = (surface->h - 1 - y)*surface->pitch + 4 * x;
+				c.r = pixels[o];
+				c.g = pixels[o + 1];
+				c.b = pixels[o + 2];
+				c.a = pixels[o + 3];
+			});
+
+			SDL_FreeSurface(surface);
+		}
 	}
 }

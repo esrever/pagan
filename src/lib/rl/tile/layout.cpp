@@ -8,6 +8,7 @@
 
 #include <rl/components/components.h>
 #include <rl/event/events.h>
+#include <io/image/utils.h>
 
 namespace pgn
 {
@@ -97,19 +98,9 @@ namespace pgn
 			}
 
 			// load image
-			auto surface = IMG_Load(fname.c_str());
-			unsigned char * pixels = (unsigned char *)(surface->pixels);
 
-			// write data to color array
-			cArray2D<SDL_Color> cmap(surface->w, surface->h, def_color);
-			cmap.View().VisitWext([&](size_t x, size_t y, SDL_Color& c){ 
-				auto o = (surface->h - 1 - y)*surface->pitch + 4 * x;
-				c.r = pixels[o];
-				c.g = pixels[o+1];
-				c.b = pixels[o+2];
-				c.a = pixels[o+3];
-			});
-		
+			cArray2D<SDL_Color> cmap;
+			io::LoadImage(fname, cmap);
 			value.Init(cmap, legend_entries, bgtiles);
 		}
 
