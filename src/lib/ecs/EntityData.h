@@ -29,9 +29,9 @@ namespace pgn
 			//! List of component pointers
 			std::vector<cComponentBase_sptr>	mComponents;
 			//! Mask of supported components
-			cComponentMask						mSupportMask;
+			cComponentMask						mComponentMask;
 			//! Mask of shared/read-only components
-			cComponentMask						mSharedMask;
+			cComponentMask						mShareMask;
 			//! Archetype
 			const cEntityData *					mArchetype;
 			//! List of tags, unique or not

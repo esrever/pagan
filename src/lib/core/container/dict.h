@@ -69,6 +69,10 @@ namespace pgn
             typedef std::map< key_type, value_type> map_type;
             typedef std::pair<map_type, cObjectMemoryMan> map_and_man_type;
 
+			cDict(){}
+			cDict(const cDict& d){}
+			cDict& operator = (const cDict& d){ return *this; }
+
 			/**
 			* Gets a value of the given type, if not found return nullptr
 			* @name key key name

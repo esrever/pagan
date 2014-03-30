@@ -118,10 +118,7 @@ struct cTestApp : public pgn::rl::cRlApp
 			ratloc.mPos = free_pos[ratCreated];
 			// Instantiate archetype
 			auto ed = pgn::mainecs()->InstantiateArchetype(rat_arch->second);
-			// InstantiateComponent ControllerAI and cLocation
-			ecs.InstantiateComponent<pgn::ecs::cmp::cControllerAI>(ed);
 			ecs.InstantiateComponent<pgn::ecs::cmp::cLocation>(ed);
-			ecs.InstantiateComponent<pgn::ecs::cmp::cCreature>(ed); 
 			ecs.System<pgn::ecs::sys::cTeleport>()(ed, ratloc);
 			ecs.System<pgn::ecs::sys::cStatsProc>().InitCreature(ed);
 			++ratCreated;

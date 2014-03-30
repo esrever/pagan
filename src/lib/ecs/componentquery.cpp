@@ -53,10 +53,10 @@ namespace pgn
 		{
 			bool ok = mPolicy == ePolicy::All ? std::all_of(mRequiredComponentTypes.begin(),
 				mRequiredComponentTypes.end(),
-				[&](size_t i)->bool{return (ed->second.mSupportMask.at(i) == 1); })
+				[&](size_t i)->bool{return (ed->second.mComponentMask.at(i) == 1); })
 				: std::any_of(mRequiredComponentTypes.begin(),
 				mRequiredComponentTypes.end(),
-				[&](size_t i)->bool{return (ed->second.mSupportMask.at(i) == 1); });
+				[&](size_t i)->bool{return (ed->second.mComponentMask.at(i) == 1); });
 			return ok;
 		}
 	}

@@ -13,8 +13,8 @@ namespace pgn
 		void cEntityData::AddComponent(cComponentBase_sptr comp)
 		{
 			auto idx = comp->TypeIndex();
-			mSupportMask.set(idx);
-			mSharedMask.reset(idx);
+			mComponentMask.set(idx);
+			mShareMask.reset(idx);
 			if (mComponents.size() <= idx)
 				mComponents.resize(idx + 1);
 			mComponents[idx] = comp;
@@ -23,35 +23,9 @@ namespace pgn
 		//---------------------------------------------------------------------------------------------------
 		void cEntityData::SetArchetype(const cEntityData& arch)
 		{
-			// set the archetype
-			mName = arch.mName;
+			*this = arch;
 			mArchetype = &arch;
-			// archetype's support is the instance's shared
-			mSupportMask |= arch.mSharedMask;
-			mSharedMask = arch.mSupportMask;
-
-			// allocate enough components to accomodate archetype's components
-			if (mComponents.size() < arch.mComponents.size())
-				mComponents.resize(arch.mComponents.size());
-
-			// Set the shared components
-			for (size_t i = 0; i < arch.mComponents.size(); ++i)
-			{
-				if (arch.mSupportMask.at(i) && arch.mComponents.at(i))
-				{
-					mComponents.at(i) = arch.mComponents.at(i);
-					mSharedMask.at(i) = 1;
-				}
-				else
-					mSharedMask.at(i) = 0;
-			}
-
-			// add tags
-			mTags.insert(arch.mTags.begin(), arch.mTags.end());
-			mTagus.insert(arch.mTagus.begin(), arch.mTagus.end());
 		}
-
-
 	}
 
 	//---------------------------------------------------------------------------------------------------
@@ -91,8 +65,8 @@ namespace pgn
 		if (value.mArchetype)
 			SerializeOut(node, "archetype", value.mArchetype->mName);
 		SerializeOut(node, "Components", value.mComponents);
-		SerializeOut(node, "SupportMask", value.mSupportMask);
-		SerializeOut(node, "SharedMask", value.mSharedMask);
+		SerializeOut(node, "SupportMask", value.mComponentMask);
+		SerializeOut(node, "SharedMask", value.mShareMask);
 		SerializeOut(node, "Tags", value.mTags);
 		SerializeOut(node, "Tagus", value.mTagus);
 	}
@@ -103,7 +77,7 @@ namespace pgn
 		// Read name
 		if (SerializeIn(reader, "name", value.mName) == 0) return false;
 
-		// Read archetype name
+		// Read archetype name. NOTE: it needs to be done before reading further components!
 		std::string archname;
 		if (SerializeIn(reader, "archetype", archname))
 		{
@@ -116,17 +90,29 @@ namespace pgn
 		}
 
 		// Read components
-		std::vector<ecs::cComponentBase_sptr> cmps;
-		SerializeIn(reader, "Components", cmps);
-		for (auto& cmp : cmps)
+		for (const auto& cmpnode : reader.child("Components").children())
 		{
-			// Add it to the list!
-			value.AddComponent(cmp);
+			auto itid = mainecs()->ComponentTypeNamesToIds().find(cmpnode.name());
+			if (itid != mainecs()->ComponentTypeNamesToIds().end())
+			{
+				auto ptr = mainecs()->ComponentCreators().at(itid->second)();
+				SerializeIn(cmpnode, *ptr);
+				value.AddComponent(ptr);
+				bool share = false;
+				SerializeIn(cmpnode, "share", share);
+				if (share)
+					value.mShareMask[ptr->TypeIndex()] = true;
+			}
+			else
+				mainapp()->SysLog().Err(format("Component %s does not exist!", cmpnode.name()));
 		}
 
-		// Read tags
-		SerializeIn(reader, "Tags", value.mTags);
-		SerializeIn(reader, "Tagus", value.mTagus);
+		// Read and add tags 
+		std::set<std::string> tags, tagus;
+		SerializeIn(reader, "Tags", tags);
+		SerializeIn(reader, "Tagus", tagus);
+		value.mTags.insert(tags.begin(), tags.end());
+		value.mTagus.insert(tagus.begin(), tagus.end());
 		return true;
 	}
 }

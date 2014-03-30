@@ -147,10 +147,7 @@ namespace pgn
 		template<class T>
 		T * cECS::InstantiateComponent(cEntityWithData& ed)
 		{
-			auto ptr = ed->second.Component<T>();
 			auto ptrnew = ed->second.AddComponent<T>();
-			if (ptr)
-				*ptrnew = *ptr;
 			evt::cComponentAdded::Sig().emit(ed, cComponent<T>::StaticTypeIndex());
 			return ptrnew;
 		}

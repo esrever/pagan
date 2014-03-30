@@ -22,6 +22,8 @@ namespace pgn
 			virtual void SerializeOut(node_type& writer) const;
 			virtual size_t SerializeIn(const node_type& reader);
 
+			virtual void from(const cComponentBase& v){ mData = (dynamic_cast<const cComponent<T> *>(&v))->mData; }
+
 			//! Object creator function
 			static std::shared_ptr<cComponentBase> Create() { return std::shared_ptr<cComponentBase>(new cComponent<T>()); }
 			//static std::shared_ptr<cComponentBase> Create() { return std::dynamic_pointer_cast<cComponentBase>( std::make_shared<cComponent<T>>()); }

@@ -13,6 +13,7 @@ namespace pgn
 		{
 			SUPPORT_DERIVED(cComponentBase)
 		public:
+			virtual void from(const cComponentBase& v){ *this = v; }
 			//! Get type index(for masks), virtually
 			virtual unsigned short TypeIndex() const = 0;
 
