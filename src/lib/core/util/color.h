@@ -5,14 +5,13 @@
 #include <SDL.h>
 #include <SDL_pixels.h>
 
+#include <core/util/string.h>
 #include <core/util/color.h>
 #include <core/serialize/serialize.h>
 
 namespace pgn
 {
 	void GenGrayscaleGradient(std::vector<SDL_Color>& grad, Uint8 start = 0, Uint8 end = 255, size_t num = 256);
-
-	DECL_SERIALIZE_INTERFACE(SDL_Color);
 }
 
 namespace std
@@ -22,4 +21,7 @@ namespace std
 	{
 		return (*(unsigned *)(&lhs)) < (*(unsigned *)(&rhs));
 	}
+
+	const string to_string(const SDL_Color& v);
+	istream& operator>> (istream &in, SDL_Color& box);
 }

@@ -49,27 +49,6 @@
 			</Tagus>
 		</value>
 		<key value="2" />
-		<value name="FloorTile_def" archetype="FloorTile_def">
-			<Components>
-				<TileInfo Type="0" />
-				<MoveCost MoveCost="1" />
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:floor:rect_gray0" />
-					</Sprites>
-				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="." />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="3" />
 		<value name="WallTile_def" archetype="WallTile_def">
 			<Components>
 				<TileInfo Type="0" />
@@ -82,6 +61,27 @@
 				<AsciiSet>
 					<Symbols>
 						<vector_elem value="#" />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="3" />
+		<value name="FloorTile_def" archetype="FloorTile_def">
+			<Components>
+				<TileInfo Type="0" />
+				<MoveCost MoveCost="1" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:floor:rect_gray0" />
+					</Sprites>
+				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="." />
 					</Symbols>
 				</AsciiSet>
 			</Components>

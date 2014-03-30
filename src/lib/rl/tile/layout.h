@@ -1,5 +1,6 @@
 #pragma once
 
+#include <core/util/color.h>
 #include <core/container/Array2D.h>
 #include <core/serialize/serialize.h>
 
@@ -25,11 +26,15 @@ namespace pgn
 		class cLayout
 		{
 			public:
-				typedef std::tuple< ecs::cArchetypeWithData, ecs::cEntityWithData, std::string, bool, std::string> legend_entry_t;
+				typedef std::tuple< ecs::cArchetypeWithData /*arch*/,
+								    ecs::cEntityWithData /*arch-inst*/, 
+									std::string /*tile-type*/,
+									std::string /*bg-tile*/,
+									std::string /*tag*/> legend_entry_t;
 				typedef cArray2D<bool> bool_map_type;
 				typedef cArray2D<float> movecost_map_type;
 
-				void Init(const cArray2D<SDL_Color>& ws, const std::map<SDL_Color, legend_entry_t>& legend);
+				void Init(const cArray2D<SDL_Color>& ws, const std::map<SDL_Color, legend_entry_t>& legend, std::map<std::string, ecs::cEntityWithData>& bgtiles);
 
 				const glm::uvec2& Dims() const { return mDims; }
 				cTileStoreSparse1& Actors() { return mActors; }

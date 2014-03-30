@@ -17,7 +17,7 @@ namespace pgn
 	//---------------------------------------------------------------------------------------------------
 	void SerializeOut(node_type& node, const SDL_Color& value)
 	{
-		unsigned x = *(const unsigned *)(&value);
+			unsigned x = *(const unsigned *)(&value);
 		std::stringstream stream;
 		stream << std::hex << x;
 		std::string col_hex(stream.str());
@@ -48,5 +48,41 @@ namespace pgn
 			value = it->second;
 		}
 		return ret;
+	}
+}
+
+namespace std
+{
+	const string to_string(const SDL_Color& value)
+	{
+		std::ostringstream oss;
+		unsigned x = *(const unsigned *)(&value);
+		oss << std::hex << x;
+		return oss.str();
+	}
+
+	istream& operator>> (istream &in, SDL_Color& value)
+	{
+		static const std::map<std::string, SDL_Color> colours{ { "red", { 255, 0, 0, 255 } },
+		{ "green", { 0, 255, 0, 255 } },
+		{ "blue", { 0, 0, 255, 255 } },
+		{ "white", { 255, 255, 255, 255 } },
+		{ "black", { 0, 0, 0, 255 } },
+		{ "magenta", { 255, 0, 255, 255 } },
+		{ "cyan", { 0, 255, 255, 255 } },
+		{ "yellow", { 255, 255, 0, 255 } } };
+		std::string s;
+		in >> s;
+		auto it = colours.find(s);
+		if (it == colours.end())
+		{
+			unsigned x = std::stoul(s, nullptr, 16);
+			value = *(SDL_Color *)(&x);
+		}
+		else
+		{
+			value = it->second;
+		}
+		return in;
 	}
 }
