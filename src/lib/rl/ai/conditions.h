@@ -10,6 +10,7 @@ namespace pgn
 
 		bool HostilesDetected(cBlackBoard&);
 		bool TargetInMeleeDistance(cBlackBoard&);
+		bool CriticalHealth(cBlackBoard&);
 
 		//! Later on, some complex conditions might write their result to the blackboard
 

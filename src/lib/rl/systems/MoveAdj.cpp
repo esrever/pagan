@@ -63,6 +63,7 @@ namespace pgn
 					{
 						auto nb = lvl->mLayout.Actors().Cells()(newpos);
 						mainecs()->System<cStatsProc>().MeleeAttack(ed, nb);
+						evt::cPlayerAction::Sig().emit();
 					}
 				}
 				return false;

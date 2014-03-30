@@ -18,3 +18,13 @@
     </Selector>
 </Sequence>
 <Action name = "Wander"/>
+<Selector name="flee-ITE">
+    <Sequence name="flee-IT">
+        <Action name="SenseHostiles"/>
+        <Condition name="HostilesDetected"/>
+        <Condition name="CriticalHealth"/>
+        <Action name="SelectTarget"/>
+        <Action name="FleeTarget"/>
+    </Sequence>
+    <Action name = "Wander"/>
+</Selector>

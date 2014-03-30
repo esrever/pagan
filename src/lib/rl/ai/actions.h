@@ -9,6 +9,7 @@ namespace pgn
 		void RegisterActions();
 
 		eStatus ApproachTarget(cBlackBoard&);
+		eStatus FleeTarget(cBlackBoard&);
 		eStatus Wander(cBlackBoard&);
 		eStatus MeleeAttackTarget(cBlackBoard&);
 		eStatus SelectTarget(cBlackBoard&);

@@ -121,8 +121,12 @@ struct cTestApp : public pgn::rl::cRlApp
 			// InstantiateComponent ControllerAI and cLocation
 			ecs.InstantiateComponent<pgn::ecs::cmp::cControllerAI>(ed);
 			ecs.InstantiateComponent<pgn::ecs::cmp::cLocation>(ed);
+			ecs.InstantiateComponent<pgn::ecs::cmp::cCreature>(ed); 
 			ecs.System<pgn::ecs::sys::cTeleport>()(ed, ratloc);
 			ecs.System<pgn::ecs::sys::cStatsProc>().InitCreature(ed);
+
+			// TODO: temp, testing flee
+			ed->second.Component<pgn::ecs::cmp::cCreature>()->mCreatureData.mCurHealth = 1;
 			++ratCreated;
 		}
 	}

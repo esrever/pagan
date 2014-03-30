@@ -21,6 +21,7 @@ namespace pgn
 			cAction::Register("SelectTarget", &SelectTarget);
 			cAction::Register("SenseHostiles", &SenseHostiles);
 			cAction::Register("DistanceToTarget", &DistanceToTarget);
+			cAction::Register("FleeTarget", &FleeTarget);
 		}
 
 		//------------------------------------------------------------------------------------------------------
@@ -163,6 +164,81 @@ namespace pgn
 			const auto& tgt_pos = tgt->second.Component<pgn::ecs::cmp::cLocation>()->mPos;
 			bb.mDictTemp.Insert<float>("d2target", float(pgn::norm_inf(me_pos - tgt_pos)));
 			return eStatus::Success;
+		}
+
+		//------------------------------------------------------------------------------------------------------
+		eStatus FleeTarget(cBlackBoard& bb)
+		{
+			// TODO: better fleeing strategy: need longer-term thinking, not just next-square.
+			// Planning ahead for N moves requires increasing intelligence.
+			// easy: I need to do a search for a difi dist of N, starting at my current monster pos.
+			auto me = *bb.mDictPerm.Get<ecs::cEntityWithData>("me");
+			auto tgt = *bb.mDictTemp.Get<ecs::cEntityWithData>("target");
+
+			pgn::ecs::cmp::cLocation * me_loc = me->second.Component<pgn::ecs::cmp::cLocation>();
+			pgn::ecs::cmp::cLocation * tgt_loc = tgt->second.Component<pgn::ecs::cmp::cLocation>();
+
+			const auto& world = mainecs()->TagusToEntities("World")->second->second.Component<ecs::cmp::cWorldData>();
+			const auto& lvl = world->mLevelMap.find(me_loc->mLevelId)->second;
+			const auto& layout = lvl->second.Component<ecs::cmp::cLevelData>()->mLayout;
+
+			std::function< float(const glm::ivec2&)> dfunc;
+			// request difi
+			pgn::ecs::cmp::cMapDiFi * tgt_difi = tgt->second.Component<pgn::ecs::cmp::cMapDiFi>();
+			if (!tgt_difi)
+			{
+				// make the distance function
+				dfunc = [&](const glm::ivec2& off)->float{
+					auto p = me_loc->mPos + off;
+					if (layout.Obstacles().InRange(p) && (!layout.Obstacles()(p)))
+						return pgn::norm_2(p - tgt_loc->mPos);
+					else
+						return std::numeric_limits<float>::max();
+				};
+			}
+			else
+			{
+				dfunc = [&](const glm::ivec2& off)->float{
+					auto pos = me_loc->mPos + off;
+					auto pos_difi = pos - tgt_difi->mValue.CornerWcs();
+					if (layout.Obstacles()(pos))
+						return std::numeric_limits<float>::max();
+					else
+					{
+						if (tgt_difi->mValue.Data().InRange(pos_difi))
+							return tgt_difi->mValue.Data()(pos_difi);
+						else
+							return pgn::norm_2(pos - tgt_loc->mPos);
+					}
+				};
+			}
+
+			// find the closest point to target
+			auto iters = rl::cShapeCalc< rl::cBoxDistance>::Get(0, 1);
+			auto best_it = iters.first;
+			auto best_d = std::numeric_limits<float>::max();
+			for (auto it = iters.first; it != iters.second; ++it)
+			{
+				auto d = dfunc(*it);
+				// change sign so we select the furthest distance
+				// TODO: this might be crap with movecosts!
+				if (d != std::numeric_limits<float>::max())
+					d = -d;
+				if (d < best_d)
+				{
+					best_d = d;
+					best_it = it;
+				}
+			}
+
+			if (best_d == std::numeric_limits<float>::max())
+				return eStatus::Failure;
+			else
+			{
+				// TODO: MoveAdj action! use the iterator for the direction and the consumed MovePoints
+				mainecs()->System<ecs::sys::cMoveAdj>()(me, *best_it);
+				return eStatus::Success;
+			}
 		}
 
 		//------------------------------------------------------------------------------------------------------

@@ -104,16 +104,16 @@
       <TileInfo Type="3"/>
       <MoveCost MoveCost="inf"/>
       <ControllerAI>
-        <Btree preset="basic-ai"/>
+        <Btree preset="flee-ITE"/>
       </ControllerAI>
       <Creature>
         <CreatureData>
             <Stats value="4,10,6"/>
-            <HitDie value="1d4"/>
+            <HitDie value="200d4"/>
             <Damage value="1d2"/>
         </CreatureData>
       </Creature>
-      <SimpleVisibility LoS="3"/>
+      <SimpleVisibility LoS="30"/>
     </Components>
   </Entity>
   
