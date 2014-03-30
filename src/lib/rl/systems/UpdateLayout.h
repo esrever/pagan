@@ -28,10 +28,12 @@ namespace pgn
 
 					void GenerateStaticMoveCosts(ecs::cEntityWithData lvl);
 					void GenerateMoveCosts(ecs::cEntityWithData lvl);
+					void GenerateStaticObstacles(ecs::cEntityWithData lvl);
 					void GenerateObstacles(ecs::cEntityWithData lvl);
 
 					void UpdateStaticMoveCosts(ecs::cEntityWithData lvl, const glm::ivec2& pos);
 					void UpdateMoveCosts(ecs::cEntityWithData lvl, const glm::ivec2& pos);
+					void UpdateStaticObstacles(ecs::cEntityWithData lvl, const glm::ivec2& pos);
 					void UpdateObstacles(ecs::cEntityWithData lvl, const glm::ivec2& pos);
 				private:
 					DECL_EVT_MEMBER(LevelCreated);

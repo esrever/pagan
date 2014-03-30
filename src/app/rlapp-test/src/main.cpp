@@ -83,7 +83,7 @@ struct cTestApp : public pgn::rl::cRlApp
 		// init hero's difi map
 		auto& hero_difi = hero->second->second.Component<pgn::ecs::cmp::cMapDiFi>()->mValue;
 		// TODO: read the radius from config!
-		hero_difi.Init(glm::ivec2(11, 11)); 
+		hero_difi.Init(glm::ivec2(41, 41)); 
 
 		// Create the component -- overwrite it if necessary
 		auto hero_loc = ecs.InstantiateComponent<pgn::ecs::cmp::cLocation>(hero->second);

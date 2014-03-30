@@ -53,11 +53,17 @@ namespace pgn
 			else
 			{
 				dfunc = [&](const glm::ivec2& off)->float{ 
-					auto pos = me_loc->mPos + off - tgt_difi->mValue.CornerWcs();
-					if (tgt_difi->mValue.Data().InRange(pos))
-						return tgt_difi->mValue.Data()(pos); 
-					else
+					auto pos = me_loc->mPos + off;
+					auto pos_difi = pos - tgt_difi->mValue.CornerWcs();
+					if (layout.Obstacles()(pos))
 						return std::numeric_limits<float>::max();
+					else
+					{
+						if (tgt_difi->mValue.Data().InRange(pos_difi))
+							return tgt_difi->mValue.Data()(pos_difi);
+						else
+							return pgn::norm_2(pos - tgt_loc->mPos);
+					}
 				};
 			}
 

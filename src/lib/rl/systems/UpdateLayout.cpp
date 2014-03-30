@@ -131,6 +131,7 @@ namespace pgn
 				for (const auto& v : lay.mFg.Entities())
 					lay.mStaticMoveCosts(v->second.Component<ecs::cmp::cLocation>()->mPos) = v->second.Component<ecs::cmp::cMoveCost>()->mMoveCost;
 				evt::cStaticMoveCostUpdated::Sig().emit(lvl);
+				GenerateStaticObstacles(lvl);
 				GenerateMoveCosts(lvl);
 			}
 
@@ -158,6 +159,14 @@ namespace pgn
 			}
 
 			//------------------------------------------------------------------------------------------
+			void cUpdateLayout::GenerateStaticObstacles(ecs::cEntityWithData lvl)
+			{
+				rl::cLayout& lay = lvl->second.Component<cmp::cLevelData>()->mLayout;
+				lay.mStaticObstacles.Resize(lay.mDims.x, lay.mDims.y);
+				lay.mStaticMoveCosts.View().VisitRext([&](size_t x, size_t y, float v){ lay.mStaticObstacles(x, y) = (v == std::numeric_limits<float>::max()); });
+			}
+
+			//------------------------------------------------------------------------------------------
 			void cUpdateLayout::UpdateStaticMoveCosts(ecs::cEntityWithData lvl, const glm::ivec2& pos)
 			{
 				rl::cLayout& lay = lvl->second.Component<cmp::cLevelData>()->mLayout;
@@ -168,6 +177,7 @@ namespace pgn
 				{
 					lay.mStaticMoveCosts(pos) = cost;
 					evt::cStaticMoveCostUpdated::Sig().emit(lvl);
+					UpdateStaticObstacles(lvl, pos);
 					UpdateMoveCosts(lvl, pos);
 				}
 			}
@@ -190,6 +200,13 @@ namespace pgn
 			{
 				rl::cLayout& lay = lvl->second.Component<cmp::cLevelData>()->mLayout;
 				lay.mObstacles(pos) = lay.mMoveCosts(pos) == std::numeric_limits<float>::max();
+			}
+
+			//------------------------------------------------------------------------------------------
+			void cUpdateLayout::UpdateStaticObstacles(ecs::cEntityWithData lvl, const glm::ivec2& pos)
+			{
+				rl::cLayout& lay = lvl->second.Component<cmp::cLevelData>()->mLayout;
+				lay.mStaticObstacles(pos) = lay.mStaticMoveCosts(pos) == std::numeric_limits<float>::max();
 			}
 		}
 	}

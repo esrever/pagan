@@ -14,6 +14,7 @@ namespace pgn {
             ecs.RegisterComponent<cmp::cLocation>();
             ecs.RegisterComponent<cmp::cTileInfo>();
             ecs.RegisterComponent<cmp::cCreature>();
+            ecs.RegisterComponent<cmp::cSimpleVisibility>();
             ecs.RegisterComponent<cmp::cMoveCost>();
             ecs.RegisterComponent<cmp::cTextureSet>();
             ecs.RegisterComponent<cmp::cLevelData>();

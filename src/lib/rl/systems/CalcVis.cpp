@@ -25,6 +25,7 @@ namespace pgn
 			//-------------------------------------------------------------------------
 			bool cCalcVis::operator()(ecs::cEntityWithData& ed)
 			{
+
 				auto vis = ed->second.Component<cmp::cVisibility>();
 				auto loc = ed->second.Component<cmp::cLocation>();
 				auto& curexpl = vis->mExplored[loc->mLevelId];
@@ -42,7 +43,7 @@ namespace pgn
 				auto onvis = [&](const glm::ivec2& pt, float b) {curexpl(pt) = true; curvis(pt) = true; vis->mVisibleSet.insert(pt); };
 
 				// TODO: this is a parameter of... ? probably here in visibility
-				fovlut.Get(4).Calc(loc->mPos, lvl->mLayout.Obstacles(), onvis);
+				fovlut.Get(vis->mLoS).Calc(loc->mPos, lvl->mLayout.StaticObstacles(), onvis);
 
 				return true;
 			}

@@ -14,10 +14,12 @@ namespace pgn{
             {
                 cVisibility(const std::map< int, cArray2D<bool> >& arg0 = std::map< int, cArray2D<bool> >(),
                     const cArray2D<bool>& arg1 = cArray2D<bool>(),
-                    const std::set<glm::ivec2>& arg2 = std::set<glm::ivec2>()):
+                    const std::set<glm::ivec2>& arg2 = std::set<glm::ivec2>(),
+                    const int& arg3 = int(1)):
                         mExplored(arg0),
                         mVisible(arg1),
-                        mVisibleSet(arg2){}
+                        mVisibleSet(arg2),
+                        mLoS(arg3){}
                 
                 size_t SerializeIn(const node_type&);
                 void SerializeOut(node_type&) const;
@@ -30,6 +32,9 @@ namespace pgn{
                 
                 //!Visible tiles
                 std::set<glm::ivec2> mVisibleSet;
+                
+                //!Line of Sight
+                int mLoS;
                 
             };
         

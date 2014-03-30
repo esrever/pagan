@@ -47,6 +47,7 @@ namespace pgn
 				const movecost_map_type& StaticMoveCosts() const { return mStaticMoveCosts; }
 				const movecost_map_type& MoveCosts() const { return mMoveCosts; }
 				const bool_map_type& Obstacles() const { return mObstacles; }
+				const bool_map_type& StaticObstacles() const { return mStaticObstacles; }
 
 				const glm::ivec2& Entry() const { return mEntry; }
 				const glm::ivec2& Exit() const { return mExit; }
@@ -62,6 +63,7 @@ namespace pgn
 				movecost_map_type		mMoveCosts;
 				//! Obstacle mask, for visibility
 				bool_map_type			mObstacles;
+				bool_map_type			mStaticObstacles;
 				
 				cTileStoreDense1		mBg;
 				cTileStoreSparse1		mFg;

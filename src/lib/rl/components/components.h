@@ -3,6 +3,7 @@
 #include "Location.h"
 #include "TileInfo.h"
 #include "Creature.h"
+#include "SimpleVisibility.h"
 #include "MoveCost.h"
 #include "TextureSet.h"
 #include "LevelData.h"
