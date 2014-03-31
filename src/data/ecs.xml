@@ -106,7 +106,7 @@
         </Symbols>
       </AsciiSet>
       <TileInfo share = "true" Type="3"/>
-      <MoveCost share = "true" MoveCost="inf"/>
+      <MoveCost MoveCost="inf"/>
       <ControllerAI>
         <Btree preset="flee-ITE"/>
       </ControllerAI>
