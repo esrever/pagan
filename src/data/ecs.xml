@@ -1,94 +1,98 @@
 <?xml version="1.0"?>
-<Entities>  
+<Entities>
+  <Entity name ="tile-bg">
+    <Components>
+        <TileInfo share="true" Type="0"/>
+    </Components>
+  </Entity>
+  
+  <Entity name ="tile-bg-floor">
+    <Archetype value="tile-bg"/>
+    <Components>
+        <MoveCost share="true" MoveCost="1"/>
+        <TileInfo share="true" Type="0"/>
+    </Components>
+  </Entity>
+  
+  <Entity name ="tile-bg-wall">
+    <Archetype value="tile-bg"/>
+    <Components>
+        <MoveCost share="true" MoveCost="inf"/>
+        <TileInfo share="true" Type="0"/>
+    </Components>
+  </Entity>
+  
   <Entity name ="FloorTile_def" >
+    <Archetype value="tile-bg-floor"/>
     <Components>
       <TextureSet share = "true" >
         <Sprites>
           <array_elem value="::dungeon:floor:rect_gray0"/>
         </Sprites>
       </TextureSet>
-        <AsciiSet share = "true" >
-        <Symbols>
-          <array_elem value="."/>
-        </Symbols>
-        </AsciiSet>
-      <MoveCost MoveCost="1"/>
-      <TileInfo Type="0"/>
     </Components>
   </Entity>
+  
   <Entity name ="WallTile_def" >
+    <Archetype value="tile-bg-wall"/>
     <Components>
       <TextureSet share = "true" >
         <Sprites>
           <array_elem value="::dungeon:wall:marble_wall1"/>
         </Sprites>
       </TextureSet>
-      <AsciiSet share = "true" >
-        <Symbols>
-          <array_elem value="#"/>
-        </Symbols>
-        </AsciiSet>
-      <MoveCost MoveCost="inf"/>
-      <TileInfo Type="0"/>
+    </Components>
+  </Entity>
+  
+  <Entity name ="tile-fg-pass">
+    <Components>
+        <Location/>
+        <TileInfo share="true" Type="1"/>
+        <MoveCost share="true" MoveCost="1"/>
+    </Components>
+  </Entity>
+  
+  <Entity name ="tile-fg-block">
+    <Components>
+        <Location/>
+        <TileInfo share="true" Type="1"/>
+        <MoveCost share="true" MoveCost="inf"/>
     </Components>
   </Entity>
   
   <Entity name ="Door_def" >
+    <Archetype value="tile-fg-pass"/>
     <Components>
-      <Location/>
-      <TextureSet>
+      <TextureSet share="true">
         <Sprites>
           <array_elem value="::dungeon:dngn_open_door"/>
           <array_elem value="::dungeon:dngn_closed_door"/>
           <array_elem value="::dungeon:dngn_detected_secret_door"/>
         </Sprites>
       </TextureSet>
-      <AsciiSet>
-        <Symbols>
-          <array_elem value="/"/>
-          <array_elem value="+"/>
-          <array_elem value="+"/>
-        </Symbols>
-        </AsciiSet>
       <DoorState State="0"/>
-      <TileInfo Type="1"/>
-      <MoveCost MoveCost="1"/>
     </Components>
   </Entity>
   
   <Entity name ="Entry_def" >
+    <Archetype value="tile-fg-pass"/>
     <Components>
-       <Location/>
       <TextureSet share = "true" >
         <Sprites>
           <array_elem value="::dungeon:gateways:stone_stairs_down"/>
         </Sprites>
       </TextureSet>
-      <AsciiSet share = "true" >
-        <Symbols>
-          <array_elem value="V"/>
-        </Symbols>
-        </AsciiSet>
-        <TileInfo Type="1"/>
-        <MoveCost MoveCost="1"/>
     </Components>
   </Entity>
   
   <Entity name ="Exit_def" >
+    <Archetype value="tile-fg-pass"/>
     <Components>
-      <Location/>
       <TextureSet share = "true" >
         <Sprites>
           <array_elem value="::dungeon:gateways:stone_stairs_up"/>
         </Sprites>
       </TextureSet>
-      <AsciiSet share = "true" >
-        <Symbols>
-          <array_elem value="^"/>
-        </Symbols>
-        </AsciiSet>
-        <TileInfo  share = "true" Type="1"/>
-        <MoveCost  share = "true" MoveCost="1"/>
     </Components>
   </Entity>
   

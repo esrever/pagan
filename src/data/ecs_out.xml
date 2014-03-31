@@ -11,11 +11,6 @@
 						<vector_elem value="::dungeon:wall:marble_wall1" />
 					</Sprites>
 				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="#" />
-					</Symbols>
-				</AsciiSet>
 			</Components>
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
@@ -31,11 +26,6 @@
 						<vector_elem value="::dungeon:floor:rect_gray0" />
 					</Sprites>
 				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="." />
-					</Symbols>
-				</AsciiSet>
 			</Components>
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
@@ -54,11 +44,6 @@
 						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
 					</Sprites>
 				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="V" />
-					</Symbols>
-				</AsciiSet>
 			</Components>
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
@@ -77,11 +62,6 @@
 						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
 					</Sprites>
 				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="^" />
-					</Symbols>
-				</AsciiSet>
 			</Components>
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
@@ -103,13 +83,6 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
 			</Components>
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
@@ -133,13 +106,6 @@
 					</Sprites>
 				</TextureSet>
 				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
 			</Components>
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
@@ -158,11 +124,6 @@
 						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
 					</Sprites>
 				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="V" />
-					</Symbols>
-				</AsciiSet>
 			</Components>
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
@@ -181,11 +142,6 @@
 						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
 					</Sprites>
 				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="^" />
-					</Symbols>
-				</AsciiSet>
 			</Components>
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
@@ -201,11 +157,6 @@
 						<vector_elem value="::dungeon:floor:rect_gray0" />
 					</Sprites>
 				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="." />
-					</Symbols>
-				</AsciiSet>
 			</Components>
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
@@ -287,28 +238,7 @@
 			<Components>
 				<LevelData>
 					<Layout>
-						<DunGen>
-							<vector_elem value="########################################" />
-							<vector_elem value="#.....#................................#" />
-							<vector_elem value="#.....#................................#" />
-							<vector_elem value="#.....#................................#" />
-							<vector_elem value="#.....#................................#" />
-							<vector_elem value="#.....#................................#" />
-							<vector_elem value="#.....#...........#....................#" />
-							<vector_elem value="#.....#............#...................#" />
-							<vector_elem value="###.###.............#..................#" />
-							<vector_elem value="#....................#.................#" />
-							<vector_elem value="#.....................#................#" />
-							<vector_elem value="#......................................#" />
-							<vector_elem value="#......................................#" />
-							<vector_elem value="#......................................#" />
-							<vector_elem value="#......#...............................#" />
-							<vector_elem value="#......................................#" />
-							<vector_elem value="#..............................#########" />
-							<vector_elem value="#..............................#...#...#" />
-							<vector_elem value="#................................#...#.#" />
-							<vector_elem value="########################################" />
-						</DunGen>
+						<DunGen />
 					</Layout>
 				</LevelData>
 			</Components>
@@ -326,11 +256,6 @@
 						<vector_elem value="::dungeon:wall:marble_wall1" />
 					</Sprites>
 				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="#" />
-					</Symbols>
-				</AsciiSet>
 			</Components>
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
@@ -346,6 +271,61 @@
 			<Tagus>
 				<set_elem value="World" />
 			</Tagus>
+		</value>
+		<key value="tile-bg" />
+		<value name="tile-bg">
+			<Components>
+				<TileInfo Type="0" />
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="tile-bg-floor" />
+		<value name="tile-bg-floor">
+			<Components>
+				<TileInfo Type="0" />
+				<MoveCost MoveCost="1" />
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="tile-bg-wall" />
+		<value name="tile-bg-wall">
+			<Components>
+				<TileInfo Type="0" />
+				<MoveCost MoveCost="3.40282e+038" />
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="tile-fg-block" />
+		<value name="tile-fg-block">
+			<Components>
+				<Location LevelId="0">
+					<Pos x="0" y="0" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="3.40282e+038" />
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="tile-fg-pass" />
+		<value name="tile-fg-pass">
+			<Components>
+				<Location LevelId="0">
+					<Pos x="0" y="0" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
 		</value>
 	</Archetypes>
 	<TagsToEntities />

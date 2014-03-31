@@ -63,9 +63,10 @@ namespace pgn
 	//---------------------------------------------------------------------------------------------------
 	size_t SerializeIn(const node_type& reader, ecs::cEntityData & value)
 	{
+		auto& ecs = *mainecs();
 		// Read archetype name. NOTE: it needs to be done before reading further components!
 		std::string archname;
-		if (SerializeIn(reader, "archetype", archname))
+		if (SerializeIn(reader.child("Archetype"), archname))
 		{
 			// get archetype
 			auto it_arch = mainecs()->Archetypes().find(archname);

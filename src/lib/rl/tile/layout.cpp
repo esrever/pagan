@@ -16,17 +16,6 @@ namespace pgn
 	void SerializeOut(node_type& node, const rl::cLayout& value)
 	{
 		std::vector<std::string> ss;
-		for (size_t i = 0; i < value.Dims().y; ++i)
-		{
-			ss.push_back("");
-			std::string& s = ss.back();
-			for (size_t j = 0; j < value.Dims().x; ++j)
-			{
-				const auto& v = value.Bg().Cells()(j, i);
-				const auto& syms = v->second.Component<ecs::cmp::cAsciiSet>()->mSymbols;
-				s.append(syms.empty() ? "?" : syms.front());
-			}
-		}
 		SerializeOut(node, "DunGen", ss);
 	}
 
