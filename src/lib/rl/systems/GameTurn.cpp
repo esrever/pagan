@@ -49,15 +49,19 @@ namespace pgn
 			//-------------------------------------------------------------------------
 			void cGameTurn::OnPlayerAction(float tu)
 			{
-				Advance(tu);
-				// Disable keyboard till it's player's turn again
-				mainecs()->System<cInputKey>().SetActive(false);
+				if (Active())
+				{
+					Advance(tu);
+					// Disable keyboard till it's player's turn again
+					mainecs()->System<cInputKey>().SetActive(false);
+				}
 			}
 
 			//-------------------------------------------------------------------------
 			void cGameTurn::OnAIAction(float tu)
 			{
-				Advance(tu);
+				if (Active())
+					Advance(tu);
 			}
 
 			//-------------------------------------------------------------------------
@@ -87,7 +91,7 @@ namespace pgn
 					mCurrent = next;
 			}
 
-
+			 
 			//-------------------------------------------------------------------------
 			bool cGameTurn::operator()()
 			{

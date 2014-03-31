@@ -94,6 +94,9 @@ struct cTestApp : public pgn::rl::cRlApp
 		// init heros stats
 		pgn::mainecs()->System<pgn::ecs::sys::cStatsProc>().InitCreature(hero->second);
 
+		// Deactivate game turn till we place everybody
+		pgn::mainecs()->System<pgn::ecs::sys::cGameTurn>().SetActive(false);
+
 		// make hero appear in first level in world
 		auto world = pgn::mainecs()->TagusToEntities("World")->second->second.Component<pgn::ecs::cmp::cWorldData>();
 		auto lvl = world->mLevelMap.begin()->second->second.Component<pgn::ecs::cmp::cLevelData>();
@@ -126,6 +129,9 @@ struct cTestApp : public pgn::rl::cRlApp
 			ecs.System<pgn::ecs::sys::cStatsProc>().InitCreature(ed);
 			++ratCreated;
 		}
+
+		// Reactivate game turn
+		pgn::mainecs()->System<pgn::ecs::sys::cGameTurn>().SetActive(true);
 	}
 
 	//------------------------------------------------

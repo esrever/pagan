@@ -107,7 +107,7 @@
     <Components>
         <SimpleVisibility LoS="3"/>
         <ControllerAI>
-            <Btree preset="flee-ITE"/>
+            <Btree preset="basic-ai"/>
         </ControllerAI>
     </Components>
   </Entity>
