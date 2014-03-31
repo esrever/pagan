@@ -15,7 +15,8 @@ namespace pgn
 			class cTeleport : public cBase
 			{
 				public:
-					bool operator()(ecs::cEntityWithData&, const ecs::cmp::cLocation& loc);
+					//! sometimes teleporting is instant, sometimes not.
+					bool operator()(ecs::cEntityWithData&, const ecs::cmp::cLocation& loc, float tu = 1.0f);
 			};
 		}
 	}

@@ -98,7 +98,7 @@ struct cTestApp : public pgn::rl::cRlApp
 		auto world = pgn::mainecs()->TagusToEntities("World")->second->second.Component<pgn::ecs::cmp::cWorldData>();
 		auto lvl = world->mLevelMap.begin()->second->second.Component<pgn::ecs::cmp::cLevelData>();
 		pgn::ecs::cmp::cLocation newloc(lvl->mLayout.Entry(), world->mLevelMap.begin()->second->first);
-		ecs.System<pgn::ecs::sys::cTeleport>()(hero->second, newloc);
+		ecs.System<pgn::ecs::sys::cTeleport>()(hero->second, newloc,0.0f);
 
 		// ---- MONSTER STUFF 
 
@@ -122,7 +122,7 @@ struct cTestApp : public pgn::rl::cRlApp
 			ratloc.mPos = free_pos[ratCreated];
 			// Instantiate archetype
 			auto ed = pgn::mainecs()->InstantiateArchetype(rat_arch->second);
-			ecs.System<pgn::ecs::sys::cTeleport>()(ed, ratloc);
+			ecs.System<pgn::ecs::sys::cTeleport>()(ed, ratloc, 0.0f);
 			ecs.System<pgn::ecs::sys::cStatsProc>().InitCreature(ed);
 			++ratCreated;
 		}

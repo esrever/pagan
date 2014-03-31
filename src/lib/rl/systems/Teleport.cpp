@@ -10,7 +10,7 @@ namespace pgn
 	{
 		namespace sys
 		{
-			bool cTeleport::operator()(ecs::cEntityWithData& ed, const ecs::cmp::cLocation& loc)
+			bool cTeleport::operator()(ecs::cEntityWithData& ed, const ecs::cmp::cLocation& loc, float tu)
 			{
 				auto world = mainecs()->TagusToEntities("World")->second->second.Component<ecs::cmp::cWorldData>();
 				auto edloc = ed->second.Component<cmp::cLocation>();
@@ -43,9 +43,9 @@ namespace pgn
 
 				// ... and turn hint
 				if (ed == ped)
-					evt::cPlayerAction::Sig().emit(1.0f);
+					evt::cPlayerAction::Sig().emit(tu);
 				else
-					evt::cAIAction::Sig().emit(1.0f);
+					evt::cAIAction::Sig().emit(tu);
 
 				return true;
 			}

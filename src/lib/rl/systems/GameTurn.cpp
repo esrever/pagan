@@ -15,6 +15,7 @@ namespace pgn
 	{
 		namespace sys
 		{
+			static const float sMinTime = 1e-04f;
 			//-------------------------------------------------------------------------
 			cGameTurn::cGameTurn() :
 				mActorQuery(cComponentQuery::ePolicy::Any),
@@ -26,12 +27,8 @@ namespace pgn
 						   .Require<cmp::cControllerPlayer>();
 				mActorQuery.SetOnEntityAdded([&](ecs::cEntityWithData ed)
 				{
-					auto it = std::max_element(mActors.begin(), mActors.end(), [&](const data_type& lhs, const data_type& rhs) {return lhs.first < rhs.first; });
-					float t = it == mActors.end() ? 0.0f : it->first + 1e-07f;
-					auto itn = it == mActors.end() ? it : std::next(it);
-					if (itn == mActors.end())
-						itn = mActors.begin();
-					mActors.insert( itn, std::make_pair(t,ed)); 
+					float t = mActors.empty() ? 0.0f : mActors.back().first + sMinTime;
+					mActors.push_back(std::make_pair(t, ed));
 				});
 				mActorQuery.SetOnEntityRemoved([&](ecs::cEntityWithData ed)
 				{
@@ -65,9 +62,7 @@ namespace pgn
 
 			//-------------------------------------------------------------------------
 			void cGameTurn::Advance(float tu)
-			{
-				float thresh = 1e-07f;
-				
+			{				
 				// Calc next node
 				auto next = std::next(mCurrent);
 				if (next == mActors.end())
@@ -83,37 +78,21 @@ namespace pgn
 						// wait a second
 						tNext = mCurrent->first + 1.0f;
 					else // else play immediately after next
-						tNext = next->first + thresh;
+						tNext = next->first + sMinTime;
 				}
 
 				mCurrent->first = tNext;
-
-				// TODO: now, move element pointed by mCurrent and recalculate mCurrent.
-
-				// Find the first node that will play later than mCurrent
-				while (next->first <= tNext)
-				{
-					next = std::next(next);
-					if (next == mActors.end())
-						next = mActors.begin();
-					if (next == mCurrent)
-						break;
-				};
-
-				// move current to proper position, but store it first
-				auto old_cur = mCurrent;
-				mActors.splice(next, mActors, mCurrent);
-
-				// calculate new current
-				mCurrent = std::next(mCurrent);
-				if (mCurrent == mActors.end())
-					mCurrent = mActors.begin();
+				mActors.sort();
+				if (next->first < mCurrent->first)
+					mCurrent = next;
 			}
 
 
 			//-------------------------------------------------------------------------
 			bool cGameTurn::operator()()
 			{
+				if (!Active())
+					return false;
 				auto start = mCurrent->second->first;
 				// Run current
 				do
