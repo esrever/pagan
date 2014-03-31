@@ -114,17 +114,22 @@ namespace pgn
 
 			// copy the data
 			cEntityData& ed = ewd->second;
-			ed.SetArchetype(arch);
+			ed.mArchetype = &arch;
 
 			// for each component that is in the support but not in the shared mask, instantiate
 			for (size_t i = 0; i < ed.mComponents.size();++i)
 			{
 				auto& cmp = ed.mComponents[i];
-				if (arch.mComponents[i] && (!ed.mShareMask.at(i)))
+				if (arch.mComponents[i])
 				{
-					ed.AddComponent(mComponentCreators[i]());
-					ed.mComponents[i]->from(*arch.mComponents[i]);
-					evt::cComponentAdded::Sig().emit(ewd, i);
+					if (!ed.mShareMask.at(i))
+					{
+						ed.AddComponent(mComponentCreators[i]());
+						ed.mComponents[i]->from(*arch.mComponents[i]);
+						evt::cComponentAdded::Sig().emit(ewd, i);
+					}
+					else
+						ed.mComponents[i] = arch.mComponents[i];
 				}
 			}
 			return ewd;
