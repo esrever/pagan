@@ -26,8 +26,12 @@ namespace pgn
 						   .Require<cmp::cControllerPlayer>();
 				mActorQuery.SetOnEntityAdded([&](ecs::cEntityWithData ed)
 				{
-					// TODO: spawn at level properly.
-					mActors.emplace_back( std::make_pair(0.0f,ed)); 
+					auto it = std::max_element(mActors.begin(), mActors.end(), [&](const data_type& lhs, const data_type& rhs) {return lhs.first < rhs.first; });
+					float t = it == mActors.end() ? 0.0f : it->first + 1e-07f;
+					auto itn = std::next(it);
+					if (itn == mActors.end())
+						itn = mActors.begin();
+					mActors.insert( itn, std::make_pair(t,ed)); 
 				});
 				mActorQuery.SetOnEntityRemoved([&](ecs::cEntityWithData ed)
 				{
