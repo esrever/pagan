@@ -28,7 +28,7 @@ namespace pgn
 				{
 					auto it = std::max_element(mActors.begin(), mActors.end(), [&](const data_type& lhs, const data_type& rhs) {return lhs.first < rhs.first; });
 					float t = it == mActors.end() ? 0.0f : it->first + 1e-07f;
-					auto itn = std::next(it);
+					auto itn = it == mActors.end() ? it : std::next(it);
 					if (itn == mActors.end())
 						itn = mActors.begin();
 					mActors.insert( itn, std::make_pair(t,ed)); 
