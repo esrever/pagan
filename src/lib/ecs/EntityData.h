@@ -14,9 +14,8 @@ namespace pgn
 		struct cEntityData
 		{
 		public:
-			cEntityData() :mArchetype(nullptr){};
+			cEntityData(){};
 			void AddComponent(cComponentBase_sptr comp);
-			void SetArchetype(const cEntityData& arch);
 
 			template<class T>
 			T * Component() const;
@@ -28,12 +27,8 @@ namespace pgn
 			std::string							mName;
 			//! List of component pointers
 			std::vector<cComponentBase_sptr>	mComponents;
-			//! Mask of supported components
-			cComponentMask						mComponentMask;
 			//! Mask of shared/read-only components
 			cComponentMask						mShareMask;
-			//! Archetype
-			const cEntityData *					mArchetype;
 			//! List of tags, unique or not
 			std::set<std::string>				mTags;
 			std::set<std::string>				mTagus;

@@ -2,8 +2,221 @@
 <ECS>
 	<EntitiesToData>
 		<key value="0" />
+		<value name="WallTile_def">
+			<Components>
+				<TileInfo Type="0" />
+				<MoveCost MoveCost="3.40282e+038" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:wall:marble_wall1" />
+					</Sprites>
+				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="#" />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="1" />
+		<value name="FloorTile_def">
+			<Components>
+				<TileInfo Type="0" />
+				<MoveCost MoveCost="1" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:floor:rect_gray0" />
+					</Sprites>
+				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="." />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="2" />
+		<value name="Entry_def">
+			<Components>
+				<Location LevelId="-1">
+					<Pos x="2" y="2" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
+					</Sprites>
+				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="V" />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="3" />
+		<value name="Exit_def">
+			<Components>
+				<Location LevelId="-1">
+					<Pos x="36" y="2" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
+					</Sprites>
+				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="^" />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="4" />
+		<value name="Door_def">
+			<Components>
+				<Location LevelId="-1">
+					<Pos x="3" y="8" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+	</EntitiesToData>
+	<Archetypes>
+		<key value="Door_def" />
+		<value name="Door_def">
+			<Components>
+				<Location LevelId="0">
+					<Pos x="0" y="0" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:dngn_open_door" />
+						<vector_elem value="::dungeon:dngn_closed_door" />
+						<vector_elem value="::dungeon:dngn_detected_secret_door" />
+					</Sprites>
+				</TextureSet>
+				<DoorState State="0" />
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="/" />
+						<vector_elem value="+" />
+						<vector_elem value="+" />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="Entry_def" />
+		<value name="Entry_def">
+			<Components>
+				<Location LevelId="0">
+					<Pos x="0" y="0" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
+					</Sprites>
+				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="V" />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="Exit_def" />
+		<value name="Exit_def">
+			<Components>
+				<Location LevelId="0">
+					<Pos x="0" y="0" />
+				</Location>
+				<TileInfo Type="1" />
+				<MoveCost MoveCost="1" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
+					</Sprites>
+				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="^" />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="FloorTile_def" />
+		<value name="FloorTile_def">
+			<Components>
+				<TileInfo Type="0" />
+				<MoveCost MoveCost="1" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::dungeon:floor:rect_gray0" />
+					</Sprites>
+				</TextureSet>
+				<AsciiSet>
+					<Symbols>
+						<vector_elem value="." />
+					</Symbols>
+				</AsciiSet>
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="Hero" />
 		<value name="Hero">
 			<Components>
+				<Location LevelId="0">
+					<Pos x="0" y="0" />
+				</Location>
 				<TileInfo Type="3" />
 				<Creature>
 					<CreatureData>
@@ -29,238 +242,18 @@
 					<Bindings />
 				</ControllerPlayer>
 			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
 			<Tagus>
 				<set_elem value="Player" />
 			</Tagus>
 		</value>
-		<key value="1" />
-		<value name="World">
-			<Components>
-				<WorldData />
-			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<Tags />
-			<Tagus>
-				<set_elem value="World" />
-			</Tagus>
-		</value>
-		<key value="2" />
-		<value name="WallTile_def" archetype="WallTile_def">
-			<Components>
-				<TileInfo Type="0" />
-				<MoveCost MoveCost="3.40282e+038" />
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:wall:marble_wall1" />
-					</Sprites>
-				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="#" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="3" />
-		<value name="FloorTile_def" archetype="FloorTile_def">
-			<Components>
-				<TileInfo Type="0" />
-				<MoveCost MoveCost="1" />
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:floor:rect_gray0" />
-					</Sprites>
-				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="." />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="4" />
-		<value name="Entry_def" archetype="Entry_def">
-			<Components>
-				<Location LevelId="-1">
-					<Pos x="2" y="2" />
-				</Location>
-				<TileInfo Type="1" />
-				<MoveCost MoveCost="1" />
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
-					</Sprites>
-				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="V" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="5" />
-		<value name="Exit_def" archetype="Exit_def">
-			<Components>
-				<Location LevelId="-1">
-					<Pos x="36" y="2" />
-				</Location>
-				<TileInfo Type="1" />
-				<MoveCost MoveCost="1" />
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
-					</Sprites>
-				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="^" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="6" />
-		<value name="Door_def" archetype="Door_def">
-			<Components>
-				<Location LevelId="-1">
-					<Pos x="3" y="8" />
-				</Location>
-				<TileInfo Type="1" />
-				<MoveCost MoveCost="1" />
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<Tags />
-			<Tagus />
-		</value>
-	</EntitiesToData>
-	<Archetypes>
-		<key value="Door_def" />
-		<value name="Door_def">
-			<Components>
-				<TileInfo Type="1" />
-				<MoveCost MoveCost="1" />
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:dngn_open_door" />
-						<vector_elem value="::dungeon:dngn_closed_door" />
-						<vector_elem value="::dungeon:dngn_detected_secret_door" />
-					</Sprites>
-				</TextureSet>
-				<DoorState State="0" />
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="/" />
-						<vector_elem value="+" />
-						<vector_elem value="+" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="Entry_def" />
-		<value name="Entry_def">
-			<Components>
-				<TileInfo Type="1" />
-				<MoveCost MoveCost="1" />
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:gateways:stone_stairs_down" />
-					</Sprites>
-				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="V" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="Exit_def" />
-		<value name="Exit_def">
-			<Components>
-				<TileInfo Type="1" />
-				<MoveCost MoveCost="1" />
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:gateways:stone_stairs_up" />
-					</Sprites>
-				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="^" />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<Tags />
-			<Tagus />
-		</value>
-		<key value="FloorTile_def" />
-		<value name="FloorTile_def">
-			<Components>
-				<TileInfo Type="0" />
-				<MoveCost MoveCost="1" />
-				<TextureSet>
-					<Sprites>
-						<vector_elem value="::dungeon:floor:rect_gray0" />
-					</Sprites>
-				</TextureSet>
-				<AsciiSet>
-					<Symbols>
-						<vector_elem value="." />
-					</Symbols>
-				</AsciiSet>
-			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
-			<Tags />
-			<Tagus />
-		</value>
 		<key value="Rat" />
 		<value name="Rat">
 			<Components>
+				<Location LevelId="0">
+					<Pos x="0" y="0" />
+				</Location>
 				<TileInfo Type="3" />
 				<Creature>
 					<CreatureData>
@@ -285,7 +278,6 @@
 					<Btree />
 				</ControllerAI>
 			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
 			<Tagus />
@@ -320,7 +312,6 @@
 					</Layout>
 				</LevelData>
 			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
 			<Tagus />
@@ -341,10 +332,20 @@
 					</Symbols>
 				</AsciiSet>
 			</Components>
-			<SupportMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
 			<Tagus />
+		</value>
+		<key value="World" />
+		<value name="World">
+			<Components>
+				<WorldData />
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus>
+				<set_elem value="World" />
+			</Tagus>
 		</value>
 	</Archetypes>
 	<TagsToEntities />

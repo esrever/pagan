@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Entities>  
-  <Entity name ="FloorTile_def" is_archetype="true">
+  <Entity name ="FloorTile_def" >
     <Components>
       <TextureSet>
         <Sprites>
@@ -16,7 +16,7 @@
       <TileInfo Type="0"/>
     </Components>
   </Entity>
-  <Entity name ="WallTile_def" is_archetype="true">
+  <Entity name ="WallTile_def" >
     <Components>
       <TextureSet>
         <Sprites>
@@ -33,8 +33,9 @@
     </Components>
   </Entity>
   
-  <Entity name ="Door_def" is_archetype="true">
+  <Entity name ="Door_def" >
     <Components>
+      <Location/>
       <TextureSet>
         <Sprites>
           <array_elem value="::dungeon:dngn_open_door"/>
@@ -55,8 +56,9 @@
     </Components>
   </Entity>
   
-  <Entity name ="Entry_def" is_archetype="true">
+  <Entity name ="Entry_def" >
     <Components>
+       <Location/>
       <TextureSet>
         <Sprites>
           <array_elem value="::dungeon:gateways:stone_stairs_down"/>
@@ -72,8 +74,9 @@
     </Components>
   </Entity>
   
-  <Entity name ="Exit_def" is_archetype="true">
+  <Entity name ="Exit_def" >
     <Components>
+      <Location/>
       <TextureSet>
         <Sprites>
           <array_elem value="::dungeon:gateways:stone_stairs_up"/>
@@ -89,8 +92,9 @@
     </Components>
   </Entity>
   
-  <Entity name ="Rat" is_archetype="true">
+  <Entity name ="Rat" >
     <Components>
+      <Location/>
       <TextureSet share = "true">
         <Sprites>
           <array_elem value="::monsters:animals:grey_rat"/>
@@ -117,8 +121,9 @@
     </Components>
   </Entity>
   
-  <Entity name ="Hero" is_archetype="false">
+  <Entity name ="Hero">
     <Components>
+      <Location/>
       <TextureSet>
         <Sprites>
           <array_elem value="::monsters:unique:norbert"/>
@@ -177,7 +182,7 @@
     </Tagus>
   </Entity>
   
-  <Entity name ="TestLevel" is_archetype="true">
+  <Entity name ="TestLevel" >
     <Components>
       <LevelData Id = "1">
         <Layout>

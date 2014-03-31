@@ -51,12 +51,13 @@ namespace pgn
 		//-------------------------------------------------------------------------
 		bool cComponentQuery::Test(ecs::cEntityWithData ed) const
 		{
+			const auto& cmps = ed->second.mComponents;
+			auto func = [&](size_t i)->bool{return (cmps.size() > i) && cmps.at(i); };
+
 			bool ok = mPolicy == ePolicy::All ? std::all_of(mRequiredComponentTypes.begin(),
-				mRequiredComponentTypes.end(),
-				[&](size_t i)->bool{return (ed->second.mComponentMask.at(i) == 1); })
+				mRequiredComponentTypes.end(),func)
 				: std::any_of(mRequiredComponentTypes.begin(),
-				mRequiredComponentTypes.end(),
-				[&](size_t i)->bool{return (ed->second.mComponentMask.at(i) == 1); });
+				mRequiredComponentTypes.end(),func);
 			return ok;
 		}
 	}

@@ -109,15 +109,12 @@ namespace pgn
 		//---------------------------------------------------------------------------------------------------
 		cEntityWithData cECS::InstantiateArchetype(const cEntityData& arch)
 		{
-			// generate entity
-			cEntityWithData ewd = Create();
-
 			// copy the data
-			cEntityData& ed = ewd->second;
-			ed.mArchetype = &arch;
+			cEntityData ed;
+			ed = arch;
 
-			// for each component that is in the support but not in the shared mask, instantiate
-			for (size_t i = 0; i < ed.mComponents.size();++i)
+			// for each component that exists but is not in the shared mask, instantiate-copy
+			for (size_t i = 0; i < arch.mComponents.size();++i)
 			{
 				auto& cmp = ed.mComponents[i];
 				if (arch.mComponents[i])
@@ -126,17 +123,14 @@ namespace pgn
 					{
 						ed.AddComponent(mComponentCreators[i]());
 						ed.mComponents[i]->from(*arch.mComponents[i]);
-						evt::cComponentAdded::Sig().emit(ewd, i);
 					}
-					else
-						ed.mComponents[i] = arch.mComponents[i];
 				}
 			}
-			return ewd;
+			return Create(ed);
 		}
 
 		//---------------------------------------------------------------------------------------------------
-		void cECS::ParseEntities(const node_type& reader)
+		void cECS::ParseArchetypes(const node_type& reader)
 		{
 			// We expect an entity list here
 			for (auto it = reader.begin(); it != reader.end(); ++it)
@@ -147,13 +141,7 @@ namespace pgn
 				cEntityData ed;
 				if (pgn::SerializeIn(ent, ed))
 				{
-					// determine if it's an archetype or not
-					bool is_archetype = false;
-					pgn::SerializeIn(ent, "is_archetype", is_archetype);
-					if (!is_archetype)
-						Create(ed);
-					else
-						mArchetypes.emplace(ed.mName, ed);
+					mArchetypes.emplace(ed.mName, ed);
 				}
 			}
 		}
@@ -178,7 +166,7 @@ namespace pgn
 	//---------------------------------------------------------------------------------------------------
 	size_t SerializeIn(const node_type& reader, ecs::cECS& value)
 	{
-		value.ParseEntities(reader.child("Entities"));
+		value.ParseArchetypes(reader.child("Entities"));
 		return 1;
 	}
 

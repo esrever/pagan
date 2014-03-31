@@ -13,18 +13,10 @@ namespace pgn
 		void cEntityData::AddComponent(cComponentBase_sptr comp)
 		{
 			auto idx = comp->TypeIndex();
-			mComponentMask.set(idx);
 			mShareMask.reset(idx);
 			if (mComponents.size() <= idx)
 				mComponents.resize(idx + 1);
 			mComponents[idx] = comp;
-		}
-
-		//---------------------------------------------------------------------------------------------------
-		void cEntityData::SetArchetype(const cEntityData& arch)
-		{
-			*this = arch;
-			mArchetype = &arch;
 		}
 	}
 
@@ -62,10 +54,7 @@ namespace pgn
 	void SerializeOut(node_type& node, const ecs::cEntityData & value)
 	{
 		SerializeOut(node, "name", value.mName);
-		if (value.mArchetype)
-			SerializeOut(node, "archetype", value.mArchetype->mName);
 		SerializeOut(node, "Components", value.mComponents);
-		SerializeOut(node, "SupportMask", value.mComponentMask);
 		SerializeOut(node, "SharedMask", value.mShareMask);
 		SerializeOut(node, "Tags", value.mTags);
 		SerializeOut(node, "Tagus", value.mTagus);
@@ -74,9 +63,6 @@ namespace pgn
 	//---------------------------------------------------------------------------------------------------
 	size_t SerializeIn(const node_type& reader, ecs::cEntityData & value)
 	{
-		// Read name
-		if (SerializeIn(reader, "name", value.mName) == 0) return false;
-
 		// Read archetype name. NOTE: it needs to be done before reading further components!
 		std::string archname;
 		if (SerializeIn(reader, "archetype", archname))
@@ -86,8 +72,13 @@ namespace pgn
 			if (it_arch == mainecs()->Archetypes().end()) return 0; // Archetype not found
 			auto& arch = it_arch->second;
 
-			value.SetArchetype(arch);
+			value = arch;
 		}
+
+		// Read name. If it doesn't exist, we use the archetype's name
+		std::string name;
+		if (SerializeIn(reader, "name", name)) 
+			value.mName = name;
 
 		// Read components
 		for (const auto& cmpnode : reader.child("Components").children())
@@ -95,13 +86,17 @@ namespace pgn
 			auto itid = mainecs()->ComponentTypeNamesToIds().find(cmpnode.name());
 			if (itid != mainecs()->ComponentTypeNamesToIds().end())
 			{
+				// create component
 				auto ptr = mainecs()->ComponentCreators().at(itid->second)();
+				// read data
 				SerializeIn(cmpnode, *ptr);
+				// add it to entitydata
 				value.AddComponent(ptr);
+				// if shared, mark it as such
 				bool share = false;
 				SerializeIn(cmpnode, "share", share);
 				if (share)
-					value.mShareMask[ptr->TypeIndex()] = true;
+					value.mShareMask[itid->second] = true;
 			}
 			else
 				mainapp()->SysLog().Err(format("Component %s does not exist!", cmpnode.name()));

@@ -95,7 +95,7 @@ namespace pgn
 			template<class T>
 			T& System();
 
-			void ParseEntities(const node_type& reader);
+			void ParseArchetypes(const node_type& reader);
 
 		private:
 			unsigned short AddComponentType(const std::type_index& zTi);

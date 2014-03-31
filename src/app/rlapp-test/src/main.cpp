@@ -70,6 +70,12 @@ struct cTestApp : public pgn::rl::cRlApp
 			doc_out.save_file(fname_out);
 		}
 
+		// Instantiate world
+		ecs.InstantiateArchetype(ecs.Archetypes("World")->second);
+
+		// Instantiate player
+		ecs.InstantiateArchetype(ecs.Archetypes("Hero")->second);
+
 		// Initialize level
 		ecs.System<pgn::ecs::sys::cCreateLevel>()(ecs.Archetypes("TestLevel"));
 
@@ -85,9 +91,7 @@ struct cTestApp : public pgn::rl::cRlApp
 		// TODO: read the radius from config!
 		hero_difi.Init(glm::ivec2(41, 41)); 
 
-		// Create the component -- overwrite it if necessary
-		auto hero_loc = ecs.InstantiateComponent<pgn::ecs::cmp::cLocation>(hero->second);
-
+		// init heros stats
 		pgn::mainecs()->System<pgn::ecs::sys::cStatsProc>().InitCreature(hero->second);
 
 		// make hero appear in first level in world
@@ -118,7 +122,6 @@ struct cTestApp : public pgn::rl::cRlApp
 			ratloc.mPos = free_pos[ratCreated];
 			// Instantiate archetype
 			auto ed = pgn::mainecs()->InstantiateArchetype(rat_arch->second);
-			ecs.InstantiateComponent<pgn::ecs::cmp::cLocation>(ed);
 			ecs.System<pgn::ecs::sys::cTeleport>()(ed, ratloc);
 			ecs.System<pgn::ecs::sys::cStatsProc>().InitCreature(ed);
 			++ratCreated;
