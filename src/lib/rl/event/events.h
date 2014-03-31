@@ -19,7 +19,8 @@ namespace pgn
 		DECL_EVT1(LevelDestroy, ecs::cEntityWithData);
 		DECL_EVT1(StaticMoveCostUpdated, ecs::cEntityWithData /*lvl*/);
 		DECL_EVT1(MoveCostUpdated, ecs::cEntityWithData /*lvl*/);
-		DECL_EVT0(PlayerAction);
+		DECL_EVT1(PlayerAction, float /*tu*/);
+		DECL_EVT1(AIAction, float /*tu*/);
 		DECL_EVT1(CreatureDied, ecs::cEntityWithData /*who*/);
 		DECL_EVT1(MouseOverCell, glm::ivec2 /*which cell*/);
 		/*

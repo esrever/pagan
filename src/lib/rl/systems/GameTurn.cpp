@@ -18,7 +18,8 @@ namespace pgn
 			//-------------------------------------------------------------------------
 			cGameTurn::cGameTurn() :
 				mActorQuery(cComponentQuery::ePolicy::Any),
-				INIT_EVT_MEMBER(cGameTurn, PlayerAction)
+				INIT_EVT_MEMBER(cGameTurn, PlayerAction),
+				INIT_EVT_MEMBER(cGameTurn, AIAction)
 			{
 				mActorQuery.Require<cmp::cControllerAI>()
 						   .Require<cmp::cControllerPlayer>();
@@ -40,15 +41,21 @@ namespace pgn
 			}
 
 			//-------------------------------------------------------------------------
-			void cGameTurn::OnPlayerAction()
+			void cGameTurn::OnPlayerAction(float tu)
 			{
-				Advance();
+				Advance(tu);
 				// Disable keyboard till it's player's turn again
 				mainecs()->System<cInputKey>().SetActive(false);
 			}
 
 			//-------------------------------------------------------------------------
-			void cGameTurn::Advance()
+			void cGameTurn::OnAIAction(float tu)
+			{
+				Advance(tu);
+			}
+
+			//-------------------------------------------------------------------------
+			void cGameTurn::Advance(float tu)
 			{
 				// Ok, changing now
 				auto next = std::next(mCurrent);
@@ -76,7 +83,6 @@ namespace pgn
 					else if (cmp_ai)
 					{
 						mainecs()->System<cUpdateAI>()(*mCurrent);
-						Advance();
 					}
 					else
 						assert(false);

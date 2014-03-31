@@ -43,7 +43,9 @@ namespace pgn
 
 				// ... and turn hint
 				if (ed == ped)
-					evt::cPlayerAction::Sig().emit();
+					evt::cPlayerAction::Sig().emit(1.0f);
+				else
+					evt::cAIAction::Sig().emit(1.0f);
 
 				return true;
 			}

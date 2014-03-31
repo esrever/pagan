@@ -18,14 +18,16 @@ namespace pgn
 			{
 				public:
 					cGameTurn();
-					void OnPlayerAction();
+					void OnPlayerAction( float tu);
+					void OnAIAction(float tu);
 
 					bool operator()();
 					void SetCurrent(ecs::cEntityWithData ed);
 				private:
-					void Advance();
+					void Advance(float tu);
 				private:
 					DECL_EVT_MEMBER(PlayerAction);
+					DECL_EVT_MEMBER(AIAction);
 
 					cComponentQuery mActorQuery;
 					std::list<ecs::cEntityWithData> mActors;
