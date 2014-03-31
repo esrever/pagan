@@ -10,7 +10,6 @@
     <Archetype value="tile-bg"/>
     <Components>
         <MoveCost share="true" MoveCost="1"/>
-        <TileInfo share="true" Type="0"/>
     </Components>
   </Entity>
   
@@ -18,7 +17,6 @@
     <Archetype value="tile-bg"/>
     <Components>
         <MoveCost share="true" MoveCost="inf"/>
-        <TileInfo share="true" Type="0"/>
     </Components>
   </Entity>
   
@@ -96,24 +94,32 @@
     </Components>
   </Entity>
   
-  <Entity name ="Rat" >
+  <Entity name ="creature">
     <Components>
-      <Location/>
+        <MoveCost share="true" MoveCost="inf"/>
+        <TileInfo share="true" Type="2"/>
+        <Location/>
+    </Components>
+  </Entity>
+  
+  <Entity name ="creature-ai">
+    <Archetype value="creature"/>
+    <Components>
+        <SimpleVisibility LoS="3"/>
+        <ControllerAI>
+            <Btree preset="flee-ITE"/>
+        </ControllerAI>
+    </Components>
+  </Entity>
+  
+  <Entity name ="Rat" >
+    <Archetype value="creature-ai"/>
+    <Components>
       <TextureSet share = "true">
         <Sprites>
           <array_elem value="::monsters:animals:grey_rat"/>
         </Sprites>
       </TextureSet>
-      <AsciiSet share = "true">
-        <Symbols>
-          <array_elem value="r"/>
-        </Symbols>
-      </AsciiSet>
-      <TileInfo share = "true" Type="3"/>
-      <MoveCost share = "true" MoveCost="inf"/>
-      <ControllerAI>
-        <Btree preset="flee-ITE"/>
-      </ControllerAI>
       <Creature>
         <CreatureData>
             <Stats value="4,10,6"/>
@@ -121,23 +127,17 @@
             <Damage value="1d2"/>
         </CreatureData>
       </Creature>
-      <SimpleVisibility LoS="3"/>
     </Components>
   </Entity>
   
   <Entity name ="Hero">
+    <Archetype value="creature"/>
     <Components>
-      <Location/>
-      <TextureSet>
+      <TextureSet share = "true">
         <Sprites>
           <array_elem value="::monsters:unique:norbert"/>
         </Sprites>
       </TextureSet>
-      <AsciiSet>
-        <Symbols>
-          <array_elem value="@"/>
-        </Symbols>
-      </AsciiSet>
       <ControllerPlayer>
         <Bindings>
         <key value="95"/>
@@ -161,8 +161,6 @@
         </Bindings>
       </ControllerPlayer>
       <Visibility LoS="7"/>
-      <TileInfo Type="3"/>
-      <MoveCost MoveCost="inf"/>
       <MapDiFi/>
       <Creature>
         <CreatureData>
@@ -179,7 +177,7 @@
   
   <Entity name ="World">
     <Components>
-    <WorldData/>
+        <WorldData/>
     </Components>
     <Tagus>
       <array_elem value="World"/>
