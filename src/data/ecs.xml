@@ -2,12 +2,12 @@
 <Entities>  
   <Entity name ="FloorTile_def" >
     <Components>
-      <TextureSet>
+      <TextureSet share = "true" >
         <Sprites>
           <array_elem value="::dungeon:floor:rect_gray0"/>
         </Sprites>
       </TextureSet>
-        <AsciiSet>
+        <AsciiSet share = "true" >
         <Symbols>
           <array_elem value="."/>
         </Symbols>
@@ -18,12 +18,12 @@
   </Entity>
   <Entity name ="WallTile_def" >
     <Components>
-      <TextureSet>
+      <TextureSet share = "true" >
         <Sprites>
           <array_elem value="::dungeon:wall:marble_wall1"/>
         </Sprites>
       </TextureSet>
-      <AsciiSet>
+      <AsciiSet share = "true" >
         <Symbols>
           <array_elem value="#"/>
         </Symbols>
@@ -59,12 +59,12 @@
   <Entity name ="Entry_def" >
     <Components>
        <Location/>
-      <TextureSet>
+      <TextureSet share = "true" >
         <Sprites>
           <array_elem value="::dungeon:gateways:stone_stairs_down"/>
         </Sprites>
       </TextureSet>
-      <AsciiSet>
+      <AsciiSet share = "true" >
         <Symbols>
           <array_elem value="V"/>
         </Symbols>
@@ -77,18 +77,18 @@
   <Entity name ="Exit_def" >
     <Components>
       <Location/>
-      <TextureSet>
+      <TextureSet share = "true" >
         <Sprites>
           <array_elem value="::dungeon:gateways:stone_stairs_up"/>
         </Sprites>
       </TextureSet>
-      <AsciiSet>
+      <AsciiSet share = "true" >
         <Symbols>
           <array_elem value="^"/>
         </Symbols>
         </AsciiSet>
-        <TileInfo Type="1"/>
-        <MoveCost MoveCost="1"/>
+        <TileInfo  share = "true" Type="1"/>
+        <MoveCost  share = "true" MoveCost="1"/>
     </Components>
   </Entity>
   
@@ -106,7 +106,7 @@
         </Symbols>
       </AsciiSet>
       <TileInfo share = "true" Type="3"/>
-      <MoveCost MoveCost="inf"/>
+      <MoveCost share = "true" MoveCost="inf"/>
       <ControllerAI>
         <Btree preset="flee-ITE"/>
       </ControllerAI>

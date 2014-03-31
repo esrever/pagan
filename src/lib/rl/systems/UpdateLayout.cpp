@@ -126,7 +126,7 @@ namespace pgn
 			{
 				rl::cLayout& lay = lvl->second.Component<cmp::cLevelData>()->mLayout;
 				lay.mStaticMoveCosts.Resize(lay.mDims.x, lay.mDims.y);
-				lay.mBg.Cells().View().VisitRext([&](size_t x, size_t y, const ecs::cEntityWithDataConst& ed){ lay.mStaticMoveCosts(x, y) = ed->second.Component<ecs::cmp::cMoveCost>()->mMoveCost; std::cout << ed->second.mName << "-"; });
+				lay.mBg.Cells().View().VisitRext([&](size_t x, size_t y, const ecs::cEntityWithDataConst& ed){ lay.mStaticMoveCosts(x, y) = ed->second.Component<ecs::cmp::cMoveCost>()->mMoveCost; });
 				if (!lay.mFg.Entities().empty())
 				for (const auto& v : lay.mFg.Entities())
 					lay.mStaticMoveCosts(v->second.Component<ecs::cmp::cLocation>()->mPos) = v->second.Component<ecs::cmp::cMoveCost>()->mMoveCost;
