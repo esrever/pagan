@@ -19,14 +19,19 @@ namespace pgn
 			cGameTurn::cGameTurn() :
 				mActorQuery(cComponentQuery::ePolicy::Any),
 				INIT_EVT_MEMBER(cGameTurn, PlayerAction),
-				INIT_EVT_MEMBER(cGameTurn, AIAction)
+				INIT_EVT_MEMBER(cGameTurn, AIAction),
+				mCurrent(mActors.end())
 			{
 				mActorQuery.Require<cmp::cControllerAI>()
 						   .Require<cmp::cControllerPlayer>();
-				mActorQuery.SetOnEntityAdded([&](ecs::cEntityWithData ed){mActors.push_back(ed); });
+				mActorQuery.SetOnEntityAdded([&](ecs::cEntityWithData ed)
+				{
+					// TODO: spawn at level properly.
+					mActors.emplace_back( std::make_pair(0.0f,ed)); 
+				});
 				mActorQuery.SetOnEntityRemoved([&](ecs::cEntityWithData ed)
 				{
-					auto itf = std::find(mActors.begin(), mActors.end(), ed);
+					auto itf = std::find_if(mActors.begin(), mActors.end(), [&](const data_type& kv) {return kv.second->first == ed->first; });
 					assert(itf != mActors.end());
 					mActors.erase(itf); 
 				});
@@ -35,7 +40,7 @@ namespace pgn
 			//-------------------------------------------------------------------------
 			void cGameTurn::SetCurrent(ecs::cEntityWithData ed)
 			{
-				auto itf = std::find(mActors.begin(), mActors.end(), ed);
+				auto itf = std::find_if(mActors.begin(), mActors.end(), [&](const data_type& kv) {return kv.second->first == ed->first; });
 				assert(itf != mActors.end());
 				mCurrent = itf;
 			}
@@ -57,23 +62,60 @@ namespace pgn
 			//-------------------------------------------------------------------------
 			void cGameTurn::Advance(float tu)
 			{
-				// Ok, changing now
+				float thresh = 1e-07f;
+				
+				// Calc next node
 				auto next = std::next(mCurrent);
 				if (next == mActors.end())
+					next = mActors.begin();
+
+				// Calc next time mCurrent will play
+				float tNext = mCurrent->first + tu;
+				// if it has issued a wait command
+				if (tu == 0.0f)
+				{
+					// if there's nobody around
+					if (next == mCurrent)
+						// wait a second
+						tNext = mCurrent->first + 1.0f;
+					else // else play immediately after next
+						tNext = next->first + thresh;
+				}
+
+				mCurrent->first = tNext;
+
+				// TODO: now, move element pointed by mCurrent and recalculate mCurrent.
+
+				// Find the first node that will play later than mCurrent
+				while (next->first <= tNext)
+				{
+					next = std::next(next);
+					if (next == mActors.end())
+						next = mActors.begin();
+					if (next == mCurrent)
+						break;
+				};
+
+				// move current to proper position, but store it first
+				auto old_cur = mCurrent;
+				mActors.splice(next, mActors, mCurrent);
+
+				// calculate new current
+				mCurrent = std::next(mCurrent);
+				if (mCurrent == mActors.end())
 					mCurrent = mActors.begin();
-				else
-					mCurrent = next;
 			}
 
 
 			//-------------------------------------------------------------------------
 			bool cGameTurn::operator()()
 			{
+				auto start = mCurrent->second->first;
 				// Run current
 				do
 				{
-					auto cmp_ai = (*mCurrent)->second.Component<cmp::cControllerAI>();
-					auto cmp_pc = (*mCurrent)->second.Component<cmp::cControllerPlayer>();
+					auto cmp_ai = mCurrent->second->second.Component<cmp::cControllerAI>();
+					auto cmp_pc = mCurrent->second->second.Component<cmp::cControllerPlayer>();
 					if (cmp_pc)
 					{
 						// Enable keyboard
@@ -82,11 +124,11 @@ namespace pgn
 					}
 					else if (cmp_ai)
 					{
-						mainecs()->System<cUpdateAI>()(*mCurrent);
+						mainecs()->System<cUpdateAI>()(mCurrent->second);
 					}
 					else
 						assert(false);
-				} while (true); // TODO: limit
+				} while (mCurrent->second->first != start); // if we do full circle, go out for a render
 				return true;
 			}
 		}

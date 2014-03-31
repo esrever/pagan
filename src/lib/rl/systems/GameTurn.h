@@ -17,6 +17,9 @@ namespace pgn
 			class cGameTurn : public cBase
 			{
 				public:
+					typedef std::pair<float, ecs::cEntityWithData> data_type;
+					typedef std::list<data_type> container_type;
+						
 					cGameTurn();
 					void OnPlayerAction( float tu);
 					void OnAIAction(float tu);
@@ -24,14 +27,15 @@ namespace pgn
 					bool operator()();
 					void SetCurrent(ecs::cEntityWithData ed);
 				private:
+					//! Set up when the current entity will play again and update current
 					void Advance(float tu);
 				private:
 					DECL_EVT_MEMBER(PlayerAction);
 					DECL_EVT_MEMBER(AIAction);
 
 					cComponentQuery mActorQuery;
-					std::list<ecs::cEntityWithData> mActors;
-					std::list<ecs::cEntityWithData>::iterator mCurrent;
+					container_type mActors;
+					container_type::iterator mCurrent;
 			};
 		}
 	}
