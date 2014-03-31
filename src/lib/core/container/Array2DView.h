@@ -19,7 +19,7 @@ namespace pgn
 
 		// ctor
 		cArrayView(T& ar, const cArrayShape2D& orgShape, size_t w=0, size_t h=0, size_t x = 0, size_t y = 0) : mStorageRef(&ar), mOrgShape(orgShape),mShape(w, h, x, y) {};
-		cArrayView(T& ar, size_t w = 0, size_t h = 0, size_t x = 0, size_t y = 0) : mStorageRef(&ar), mShape(w, h, x, y), mOrgShape(mShape) {};
+		cArrayView(T& ar, size_t w = 0, size_t h = 0, size_t x = 0, size_t y = 0) : mStorageRef(&ar), mShape(w, h, x, y), mOrgShape(w,h,x,y) {};
 		cArrayView& operator = (const cArrayView& v) {
 			mStorageRef = v.mStorageRef;  mShape = v.mShape; mOrgShape = v.mOrgShape;
 		    return *this; }
@@ -45,7 +45,7 @@ namespace pgn
 
 		// data-access
 		const cArrayShape2D& Shape() const { return mShape; }
-		const cArrayShape2D& OrgShape() const { return *mOrgShape; }
+		const cArrayShape2D& OrgShape() const { return mOrgShape; }
 		const T& Storage() const { return *mStorageRef; }
 
 	private:

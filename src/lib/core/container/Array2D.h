@@ -18,6 +18,11 @@ namespace pgn
 
 		// ctor
 		cArray2D(size_t w = 0, size_t h = 0, const T& v = T()) :mStorage(), mView(mStorage, w, h){ Resize(w, h, v); }
+		cArray2D& operator = (const cArray2D& v) {
+			auto shape = v.mView.Shape();
+			mStorage = v.mStorage;  mView = view_type(mStorage, v.mView.OrgShape(), shape.Width(), shape.Height(), shape.RealX(), shape.RealY());
+			return *this;
+		}
 
 		// functions
 		const view_type& View() const { return mView; }
