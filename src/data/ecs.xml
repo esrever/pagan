@@ -139,7 +139,7 @@
         </Sprites>
       </TextureSet>
       <ControllerAI>
-            <Btree preset="Wander"/>
+            <Btree preset="basic-ai"/>
         </ControllerAI>
       <Creature>
         <CreatureData>
@@ -159,7 +159,10 @@
           <array_elem value="::monsters:unique:norbert"/>
         </Sprites>
       </TextureSet>
-      <ControllerPlayer>
+      <ControllerAI>
+            <Btree preset="Wander"/>
+        </ControllerAI>
+      <ControllerPlayers>
         <Bindings>
         <key value="95"/>
         <value value="PlayerMoveNW"/>
@@ -180,7 +183,7 @@
         <key value="94"/>
         <value value="PlayerMoveE"/>
         </Bindings>
-      </ControllerPlayer>
+      </ControllerPlayers>
       <Visibility LoS="7"/>
       <MapDiFi/>
       <Creature>

@@ -184,9 +184,9 @@
 				</TextureSet>
 				<Visibility LoS="7" />
 				<MapDiFi />
-				<ControllerPlayer>
-					<Bindings />
-				</ControllerPlayer>
+				<ControllerAI>
+					<Btree />
+				</ControllerAI>
 			</Components>
 			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
 			<Tags />
