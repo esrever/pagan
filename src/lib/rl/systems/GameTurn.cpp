@@ -26,8 +26,8 @@ namespace pgn
 						   .Require<cmp::cControllerPlayer>();
 				mActorQuery.SetOnEntityAdded([&](ecs::cEntityWithData ed)
 				{
-					float t = mActors.empty() ? 0.0f : mActors.back().first + sMinTime;
-					mActors.push_back(std::make_pair(t, ed));
+					float t = mActors.empty() ? 0.0f : mActors.rbegin()->first + sMinTime;
+					mActors.insert(std::make_pair(t, ed));
 				});
 				mActorQuery.SetOnEntityRemoved([&](ecs::cEntityWithData ed)
 				{
@@ -79,41 +79,10 @@ namespace pgn
 						tNext = next->first + sMinTime;
 				}
 
-				mCurrent->first = tNext;
-				
-				// Sorting phase:
-				// Locate target position
-				auto it = mActors.begin();
-				while (it != mActors.end())
-				{
-					if (it->first > mCurrent->first)
-						break;
-					else
-						++it;
-				};
-				// Insert at target position
-				mActors.splice(it, mActors, mCurrent);
-				// sanity check
-				if (false)
-				{
-					bool all_sorted = true;
-					auto it_prev = mActors.begin();
-					it = std::next(it_prev);
-					while (it != mActors.end())
-					{
-						if (it->first < it_prev->first)
-						{
-							all_sorted = false;
-							break;
-						}
-						else
-						{
-							it_prev = it;
-							it = std::next(it_prev);
-						}
-					}
-					assert(all_sorted);
-				}
+				auto val = *mCurrent;
+				val.first = tNext;
+				mActors.erase(mCurrent);
+				mActors.insert(val);
 
 				mCurrent = mActors.begin();
 			}

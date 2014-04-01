@@ -1,6 +1,6 @@
 #pragma once
 
-#include <list>
+#include <set>
 
 #include <core/event/Event.h>
 #include <ecs/system.h>
@@ -18,7 +18,7 @@ namespace pgn
 			{
 				public:
 					typedef std::pair<float, ecs::cEntityWithData> data_type;
-					typedef std::list<data_type> container_type;
+					typedef std::set<data_type> container_type;
 						
 					cGameTurn();
 					void OnActorAction( float tu);
