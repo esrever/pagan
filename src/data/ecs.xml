@@ -107,7 +107,7 @@
     <Components>
         <SimpleVisibility LoS="3"/>
         <ControllerAI>
-            <Btree preset="flee-ITE"/>
+            <Btree preset="Wander"/>
         </ControllerAI>
     </Components>
   </Entity>
@@ -139,7 +139,7 @@
         </Sprites>
       </TextureSet>
       <ControllerAI>
-            <Btree preset="basic-ai"/>
+            <Btree preset="Wander"/>
         </ControllerAI>
       <Creature>
         <CreatureData>
