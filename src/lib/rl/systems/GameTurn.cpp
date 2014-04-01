@@ -19,8 +19,7 @@ namespace pgn
 			//-------------------------------------------------------------------------
 			cGameTurn::cGameTurn() :
 				mActorQuery(cComponentQuery::ePolicy::Any),
-				INIT_EVT_MEMBER(cGameTurn, PlayerAction),
-				INIT_EVT_MEMBER(cGameTurn, AIAction),
+				INIT_EVT_MEMBER(cGameTurn, ActorAction),
 				mCurrent(mActors.end())
 			{
 				mActorQuery.Require<cmp::cControllerAI>()
@@ -47,21 +46,16 @@ namespace pgn
 			}
 
 			//-------------------------------------------------------------------------
-			void cGameTurn::OnPlayerAction(float tu)
+			void cGameTurn::OnActorAction(float tu)
 			{
 				if (Active())
 				{
+					bool isPlayer = mCurrent->second == mainecs()->TagusToEntities("Player")->second;
 					Advance(tu);
-					// Disable keyboard till it's player's turn again
-					mainecs()->System<cInputKey>().SetActive(false);
+					if (isPlayer)
+						// Disable keyboard till it's player's turn again
+						mainecs()->System<cInputKey>().SetActive(false);
 				}
-			}
-
-			//-------------------------------------------------------------------------
-			void cGameTurn::OnAIAction(float tu)
-			{
-				if (Active())
-					Advance(tu);
 			}
 
 			//-------------------------------------------------------------------------
@@ -86,9 +80,42 @@ namespace pgn
 				}
 
 				mCurrent->first = tNext;
-				mActors.sort();
-				if (next->first < mCurrent->first)
-					mCurrent = next;
+				
+				// Sorting phase:
+				// Locate target position
+				auto it = mActors.begin();
+				while (it != mActors.end())
+				{
+					if (it->first > mCurrent->first)
+						break;
+					else
+						++it;
+				};
+				// Insert at target position
+				mActors.splice(it, mActors, mCurrent);
+				// sanity check
+				if (false)
+				{
+					bool all_sorted = true;
+					auto it_prev = mActors.begin();
+					it = std::next(it_prev);
+					while (it != mActors.end())
+					{
+						if (it->first < it_prev->first)
+						{
+							all_sorted = false;
+							break;
+						}
+						else
+						{
+							it_prev = it;
+							it = std::next(it_prev);
+						}
+					}
+					assert(all_sorted);
+				}
+
+				mCurrent = mActors.begin();
 			}
 
 			 
@@ -98,9 +125,11 @@ namespace pgn
 				if (!Active())
 					return false;
 				auto start = mCurrent->second->first;
+				int num_processed = 0;
 				// Run current
 				do
 				{
+					++num_processed;
 					auto cmp_ai = mCurrent->second->second.Component<cmp::cControllerAI>();
 					auto cmp_pc = mCurrent->second->second.Component<cmp::cControllerPlayer>();
 					if (cmp_pc)
@@ -116,6 +145,7 @@ namespace pgn
 					else
 						assert(false);
 				} while (mCurrent->second->first != start); // if we do full circle, go out for a render
+				//mainapp()->GameLog().Err(format("Entities processed in this turn: %d",num_processed ));
 				return true;
 			}
 		}

@@ -117,7 +117,7 @@ struct cTestApp : public pgn::rl::cRlApp
 		// Get archetype
 		auto rat_arch = pgn::mainecs()->Archetypes("Rat");
 		auto scorp_arch = pgn::mainecs()->Archetypes("Scorpion");
-		int monsterNum = std::min(100, int(free_pos.size()));
+		int monsterNum = std::min(200, int(free_pos.size()));
 		int monsterCreated = 0;
 		pgn::ecs::cmp::cLocation monsterloc(glm::ivec2(0,0), world->mLevelMap.begin()->second->first);
 		// start adding rats

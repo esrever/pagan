@@ -17,16 +17,14 @@ namespace pgn
 		{
 			bool cMoveAdj::operator()(ecs::cEntityWithData& ed, const glm::ivec2& dir)
 			{
-				// if entity didn't move anywhere & it's the player, still emit a player action event
+				// if entity didn't move anywhere, still emit an action event
 				if (dir == glm::ivec2(0, 0))
 				{
 					if (ed == mainecs()->TagusToEntities("Player")->second)
 					{
 						mainapp()->GameLog().Inf(pgn::format("%s moves %s", ed->second.mName.c_str(), dirstrings_long[dir.x + 1 + 3 * (dir.y + 1)]));
-						evt::cPlayerAction::Sig().emit(0.0f);
 					}
-					else
-						evt::cAIAction::Sig().emit(0.0f);
+					evt::cActorAction::Sig().emit(1.0f);
 					
 					return false;
 				}
@@ -60,10 +58,8 @@ namespace pgn
 					{
 						mainapp()->GameLog().Inf(pgn::format("%s moves %s", ed->second.mName.c_str(), dirstrings_long[dir.x + 1 + 3 * (dir.y + 1)]));
 						// ... and turn hint
-						evt::cPlayerAction::Sig().emit( norm_2(dir));
 					}
-					else
-						evt::cAIAction::Sig().emit(norm_2(dir));
+					evt::cActorAction::Sig().emit(norm_2(dir));
 					return true;
 				}
 				else
@@ -73,8 +69,6 @@ namespace pgn
 					{
 						auto nb = lvl->mLayout.Actors().Cells()(newpos);
 						mainecs()->System<cStatsProc>().MeleeAttack(ed, nb);
-						// TODO: use proper attack costs!
-						evt::cPlayerAction::Sig().emit(1.0f);
 					}
 				}
 				return false;

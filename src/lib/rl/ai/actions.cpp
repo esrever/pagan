@@ -2,6 +2,7 @@
 #include "blackboard.h"
 
 #include <ecs/ecs.h>
+#include <rl/event/events.h>
 #include <rl/components/components.h>
 #include <rl/systems/MoveAdj.h>
 #include <rl/systems/StatsProc.h>
@@ -96,8 +97,32 @@ namespace pgn
 		eStatus Wander(cBlackBoard& bb)
 		{
 			auto me = *bb.mDictPerm.Get<ecs::cEntityWithData>("me");
-			bool ok = mainecs()->System<ecs::sys::cMoveAdj>()(me, glm::ivec2((rand() % 3) - 1, (rand() % 3) - 1));
-			return eStatus::Success;
+			pgn::ecs::cmp::cLocation * me_loc = me->second.Component<pgn::ecs::cmp::cLocation>();
+
+			auto world = mainecs()->TagusToEntities("World")->second->second.Component<ecs::cmp::cWorldData>();
+			auto lvl = world->mLevelMap[me_loc->mLevelId]->second.Component<ecs::cmp::cLevelData>();
+			
+			// Find an available adjacent square
+			// TODO: move somewhere else!
+			auto iters = rl::cShapeCalc< rl::cBoxDistance>::Get(1, 1);
+			std::vector<glm::ivec2> avail_pos;
+			for (auto it = iters.first; it != iters.second; ++it)
+			{
+				auto newpos = me_loc->mPos + (*it);
+				if (!lvl->mLayout.Bg().Cells().InRange(newpos))
+					continue;
+				if (!lvl->mLayout.Obstacles()(newpos))
+				{
+					avail_pos.push_back(*it);
+				}
+			}
+
+			if (!avail_pos.empty())
+				bool ok = mainecs()->System<ecs::sys::cMoveAdj>()(me, avail_pos.at( rand() % avail_pos.size()));
+			else
+				mainecs()->System<ecs::sys::cMoveAdj>()(me, glm::ivec2(0,0));
+
+			return avail_pos.empty() ? eStatus::Failure : eStatus::Success;
 		}
 
 		//------------------------------------------------------------------------------------------------------

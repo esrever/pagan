@@ -37,6 +37,7 @@ namespace pgn
 		cBehavior::cBehavior(const cBehavior& v)
 			:mStatus(v.mStatus)
 			, mPriority(v.mPriority)
+			, mName(v.mName)
 		{
 		}
 

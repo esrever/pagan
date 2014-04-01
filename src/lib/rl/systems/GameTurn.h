@@ -21,8 +21,7 @@ namespace pgn
 					typedef std::list<data_type> container_type;
 						
 					cGameTurn();
-					void OnPlayerAction( float tu);
-					void OnAIAction(float tu);
+					void OnActorAction( float tu);
 
 					bool operator()();
 					void SetCurrent(ecs::cEntityWithData ed);
@@ -30,8 +29,7 @@ namespace pgn
 					//! Set up when the current entity will play again and update current
 					void Advance(float tu);
 				private:
-					DECL_EVT_MEMBER(PlayerAction);
-					DECL_EVT_MEMBER(AIAction);
+					DECL_EVT_MEMBER(ActorAction);
 
 					cComponentQuery mActorQuery;
 					container_type mActors;

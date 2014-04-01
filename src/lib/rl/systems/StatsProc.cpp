@@ -60,6 +60,9 @@ namespace pgn
 				{
 					mainapp()->GameLog().Inf(pgn::format("%s misses %s", eatt->second.mName.c_str(), edef->second.mName.c_str()));
 				}
+
+				// TODO: assign melee attack costs
+				evt::cActorAction::Sig().emit(1.0f);
 			}
 
 			int cStatsProc::StatMod(const int stat)

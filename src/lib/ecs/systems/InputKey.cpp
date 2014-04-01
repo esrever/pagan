@@ -22,15 +22,16 @@ namespace pgn
 				auto& bindings = mainecs()->TagusToEntities("Player")->second->second.Component< cmp::cControllerPlayer>()->mBindings;
 				if (evt.state == 1)
 				{
-					for (const auto& binding : bindings)
-					{
-						if (binding.first == evt.keysym.scancode)
+					if (!bindings.empty())
+						for (const auto& binding : bindings)
 						{
-							binding.second();
-							// tODO: after turn system, mEvtHandleOnKeyboard.Accept(false);
-							break;
+							if (binding.first == evt.keysym.scancode)
+							{
+								binding.second();
+								// tODO: after turn system, mEvtHandleOnKeyboard.Accept(false);
+								break;
+							}
 						}
-					}
 				}
 			}
 		}

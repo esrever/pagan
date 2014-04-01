@@ -42,10 +42,7 @@ namespace pgn
 				evt::cLocationChanged::Sig().emit(ed);
 
 				// ... and turn hint
-				if (ed == ped)
-					evt::cPlayerAction::Sig().emit(tu);
-				else
-					evt::cAIAction::Sig().emit(tu);
+				evt::cActorAction::Sig().emit(tu);
 
 				return true;
 			}
