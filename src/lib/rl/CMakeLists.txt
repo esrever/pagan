@@ -100,7 +100,7 @@ add_library(pagan_rl STATIC
             ${SOURCE_FILES}
             ${HEADER_FILES}
         )
-set_target_properties(pagan_rl PROPERTIES OUTPUT_NAME pagan_rl CLEAN_DIRECT_OUTPUT 1)
+set_target_properties(pagan_rl PROPERTIES OUTPUT_NAME pagan_rl CLEAN_DIRECT_OUTPUT 1 DEBUG_POSTFIX "d")
 target_link_libraries(pagan_rl pagan_core pagan_ecs pagan_io
     #${PLATFORM_LIBRARIES} what is this?
     ${Boost_LIBRARIES}

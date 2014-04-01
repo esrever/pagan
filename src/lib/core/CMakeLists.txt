@@ -83,7 +83,7 @@ add_library(pagan_core STATIC
             ${SOURCE_FILES}
             ${HEADER_FILES}
         )
-set_target_properties(pagan_core PROPERTIES OUTPUT_NAME pagan_core CLEAN_DIRECT_OUTPUT 1)
+set_target_properties(pagan_core PROPERTIES OUTPUT_NAME pagan_core CLEAN_DIRECT_OUTPUT 1 DEBUG_POSTFIX "d")
 target_link_libraries(pagan_core
     ${PLATFORM_LIBRARIES}
     ${Boost_LIBRARIES}

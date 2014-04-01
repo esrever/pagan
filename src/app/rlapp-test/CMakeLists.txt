@@ -27,13 +27,15 @@ add_executable (rlapp-test
 
 copy_dlls(rlapp-test)
 
-#set_target_properties(CMakeTest PROPERTIES OUTPUT_NAME pagan_core CLEAN_DIRECT_OUTPUT 1)
+set_target_properties(rlapp-test PROPERTIES OUTPUT_NAME rlapp-test CLEAN_DIRECT_OUTPUT 1 DEBUG_POSTFIX "d")
 target_link_libraries(rlapp-test
     ${APP_LIBS}
 )
 
-target_link_libraries(rlapp-test debug
-    ${APP_LIBS_DBG})
-    
-target_link_libraries(rlapp-test optimized
-    ${APP_LIBS_OPT})
+foreach(f ${APP_LIBS_DBG}) 
+target_link_libraries(rlapp-test debug ${f})
+endforeach(f) 
+
+foreach(f ${APP_LIBS_OPT})     
+target_link_libraries(rlapp-test optimized ${f})
+endforeach(f) 

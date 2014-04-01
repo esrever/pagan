@@ -26,7 +26,7 @@ add_library(pagan_io STATIC
             ${SOURCE_FILES}
             ${HEADER_FILES}
         )
-set_target_properties(pagan_io PROPERTIES OUTPUT_NAME pagan_io CLEAN_DIRECT_OUTPUT 1)
+set_target_properties(pagan_io PROPERTIES OUTPUT_NAME pagan_io CLEAN_DIRECT_OUTPUT 1 DEBUG_POSTFIX "d")
 target_link_libraries(pagan_io
     pagan_core
     #${PLATFORM_LIBRARIES} what is this?

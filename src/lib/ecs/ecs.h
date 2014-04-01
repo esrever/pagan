@@ -114,11 +114,9 @@ namespace pgn
 		template<class T>
 		sys::cBase_sptr cECS::SystemBase()
 		{
-			auto name = typeid(T).name();
-			// create a nice name & add it, omit the struct from "struct blah"
-			std::vector<std::string> result;
-			pystring::rsplit(name, result, "::c", 1);
-			auto s = pystring::strip(result.back(), ">");
+			const auto& name = std::string(typeid(T).name());
+			auto idx = name.rfind("::c") + 3;
+			auto s = name.substr(idx);
 
 			auto& base = SystemBase(s);
 			if (!base)

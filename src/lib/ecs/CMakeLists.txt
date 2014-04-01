@@ -52,7 +52,7 @@ add_library(pagan_ecs STATIC
             ${SOURCE_FILES}
             ${HEADER_FILES}
         )
-set_target_properties(pagan_ecs PROPERTIES OUTPUT_NAME pagan_ecs CLEAN_DIRECT_OUTPUT 1)
+set_target_properties(pagan_ecs PROPERTIES OUTPUT_NAME pagan_ecs CLEAN_DIRECT_OUTPUT 1 DEBUG_POSTFIX "d")
 target_link_libraries(pagan_ecs
     pagan_core
     #${PLATFORM_LIBRARIES} what is this?
