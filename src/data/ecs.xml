@@ -107,7 +107,7 @@
     <Components>
         <SimpleVisibility LoS="3"/>
         <ControllerAI>
-            <Btree preset="basic-ai"/>
+            <Btree preset="flee-ITE"/>
         </ControllerAI>
     </Components>
   </Entity>
@@ -123,8 +123,29 @@
       <Creature>
         <CreatureData>
             <Stats value="4,10,6"/>
-            <HitDie value="200d4"/>
+            <HitDie value="10d4"/>
             <Damage value="1d2"/>
+        </CreatureData>
+      </Creature>
+    </Components>
+  </Entity>
+  
+  <Entity name ="Scorpion" >
+    <Archetype value="creature-ai"/>
+    <Components>
+      <TextureSet share = "true">
+        <Sprites>
+          <array_elem value="::monsters:animals:giant_scorpion"/>
+        </Sprites>
+      </TextureSet>
+      <ControllerAI>
+            <Btree preset="basic-ai"/>
+        </ControllerAI>
+      <Creature>
+        <CreatureData>
+            <Stats value="10,10,10"/>
+            <HitDie value="20d4"/>
+            <Damage value="1d10"/>
         </CreatureData>
       </Creature>
     </Components>

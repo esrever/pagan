@@ -204,7 +204,7 @@
 				<Creature>
 					<CreatureData>
 						<Stats value="4,10,6," />
-						<HitDie value="200d4" />
+						<HitDie value="10d4" />
 						<Damage value="1d2" />
 					</CreatureData>
 				</Creature>
@@ -213,6 +213,35 @@
 				<TextureSet>
 					<Sprites>
 						<vector_elem value="::monsters:animals:grey_rat" />
+					</Sprites>
+				</TextureSet>
+				<ControllerAI>
+					<Btree />
+				</ControllerAI>
+			</Components>
+			<SharedMask value="unserializable: class std::bitset&lt;32&gt;" />
+			<Tags />
+			<Tagus />
+		</value>
+		<key value="Scorpion" />
+		<value name="Scorpion">
+			<Components>
+				<Location LevelId="0">
+					<Pos x="0" y="0" />
+				</Location>
+				<TileInfo Type="2" />
+				<Creature>
+					<CreatureData>
+						<Stats value="10,10,10," />
+						<HitDie value="20d4" />
+						<Damage value="1d10" />
+					</CreatureData>
+				</Creature>
+				<SimpleVisibility LoS="3" />
+				<MoveCost MoveCost="3.40282e+038" />
+				<TextureSet>
+					<Sprites>
+						<vector_elem value="::monsters:animals:giant_scorpion" />
 					</Sprites>
 				</TextureSet>
 				<ControllerAI>

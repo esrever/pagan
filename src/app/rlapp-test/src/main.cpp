@@ -116,18 +116,20 @@ struct cTestApp : public pgn::rl::cRlApp
 
 		// Get archetype
 		auto rat_arch = pgn::mainecs()->Archetypes("Rat");
-		int ratNum = std::min(10, int(free_pos.size()));
-		int ratCreated = 0;
-		pgn::ecs::cmp::cLocation ratloc(glm::ivec2(0,0), world->mLevelMap.begin()->second->first);
+		auto scorp_arch = pgn::mainecs()->Archetypes("Scorpion");
+		int monsterNum = std::min(100, int(free_pos.size()));
+		int monsterCreated = 0;
+		pgn::ecs::cmp::cLocation monsterloc(glm::ivec2(0,0), world->mLevelMap.begin()->second->first);
 		// start adding rats
-		while (ratCreated < ratNum)
+		while (monsterCreated < monsterNum)
 		{
-			ratloc.mPos = free_pos[ratCreated];
+			auto monster_arch = rand() & 1 ? rat_arch : scorp_arch;
+			monsterloc.mPos = free_pos[monsterCreated];
 			// Instantiate archetype
-			auto ed = pgn::mainecs()->InstantiateArchetype(rat_arch->second);
-			ecs.System<pgn::ecs::sys::cTeleport>()(ed, ratloc, 0.0f);
+			auto ed = pgn::mainecs()->InstantiateArchetype(monster_arch->second);
+			ecs.System<pgn::ecs::sys::cTeleport>()(ed, monsterloc, 0.0f);
 			ecs.System<pgn::ecs::sys::cStatsProc>().InitCreature(ed);
-			++ratCreated;
+			++monsterCreated;
 		}
 
 		// Reactivate game turn
